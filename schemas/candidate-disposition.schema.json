@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/candidate-disposition.schema.json",
+  "title": "Evidence-backed candidate dispositions",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "inventory", "evidenceRevision", "records"],
+  "$defs": {
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate", "disposition", "rationale", "evidenceDigest"],
+      "properties": {
+        "candidate": { "type": "string" },
+        "disposition": { "enum": ["approve", "defer", "reject"] },
+        "rationale": { "type": "string", "minLength": 1 },
+        "evidenceDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+      }
+    },
+    "tableRecords": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "allOf": [
+          { "$ref": "#/$defs/record" },
+          {
+            "properties": {
+              "candidate": {
+                "enum": [
+                  "selection",
+                  "sorting",
+                  "pagination",
+                  "filtering",
+                  "column visibility/settings",
+                  "column resize",
+                  "sticky columns",
+                  "row expansion",
+                  "grouped/tree rows",
+                  "virtualization"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "allOf": [
+        { "contains": { "properties": { "candidate": { "const": "selection" } } } },
+        { "contains": { "properties": { "candidate": { "const": "sorting" } } } },
+        { "contains": { "properties": { "candidate": { "const": "pagination" } } } },
+        { "contains": { "properties": { "candidate": { "const": "filtering" } } } },
+        {
+          "contains": {
+            "properties": { "candidate": { "const": "column visibility/settings" } }
+          }
+        },
+        { "contains": { "properties": { "candidate": { "const": "column resize" } } } },
+        { "contains": { "properties": { "candidate": { "const": "sticky columns" } } } },
+        { "contains": { "properties": { "candidate": { "const": "row expansion" } } } },
+        { "contains": { "properties": { "candidate": { "const": "grouped/tree rows" } } } },
+        { "contains": { "properties": { "candidate": { "const": "virtualization" } } } }
+      ]
+    },
+    "appShellRecords": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "allOf": [
+          { "$ref": "#/$defs/record" },
+          {
+            "properties": {
+              "candidate": {
+                "enum": [
+                  "root",
+                  "header",
+                  "sidebar",
+                  "main",
+                  "secondary panel",
+                  "mobile navigation",
+                  "skip link",
+                  "resizable-region adapter"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "allOf": [
+        { "contains": { "properties": { "candidate": { "const": "root" } } } },
+        { "contains": { "properties": { "candidate": { "const": "header" } } } },
+        { "contains": { "properties": { "candidate": { "const": "sidebar" } } } },
+        { "contains": { "properties": { "candidate": { "const": "main" } } } },
+        { "contains": { "properties": { "candidate": { "const": "secondary panel" } } } },
+        { "contains": { "properties": { "candidate": { "const": "mobile navigation" } } } },
+        { "contains": { "properties": { "candidate": { "const": "skip link" } } } },
+        {
+          "contains": {
+            "properties": { "candidate": { "const": "resizable-region adapter" } }
+          }
+        }
+      ]
+    },
+    "chatRecords": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {
+        "allOf": [
+          { "$ref": "#/$defs/record" },
+          {
+            "properties": {
+              "candidate": {
+                "enum": [
+                  "ChatLayout",
+                  "MessageList",
+                  "Message",
+                  "MessageBubble",
+                  "MessageMetadata",
+                  "SystemMessage",
+                  "Composer",
+                  "ToolCall",
+                  "streaming-text utility"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "allOf": [
+        { "contains": { "properties": { "candidate": { "const": "ChatLayout" } } } },
+        { "contains": { "properties": { "candidate": { "const": "MessageList" } } } },
+        { "contains": { "properties": { "candidate": { "const": "Message" } } } },
+        { "contains": { "properties": { "candidate": { "const": "MessageBubble" } } } },
+        { "contains": { "properties": { "candidate": { "const": "MessageMetadata" } } } },
+        { "contains": { "properties": { "candidate": { "const": "SystemMessage" } } } },
+        { "contains": { "properties": { "candidate": { "const": "Composer" } } } },
+        { "contains": { "properties": { "candidate": { "const": "ToolCall" } } } },
+        {
+          "contains": {
+            "properties": { "candidate": { "const": "streaming-text utility" } }
+          }
+        }
+      ]
+    },
+    "contentRecords": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "allOf": [
+          { "$ref": "#/$defs/record" },
+          {
+            "properties": {
+              "candidate": {
+                "enum": ["Kbd", "Timestamp", "Blockquote", "Citation", "CodeBlock", "MetadataList"]
+              }
+            }
+          }
+        ]
+      },
+      "allOf": [
+        { "contains": { "properties": { "candidate": { "const": "Kbd" } } } },
+        { "contains": { "properties": { "candidate": { "const": "Timestamp" } } } },
+        { "contains": { "properties": { "candidate": { "const": "Blockquote" } } } },
+        { "contains": { "properties": { "candidate": { "const": "Citation" } } } },
+        { "contains": { "properties": { "candidate": { "const": "CodeBlock" } } } },
+        { "contains": { "properties": { "candidate": { "const": "MetadataList" } } } }
+      ]
+    }
+  },
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "inventory": { "enum": ["table", "app-shell", "chat", "content"] },
+    "evidenceRevision": { "type": "string" },
+    "records": { "type": "array" }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "inventory": { "const": "table" },
+        "records": { "$ref": "#/$defs/tableRecords" }
+      }
+    },
+    {
+      "properties": {
+        "inventory": { "const": "app-shell" },
+        "records": { "$ref": "#/$defs/appShellRecords" }
+      }
+    },
+    {
+      "properties": {
+        "inventory": { "const": "chat" },
+        "records": { "$ref": "#/$defs/chatRecords" }
+      }
+    },
+    {
+      "properties": {
+        "inventory": { "const": "content" },
+        "records": { "$ref": "#/$defs/contentRecords" }
+      }
+    }
+  ]
+}

@@ -24,7 +24,13 @@ const COMPONENTS_REGISTRY_PATH = path.join(ROOT, 'registry/components.json');
 
 const isCheck = process.argv.includes('--check');
 
-const { TYPE_DESCRIPTIONS, PROP_VALUES, PROP_VALUE_OVERRIDES, PROP_ALLOWED_VALUES, SUB_PARTS } = require('./a2ui-catalog-metadata.js');
+const {
+  TYPE_DESCRIPTIONS,
+  PROP_VALUES,
+  PROP_VALUE_OVERRIDES,
+  PROP_ALLOWED_VALUES,
+  SUB_PARTS,
+} = require('./a2ui-catalog-metadata.js');
 
 /* ─── Source Parsing ──────────────────────────────────────────────────────── */
 
@@ -41,7 +47,9 @@ function extractCatalogEntries(source) {
     }
 
     const entryMatch = lines[i].match(/^\s{2}(\w+):\s*\{$/);
-    if (!entryMatch) {continue;}
+    if (!entryMatch) {
+      continue;
+    }
 
     const typeName = entryMatch[1];
     let component = '?';
@@ -50,10 +58,14 @@ function extractCatalogEntries(source) {
 
     while (j < lines.length) {
       const line = lines[j];
-      if (line.match(/^\s*\}\s*as\s+CatalogEntry/)) {break;}
+      if (line.match(/^\s*\}\s*as\s+CatalogEntry/)) {
+        break;
+      }
 
       const compMatch = line.match(/component:\s*(\S+),/);
-      if (compMatch) {component = compMatch[1];}
+      if (compMatch) {
+        component = compMatch[1];
+      }
 
       for (const propMatch of line.matchAll(/props\.(\w+)/g)) {
         if (!adapterProps.includes(propMatch[1])) {
@@ -72,7 +84,9 @@ function extractCatalogEntries(source) {
 function extractIconNames(source) {
   const names = [];
   const mapMatch = source.match(/const iconMap[^{]*\{([\s\S]*?)\n\};/);
-  if (!mapMatch) {return names;}
+  if (!mapMatch) {
+    return names;
+  }
   for (const match of mapMatch[1].matchAll(/^\s+'?([\w-]+)'?\s*:/gm)) {
     names.push(match[1]);
   }
@@ -82,8 +96,12 @@ function extractIconNames(source) {
 function extractUsageHints(source) {
   const hints = [];
   const fnMatch = source.match(/function mapTextHint[\s\S]*?\n\}/);
-  if (!fnMatch) {return hints;}
-  for (const match of fnMatch[0].matchAll(/case '([^']+)':\s*return\s*\{\s*variant:\s*'([^']+)',\s*size:\s*'([^']+)',\s*as:\s*'([^']+)'/g)) {
+  if (!fnMatch) {
+    return hints;
+  }
+  for (const match of fnMatch[0].matchAll(
+    /case '([^']+)':\s*return\s*\{\s*variant:\s*'([^']+)',\s*size:\s*'([^']+)',\s*as:\s*'([^']+)'/g,
+  )) {
     hints.push({ hint: match[1], variant: match[2], size: match[3], element: match[4] });
   }
   return hints;
@@ -119,7 +137,9 @@ function loadComponentDescriptions() {
 
 function resolveDescription(typeName, component, componentDescriptions) {
   // 1. Explicit A2UI override wins.
-  if (TYPE_DESCRIPTIONS[typeName]) {return TYPE_DESCRIPTIONS[typeName];}
+  if (TYPE_DESCRIPTIONS[typeName]) {
+    return TYPE_DESCRIPTIONS[typeName];
+  }
   // 2. Fall back to the registry description for the underlying component.
   //    component may be "Card.Root", "List.Item" etc — strip the sub-part suffix
   //    to get the component name ("Card", "List").
@@ -145,9 +165,10 @@ function main() {
       const typeKey = `${entry.typeName}.${p}`;
       const hint = PROP_VALUE_OVERRIDES[typeKey] || PROP_VALUES[p] || '';
       // allowedValues: machine-readable array when a closed enum exists, null otherwise
-      const allowedValues = typeKey in PROP_ALLOWED_VALUES
-        ? PROP_ALLOWED_VALUES[typeKey]
-        : (PROP_ALLOWED_VALUES[p] ?? null);
+      const allowedValues =
+        typeKey in PROP_ALLOWED_VALUES
+          ? PROP_ALLOWED_VALUES[typeKey]
+          : (PROP_ALLOWED_VALUES[p] ?? null);
       return { name: p, hint, allowedValues };
     }),
     isSubPart: SUB_PARTS.has(entry.typeName),
@@ -156,30 +177,34 @@ function main() {
 
   const catalog = {
     schemaVersion: '1.0.0',
-    generatedAt: new Date().toISOString().split('T')[0],
     types,
     usageHints,
     iconNames,
     examples,
   };
 
-  const output = `${JSON.stringify(catalog, null, 2)  }\n`;
+  const output = `${JSON.stringify(catalog, null, 2)}\n`;
 
   if (isCheck) {
     if (!fs.existsSync(OUTPUT_PATH)) {
-      console.log(`MISSING: ${path.relative(ROOT, OUTPUT_PATH)} — run \`node tools/generate-a2ui-catalog.js\` to create`);
+      console.log(
+        `MISSING: ${path.relative(ROOT, OUTPUT_PATH)} — run \`node tools/generate-a2ui-catalog.js\` to create`,
+      );
       process.exit(1);
     }
     const existing = fs.readFileSync(OUTPUT_PATH, 'utf8');
-    const normalize = (s) => s.replace(/"generatedAt": "[^"]*"/, '"generatedAt": ""');
-    if (normalize(existing) !== normalize(output)) {
-      console.log(`STALE: ${path.relative(ROOT, OUTPUT_PATH)} — run \`node tools/generate-a2ui-catalog.js\` to update`);
+    if (existing !== output) {
+      console.log(
+        `STALE: ${path.relative(ROOT, OUTPUT_PATH)} — run \`node tools/generate-a2ui-catalog.js\` to update`,
+      );
       process.exit(1);
     }
     console.log(`OK: ${path.relative(ROOT, OUTPUT_PATH)}`);
   } else {
     fs.writeFileSync(OUTPUT_PATH, output);
-    console.log(`GENERATED: ${path.relative(ROOT, OUTPUT_PATH)} (${types.length} types, ${iconNames.length} icons, ${usageHints.length} hints, ${Object.keys(examples).length} examples)`);
+    console.log(
+      `GENERATED: ${path.relative(ROOT, OUTPUT_PATH)} (${types.length} types, ${iconNames.length} icons, ${usageHints.length} hints, ${Object.keys(examples).length} examples)`,
+    );
   }
 }
 

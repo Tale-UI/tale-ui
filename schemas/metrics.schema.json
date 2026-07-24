@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/metrics.schema.json",
+  "title": "Tale metric definition or aggregate",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "metricId",
+    "definitionVersion",
+    "consentClass",
+    "coverage",
+    "freshness",
+    "provenance"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "metricId": { "type": "string" },
+    "definitionVersion": { "type": "string" },
+    "consentClass": { "enum": ["public-aggregate", "project-opt-in"] },
+    "coverage": { "enum": ["complete", "partial", "unavailable"] },
+    "freshness": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["current", "stale", "unavailable"] },
+        "asOf": { "type": "string", "format": "date-time" }
+      }
+    },
+    "provenance": { "type": "array", "items": { "type": "string" } },
+    "value": { "type": ["number", "string", "object", "array", "null"] }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "coverage": { "const": "unavailable" } } },
+      "then": { "properties": { "value": { "type": "null" } } }
+    }
+  ]
+}

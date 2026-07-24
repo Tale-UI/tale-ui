@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "foundations": [
+    {
+      "slug": "design-philosophy",
+      "title": "Design philosophy",
+      "path": "docs/design-philosophy.md",
+      "keywords": ["architecture", "react-aria", "css-first", "accessibility"]
+    },
+    {
+      "slug": "design-tokens",
+      "title": "Design tokens",
+      "path": "packages/css/docs/design-tokens.md",
+      "keywords": ["tokens", "color", "spacing", "typography"]
+    },
+    {
+      "slug": "css-architecture",
+      "title": "CSS architecture",
+      "path": "packages/css/docs/architecture.md",
+      "keywords": ["css", "architecture", "layers", "themes"]
+    },
+    {
+      "slug": "component-styling",
+      "title": "Building components",
+      "path": "packages/css/docs/building-components.md",
+      "keywords": ["css", "components", "bem", "states"]
+    },
+    {
+      "slug": "framework-integration",
+      "title": "Framework integration",
+      "path": "packages/css/docs/framework-integration.md",
+      "keywords": ["css", "framework", "integration", "setup"]
+    },
+    {
+      "slug": "naming-conventions",
+      "title": "Naming conventions",
+      "path": "packages/css/docs/naming-conventions.md",
+      "keywords": ["css", "bem", "naming"]
+    },
+    {
+      "slug": "react-aria-deviations",
+      "title": "React Aria deviations",
+      "path": "docs/react-aria-deviations.md",
+      "keywords": ["react-aria", "compatibility", "behavior"]
+    },
+    {
+      "slug": "a2ui-integration",
+      "title": "A2UI integration",
+      "path": "docs/a2ui-integration.md",
+      "keywords": ["a2ui", "agents", "renderer", "protocol"]
+    }
+  ]
+}

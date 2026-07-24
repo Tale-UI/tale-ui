@@ -151,7 +151,9 @@ Also accepts all standard `<div>` HTML attributes.
 - **Pass content via `Banner.Title` and `Banner.Description`** — do NOT pass raw `<Text>` children directly to `Banner.Root`.
   - anti-pattern: `<Banner.Root><Text>Something went wrong.</Text></Banner.Root>`
   - fix: `<Banner.Root><Banner.Title>Something went wrong.</Banner.Title></Banner.Root>`
-  <!-- pitfall: banner-actions-for-buttons -->
+
+<!-- pitfall: banner-actions-for-buttons -->
+
 - **Use Banner.Actions to add action buttons inside a Banner — never place Button children directly inside Banner.Root** — Banner.Root exposes a Banner.Actions sub-part for placing interactive buttons alongside the title and description. Wrap Button components inside Banner.Actions; do not add them as raw children of Banner.Root. Use this for any prompt that asks for a banner with one or more action buttons such as 'Later' (ghost) and 'Update now' (primary).
   - anti-pattern: `<Banner.Root variant="warning"><Banner.Title>Update available</Banner.Title><Button variant="ghost">Later</Button><Button variant="primary">Update now</Button></Banner.Root>`
   - anti-pattern: `<Banner.Root variant="warning"><Banner.Description>A new version is ready to install.</Banner.Description><Button variant="primary">Update now</Button></Banner.Root>`

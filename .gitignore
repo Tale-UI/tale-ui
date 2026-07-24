@@ -58,8 +58,28 @@ playwright-report/
 /playground/vite-app/src/demos/EvalReview.tsx
 storybook-static/
 
-# Analysis (local research notes)
-/analysis/
+# Analysis (local research notes; canonical roadmap inventories are tracked)
+/analysis/*
+!/analysis/table-plugins/
+/analysis/table-plugins/*
+!/analysis/table-plugins/inventory.json
+!/analysis/app-shell/
+/analysis/app-shell/*
+!/analysis/app-shell/inventory.json
+!/analysis/chat/
+/analysis/chat/*
+!/analysis/chat/inventory.json
+!/analysis/content/
+/analysis/content/*
+!/analysis/content/inventory.json
+!/analysis/extensions/
+/analysis/extensions/*
+!/analysis/extensions/inventory.json
+!/analysis/gap-analysis-astryx/
+/analysis/gap-analysis-astryx/*
+!/analysis/gap-analysis-astryx/plans/
+/analysis/gap-analysis-astryx/plans/*
+!/analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md
 /.agentic-loop/
 /.agentic-loops/
 /plans/

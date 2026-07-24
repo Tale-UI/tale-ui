@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/table-ranking.schema.json",
+  "title": "Table plugin evidence ranking",
+  "type": "object",
+  "required": ["schemaVersion", "evidenceRevision", "records"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "evidenceRevision": { "type": "string" },
+    "records": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "allOf": [
+        { "contains": { "properties": { "candidate": { "const": "selection" } } } },
+        { "contains": { "properties": { "candidate": { "const": "sorting" } } } },
+        { "contains": { "properties": { "candidate": { "const": "pagination" } } } },
+        { "contains": { "properties": { "candidate": { "const": "filtering" } } } },
+        {
+          "contains": {
+            "properties": { "candidate": { "const": "column visibility/settings" } }
+          }
+        },
+        { "contains": { "properties": { "candidate": { "const": "column resize" } } } },
+        { "contains": { "properties": { "candidate": { "const": "sticky columns" } } } },
+        { "contains": { "properties": { "candidate": { "const": "row expansion" } } } },
+        { "contains": { "properties": { "candidate": { "const": "grouped/tree rows" } } } },
+        { "contains": { "properties": { "candidate": { "const": "virtualization" } } } },
+        { "contains": { "properties": { "rank": { "const": 1 } } } },
+        { "contains": { "properties": { "rank": { "const": 2 } } } },
+        { "contains": { "properties": { "rank": { "const": 3 } } } },
+        { "contains": { "properties": { "rank": { "const": 4 } } } },
+        { "contains": { "properties": { "rank": { "const": 5 } } } },
+        { "contains": { "properties": { "rank": { "const": 6 } } } },
+        { "contains": { "properties": { "rank": { "const": 7 } } } },
+        { "contains": { "properties": { "rank": { "const": 8 } } } },
+        { "contains": { "properties": { "rank": { "const": 9 } } } },
+        { "contains": { "properties": { "rank": { "const": 10 } } } }
+      ],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate",
+          "demandEvidence",
+          "reactAriaCompatibility",
+          "accessibilityRisks",
+          "stateModel",
+          "ssrHydration",
+          "performance",
+          "cost",
+          "disposition",
+          "rank",
+          "evidenceDigest"
+        ],
+        "properties": {
+          "candidate": {
+            "enum": [
+              "selection",
+              "sorting",
+              "pagination",
+              "filtering",
+              "column visibility/settings",
+              "column resize",
+              "sticky columns",
+              "row expansion",
+              "grouped/tree rows",
+              "virtualization"
+            ]
+          },
+          "demandEvidence": { "type": "array", "minItems": 1 },
+          "reactAriaCompatibility": { "type": "string" },
+          "accessibilityRisks": { "type": "array" },
+          "stateModel": { "type": "string" },
+          "ssrHydration": { "type": "string" },
+          "performance": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["rows1k", "rows10k"],
+            "properties": {
+              "rows1k": { "type": "string" },
+              "rows10k": { "type": "string" }
+            }
+          },
+          "cost": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["implementation", "migration", "maintenance"],
+            "properties": {
+              "implementation": { "type": "string", "minLength": 1 },
+              "migration": { "type": "string", "minLength": 1 },
+              "maintenance": { "type": "string", "minLength": 1 }
+            }
+          },
+          "disposition": { "enum": ["approve", "defer", "reject"] },
+          "rank": { "type": "integer", "minimum": 1, "maximum": 10 },
+          "evidenceDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/figma-record.schema.json",
+  "title": "Classified Figma mapping record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "classification",
+    "registryId",
+    "mappingKind",
+    "sourceDigest",
+    "publishable"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "classification": { "enum": ["public", "internal", "private"] },
+    "registryId": { "type": "string" },
+    "mappingKind": { "enum": ["token", "component", "variant", "code-connection"] },
+    "sourceDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "publishable": { "type": "boolean" },
+    "publicData": { "type": "object" },
+    "protectedReference": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "classification": { "const": "public" } } },
+      "then": {
+        "properties": { "publishable": { "const": true } },
+        "not": { "required": ["protectedReference"] }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "classification": { "enum": ["internal", "private"] }
+        }
+      },
+      "then": {
+        "properties": { "publishable": { "const": false } },
+        "not": { "required": ["publicData"] }
+      }
+    }
+  ]
+}

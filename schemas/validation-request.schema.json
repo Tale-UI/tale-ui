@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/validation-request.schema.json",
+  "title": "Local validation request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "requestId", "root", "timeoutMs"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "requestId": { "type": "string", "minLength": 1 },
+    "root": { "type": "string", "minLength": 1 },
+    "file": {
+      "type": "string",
+      "pattern": "^(?![A-Za-z]:)(?![\\\\/])(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$)).+$"
+    },
+    "code": { "type": "string", "maxLength": 1000000 },
+    "virtualFile": {
+      "type": "string",
+      "pattern": "^(?![A-Za-z]:)(?![\\\\/])(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$)).+\\.[cm]?[jt]sx?$"
+    },
+    "rules": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+    "timeoutMs": { "type": "integer", "minimum": 1, "maximum": 60000 }
+  },
+  "oneOf": [
+    {
+      "required": ["file"],
+      "not": {
+        "anyOf": [{ "required": ["code"] }, { "required": ["virtualFile"] }]
+      }
+    },
+    { "required": ["code", "virtualFile"], "not": { "required": ["file"] } }
+  ]
+}

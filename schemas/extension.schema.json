@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/extension.schema.json",
+  "title": "Tale extension manifest",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "namespace",
+    "package",
+    "version",
+    "publisher",
+    "provenance",
+    "integrity",
+    "license",
+    "contributionClasses",
+    "contractRanges",
+    "capabilities",
+    "permissions",
+    "trust",
+    "sourceLinks"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "namespace": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]+$" },
+    "package": { "type": "string" },
+    "version": { "type": "string" },
+    "publisher": { "type": "string" },
+    "provenance": { "type": "object" },
+    "integrity": { "type": "string" },
+    "signaturePolicy": { "type": "string" },
+    "license": { "type": "string" },
+    "contributionClasses": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "components-and-docs",
+          "recipes-and-templates",
+          "validations-and-pitfalls",
+          "codemods",
+          "a2ui-types"
+        ]
+      }
+    },
+    "contractRanges": { "type": "object" },
+    "capabilities": { "type": "array", "items": { "type": "string" } },
+    "permissions": { "type": "array", "items": { "type": "string" } },
+    "trust": { "enum": ["untrusted", "trusted-local", "revoked"] },
+    "sourceLinks": { "type": "array", "items": { "type": "string", "format": "uri" } },
+    "revocation": { "type": ["object", "null"] }
+  }
+}

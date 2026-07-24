@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/template.schema.json",
+  "title": "Installable Tale template",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "source",
+    "skeleton",
+    "dependencies",
+    "preview",
+    "golden",
+    "compatibility",
+    "appearance",
+    "rtl",
+    "provenance",
+    "license",
+    "digest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "id": { "type": "string", "pattern": "^tale:template:[a-z0-9][a-z0-9-]+$" },
+    "version": { "type": "string" },
+    "source": {
+      "type": "string",
+      "pattern": "^source/(?!\\.{1,2}(?:[\\\\/]|$))(?!.*[\\\\/]\\.{1,2}(?:[\\\\/]|$))(?:[^\\\\/]+[\\\\/])*[^\\\\/]+$"
+    },
+    "skeleton": {
+      "type": "string",
+      "pattern": "^skeleton/(?!\\.{1,2}(?:[\\\\/]|$))(?!.*[\\\\/]\\.{1,2}(?:[\\\\/]|$))(?:[^\\\\/]+[\\\\/])*[^\\\\/]+$"
+    },
+    "dependencies": { "type": "object", "additionalProperties": { "type": "string" } },
+    "preview": { "type": "object" },
+    "golden": { "type": "string" },
+    "compatibility": { "type": "object" },
+    "appearance": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": { "enum": ["light", "dark"] },
+      "allOf": [{ "contains": { "const": "light" } }, { "contains": { "const": "dark" } }]
+    },
+    "rtl": { "type": "boolean" },
+    "provenance": { "type": "object" },
+    "license": { "type": "string" },
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  }
+}

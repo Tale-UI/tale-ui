@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/error-envelope.schema.json",
+  "title": "Tale command result envelope",
+  "$defs": {
+    "errorCode": {
+      "type": "string",
+      "enum": [
+        "TALE_INVALID_ARGUMENT",
+        "TALE_UNSUPPORTED_COMMAND",
+        "TALE_UNSUPPORTED_CAPABILITY",
+        "TALE_UNSUPPORTED_CONTRACT_VERSION",
+        "TALE_UNSUPPORTED_REGISTRY_VERSION",
+        "TALE_VERSION_RANGE_MISMATCH",
+        "TALE_SCHEMA_MISMATCH",
+        "TALE_EXTENSION_UNSUPPORTED",
+        "TALE_ARTIFACT_NOT_FOUND",
+        "TALE_OPERATION_NOT_FOUND",
+        "TALE_MIGRATION_UNAVAILABLE",
+        "TALE_VALIDATION_FAILED",
+        "TALE_VALIDATION_TIMEOUT",
+        "TALE_VALIDATION_CANCELLED",
+        "TALE_OUTSIDE_PROJECT_ROOT",
+        "TALE_UNSAFE_PATH",
+        "TALE_SYMLINK_REFUSED",
+        "TALE_OVERWRITE_REFUSED",
+        "TALE_CHANGED_SINCE_PLAN",
+        "TALE_IDEMPOTENCY_CONFLICT",
+        "TALE_TEMPLATE_CONFLICT",
+        "TALE_EXTENSION_UNTRUSTED",
+        "TALE_RECOVERY_PRECONDITION_FAILED",
+        "TALE_UNVERIFIABLE_POSTIMAGE",
+        "TALE_CONCURRENT_MUTATION",
+        "TALE_OPERATION_IN_PROGRESS",
+        "TALE_RECOVERY_IN_PROGRESS",
+        "TALE_RETRYABLE_EXTERNAL_ERROR",
+        "TALE_CORRUPT_REGISTRY",
+        "TALE_CORRUPT_OPERATION_STATE",
+        "TALE_MALFORMED_PROJECT_CONFIG",
+        "TALE_INVALID_TSCONFIG",
+        "TALE_INTERNAL_ERROR"
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ok", "command", "requestId", "versions", "capabilities", "data", "warnings"],
+      "properties": {
+        "ok": { "const": true },
+        "command": { "type": "string" },
+        "requestId": { "type": "string", "minLength": 1 },
+        "versions": { "type": "object" },
+        "capabilities": { "type": "array", "items": { "type": "string" } },
+        "data": {},
+        "warnings": { "type": "array", "items": { "type": "string" } },
+        "metadata": { "type": "object" }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ok", "command", "requestId", "error"],
+      "properties": {
+        "ok": { "const": false },
+        "command": { "type": "string" },
+        "requestId": { "type": "string", "minLength": 1 },
+        "error": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "message", "details", "retryable", "documentation"],
+          "properties": {
+            "code": { "$ref": "#/$defs/errorCode" },
+            "message": { "type": "string" },
+            "details": { "type": "object" },
+            "retryable": { "type": "boolean" },
+            "documentation": { "type": "string", "format": "uri" },
+            "deprecatedIn": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$"
+            },
+            "replacementCode": { "$ref": "#/$defs/errorCode" }
+          },
+          "dependentRequired": {
+            "deprecatedIn": ["replacementCode"],
+            "replacementCode": ["deprecatedIn"]
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/artifact.schema.json",
+  "title": "Tale UI unified artifact registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "registryVersion",
+    "releaseChannel",
+    "generatedFrom",
+    "sourceRevision",
+    "digest",
+    "packageVersions",
+    "capabilityManifestId",
+    "artifacts"
+  ],
+  "properties": {
+    "schemaVersion": { "$ref": "#/$defs/semver" },
+    "registryVersion": { "$ref": "#/$defs/semver" },
+    "releaseChannel": { "enum": ["internal", "canary", "beta", "stable"] },
+    "generatedFrom": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[^/].+" }
+    },
+    "sourceRevision": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "packageVersions": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/semver" }
+    },
+    "capabilityManifestId": {
+      "type": "string",
+      "const": "tale:capability-manifest:core"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/artifact" }
+    }
+  },
+  "$defs": {
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "artifactId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*:(component|hook|recipe|template|doc|a2ui-type|foundation|pitfall|validation|codemod|composition|extension):[a-z0-9][a-z0-9._-]*$"
+    },
+    "pointer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "path"],
+      "properties": {
+        "type": { "enum": ["registry", "file", "package-export"] },
+        "path": { "type": "string", "pattern": "^[^/].+" },
+        "selector": { "type": "string" }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "namespace",
+        "kind",
+        "slug",
+        "name",
+        "lifecycle",
+        "keywords",
+        "related",
+        "retrieval",
+        "capabilities",
+        "platforms",
+        "provenance",
+        "trust"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/artifactId" },
+        "namespace": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$" },
+        "kind": {
+          "enum": [
+            "component",
+            "hook",
+            "recipe",
+            "template",
+            "doc",
+            "a2ui-type",
+            "foundation",
+            "pitfall",
+            "validation",
+            "codemod",
+            "composition",
+            "extension"
+          ]
+        },
+        "slug": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$" },
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "lifecycle": { "enum": ["stable", "experimental", "deprecated", "retired"] },
+        "package": { "type": "string", "pattern": "^@tale-ui/[a-z0-9-]+$" },
+        "version": { "$ref": "#/$defs/semver" },
+        "aliases": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "deprecatedIn": { "$ref": "#/$defs/semver" },
+        "replacementId": { "$ref": "#/$defs/artifactId" },
+        "migration": { "type": "string" },
+        "keywords": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "related": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/artifactId" }
+        },
+        "retrieval": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/pointer" }
+        },
+        "capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[a-z][a-z0-9.-]+$" }
+        },
+        "platforms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["web", "native", "agent"] }
+        },
+        "locales": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string" }
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source", "firstParty"],
+          "properties": {
+            "source": { "type": "string", "pattern": "^[^/].+" },
+            "firstParty": { "type": "boolean" },
+            "license": { "type": "string" }
+          }
+        },
+        "integrity": { "type": "string", "pattern": "^sha256-[A-Za-z0-9+/=]+$" },
+        "trust": { "enum": ["first-party", "trusted", "untrusted", "revoked"] },
+        "permissions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string" }
+        },
+        "metadata": { "type": "object" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "lifecycle": { "const": "deprecated" } } },
+          "then": { "required": ["replacementId"] }
+        },
+        {
+          "if": { "required": ["package"] },
+          "then": { "required": ["version"] }
+        }
+      ]
+    }
+  }
+}

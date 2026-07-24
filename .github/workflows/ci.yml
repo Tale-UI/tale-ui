@@ -41,6 +41,8 @@ jobs:
         run: pnpm audit:coverage:check
       - name: Verify component registry
         run: pnpm registry:check
+      - name: Verify roadmap contracts and unified registry
+        run: pnpm roadmap:check
       - name: Verify cursor rules
         run: pnpm cursorrules:check
       - name: Audit snippet component kinds

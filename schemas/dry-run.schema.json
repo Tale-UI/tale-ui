@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/dry-run.schema.json",
+  "title": "Deterministic mutation dry-run report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "requestId", "planDigest", "files", "warnings"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "requestId": { "type": "string" },
+    "planDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "action", "postimageDigest", "postimageSize"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^(?![A-Za-z]:)(?![\\\\/])(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$)).+$"
+          },
+          "action": { "enum": ["create", "update", "no-op", "conflict"] },
+          "postimageDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+          "postimageSize": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "warnings": { "type": "array", "items": { "type": "string" } }
+  }
+}

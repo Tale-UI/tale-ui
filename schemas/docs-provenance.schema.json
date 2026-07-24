@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/docs-provenance.schema.json",
+  "title": "Immutable documentation version manifest",
+  "type": "object",
+  "required": ["schemaVersion", "origin", "versions"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "origin": { "type": "string", "format": "uri" },
+    "versions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "major",
+          "source",
+          "sourceRevision",
+          "contentDigest",
+          "packageVersions",
+          "registryVersion",
+          "publicAllowlist"
+        ],
+        "properties": {
+          "major": { "type": "integer", "minimum": 1 },
+          "source": { "type": "string" },
+          "sourceRevision": { "type": "string" },
+          "contentDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+          "packageVersions": { "type": "object" },
+          "registryVersion": { "type": "string" },
+          "publicAllowlist": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/operation.schema.json",
+  "title": "Durable mutation operation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "operationId",
+    "operation",
+    "rootDigest",
+    "idempotencyDigest",
+    "payloadDigest",
+    "state",
+    "plannedPostimages"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "operationId": { "type": "string" },
+    "operation": { "enum": ["init", "template-add", "generate", "compose", "upgrade"] },
+    "rootDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "idempotencyDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "payloadDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "state": {
+      "enum": [
+        "reserved",
+        "journal-linked",
+        "in-progress",
+        "completed",
+        "rolled-back",
+        "manual-intervention",
+        "tombstoned"
+      ]
+    },
+    "plannedPostimages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "digest", "size"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^(?![A-Za-z]:)(?![\\\\/])(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$)).+$"
+          },
+          "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+          "size": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

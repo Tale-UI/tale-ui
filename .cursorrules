@@ -86,7 +86,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [Card] Do not place interactive descendants inside Card.Button
 - [Card] Compose Card.Button with phrasing content, not the div-based Card.Header, Card.Body, or Card.Footer parts
 - [Card] Use onPress, not onClick, for Card.Button actions
-- [Card] isSelected is controlled and represents a pressed/active action state
+- [Card] Control isSelected in response to onPress
 - [Card] No elevated boolean prop
 - [Card] Card.Header has no title or description props
 - [Card] Card.Body and Card.Footer do NOT accept a gap prop
