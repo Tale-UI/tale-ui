@@ -51,6 +51,11 @@ const buildManifest = {
       import: './registry.js',
       default: './registry.js',
     },
+    './validation': {
+      types: './validation/index.d.ts',
+      import: './validation/index.js',
+      default: './validation/index.js',
+    },
     './package.json': './package.json',
   },
   main: './index.js',

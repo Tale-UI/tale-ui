@@ -636,7 +636,7 @@ importers:
     publishDirectory: build
 
   packages/tooling:
-    devDependencies:
+    dependencies:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
