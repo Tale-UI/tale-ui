@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "status": "approved",
   "inventory": "analysis/table-plugins/inventory.json",
-  "evidenceRevision": "sha256:889b9a4cae2533c877a370039b536ba8b00dccb022d2ff9c8f18251081b2c944",
+  "evidenceRevision": "sha256:cbb2adf11daaa6aaaef5126eb865db625e40877722df37618e2c19c028f5a146",
   "methodology": "Rank repository-evidenced product need first, then React Aria compatibility, accessibility risk, explicit 1k/10k requirements, and implementation/migration/maintenance cost. Mandatory prototypes receive no automatic rank bonus.",
   "prototypeCandidates": ["selection", "sorting"],
   "records": [
@@ -10,7 +10,7 @@
       "candidate": "sorting",
       "demandEvidence": [
         {
-          "source": "analysis/gap-analysis-astryx/05-prioritized-roadmap.md#design-the-table-plugin-contract",
+          "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#table-inventory-and-ranking-contract",
           "claim": "The approved roadmap requires sorting and first-class server-side sorting."
         },
         {
@@ -39,13 +39,13 @@
       "disposition": "approve",
       "rank": 1,
       "rankingRationale": "Existing public behavior plus an explicit server-side roadmap requirement makes sorting the strongest incremental plugin candidate.",
-      "evidenceDigest": "sha256:af0468009b6644a7ba1d5162c13546cd55418f7c2aa4331776ccb53878308715"
+      "evidenceDigest": "sha256:8ec33a96d63005fe869f16322323c39ec7f1b9bf83e95ef627ae05d5d825f572"
     },
     {
       "candidate": "selection",
       "demandEvidence": [
         {
-          "source": "analysis/gap-analysis-astryx/05-prioritized-roadmap.md#design-the-table-plugin-contract",
+          "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#table-inventory-and-ranking-contract",
           "claim": "The approved roadmap requires selection in the plugin research scope."
         },
         {
@@ -74,13 +74,13 @@
       "disposition": "approve",
       "rank": 2,
       "rankingRationale": "Selection already exists publicly and can validate shared-state composition without replacing accessible interaction behavior.",
-      "evidenceDigest": "sha256:16b43b4d09b14aa403a2db7394be4a4fa05b46ee27924eef999ddc884aa0659e"
+      "evidenceDigest": "sha256:998cafa55df4c99d6de8d03d3ea593d234c9926e3288da9c3a8aed0ce11cdf4b"
     },
     {
       "candidate": "pagination",
       "demandEvidence": [
         {
-          "source": "analysis/gap-analysis-astryx/05-prioritized-roadmap.md#design-the-table-plugin-contract",
+          "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#table-inventory-and-ranking-contract",
           "claim": "The roadmap explicitly requires first-class server-side pagination."
         },
         {
@@ -109,13 +109,13 @@
       "disposition": "approve",
       "rank": 3,
       "rankingRationale": "The roadmap explicitly requires server pagination and Tale UI already owns the visual navigation primitive.",
-      "evidenceDigest": "sha256:16126c183c5d12422c791b300ca06e843c95c4348a802e91e7fcc4b3d29bdadb"
+      "evidenceDigest": "sha256:167998525c49802ee1eb25929d06aad929c678a8d748f52b3d9efc4caaa9aa7a"
     },
     {
       "candidate": "filtering",
       "demandEvidence": [
         {
-          "source": "analysis/gap-analysis-astryx/05-prioritized-roadmap.md#design-the-table-plugin-contract",
+          "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#table-inventory-and-ranking-contract",
           "claim": "The roadmap explicitly requires first-class server-side filtering."
         }
       ],
@@ -140,13 +140,13 @@
       "disposition": "approve",
       "rank": 4,
       "rankingRationale": "Filtering is a named server-side acceptance requirement and must share request state with sorting and pagination.",
-      "evidenceDigest": "sha256:965af7aa00a23973c0777b54ea07c256dc74c19c804dabc7a5b6c63890ff6e0a"
+      "evidenceDigest": "sha256:7367acd4b95d5fc5744da817d2457b9eb03a0ad3253681ab97fa2fa7b6e0ed1c"
     },
     {
       "candidate": "virtualization",
       "demandEvidence": [
         {
-          "source": "analysis/gap-analysis-astryx/05-prioritized-roadmap.md#design-the-table-plugin-contract",
+          "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#table-inventory-and-ranking-contract",
           "claim": "The roadmap requires virtualization research and 1k/10k benchmarks."
         },
         {
@@ -175,7 +175,7 @@
       "disposition": "approve",
       "rank": 5,
       "rankingRationale": "The explicit 10k-row gate makes a bounded rendering path more consequential than convenience-only column plugins.",
-      "evidenceDigest": "sha256:c8af5cd248ae0e2108f087d396691c5a7a04b630b6e6b0d030979ab96548ea31"
+      "evidenceDigest": "sha256:f9e05877da12866c5c6546052be239eafed102e340f289e7456f6427367c048a"
     },
     {
       "candidate": "column visibility/settings",
