@@ -95,19 +95,25 @@ if (codeIndex >= 0 && filteredArgs[codeIndex + 1]) {
   source = '<inline>';
   request = {
     code: filteredArgs[codeIndex + 1],
-    virtualFile: 'tools/generated-validation.tsx',
+    virtualFile: 'playground/vite-app/src/generated-validation.tsx',
   };
 } else if (goldenIndex >= 0 && filteredArgs[goldenIndex + 1]) {
   const goldenPath = resolve(filteredArgs[goldenIndex + 1]);
   const golden = JSON.parse(readFileSync(goldenPath, 'utf8'));
   source = filteredArgs[goldenIndex + 1];
-  request = { code: golden.reference, virtualFile: 'tools/generated-validation.tsx' };
+  request = {
+    code: golden.reference,
+    virtualFile: 'playground/vite-app/src/generated-validation.tsx',
+  };
 } else if (filteredArgs[0] && !filteredArgs[0].startsWith('-')) {
   const filePath = resolve(filteredArgs[0]);
   if (filePath.endsWith('.json')) {
     const golden = JSON.parse(readFileSync(filePath, 'utf8'));
     source = filteredArgs[0];
-    request = { code: golden.reference, virtualFile: 'tools/generated-validation.tsx' };
+    request = {
+      code: golden.reference,
+      virtualFile: 'playground/vite-app/src/generated-validation.tsx',
+    };
   } else {
     source = filteredArgs[0];
     request = { file: relative(root, filePath).replaceAll('\\', '/') };

@@ -2,6 +2,6 @@
   "slug": "drawer-with-backdrop",
   "difficulty": "medium",
   "prompt": "Create a side drawer that opens from the right with a backdrop, title \"Settings\", and a close button.",
-  "reference": "import { useState } from 'react';\nimport { Drawer } from '@tale-ui/react/drawer';\nimport { Button } from '@tale-ui/react/button';\n\nexport function SettingsDrawer() {\n  const [open, setOpen] = useState(false);\n  return (\n    <Drawer.Root open={open} onOpenChange={setOpen}>\n      <Drawer.Trigger className=\"tale-button tale-button--neutral\">\n        Open Settings\n      </Drawer.Trigger>\n      <Drawer.Backdrop />\n      <Drawer.Popup>\n        <Drawer.Title>Settings</Drawer.Title>\n        <Drawer.Close className=\"tale-button tale-button--ghost\">\n          Close\n        </Drawer.Close>\n      </Drawer.Popup>\n    </Drawer.Root>\n  );\n}\n",
+  "reference": "import { useState } from 'react';\nimport { Drawer } from '@tale-ui/react/drawer';\n\nexport function SettingsDrawer() {\n  const [open, setOpen] = useState(false);\n  return (\n    <Drawer.Root open={open} onOpenChange={setOpen}>\n      <Drawer.Trigger className=\"tale-button tale-button--neutral\">\n        Open Settings\n      </Drawer.Trigger>\n      <Drawer.Backdrop />\n      <Drawer.Popup>\n        <Drawer.Title>Settings</Drawer.Title>\n        <Drawer.Close className=\"tale-button tale-button--ghost\">\n          Close\n        </Drawer.Close>\n      </Drawer.Popup>\n    </Drawer.Root>\n  );\n}\n",
   "tags": ["Drawer"]
 }

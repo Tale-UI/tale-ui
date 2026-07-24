@@ -12,6 +12,11 @@ interface CompilerConfiguration {
   declarationFiles: string[];
 }
 
+interface ParsedProjectConfiguration {
+  configPath: string;
+  parsed: ts.ParsedCommandLine;
+}
+
 const TYPESCRIPT_ROOT = realpathSync(dirname(ts.sys.getExecutingFilePath()));
 
 function invalidConfig(): never {
@@ -137,7 +142,68 @@ function createParseHost(root: string): ts.ParseConfigHost {
   };
 }
 
-function compilerConfiguration(root: string): CompilerConfiguration {
+function parseProjectConfiguration(
+  root: string,
+  configPath: string,
+  parseHost: ts.ParseConfigHost,
+): ParsedProjectConfiguration {
+  if (!isAllowedCompilerPath(root, configPath)) {
+    invalidConfig();
+  }
+  const loaded = ts.readConfigFile(configPath, parseHost.readFile);
+  if (loaded.error) {
+    throw new TaleToolingError(
+      'TALE_INVALID_TSCONFIG',
+      'Tale UI: the project TypeScript configuration could not be read.',
+    );
+  }
+  assertConfigurationPaths(root, dirname(configPath), loaded.config as Record<string, unknown>);
+  const parsed = ts.parseJsonConfigFileContent(
+    loaded.config,
+    parseHost,
+    dirname(configPath),
+    { noEmit: true },
+    configPath,
+  );
+  if (parsed.errors.length > 0) {
+    throw new TaleToolingError(
+      'TALE_INVALID_TSCONFIG',
+      'Tale UI: the project TypeScript configuration is invalid.',
+    );
+  }
+  return { configPath, parsed };
+}
+
+function projectConfigurations(
+  root: string,
+  configPath: string,
+  parseHost: ts.ParseConfigHost,
+  seen = new Set<string>(),
+): ParsedProjectConfiguration[] {
+  const canonicalPath = resolve(configPath);
+  if (seen.has(canonicalPath)) {
+    return [];
+  }
+  seen.add(canonicalPath);
+  const configuration = parseProjectConfiguration(root, canonicalPath, parseHost);
+  return [
+    configuration,
+    ...(configuration.parsed.projectReferences || []).flatMap((reference) =>
+      projectConfigurations(root, ts.resolveProjectReferencePath(reference), parseHost, seen),
+    ),
+  ];
+}
+
+function configurationOwnsTarget(configuration: ParsedProjectConfiguration, target: string) {
+  if (configuration.parsed.fileNames.some((fileName) => resolve(fileName) === target)) {
+    return true;
+  }
+  return Object.keys(configuration.parsed.wildcardDirectories || {}).some((directory) =>
+    isWithinProject(directory, target),
+  );
+}
+
+function compilerConfiguration(root: string, target: string): CompilerConfiguration {
   const configPath = join(root, 'tsconfig.json');
   if (!existsSync(configPath)) {
     return {
@@ -156,35 +222,28 @@ function compilerConfiguration(root: string): CompilerConfiguration {
   }
 
   const parseHost = createParseHost(root);
-  const loaded = ts.readConfigFile(configPath, parseHost.readFile);
-  if (loaded.error) {
-    throw new TaleToolingError(
-      'TALE_INVALID_TSCONFIG',
-      'Tale UI: the project TypeScript configuration could not be read.',
-    );
-  }
-  assertConfigurationPaths(root, dirname(configPath), loaded.config as Record<string, unknown>);
-  const parsed = ts.parseJsonConfigFileContent(
-    loaded.config,
-    parseHost,
-    root,
-    { noEmit: true },
-    configPath,
+  const configurations = projectConfigurations(root, configPath, parseHost);
+  const selected =
+    configurations
+      .filter((configuration) => configurationOwnsTarget(configuration, target))
+      .sort((a, b) => b.configPath.length - a.configPath.length)[0] || configurations[0]!;
+  const selectedTree = projectConfigurations(root, selected.configPath, parseHost);
+  const declarationFiles = selectedTree.flatMap((configuration) =>
+    configuration.parsed.fileNames.filter((fileName) => /\.d\.[cm]?ts$/.test(fileName)),
   );
-  if (parsed.errors.length > 0) {
-    throw new TaleToolingError(
-      'TALE_INVALID_TSCONFIG',
-      'Tale UI: the project TypeScript configuration is invalid.',
-    );
-  }
-  const declarationFiles = parsed.fileNames.filter((fileName) => /\.d\.[cm]?ts$/.test(fileName));
   if (declarationFiles.some((fileName) => !isAllowedCompilerPath(root, fileName))) {
     invalidConfig();
   }
   return {
-    options: { ...parsed.options, noEmit: true },
+    options: {
+      ...selected.parsed.options,
+      composite: false,
+      incremental: false,
+      tsBuildInfoFile: undefined,
+      noEmit: true,
+    },
     fallbackConfig: false,
-    declarationFiles,
+    declarationFiles: [...new Set(declarationFiles)],
   };
 }
 
@@ -193,8 +252,8 @@ export function validateTypeScript(
   absoluteFile: string,
   code: string,
 ): { diagnostics: ValidationDiagnostic[]; fallbackConfig: boolean } {
-  const configuration = compilerConfiguration(root);
   const target = resolve(absoluteFile);
+  const configuration = compilerConfiguration(root, target);
   const host = ts.createCompilerHost(configuration.options, true);
   const originalFileExists = host.fileExists.bind(host);
   const originalReadFile = host.readFile.bind(host);

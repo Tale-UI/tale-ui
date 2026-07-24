@@ -175,6 +175,44 @@ test('project ambient declarations participate in virtual validation', () => {
   }
 });
 
+test('solution configs select the referenced project that owns the virtual target', () => {
+  const root = fixture();
+  try {
+    mkdirSync(join(root, 'app/src'), { recursive: true });
+    writeFileSync(
+      join(root, 'tsconfig.json'),
+      JSON.stringify({
+        compilerOptions: {
+          module: 'NodeNext',
+          moduleResolution: 'NodeNext',
+        },
+        files: [],
+        references: [{ path: './app' }],
+      }),
+    );
+    writeFileSync(
+      join(root, 'app/tsconfig.json'),
+      JSON.stringify({
+        compilerOptions: {
+          module: 'ESNext',
+          moduleResolution: 'Bundler',
+          strict: true,
+        },
+        include: ['src'],
+      }),
+    );
+    writeFileSync(join(root, 'app/src/global.d.ts'), 'declare const referencedValue: number;');
+    const result = validateRequestCore({
+      ...request(root, 'export const value: number = referencedValue;'),
+      virtualFile: 'app/src/example.ts',
+    });
+    assert.equal(result.valid, true);
+    assert.equal(result.fallbackConfig, false);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('compiler resolution cannot read relative imports outside the project', () => {
   const parent = mkdtempSync(join(tmpdir(), 'tale-validation-boundary-'));
   const root = join(parent, 'project');

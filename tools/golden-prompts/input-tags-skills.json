@@ -2,6 +2,6 @@
   "slug": "input-tags-skills",
   "difficulty": "simple",
   "prompt": "Show an InputTags field for entering skills. Include a label, placeholder text, and description. Allow up to 5 tags.",
-  "reference": "import * as React from 'react';\nimport { InputTags } from '@tale-ui/react/input-tags';\n\nexport function SkillsInput() {\n  const [tags, setTags] = React.useState<string[]>([]);\n\n  return (\n    <InputTags.Root\n      label=\"Skills\"\n      placeholder=\"Add a skill…\"\n      description=\"Press Enter to add each skill. Maximum 5.\"\n      maxTags={5}\n      onChange={setTags}\n    />\n  );\n}",
+  "reference": "import * as React from 'react';\nimport { InputTags } from '@tale-ui/react/input-tags';\n\nexport function SkillsInput() {\n  const [tags, setTags] = React.useState<string[]>([]);\n\n  return (\n    <InputTags.Root\n      label=\"Skills\"\n      placeholder=\"Add a skill…\"\n      description=\"Press Enter to add each skill. Maximum 5.\"\n      maxTags={5}\n      value={tags}\n      onChange={setTags}\n    />\n  );\n}",
   "tags": ["InputTags"]
 }
