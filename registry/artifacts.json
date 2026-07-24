@@ -218,7 +218,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:c2dccdf49be0bd2aafc62e38017315895016ecd37c85fb7c7084bc1c46639d43",
+  "sourceRevision": "sha256:5e085c80a339fb43c68e4c71e55bc69e0c84c3291b22e2ca765da497d471a059",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -48358,8 +48358,7 @@
         "with"
       ],
       "related": [
-        "tale:component:combobox",
-        "tale:component:icon"
+        "tale:component:combobox"
       ],
       "retrieval": [
         {
@@ -48796,5 +48795,5 @@
       "trust": "first-party"
     }
   ],
-  "digest": "sha256:00aceb7cd4ba711efce29530eb51ee75b4e5ce47db854f8df11da00c4d6080bb"
+  "digest": "sha256:494db892687a98ec2e14fe7c89f7b66be338f72cf8fc2eb0bd1fd6f3aef34024"
 }

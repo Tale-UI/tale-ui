@@ -151,6 +151,36 @@ Delivery uses capability gates:
 
 Discovery, RFCs, and private prototypes may overlap safely. Public API promotion requires its RFC, provenance, security, privacy, accessibility, compatibility, packaging, migration, observability, and rollback gates.
 
+### Consolidated delivery protocol
+
+On 2026-07-25 the repository owner delegated implementation decisions to
+Codex and requested the fewest practical manual reviews. The remaining roadmap
+is delivered in exactly three owner-review bundles:
+
+| Bundle | Scope | Cumulative exit |
+| ------ | ----- | --------------- |
+| A — Core authoring and data workflows | Current Table RFC and sorting work; remaining Phase 0 evidence; P0-B safe operations and packed tooling; P0-C ten templates; P1-A migrations; P1-F selection, pagination, filtering, and virtualization; existing recipe/package baseline cleanup | R02–R05 and SM01–SM04 pass; previously merged R01 evidence remains green |
+| B — Design-system experience and quality | P1-C i18n; P1-E AppShell; P2-A motion/elevation; P2-B Chat and two templates; P2-C content dispositions and approved primitives; P2-D governance; P2-E accessibility/performance | R07, R09–R14, and SM06 pass; Bundle A evidence remains green |
+| C — Distribution, insight, integrations, and closure | P1-B versioned docs/hosted MCP/`llms.txt`; P1-D aggregate metrics; P3-A Figma contracts; P3-B extensions; P3-C native conformance; cumulative release reconciliation | R01–R17 and SM01–SM08 pass or carry an explicit delegated exception |
+
+Each bundle uses one draft pull request and as many small, ordered milestone
+commits as necessary. The pull request becomes ready only after its complete
+scope and evidence manifest pass. The named review disciplines in the
+traceability matrix are consolidated into that single bundle review rather
+than separate feature approvals.
+
+Codex may make and record candidate dispositions, thresholds, migration
+ranges, compatibility choices, and non-destructive implementation decisions
+without pausing. Automated review findings are actioned within the same pull
+request. Escalation is limited to unavailable credentials/resources, new
+ongoing external cost, a requested change to a preserved non-goal, or a
+destructive external write. npm publication, Figma writes, DNS changes, and
+direct production mutation are not implied by this delegation.
+
+There are no per-template, per-Table-plugin, per-migration-group, or per-public-
+primitive owner reviews. Their independent commits, fixtures, and evidence
+remain mandatory so a consolidated review is still auditable and reversible.
+
 ### Evidence-backed current-state architecture
 
 - Component, pitfall, and A2UI registries are separate generated contracts.
@@ -189,14 +219,17 @@ Discovery, RFCs, and private prototypes may overlap safely. Public API promotion
 ## Assumptions
 
 - The roadmap’s P0–P3 order, dependency map, acceptance criteria, recommended first six issues, constraints, and success measures are binding.
-- Package and app names remain provisional until Phase 0. Working paths are `packages/tooling/`, `apps/hosted-mcp/`, `apps/metrics-service/`, and `apps/metrics-dashboard/`.
+- Adopt `packages/tooling/`, `apps/hosted-mcp/`, and `apps/metrics-dashboard/`.
+  A separate metrics ingestion service is not part of this roadmap.
 - Schema versions are independent. Records correlate schema, producer, package, registry, capability, and release-channel versions.
-- Phase 0 selects the authoritative previous-major source and public hosting origin before historical routes are committed.
+- ADR-003 selects `react-v1.3.56` as the previous-major source and GitHub
+  Pages at `https://tale-ui.github.io/tale-ui/` as the public origin.
 - Unknown baselines are measured before thresholds are approved.
 - Exact source/target versions for starter migrations are derived from release evidence before manifests merge.
 - Canonical generated artifacts omit wall-clock metadata.
 - Idempotency keys are caller-generated opaque values; raw keys and absolute project paths are never persisted or logged.
-- No unresolved preflight decision authorizes irreversible implementation.
+- ADR-000–ADR-004 are accepted. External credentials and destructive
+  production writes remain separate operational inputs.
 
 ## Proposed Changes
 
@@ -554,7 +587,10 @@ Identifiers in this table are canonical for this plan. `Rnn.m` identifies a road
 | SM07  | Agent pass rate and context cost are tracked over time                                                                        | P0-B/P1-D               | benchmark trend artifacts                     | Developer Experience/Product Analytics review        | P1-D         |
 | SM08  | Adoption decisions use measured searches, templates, issues, and upgrades rather than component counts                        | P1-D                    | coverage/decision-record checks               | Product Analytics/Governance review                  | P1-D         |
 
-A criterion can pass only with both its automated evidence and required manual review. Unavailable metrics keep affected criteria open unless the user approves an explicit exception.
+A criterion can pass only with its automated evidence and its bundle-level
+manual review. One bundle review may satisfy multiple named review disciplines
+when its evidence manifest enumerates each criterion. ADR-003 contains the
+delegated exception for unavailable user-level metrics.
 
 ## Implementation Steps
 
@@ -694,7 +730,7 @@ Recommended first six issues remain:
 5. Table plugin RFC and selection/sorting prototype.
 6. Agent cold-start benchmark: current README/MCP setup versus CLI `init`.
 
-Subsequent reviewable slices:
+Internal milestone sequence within the three consolidated bundles:
 
 7. Registry source equality and deterministic A2UI output.
 8. Capability/version correlation and traceability registry.
@@ -707,11 +743,11 @@ Subsequent reviewable slices:
 15. Recovery identities and concurrency fixtures.
 16. Four init planners and structural merges.
 17. Shared materializer and installed fixtures.
-18. Ten templates in independently reviewable slices.
+18. Ten templates in independently reversible commits within Bundle A.
 19. Table inventory, ranking schema, evidence records, and prototypes.
-20. One PR per evidence-ranked stable Table plugin.
+20. One commit per evidence-ranked stable Table plugin within Bundle A.
 21. Migration schemas, loader, protected diff, and fidelity harness.
-22. One PR per mandatory starter-migration group.
+22. One commit per mandatory starter-migration group within Bundle A.
 23. Cross-group replay/recovery and traceability gate.
 24. Historical-doc importer and immutable snapshot tests.
 25. Versioned Pages assembly, root guidance, and route checks.
@@ -728,7 +764,12 @@ Subsequent reviewable slices:
 36. Figma classification, mapping, disclosure, and parity reports.
 37. Extension contribution schemas, trust model, per-class fixtures, and beta loader.
 38. Native conformance and React Native examples.
-39. Final criterion, success-measure, package, route, recovery, privacy, and non-goal reconciliation.
+39. Final criterion, success-measure, package, route, recovery, privacy, and non-goal reconciliation in Bundle C.
+
+Milestones 7–23 comprise Bundle A, 27 and 30–35 comprise Bundle B, and
+24–26, 28–29, and 36–39 comprise Bundle C. Work follows dependency order
+inside each bundle; numbering is traceability, not a requirement for
+additional pull requests.
 
 ## Verification
 
@@ -910,27 +951,30 @@ The roadmap is complete only when:
 - Removed undefined `R1–R17`, `R5`, `SM1–SM8`, and `SM6a` shorthand.
 - Preserved the four mandatory starter migrations, exact ten-candidate Table ranking, filesystem safety, recovery, metrics/privacy, historical docs, Figma, async-state, packaging, accessibility, performance, governance, and non-goal requirements.
 
-## Open Questions
+## Implementation Authority And Remaining Inputs
 
-These are implementation preflight decisions and do not block plan approval:
+Architecture and product preflight no longer require separate approval:
 
-- Final tooling/local-MCP package boundary and independent-versus-lockstep release policy.
-- Supported TypeScript and Node ranges for the packaged validator.
-- Validator worker memory/time limits and deterministic fallback compiler options.
-- Exact operation/recovery storage paths, permissions, retention, and durability fallbacks.
-- Exact starter-migration source/target ranges and affected records.
-- Authoritative previous-major source and static snapshot storage.
-- Canonical public origin and root-routing mechanism.
-- Hosted MCP vendor, transport, rate-limit storage, and deployment platform.
-- Metrics aggregate-only versus opt-in project events and approved source coverage.
-- Figma authentication, approved files, disclosure thresholds, and code-connection mechanism.
-- Evidence-ranked Table top five.
-- AppShell repetition threshold and resulting candidate dispositions.
-- Chat and content candidate dispositions.
-- Maintained performance and axe runners and post-baseline thresholds.
-- Extension integrity/signature and revocation distribution policy.
+- ADR-001 fixes the tooling boundary, independent release policy, Node range,
+  packaged validator, and runtime assets.
+- ADR-002 fixes operation storage, permissions, locking, durability, recovery,
+  retention, and manual-intervention behavior.
+- ADR-003 fixes historical provenance, public origin, hosting boundaries,
+  hosted MCP transport, metrics sources, retention, and unavailable-data
+  exceptions.
+- ADR-004 fixes Figma classification, extension integrity/trust/revocation,
+  and native-platform exception ownership.
+- The approved Table top five are sorting, selection, pagination, filtering,
+  and virtualization.
 
-No irreversible implementation occurs before its applicable gate.
+Exact migration ranges, AppShell repetition evidence, Chat/content
+dispositions, and post-baseline axe/performance thresholds are implementation
+evidence decisions. Codex records them in the applicable bundle without a
+separate owner-review round.
+
+Cloudflare credentials/DNS and a future approved Figma file ID are operational
+inputs, not design blockers. Local builds, deploy artifacts, empty-allowlist
+behavior, fixtures, and honest `unavailable` states must pass without them.
 
 ## Status
 
