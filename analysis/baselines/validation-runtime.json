@@ -59,10 +59,10 @@
     "defaultTimeoutMs": 30000,
     "maximumTimeoutMs": 60000,
     "workerMemoryMb": {
-      "oldGeneration": 256,
-      "youngGeneration": 32,
+      "oldGeneration": 512,
+      "youngGeneration": 64,
       "stack": 4
     }
   },
-  "rationale": "The default timeout is over 45 times the slowest observed case, while the hard timeout bounds caller requests. Input, diagnostic, and worker-memory caps bound parser and compiler work without constraining the measured fixtures."
+  "rationale": "The default timeout is over 45 times the slowest observed case, while the hard timeout bounds caller requests. Input and diagnostic caps bound parser and compiler work. The worker ceiling is 512 MB because realistic form and settings recipes can exceed 256 MB while resolving the full React type graph; the process remains isolated and bounded."
 }

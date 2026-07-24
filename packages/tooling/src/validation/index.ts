@@ -47,8 +47,8 @@ function runValidation(
       workerData: request,
       execArgv: runtime.execArgv,
       resourceLimits: {
-        maxOldGenerationSizeMb: 256,
-        maxYoungGenerationSizeMb: 32,
+        maxOldGenerationSizeMb: 512,
+        maxYoungGenerationSizeMb: 64,
         stackSizeMb: 4,
       },
     });

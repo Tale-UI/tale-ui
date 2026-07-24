@@ -41,7 +41,7 @@ export function useResizeObserver({ ref, box, onResize }: UseResizeObserverOptio
 import { useRef, useState } from 'react';
 import { Text } from '@tale-ui/react/text';
 
-function ResponsiveComponent() {
+export function ResponsiveComponent() {
   const ref = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
 

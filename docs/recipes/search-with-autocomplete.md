@@ -5,15 +5,11 @@ A search input with filtered suggestions from a list of items.
 ## Components Used
 
 - `Combobox` from `@tale-ui/react/combobox`
-- `Icon` from `@tale-ui/react/icon`
-- `Search` from `lucide-react`
 
 ## Code
 
 ```tsx
 import { Combobox } from '@tale-ui/react/combobox';
-import { Icon } from '@tale-ui/react/icon';
-import { Search } from 'lucide-react';
 import { useState } from 'react';
 
 const allItems = [
