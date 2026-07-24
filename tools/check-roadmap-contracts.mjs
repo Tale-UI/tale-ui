@@ -7,6 +7,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
+import { compareCanonicalStrings, computeArtifactSourceRevision } from './artifact-canonical.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -139,6 +140,34 @@ assert.equal(
   digest(capabilityPreimage),
   'registry/capabilities.json digest does not match its canonical preimage',
 );
+assert.deepEqual(
+  artifactRegistry.generatedFrom,
+  artifactRegistry.generatedFrom.toSorted(),
+  'Artifact source paths must be canonically sorted',
+);
+assert.equal(
+  artifactRegistry.sourceRevision,
+  computeArtifactSourceRevision(artifactRegistry.generatedFrom, text),
+  'Artifact source revision must match the canonical source preimage',
+);
+for (const path of artifactRegistry.generatedFrom) {
+  assert.ok(existsSync(join(ROOT, path)), `Artifact registry source is missing: ${path}`);
+}
+assert.deepEqual(
+  Object.keys(artifactRegistry.packageVersions),
+  Object.keys(artifactRegistry.packageVersions).toSorted(compareCanonicalStrings),
+  'Package-version keys must be canonically sorted',
+);
+assert.equal(
+  capabilityRegistry.registryVersion,
+  artifactRegistry.registryVersion,
+  'Artifact and capability registry versions must correlate',
+);
+assert.equal(
+  artifactRegistry.capabilityManifestId,
+  capabilityRegistry.manifestId,
+  'Artifact registry must reference the generated capability manifest',
+);
 
 for (const [path, expected] of Object.entries(INVENTORIES)) {
   const inventory = json(path);
@@ -156,6 +185,11 @@ for (const [path, expected] of Object.entries(INVENTORIES)) {
 }
 
 const artifacts = artifactRegistry.artifacts;
+assert.deepEqual(
+  artifacts.map((artifact) => artifact.id),
+  artifacts.map((artifact) => artifact.id).toSorted(compareCanonicalStrings),
+  'Artifacts must be canonically ordered by stable ID',
+);
 const byKind = (kind) =>
   artifacts.filter((artifact) => artifact.kind === kind).map((artifact) => artifact.slug);
 const chartSlugs = Object.keys(json('packages/charts/package.json').exports)
@@ -216,6 +250,17 @@ assert.equal(
   capabilitySource.capabilities.length,
   'Source capability IDs must be unique',
 );
+assert.deepEqual(
+  capabilityRegistry.capabilities,
+  capabilitySource.capabilities
+    .map((capability) => ({
+      ...capability,
+      availability: capability.availability.toSorted(),
+      status: capability.status || 'available',
+    }))
+    .toSorted((a, b) => compareCanonicalStrings(a.id, b.id)),
+  'Generated capabilities must exactly match their normalized source records',
+);
 for (const capability of capabilityRegistry.capabilities) {
   assert.deepEqual(
     capability.availability,
@@ -224,6 +269,33 @@ for (const capability of capabilityRegistry.capabilities) {
   );
 }
 for (const artifact of artifacts) {
+  assert.equal(
+    artifact.id,
+    `${artifact.namespace}:${artifact.kind}:${artifact.slug}`,
+    `${artifact.id} fields must reproduce its stable ID`,
+  );
+  for (const key of ['aliases', 'keywords', 'related', 'capabilities', 'platforms', 'locales']) {
+    if (artifact[key]) {
+      assert.deepEqual(
+        artifact[key],
+        artifact[key].toSorted(),
+        `${artifact.id} ${key} must be canonically sorted`,
+      );
+    }
+  }
+  if (artifact.package) {
+    assert.equal(
+      artifact.version,
+      artifactRegistry.packageVersions[artifact.package],
+      `${artifact.id} version must match its correlated package version`,
+    );
+  } else {
+    assert.equal(
+      'version' in artifact,
+      false,
+      `${artifact.id} must not declare a version without a package`,
+    );
+  }
   for (const capability of artifact.capabilities) {
     assert.ok(
       capabilityIds.has(capability),
@@ -309,6 +381,44 @@ for (const path of [
 for (const path of ['src/file.tsx', 'src\\file.tsx', 'app/routes/settings.tsx']) {
   assert.equal(portablePath.test(path), true, `Safe relative path failed schema pattern: ${path}`);
 }
+
+validate(
+  'schemas/error-envelope.schema.json',
+  {
+    ok: true,
+    command: 'manifest',
+    requestId: 'request-1',
+    versions: {
+      contract: '1.0.0',
+      registry: artifactRegistry.registryVersion,
+      capabilityManifest: capabilityRegistry.schemaVersion,
+      packages: artifactRegistry.packageVersions,
+    },
+    capabilities: capabilityRegistry.capabilities
+      .filter((capability) => capability.status === 'available')
+      .map((capability) => capability.id),
+    data: { releaseChannel: artifactRegistry.releaseChannel },
+    warnings: [],
+  },
+  'success envelope fixture',
+);
+assert.equal(
+  isValid('schemas/error-envelope.schema.json', {
+    ok: true,
+    command: 'manifest',
+    requestId: 'request-1',
+    versions: {
+      contract: '1.0.0',
+      registry: artifactRegistry.registryVersion,
+      packages: artifactRegistry.packageVersions,
+    },
+    capabilities: [],
+    data: {},
+    warnings: [],
+  }),
+  false,
+  'Success envelopes must include every correlated version field',
+);
 
 validate(
   'schemas/error-envelope.schema.json',

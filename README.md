@@ -12,6 +12,7 @@ Unified monorepo for the Tale UI design system and React component library.
 | [`@tale-ui/react-styles`](packages/styles/) | Component CSS using @tale-ui/css design tokens                                                         | [![npm](https://img.shields.io/npm/v/@tale-ui/react-styles)](https://www.npmjs.com/package/@tale-ui/react-styles) |
 | [`@tale-ui/themes`](packages/themes/)       | Optional standard and monochrome theme suites                                                          | [![npm](https://img.shields.io/npm/v/@tale-ui/themes)](https://www.npmjs.com/package/@tale-ui/themes)             |
 | [`@tale-ui/utils`](packages/utils/)         | Shared utilities                                                                                       | [![npm](https://img.shields.io/npm/v/@tale-ui/utils)](https://www.npmjs.com/package/@tale-ui/utils)               |
+| [`@tale-ui/tooling`](packages/tooling/)     | Internal-first registry API, CLI, validation, and safe project tooling                                 | Internal                                                                                                          |
 
 ## Installation
 

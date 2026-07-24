@@ -635,6 +635,13 @@ importers:
         version: 5.9.3
     publishDirectory: build
 
+  packages/tooling:
+    devDependencies:
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+    publishDirectory: build
+
   packages/utils:
     dependencies:
       '@babel/runtime':

@@ -75,6 +75,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: TypeScript
         run: pnpm typescript
+      - name: Verify packed tooling API and CLI
+        run: pnpm tooling:test:package
       - name: Unit tests (jsdom)
         run: pnpm test:jsdom
 

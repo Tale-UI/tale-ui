@@ -27,6 +27,7 @@ tale-ui/
 │   ├── react/             # @tale-ui/react — styled React components
 │   ├── styles/            # @tale-ui/react-styles — per-component CSS
 │   ├── themes/            # @tale-ui/themes — optional standard and monochrome themes
+│   ├── tooling/           # @tale-ui/tooling — registry API, CLI, validation, operations
 │   └── utils/             # @tale-ui/utils — shared hooks & helpers
 ├── docs/                  # Next.js documentation site
 ├── playground/
@@ -40,14 +41,15 @@ tale-ui/
 
 ## Packages
 
-| Package                 | Path               | Description                                            |
-| ----------------------- | ------------------ | ------------------------------------------------------ |
-| `@tale-ui/tokens`       | `packages/tokens/` | Canonical token source and generated native objects    |
-| `@tale-ui/css`          | `packages/css/`    | CSS tokens, foundations, layout utilities, themes      |
-| `@tale-ui/react`        | `packages/react/`  | Styled React components (BEM class names auto-applied) |
-| `@tale-ui/react-styles` | `packages/styles/` | Per-component CSS rules built on `@tale-ui/css` tokens |
-| `@tale-ui/themes`       | `packages/themes/` | Optional standard and monochrome theme presets         |
-| `@tale-ui/utils`        | `packages/utils/`  | Shared hooks, colour utilities, DOM helpers            |
+| Package                 | Path                | Description                                            |
+| ----------------------- | ------------------- | ------------------------------------------------------ |
+| `@tale-ui/tokens`       | `packages/tokens/`  | Canonical token source and generated native objects    |
+| `@tale-ui/css`          | `packages/css/`     | CSS tokens, foundations, layout utilities, themes      |
+| `@tale-ui/react`        | `packages/react/`   | Styled React components (BEM class names auto-applied) |
+| `@tale-ui/react-styles` | `packages/styles/`  | Per-component CSS rules built on `@tale-ui/css` tokens |
+| `@tale-ui/themes`       | `packages/themes/`  | Optional standard and monochrome theme presets         |
+| `@tale-ui/tooling`      | `packages/tooling/` | Registry API, CLI, validation, and project operations  |
+| `@tale-ui/utils`        | `packages/utils/`   | Shared hooks, colour utilities, DOM helpers            |
 
 ## Workspace CLI Commands
 
