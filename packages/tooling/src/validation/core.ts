@@ -45,6 +45,13 @@ function assertRequest(request: ValidationRequest) {
       );
     }
   }
+  if (request.rules?.length === 0) {
+    throw new TaleToolingError(
+      'TALE_INVALID_ARGUMENT',
+      'Tale UI: validation rules cannot be empty because that would skip every check. ' +
+        'Choose registry, typescript, or both and retry.',
+    );
+  }
   if (request.rules && new Set(request.rules).size !== request.rules.length) {
     throw new TaleToolingError(
       'TALE_INVALID_ARGUMENT',

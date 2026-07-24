@@ -16,17 +16,20 @@
     "./package.json": "./package.json"
   },
   "bin": {
-    "tale": "./bin/tale.mjs"
+    "tale": "./bin/tale.mjs",
+    "tale-mcp": "./bin/tale-mcp.mjs"
   },
   "scripts": {
     "prebuild": "rimraf --glob build build-tests \"*.tsbuildinfo\"",
     "build": "node scripts/build.mjs",
-    "test": "tsx --test src/api.test.ts src/validation/validation.test.ts",
+    "test": "tsx --test src/api.test.ts src/mcp.test.ts src/validation/validation.test.ts",
     "test:package": "pnpm build && publint run ./build && attw --profile esm-only --pack ./build && node scripts/test-packed.mjs",
     "typescript": "tsc -b tsconfig.json"
   },
   "dependencies": {
-    "typescript": "5.9.3"
+    "@modelcontextprotocol/sdk": "^1.28.0",
+    "typescript": "5.9.3",
+    "zod": "^3.25.76"
   },
   "sideEffects": false,
   "repository": {

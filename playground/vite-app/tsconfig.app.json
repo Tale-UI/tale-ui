@@ -11,6 +11,7 @@
     "baseUrl": ".",
     "paths": {
       "@tale-ui/react": ["../../packages/react/src/index.ts"],
+      "@tale-ui/react/styles": ["../../packages/react/src/styles.css.d.ts"],
       "@tale-ui/react/*": ["../../packages/react/src/*"],
       "@tale-ui/charts": ["../../packages/charts/src/index.ts"],
       "@tale-ui/charts/*": ["../../packages/charts/src/*"],

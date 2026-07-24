@@ -71,6 +71,9 @@ importers:
       '@tale-ui/monorepo-tests':
         specifier: workspace:*
         version: link:test
+      '@tale-ui/tooling':
+        specifier: link:packages/tooling
+        version: link:packages/tooling
       '@types/node':
         specifier: 22.18.13
         version: 22.18.13
@@ -637,9 +640,15 @@ importers:
 
   packages/tooling:
     dependencies:
+      '@modelcontextprotocol/sdk':
+        specifier: ^1.28.0
+        version: 1.28.0(zod@3.25.76)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
+      zod:
+        specifier: ^3.25.76
+        version: 3.25.76
     publishDirectory: build
 
   packages/utils:

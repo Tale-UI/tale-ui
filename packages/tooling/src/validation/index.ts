@@ -1,3 +1,5 @@
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { Worker } from 'node:worker_threads';
 import type {
   ValidationCodeRequest,
@@ -18,6 +20,17 @@ interface WorkerMessage {
   };
 }
 
+function workerRuntime() {
+  const builtWorker = new URL('./worker.js', import.meta.url);
+  if (existsSync(fileURLToPath(builtWorker))) {
+    return { url: builtWorker, execArgv: [] };
+  }
+  return {
+    url: new URL('./worker-dev.mjs', import.meta.url),
+    execArgv: [],
+  };
+}
+
 function runValidation(
   request: ValidationRequest,
   options: ValidationRunOptions = {},
@@ -29,9 +42,10 @@ function runValidation(
   }
 
   return new Promise((resolve, reject) => {
-    const worker = new Worker(new URL('./worker.js', import.meta.url), {
+    const runtime = workerRuntime();
+    const worker = new Worker(runtime.url, {
       workerData: request,
-      execArgv: [],
+      execArgv: runtime.execArgv,
       resourceLimits: {
         maxOldGenerationSizeMb: 256,
         maxYoungGenerationSizeMb: 32,

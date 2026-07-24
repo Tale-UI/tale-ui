@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0.0",
+  "surface": "code.validate",
+  "environment": {
+    "node": "v24.14.1",
+    "platform": "darwin",
+    "architecture": "arm64",
+    "logicalCpuCount": 18,
+    "totalMemoryBytes": 137438953472
+  },
+  "method": {
+    "runtime": "packages/tooling/build/validation/index.js",
+    "projectRoot": "repository root",
+    "iterations": 12,
+    "command": "pnpm --filter @tale-ui/tooling build, followed by in-process validateCode calls"
+  },
+  "normalTypeScriptSamplesMs": [
+    401.08,
+    402.94,
+    407.7,
+    408.47,
+    412.04,
+    412.79,
+    413.89,
+    415.85,
+    419.56,
+    428.76,
+    435.22,
+    446.62
+  ],
+  "normalTypeScriptSummaryMs": {
+    "minimum": 401.08,
+    "median": 412.79,
+    "p95": 446.62,
+    "maximum": 446.62
+  },
+  "boundaryCases": [
+    {
+      "name": "registry-only 950000-byte input",
+      "durationMs": 143,
+      "diagnosticCount": 0
+    },
+    {
+      "name": "TypeScript diagnostic cap",
+      "inputBytes": 8029,
+      "durationMs": 424.08,
+      "diagnosticCount": 200
+    },
+    {
+      "name": "mixed registry and TypeScript React import",
+      "inputBytes": 121,
+      "durationMs": 651.74,
+      "diagnosticCount": 0
+    }
+  ],
+  "selectedLimits": {
+    "maximumInputBytes": 1000000,
+    "maximumDiagnostics": 200,
+    "defaultTimeoutMs": 30000,
+    "maximumTimeoutMs": 60000,
+    "workerMemoryMb": {
+      "oldGeneration": 256,
+      "youngGeneration": 32,
+      "stack": 4
+    }
+  },
+  "rationale": "The default timeout is over 45 times the slowest observed case, while the hard timeout bounds caller requests. Input, diagnostic, and worker-memory caps bound parser and compiler work without constraining the measured fixtures."
+}

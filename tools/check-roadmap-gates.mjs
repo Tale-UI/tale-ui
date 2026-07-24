@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const ADR_PATH = 'docs/architecture/adr-001-tooling-package.md';
+const VALIDATION_BASELINE_PATH = 'analysis/baselines/validation-runtime.json';
 const adr = readFileSync(join(ROOT, ADR_PATH), 'utf8');
 const accepted = /^- Status: Accepted$/m.test(adr);
 
@@ -73,15 +74,56 @@ if (accepted) {
   if (publishWorkflow.includes('@tale-ui/tooling')) {
     throw new Error('Tooling publication is gated until packed validation parity passes');
   }
-  for (const id of ['code.validate', 'project.mutate']) {
-    const capability = capabilitySource.capabilities.find((entry) => entry.id === id);
-    if (!capability || capability.status !== 'gated' || capability.availability.length !== 0) {
-      throw new Error(`${id} must remain unavailable until its capability-specific gate passes`);
-    }
-  }
-  console.log(
-    'OK: P-01 is approved; @tale-ui/tooling remains internal and validation/mutation stay gated',
+  const validationCapability = capabilitySource.capabilities.find(
+    (entry) => entry.id === 'code.validate',
   );
+  if (!validationCapability) {
+    throw new Error('code.validate must be declared in the capability source');
+  }
+  if (validationCapability.status === 'available') {
+    const requiredAvailability = ['api', 'cli', 'local-mcp'];
+    if (
+      JSON.stringify(validationCapability.availability) !== JSON.stringify(requiredAvailability)
+    ) {
+      throw new Error('Available code.validate must expose exact API, CLI, and local-MCP parity');
+    }
+    const requiredEvidence = [
+      VALIDATION_BASELINE_PATH,
+      'packages/tooling/fixtures/vite/tsconfig.json',
+      'packages/tooling/fixtures/next/tsconfig.json',
+      'packages/tooling/src/mcp-server.ts',
+    ];
+    for (const path of requiredEvidence) {
+      if (!existsSync(join(ROOT, path))) {
+        throw new Error(`code.validate is available without required gate evidence: ${path}`);
+      }
+    }
+    const baseline = JSON.parse(readFileSync(join(ROOT, VALIDATION_BASELINE_PATH), 'utf8'));
+    if (
+      baseline.selectedLimits?.maximumInputBytes !== 1_000_000 ||
+      baseline.selectedLimits?.maximumDiagnostics !== 200 ||
+      baseline.selectedLimits?.defaultTimeoutMs !== 30_000 ||
+      baseline.selectedLimits?.maximumTimeoutMs !== 60_000
+    ) {
+      throw new Error('code.validate runtime limits do not match the approved baseline evidence');
+    }
+  } else if (
+    validationCapability.status !== 'gated' ||
+    validationCapability.availability.length !== 0
+  ) {
+    throw new Error('code.validate must be available with evidence or remain fully gated');
+  }
+  const mutationCapability = capabilitySource.capabilities.find(
+    (entry) => entry.id === 'project.mutate',
+  );
+  if (
+    !mutationCapability ||
+    mutationCapability.status !== 'gated' ||
+    mutationCapability.availability.length !== 0
+  ) {
+    throw new Error('project.mutate must remain unavailable until its capability gate passes');
+  }
+  console.log('OK: P-01 is approved; validation evidence is enforced and mutation remains gated');
 } else {
   console.log(
     `OK: P-01 is enforced; ${ADR_PATH} remains Proposed and no public tooling integration exists`,

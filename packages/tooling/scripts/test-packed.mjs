@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 import { execFileSync, spawnSync } from 'node:child_process';
-import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { cp, mkdtemp, readFile, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 
 const fixtureRoot = await mkdtemp(join(tmpdir(), 'tale-tooling-pack-'));
 const packOutput = execFileSync(
@@ -58,6 +60,33 @@ if (
   throw new Error('Packed validation failed compiler parity or leaked its project root');
 }
 
+await Promise.all(
+  ['vite', 'next'].map(async (fixture) => {
+    const projectRoot = join(fixtureRoot, `${fixture}-app`);
+    await cp(new URL(`../fixtures/${fixture}`, import.meta.url), projectRoot, { recursive: true });
+    const fixtureOutput = execFileSync(
+      process.execPath,
+      [
+        '--input-type=module',
+        '--eval',
+        "import { validateFile } from '@tale-ui/tooling/validation'; const base = { schemaVersion: '1.0.0', requestId: 'packed-fixture', root: process.cwd(), timeoutMs: 10000, rules: ['typescript'] }; const valid = await validateFile({ ...base, file: 'src/valid.ts' }); const invalid = await validateFile({ ...base, file: 'src/invalid.ts' }); process.stdout.write(JSON.stringify({ valid, invalid }));",
+      ],
+      { cwd: projectRoot, encoding: 'utf8' },
+    );
+    const fixtureResult = JSON.parse(fixtureOutput);
+    if (
+      !fixtureResult.valid.valid ||
+      fixtureResult.invalid.valid ||
+      fixtureResult.valid.fallbackConfig ||
+      fixtureResult.invalid.fallbackConfig ||
+      !fixtureResult.invalid.diagnostics.some((diagnostic) => diagnostic.code === 2322) ||
+      fixtureOutput.includes(projectRoot)
+    ) {
+      throw new Error(`Packed validation failed the ${fixture} project-config fixture`);
+    }
+  }),
+);
+
 const cliPath = join(fixtureRoot, 'node_modules/.bin/tale');
 const cliOutput = execFileSync(cliPath, ['manifest', '--json'], {
   cwd: fixtureRoot,
@@ -69,9 +98,100 @@ if (!cliResult.ok || cliResult.data.registryVersion !== '1.0.0') {
 }
 if (
   !cliResult.capabilities.includes('manifest.get') ||
+  !cliResult.capabilities.includes('code.validate') ||
   cliResult.capabilities.includes('ui.plan')
 ) {
   throw new Error('Packed CLI reported capabilities outside the CLI surface');
+}
+const cliValidation = spawnSync(
+  cliPath,
+  [
+    'validate',
+    '--code',
+    'export const answer: string = 42;',
+    '--virtual-file',
+    'src/example.ts',
+    '--root',
+    fixtureRoot,
+    '--timeout',
+    '10000',
+    '--rules',
+    'typescript',
+    '--json',
+  ],
+  { cwd: fixtureRoot, encoding: 'utf8' },
+);
+const cliValidationResult = JSON.parse(cliValidation.stdout);
+if (
+  cliValidation.status !== 5 ||
+  !cliValidationResult.ok ||
+  cliValidationResult.data.valid ||
+  JSON.stringify(cliValidationResult.data.diagnostics) !==
+    JSON.stringify(validationResult.invalid.diagnostics) ||
+  JSON.stringify(cliValidationResult.data.versions) !==
+    JSON.stringify(validationResult.invalid.versions) ||
+  cliValidation.stderr !== ''
+) {
+  throw new Error('Packed CLI validation did not preserve normalized diagnostics and exit status');
+}
+const orderedFileValidation = spawnSync(
+  cliPath,
+  [
+    'validate',
+    '--root',
+    join(fixtureRoot, 'vite-app'),
+    '--rules',
+    'typescript',
+    'src/valid.ts',
+    '--json',
+  ],
+  { cwd: fixtureRoot, encoding: 'utf8' },
+);
+const orderedFileResult = JSON.parse(orderedFileValidation.stdout);
+if (
+  orderedFileValidation.status !== 0 ||
+  !orderedFileResult.ok ||
+  !orderedFileResult.data.valid ||
+  orderedFileValidation.stderr !== ''
+) {
+  throw new Error('Packed CLI validation did not accept a positional file after options');
+}
+const conflictingInput = spawnSync(
+  cliPath,
+  [
+    'validate',
+    '--code',
+    'export const answer = 42;',
+    'src/other.ts',
+    '--root',
+    fixtureRoot,
+    '--json',
+  ],
+  { cwd: fixtureRoot, encoding: 'utf8' },
+);
+const conflictingInputResult = JSON.parse(conflictingInput.stdout);
+if (
+  conflictingInput.status !== 2 ||
+  conflictingInputResult.error?.code !== 'TALE_INVALID_ARGUMENT' ||
+  conflictingInput.stderr !== ''
+) {
+  throw new Error('Packed CLI validation did not reject conflicting ordered inputs');
+}
+const invalidTimeout = spawnSync(
+  cliPath,
+  ['validate', '--code', 'export const answer = 42;', '--timeout', 'nope', '--json'],
+  { cwd: fixtureRoot, encoding: 'utf8' },
+);
+const invalidTimeoutResult = JSON.parse(invalidTimeout.stdout);
+if (
+  invalidTimeout.status !== 2 ||
+  invalidTimeoutResult.error?.code !== 'TALE_INVALID_ARGUMENT' ||
+  !invalidTimeoutResult.error.message.startsWith('Tale UI:') ||
+  !invalidTimeoutResult.error.message.includes('whole-number value') ||
+  !invalidTimeoutResult.error.message.includes('retry') ||
+  invalidTimeout.stderr !== ''
+) {
+  throw new Error('Packed CLI validation did not normalize its timeout error');
 }
 const failedCli = spawnSync(cliPath, ['unsupported', '--json'], {
   cwd: fixtureRoot,
@@ -89,7 +209,61 @@ if (cliOutput.includes(fixtureRoot) || (await readFile(cliPath, 'utf8')).include
   throw new Error('Packed CLI output or launcher leaked an absolute project path');
 }
 
+const mcpPath = join(fixtureRoot, 'node_modules/.bin/tale-mcp');
+const mcpTransport = new StdioClientTransport({
+  command: mcpPath,
+  cwd: fixtureRoot,
+  stderr: 'pipe',
+});
+const mcpClient = new Client({ name: 'tale-tooling-packed-test', version: '1.0.0' });
+try {
+  await mcpClient.connect(mcpTransport);
+  const tools = await mcpClient.listTools();
+  if (!tools.tools.some((tool) => tool.name === 'validate_code')) {
+    throw new Error('Packed local MCP did not register validate_code');
+  }
+  const response = await mcpClient.callTool({
+    name: 'validate_code',
+    arguments: {
+      code: 'export const answer: string = 42;',
+      virtualFile: 'src/example.ts',
+      timeoutMs: 10_000,
+      rules: ['typescript'],
+    },
+  });
+  const content = response.content.find((entry) => entry.type === 'text');
+  const mcpValidationResult = JSON.parse(content?.text || '{}');
+  if (
+    response.isError !== true ||
+    mcpValidationResult.valid ||
+    JSON.stringify(mcpValidationResult.diagnostics) !==
+      JSON.stringify(validationResult.invalid.diagnostics) ||
+    JSON.stringify(mcpValidationResult.versions) !==
+      JSON.stringify(validationResult.invalid.versions) ||
+    JSON.stringify(response).includes(fixtureRoot)
+  ) {
+    throw new Error('Packed local MCP validation diverged from the API result or leaked its root');
+  }
+  const emptyRulesResponse = await mcpClient.callTool({
+    name: 'validate_code',
+    arguments: {
+      code: 'export const answer: string = 42;',
+      rules: [],
+    },
+  });
+  if (
+    emptyRulesResponse.isError !== true ||
+    !emptyRulesResponse.content.some(
+      (entry) => entry.type === 'text' && entry.text.includes('validation'),
+    )
+  ) {
+    throw new Error('Packed local MCP accepted an empty validation rule selection');
+  }
+} finally {
+  await mcpClient.close();
+}
+
 await rm(fixtureRoot, { recursive: true, force: true });
 process.stdout.write(
-  'Packed @tale-ui/tooling API, validation worker, and CLI load without monorepo paths.\n',
+  'Packed @tale-ui/tooling API, CLI, local MCP, and validation worker preserve parity without monorepo paths.\n',
 );

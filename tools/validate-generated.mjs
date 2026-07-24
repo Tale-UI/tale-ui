@@ -2,203 +2,156 @@
 /**
  * Tale UI — Generated Code Validator
  *
- * Validates generated .tsx code against the component registry,
- * TypeScript compiler, and ESLint. Usable without an API key.
- *
- * Usage:
- *   node tools/validate-generated.mjs path/to/file.tsx
- *   node tools/validate-generated.mjs --code '<Button>Hi</Button>'
- *   node tools/validate-generated.mjs --json path/to/file.tsx
- *   node tools/validate-generated.mjs --golden tools/golden-prompts/primary-button.json
- *
- * Exit codes:
- *   0 — valid
- *   1 — validation errors found
+ * Compatibility adapter over @tale-ui/tooling's packaged validation runtime.
+ * It preserves the repository's legacy JSON shape while using the same
+ * read-only compiler API as the public API, CLI, and local MCP server.
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { execFileSync, execSync } from 'child_process';
+import { readFileSync } from 'node:fs';
+import { dirname, relative, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { register } from 'tsx/esm/api';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
-const REGISTRY_PATH = resolve(ROOT, 'registry/components.json');
-const SCRATCH_DIR = resolve(__dirname, '.generated-scratch');
-const TSCONFIG_PATH = resolve(__dirname, 'tsconfig.generated.json');
+register();
 
-// ─── Parse args ─────────────────────────────────────────────────────────────
+const { validateCode, validateFile } = await import('@tale-ui/tooling/validation');
+const { toTaleError } = await import('@tale-ui/tooling/contracts');
 
+const currentDir = dirname(fileURLToPath(import.meta.url));
+const root = resolve(currentDir, '..');
 const args = process.argv.slice(2);
 const jsonOutput = args.includes('--json');
-const filteredArgs = args.filter(a => a !== '--json');
+const filteredArgs = args.filter((argument) => argument !== '--json');
 
-let code;
-let sourceLabel;
+function legacyRegistryType(code) {
+  if (code === 'TALE_INVALID_IMPORT') {
+    return 'invalid-import';
+  }
+  if (code === 'TALE_WRONG_COMPONENT_KIND') {
+    return 'wrong-kind';
+  }
+  if (code === 'TALE_DEPRECATED_ARTIFACT') {
+    return 'deprecated-artifact';
+  }
+  return 'registry';
+}
 
-const codeArgIdx = filteredArgs.indexOf('--code');
-const goldenArgIdx = filteredArgs.indexOf('--golden');
+function legacyResult(source, result) {
+  const registryErrors = result.diagnostics
+    .filter(
+      (diagnostic) => diagnostic.severity === 'error' && diagnostic.ruleId?.startsWith('registry.'),
+    )
+    .map((diagnostic) => ({
+      type: legacyRegistryType(diagnostic.code),
+      message: diagnostic.message,
+      ...(diagnostic.path ? { path: diagnostic.path } : {}),
+      ...(diagnostic.line ? { line: diagnostic.line } : {}),
+      ...(diagnostic.column ? { column: diagnostic.column } : {}),
+    }));
+  const typescriptErrors = result.diagnostics
+    .filter((diagnostic) => diagnostic.severity === 'error' && typeof diagnostic.code === 'number')
+    .map((diagnostic) => ({
+      code: diagnostic.code,
+      line: diagnostic.line || 0,
+      ...(diagnostic.column ? { column: diagnostic.column } : {}),
+      ...(diagnostic.path ? { path: diagnostic.path } : {}),
+      message: diagnostic.message,
+    }));
+  return {
+    source,
+    valid: result.valid,
+    registryErrors,
+    typescriptErrors,
+    diagnostics: result.diagnostics,
+    versions: result.versions,
+    fallbackConfig: result.fallbackConfig,
+  };
+}
 
-if (codeArgIdx !== -1 && filteredArgs[codeArgIdx + 1]) {
-  code = filteredArgs[codeArgIdx + 1];
-  sourceLabel = '<inline>';
-} else if (goldenArgIdx !== -1 && filteredArgs[goldenArgIdx + 1]) {
-  const golden = JSON.parse(readFileSync(filteredArgs[goldenArgIdx + 1], 'utf8'));
-  code = golden.reference;
-  sourceLabel = filteredArgs[goldenArgIdx + 1];
+function print(result) {
+  if (jsonOutput) {
+    process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+    return;
+  }
+  if (result.valid) {
+    process.stdout.write(`✅ ${result.source} — valid\n`);
+    return;
+  }
+  const errors = [...result.registryErrors, ...result.typescriptErrors];
+  process.stdout.write(`❌ ${result.source} — ${errors.length} error(s)\n\n`);
+  for (const error of result.registryErrors) {
+    process.stdout.write(`  [registry] ${error.message}\n`);
+  }
+  for (const error of result.typescriptErrors) {
+    const location = error.line > 0 ? `:${error.line}` : '';
+    process.stdout.write(`  [tsc${location}] ${error.message}\n`);
+  }
+}
+
+let source;
+let request;
+const codeIndex = filteredArgs.indexOf('--code');
+const goldenIndex = filteredArgs.indexOf('--golden');
+
+if (codeIndex >= 0 && filteredArgs[codeIndex + 1]) {
+  source = '<inline>';
+  request = {
+    code: filteredArgs[codeIndex + 1],
+    virtualFile: 'playground/vite-app/src/generated-validation.tsx',
+  };
+} else if (goldenIndex >= 0 && filteredArgs[goldenIndex + 1]) {
+  const goldenPath = resolve(filteredArgs[goldenIndex + 1]);
+  const golden = JSON.parse(readFileSync(goldenPath, 'utf8'));
+  source = filteredArgs[goldenIndex + 1];
+  request = {
+    code: golden.reference,
+    virtualFile: 'playground/vite-app/src/generated-validation.tsx',
+  };
 } else if (filteredArgs[0] && !filteredArgs[0].startsWith('-')) {
   const filePath = resolve(filteredArgs[0]);
   if (filePath.endsWith('.json')) {
     const golden = JSON.parse(readFileSync(filePath, 'utf8'));
-    code = golden.reference;
-    sourceLabel = filteredArgs[0];
+    source = filteredArgs[0];
+    request = {
+      code: golden.reference,
+      virtualFile: 'playground/vite-app/src/generated-validation.tsx',
+    };
   } else {
-    code = readFileSync(filePath, 'utf8');
-    sourceLabel = filteredArgs[0];
+    source = filteredArgs[0];
+    request = { file: relative(root, filePath).replaceAll('\\', '/') };
   }
 } else {
-  execFileSync(process.execPath, [resolve(__dirname, 'validate-golden-prompts.mjs')], {
-    cwd: ROOT,
+  const { execFileSync } = await import('node:child_process');
+  execFileSync(process.execPath, [resolve(currentDir, 'validate-golden-prompts.mjs')], {
+    cwd: root,
     stdio: 'inherit',
   });
   process.exit(0);
 }
 
-// ─── Load registry ──────────────────────────────────────────────────────────
-
-const registry = JSON.parse(readFileSync(REGISTRY_PATH, 'utf8'));
-const componentsBySlug = new Map(registry.components.map(c => [c.slug, c]));
-const componentsByName = new Map(registry.components.map(c => [c.name, c]));
-
-// ─── Step 1: Registry validation ────────────────────────────────────────────
-
-function validateRegistry(code) {
-  const errors = [];
-
-  // Check import paths
-  const importRegex = /import\s+\{[^}]+\}\s+from\s+['"]@tale-ui\/react\/([^'"]+)['"]/g;
-  let m;
-  while ((m = importRegex.exec(code)) !== null) {
-    const slug = m[1];
-    if (!componentsBySlug.has(slug)) {
-      errors.push({ type: 'invalid-import', message: `Import path '@tale-ui/react/${slug}' not found in registry` });
-    }
-  }
-
-  // Extract imported names and their slugs
-  const importedComponents = new Map();
-  const namedImportRegex = /import\s+\{\s*([^}]+)\s*\}\s+from\s+['"]@tale-ui\/react\/([^'"]+)['"]/g;
-  while ((m = namedImportRegex.exec(code)) !== null) {
-    const names = m[1].split(',').map(n => n.trim().split(/\s+as\s+/)[0].trim()).filter(Boolean);
-    const slug = m[2];
-    for (const name of names) {
-      importedComponents.set(name, slug);
-    }
-  }
-
-  // Check compound vs simple usage in JSX
-  for (const [name, slug] of importedComponents) {
-    const comp = componentsBySlug.get(slug) || componentsByName.get(name);
-    if (!comp) {continue;}
-
-    if (comp.kind === 'compound') {
-      // Check if used as bare <Dialog> instead of <Dialog.Root>
-      const bareUsageRegex = new RegExp(`<${name}[\\s/>](?![.])`, 'g');
-      const rootUsageRegex = new RegExp(`<${name}\\.Root[\\s/>]`, 'g');
-      const hasBare = bareUsageRegex.test(code);
-      const hasRoot = rootUsageRegex.test(code);
-      if (hasBare && !hasRoot) {
-        errors.push({ type: 'wrong-kind', message: `${name} is compound — use <${name}.Root>, not <${name}>` });
-      }
-    } else if (comp.kind === 'simple') {
-      // Check if used as <Button.Root> (shouldn't)
-      const dotRootRegex = new RegExp(`<${name}\\.Root`, 'g');
-      if (dotRootRegex.test(code)) {
-        errors.push({ type: 'wrong-kind', message: `${name} is simple — use <${name}>, not <${name}.Root>` });
-      }
-    }
-  }
-
-  return errors;
+try {
+  const base = {
+    schemaVersion: '1.0.0',
+    requestId: 'repository-validation',
+    root,
+    timeoutMs: 30_000,
+  };
+  const result =
+    'code' in request
+      ? await validateCode({ ...base, ...request })
+      : await validateFile({ ...base, ...request });
+  const compatible = legacyResult(source, result);
+  print(compatible);
+  process.exitCode = compatible.valid ? 0 : 1;
+} catch (error) {
+  const normalized = toTaleError(error);
+  const failed = {
+    source,
+    valid: false,
+    registryErrors: [],
+    typescriptErrors: [{ line: 0, message: normalized.message }],
+    error: normalized,
+  };
+  print(failed);
+  process.exitCode = 1;
 }
-
-// ─── Step 2: TypeScript validation ──────────────────────────────────────────
-
-function validateTypeScript(code) {
-  // Ensure scratch directory exists
-  if (!existsSync(SCRATCH_DIR)) {
-    mkdirSync(SCRATCH_DIR, { recursive: true });
-  }
-
-  const tempFile = resolve(SCRATCH_DIR, 'temp.tsx');
-  writeFileSync(tempFile, code);
-
-  try {
-    execSync(`npx tsc --project ${TSCONFIG_PATH} --noEmit 2>&1`, {
-      cwd: ROOT,
-      encoding: 'utf8',
-      timeout: 30000,
-    });
-    return [];
-  } catch (err) {
-    const output = (err.stdout || '') + (err.stderr || '');
-    const errors = [];
-    // Parse tsc output: file(line,col): error TSxxxx: message
-    const errRegex = /temp\.tsx\((\d+),\d+\):\s*error\s+TS\d+:\s*(.+)/g;
-    let m;
-    while ((m = errRegex.exec(output)) !== null) {
-      errors.push({ line: parseInt(m[1], 10), message: m[2].trim() });
-    }
-    // If we couldn't parse temp.tsx-specific errors, check for other relevant errors
-    if (errors.length === 0 && output.trim()) {
-      const lines = output.split('\n').filter(l =>
-        l.includes('error TS') &&
-        !l.includes('TS6305') &&
-        !l.includes('TS6310') &&
-        // Only include errors from the temp file or module resolution errors
-        (l.includes('temp.tsx') || l.includes('Cannot find module'))
-      );
-      if (lines.length > 0) {
-        errors.push({ line: 0, message: lines.join('\n').trim() });
-      }
-    }
-    return errors;
-  }
-}
-
-// ─── Run validation ─────────────────────────────────────────────────────────
-
-const result = {
-  source: sourceLabel,
-  valid: true,
-  registryErrors: [],
-  typescriptErrors: [],
-};
-
-// Registry checks
-result.registryErrors = validateRegistry(code);
-
-// TypeScript checks
-result.typescriptErrors = validateTypeScript(code);
-
-// Determine overall validity
-result.valid = result.registryErrors.length === 0 && result.typescriptErrors.length === 0;
-
-// ─── Output ─────────────────────────────────────────────────────────────────
-
-if (jsonOutput) {
-  console.log(JSON.stringify(result, null, 2));
-} else if (result.valid) {
-    console.log(`✅ ${sourceLabel} — valid`);
-  } else {
-    console.log(`❌ ${sourceLabel} — ${result.registryErrors.length + result.typescriptErrors.length} error(s)\n`);
-    for (const err of result.registryErrors) {
-      console.log(`  [registry] ${err.message}`);
-    }
-    for (const err of result.typescriptErrors) {
-      const loc = err.line > 0 ? `:${err.line}` : '';
-      console.log(`  [tsc${loc}] ${err.message}`);
-    }
-  }
-
-process.exit(result.valid ? 0 : 1);

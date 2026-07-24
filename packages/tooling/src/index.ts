@@ -7,5 +7,6 @@ export {
   searchArtifacts,
 } from './api.js';
 export { loadArtifactRegistry, loadCapabilityManifest, loadReactExportPaths } from './registry.js';
+export { createLocalMcpServer, parseMcpValidationResponse, validateCodeForMcp } from './mcp.js';
 export { validateCode, validateFile } from './validation/index.js';
 export * from './contracts/index.js';
