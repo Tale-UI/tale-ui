@@ -35,7 +35,16 @@
             "message": { "type": "string" },
             "details": { "type": "object" },
             "retryable": { "type": "boolean" },
-            "documentation": { "type": "string", "format": "uri" }
+            "documentation": { "type": "string", "format": "uri" },
+            "deprecatedIn": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$"
+            },
+            "replacementCode": { "type": "string", "pattern": "^TALE_[A-Z0-9_]+$" }
+          },
+          "dependentRequired": {
+            "deprecatedIn": ["replacementCode"],
+            "replacementCode": ["deprecatedIn"]
           }
         }
       }

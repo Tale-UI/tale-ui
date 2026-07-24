@@ -37,7 +37,10 @@
     },
     "targets": {
       "type": "array",
-      "items": { "type": "string", "pattern": "^(?!/)(?!.*\\.\\./).+$" }
+      "items": {
+        "type": "string",
+        "pattern": "^(?![A-Za-z]:)(?![\\\\/])(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$)).+$"
+      }
     },
     "dependencies": { "type": "object" },
     "conflicts": { "type": "array" },

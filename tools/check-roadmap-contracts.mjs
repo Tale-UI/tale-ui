@@ -152,11 +152,17 @@ for (const [path, expected] of Object.entries(INVENTORIES)) {
 const artifacts = artifactRegistry.artifacts;
 const byKind = (kind) =>
   artifacts.filter((artifact) => artifact.kind === kind).map((artifact) => artifact.slug);
+const chartSlugs = Object.keys(json('packages/charts/package.json').exports)
+  .filter((exportPath) => /^\.\/[a-z0-9-]+-chart$/.test(exportPath))
+  .map((exportPath) => exportPath.slice(2));
 
 assert.deepEqual(
   new Set(byKind('component')),
-  new Set(json('registry/components.json').components.map((component) => component.slug)),
-  'Unified component source set differs from registry/components.json',
+  new Set([
+    ...json('registry/components.json').components.map((component) => component.slug),
+    ...chartSlugs,
+  ]),
+  'Unified component source set differs from the React registry and chart exports',
 );
 assert.deepEqual(
   new Set(byKind('recipe')),
@@ -190,6 +196,81 @@ assert.equal(
   'generatedAt' in a2uiCatalog,
   false,
   'A2UI catalog must not contain wall-clock-derived metadata',
+);
+
+const capabilityIds = new Set(capabilityRegistry.capabilities.map((capability) => capability.id));
+for (const artifact of artifacts) {
+  for (const capability of artifact.capabilities) {
+    assert.ok(
+      capabilityIds.has(capability),
+      `${artifact.id} references unknown capability ${capability}`,
+    );
+  }
+}
+
+const artifactById = new Map(artifacts.map((artifact) => [artifact.id, artifact]));
+assert.ok(
+  artifactById.get('tale:a2ui-type:card').related.includes('tale:component:card'),
+  'Namespaced A2UI component references must relate to their component root',
+);
+for (const [legacyId, replacementId] of [
+  ['tale:a2ui-type:checkbox', 'tale:a2ui-type:checkbox-field'],
+  ['tale:a2ui-type:radio', 'tale:a2ui-type:radio-field'],
+  ['tale:a2ui-type:radio-option', 'tale:a2ui-type:radio-field-option'],
+  ['tale:a2ui-type:switch', 'tale:a2ui-type:switch-field'],
+]) {
+  assert.equal(artifactById.get(legacyId).lifecycle, 'deprecated');
+  assert.equal(artifactById.get(legacyId).replacementId, replacementId);
+}
+
+const portablePathPatterns = [
+  json('schemas/operation.schema.json').properties.plannedPostimages.items.properties.path.pattern,
+  json('schemas/composition.schema.json').properties.targets.items.pattern,
+  json('schemas/dry-run.schema.json').properties.files.items.properties.path.pattern,
+  json('schemas/validation-request.schema.json').properties.file.pattern,
+  json('schemas/validation-result.schema.json').properties.diagnostics.items.properties.path
+    .pattern,
+];
+assert.equal(
+  new Set(portablePathPatterns).size,
+  1,
+  'All root-confined path schemas must share one portable relative-path contract',
+);
+const portablePath = new RegExp(portablePathPatterns[0]);
+for (const path of [
+  '../outside',
+  '..\\outside',
+  'src/../../outside',
+  'src\\..\\..\\outside',
+  '/outside',
+  '\\\\server\\share',
+  'C:\\outside',
+  'C:/outside',
+  'C:outside',
+]) {
+  assert.equal(portablePath.test(path), false, `Unsafe path passed schema pattern: ${path}`);
+}
+for (const path of ['src/file.tsx', 'src\\file.tsx', 'app/routes/settings.tsx']) {
+  assert.equal(portablePath.test(path), true, `Safe relative path failed schema pattern: ${path}`);
+}
+
+validate(
+  'schemas/error-envelope.schema.json',
+  {
+    ok: false,
+    command: 'search',
+    requestId: 'request-1',
+    error: {
+      code: 'TALE_INVALID_ARGUMENT',
+      message: 'Deprecated code fixture',
+      details: {},
+      retryable: false,
+      documentation: 'https://tale-ui.dev/errors/TALE_INVALID_ARGUMENT',
+      deprecatedIn: '2.0.0',
+      replacementCode: 'TALE_UNSUPPORTED_COMMAND',
+    },
+  },
+  'deprecated error fixture',
 );
 
 const traceability = json('registry/roadmap-traceability.json');

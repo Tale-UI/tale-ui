@@ -56,6 +56,13 @@ const DEPRECATED_COMPONENT_REPLACEMENTS = {
   switch: 'tale:component:switch-field',
 };
 
+const DEPRECATED_A2UI_REPLACEMENTS = {
+  Checkbox: 'tale:a2ui-type:checkbox-field',
+  Radio: 'tale:a2ui-type:radio-field',
+  RadioOption: 'tale:a2ui-type:radio-field-option',
+  Switch: 'tale:a2ui-type:switch-field',
+};
+
 function readText(path) {
   return readFileSync(join(ROOT, path), 'utf8').replace(/\r\n/g, '\n');
 }
@@ -185,6 +192,63 @@ function componentArtifacts(components, reactVersion) {
   });
 }
 
+function chartComponentArtifacts(chartPackage, chartVersion) {
+  const chartRows = new Map(
+    readText('docs/component-index.md')
+      .split('\n')
+      .filter((line) => line.includes('`@tale-ui/charts/'))
+      .map((line) => {
+        const cells = line
+          .slice(1, -1)
+          .split('|')
+          .map((cell) => cell.trim());
+        const importPath = cells[2].replaceAll('`', '');
+        return [
+          importPath,
+          {
+            name: cells[0],
+            description: cells[1],
+            parts: cells[3].split(',').map((part) => part.trim()),
+          },
+        ];
+      }),
+  );
+  const chartExports = Object.keys(chartPackage.exports)
+    .filter((exportPath) => /^\.\/[a-z0-9-]+-chart$/.test(exportPath))
+    .sort();
+
+  return chartExports.map((exportPath) => {
+    const slug = exportPath.slice(2);
+    const importPath = `@tale-ui/charts/${slug}`;
+    const row = chartRows.get(importPath);
+    const source = `packages/charts/src/${slug}/index.ts`;
+    if (!row || !existsSync(join(ROOT, source))) {
+      throw new Error(`Chart export ${importPath} is missing canonical docs or source`);
+    }
+    return artifactBase({
+      kind: 'component',
+      slug,
+      name: row.name,
+      description: row.description,
+      packageName: '@tale-ui/charts',
+      version: chartVersion,
+      aliases: [row.name],
+      keywords: words(row.name, 'Charts', row.description),
+      retrieval: [
+        { type: 'file', path: `docs/components/${slug}.md` },
+        { type: 'package-export', path: importPath },
+      ],
+      capabilities: ['artifact.get', 'artifact.search', 'component.get'],
+      source,
+      metadata: {
+        category: 'Charts',
+        componentKind: 'compound',
+        parts: row.parts,
+      },
+    });
+  });
+}
+
 function recipeArtifacts(componentIds) {
   const recipePaths = readdirSync(join(ROOT, 'docs/recipes'))
     .filter((name) => name.endsWith('.md') && name !== 'index.md')
@@ -196,7 +260,7 @@ function recipeArtifacts(componentIds) {
     records: recipePaths.map((path) => {
       const content = readText(path);
       const slug = path.split('/').at(-1).replace(/\.md$/, '');
-      const related = [...content.matchAll(/@tale-ui\/react\/([a-z0-9-]+)/g)]
+      const related = [...content.matchAll(/@tale-ui\/(?:react|charts)\/([a-z0-9-]+)/g)]
         .map((match) => `tale:component:${match[1]}`)
         .filter((id) => componentIds.has(id));
       return artifactBase({
@@ -216,17 +280,21 @@ function recipeArtifacts(componentIds) {
 
 function a2uiArtifacts(catalog, a2uiVersion, componentByName) {
   return catalog.types.map((type) => {
-    const relatedComponent = componentByName.get(type.component.toLowerCase());
+    const componentName = type.component.split('.')[0].toLowerCase();
+    const relatedComponent = componentByName.get(componentName);
+    const replacementId = DEPRECATED_A2UI_REPLACEMENTS[type.name];
     return artifactBase({
       kind: 'a2ui-type',
       slug: slugify(type.name),
       name: type.name,
       description: type.description,
+      lifecycle: replacementId ? 'deprecated' : 'stable',
       packageName: '@tale-ui/a2ui',
       version: a2uiVersion,
       aliases: [type.name],
+      replacementId,
       keywords: words(type.name, type.category, type.component, type.description),
-      related: relatedComponent ? [relatedComponent] : [],
+      related: [relatedComponent, replacementId].filter(Boolean),
       retrieval: [
         {
           type: 'registry',
@@ -425,7 +493,11 @@ function build() {
     }),
   );
 
-  const components = componentArtifacts(componentRegistry.components, packages['@tale-ui/react']);
+  const chartPackage = readJson('packages/charts/package.json');
+  const components = [
+    ...componentArtifacts(componentRegistry.components, packages['@tale-ui/react']),
+    ...chartComponentArtifacts(chartPackage, packages['@tale-ui/charts']),
+  ];
   const componentIds = new Set(components.map((record) => record.id));
   const componentByName = new Map(
     components.map((record) => [record.name.toLowerCase(), record.id]),
@@ -443,6 +515,7 @@ function build() {
   ].sort((a, b) => a.id.localeCompare(b.id));
 
   const ids = records.map((record) => record.id);
+  const capabilityIds = new Set(capabilitySource.capabilities.map((capability) => capability.id));
   if (new Set(ids).size !== ids.length) {
     const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
     throw new Error(`Duplicate artifact IDs: ${[...new Set(duplicates)].join(', ')}`);
@@ -456,12 +529,20 @@ function build() {
     if (record.replacementId && !ids.includes(record.replacementId)) {
       throw new Error(`${record.id} has dangling replacement ${record.replacementId}`);
     }
+    for (const capability of record.capabilities) {
+      if (!capabilityIds.has(capability)) {
+        throw new Error(`${record.id} references unknown capability ${capability}`);
+      }
+    }
   }
 
   const generatedFrom = [
     ...GENERATED_INPUTS,
     ...recipes.paths,
     ...docs,
+    ...components
+      .filter((record) => record.package === '@tale-ui/charts')
+      .map((record) => record.provenance.source),
     ...hookSource.hooks.map((name) => `packages/utils/src/${name}.ts`),
     ...foundationSource.foundations.map((record) => record.path),
   ].sort();

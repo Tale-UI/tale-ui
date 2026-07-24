@@ -20,7 +20,10 @@
           "code": { "type": ["string", "integer"] },
           "ruleId": { "type": "string" },
           "severity": { "enum": ["error", "warning", "info"] },
-          "path": { "type": "string", "pattern": "^(?!/).*$" },
+          "path": {
+            "type": "string",
+            "pattern": "^(?![A-Za-z]:)(?![\\\\/])(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$)).+$"
+          },
           "line": { "type": "integer", "minimum": 1 },
           "column": { "type": "integer", "minimum": 1 },
           "message": { "type": "string", "maxLength": 1000 }

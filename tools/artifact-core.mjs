@@ -72,16 +72,26 @@ export function searchArtifacts({ query = '', kinds, lifecycle, limit = 20, curs
   };
 }
 
-export function getArtifact(idOrAlias) {
+export function getArtifact(idOrAlias, { kind } = {}) {
   const query = idOrAlias.trim().toLowerCase();
   const registry = loadArtifactRegistry();
-  return (
-    registry.artifacts.find(
-      (artifact) =>
-        artifact.id.toLowerCase() === query ||
-        artifact.slug.toLowerCase() === query ||
+  const exactId = registry.artifacts.find((artifact) => artifact.id.toLowerCase() === query);
+  if (exactId) {
+    return exactId;
+  }
+  const matches = registry.artifacts.filter(
+    (artifact) =>
+      (!kind || artifact.kind === kind) &&
+      (artifact.slug.toLowerCase() === query ||
         artifact.name.toLowerCase() === query ||
-        (artifact.aliases || []).some((alias) => alias.toLowerCase() === query),
-    ) || null
+        (artifact.aliases || []).some((alias) => alias.toLowerCase() === query)),
   );
+  if (matches.length > 1) {
+    throw new TypeError(
+      `Artifact lookup "${idOrAlias}" is ambiguous: ${matches
+        .map((artifact) => artifact.id)
+        .join(', ')}. Pass a stable ID or kind.`,
+    );
+  }
+  return matches[0] || null;
 }

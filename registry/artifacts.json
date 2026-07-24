@@ -181,6 +181,12 @@
     "docs/workspace-structure.md",
     "packages/a2ui/package.json",
     "packages/charts/package.json",
+    "packages/charts/src/area-chart/index.ts",
+    "packages/charts/src/bar-chart/index.ts",
+    "packages/charts/src/line-chart/index.ts",
+    "packages/charts/src/pie-chart/index.ts",
+    "packages/charts/src/radar-chart/index.ts",
+    "packages/charts/src/radial-bar-chart/index.ts",
     "packages/css/docs/ai-reference.md",
     "packages/css/docs/architecture.md",
     "packages/css/docs/building-components.md",
@@ -210,7 +216,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:b28e134a1396f8fcc68b50ce55b03ed62fbe06a6750b94cb91060acc8cf807bf",
+  "sourceRevision": "sha256:bee9195ffaab1d8e0070a53939ef4531ba2d0a51b797e4a44bbc0b0839eb1b51",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -250,7 +256,9 @@
         "tale",
         "ui"
       ],
-      "related": [],
+      "related": [
+        "tale:component:accordion"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -305,7 +313,9 @@
         "within",
         "wrapper"
       ],
-      "related": [],
+      "related": [
+        "tale:component:accordion"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -360,7 +370,9 @@
         "ui",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:accordion"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -416,7 +428,9 @@
         "ui",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:accordion"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -471,7 +485,9 @@
         "ui",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:accordion"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -524,7 +540,9 @@
         "overlays",
         "root"
       ],
-      "related": [],
+      "related": [
+        "tale:component:alert-dialog"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -634,7 +652,9 @@
         "suggestions",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:autocomplete"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -687,7 +707,9 @@
         "suggestion",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:autocomplete"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -743,7 +765,9 @@
         "user",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:avatar"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -798,7 +822,9 @@
         "ui",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:avatar"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -851,7 +877,9 @@
         "ui",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:avatar"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -958,7 +986,9 @@
         "trailing",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:badge-group"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1015,7 +1045,9 @@
         "ui",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:banner"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1065,7 +1097,9 @@
         "trail",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:breadcrumbs"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1114,7 +1148,9 @@
         "navigation",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:breadcrumbs"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1164,7 +1200,9 @@
         "showing",
         "trail"
       ],
-      "related": [],
+      "related": [
+        "tale:component:breadcrumbs"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1269,7 +1307,9 @@
         "selection",
         "time"
       ],
-      "related": [],
+      "related": [
+        "tale:component:calendar"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1323,7 +1363,9 @@
         "surface",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:card"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1373,7 +1415,9 @@
         "sub",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:card"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1423,7 +1467,9 @@
         "sub",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:card"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1473,7 +1519,9 @@
         "sub",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:card"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1528,7 +1576,9 @@
         "slide",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:carousel"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1579,7 +1629,9 @@
         "slide",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:carousel"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1614,12 +1666,13 @@
       "slug": "checkbox",
       "name": "Checkbox",
       "description": "Legacy checkbox input; prefer CheckboxField for new A2UI surfaces",
-      "lifecycle": "stable",
+      "lifecycle": "deprecated",
       "package": "@tale-ui/a2ui",
       "version": "0.1.5",
       "aliases": [
         "Checkbox"
       ],
+      "replacementId": "tale:a2ui-type:checkbox-field",
       "keywords": [
         "a2ui",
         "checkbox",
@@ -1634,7 +1687,10 @@
         "root",
         "surfaces"
       ],
-      "related": [],
+      "related": [
+        "tale:a2ui-type:checkbox-field",
+        "tale:component:checkbox"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1691,7 +1747,9 @@
         "validation",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:checkbox-field"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1804,7 +1862,9 @@
         "saturation",
         "selection"
       ],
-      "related": [],
+      "related": [
+        "tale:component:color-area"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1858,7 +1918,9 @@
         "text",
         "values"
       ],
-      "related": [],
+      "related": [
+        "tale:component:color-field"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1911,7 +1973,9 @@
         "root",
         "selection"
       ],
-      "related": [],
+      "related": [
+        "tale:component:color-picker"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -1964,7 +2028,9 @@
         "slider",
         "value"
       ],
-      "related": [],
+      "related": [
+        "tale:component:color-slider"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2073,7 +2139,9 @@
         "root",
         "selecting"
       ],
-      "related": [],
+      "related": [
+        "tale:component:color-swatch-picker"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2127,7 +2195,9 @@
         "wheel",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:color-wheel"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2237,7 +2307,9 @@
         "search",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:combobox"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2289,7 +2361,9 @@
         "option",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:combobox"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2342,7 +2416,9 @@
         "root",
         "triggered"
       ],
-      "related": [],
+      "related": [
+        "tale:component:context-menu"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2392,7 +2468,9 @@
         "overlays",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:context-menu"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2445,7 +2523,9 @@
         "popup",
         "the"
       ],
-      "related": [],
+      "related": [
+        "tale:component:context-menu"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2499,7 +2579,9 @@
         "separator",
         "visual"
       ],
-      "related": [],
+      "related": [
+        "tale:component:context-menu"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2553,7 +2635,9 @@
         "trigger",
         "triggers"
       ],
-      "related": [],
+      "related": [
+        "tale:component:context-menu"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2604,7 +2688,9 @@
         "segmented",
         "time"
       ],
-      "related": [],
+      "related": [
+        "tale:component:date-field"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2657,7 +2743,9 @@
         "time",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:date-picker"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2709,7 +2797,9 @@
         "time",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:date-range-picker"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2763,7 +2853,9 @@
         "title",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:dialog"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2816,7 +2908,9 @@
         "tale",
         "ui"
       ],
-      "related": [],
+      "related": [
+        "tale:component:disclosure"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2870,7 +2964,9 @@
         "ui",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:disclosure"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -2925,7 +3021,9 @@
         "trigger",
         "ui"
       ],
-      "related": [],
+      "related": [
+        "tale:component:disclosure"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -3033,7 +3131,9 @@
         "title",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:drawer"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -3144,7 +3244,9 @@
         "with",
         "zero"
       ],
-      "related": [],
+      "related": [
+        "tale:component:empty-state"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -3255,7 +3357,9 @@
         "with",
         "wrapper"
       ],
-      "related": [],
+      "related": [
+        "tale:component:field"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -3306,7 +3410,9 @@
         "structure",
         "text"
       ],
-      "related": [],
+      "related": [
+        "tale:component:field"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -3357,7 +3463,9 @@
         "structure",
         "validation"
       ],
-      "related": [],
+      "related": [
+        "tale:component:field"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -3406,7 +3514,9 @@
         "label",
         "structure"
       ],
-      "related": [],
+      "related": [
+        "tale:component:field"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -3459,7 +3569,9 @@
         "structure",
         "under"
       ],
-      "related": [],
+      "related": [
+        "tale:component:fieldset"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -3567,7 +3679,9 @@
         "with",
         "zone"
       ],
-      "related": [],
+      "related": [
+        "tale:component:file-upload"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -3674,7 +3788,9 @@
         "selection",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:grid-list"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -3724,7 +3840,9 @@
         "item",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:grid-list"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -3941,7 +4059,9 @@
         "root",
         "to"
       ],
-      "related": [],
+      "related": [
+        "tale:component:input-group"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -3999,7 +4119,9 @@
         "to",
         "type"
       ],
-      "related": [],
+      "related": [
+        "tale:component:input-tags"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4051,7 +4173,9 @@
         "value",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:key-value-pairs"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4105,7 +4229,9 @@
         "value",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:key-value-pairs"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4159,7 +4285,9 @@
         "using",
         "value"
       ],
-      "related": [],
+      "related": [
+        "tale:component:key-value-pairs"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4259,7 +4387,9 @@
         "simple",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:list"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4308,7 +4438,9 @@
         "listitem",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:list"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4361,7 +4493,9 @@
         "ui",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:menu"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4414,7 +4548,9 @@
         "ui",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:menu"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4468,7 +4604,9 @@
         "the",
         "ui"
       ],
-      "related": [],
+      "related": [
+        "tale:component:menu"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4523,7 +4661,9 @@
         "ui",
         "visual"
       ],
-      "related": [],
+      "related": [
+        "tale:component:menu"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4577,7 +4717,9 @@
         "trigger",
         "ui"
       ],
-      "related": [],
+      "related": [
+        "tale:component:menu"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4632,7 +4774,9 @@
         "visual",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:meter"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4688,7 +4832,9 @@
         "value",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:multi-select"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4742,7 +4888,9 @@
         "root",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:navigation-menu"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4792,7 +4940,9 @@
         "navigationmenuitem",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:navigation-menu"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4842,7 +4992,9 @@
         "navigationmenulink",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:navigation-menu"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4899,7 +5051,9 @@
         "ui",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:number-field"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -4953,7 +5107,9 @@
         "root",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:pagination"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5004,7 +5160,9 @@
         "paginationellipsis",
         "skipped"
       ],
-      "related": [],
+      "related": [
+        "tale:component:pagination"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5055,7 +5213,9 @@
         "paginationitem",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:pagination"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5106,7 +5266,9 @@
         "paginationnext",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:pagination"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5157,7 +5319,9 @@
         "previoustrigger",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:pagination"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5215,7 +5379,9 @@
         "type",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:payment-input"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5271,7 +5437,9 @@
         "slots",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:pin-input"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5325,7 +5493,9 @@
         "trigger",
         "triggered"
       ],
-      "related": [],
+      "related": [
+        "tale:component:popover"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5375,7 +5545,9 @@
         "popoverpopup",
         "popup"
       ],
-      "related": [],
+      "related": [
+        "tale:component:popover"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5427,7 +5599,9 @@
         "trigger",
         "triggers"
       ],
-      "related": [],
+      "related": [
+        "tale:component:popover"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5482,7 +5656,9 @@
         "trigger",
         "triggered"
       ],
-      "related": [],
+      "related": [
+        "tale:component:preview-card"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5535,7 +5711,9 @@
         "progressbar",
         "root"
       ],
-      "related": [],
+      "related": [
+        "tale:component:progress-bar"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5587,7 +5765,9 @@
         "root",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:progress-circle"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5622,12 +5802,13 @@
       "slug": "radio",
       "name": "Radio",
       "description": "Legacy radio group container; prefer RadioField with RadioFieldOption children for new A2UI surfaces",
-      "lifecycle": "stable",
+      "lifecycle": "deprecated",
       "package": "@tale-ui/a2ui",
       "version": "0.1.5",
       "aliases": [
         "Radio"
       ],
+      "replacementId": "tale:a2ui-type:radio-field",
       "keywords": [
         "a2ui",
         "children",
@@ -5647,6 +5828,7 @@
         "with"
       ],
       "related": [
+        "tale:a2ui-type:radio-field",
         "tale:component:radio-group"
       ],
       "retrieval": [
@@ -5763,7 +5945,9 @@
         "validation",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:radio-field"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5798,12 +5982,13 @@
       "slug": "radio-option",
       "name": "RadioOption",
       "description": "Legacy individual radio option; prefer RadioFieldOption for new A2UI surfaces",
-      "lifecycle": "stable",
+      "lifecycle": "deprecated",
       "package": "@tale-ui/a2ui",
       "version": "0.1.5",
       "aliases": [
         "RadioOption"
       ],
+      "replacementId": "tale:a2ui-type:radio-field-option",
       "keywords": [
         "a2ui",
         "controls",
@@ -5820,7 +6005,10 @@
         "root",
         "surfaces"
       ],
-      "related": [],
+      "related": [
+        "tale:a2ui-type:radio-field-option",
+        "tale:component:radio"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -5873,7 +6061,9 @@
         "selection",
         "time"
       ],
-      "related": [],
+      "related": [
+        "tale:component:range-calendar"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -6088,7 +6278,9 @@
         "styled",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:scroll-area"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -6144,7 +6336,9 @@
         "ui",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:search-field"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -6253,7 +6447,9 @@
         "trigger",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:select"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -6304,7 +6500,9 @@
         "selectitem",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:select"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -6469,7 +6667,9 @@
         "ui",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:slider"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -6614,12 +6814,13 @@
       "slug": "switch",
       "name": "Switch",
       "description": "Legacy toggle switch; prefer SwitchField for new A2UI surfaces",
-      "lifecycle": "stable",
+      "lifecycle": "deprecated",
       "package": "@tale-ui/a2ui",
       "version": "0.1.5",
       "aliases": [
         "Switch"
       ],
+      "replacementId": "tale:a2ui-type:switch-field",
       "keywords": [
         "a2ui",
         "controls",
@@ -6634,7 +6835,10 @@
         "switchfield",
         "toggle"
       ],
-      "related": [],
+      "related": [
+        "tale:a2ui-type:switch-field",
+        "tale:component:switch"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -6692,7 +6896,9 @@
         "validation",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:switch-field"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -6744,7 +6950,9 @@
         "tabs",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:tabs"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -6797,7 +7005,9 @@
         "tabs",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:tabs"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -6849,7 +7059,9 @@
         "tabs",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:tabs"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -6900,7 +7112,9 @@
         "table",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:table"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -6952,7 +7166,9 @@
         "tablebody",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:table"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7003,7 +7219,9 @@
         "tablerow",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:table"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7054,7 +7272,9 @@
         "tableheader",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:table"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7105,7 +7325,9 @@
         "tableheader",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:table"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7156,7 +7378,9 @@
         "tablerow",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:table"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7207,7 +7431,9 @@
         "tabs",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:tabs"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7256,7 +7482,9 @@
         "taglist",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:tag-group"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7309,7 +7537,9 @@
         "taggroup",
         "tags"
       ],
-      "related": [],
+      "related": [
+        "tale:component:tag-group"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7361,7 +7591,9 @@
         "taglist",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:tag-group"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7419,7 +7651,9 @@
         "that",
         "the"
       ],
-      "related": [],
+      "related": [
+        "tale:component:tag-select"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7532,7 +7766,9 @@
         "ui",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:text-area"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7589,7 +7825,9 @@
         "validation",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:text-field"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7640,7 +7878,9 @@
         "time",
         "timefield"
       ],
-      "related": [],
+      "related": [
+        "tale:component:time-field"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7801,7 +8041,9 @@
         "toolbar",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:toolbar"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7851,7 +8093,9 @@
         "toolbarbutton",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:toolbar"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7903,7 +8147,9 @@
         "toolbarseparator",
         "visual"
       ],
-      "related": [],
+      "related": [
+        "tale:component:toolbar"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -7956,7 +8202,9 @@
         "trigger",
         "triggered"
       ],
-      "related": [],
+      "related": [
+        "tale:component:tooltip"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -8006,7 +8254,9 @@
         "tooltip",
         "tooltippopup"
       ],
-      "related": [],
+      "related": [
+        "tale:component:tooltip"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -8058,7 +8308,9 @@
         "trigger",
         "triggers"
       ],
-      "related": [],
+      "related": [
+        "tale:component:tooltip"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -8112,7 +8364,9 @@
         "view",
         "with"
       ],
-      "related": [],
+      "related": [
+        "tale:component:tree"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -8166,7 +8420,9 @@
         "treeitem",
         "within"
       ],
-      "related": [],
+      "related": [
+        "tale:component:tree"
+      ],
       "retrieval": [
         {
           "type": "registry",
@@ -8359,6 +8615,67 @@
       "metadata": {
         "category": "Marketing",
         "componentKind": "simple"
+      }
+    },
+    {
+      "id": "tale:component:area-chart",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "area-chart",
+      "name": "AreaChart",
+      "description": "Token-themed area chart",
+      "lifecycle": "stable",
+      "package": "@tale-ui/charts",
+      "version": "0.1.5",
+      "aliases": [
+        "AreaChart"
+      ],
+      "keywords": [
+        "area",
+        "areachart",
+        "chart",
+        "charts",
+        "themed",
+        "token"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/area-chart.md"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/charts/area-chart"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/charts/src/area-chart/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Charts",
+        "componentKind": "compound",
+        "parts": [
+          "Root",
+          "Area",
+          "XAxis",
+          "YAxis",
+          "Grid",
+          "Tooltip",
+          "Legend"
+        ]
       }
     },
     {
@@ -8692,6 +9009,67 @@
       "metadata": {
         "category": "Feedback",
         "componentKind": "compound"
+      }
+    },
+    {
+      "id": "tale:component:bar-chart",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "bar-chart",
+      "name": "BarChart",
+      "description": "Token-themed bar chart",
+      "lifecycle": "stable",
+      "package": "@tale-ui/charts",
+      "version": "0.1.5",
+      "aliases": [
+        "BarChart"
+      ],
+      "keywords": [
+        "bar",
+        "barchart",
+        "chart",
+        "charts",
+        "themed",
+        "token"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/bar-chart.md"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/charts/bar-chart"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/charts/src/bar-chart/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Charts",
+        "componentKind": "compound",
+        "parts": [
+          "Root",
+          "Bar",
+          "XAxis",
+          "YAxis",
+          "Grid",
+          "Tooltip",
+          "Legend"
+        ]
       }
     },
     {
@@ -11511,6 +11889,67 @@
       }
     },
     {
+      "id": "tale:component:line-chart",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "line-chart",
+      "name": "LineChart",
+      "description": "Token-themed line chart",
+      "lifecycle": "stable",
+      "package": "@tale-ui/charts",
+      "version": "0.1.5",
+      "aliases": [
+        "LineChart"
+      ],
+      "keywords": [
+        "chart",
+        "charts",
+        "line",
+        "linechart",
+        "themed",
+        "token"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/line-chart.md"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/charts/line-chart"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/charts/src/line-chart/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Charts",
+        "componentKind": "compound",
+        "parts": [
+          "Root",
+          "Line",
+          "XAxis",
+          "YAxis",
+          "Grid",
+          "Tooltip",
+          "Legend"
+        ]
+      }
+    },
+    {
       "id": "tale:component:link",
       "namespace": "tale",
       "kind": "component",
@@ -12281,6 +12720,65 @@
       }
     },
     {
+      "id": "tale:component:pie-chart",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "pie-chart",
+      "name": "PieChart",
+      "description": "Token-themed pie chart",
+      "lifecycle": "stable",
+      "package": "@tale-ui/charts",
+      "version": "0.1.5",
+      "aliases": [
+        "PieChart"
+      ],
+      "keywords": [
+        "chart",
+        "charts",
+        "pie",
+        "piechart",
+        "themed",
+        "token"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/pie-chart.md"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/charts/pie-chart"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/charts/src/pie-chart/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Charts",
+        "componentKind": "compound",
+        "parts": [
+          "Root",
+          "Pie",
+          "Cell",
+          "Tooltip",
+          "Legend"
+        ]
+      }
+    },
+    {
       "id": "tale:component:pin-input",
       "namespace": "tale",
       "kind": "component",
@@ -12618,6 +13116,126 @@
       "metadata": {
         "category": "Display",
         "componentKind": "compound"
+      }
+    },
+    {
+      "id": "tale:component:radar-chart",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "radar-chart",
+      "name": "RadarChart",
+      "description": "Token-themed radar chart",
+      "lifecycle": "stable",
+      "package": "@tale-ui/charts",
+      "version": "0.1.5",
+      "aliases": [
+        "RadarChart"
+      ],
+      "keywords": [
+        "chart",
+        "charts",
+        "radar",
+        "radarchart",
+        "themed",
+        "token"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/radar-chart.md"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/charts/radar-chart"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/charts/src/radar-chart/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Charts",
+        "componentKind": "compound",
+        "parts": [
+          "Root",
+          "Radar",
+          "PolarGrid",
+          "PolarAngleAxis",
+          "PolarRadiusAxis",
+          "Tooltip",
+          "Legend"
+        ]
+      }
+    },
+    {
+      "id": "tale:component:radial-bar-chart",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "radial-bar-chart",
+      "name": "RadialBarChart",
+      "description": "Token-themed radial bar chart",
+      "lifecycle": "stable",
+      "package": "@tale-ui/charts",
+      "version": "0.1.5",
+      "aliases": [
+        "RadialBarChart"
+      ],
+      "keywords": [
+        "bar",
+        "chart",
+        "charts",
+        "radial",
+        "radialbarchart",
+        "themed",
+        "token"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/radial-bar-chart.md"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/charts/radial-bar-chart"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/charts/src/radial-bar-chart/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Charts",
+        "componentKind": "compound",
+        "parts": [
+          "Root",
+          "RadialBar",
+          "Tooltip",
+          "Legend"
+        ]
       }
     },
     {
@@ -14877,7 +15495,9 @@
         "docs",
         "md"
       ],
-      "related": [],
+      "related": [
+        "tale:component:area-chart"
+      ],
       "retrieval": [
         {
           "type": "file",
@@ -15147,7 +15767,9 @@
         "docs",
         "md"
       ],
-      "related": [],
+      "related": [
+        "tale:component:bar-chart"
+      ],
       "retrieval": [
         {
           "type": "file",
@@ -17191,7 +17813,9 @@
         "linechart",
         "md"
       ],
-      "related": [],
+      "related": [
+        "tale:component:line-chart"
+      ],
       "retrieval": [
         {
           "type": "file",
@@ -17777,7 +18401,9 @@
         "pie",
         "piechart"
       ],
-      "related": [],
+      "related": [
+        "tale:component:pie-chart"
+      ],
       "retrieval": [
         {
           "type": "file",
@@ -18053,7 +18679,9 @@
         "radar",
         "radarchart"
       ],
-      "related": [],
+      "related": [
+        "tale:component:radar-chart"
+      ],
       "retrieval": [
         {
           "type": "file",
@@ -18092,7 +18720,9 @@
         "radial",
         "radialbarchart"
       ],
-      "related": [],
+      "related": [
+        "tale:component:radial-bar-chart"
+      ],
       "retrieval": [
         {
           "type": "file",
@@ -24053,6 +24683,9 @@
         "with"
       ],
       "related": [
+        "tale:component:bar-chart",
+        "tale:component:line-chart",
+        "tale:component:pie-chart",
         "tale:component:text"
       ],
       "retrieval": [
@@ -25478,5 +26111,5 @@
       "trust": "first-party"
     }
   ],
-  "digest": "sha256:9f01af6b807e0bf905fa9dba1f54122cd001e0d157165d196564ab397010094f"
+  "digest": "sha256:578af84f4446c68b47633ce321f3e78118100be36e2c83a7315b02a123b2695c"
 }

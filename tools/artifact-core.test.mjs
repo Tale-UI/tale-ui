@@ -19,6 +19,26 @@ test('deprecated components retain stable replacement IDs', () => {
   assert.equal(checkbox.replacementId, 'tale:component:checkbox-field');
 });
 
+test('public chart components are indexed from the charts package', () => {
+  const areaChart = getArtifact('tale:component:area-chart');
+  assert.equal(areaChart.package, '@tale-ui/charts');
+  assert.equal(areaChart.name, 'AreaChart');
+});
+
+test('ambiguous aliases require a stable ID or kind', () => {
+  assert.throws(() => getArtifact('Button'), /ambiguous/);
+  assert.equal(getArtifact('Button', { kind: 'component' }).id, 'tale:component:button');
+  assert.equal(getArtifact('Button', { kind: 'a2ui-type' }).id, 'tale:a2ui-type:button');
+});
+
+test('A2UI namespace parts relate to components and preserve legacy lifecycle', () => {
+  const card = getArtifact('tale:a2ui-type:card');
+  assert.ok(card.related.includes('tale:component:card'));
+  const checkbox = getArtifact('tale:a2ui-type:checkbox');
+  assert.equal(checkbox.lifecycle, 'deprecated');
+  assert.equal(checkbox.replacementId, 'tale:a2ui-type:checkbox-field');
+});
+
 test('search filters kinds and uses deterministic ID ordering for ties', () => {
   const result = searchArtifacts({ query: '', kinds: ['foundation'], limit: 100 });
   assert.ok(result.results.length > 0);
