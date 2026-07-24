@@ -7,6 +7,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
+import { compareCanonicalStrings, computeArtifactSourceRevision } from './artifact-canonical.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -73,11 +74,6 @@ function digest(value) {
   return `sha256:${createHash('sha256')
     .update(`${JSON.stringify(value, null, 2)}\n`)
     .digest('hex')}`;
-}
-
-function sourceRevision(paths) {
-  const preimage = paths.map((path) => `${path}\0${text(path)}`).join('\0');
-  return `sha256:${createHash('sha256').update(preimage).digest('hex')}`;
 }
 
 const ajv = new Ajv2020({ allErrors: true, strict: false });
@@ -151,7 +147,7 @@ assert.deepEqual(
 );
 assert.equal(
   artifactRegistry.sourceRevision,
-  sourceRevision(artifactRegistry.generatedFrom),
+  computeArtifactSourceRevision(artifactRegistry.generatedFrom, text),
   'Artifact source revision must match the canonical source preimage',
 );
 for (const path of artifactRegistry.generatedFrom) {
@@ -159,7 +155,7 @@ for (const path of artifactRegistry.generatedFrom) {
 }
 assert.deepEqual(
   Object.keys(artifactRegistry.packageVersions),
-  Object.keys(artifactRegistry.packageVersions).toSorted(),
+  Object.keys(artifactRegistry.packageVersions).toSorted(compareCanonicalStrings),
   'Package-version keys must be canonically sorted',
 );
 assert.equal(
@@ -191,7 +187,7 @@ for (const [path, expected] of Object.entries(INVENTORIES)) {
 const artifacts = artifactRegistry.artifacts;
 assert.deepEqual(
   artifacts.map((artifact) => artifact.id),
-  artifacts.map((artifact) => artifact.id).toSorted(),
+  artifacts.map((artifact) => artifact.id).toSorted(compareCanonicalStrings),
   'Artifacts must be canonically ordered by stable ID',
 );
 const byKind = (kind) =>
@@ -262,7 +258,7 @@ assert.deepEqual(
       availability: capability.availability.toSorted(),
       status: capability.status || 'available',
     }))
-    .toSorted((a, b) => a.id.localeCompare(b.id)),
+    .toSorted((a, b) => compareCanonicalStrings(a.id, b.id)),
   'Generated capabilities must exactly match their normalized source records',
 );
 for (const capability of capabilityRegistry.capabilities) {

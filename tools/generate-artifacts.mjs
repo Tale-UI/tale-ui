@@ -6,6 +6,11 @@ import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
+import {
+  compareCanonicalStrings,
+  computeArtifactSourceRevision,
+  normalizeArtifactSourceText,
+} from './artifact-canonical.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const CHECK_MODE = process.argv.includes('--check');
@@ -65,7 +70,7 @@ const DEPRECATED_A2UI_REPLACEMENTS = {
 };
 
 function readText(path) {
-  return readFileSync(join(ROOT, path), 'utf8').replace(/\r\n/g, '\n');
+  return normalizeArtifactSourceText(readFileSync(join(ROOT, path), 'utf8'));
 }
 
 function readJson(path) {
@@ -482,8 +487,7 @@ function parseTraceability(plan) {
 }
 
 function sourceRevision(paths) {
-  const preimage = paths.map((path) => `${path}\0${readText(path)}`).join('\0');
-  return digest(preimage);
+  return computeArtifactSourceRevision(paths, readText);
 }
 
 function validate(schemaPath, value) {
@@ -549,7 +553,7 @@ function build() {
     ...foundationArtifacts(foundationSource),
     ...sharedPitfallArtifacts(pitfalls, componentByName),
     ...componentPitfallArtifacts(componentRegistry.components),
-  ].sort((a, b) => a.id.localeCompare(b.id));
+  ].sort((a, b) => compareCanonicalStrings(a.id, b.id));
 
   const ids = records.map((record) => record.id);
   const capabilityIds = new Set(capabilitySource.capabilities.map((capability) => capability.id));
@@ -604,7 +608,7 @@ function build() {
     generatedFrom: uniqueSources,
     sourceRevision: sourceRevision(uniqueSources),
     packageVersions: Object.fromEntries(
-      Object.entries(packages).sort(([a], [b]) => a.localeCompare(b)),
+      Object.entries(packages).sort(([a], [b]) => compareCanonicalStrings(a, b)),
     ),
     capabilityManifestId: capabilitySource.manifestId,
     artifacts: records,
@@ -624,7 +628,7 @@ function build() {
         availability: [...capability.availability].sort(),
         status: capability.status || 'available',
       }))
-      .sort((a, b) => a.id.localeCompare(b.id)),
+      .sort((a, b) => compareCanonicalStrings(a.id, b.id)),
   };
   const capabilityRegistry = {
     ...capabilityPreimage,
