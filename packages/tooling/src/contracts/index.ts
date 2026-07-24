@@ -19,6 +19,14 @@ export type {
 } from './envelope.js';
 export type { ToolingManifest } from './manifest.js';
 export type {
+  MigrationApplyResult,
+  MigrationFileReport,
+  MigrationPlan,
+  MigrationRequest,
+  TaleMigrationManifest,
+  TaleMigrationTransform,
+} from './migrations.js';
+export type {
   AddTemplateRequest,
   InitializeProjectRequest,
   TaleTemplateManifest,

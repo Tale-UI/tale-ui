@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "known-import-path-corrections",
+  "order": 40,
+  "group": "import-path",
+  "description": "Correct known non-existent or non-canonical Tale UI import paths.",
+  "from": "@tale-ui/react@>=1.0.0 <3.0.0",
+  "to": "@tale-ui/react canonical exports@>=2.0.0 <3.0.0",
+  "dependencies": [],
+  "affectedArtifacts": [
+    "tale:component:text-area",
+    "tale:component:toggle-button",
+    "tale:component:table"
+  ],
+  "deprecations": [],
+  "sourceEvidence": [
+    "docs/consumer-claude-md-snippet-full.md",
+    "packages/react/package.json"
+  ],
+  "parsers": [
+    "typescript"
+  ],
+  "sensitiveFiles": "require-explicit",
+  "generatedFiles": "require-explicit",
+  "reversible": true,
+  "backupPolicy": "required",
+  "idempotent": true,
+  "transforms": [
+    {
+      "id": "literal-replacements",
+      "kind": "typescript",
+      "path": "transform.json",
+      "files": [
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.mjs",
+        "**/*.ts",
+        "**/*.tsx"
+      ]
+    }
+  ],
+  "checksum": "sha256:c18b7d5a003e94e4b53a88d4b8d4d6fecfe5ef47a6ac8f37186be3ce56ccd803"
+}

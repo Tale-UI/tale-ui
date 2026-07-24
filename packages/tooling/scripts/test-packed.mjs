@@ -52,6 +52,18 @@ if (
 ) {
   throw new Error('Packed materialization API failed to load its installed template assets');
 }
+const migrationOutput = execFileSync(
+  process.execPath,
+  [
+    '--input-type=module',
+    '--eval',
+    "import { listMigrations } from '@tale-ui/tooling/migrations'; const migrations = await listMigrations(); process.stdout.write(JSON.stringify(migrations.map(({ id }) => id)));",
+  ],
+  { cwd: fixtureRoot, encoding: 'utf8' },
+);
+if (JSON.parse(migrationOutput).length !== 4) {
+  throw new Error('Packed migration API failed to load its installed transform assets');
+}
 
 const validationOutput = execFileSync(
   process.execPath,
@@ -156,6 +168,33 @@ const doctorResult = JSON.parse(
     encoding: 'utf8',
   }),
 );
+await writeFile(
+  join(consumerRoot, 'src/tale-templates/import-fixture.ts'),
+  "import { TextArea } from '@tale-ui/react/textarea';\nexport { TextArea };\n",
+);
+const migrationPlanResult = JSON.parse(
+  execFileSync(cliPath, ['upgrade', 'known-import-path-corrections', '--json'], {
+    cwd: consumerRoot,
+    encoding: 'utf8',
+  }),
+);
+const migrationApplyResult = JSON.parse(
+  execFileSync(
+    cliPath,
+    [
+      'upgrade',
+      'known-import-path-corrections',
+      '--apply',
+      '--plan-digest',
+      migrationPlanResult.data.planDigest,
+      '--json',
+    ],
+    {
+      cwd: consumerRoot,
+      encoding: 'utf8',
+    },
+  ),
+);
 if (
   !initResult.ok ||
   initResult.data.files.length !== 4 ||
@@ -167,11 +206,18 @@ if (
   templateAddResult.data.template.id !== 'tale:template:empty-state' ||
   !doctorResult.ok ||
   !doctorResult.data.healthy ||
+  !migrationPlanResult.ok ||
+  migrationPlanResult.data.state !== 'applicable' ||
+  !migrationApplyResult.ok ||
+  !migrationApplyResult.data.operationId ||
   !(await readFile(join(consumerRoot, 'src/tale-templates/empty-state.tsx'), 'utf8')).includes(
     'export function Example',
+  ) ||
+  !(await readFile(join(consumerRoot, 'src/tale-templates/import-fixture.ts'), 'utf8')).includes(
+    '@tale-ui/react/text-area',
   )
 ) {
-  throw new Error('Packed CLI init, template, or doctor command failed');
+  throw new Error('Packed CLI init, template, migration, or doctor command failed');
 }
 const cliValidation = spawnSync(
   cliPath,

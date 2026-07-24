@@ -336,6 +336,54 @@ function templateArtifacts(toolingVersion) {
   return { paths, records };
 }
 
+function migrationArtifacts(toolingVersion) {
+  const directories = readdirSync(join(ROOT, 'packages/tooling/migrations'), {
+    withFileTypes: true,
+  })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort();
+  const paths = directories.flatMap((directory) => [
+    `packages/tooling/migrations/${directory}/manifest.json`,
+    `packages/tooling/migrations/${directory}/transform.json`,
+  ]);
+  const records = directories.map((directory) => {
+    const path = `packages/tooling/migrations/${directory}/manifest.json`;
+    const migration = readJson(path);
+    validate('schemas/migration.schema.json', migration);
+    return artifactBase({
+      kind: 'codemod',
+      slug: migration.id,
+      name: migration.description,
+      description: `${migration.from} → ${migration.to}`,
+      packageName: '@tale-ui/tooling',
+      version: toolingVersion,
+      aliases: [migration.id],
+      keywords: words(migration.id, migration.group, migration.description),
+      related: migration.affectedArtifacts.filter((id) => id.startsWith('tale:')),
+      retrieval: [
+        { type: 'file', path },
+        {
+          type: 'package-export',
+          path: '@tale-ui/tooling/migrations',
+          selector: migration.id,
+        },
+      ],
+      capabilities: ['artifact.get', 'artifact.search', 'project.mutate'],
+      source: path,
+      metadata: {
+        order: migration.order,
+        group: migration.group,
+        from: migration.from,
+        to: migration.to,
+        reversible: migration.reversible,
+        checksum: migration.checksum,
+      },
+    });
+  });
+  return { paths, records };
+}
+
 function a2uiArtifacts(catalog, a2uiVersion, componentByName) {
   return catalog.types.map((type) => {
     const componentName = type.component.split('.')[0].toLowerCase();
@@ -609,12 +657,14 @@ function build() {
   );
   const recipes = recipeArtifacts(componentIds);
   const templates = templateArtifacts(packages['@tale-ui/tooling']);
+  const migrations = migrationArtifacts(packages['@tale-ui/tooling']);
   const docs = publicDocPaths();
   const records = [
     ...components,
     ...hookArtifacts(hookSource, packages),
     ...recipes.records,
     ...templates.records,
+    ...migrations.records,
     ...docArtifacts(docs, componentIds),
     ...a2uiArtifacts(a2uiCatalog, packages['@tale-ui/a2ui'], componentByName),
     ...foundationArtifacts(foundationSource),
@@ -661,6 +711,7 @@ function build() {
     ...GENERATED_INPUTS,
     ...recipes.paths,
     ...templates.paths,
+    ...migrations.paths,
     ...docs,
     ...components
       .filter((record) => record.package === '@tale-ui/charts')

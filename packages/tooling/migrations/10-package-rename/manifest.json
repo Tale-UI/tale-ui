@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "v1-to-v2-package-rename",
+  "order": 10,
+  "group": "package-rename",
+  "description": "Rename the v1 @tale-ui/core CSS package to @tale-ui/css for v2.",
+  "from": "@tale-ui/core@>=1.0.0 <2.0.0",
+  "to": "@tale-ui/css@>=2.0.0 <3.0.0",
+  "dependencies": [],
+  "affectedArtifacts": [
+    "tale:foundation:css-architecture"
+  ],
+  "deprecations": [
+    {
+      "id": "@tale-ui/core",
+      "replacementId": "@tale-ui/css",
+      "documentation": "https://tale-ui.dev/migrations/v1-to-v2-package-rename"
+    }
+  ],
+  "sourceEvidence": [
+    "CHANGELOG.md#v200--2026-07-24",
+    "css-v1.3.56"
+  ],
+  "parsers": [
+    "text",
+    "json",
+    "css",
+    "typescript"
+  ],
+  "sensitiveFiles": "require-explicit",
+  "generatedFiles": "require-explicit",
+  "reversible": true,
+  "backupPolicy": "required",
+  "idempotent": true,
+  "transforms": [
+    {
+      "id": "literal-replacements",
+      "kind": "config",
+      "path": "transform.json",
+      "files": [
+        "**/*.css",
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.json",
+        "**/*.mjs",
+        "**/*.ts",
+        "**/*.tsx"
+      ]
+    }
+  ],
+  "checksum": "sha256:af764ccb93b9f0b0f2e9a28b77ab7e3aa761ceb386309918ae8d3a02069843ce"
+}

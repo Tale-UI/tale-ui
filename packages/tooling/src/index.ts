@@ -23,4 +23,5 @@ export {
   initializeProject,
   listTemplates,
 } from './materialize.js';
+export { applyMigration, listMigrations, planMigration } from './migrations.js';
 export * from './contracts/index.js';

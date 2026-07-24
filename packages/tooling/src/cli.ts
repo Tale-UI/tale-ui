@@ -17,6 +17,7 @@ import {
   initializeProject,
   listTemplates,
 } from './materialize.js';
+import { applyMigration, listMigrations, planMigration } from './migrations.js';
 import { doctorProject, recoverProjectOperation } from './operations.js';
 import { validateCode, validateFile } from './validation/index.js';
 
@@ -234,11 +235,39 @@ try {
       operationId,
       action: resume ? 'resume' : 'rollback',
     });
+  } else if (command === 'upgrade') {
+    if (filteredArgs.includes('--list')) {
+      data = await listMigrations();
+    } else {
+      const migrations = positionalArguments(
+        new Set(['--root', '--idempotency-key', '--plan-digest']),
+      );
+      const migration = migrations.length === 1 ? migrations[0] : undefined;
+      if (!migration || migrations.length > 1) {
+        throw new TaleToolingError(
+          'TALE_INVALID_ARGUMENT',
+          'Tale UI: upgrade requires exactly one migration ID or --list.',
+        );
+      }
+      const migrationRequest = {
+        schemaVersion: '1.0.0' as const,
+        requestId,
+        root: option('--root') || process.cwd(),
+        migration,
+        idempotencyKey: option('--idempotency-key'),
+        planDigest: option('--plan-digest') as `sha256:${string}` | undefined,
+        authorizeSensitive: filteredArgs.includes('--authorize-sensitive'),
+        authorizeGenerated: filteredArgs.includes('--authorize-generated'),
+      };
+      data = filteredArgs.includes('--apply')
+        ? await applyMigration(migrationRequest)
+        : await planMigration(migrationRequest);
+    }
   } else {
     throw new TaleToolingError(
       'TALE_UNSUPPORTED_COMMAND',
       'Tale UI: the requested command is unsupported, so no tooling action ran. ' +
-        'Use manifest, search, component, validate, init, template, doctor, or recover and retry.',
+        'Use manifest, search, component, validate, init, template, doctor, recover, or upgrade and retry.',
     );
   }
   write(jsonMode ? createSuccessEnvelope(command, requestId, data, { surface: 'cli' }) : data);

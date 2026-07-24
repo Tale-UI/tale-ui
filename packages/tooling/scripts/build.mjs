@@ -39,6 +39,7 @@ await writeFile(
 );
 await cp(join(REPOSITORY_ROOT, 'schemas'), join(BUILD_ROOT, 'schemas'), { recursive: true });
 await cp(join(PACKAGE_ROOT, 'templates'), join(BUILD_ROOT, 'templates'), { recursive: true });
+await cp(join(PACKAGE_ROOT, 'migrations'), join(BUILD_ROOT, 'migrations'), { recursive: true });
 await cp(join(PACKAGE_ROOT, 'bin'), join(BUILD_ROOT, 'bin'), { recursive: true });
 await Promise.all(
   ['tale.mjs', 'tale-mcp.mjs'].map((file) => chmod(join(BUILD_ROOT, 'bin', file), 0o755)),
@@ -70,6 +71,11 @@ const buildManifest = {
       types: './materialize.d.ts',
       import: './materialize.js',
       default: './materialize.js',
+    },
+    './migrations': {
+      types: './migrations.d.ts',
+      import: './migrations.js',
+      default: './migrations.js',
     },
     './operations': {
       types: './operations.d.ts',

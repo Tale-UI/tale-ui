@@ -199,6 +199,14 @@
     "packages/styles/package.json",
     "packages/themes/package.json",
     "packages/tokens/package.json",
+    "packages/tooling/migrations/10-package-rename/manifest.json",
+    "packages/tooling/migrations/10-package-rename/transform.json",
+    "packages/tooling/migrations/20-field-controls/manifest.json",
+    "packages/tooling/migrations/20-field-controls/transform.json",
+    "packages/tooling/migrations/30-ui-color-aliases/manifest.json",
+    "packages/tooling/migrations/30-ui-color-aliases/transform.json",
+    "packages/tooling/migrations/40-import-paths/manifest.json",
+    "packages/tooling/migrations/40-import-paths/transform.json",
     "packages/tooling/package.json",
     "packages/tooling/templates/app-header/skeleton/App.tsx",
     "packages/tooling/templates/app-header/source/App.tsx",
@@ -248,7 +256,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:0cd1c7ba1f0d5ecd7ee895e45cb058697fccb49713e995fdabe30d521d639f56",
+  "sourceRevision": "sha256:64f85f2b0ec93926a235ae0dee8225870d7ec367b39d7f7b2a12c42cbf225871",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -8481,6 +8489,278 @@
         "category": "Display (additional)",
         "component": "Tree.Item",
         "isSubPart": true
+      }
+    },
+    {
+      "id": "tale:codemod:deprecated-field-controls",
+      "namespace": "tale",
+      "kind": "codemod",
+      "slug": "deprecated-field-controls",
+      "name": "Migrate deprecated Checkbox, Radio, and Switch namespaces to field/button APIs.",
+      "description": "@tale-ui/react@>=1.3.53 <3.0.0 → @tale-ui/react field controls@>=1.3.53 <3.0.0",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "aliases": [
+        "deprecated-field-controls"
+      ],
+      "keywords": [
+        "and",
+        "api",
+        "apis",
+        "button",
+        "checkbox",
+        "controls",
+        "deprecated",
+        "field",
+        "migrate",
+        "namespaces",
+        "radio",
+        "switch",
+        "to"
+      ],
+      "related": [
+        "tale:component:checkbox",
+        "tale:component:checkbox-field",
+        "tale:component:radio",
+        "tale:component:radio-field",
+        "tale:component:switch",
+        "tale:component:switch-field"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/migrations/20-field-controls/manifest.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/migrations",
+          "selector": "deprecated-field-controls"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/migrations/20-field-controls/manifest.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "order": 20,
+        "group": "deprecated-api",
+        "from": "@tale-ui/react@>=1.3.53 <3.0.0",
+        "to": "@tale-ui/react field controls@>=1.3.53 <3.0.0",
+        "reversible": true,
+        "checksum": "sha256:a73484910a6ad2d350db1547f86b479f43ccbc394d017e2c9496bb2a5a8bf99c"
+      }
+    },
+    {
+      "id": "tale:codemod:known-import-path-corrections",
+      "namespace": "tale",
+      "kind": "codemod",
+      "slug": "known-import-path-corrections",
+      "name": "Correct known non-existent or non-canonical Tale UI import paths.",
+      "description": "@tale-ui/react@>=1.0.0 <3.0.0 → @tale-ui/react canonical exports@>=2.0.0 <3.0.0",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "aliases": [
+        "known-import-path-corrections"
+      ],
+      "keywords": [
+        "canonical",
+        "correct",
+        "corrections",
+        "existent",
+        "import",
+        "known",
+        "non",
+        "or",
+        "path",
+        "paths",
+        "tale",
+        "ui"
+      ],
+      "related": [
+        "tale:component:table",
+        "tale:component:text-area",
+        "tale:component:toggle-button"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/migrations/40-import-paths/manifest.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/migrations",
+          "selector": "known-import-path-corrections"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/migrations/40-import-paths/manifest.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "order": 40,
+        "group": "import-path",
+        "from": "@tale-ui/react@>=1.0.0 <3.0.0",
+        "to": "@tale-ui/react canonical exports@>=2.0.0 <3.0.0",
+        "reversible": true,
+        "checksum": "sha256:c18b7d5a003e94e4b53a88d4b8d4d6fecfe5ef47a6ac8f37186be3ce56ccd803"
+      }
+    },
+    {
+      "id": "tale:codemod:ui-color-token-aliases",
+      "namespace": "tale",
+      "kind": "codemod",
+      "slug": "ui-color-token-aliases",
+      "name": "Move component-facing palette usage from fixed brand tokens to color-mode-aware aliases.",
+      "description": "component CSS using --brand-{5..100} → component CSS using --color-{5..100}",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "aliases": [
+        "ui-color-token-aliases"
+      ],
+      "keywords": [
+        "aliases",
+        "aware",
+        "brand",
+        "color",
+        "component",
+        "facing",
+        "fixed",
+        "from",
+        "mode",
+        "move",
+        "name",
+        "palette",
+        "to",
+        "token",
+        "tokens",
+        "ui",
+        "usage"
+      ],
+      "related": [
+        "tale:foundation:design-tokens"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/migrations/30-ui-color-aliases/manifest.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/migrations",
+          "selector": "ui-color-token-aliases"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/migrations/30-ui-color-aliases/manifest.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "order": 30,
+        "group": "token-name",
+        "from": "component CSS using --brand-{5..100}",
+        "to": "component CSS using --color-{5..100}",
+        "reversible": true,
+        "checksum": "sha256:c9a8011fd52b5b04c3a8406ca40452d3364386adf4a268854f5f966f71713e99"
+      }
+    },
+    {
+      "id": "tale:codemod:v1-to-v2-package-rename",
+      "namespace": "tale",
+      "kind": "codemod",
+      "slug": "v1-to-v2-package-rename",
+      "name": "Rename the v1 @tale-ui/core CSS package to @tale-ui/css for v2.",
+      "description": "@tale-ui/core@>=1.0.0 <2.0.0 → @tale-ui/css@>=2.0.0 <3.0.0",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "aliases": [
+        "v1-to-v2-package-rename"
+      ],
+      "keywords": [
+        "core",
+        "css",
+        "for",
+        "package",
+        "rename",
+        "tale",
+        "the",
+        "to",
+        "ui",
+        "v1",
+        "v2"
+      ],
+      "related": [
+        "tale:foundation:css-architecture"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/migrations/10-package-rename/manifest.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/migrations",
+          "selector": "v1-to-v2-package-rename"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/migrations/10-package-rename/manifest.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "order": 10,
+        "group": "package-rename",
+        "from": "@tale-ui/core@>=1.0.0 <2.0.0",
+        "to": "@tale-ui/css@>=2.0.0 <3.0.0",
+        "reversible": true,
+        "checksum": "sha256:af764ccb93b9f0b0f2e9a28b77ab7e3aa761ceb386309918ae8d3a02069843ce"
       }
     },
     {
@@ -49457,5 +49737,5 @@
       }
     }
   ],
-  "digest": "sha256:beb7bd4c4a035f676a7d2f2b7f479771aa1e48a943fb62f5222bf51a92274acb"
+  "digest": "sha256:14a62c76e2a6a8766d22aaab7e83f8f017744c50cc53b315da5ccdca11dfb9e7"
 }
