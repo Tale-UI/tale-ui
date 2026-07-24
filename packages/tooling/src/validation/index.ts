@@ -70,7 +70,8 @@ function runValidation(
         reject(
           new TaleToolingError(
             'TALE_VALIDATION_TIMEOUT',
-            'Tale UI: validation exceeded the requested timeout.',
+            'Tale UI: validation exceeded timeoutMs, so it could not produce a complete result. ' +
+              'Increase timeoutMs, reduce the input or project scope, then retry.',
           ),
         ),
       );

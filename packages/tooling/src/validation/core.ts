@@ -9,7 +9,7 @@ import type {
 } from '../contracts/validation.js';
 import { TaleToolingError } from '../contracts/errors.js';
 import { getManifest } from '../api.js';
-import { loadArtifactRegistry } from '../registry.js';
+import { loadArtifactRegistry, loadReactExportPaths } from '../registry.js';
 import { boundDiagnostics } from './diagnostics.js';
 import { relativeProjectPath, resolveProjectFile, resolveProjectRoot } from './project.js';
 import { validateRegistryRules } from './registry.js';
@@ -96,7 +96,7 @@ export function validateRequestCore(request: ValidationRequest): ValidationResul
   const code = inline ? request.code : readTarget(absoluteFile);
   const rules = new Set(request.rules || AVAILABLE_RULES);
   const diagnostics = rules.has('registry')
-    ? validateRegistryRules(code, path, loadArtifactRegistry())
+    ? validateRegistryRules(code, path, loadArtifactRegistry(), loadReactExportPaths())
     : [];
   let fallbackConfig = false;
   if (rules.has('typescript')) {
@@ -104,12 +104,13 @@ export function validateRequestCore(request: ValidationRequest): ValidationResul
     diagnostics.push(...result.diagnostics);
     fallbackConfig = result.fallbackConfig;
   }
+  const valid = diagnostics.every((diagnostic) => diagnostic.severity !== 'error');
   const bounded = boundDiagnostics(diagnostics);
   const manifest = getManifest();
   return {
     schemaVersion: '1.0.0',
     requestId: request.requestId,
-    valid: bounded.every((diagnostic) => diagnostic.severity !== 'error'),
+    valid,
     diagnostics: bounded,
     versions: {
       contract: manifest.contractVersion,

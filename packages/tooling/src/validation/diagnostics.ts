@@ -54,8 +54,17 @@ export function normalizeTypeScriptDiagnostics(
 }
 
 export function boundDiagnostics(diagnostics: ValidationDiagnostic[]) {
-  return diagnostics.slice(0, MAX_DIAGNOSTICS).map((diagnostic) => ({
-    ...diagnostic,
-    message: diagnostic.message.slice(0, MAX_MESSAGE_LENGTH),
-  }));
+  const severityRank = { error: 0, warning: 1, info: 2 } as const;
+  return diagnostics
+    .map((diagnostic, index) => ({ diagnostic, index }))
+    .sort(
+      (a, b) =>
+        severityRank[a.diagnostic.severity] - severityRank[b.diagnostic.severity] ||
+        a.index - b.index,
+    )
+    .slice(0, MAX_DIAGNOSTICS)
+    .map(({ diagnostic }) => ({
+      ...diagnostic,
+      message: diagnostic.message.slice(0, MAX_MESSAGE_LENGTH),
+    }));
 }

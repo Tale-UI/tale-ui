@@ -65,7 +65,9 @@ test('registry rules reject unknown imports and compound bare usage', () => {
     const compound = validateRequestCore({
       ...request(
         root,
-        "import { Dialog } from '@tale-ui/react/dialog';\nexport const value = <Dialog />;",
+        "import { Dialog } from '@tale-ui/react/dialog';\n" +
+          'export const correct = <Dialog.Root />;\n' +
+          'export const incorrect = <Dialog />;',
       ),
       virtualFile: 'src/example.tsx',
       rules: ['registry'],
@@ -74,6 +76,38 @@ test('registry rules reject unknown imports and compound bare usage', () => {
     assert.ok(
       compound.diagnostics.some((diagnostic) => diagnostic.code === 'TALE_WRONG_COMPONENT_KIND'),
     );
+
+    const documented = validateRequestCore({
+      ...request(
+        root,
+        "// import { Missing } from '@tale-ui/react/not-real';\n" +
+          "import { parseColor } from '@tale-ui/react/aria';\n" +
+          "export const example = '<Dialog />';\n" +
+          'export const color = parseColor;',
+      ),
+      rules: ['registry'],
+    });
+    assert.equal(documented.valid, true);
+    assert.equal(documented.diagnostics.length, 0);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('validity and error retention are independent of the diagnostic cap', () => {
+  const root = fixture();
+  try {
+    const warnings = Array.from(
+      { length: 201 },
+      (_, index) => `import { Checkbox as Checkbox${index} } from '@tale-ui/react/checkbox';`,
+    ).join('\n');
+    const result = validateRequestCore({
+      ...request(root, `${warnings}\nimport { Missing } from '@tale-ui/react/not-real';`),
+      rules: ['registry'],
+    });
+    assert.equal(result.valid, false);
+    assert.equal(result.diagnostics.length, 200);
+    assert.equal(result.diagnostics[0].code, 'TALE_INVALID_IMPORT');
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
@@ -104,6 +138,43 @@ test('validation rejects traversal and malformed project configuration', () => {
   }
 });
 
+test('recursively extended TypeScript configs cannot escape the project', () => {
+  const parent = mkdtempSync(join(tmpdir(), 'tale-validation-config-'));
+  const root = join(parent, 'project');
+  mkdirSync(join(root, 'src'), { recursive: true });
+  mkdirSync(join(root, 'config'));
+  writeFileSync(
+    join(parent, 'outside.json'),
+    JSON.stringify({ compilerOptions: { strict: false } }),
+  );
+  writeFileSync(join(root, 'config/base.json'), JSON.stringify({ extends: '../../outside.json' }));
+  writeFileSync(join(root, 'tsconfig.json'), JSON.stringify({ extends: './config/base.json' }));
+  try {
+    assert.throws(
+      () => validateRequestCore(request(root, 'export const value = true;')),
+      (error) => error instanceof TaleToolingError && error.code === 'TALE_INVALID_TSCONFIG',
+    );
+  } finally {
+    rmSync(parent, { recursive: true, force: true });
+  }
+});
+
+test('project ambient declarations participate in virtual validation', () => {
+  const root = fixture();
+  try {
+    writeFileSync(join(root, 'src/global.d.ts'), 'declare const ambientValue: number;');
+    writeFileSync(
+      join(root, 'tsconfig.json'),
+      JSON.stringify({ compilerOptions: { strict: true }, include: ['src/**/*.d.ts'] }),
+    );
+    const result = validateRequestCore(request(root, 'export const value: number = ambientValue;'));
+    assert.equal(result.valid, true);
+    assert.equal(result.fallbackConfig, false);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('compiler resolution cannot read relative imports outside the project', () => {
   const parent = mkdtempSync(join(tmpdir(), 'tale-validation-boundary-'));
   const root = join(parent, 'project');
@@ -123,6 +194,31 @@ test('compiler resolution cannot read relative imports outside the project', () 
     rmSync(parent, { recursive: true, force: true });
   }
 });
+
+test(
+  'compiler resolution cannot follow project symlinks outside the root',
+  { skip: process.platform === 'win32' },
+  () => {
+    const root = fixture();
+    const outside = fixture();
+    try {
+      writeFileSync(join(outside, 'dep.ts'), 'export const secret = true;');
+      symlinkSync(outside, join(root, 'src/linked'), 'dir');
+      const result = validateRequestCore(
+        request(
+          root,
+          "import { secret } from './linked/dep';\nexport const exposed: boolean = secret;",
+        ),
+      );
+      assert.equal(result.valid, false);
+      assert.ok(result.diagnostics.some((diagnostic) => diagnostic.code === 2307));
+      assert.equal(JSON.stringify(result).includes(outside), false);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+      rmSync(outside, { recursive: true, force: true });
+    }
+  },
+);
 
 test('file validation reads UTF-8 without modifying the target', () => {
   const root = fixture();

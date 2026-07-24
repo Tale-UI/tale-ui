@@ -26,6 +26,17 @@ await Promise.all(
     cp(join(REPOSITORY_ROOT, 'registry', file), join(BUILD_ROOT, 'registry', file)),
   ),
 );
+const reactPackage = JSON.parse(
+  await readFile(join(REPOSITORY_ROOT, 'packages/react/package.json'), 'utf8'),
+);
+await writeFile(
+  join(BUILD_ROOT, 'registry/react-exports.json'),
+  `${JSON.stringify(
+    { name: reactPackage.name, exports: Object.keys(reactPackage.exports) },
+    null,
+    2,
+  )}\n`,
+);
 await cp(join(REPOSITORY_ROOT, 'schemas'), join(BUILD_ROOT, 'schemas'), { recursive: true });
 await cp(join(PACKAGE_ROOT, 'bin'), join(BUILD_ROOT, 'bin'), { recursive: true });
 await chmod(join(BUILD_ROOT, 'bin/tale.mjs'), 0o755);
