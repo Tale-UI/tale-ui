@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/table-benchmark.schema.json",
+  "title": "Table controller prototype benchmark",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "environment", "method", "cases"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node", "platform", "architecture", "logicalCpuCount", "totalMemoryBytes"],
+      "properties": {
+        "node": { "type": "string" },
+        "platform": { "type": "string" },
+        "architecture": { "type": "string" },
+        "logicalCpuCount": { "type": "integer", "minimum": 1 },
+        "totalMemoryBytes": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runtime", "warmupIterations", "measuredIterations", "clock"],
+      "properties": {
+        "runtime": { "type": "string" },
+        "warmupIterations": { "type": "integer", "minimum": 1 },
+        "measuredIterations": { "type": "integer", "minimum": 5 },
+        "clock": { "const": "performance.now" }
+      }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "operation", "rowCount", "samplesMs", "summaryMs", "resultDigest"],
+        "properties": {
+          "name": { "type": "string" },
+          "operation": { "enum": ["selection-clone", "stable-sort"] },
+          "rowCount": { "enum": [1000, 10000] },
+          "samplesMs": {
+            "type": "array",
+            "minItems": 5,
+            "items": { "type": "number", "minimum": 0 }
+          },
+          "summaryMs": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["minimum", "median", "p95", "maximum"],
+            "properties": {
+              "minimum": { "type": "number", "minimum": 0 },
+              "median": { "type": "number", "minimum": 0 },
+              "p95": { "type": "number", "minimum": 0 },
+              "maximum": { "type": "number", "minimum": 0 }
+            }
+          },
+          "resultDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+        }
+      }
+    }
+  }
+}

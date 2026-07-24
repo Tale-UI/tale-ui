@@ -184,6 +184,107 @@ for (const [path, expected] of Object.entries(INVENTORIES)) {
   assert.equal(inventory.candidates.length, expected.length, `${path} must not contain duplicates`);
 }
 
+const tableRankingPath = 'analysis/table-plugins/ranking.json';
+const tableRanking = json(tableRankingPath);
+validate('schemas/table-ranking.schema.json', tableRanking, tableRankingPath);
+assert.equal(
+  tableRanking.status,
+  'approved',
+  'P0-D cannot exit until every Table candidate disposition and rank is approved',
+);
+const tableCandidates = INVENTORIES['analysis/table-plugins/inventory.json'];
+assert.deepEqual(
+  tableRanking.records.map((record) => record.rank),
+  Array.from({ length: tableCandidates.length }, (_, index) => index + 1),
+  'Table ranking records must be ordered by rank',
+);
+assert.deepEqual(
+  new Set(tableRanking.records.map((record) => record.candidate)),
+  new Set(tableCandidates),
+  'Table ranking must preserve the exact frozen candidate set',
+);
+assert.deepEqual(
+  tableRanking.prototypeCandidates,
+  ['selection', 'sorting'],
+  'P0-D must prototype selection and sorting without substituting candidates',
+);
+const tableEvidenceSources = [
+  ...new Set(
+    tableRanking.records.flatMap((record) =>
+      record.demandEvidence.map((evidence) => evidence.source.split('#')[0]),
+    ),
+  ),
+].toSorted(compareCanonicalStrings);
+for (const source of tableEvidenceSources) {
+  assert.ok(existsSync(join(ROOT, source)), `Table ranking evidence source is missing: ${source}`);
+}
+assert.equal(
+  tableRanking.evidenceRevision,
+  digest(tableEvidenceSources.map((path) => ({ path, content: text(path) }))),
+  'Table ranking evidence revision does not match its source preimage',
+);
+for (const record of tableRanking.records) {
+  const { evidenceDigest, ...evidencePreimage } = record;
+  assert.equal(
+    evidenceDigest,
+    digest(evidencePreimage),
+    `Table ranking evidence digest is stale for ${record.candidate}`,
+  );
+}
+assert.ok(
+  existsSync(join(ROOT, 'analysis/table-plugins/rfc.md')),
+  'Table controller RFC is required with the ranking',
+);
+assert.match(
+  text('analysis/table-plugins/rfc.md'),
+  /^- Status: Approved$/m,
+  'The Table controller RFC must record its approved status',
+);
+assert.ok(
+  existsSync(join(ROOT, 'packages/react/src/table/TableController.experimental.ts')),
+  'Selection and sorting prototypes require the private controller source',
+);
+assert.ok(
+  existsSync(join(ROOT, 'packages/react/src/table/TableController.experimental.test.tsx')),
+  'Selection and sorting prototypes require controller fixtures',
+);
+const tableBenchmarkPath = 'analysis/baselines/table-controller.json';
+const tableBenchmark = json(tableBenchmarkPath);
+validate('schemas/table-benchmark.schema.json', tableBenchmark, tableBenchmarkPath);
+assert.equal(
+  tableBenchmark.method.runtime,
+  'packages/react/src/table/TableController.experimental.ts',
+  'Table benchmark must exercise the private controller prototype',
+);
+assert.deepEqual(
+  tableBenchmark.cases.map(({ operation, rowCount }) => [operation, rowCount]),
+  [
+    ['selection-clone', 1000],
+    ['selection-clone', 10000],
+    ['stable-sort', 1000],
+    ['stable-sort', 10000],
+  ],
+  'Table benchmark must preserve the exact selection/sorting 1k/10k matrix',
+);
+for (const benchmarkCase of tableBenchmark.cases) {
+  assert.equal(
+    benchmarkCase.samplesMs.length,
+    tableBenchmark.method.measuredIterations,
+    `${benchmarkCase.name} must preserve every measured sample`,
+  );
+  const sortedSamples = benchmarkCase.samplesMs.toSorted((left, right) => left - right);
+  assert.deepEqual(
+    benchmarkCase.summaryMs,
+    {
+      minimum: sortedSamples[0],
+      median: sortedSamples[Math.floor(sortedSamples.length / 2)],
+      p95: sortedSamples[Math.ceil(sortedSamples.length * 0.95) - 1],
+      maximum: sortedSamples.at(-1),
+    },
+    `${benchmarkCase.name} summary must match its samples`,
+  );
+}
+
 const artifacts = artifactRegistry.artifacts;
 assert.deepEqual(
   artifacts.map((artifact) => artifact.id),
@@ -566,13 +667,19 @@ assert.equal(
 const rankingCandidates = INVENTORIES['analysis/table-plugins/inventory.json'];
 const rankingFixture = {
   schemaVersion: '1.0.0',
-  evidenceRevision: 'fixture',
+  status: 'proposed',
+  inventory: 'analysis/table-plugins/inventory.json',
+  evidenceRevision: digestFixture,
+  methodology: 'fixture',
+  prototypeCandidates: ['selection', 'sorting'],
   records: rankingCandidates.map((candidate, index) => ({
     candidate,
-    demandEvidence: ['fixture'],
+    demandEvidence: [{ source: 'fixture', claim: 'fixture' }],
     reactAriaCompatibility: 'fixture',
-    accessibilityRisks: [],
+    accessibilityRisks: ['fixture'],
     stateModel: 'fixture',
+    controlledUncontrolled: 'fixture',
+    clientServer: 'fixture',
     ssrHydration: 'fixture',
     performance: { rows1k: 'fixture', rows10k: 'fixture' },
     cost: {
@@ -582,6 +689,7 @@ const rankingFixture = {
     },
     disposition: 'defer',
     rank: index + 1,
+    rankingRationale: 'fixture',
     evidenceDigest: digestFixture,
   })),
 };

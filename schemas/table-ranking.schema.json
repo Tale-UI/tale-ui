@@ -3,10 +3,26 @@
   "$id": "https://tale-ui.dev/schemas/table-ranking.schema.json",
   "title": "Table plugin evidence ranking",
   "type": "object",
-  "required": ["schemaVersion", "evidenceRevision", "records"],
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "inventory",
+    "evidenceRevision",
+    "methodology",
+    "prototypeCandidates",
+    "records"
+  ],
   "properties": {
     "schemaVersion": { "const": "1.0.0" },
-    "evidenceRevision": { "type": "string" },
+    "status": { "enum": ["proposed", "approved"] },
+    "inventory": { "const": "analysis/table-plugins/inventory.json" },
+    "evidenceRevision": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "methodology": { "type": "string", "minLength": 1 },
+    "prototypeCandidates": {
+      "type": "array",
+      "const": ["selection", "sorting"]
+    },
     "records": {
       "type": "array",
       "minItems": 10,
@@ -47,11 +63,14 @@
           "reactAriaCompatibility",
           "accessibilityRisks",
           "stateModel",
+          "controlledUncontrolled",
+          "clientServer",
           "ssrHydration",
           "performance",
           "cost",
           "disposition",
           "rank",
+          "rankingRationale",
           "evidenceDigest"
         ],
         "properties": {
@@ -69,11 +88,29 @@
               "virtualization"
             ]
           },
-          "demandEvidence": { "type": "array", "minItems": 1 },
-          "reactAriaCompatibility": { "type": "string" },
-          "accessibilityRisks": { "type": "array" },
-          "stateModel": { "type": "string" },
-          "ssrHydration": { "type": "string" },
+          "demandEvidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["source", "claim"],
+              "properties": {
+                "source": { "type": "string", "minLength": 1 },
+                "claim": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "reactAriaCompatibility": { "type": "string", "minLength": 1 },
+          "accessibilityRisks": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "stateModel": { "type": "string", "minLength": 1 },
+          "controlledUncontrolled": { "type": "string", "minLength": 1 },
+          "clientServer": { "type": "string", "minLength": 1 },
+          "ssrHydration": { "type": "string", "minLength": 1 },
           "performance": {
             "type": "object",
             "additionalProperties": false,
@@ -95,6 +132,7 @@
           },
           "disposition": { "enum": ["approve", "defer", "reject"] },
           "rank": { "type": "integer", "minimum": 1, "maximum": 10 },
+          "rankingRationale": { "type": "string", "minLength": 1 },
           "evidenceDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
         }
       }

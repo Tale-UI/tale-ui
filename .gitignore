@@ -63,6 +63,11 @@ storybook-static/
 !/analysis/table-plugins/
 /analysis/table-plugins/*
 !/analysis/table-plugins/inventory.json
+!/analysis/table-plugins/ranking.json
+!/analysis/table-plugins/rfc.md
+!/analysis/baselines/
+/analysis/baselines/*
+!/analysis/baselines/table-controller.json
 !/analysis/app-shell/
 /analysis/app-shell/*
 !/analysis/app-shell/inventory.json
