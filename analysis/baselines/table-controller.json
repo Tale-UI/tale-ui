@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0.0",
+  "environment": {
+    "node": "v24.14.1",
+    "platform": "darwin",
+    "architecture": "arm64",
+    "logicalCpuCount": 18,
+    "totalMemoryBytes": 137438953472
+  },
+  "method": {
+    "runtime": "packages/react/src/table/TableController.experimental.ts",
+    "warmupIterations": 3,
+    "measuredIterations": 15,
+    "clock": "performance.now"
+  },
+  "cases": [
+    {
+      "name": "selection clone — 1k keys",
+      "operation": "selection-clone",
+      "rowCount": 1000,
+      "samplesMs": [
+        0.0054, 0.0055, 0.006, 0.0066, 0.0107, 0.0052, 0.0098, 0.0086, 0.0059, 0.0075, 0.0067,
+        0.005, 0.0043, 0.0046, 0.0052
+      ],
+      "summaryMs": {
+        "minimum": 0.0043,
+        "median": 0.0059,
+        "p95": 0.0107,
+        "maximum": 0.0107
+      },
+      "resultDigest": "sha256:dbe5748a71d70cfd3d0f02b72299df6d37a9ef20984b0823cff11cfc56d72035"
+    },
+    {
+      "name": "selection clone — 10k keys",
+      "operation": "selection-clone",
+      "rowCount": 10000,
+      "samplesMs": [
+        0.0672, 0.5082, 0.0491, 0.0456, 0.0591, 0.04, 0.0443, 0.039, 0.0382, 0.0446, 0.047, 0.0422,
+        0.0489, 0.3569, 0.0588
+      ],
+      "summaryMs": {
+        "minimum": 0.0382,
+        "median": 0.047,
+        "p95": 0.5082,
+        "maximum": 0.5082
+      },
+      "resultDigest": "sha256:f05684e9fdc40c25df29fdc06c7e56152e0297391b15a8fe7c8e2b52fc78365e"
+    },
+    {
+      "name": "stable local sort — 1k rows",
+      "operation": "stable-sort",
+      "rowCount": 1000,
+      "samplesMs": [
+        0.0262, 0.025, 0.0245, 0.0244, 0.0242, 0.0252, 0.0269, 0.0252, 0.0255, 0.0463, 0.0266,
+        0.035, 0.0268, 0.026, 0.026
+      ],
+      "summaryMs": {
+        "minimum": 0.0242,
+        "median": 0.026,
+        "p95": 0.0463,
+        "maximum": 0.0463
+      },
+      "resultDigest": "sha256:7c0441b89fdc6aba3914f9b208bbc144df440fa09d4010e510376dd7d8100873"
+    },
+    {
+      "name": "stable local sort — 10k rows",
+      "operation": "stable-sort",
+      "rowCount": 10000,
+      "samplesMs": [
+        0.2648, 0.2594, 0.2484, 0.4368, 0.2126, 0.2377, 0.2289, 0.2237, 0.3605, 0.237, 0.3183,
+        0.2353, 0.232, 0.3955, 0.228
+      ],
+      "summaryMs": {
+        "minimum": 0.2126,
+        "median": 0.2377,
+        "p95": 0.4368,
+        "maximum": 0.4368
+      },
+      "resultDigest": "sha256:3ea8e47c54a61c4fc55d04c542f43402f71f7c066992eb13d05e9cc8fa81e553"
+    }
+  ]
+}

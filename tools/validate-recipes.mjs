@@ -9,7 +9,7 @@
  */
 
 import { readFileSync, readdirSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
+import { basename, dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
@@ -274,7 +274,11 @@ function validateRecipe(file) {
   }
 }
 
-const recipeFiles = readdirSync(RECIPES_DIR)
+const requestedFiles = process.argv
+  .slice(2)
+  .filter((file) => file.endsWith('.md'))
+  .map((file) => basename(file));
+const recipeFiles = (requestedFiles.length > 0 ? [...new Set(requestedFiles)] : readdirSync(RECIPES_DIR))
   .filter((file) => file.endsWith('.md') && file !== 'index.md')
   .sort((a, b) => a.localeCompare(b));
 

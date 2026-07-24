@@ -10,4 +10,14 @@ export type {
   CellProps as TableCellProps,
 } from './Table.styled';
 
+export {
+  sortTableRows,
+  useTableController,
+  type TableController,
+  type TableControllerOptions,
+  type TableControllerQuery,
+  type TableControllerRequestContext,
+  type TableSortingController,
+} from './TableController';
+
 export type { Selection, Key, SortDescriptor } from 'react-aria-components';

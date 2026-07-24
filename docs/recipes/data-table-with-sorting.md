@@ -4,7 +4,7 @@ A data table with sortable columns, row action menus, and pagination.
 
 ## Components Used
 
-- `Table` from `@tale-ui/react/table`
+- `Table` and `useTableController` from `@tale-ui/react/table`
 - `Menu` from `@tale-ui/react/menu`
 - `Icon` from `@tale-ui/react/icon`
 - `Pagination` from `@tale-ui/react/pagination`
@@ -13,13 +13,11 @@ A data table with sortable columns, row action menus, and pagination.
 ## Code
 
 ```tsx
-import { Table } from '@tale-ui/react/table';
+import { Table, useTableController, type Key } from '@tale-ui/react/table';
 import { Menu } from '@tale-ui/react/menu';
 import { Icon } from '@tale-ui/react/icon';
 import { Pagination } from '@tale-ui/react/pagination';
-import type { SortDescriptor } from '@tale-ui/react/table';
 import { MoreHorizontal } from 'lucide-react';
-import { useState } from 'react';
 
 const data = [
   { id: 1, name: 'Alice Johnson', email: 'alice@example.com', role: 'Admin' },
@@ -28,24 +26,20 @@ const data = [
 ];
 
 function UserTable() {
-  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-    column: 'name',
-    direction: 'ascending',
+  const controller = useTableController({
+    tableId: 'users',
+    defaultSortDescriptor: { column: 'name', direction: 'ascending' },
   });
 
-  const sorted = [...data].sort((a, b) => {
-    const key = sortDescriptor.column as keyof typeof a;
-    const cmp = String(a[key]).localeCompare(String(b[key]));
-    return sortDescriptor.direction === 'ascending' ? cmp : -cmp;
+  const sorted = controller.sorting.sortRows(data, (left, right, column: Key) => {
+    if (column === 'email') return left.email.localeCompare(right.email);
+    if (column === 'role') return left.role.localeCompare(right.role);
+    return left.name.localeCompare(right.name);
   });
 
   return (
     <div>
-      <Table.Root
-        aria-label="Users"
-        sortDescriptor={sortDescriptor}
-        onSortChange={setSortDescriptor}
-      >
+      <Table.Root {...controller.tableProps} aria-label="Users">
         <Table.Header>
           <Table.Column id="name" allowsSorting>
             Name
@@ -60,7 +54,7 @@ function UserTable() {
         </Table.Header>
         <Table.Body>
           {sorted.map((user) => (
-            <Table.Row key={user.id}>
+            <Table.Row key={user.id} id={user.id}>
               <Table.Cell>{user.name}</Table.Cell>
               <Table.Cell>{user.email}</Table.Cell>
               <Table.Cell>{user.role}</Table.Cell>

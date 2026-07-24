@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "approved",
+  "inventory": "analysis/table-plugins/inventory.json",
+  "evidenceRevision": "sha256:cbb2adf11daaa6aaaef5126eb865db625e40877722df37618e2c19c028f5a146",
+  "methodology": "Rank repository-evidenced product need first, then React Aria compatibility, accessibility risk, explicit 1k/10k requirements, and implementation/migration/maintenance cost. Mandatory prototypes receive no automatic rank bonus.",
+  "prototypeCandidates": ["selection", "sorting"],
+  "records": [
+    {
+      "candidate": "sorting",
+      "demandEvidence": [
+        {
+          "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#table-inventory-and-ranking-contract",
+          "claim": "The approved roadmap requires sorting and first-class server-side sorting."
+        },
+        {
+          "source": "docs/components/table.md#with-sorting",
+          "claim": "The current public Table already documents controlled sorting."
+        }
+      ],
+      "reactAriaCompatibility": "React Aria Table natively accepts sortDescriptor/onSortChange and Column allowsSorting.",
+      "accessibilityRisks": [
+        "Sort direction must remain announced by React Aria.",
+        "Server refreshes must retain focus and stable column IDs."
+      ],
+      "stateModel": "One SortDescriptor in the shared controller; every change increments the table query revision.",
+      "controlledUncontrolled": "Support controlled sortDescriptor and defaultSortDescriptor without mirroring controlled state.",
+      "clientServer": "Client mode uses a stable comparator; server mode publishes the same descriptor with cancellation and stale-result rejection.",
+      "ssrHydration": "The initial descriptor and column IDs must be deterministic on server and client.",
+      "performance": {
+        "rows1k": "Measure stable local O(n log n) sorting; server mode remains available.",
+        "rows10k": "Prefer server sorting or deliberate memoized local sorting; capture both before promotion."
+      },
+      "cost": {
+        "implementation": "Low: current Table and React Aria already expose the state contract.",
+        "migration": "Low: existing direct sort props remain supported.",
+        "maintenance": "Low: preserve React Aria descriptors and avoid a second sorting model."
+      },
+      "disposition": "approve",
+      "rank": 1,
+      "rankingRationale": "Existing public behavior plus an explicit server-side roadmap requirement makes sorting the strongest incremental plugin candidate.",
+      "evidenceDigest": "sha256:8ec33a96d63005fe869f16322323c39ec7f1b9bf83e95ef627ae05d5d825f572"
+    },
+    {
+      "candidate": "selection",
+      "demandEvidence": [
+        {
+          "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#table-inventory-and-ranking-contract",
+          "claim": "The approved roadmap requires selection in the plugin research scope."
+        },
+        {
+          "source": "docs/components/table.md#with-selection",
+          "claim": "The current public Table documents React Aria selection modes."
+        }
+      ],
+      "reactAriaCompatibility": "React Aria Table natively owns selectedKeys/onSelectionChange, selection modes, and keyboard semantics.",
+      "accessibilityRisks": [
+        "Selection cannot be duplicated outside React Aria state.",
+        "Bulk selection and disabled rows require accurate announcements."
+      ],
+      "stateModel": "One React Aria Selection value in the shared controller with stable row keys.",
+      "controlledUncontrolled": "Support controlled selectedKeys and defaultSelectedKeys; controlled values remain authoritative.",
+      "clientServer": "Selection is local identity state while server queries may consume the selected key snapshot.",
+      "ssrHydration": "Default selection and row IDs must match across server render and hydration.",
+      "performance": {
+        "rows1k": "Measure Set cloning and membership without scanning every row.",
+        "rows10k": "Use key-based selection and the React Aria all-selection sentinel rather than materializing all keys."
+      },
+      "cost": {
+        "implementation": "Low: React Aria already supplies selection behavior.",
+        "migration": "Low: direct selection props map to controller root props.",
+        "maintenance": "Low: retain React Aria Selection as the only representation."
+      },
+      "disposition": "approve",
+      "rank": 2,
+      "rankingRationale": "Selection already exists publicly and can validate shared-state composition without replacing accessible interaction behavior.",
+      "evidenceDigest": "sha256:998cafa55df4c99d6de8d03d3ea593d234c9926e3288da9c3a8aed0ce11cdf4b"
+    },
+    {
+      "candidate": "pagination",
+      "demandEvidence": [
+        {
+          "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#table-inventory-and-ranking-contract",
+          "claim": "The roadmap explicitly requires first-class server-side pagination."
+        },
+        {
+          "source": "packages/react/src/pagination/Pagination.styled.tsx",
+          "claim": "Tale UI already has an accessible standalone Pagination component available for composition."
+        }
+      ],
+      "reactAriaCompatibility": "Pagination composes outside Table without replacing table semantics; the controller supplies page query state.",
+      "accessibilityRisks": [
+        "Page changes must move or preserve focus intentionally.",
+        "Row counts and current page state require accessible labels."
+      ],
+      "stateModel": "Page, page size, known/unknown total, and query revision belong to the shared controller.",
+      "controlledUncontrolled": "Support controlled page/pageSize and deterministic defaults.",
+      "clientServer": "Client mode slices a stable row set; server mode treats page changes as cancellable correlated requests.",
+      "ssrHydration": "Initial page and page size must be identical during SSR and hydration.",
+      "performance": {
+        "rows1k": "Client slicing is bounded by page size and should not copy unrelated rows.",
+        "rows10k": "Server pagination is the default performance path when a backend is available."
+      },
+      "cost": {
+        "implementation": "Medium: integrate query state with the existing Pagination component.",
+        "migration": "Low: standalone Pagination compositions can move handlers into the controller.",
+        "maintenance": "Medium: support unknown totals and server response correlation."
+      },
+      "disposition": "approve",
+      "rank": 3,
+      "rankingRationale": "The roadmap explicitly requires server pagination and Tale UI already owns the visual navigation primitive.",
+      "evidenceDigest": "sha256:167998525c49802ee1eb25929d06aad929c678a8d748f52b3d9efc4caaa9aa7a"
+    },
+    {
+      "candidate": "filtering",
+      "demandEvidence": [
+        {
+          "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#table-inventory-and-ranking-contract",
+          "claim": "The roadmap explicitly requires first-class server-side filtering."
+        }
+      ],
+      "reactAriaCompatibility": "Filtering is external query state and can change Table.Body rows without changing React Aria table semantics.",
+      "accessibilityRisks": [
+        "Result changes need count/status announcements without excessive live-region noise.",
+        "Focus must be reconciled when the focused row is filtered out."
+      ],
+      "stateModel": "A versioned filter expression joins sorting and pagination in the shared query snapshot.",
+      "controlledUncontrolled": "Support controlled filters and deterministic default filters; schema design precedes public promotion.",
+      "clientServer": "Client predicates and server expressions share revision/cancellation behavior but not executable serialization.",
+      "ssrHydration": "Default filters and their resulting initial rows must be server/client deterministic.",
+      "performance": {
+        "rows1k": "Measure predicate cost and avoid recomputation for unrelated state.",
+        "rows10k": "Prefer server filtering or an explicitly benchmarked indexed client strategy."
+      },
+      "cost": {
+        "implementation": "Medium: define a non-executable filter model and result announcements.",
+        "migration": "Medium: existing ad hoc predicates need explicit adapters.",
+        "maintenance": "Medium: client and server operators require compatibility discipline."
+      },
+      "disposition": "approve",
+      "rank": 4,
+      "rankingRationale": "Filtering is a named server-side acceptance requirement and must share request state with sorting and pagination.",
+      "evidenceDigest": "sha256:7367acd4b95d5fc5744da817d2457b9eb03a0ad3253681ab97fa2fa7b6e0ed1c"
+    },
+    {
+      "candidate": "virtualization",
+      "demandEvidence": [
+        {
+          "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#table-inventory-and-ranking-contract",
+          "claim": "The roadmap requires virtualization research and 1k/10k benchmarks."
+        },
+        {
+          "source": "packages/react/src/virtualizer/index.ts",
+          "claim": "Tale UI already exposes React Aria Virtualizer primitives."
+        }
+      ],
+      "reactAriaCompatibility": "React Aria virtualization primitives exist, but Table integration and collection semantics require a dedicated prototype.",
+      "accessibilityRisks": [
+        "Unmounted offscreen rows can change screen-reader browsing and row count expectations.",
+        "Focus restoration and virtualized measurement must survive zoom and dynamic content."
+      ],
+      "stateModel": "Viewport and measurement state is plugin-local while row identity and query revision remain controller-owned.",
+      "controlledUncontrolled": "Expose controlled layout inputs only where persistence is required; measurements remain internal.",
+      "clientServer": "Virtualization composes with either client rows or server windows and must not imply pagination semantics.",
+      "ssrHydration": "Use a deterministic non-virtualized or bounded initial window until client measurements are available.",
+      "performance": {
+        "rows1k": "Compare virtualized and non-virtualized rendering before choosing the crossover.",
+        "rows10k": "Require bounded mounted rows, scroll/focus evidence, and retained benchmark results."
+      },
+      "cost": {
+        "implementation": "High: integrate layout, collection, focus, and measurement behavior.",
+        "migration": "Medium: consumers need a deterministic size/scroll contract.",
+        "maintenance": "High: browser, accessibility, and dynamic-row regressions require dedicated coverage."
+      },
+      "disposition": "approve",
+      "rank": 5,
+      "rankingRationale": "The explicit 10k-row gate makes a bounded rendering path more consequential than convenience-only column plugins.",
+      "evidenceDigest": "sha256:f9e05877da12866c5c6546052be239eafed102e340f289e7456f6427367c048a"
+    },
+    {
+      "candidate": "column visibility/settings",
+      "demandEvidence": [
+        {
+          "source": "analysis/table-plugins/inventory.json",
+          "claim": "The approved plan freezes column visibility/settings in the exact evaluation inventory."
+        }
+      ],
+      "reactAriaCompatibility": "Visible columns can be derived before Table.Header/Table.Body render while retaining stable column keys.",
+      "accessibilityRisks": [
+        "Hiding a focused or row-header column requires deliberate focus and announcement behavior.",
+        "At least one row-header column must remain available."
+      ],
+      "stateModel": "A set of visible stable column IDs belongs to the shared controller.",
+      "controlledUncontrolled": "Support controlled visibleColumnIds and a deterministic default set.",
+      "clientServer": "Visibility is normally client state; servers may consume it only as an explicit projection hint.",
+      "ssrHydration": "Persisted visibility cannot change the hydration tree before client state is reconciled.",
+      "performance": {
+        "rows1k": "Derive visible column definitions once per visibility revision.",
+        "rows10k": "Avoid per-cell visibility checks by projecting columns before row rendering."
+      },
+      "cost": {
+        "implementation": "Medium: enforce row-header and focus invariants.",
+        "migration": "Medium: current conditional-column patterns need stable IDs.",
+        "maintenance": "Medium: persistence and responsive ownership must remain outside Table."
+      },
+      "disposition": "defer",
+      "rank": 6,
+      "rankingRationale": "Useful shared state, but it lacks the explicit server/performance pressure of the proposed top five.",
+      "evidenceDigest": "sha256:a4682e91d25c967bbb9fbe26ef5260c673bf8f9d4dcaae9baf348591977743ab"
+    },
+    {
+      "candidate": "column resize",
+      "demandEvidence": [
+        {
+          "source": "docs/components/table.md#notes",
+          "claim": "Current Table documentation already acknowledges React Aria resizable column state."
+        }
+      ],
+      "reactAriaCompatibility": "React Aria exposes resizable containers, column widths, and resize callbacks.",
+      "accessibilityRisks": [
+        "Resize handles need keyboard operation and perceivable labels.",
+        "Minimum widths must preserve zoom and reflow usability."
+      ],
+      "stateModel": "Column widths use stable column IDs and remain isolated from data query revisions.",
+      "controlledUncontrolled": "Support controlled widths and defaults using React Aria column-size types.",
+      "clientServer": "Resize is client presentation state and must not trigger data requests.",
+      "ssrHydration": "Deterministic default widths render on the server; persisted widths apply after safe reconciliation.",
+      "performance": {
+        "rows1k": "Width changes should update column layout without rebuilding row data.",
+        "rows10k": "Throttle visual layout work through React Aria behavior and measure resize frames."
+      },
+      "cost": {
+        "implementation": "Medium: add container/resizer wrappers and styling.",
+        "migration": "Low: width props are additive.",
+        "maintenance": "Medium: pointer, keyboard, RTL, and zoom behavior need coverage."
+      },
+      "disposition": "defer",
+      "rank": 7,
+      "rankingRationale": "Strong upstream compatibility lowers risk, but resize is presentation state rather than a core server-data workflow.",
+      "evidenceDigest": "sha256:40dcadde64f608e2af2d7e9c5407d61062c51b50f44d0230b880892ac52569b1"
+    },
+    {
+      "candidate": "row expansion",
+      "demandEvidence": [
+        {
+          "source": "docs/components/table.md#expandable-rows",
+          "claim": "Current Table documentation exposes React Aria hierarchical expansion props."
+        }
+      ],
+      "reactAriaCompatibility": "React Aria Table supports expandedKeys/defaultExpandedKeys and hierarchical rows.",
+      "accessibilityRisks": [
+        "Expansion state and hierarchy levels must be announced.",
+        "Collapsed descendants must not retain unreachable focus."
+      ],
+      "stateModel": "Expanded row keys use stable row IDs and may join server child-loading requests.",
+      "controlledUncontrolled": "Preserve React Aria controlled/default expanded-key conventions.",
+      "clientServer": "Client mode reveals existing children; server mode correlates child loading by row and query revision.",
+      "ssrHydration": "Default expanded keys and available child rows must match across hydration.",
+      "performance": {
+        "rows1k": "Expansion should process affected branches rather than flattening every row.",
+        "rows10k": "Large expanded trees require windowing or server child loading."
+      },
+      "cost": {
+        "implementation": "Medium: upstream behavior exists but shared async loading does not.",
+        "migration": "Low: current expansion props remain valid.",
+        "maintenance": "Medium: tree accessibility and lazy children require coverage."
+      },
+      "disposition": "defer",
+      "rank": 8,
+      "rankingRationale": "The base component already exposes expansion, so controller work is less urgent than missing query and performance capabilities.",
+      "evidenceDigest": "sha256:f8622e26564c22730762158f2b368549913004a76b604d7df0b1ae89e221c8c7"
+    },
+    {
+      "candidate": "sticky columns",
+      "demandEvidence": [
+        {
+          "source": "analysis/table-plugins/inventory.json",
+          "claim": "The approved plan freezes sticky columns in the exact evaluation inventory."
+        }
+      ],
+      "reactAriaCompatibility": "Sticky positioning can preserve native table semantics if DOM order and headers remain unchanged.",
+      "accessibilityRisks": [
+        "Pinned content must not obscure focused cells at zoom.",
+        "RTL pinning and overlap order require explicit tests."
+      ],
+      "stateModel": "Pinned leading/trailing column IDs are presentation state in the shared controller.",
+      "controlledUncontrolled": "Support controlled pin sets and deterministic defaults only after the CSS contract is proven.",
+      "clientServer": "Sticky state is client presentation state and never changes the data query.",
+      "ssrHydration": "Default pinning must be deterministic; viewport-derived pinning waits until after hydration.",
+      "performance": {
+        "rows1k": "Measure paint and compositing cost with representative cell content.",
+        "rows10k": "Combine only with a proven bounded rendering strategy."
+      },
+      "cost": {
+        "implementation": "Medium: coordinate offsets, resize, visibility, and RTL.",
+        "migration": "Low: additive when opt-in.",
+        "maintenance": "High: browser layout interactions with resize and virtualization."
+      },
+      "disposition": "defer",
+      "rank": 9,
+      "rankingRationale": "Sticky columns depend on unresolved visibility, resize, RTL, and virtualization contracts.",
+      "evidenceDigest": "sha256:5553be209d7ad1b1c770b1d3bad5d88eab8e255c214177ecd660270ef62ba383"
+    },
+    {
+      "candidate": "grouped/tree rows",
+      "demandEvidence": [
+        {
+          "source": "analysis/table-plugins/inventory.json",
+          "claim": "The approved plan freezes grouped/tree rows in the exact evaluation inventory."
+        },
+        {
+          "source": "docs/components/table.md#expandable-rows",
+          "claim": "The current Table exposes hierarchical rows but not a grouping controller."
+        }
+      ],
+      "reactAriaCompatibility": "Hierarchical rows align with React Aria tree-grid behavior; data grouping and aggregation remain Tale-owned concerns.",
+      "accessibilityRisks": [
+        "Group rows, levels, expansion, and aggregate labels need a complete tree-grid model.",
+        "Keyboard behavior must not conflict with row selection."
+      ],
+      "stateModel": "Grouping descriptors, expanded keys, and stable derived group IDs share one controller.",
+      "controlledUncontrolled": "Controlled grouping and expansion require deterministic derived IDs; defaults cannot depend on locale-sensitive labels.",
+      "clientServer": "Client grouping derives branches; server grouping requires explicit aggregate and child contracts.",
+      "ssrHydration": "Grouping, derived IDs, and expansion must produce identical trees on server and client.",
+      "performance": {
+        "rows1k": "Measure grouping and flattening independently from rendering.",
+        "rows10k": "Require server grouping or a benchmarked indexed tree plus virtualization."
+      },
+      "cost": {
+        "implementation": "High: define grouping, aggregation, hierarchy, and selection interactions.",
+        "migration": "High: no current Tale grouping model exists.",
+        "maintenance": "High: complex accessibility, async, and performance matrix."
+      },
+      "disposition": "defer",
+      "rank": 10,
+      "rankingRationale": "This has the broadest unresolved data, accessibility, server, and migration contract, so it follows the foundational plugins.",
+      "evidenceDigest": "sha256:61ca0180869c96e4b10aa06ae4f92d0fda205879274aa797d962eb0e7e4e0a98"
+    }
+  ]
+}

@@ -361,6 +361,10 @@
       "difficulty": "medium"
     },
     {
+      "slug": "table-controller-sorting",
+      "difficulty": "complex"
+    },
+    {
       "slug": "table-data",
       "difficulty": "complex"
     },

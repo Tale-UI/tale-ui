@@ -1,12 +1,10 @@
-import * as React from 'react';
-import { Table } from '@tale-ui/react/table';
+import { Table, useTableController, type Key } from '@tale-ui/react/table';
 import { Menu } from '@tale-ui/react/menu';
 import { Pagination } from '@tale-ui/react/pagination';
 import { Icon } from '@tale-ui/react/icon';
 import { Column } from '@tale-ui/react/column';
 import { Text } from '@tale-ui/react/text';
 import { MoreHorizontal } from 'lucide-react';
-import type { SortDescriptor } from 'react-aria-components';
 
 const tableData = [
   { id: 1, name: 'Alice Johnson', email: 'alice@example.com', role: 'Admin' },
@@ -17,15 +15,19 @@ const tableData = [
 ];
 
 export default function DataTableWithSorting() {
-  const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-    column: 'name',
-    direction: 'ascending',
+  const controller = useTableController({
+    tableId: 'recipe-users',
+    defaultSortDescriptor: { column: 'name', direction: 'ascending' },
   });
 
-  const sorted = [...tableData].sort((a, b) => {
-    const key = sortDescriptor.column as keyof (typeof tableData)[0];
-    const cmp = String(a[key]).localeCompare(String(b[key]));
-    return sortDescriptor.direction === 'ascending' ? cmp : -cmp;
+  const sorted = controller.sorting.sortRows(tableData, (left, right, column: Key) => {
+    if (column === 'email') {
+      return left.email.localeCompare(right.email);
+    }
+    if (column === 'role') {
+      return left.role.localeCompare(right.role);
+    }
+    return left.name.localeCompare(right.name);
   });
 
   return (
@@ -36,11 +38,7 @@ export default function DataTableWithSorting() {
       <Text as="h1" variant="heading" size="l">
         Data Table with Sorting
       </Text>
-      <Table.Root
-        aria-label="Users"
-        sortDescriptor={sortDescriptor}
-        onSortChange={setSortDescriptor}
-      >
+      <Table.Root {...controller.tableProps} aria-label="Users">
         <Table.Header>
           <Table.Column id="name" isRowHeader allowsSorting>
             Name
@@ -55,7 +53,7 @@ export default function DataTableWithSorting() {
         </Table.Header>
         <Table.Body>
           {sorted.map((user) => (
-            <Table.Row key={user.id}>
+            <Table.Row key={user.id} id={user.id}>
               <Table.Cell>{user.name}</Table.Cell>
               <Table.Cell>{user.email}</Table.Cell>
               <Table.Cell>{user.role}</Table.Cell>

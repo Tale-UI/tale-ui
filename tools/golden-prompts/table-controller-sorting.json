@@ -1,0 +1,7 @@
+{
+  "slug": "table-controller-sorting",
+  "difficulty": "complex",
+  "prompt": "Build a sortable people table that starts sorted by name and uses Tale UI's Table controller for stable client-side sorting.",
+  "reference": "import { Table, useTableController, type Key } from '@tale-ui/react/table';\n\nconst people = [\n  { id: '1', name: 'Alice', role: 'Designer' },\n  { id: '2', name: 'Bob', role: 'Engineer' },\n  { id: '3', name: 'Carol', role: 'Manager' },\n];\n\nexport function SortablePeopleTable() {\n  const controller = useTableController({\n    tableId: 'people',\n    defaultSortDescriptor: { column: 'name', direction: 'ascending' },\n  });\n  const rows = controller.sorting.sortRows(people, (left, right, column: Key) => {\n    if (column === 'role') return left.role.localeCompare(right.role);\n    return left.name.localeCompare(right.name);\n  });\n\n  return (\n    <Table.Root {...controller.tableProps} aria-label=\"People\">\n      <Table.Header>\n        <Table.Column id=\"name\" isRowHeader allowsSorting>\n          Name\n        </Table.Column>\n        <Table.Column id=\"role\" allowsSorting>\n          Role\n        </Table.Column>\n      </Table.Header>\n      <Table.Body>\n        {rows.map((row) => (\n          <Table.Row key={row.id} id={row.id}>\n            <Table.Cell>{row.name}</Table.Cell>\n            <Table.Cell>{row.role}</Table.Cell>\n          </Table.Row>\n        ))}\n      </Table.Body>\n    </Table.Root>\n  );\n}",
+  "tags": ["Table"]
+}

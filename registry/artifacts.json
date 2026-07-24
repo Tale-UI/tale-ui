@@ -195,6 +195,7 @@
     "packages/css/docs/naming-conventions.md",
     "packages/css/package.json",
     "packages/react/package.json",
+    "packages/react/src/table/TableController.ts",
     "packages/styles/package.json",
     "packages/themes/package.json",
     "packages/tokens/package.json",
@@ -217,7 +218,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:7d1d40a49cd9f7c94903dc6af1d3f10d40460e2b9849cc86a14a7908a1b5c805",
+  "sourceRevision": "sha256:5e085c80a339fb43c68e4c71e55bc69e0c84c3291b22e2ca765da497d471a059",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -21367,6 +21368,51 @@
       ],
       "provenance": {
         "source": "packages/utils/src/useStableCallback.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:hook:use-table-controller",
+      "namespace": "tale",
+      "kind": "hook",
+      "slug": "use-table-controller",
+      "name": "useTableController",
+      "description": "Public Table controller hook for stable client sorting and correlated server sorting.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/react",
+      "version": "2.0.0",
+      "aliases": [
+        "useTableController"
+      ],
+      "keywords": [
+        "hook",
+        "react",
+        "usetablecontroller",
+        "utility"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/react/src/table/TableController.ts"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/table"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/table/TableController.ts",
         "firstParty": true,
         "license": "MIT"
       },
@@ -48312,8 +48358,7 @@
         "with"
       ],
       "related": [
-        "tale:component:combobox",
-        "tale:component:icon"
+        "tale:component:combobox"
       ],
       "retrieval": [
         {
@@ -48750,5 +48795,5 @@
       "trust": "first-party"
     }
   ],
-  "digest": "sha256:f1bf9147c3992fbfdfcc4f3a884e0b875c11672d4d1a78dc328929fae36cd3c9"
+  "digest": "sha256:494db892687a98ec2e14fe7c89f7b66be338f72cf8fc2eb0bd1fd6f3aef34024"
 }
