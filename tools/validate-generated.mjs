@@ -38,7 +38,9 @@ function legacyRegistryType(code) {
 
 function legacyResult(source, result) {
   const registryErrors = result.diagnostics
-    .filter((diagnostic) => diagnostic.ruleId?.startsWith('registry.'))
+    .filter(
+      (diagnostic) => diagnostic.severity === 'error' && diagnostic.ruleId?.startsWith('registry.'),
+    )
     .map((diagnostic) => ({
       type: legacyRegistryType(diagnostic.code),
       message: diagnostic.message,
@@ -47,7 +49,7 @@ function legacyResult(source, result) {
       ...(diagnostic.column ? { column: diagnostic.column } : {}),
     }));
   const typescriptErrors = result.diagnostics
-    .filter((diagnostic) => typeof diagnostic.code === 'number')
+    .filter((diagnostic) => diagnostic.severity === 'error' && typeof diagnostic.code === 'number')
     .map((diagnostic) => ({
       code: diagnostic.code,
       line: diagnostic.line || 0,

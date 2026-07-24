@@ -30,3 +30,19 @@ test('validate-generated accepts app-level @tale-ui/react/styles imports', () =>
   assert.deepEqual(result.registryErrors, []);
   assert.deepEqual(result.typescriptErrors, []);
 });
+
+test('validate-generated retains warnings without reporting legacy errors', () => {
+  const result = runValidator(
+    "import { Checkbox } from '@tale-ui/react/checkbox';\n\nexport const Example = Checkbox;\n",
+  );
+
+  assert.equal(result.valid, true);
+  assert.deepEqual(result.registryErrors, []);
+  assert.deepEqual(result.typescriptErrors, []);
+  assert.ok(
+    result.diagnostics.some(
+      (diagnostic) =>
+        diagnostic.code === 'TALE_DEPRECATED_ARTIFACT' && diagnostic.severity === 'warning',
+    ),
+  );
+});

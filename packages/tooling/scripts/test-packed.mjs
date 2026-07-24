@@ -134,6 +134,65 @@ if (
 ) {
   throw new Error('Packed CLI validation did not preserve normalized diagnostics and exit status');
 }
+const orderedFileValidation = spawnSync(
+  cliPath,
+  [
+    'validate',
+    '--root',
+    join(fixtureRoot, 'vite-app'),
+    '--rules',
+    'typescript',
+    'src/valid.ts',
+    '--json',
+  ],
+  { cwd: fixtureRoot, encoding: 'utf8' },
+);
+const orderedFileResult = JSON.parse(orderedFileValidation.stdout);
+if (
+  orderedFileValidation.status !== 0 ||
+  !orderedFileResult.ok ||
+  !orderedFileResult.data.valid ||
+  orderedFileValidation.stderr !== ''
+) {
+  throw new Error('Packed CLI validation did not accept a positional file after options');
+}
+const conflictingInput = spawnSync(
+  cliPath,
+  [
+    'validate',
+    '--code',
+    'export const answer = 42;',
+    'src/other.ts',
+    '--root',
+    fixtureRoot,
+    '--json',
+  ],
+  { cwd: fixtureRoot, encoding: 'utf8' },
+);
+const conflictingInputResult = JSON.parse(conflictingInput.stdout);
+if (
+  conflictingInput.status !== 2 ||
+  conflictingInputResult.error?.code !== 'TALE_INVALID_ARGUMENT' ||
+  conflictingInput.stderr !== ''
+) {
+  throw new Error('Packed CLI validation did not reject conflicting ordered inputs');
+}
+const invalidTimeout = spawnSync(
+  cliPath,
+  ['validate', '--code', 'export const answer = 42;', '--timeout', 'nope', '--json'],
+  { cwd: fixtureRoot, encoding: 'utf8' },
+);
+const invalidTimeoutResult = JSON.parse(invalidTimeout.stdout);
+if (
+  invalidTimeout.status !== 2 ||
+  invalidTimeoutResult.error?.code !== 'TALE_INVALID_ARGUMENT' ||
+  !invalidTimeoutResult.error.message.startsWith('Tale UI:') ||
+  !invalidTimeoutResult.error.message.includes('whole-number value') ||
+  !invalidTimeoutResult.error.message.includes('retry') ||
+  invalidTimeout.stderr !== ''
+) {
+  throw new Error('Packed CLI validation did not normalize its timeout error');
+}
 const failedCli = spawnSync(cliPath, ['unsupported', '--json'], {
   cwd: fixtureRoot,
   encoding: 'utf8',
@@ -184,6 +243,21 @@ try {
     JSON.stringify(response).includes(fixtureRoot)
   ) {
     throw new Error('Packed local MCP validation diverged from the API result or leaked its root');
+  }
+  const emptyRulesResponse = await mcpClient.callTool({
+    name: 'validate_code',
+    arguments: {
+      code: 'export const answer: string = 42;',
+      rules: [],
+    },
+  });
+  if (
+    emptyRulesResponse.isError !== true ||
+    !emptyRulesResponse.content.some(
+      (entry) => entry.type === 'text' && entry.text.includes('validation'),
+    )
+  ) {
+    throw new Error('Packed local MCP accepted an empty validation rule selection');
   }
 } finally {
   await mcpClient.close();

@@ -49,9 +49,26 @@ function integerOption(name: string, value: string | undefined) {
   }
   const parsed = Number(value);
   if (!Number.isInteger(parsed)) {
-    throw new TaleToolingError('TALE_INVALID_ARGUMENT', `${name} must be an integer.`);
+    throw new TaleToolingError(
+      'TALE_INVALID_ARGUMENT',
+      `Tale UI: ${name} must be an integer, so the command could not be interpreted. ` +
+        'Provide a whole-number value and retry.',
+    );
   }
   return parsed;
+}
+
+function positionalArguments(valueOptions: ReadonlySet<string>) {
+  const positional: string[] = [];
+  for (let index = 1; index < filteredArgs.length; index += 1) {
+    const argument = filteredArgs[index]!;
+    if (valueOptions.has(argument)) {
+      index += 1;
+    } else if (!argument.startsWith('--')) {
+      positional.push(argument);
+    }
+  }
+  return positional;
 }
 
 function validationRules(value: string | undefined): ValidationRule[] | undefined {
@@ -112,8 +129,11 @@ try {
     }
   } else if (command === 'validate') {
     const code = option('--code');
-    const file = filteredArgs[1]?.startsWith('--') ? undefined : filteredArgs[1];
-    if ((code === undefined) === (file === undefined)) {
+    const files = positionalArguments(
+      new Set(['--code', '--root', '--timeout', '--rules', '--virtual-file']),
+    );
+    const file = files.length === 1 ? files[0] : undefined;
+    if ((code === undefined) === (file === undefined) || files.length > 1) {
       throw new TaleToolingError(
         'TALE_INVALID_ARGUMENT',
         'Tale UI: validate requires exactly one project-relative file or --code input. ' +

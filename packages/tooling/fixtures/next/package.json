@@ -1,5 +1,8 @@
 {
   "name": "tale-tooling-next-fixture",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "typescript": "5.9.3"
+  }
 }

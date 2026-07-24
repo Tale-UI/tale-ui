@@ -113,6 +113,21 @@ test('validity and error retention are independent of the diagnostic cap', () =>
   }
 });
 
+test('validation rejects an empty rule selection', () => {
+  const root = fixture();
+  try {
+    assert.throws(
+      () => validateRequestCore({ ...request(root, 'export const value = true;'), rules: [] }),
+      (error) =>
+        error instanceof TaleToolingError &&
+        error.code === 'TALE_INVALID_ARGUMENT' &&
+        error.message.includes('cannot be empty'),
+    );
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('validation rejects traversal and malformed project configuration', () => {
   const root = fixture();
   try {
@@ -228,6 +243,47 @@ test('compiler resolution cannot read relative imports outside the project', () 
     assert.equal(result.valid, false);
     assert.ok(result.diagnostics.some((diagnostic) => diagnostic.code === 2307));
     assert.equal(JSON.stringify(result).includes(parent), false);
+  } finally {
+    rmSync(parent, { recursive: true, force: true });
+  }
+});
+
+test('compiler resolution permits dependencies from an ancestor node_modules', () => {
+  const parent = mkdtempSync(join(tmpdir(), 'tale-validation-workspace-'));
+  const root = join(parent, 'packages/app');
+  const dependencyRoot = join(parent, 'node_modules/hoisted-dependency');
+  mkdirSync(join(root, 'src'), { recursive: true });
+  mkdirSync(dependencyRoot, { recursive: true });
+  writeFileSync(
+    join(root, 'tsconfig.json'),
+    JSON.stringify({
+      compilerOptions: {
+        module: 'ESNext',
+        moduleResolution: 'Bundler',
+        strict: true,
+      },
+      include: ['src'],
+    }),
+  );
+  writeFileSync(join(root, 'src/existing.ts'), 'export {};');
+  writeFileSync(
+    join(dependencyRoot, 'package.json'),
+    JSON.stringify({ name: 'hoisted-dependency', version: '1.0.0', types: 'index.d.ts' }),
+  );
+  writeFileSync(
+    join(dependencyRoot, 'index.d.ts'),
+    'export interface HoistedValue { enabled: boolean; }',
+  );
+  try {
+    const result = validateRequestCore(
+      request(
+        root,
+        "import type { HoistedValue } from 'hoisted-dependency';\n" +
+          'export const value: HoistedValue = { enabled: true };',
+      ),
+    );
+    assert.equal(result.valid, true);
+    assert.equal(result.fallbackConfig, false);
   } finally {
     rmSync(parent, { recursive: true, force: true });
   }
