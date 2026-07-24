@@ -20,7 +20,11 @@ test('manifest correlates registry, capability, and package versions', () => {
   assert.ok(manifest.capabilities.some((capability) => capability.id === 'manifest.get'));
   assert.equal(
     manifest.capabilities.find((capability) => capability.id === 'code.validate')?.status,
-    'gated',
+    'available',
+  );
+  assert.deepEqual(
+    manifest.capabilities.find((capability) => capability.id === 'code.validate')?.availability,
+    ['api', 'cli', 'local-mcp'],
   );
 });
 
@@ -51,7 +55,7 @@ test('machine envelopes carry correlated versions and sanitized errors', () => {
   assert.equal(success.ok, true);
   assert.equal(success.versions.registry, '1.0.0');
   assert.ok(success.capabilities.includes('artifact.search'));
-  assert.equal(success.capabilities.includes('code.validate'), false);
+  assert.equal(success.capabilities.includes('code.validate'), true);
 
   const failure = createErrorEnvelope(
     'component',

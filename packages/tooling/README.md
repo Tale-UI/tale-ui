@@ -5,10 +5,9 @@ and future safe project operations.
 
 The package is ESM-only and requires Node 22 or newer.
 
-The current slice exposes read-only manifest, artifact search, and artifact
-lookup APIs plus the corresponding `tale` CLI commands. The validation API is
-packaged for internal parity testing; CLI/MCP validation and mutation remain
-capability-gated.
+The current slice exposes read-only manifest, artifact search, artifact lookup,
+and local validation through the API, `tale` CLI, and `tale-mcp` server.
+Mutation remains capability-gated.
 
 ```ts
 import { getManifest, searchArtifacts } from '@tale-ui/tooling';
@@ -32,3 +31,13 @@ const result = await validateCode({
 
 Validation uses the packaged TypeScript compiler API and virtual files. It does
 not invoke package managers, create scratch files, or execute project code.
+
+```bash
+tale validate src/example.tsx --json
+tale validate --code 'export const answer: number = 42' \
+  --virtual-file src/example.ts --json
+tale-mcp
+```
+
+The local MCP server registers `validate_code` only when the installed
+capability manifest marks `code.validate` available for `local-mcp`.

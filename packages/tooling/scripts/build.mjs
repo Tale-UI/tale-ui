@@ -39,7 +39,9 @@ await writeFile(
 );
 await cp(join(REPOSITORY_ROOT, 'schemas'), join(BUILD_ROOT, 'schemas'), { recursive: true });
 await cp(join(PACKAGE_ROOT, 'bin'), join(BUILD_ROOT, 'bin'), { recursive: true });
-await chmod(join(BUILD_ROOT, 'bin/tale.mjs'), 0o755);
+await Promise.all(
+  ['tale.mjs', 'tale-mcp.mjs'].map((file) => chmod(join(BUILD_ROOT, 'bin', file), 0o755)),
+);
 
 await Promise.all(
   ['README.md', 'CLAUDE.md'].map((file) => cp(join(PACKAGE_ROOT, file), join(BUILD_ROOT, file))),
@@ -62,6 +64,7 @@ const buildManifest = {
       import: './registry.js',
       default: './registry.js',
     },
+    './mcp': { types: './mcp.d.ts', import: './mcp.js', default: './mcp.js' },
     './validation': {
       types: './validation/index.d.ts',
       import: './validation/index.js',

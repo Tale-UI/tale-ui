@@ -40,11 +40,10 @@
     },
     {
       "id": "code.validate",
-      "version": "0.0.0",
-      "description": "Validate consumer code locally. Unavailable until the packaged validator gate passes.",
-      "availability": [],
-      "status": "gated",
-      "gate": "P0-B-validator"
+      "version": "1.0.0",
+      "description": "Validate consumer code locally with bounded registry and TypeScript checks.",
+      "availability": ["api", "cli", "local-mcp"],
+      "status": "available"
     },
     {
       "id": "project.mutate",

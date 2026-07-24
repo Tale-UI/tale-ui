@@ -10,6 +10,8 @@ import {
 } from './api.js';
 import type { ArtifactKind } from './contracts/artifact.js';
 import { TALE_ERROR_EXIT, TaleToolingError } from './contracts/errors.js';
+import type { ValidationRule } from './contracts/validation.js';
+import { validateCode, validateFile } from './validation/index.js';
 
 const ARTIFACT_KINDS = new Set<ArtifactKind>([
   'component',
@@ -52,6 +54,25 @@ function integerOption(name: string, value: string | undefined) {
   return parsed;
 }
 
+function validationRules(value: string | undefined): ValidationRule[] | undefined {
+  if (!value) {
+    return undefined;
+  }
+  const rules = value.split(',').filter(Boolean) as ValidationRule[];
+  if (
+    rules.length === 0 ||
+    new Set(rules).size !== rules.length ||
+    rules.some((rule) => rule !== 'registry' && rule !== 'typescript')
+  ) {
+    throw new TaleToolingError(
+      'TALE_INVALID_ARGUMENT',
+      'Tale UI: --rules must contain unique registry or typescript values. ' +
+        'Use --rules registry,typescript and retry.',
+    );
+  }
+  return rules;
+}
+
 try {
   let data: unknown;
   if (command === 'manifest') {
@@ -89,10 +110,47 @@ try {
         'The requested component artifact was not found.',
       );
     }
+  } else if (command === 'validate') {
+    const code = option('--code');
+    const file = filteredArgs[1]?.startsWith('--') ? undefined : filteredArgs[1];
+    if ((code === undefined) === (file === undefined)) {
+      throw new TaleToolingError(
+        'TALE_INVALID_ARGUMENT',
+        'Tale UI: validate requires exactly one project-relative file or --code input. ' +
+          'Choose one input mode and retry.',
+      );
+    }
+    const root = option('--root') || process.cwd();
+    const timeoutMs = integerOption('--timeout', option('--timeout')) ?? 30_000;
+    const rules = validationRules(option('--rules'));
+    const validationResult =
+      code !== undefined
+        ? await validateCode({
+            schemaVersion: '1.0.0',
+            requestId,
+            root,
+            code,
+            virtualFile: option('--virtual-file') || 'src/tale-validation.tsx',
+            timeoutMs,
+            ...(rules ? { rules } : {}),
+          })
+        : await validateFile({
+            schemaVersion: '1.0.0',
+            requestId,
+            root,
+            file: file!,
+            timeoutMs,
+            ...(rules ? { rules } : {}),
+          });
+    data = validationResult;
+    if (!validationResult.valid) {
+      process.exitCode = TALE_ERROR_EXIT.TALE_VALIDATION_FAILED;
+    }
   } else {
     throw new TaleToolingError(
       'TALE_UNSUPPORTED_COMMAND',
-      'Supported commands are manifest, search, and component.',
+      'Tale UI: the requested command is unsupported, so no tooling action ran. ' +
+        'Use manifest, search, component, or validate and retry.',
     );
   }
   write(jsonMode ? createSuccessEnvelope(command, requestId, data, { surface: 'cli' }) : data);
