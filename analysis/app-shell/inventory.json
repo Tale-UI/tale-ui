@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0.0",
+  "inventory": "app-shell",
+  "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#app-shell-evaluation-contract",
+  "status": "frozen",
+  "candidates": [
+    "root",
+    "header",
+    "sidebar",
+    "main",
+    "secondary panel",
+    "mobile navigation",
+    "skip link",
+    "resizable-region adapter"
+  ]
+}

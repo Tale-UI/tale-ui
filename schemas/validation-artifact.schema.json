@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/validation-artifact.schema.json",
+  "title": "Extension validation contribution metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ruleId",
+    "schemaVersionRange",
+    "applicableArtifactKinds",
+    "applicableFileKinds",
+    "severity",
+    "inputSchema",
+    "outputSchema",
+    "executionMode",
+    "requiredCapabilities",
+    "permissions",
+    "timeoutMs",
+    "provenance",
+    "integrity"
+  ],
+  "properties": {
+    "ruleId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]+$" },
+    "schemaVersionRange": { "type": "string" },
+    "applicableArtifactKinds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "applicableFileKinds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "severity": { "enum": ["error", "warning", "info"] },
+    "inputSchema": { "type": "object" },
+    "outputSchema": { "type": "object" },
+    "executionMode": { "enum": ["declarative", "executable"] },
+    "requiredCapabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "permissions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "timeoutMs": { "type": "integer", "minimum": 1, "maximum": 60000 },
+    "provenance": { "type": "object" },
+    "integrity": { "type": "string" },
+    "replacementId": { "type": "string" },
+    "deprecatedIn": { "type": "string" }
+  }
+}

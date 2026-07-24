@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/error-envelope.schema.json",
+  "title": "Tale command result envelope",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ok", "command", "requestId", "versions", "capabilities", "data", "warnings"],
+      "properties": {
+        "ok": { "const": true },
+        "command": { "type": "string" },
+        "requestId": { "type": "string", "minLength": 1 },
+        "versions": { "type": "object" },
+        "capabilities": { "type": "array", "items": { "type": "string" } },
+        "data": {},
+        "warnings": { "type": "array", "items": { "type": "string" } },
+        "metadata": { "type": "object" }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ok", "command", "requestId", "error"],
+      "properties": {
+        "ok": { "const": false },
+        "command": { "type": "string" },
+        "requestId": { "type": "string", "minLength": 1 },
+        "error": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "message", "details", "retryable", "documentation"],
+          "properties": {
+            "code": { "type": "string", "pattern": "^TALE_[A-Z0-9_]+$" },
+            "message": { "type": "string" },
+            "details": { "type": "object" },
+            "retryable": { "type": "boolean" },
+            "documentation": { "type": "string", "format": "uri" }
+          }
+        }
+      }
+    }
+  ]
+}

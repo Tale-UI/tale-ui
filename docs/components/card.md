@@ -260,8 +260,8 @@ behavior, and pending-state announcements. Provide visible text or an `aria-labe
 
 <!-- pitfall: card-button-selected-controlled -->
 
-- **`isSelected` is controlled and represents a pressed/active action state** — update it in response to `onPress`; for form-style mutually exclusive choices, use `RadioField` instead.
-  - anti-pattern: `<Card.Button isSelected>Theme</Card.Button>` with no state update
+- **Control `isSelected` in response to `onPress`** — it represents a pressed/active action state; for form-style mutually exclusive choices, use `RadioField` instead.
+  - anti-pattern: `<Card.Button isSelected>Theme</Card.Button> /* no state update */`
   - fix: `<Card.Button isSelected={selected} onPress={() => setSelected(!selected)}>Theme</Card.Button>`
 
 <!-- pitfall: card-no-elevated-boolean -->
@@ -299,14 +299,16 @@ behavior, and pending-state announcements. Provide visible text or an `aria-labe
   - anti-pattern: `<Card.Footer gap="s">`
   - fix: `<Card.Body><Column gap="s">…</Column></Card.Body>`
   - fix: `<Card.Footer><Row gap="s">…</Row></Card.Footer>`
-  <!-- pitfall: for-stat-cards-label-value -->
+
+<!-- pitfall: for-stat-cards-label-value -->
 
 - **For stat cards, render <Text color="muted"> inside Card.Header — wrap value/badge in <Column> inside Card.Body** — `Card.Header` has no `title` prop; place a `<Text color="muted">` child directly. `Card.Body` has no `gap` prop; wrap contents in `<Column gap="s">`. Use `<Row gap="m">` to lay out multiple stat cards side by side.
   - anti-pattern: `<Card.Header title="Revenue" />`
   - anti-pattern: `<Card.Body gap="s">`
   - fix: `<Card.Header><Text color="muted">Revenue</Text></Card.Header>`
   - fix: `<Card.Body><Column gap="s"><Text variant="display">$48,200</Text><Badge variant="success">+12%</Badge></Column></Card.Body>`
-  <!-- pitfall: use-card-row-column-text -->
+
+<!-- pitfall: use-card-row-column-text -->
 
 - **Use Card + Row + Column + Text + Badge for any prompt that asks for stat cards, metric cards, or KPI cards** — when the request is to display a row of cards each showing a label, a large value, and a trend badge, render `Card.Root` for each card with `Card.Header`/`Card.Body`, wrap card body content in `<Column gap="s">`, and use `<Row gap="m">` to lay the cards out horizontally instead of leaving the file empty.
   - anti-pattern: `// empty file`

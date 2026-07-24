@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "hooks": [
+    "useAnimationFrame",
+    "useEnhancedClickHandler",
+    "useId",
+    "useInterval",
+    "useIsoLayoutEffect",
+    "useMergedRefs",
+    "useOnMount",
+    "useRefWithInit",
+    "useStableCallback",
+    "useTimeout"
+  ]
+}

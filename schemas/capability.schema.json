@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/capability.schema.json",
+  "title": "Tale UI capability manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "manifestId", "registryVersion", "digest", "capabilities"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "manifestId": { "const": "tale:capability-manifest:core" },
+    "registryVersion": { "type": "string" },
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "version", "description", "availability", "status"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9.-]+$" },
+          "version": { "type": "string" },
+          "description": { "type": "string", "minLength": 1 },
+          "availability": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "enum": ["api", "cli", "local-mcp", "hosted-mcp"] }
+          },
+          "status": { "enum": ["available", "gated", "deprecated"] },
+          "gate": { "type": "string" }
+        }
+      }
+    }
+  }
+}

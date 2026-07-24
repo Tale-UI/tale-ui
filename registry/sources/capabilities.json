@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "manifestId": "tale:capability-manifest:core",
+  "capabilities": [
+    {
+      "id": "artifact.get",
+      "version": "1.0.0",
+      "description": "Retrieve one artifact by stable ID or alias.",
+      "availability": ["api"]
+    },
+    {
+      "id": "artifact.search",
+      "version": "1.0.0",
+      "description": "Search mixed artifact kinds with stable identifiers.",
+      "availability": ["api"]
+    },
+    {
+      "id": "component.get",
+      "version": "1.0.0",
+      "description": "Retrieve the canonical component registry payload.",
+      "availability": ["api", "local-mcp"]
+    },
+    {
+      "id": "recipe.get",
+      "version": "1.0.0",
+      "description": "Retrieve a canonical recipe document.",
+      "availability": ["api", "local-mcp"]
+    },
+    {
+      "id": "ui.plan",
+      "version": "1.0.0",
+      "description": "Plan UI with bounded registry and recipe context.",
+      "availability": ["api", "local-mcp"]
+    },
+    {
+      "id": "code.validate",
+      "version": "0.0.0",
+      "description": "Validate consumer code locally. Unavailable until the packaged validator gate passes.",
+      "availability": [],
+      "status": "gated",
+      "gate": "P-01"
+    },
+    {
+      "id": "project.mutate",
+      "version": "0.0.0",
+      "description": "Perform root-confined, recoverable project mutations. Unavailable until the operation and recovery gates pass.",
+      "availability": [],
+      "status": "gated",
+      "gate": "P0-B"
+    }
+  ]
+}

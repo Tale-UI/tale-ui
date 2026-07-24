@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/composition.schema.json",
+  "title": "Validated UI composition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "producerVersion",
+    "compositionId",
+    "digest",
+    "requestId",
+    "artifacts",
+    "targets",
+    "dependencies",
+    "conflicts",
+    "capabilities",
+    "validationRules",
+    "compatibility"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "producerVersion": { "type": "string" },
+    "compositionId": { "type": "string" },
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "requestId": { "type": "string" },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "version"],
+        "properties": {
+          "id": { "type": "string" },
+          "version": { "type": "string" }
+        }
+      }
+    },
+    "targets": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^(?!/)(?!.*\\.\\./).+$" }
+    },
+    "dependencies": { "type": "object" },
+    "conflicts": { "type": "array" },
+    "capabilities": { "type": "array", "items": { "type": "string" } },
+    "validationRules": { "type": "array", "items": { "type": "string" } },
+    "compatibility": { "type": "object" }
+  }
+}

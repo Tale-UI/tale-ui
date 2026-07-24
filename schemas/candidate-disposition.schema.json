@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/candidate-disposition.schema.json",
+  "title": "Evidence-backed candidate dispositions",
+  "type": "object",
+  "required": ["schemaVersion", "inventory", "evidenceRevision", "records"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "inventory": { "enum": ["table", "app-shell", "chat", "content"] },
+    "evidenceRevision": { "type": "string" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["candidate", "disposition", "rationale", "evidenceDigest"],
+        "properties": {
+          "candidate": { "type": "string" },
+          "disposition": { "enum": ["approve", "defer", "reject"] },
+          "rationale": { "type": "string", "minLength": 1 },
+          "evidenceDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+        }
+      }
+    }
+  }
+}

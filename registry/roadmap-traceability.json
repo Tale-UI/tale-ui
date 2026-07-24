@@ -1,0 +1,471 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md",
+  "sourceDigest": "sha256:7fdc84397497f55814a4828e9baf4acea4cebf861e5de9bc107e63d026bbde65",
+  "criteria": [
+    {
+      "id": "R01.1",
+      "requirement": "Every public component, recipe, A2UI type, and foundation topic is indexed",
+      "deliverable": "P0-A registry",
+      "automatedVerification": "source-set equality",
+      "manualEvidenceAndOwner": "Design Systems/Developer Experience inventory review",
+      "releaseGate": "P0-A"
+    },
+    {
+      "id": "R01.2",
+      "requirement": "Search returns mixed kinds with stable IDs",
+      "deliverable": "P0-A search/API",
+      "automatedVerification": "mixed-query contract tests",
+      "manualEvidenceAndOwner": "Developer Experience API review",
+      "releaseGate": "P0-A"
+    },
+    {
+      "id": "R01.3",
+      "requirement": "Deprecated entries retain replacements",
+      "deliverable": "P0-A lifecycle metadata",
+      "automatedVerification": "relation/schema checks",
+      "manualEvidenceAndOwner": "Governance review",
+      "releaseGate": "P0-A"
+    },
+    {
+      "id": "R01.4",
+      "requirement": "Registry is deterministic and versioned",
+      "deliverable": "P0-A generator",
+      "automatedVerification": "two-run byte identity/version tests",
+      "manualEvidenceAndOwner": "Release Engineering review",
+      "releaseGate": "P0-A"
+    },
+    {
+      "id": "R02.1",
+      "requirement": "Typed envelopes, append-only errors, capabilities, shared pure functions, and correlated versions",
+      "deliverable": "P0-B tooling",
+      "automatedVerification": "schema/parity/version tests",
+      "manualEvidenceAndOwner": "Developer Experience review",
+      "releaseGate": "P0-B"
+    },
+    {
+      "id": "R02.2",
+      "requirement": "`init` idempotently manages AGENTS, cursorrules, MCP, and optional scripts",
+      "deliverable": "P0-B operations",
+      "automatedVerification": "mutation/replay fixtures",
+      "manualEvidenceAndOwner": "Security/Release Engineering recovery review",
+      "releaseGate": "P0-B"
+    },
+    {
+      "id": "R02.3",
+      "requirement": "Clean Vite/Next projects install, initialize, search, plan, generate, and validate without the monorepo",
+      "deliverable": "P0-B validator/tooling",
+      "automatedVerification": "packed end-to-end fixtures",
+      "manualEvidenceAndOwner": "Developer Experience acceptance",
+      "releaseGate": "P0-B"
+    },
+    {
+      "id": "R02.4",
+      "requirement": "Manifest drift and JSON schemas are CI-gated",
+      "deliverable": "P0-B CI",
+      "automatedVerification": "drift/schema jobs",
+      "manualEvidenceAndOwner": "Release Engineering review",
+      "releaseGate": "P0-B"
+    },
+    {
+      "id": "R02.5",
+      "requirement": "Agent cold-start discovery is measured before/after init",
+      "deliverable": "P0-B benchmark",
+      "automatedVerification": "reproducible benchmark artifact",
+      "manualEvidenceAndOwner": "Developer Experience evaluation",
+      "releaseGate": "P0-B"
+    },
+    {
+      "id": "R03.1",
+      "requirement": "Ten named templates have metadata, source, skeleton, dependencies, preview, golden, and version",
+      "deliverable": "P0-C templates",
+      "automatedVerification": "exact inventory/schema/pack tests",
+      "manualEvidenceAndOwner": "Design Systems review",
+      "releaseGate": "P0-C"
+    },
+    {
+      "id": "R03.2",
+      "requirement": "Template list, skeleton, and add commands work",
+      "deliverable": "P0-C tooling",
+      "automatedVerification": "command/API tests",
+      "manualEvidenceAndOwner": "Developer Experience review",
+      "releaseGate": "P0-C"
+    },
+    {
+      "id": "R03.3",
+      "requirement": "Add refuses destructive overwrites and reports files",
+      "deliverable": "P0-C materializer",
+      "automatedVerification": "safety/recovery fixtures",
+      "manualEvidenceAndOwner": "Security review",
+      "releaseGate": "P0-C"
+    },
+    {
+      "id": "R03.4",
+      "requirement": "Materialized code passes installed validation and TypeScript",
+      "deliverable": "P0-C validator",
+      "automatedVerification": "packed Vite/Next valid-output tests",
+      "manualEvidenceAndOwner": "Developer Experience review",
+      "releaseGate": "P0-C"
+    },
+    {
+      "id": "R03.5",
+      "requirement": "Templates render in light and dark",
+      "deliverable": "P0-C previews",
+      "automatedVerification": "visual snapshots",
+      "manualEvidenceAndOwner": "Design Systems/Accessibility QA",
+      "releaseGate": "P0-C"
+    },
+    {
+      "id": "R04.1",
+      "requirement": "All ten Table candidates are assessed and plugins share state",
+      "deliverable": "P0-D/P1-F",
+      "automatedVerification": "candidate equality/controller tests",
+      "manualEvidenceAndOwner": "Design Systems review",
+      "releaseGate": "P0-D/P1-F"
+    },
+    {
+      "id": "R04.2",
+      "requirement": "Keyboard/screen-reader behavior remains React Aria-compatible",
+      "deliverable": "P1-F",
+      "automatedVerification": "interaction/a11y tests",
+      "manualEvidenceAndOwner": "Accessibility QA",
+      "releaseGate": "P1-F"
+    },
+    {
+      "id": "R04.3",
+      "requirement": "Server sorting/filtering/pagination are first-class",
+      "deliverable": "P1-F controller",
+      "automatedVerification": "request/stale/cancel tests",
+      "manualEvidenceAndOwner": "Developer Experience review",
+      "releaseGate": "P1-F"
+    },
+    {
+      "id": "R04.4",
+      "requirement": "Controlled/uncontrolled forms follow Tale conventions",
+      "deliverable": "P1-F",
+      "automatedVerification": "state/SSR tests",
+      "manualEvidenceAndOwner": "Design Systems review",
+      "releaseGate": "P1-F"
+    },
+    {
+      "id": "R04.5",
+      "requirement": "1k/10k benchmarks and current-API migration exist",
+      "deliverable": "P0-D/P1-F",
+      "automatedVerification": "benchmarks/migration fixtures",
+      "manualEvidenceAndOwner": "Performance/Release Engineering review",
+      "releaseGate": "P1-F"
+    },
+    {
+      "id": "R05.1",
+      "requirement": "Ordered version manifests cover JS/TS, CSS, and project config",
+      "deliverable": "P1-A migrations",
+      "automatedVerification": "manifest/loader/transform tests",
+      "manualEvidenceAndOwner": "Developer Experience review",
+      "releaseGate": "P1-A"
+    },
+    {
+      "id": "R05.2",
+      "requirement": "Dry-run diff/report, idempotency, fixtures, and deprecation links exist",
+      "deliverable": "P1-A operations",
+      "automatedVerification": "postimage/replay/relation tests",
+      "manualEvidenceAndOwner": "Release Engineering review",
+      "releaseGate": "P1-A"
+    },
+    {
+      "id": "R05.3",
+      "requirement": "All four prescribed starter groups ship with verified ranges",
+      "deliverable": "P1-A migrations",
+      "automatedVerification": "exact inventory/per-group compatibility tests",
+      "manualEvidenceAndOwner": "Developer Experience/Release Engineering review",
+      "releaseGate": "P1-A"
+    },
+    {
+      "id": "R06.1",
+      "requirement": "Current and one previous major are hosted",
+      "deliverable": "P1-B docs",
+      "automatedVerification": "provenance/route tests",
+      "manualEvidenceAndOwner": "Docs Platform review",
+      "releaseGate": "P1-B"
+    },
+    {
+      "id": "R06.2",
+      "requirement": "Root `llms.txt` points to CLI and hosted MCP",
+      "deliverable": "P1-B assembly",
+      "automatedVerification": "deployed-route/content tests",
+      "manualEvidenceAndOwner": "Docs Platform review",
+      "releaseGate": "P1-B"
+    },
+    {
+      "id": "R06.3",
+      "requirement": "Hosted MCP exposes retrieval plus `plan_ui`, not validation",
+      "deliverable": "P1-B runtime",
+      "automatedVerification": "capability/absence/load tests",
+      "manualEvidenceAndOwner": "Security review",
+      "releaseGate": "P1-B"
+    },
+    {
+      "id": "R06.4",
+      "requirement": "Responses include registry version/source and budgets are documented",
+      "deliverable": "P1-B contracts",
+      "automatedVerification": "response/budget tests",
+      "manualEvidenceAndOwner": "Developer Experience review",
+      "releaseGate": "P1-B"
+    },
+    {
+      "id": "R07.1",
+      "requirement": "Tale-owned strings are inventoried with keys and English catalog",
+      "deliverable": "P1-C i18n",
+      "automatedVerification": "inventory/schema tests",
+      "manualEvidenceAndOwner": "Localization review",
+      "releaseGate": "P1-C"
+    },
+    {
+      "id": "R07.2",
+      "requirement": "Pseudo-locale, RTL, overrides, contribution workflow, context, and screenshots exist",
+      "deliverable": "P1-C operations",
+      "automatedVerification": "fallback/RTL/SSR tests",
+      "manualEvidenceAndOwner": "Localization/Accessibility QA",
+      "releaseGate": "P1-C"
+    },
+    {
+      "id": "R07.3",
+      "requirement": "Application-owned copy remains outside Tale catalogs",
+      "deliverable": "P1-C boundary",
+      "automatedVerification": "inventory allowlist tests",
+      "manualEvidenceAndOwner": "Localization review",
+      "releaseGate": "P1-C"
+    },
+    {
+      "id": "R08.1",
+      "requirement": "Dashboard covers downloads/version, docs/search, errors, templates, codemods, issues, health, and cadence/lag where evidenced",
+      "deliverable": "P1-D metrics",
+      "automatedVerification": "coverage/freshness schemas",
+      "manualEvidenceAndOwner": "Product Analytics review",
+      "releaseGate": "P1-D"
+    },
+    {
+      "id": "R08.2",
+      "requirement": "Project telemetry is opt-in, minimal, documented, removable, and separate",
+      "deliverable": "P1-D privacy",
+      "automatedVerification": "capability/consent/absence tests",
+      "manualEvidenceAndOwner": "Privacy/Security review",
+      "releaseGate": "P1-D"
+    },
+    {
+      "id": "R09.1",
+      "requirement": "All eight AppShell candidates receive evidence-backed dispositions after template evidence",
+      "deliverable": "P1-E RFC",
+      "automatedVerification": "exact inventory/disposition tests",
+      "manualEvidenceAndOwner": "Design Systems review",
+      "releaseGate": "P1-E"
+    },
+    {
+      "id": "R09.2",
+      "requirement": "Approved AppShell excludes routing, data loading, auth, and app-state ownership",
+      "deliverable": "P1-E contract",
+      "automatedVerification": "API/state boundary tests",
+      "manualEvidenceAndOwner": "Architecture/Accessibility review",
+      "releaseGate": "P1-E"
+    },
+    {
+      "id": "R10.1",
+      "requirement": "Semantic motion roles/tokens, reduced-motion mapping, and elevation hierarchy exist",
+      "deliverable": "P2-A foundations",
+      "automatedVerification": "token/drift/raw-value tests",
+      "manualEvidenceAndOwner": "Design Systems/Accessibility review",
+      "releaseGate": "P2-A"
+    },
+    {
+      "id": "R10.2",
+      "requirement": "Examples and enter/exit/state Storybook matrix exist",
+      "deliverable": "P2-A stories",
+      "automatedVerification": "coverage/visual tests",
+      "manualEvidenceAndOwner": "Design Systems QA",
+      "releaseGate": "P2-A"
+    },
+    {
+      "id": "R11.1",
+      "requirement": "All nine Chat candidates receive RFC dispositions and approved APIs use ordinary app data",
+      "deliverable": "P2-B RFC/family",
+      "automatedVerification": "inventory/schema/API tests",
+      "manualEvidenceAndOwner": "Design Systems review",
+      "releaseGate": "P2-B"
+    },
+    {
+      "id": "R11.2",
+      "requirement": "Keyboard, live region, streaming, reduced motion, and long content are specified",
+      "deliverable": "P2-B family",
+      "automatedVerification": "interaction/stream tests",
+      "manualEvidenceAndOwner": "Accessibility QA",
+      "releaseGate": "P2-B"
+    },
+    {
+      "id": "R11.3",
+      "requirement": "HTML/Markdown security boundaries and four tool states are explicit",
+      "deliverable": "P2-B security",
+      "automatedVerification": "sanitization/CSP/state tests",
+      "manualEvidenceAndOwner": "Security review",
+      "releaseGate": "P2-B"
+    },
+    {
+      "id": "R11.4",
+      "requirement": "Mobile and artifact-panel templates exist",
+      "deliverable": "P2-B templates",
+      "automatedVerification": "pack/materialize/validate tests",
+      "manualEvidenceAndOwner": "Design Systems review",
+      "releaseGate": "P2-B"
+    },
+    {
+      "id": "R12.1",
+      "requirement": "Kbd, Timestamp, Blockquote, Citation, CodeBlock, and MetadataList receive dispositions",
+      "deliverable": "P2-C rubric",
+      "automatedVerification": "exact inventory/disposition tests",
+      "manualEvidenceAndOwner": "Design Systems/Accessibility/Security review",
+      "releaseGate": "P2-C"
+    },
+    {
+      "id": "R12.2",
+      "requirement": "Markdown remains deferred until sanitization, link, highlighting, and CSP approval",
+      "deliverable": "P2-C boundary",
+      "automatedVerification": "absence/capability tests",
+      "manualEvidenceAndOwner": "Security review",
+      "releaseGate": "P2-C"
+    },
+    {
+      "id": "R13.1",
+      "requirement": "Lifecycle definitions, promotion/deprecation gates, ownership, proposal, rubric, review, and exception policies exist",
+      "deliverable": "Phase 0/P2-D governance",
+      "automatedVerification": "schema/coverage/expiry checks",
+      "manualEvidenceAndOwner": "Governance review",
+      "releaseGate": "P2-D"
+    },
+    {
+      "id": "R14.1",
+      "requirement": "Budgets cover ESM, minimal app JS, CSS, SSR/hydration, Table, charts, and A2UI",
+      "deliverable": "P2-E performance",
+      "automatedVerification": "maintained benchmark runner",
+      "manualEvidenceAndOwner": "Performance review",
+      "releaseGate": "P2-E"
+    },
+    {
+      "id": "R14.2",
+      "requirement": "CI trends results and blocks only understood regressions",
+      "deliverable": "P2-E workflow",
+      "automatedVerification": "baseline/trend/exception tests",
+      "manualEvidenceAndOwner": "Performance/Release Engineering review",
+      "releaseGate": "P2-E"
+    },
+    {
+      "id": "R15.1",
+      "requirement": "Tokens generate Figma variables and components/variants map to registry IDs",
+      "deliverable": "P3-A integration",
+      "automatedVerification": "mapping/parity tests",
+      "manualEvidenceAndOwner": "Design Tooling review",
+      "releaseGate": "P3-A"
+    },
+    {
+      "id": "R15.2",
+      "requirement": "Code connection, parity reporting, and design/code ownership exist",
+      "deliverable": "P3-A reports",
+      "automatedVerification": "correlation/disclosure tests",
+      "manualEvidenceAndOwner": "Design Systems/Privacy review",
+      "releaseGate": "P3-A"
+    },
+    {
+      "id": "R16.1",
+      "requirement": "All five extension contribution classes are supported and namespaced",
+      "deliverable": "P3-B extensions",
+      "automatedVerification": "exact class/kind fixture matrix",
+      "manualEvidenceAndOwner": "Developer Experience review",
+      "releaseGate": "P3-B"
+    },
+    {
+      "id": "R16.2",
+      "requirement": "Third parties remain provenance-visible and explicitly trusted before execution",
+      "deliverable": "P3-B trust",
+      "automatedVerification": "integrity/revocation/execution tests",
+      "manualEvidenceAndOwner": "Security/Governance review",
+      "releaseGate": "P3-B"
+    },
+    {
+      "id": "R17.1",
+      "requirement": "RN examples, token parity, platform exceptions, and dark/high-contrast guidance exist",
+      "deliverable": "P3-C conformance",
+      "automatedVerification": "deterministic report/example build",
+      "manualEvidenceAndOwner": "Mobile Platform/Accessibility review",
+      "releaseGate": "P3-C"
+    },
+    {
+      "id": "R17.2",
+      "requirement": "No native component library is introduced",
+      "deliverable": "P3-C boundary",
+      "automatedVerification": "package/capability absence test",
+      "manualEvidenceAndOwner": "Governance review",
+      "releaseGate": "P3-C"
+    },
+    {
+      "id": "SM01",
+      "requirement": "Clean project completes `init → plan → template or compose → validate`",
+      "deliverable": "P0-B/P0-C",
+      "automatedVerification": "packed Vite/Next end-to-end tests",
+      "manualEvidenceAndOwner": "Developer Experience acceptance",
+      "releaseGate": "P0-C"
+    },
+    {
+      "id": "SM02",
+      "requirement": "At least ten canonical templates are installable and versioned",
+      "deliverable": "P0-C",
+      "automatedVerification": "exact inventory/pack tests",
+      "manualEvidenceAndOwner": "Design Systems review",
+      "releaseGate": "P0-C"
+    },
+    {
+      "id": "SM03",
+      "requirement": "Table supports the evidence-ranked five most-demanded plugins with React Aria semantics",
+      "deliverable": "P1-F",
+      "automatedVerification": "ranking equality/plugin/a11y tests",
+      "manualEvidenceAndOwner": "Design Systems/Accessibility review",
+      "releaseGate": "P1-F"
+    },
+    {
+      "id": "SM04",
+      "requirement": "Supported upgrades have codemods and reports",
+      "deliverable": "P1-A",
+      "automatedVerification": "range/transform/report tests",
+      "manualEvidenceAndOwner": "Release Engineering review",
+      "releaseGate": "P1-A"
+    },
+    {
+      "id": "SM05",
+      "requirement": "Docs, CLI, MCP, registry, and npm package versions align",
+      "deliverable": "P1-B",
+      "automatedVerification": "version-correlation tests",
+      "manualEvidenceAndOwner": "Release Engineering review",
+      "releaseGate": "P1-B"
+    },
+    {
+      "id": "SM06",
+      "requirement": "RTL/pseudo-locale and changed-component axe checks are routine",
+      "deliverable": "P1-C/P2-E",
+      "automatedVerification": "recurring CI jobs",
+      "manualEvidenceAndOwner": "Localization/Accessibility review",
+      "releaseGate": "P2-E"
+    },
+    {
+      "id": "SM07",
+      "requirement": "Agent pass rate and context cost are tracked over time",
+      "deliverable": "P0-B/P1-D",
+      "automatedVerification": "benchmark trend artifacts",
+      "manualEvidenceAndOwner": "Developer Experience/Product Analytics review",
+      "releaseGate": "P1-D"
+    },
+    {
+      "id": "SM08",
+      "requirement": "Adoption decisions use measured searches, templates, issues, and upgrades rather than component counts",
+      "deliverable": "P1-D",
+      "automatedVerification": "coverage/decision-record checks",
+      "manualEvidenceAndOwner": "Product Analytics/Governance review",
+      "releaseGate": "P1-D"
+    }
+  ]
+}

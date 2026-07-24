@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0.0",
+  "inventory": "extensions",
+  "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#extension-contribution-and-trust-contract",
+  "status": "frozen",
+  "candidates": [
+    "components-and-docs",
+    "recipes-and-templates",
+    "validations-and-pitfalls",
+    "codemods",
+    "a2ui-types"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/lifecycle.schema.json",
+  "title": "Artifact lifecycle policy",
+  "type": "object",
+  "required": ["schemaVersion", "states", "promotionGates", "deprecationPolicy", "exceptionPolicy"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "states": {
+      "type": "array",
+      "items": { "enum": ["experimental", "stable", "deprecated", "retired"] },
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true
+    },
+    "promotionGates": { "type": "array", "items": { "type": "string" } },
+    "deprecationPolicy": { "type": "object" },
+    "exceptionPolicy": {
+      "type": "object",
+      "required": ["owner", "rationale", "expires"],
+      "properties": {
+        "owner": { "type": "string" },
+        "rationale": { "type": "string" },
+        "expires": { "type": "string", "format": "date" }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0.0",
+  "inventory": "chat",
+  "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#chat-evaluation-contract",
+  "status": "frozen",
+  "candidates": [
+    "ChatLayout",
+    "MessageList",
+    "Message",
+    "MessageBubble",
+    "MessageMetadata",
+    "SystemMessage",
+    "Composer",
+    "ToolCall",
+    "streaming-text utility"
+  ]
+}

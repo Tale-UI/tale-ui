@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/validation-result.schema.json",
+  "title": "Local validation result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "requestId", "valid", "diagnostics", "versions", "fallbackConfig"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "requestId": { "type": "string" },
+    "valid": { "type": "boolean" },
+    "diagnostics": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "severity", "message"],
+        "properties": {
+          "code": { "type": ["string", "integer"] },
+          "ruleId": { "type": "string" },
+          "severity": { "enum": ["error", "warning", "info"] },
+          "path": { "type": "string", "pattern": "^(?!/).*$" },
+          "line": { "type": "integer", "minimum": 1 },
+          "column": { "type": "integer", "minimum": 1 },
+          "message": { "type": "string", "maxLength": 1000 }
+        }
+      }
+    },
+    "versions": { "type": "object" },
+    "fallbackConfig": { "type": "boolean" }
+  }
+}
