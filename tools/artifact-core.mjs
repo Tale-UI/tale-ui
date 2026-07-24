@@ -4,9 +4,11 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const ARTIFACTS_PATH = join(ROOT, 'registry/artifacts.json');
+let cachedArtifactRegistry;
 
 export function loadArtifactRegistry() {
-  return JSON.parse(readFileSync(ARTIFACTS_PATH, 'utf8'));
+  cachedArtifactRegistry ??= JSON.parse(readFileSync(ARTIFACTS_PATH, 'utf8'));
+  return cachedArtifactRegistry;
 }
 
 function score(query, artifact) {

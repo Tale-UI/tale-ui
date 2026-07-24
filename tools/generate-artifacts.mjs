@@ -620,6 +620,7 @@ function build() {
     capabilities: capabilitySource.capabilities
       .map((capability) => ({
         ...capability,
+        availability: [...capability.availability].sort(),
         status: capability.status || 'available',
       }))
       .sort((a, b) => a.id.localeCompare(b.id)),

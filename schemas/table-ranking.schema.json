@@ -83,7 +83,16 @@
               "rows10k": { "type": "string" }
             }
           },
-          "cost": { "type": "object" },
+          "cost": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["implementation", "migration", "maintenance"],
+            "properties": {
+              "implementation": { "type": "string", "minLength": 1 },
+              "migration": { "type": "string", "minLength": 1 },
+              "maintenance": { "type": "string", "minLength": 1 }
+            }
+          },
           "disposition": { "enum": ["approve", "defer", "reject"] },
           "rank": { "type": "integer", "minimum": 1, "maximum": 10 },
           "evidenceDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }

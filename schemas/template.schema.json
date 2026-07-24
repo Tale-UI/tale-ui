@@ -24,8 +24,14 @@
     "schemaVersion": { "const": "1.0.0" },
     "id": { "type": "string", "pattern": "^tale:template:[a-z0-9][a-z0-9-]+$" },
     "version": { "type": "string" },
-    "source": { "type": "string", "pattern": "^source/" },
-    "skeleton": { "type": "string", "pattern": "^skeleton/" },
+    "source": {
+      "type": "string",
+      "pattern": "^source/(?!\\.{1,2}(?:[\\\\/]|$))(?!.*[\\\\/]\\.{1,2}(?:[\\\\/]|$))(?:[^\\\\/]+[\\\\/])*[^\\\\/]+$"
+    },
+    "skeleton": {
+      "type": "string",
+      "pattern": "^skeleton/(?!\\.{1,2}(?:[\\\\/]|$))(?!.*[\\\\/]\\.{1,2}(?:[\\\\/]|$))(?:[^\\\\/]+[\\\\/])*[^\\\\/]+$"
+    },
     "dependencies": { "type": "object", "additionalProperties": { "type": "string" } },
     "preview": { "type": "object" },
     "golden": { "type": "string" },

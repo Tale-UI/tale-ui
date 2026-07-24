@@ -216,6 +216,13 @@ assert.equal(
   capabilitySource.capabilities.length,
   'Source capability IDs must be unique',
 );
+for (const capability of capabilityRegistry.capabilities) {
+  assert.deepEqual(
+    capability.availability,
+    capability.availability.toSorted(),
+    `${capability.id} availability must be canonically sorted`,
+  );
+}
 for (const artifact of artifacts) {
   for (const capability of artifact.capabilities) {
     assert.ok(
@@ -373,6 +380,79 @@ assert.equal(
   'Dry-run file entries must reject undeclared fields',
 );
 
+const dispositionInventories = {
+  table: INVENTORIES['analysis/table-plugins/inventory.json'],
+  'app-shell': INVENTORIES['analysis/app-shell/inventory.json'],
+  chat: INVENTORIES['analysis/chat/inventory.json'],
+  content: INVENTORIES['analysis/content/inventory.json'],
+};
+for (const [inventory, candidates] of Object.entries(dispositionInventories)) {
+  const dispositionFixture = {
+    schemaVersion: '1.0.0',
+    inventory,
+    evidenceRevision: 'fixture',
+    records: candidates.map((candidate) => ({
+      candidate,
+      disposition: 'defer',
+      rationale: 'Fixture evidence',
+      evidenceDigest: digestFixture,
+    })),
+  };
+  assert.equal(
+    isValid('schemas/candidate-disposition.schema.json', dispositionFixture),
+    true,
+    `${inventory} disposition fixture must be valid`,
+  );
+  assert.equal(
+    isValid('schemas/candidate-disposition.schema.json', {
+      ...dispositionFixture,
+      records: [],
+    }),
+    false,
+    `${inventory} dispositions must reject empty records`,
+  );
+  assert.equal(
+    isValid('schemas/candidate-disposition.schema.json', {
+      ...dispositionFixture,
+      records: dispositionFixture.records.map((record, index) =>
+        index === 1 ? { ...record, candidate: candidates[0] } : record,
+      ),
+    }),
+    false,
+    `${inventory} dispositions must reject duplicate candidates`,
+  );
+  assert.equal(
+    isValid('schemas/candidate-disposition.schema.json', {
+      ...dispositionFixture,
+      records: dispositionFixture.records.map((record, index) =>
+        index === 0 ? { ...record, candidate: 'unknown candidate' } : record,
+      ),
+    }),
+    false,
+    `${inventory} dispositions must reject unknown candidates`,
+  );
+}
+
+const operationFixture = {
+  schemaVersion: '1.0.0',
+  operationId: 'operation-1',
+  operation: 'generate',
+  rootDigest: digestFixture,
+  idempotencyDigest: digestFixture,
+  payloadDigest: digestFixture,
+  state: 'reserved',
+  plannedPostimages: [{ path: 'src/example.tsx', digest: digestFixture, size: 42 }],
+};
+assert.equal(isValid('schemas/operation.schema.json', operationFixture), true);
+assert.equal(
+  isValid('schemas/operation.schema.json', {
+    ...operationFixture,
+    plannedPostimages: [{ ...operationFixture.plannedPostimages[0], content: 'private' }],
+  }),
+  false,
+  'Operation postimages must reject undeclared fields',
+);
+
 const rankingCandidates = INVENTORIES['analysis/table-plugins/inventory.json'];
 const rankingFixture = {
   schemaVersion: '1.0.0',
@@ -385,7 +465,11 @@ const rankingFixture = {
     stateModel: 'fixture',
     ssrHydration: 'fixture',
     performance: { rows1k: 'fixture', rows10k: 'fixture' },
-    cost: {},
+    cost: {
+      implementation: 'fixture',
+      migration: 'fixture',
+      maintenance: 'fixture',
+    },
     disposition: 'defer',
     rank: index + 1,
     evidenceDigest: digestFixture,
@@ -412,6 +496,21 @@ assert.equal(
   false,
   'Table rankings must contain every rank exactly once',
 );
+assert.equal(
+  isValid('schemas/table-ranking.schema.json', {
+    ...rankingFixture,
+    records: rankingFixture.records.map((record, index) =>
+      index === 0
+        ? {
+            ...record,
+            cost: { implementation: 'fixture', maintenance: 'fixture' },
+          }
+        : record,
+    ),
+  }),
+  false,
+  'Table rankings must include implementation, migration, and maintenance costs',
+);
 
 const templateFixture = {
   schemaVersion: '1.0.0',
@@ -435,6 +534,18 @@ assert.equal(
   false,
   'Templates must declare both supported appearances',
 );
+for (const [field, unsafePath] of [
+  ['source', 'source/../../outside'],
+  ['source', 'source/nested\\..\\outside'],
+  ['skeleton', 'skeleton/../../../secret'],
+  ['skeleton', 'skeleton/nested/../secret'],
+]) {
+  assert.equal(
+    isValid('schemas/template.schema.json', { ...templateFixture, [field]: unsafePath }),
+    false,
+    `Templates must reject traversal in ${field}: ${unsafePath}`,
+  );
+}
 
 const migrationFixture = {
   schemaVersion: '1.0.0',

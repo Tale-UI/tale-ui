@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { getArtifact, searchArtifacts } from './artifact-core.mjs';
+import { getArtifact, loadArtifactRegistry, searchArtifacts } from './artifact-core.mjs';
+
+test('artifact registry parsing is cached for the process lifetime', () => {
+  assert.strictEqual(loadArtifactRegistry(), loadArtifactRegistry());
+});
 
 test('mixed-kind search returns stable IDs and correlated registry data', () => {
   const result = searchArtifacts({ query: 'table', limit: 100 });
