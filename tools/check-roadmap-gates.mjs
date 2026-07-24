@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -10,14 +10,46 @@ const adr = readFileSync(join(ROOT, ADR_PATH), 'utf8');
 const accepted = /^- Status: Accepted$/m.test(adr);
 
 const packageManifest = join(ROOT, 'packages/tooling/package.json');
-const rootManifest = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
-const reactManifest = JSON.parse(readFileSync(join(ROOT, 'packages/react/package.json'), 'utf8'));
 const publishWorkflow = readFileSync(join(ROOT, '.github/workflows/publish.yml'), 'utf8');
+
+function findPackageManifests(directory) {
+  if (!existsSync(directory)) {
+    return [];
+  }
+  const manifests = [];
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    if (['node_modules', 'build', 'dist', '.git'].includes(entry.name)) {
+      continue;
+    }
+    const path = join(directory, entry.name);
+    if (entry.isDirectory()) {
+      manifests.push(...findPackageManifests(path));
+    } else if (entry.name === 'package.json') {
+      manifests.push(path);
+    }
+  }
+  return manifests;
+}
+
+const workspaceManifestPaths = [
+  join(ROOT, 'package.json'),
+  ...['docs', 'packages', 'apps', 'tools', 'test', 'scripts', 'playground'].flatMap((directory) =>
+    findPackageManifests(join(ROOT, directory)),
+  ),
+];
+const taleBinaryManifests = workspaceManifestPaths.filter((path) => {
+  const manifest = JSON.parse(readFileSync(path, 'utf8'));
+  if (typeof manifest.bin === 'object' && manifest.bin !== null) {
+    return Object.hasOwn(manifest.bin, 'tale');
+  }
+  return typeof manifest.bin === 'string' && manifest.name?.split('/').at(-1) === 'tale';
+});
 
 const prematureIntegrations = [
   existsSync(packageManifest) && 'packages/tooling/package.json',
-  rootManifest.bin?.tale && 'root tale binary',
-  reactManifest.bin?.tale && '@tale-ui/react tale binary',
+  ...taleBinaryManifests.map(
+    (path) => `tale binary in ${path.slice(ROOT.length + 1).replaceAll('\\', '/')}`,
+  ),
   publishWorkflow.includes('@tale-ui/tooling') && 'tooling publish integration',
 ].filter(Boolean);
 

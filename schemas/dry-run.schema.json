@@ -13,6 +13,7 @@
       "type": "array",
       "items": {
         "type": "object",
+        "additionalProperties": false,
         "required": ["path", "action", "postimageDigest", "postimageSize"],
         "properties": {
           "path": {

@@ -23,6 +23,7 @@ test('public chart components are indexed from the charts package', () => {
   const areaChart = getArtifact('tale:component:area-chart');
   assert.equal(areaChart.package, '@tale-ui/charts');
   assert.equal(areaChart.name, 'AreaChart');
+  assert.equal(areaChart.capabilities.includes('component.get'), false);
 });
 
 test('ambiguous aliases require a stable ID or kind', () => {
@@ -37,6 +38,15 @@ test('A2UI namespace parts relate to components and preserve legacy lifecycle', 
   const checkbox = getArtifact('tale:a2ui-type:checkbox');
   assert.equal(checkbox.lifecycle, 'deprecated');
   assert.equal(checkbox.replacementId, 'tale:a2ui-type:checkbox-field');
+});
+
+test('component-specific pitfalls are indexed and searchable', () => {
+  const result = searchArtifacts({ query: 'isSelected', kinds: ['pitfall'], limit: 100 });
+  assert.ok(
+    result.results.some(
+      (artifact) => artifact.id === 'tale:pitfall:card--card-button-selected-controlled',
+    ),
+  );
 });
 
 test('search filters kinds and uses deterministic ID ordering for ties', () => {

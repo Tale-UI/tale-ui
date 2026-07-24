@@ -30,7 +30,14 @@
     "preview": { "type": "object" },
     "golden": { "type": "string" },
     "compatibility": { "type": "object" },
-    "appearance": { "type": "array", "contains": { "const": "light" } },
+    "appearance": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": { "enum": ["light", "dark"] },
+      "allOf": [{ "contains": { "const": "light" } }, { "contains": { "const": "dark" } }]
+    },
     "rtl": { "type": "boolean" },
     "provenance": { "type": "object" },
     "license": { "type": "string" },

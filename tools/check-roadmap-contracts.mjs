@@ -103,6 +103,12 @@ function validate(schemaPath, value, valuePath) {
   }
 }
 
+function isValid(schemaPath, value) {
+  const localAjv = new Ajv2020({ allErrors: true, strict: false });
+  addFormats(localAjv);
+  return localAjv.compile(json(schemaPath))(value);
+}
+
 validate(
   'schemas/artifact.schema.json',
   json('registry/artifacts.json'),
@@ -199,6 +205,17 @@ assert.equal(
 );
 
 const capabilityIds = new Set(capabilityRegistry.capabilities.map((capability) => capability.id));
+assert.equal(
+  capabilityIds.size,
+  capabilityRegistry.capabilities.length,
+  'Generated capability IDs must be unique',
+);
+const capabilitySource = json('registry/sources/capabilities.json');
+assert.equal(
+  new Set(capabilitySource.capabilities.map((capability) => capability.id)).size,
+  capabilitySource.capabilities.length,
+  'Source capability IDs must be unique',
+);
 for (const artifact of artifacts) {
   for (const capability of artifact.capabilities) {
     assert.ok(
@@ -208,7 +225,39 @@ for (const artifact of artifacts) {
   }
 }
 
+const componentRegistry = json('registry/components.json');
+const sharedPitfallCount = [
+  ...json('registry/pitfalls.json').generalConventions,
+  ...json('registry/pitfalls.json').crossComponentPitfalls,
+].length;
+const componentPitfallCount = componentRegistry.components.reduce(
+  (count, component) => count + (component.pitfalls?.length || 0),
+  0,
+);
+assert.equal(
+  byKind('pitfall').length,
+  sharedPitfallCount + componentPitfallCount,
+  'Unified pitfalls must include shared and component-specific guidance',
+);
+
 const artifactById = new Map(artifacts.map((artifact) => [artifact.id, artifact]));
+for (const artifact of artifacts) {
+  if (artifact.replacementId) {
+    const replacement = artifactById.get(artifact.replacementId);
+    assert.notEqual(replacement?.id, artifact.id, `${artifact.id} must not replace itself`);
+    assert.equal(
+      replacement?.kind,
+      artifact.kind,
+      `${artifact.id} replacement must have the same artifact kind`,
+    );
+  }
+}
+assert.ok(
+  artifactById
+    .get('tale:pitfall:card--card-button-selected-controlled')
+    .related.includes('tale:component:card'),
+  'Component-specific pitfalls must relate to their component root',
+);
 assert.ok(
   artifactById.get('tale:a2ui-type:card').related.includes('tale:component:card'),
   'Namespaced A2UI component references must relate to their component root',
@@ -271,6 +320,159 @@ validate(
     },
   },
   'deprecated error fixture',
+);
+
+const declaredErrorCodes = [
+  ...text('packages/tooling/src/contracts/errors.ts').matchAll(/^\s+(TALE_[A-Z0-9_]+):\s*\d+,?$/gm),
+].map((match) => match[1]);
+const schemaErrorCodes = json('schemas/error-envelope.schema.json').$defs.errorCode.enum;
+assert.deepEqual(
+  declaredErrorCodes.toSorted(),
+  schemaErrorCodes.toSorted(),
+  'Error envelope codes must exactly match the tooling registry',
+);
+assert.equal(
+  isValid('schemas/error-envelope.schema.json', {
+    ok: false,
+    command: 'search',
+    requestId: 'request-2',
+    error: {
+      code: 'TALE_INVALID_ARGUMNET',
+      message: 'Typo fixture',
+      details: {},
+      retryable: false,
+      documentation: 'https://tale-ui.dev/errors/TALE_INVALID_ARGUMNET',
+    },
+  }),
+  false,
+  'Error envelopes must reject undeclared TALE_* codes',
+);
+
+const digestFixture = `sha256:${'0'.repeat(64)}`;
+const dryRunFixture = {
+  schemaVersion: '1.0.0',
+  requestId: 'request-1',
+  planDigest: digestFixture,
+  files: [
+    {
+      path: 'src/example.tsx',
+      action: 'update',
+      postimageDigest: digestFixture,
+      postimageSize: 42,
+    },
+  ],
+  warnings: [],
+};
+assert.equal(isValid('schemas/dry-run.schema.json', dryRunFixture), true);
+assert.equal(
+  isValid('schemas/dry-run.schema.json', {
+    ...dryRunFixture,
+    files: [{ ...dryRunFixture.files[0], content: 'unreviewed postimage' }],
+  }),
+  false,
+  'Dry-run file entries must reject undeclared fields',
+);
+
+const rankingCandidates = INVENTORIES['analysis/table-plugins/inventory.json'];
+const rankingFixture = {
+  schemaVersion: '1.0.0',
+  evidenceRevision: 'fixture',
+  records: rankingCandidates.map((candidate, index) => ({
+    candidate,
+    demandEvidence: ['fixture'],
+    reactAriaCompatibility: 'fixture',
+    accessibilityRisks: [],
+    stateModel: 'fixture',
+    ssrHydration: 'fixture',
+    performance: { rows1k: 'fixture', rows10k: 'fixture' },
+    cost: {},
+    disposition: 'defer',
+    rank: index + 1,
+    evidenceDigest: digestFixture,
+  })),
+};
+assert.equal(isValid('schemas/table-ranking.schema.json', rankingFixture), true);
+assert.equal(
+  isValid('schemas/table-ranking.schema.json', {
+    ...rankingFixture,
+    records: rankingFixture.records.map((record, index) =>
+      index === 1 ? { ...record, candidate: rankingCandidates[0] } : record,
+    ),
+  }),
+  false,
+  'Table rankings must contain each frozen candidate exactly once',
+);
+assert.equal(
+  isValid('schemas/table-ranking.schema.json', {
+    ...rankingFixture,
+    records: rankingFixture.records.map((record, index) =>
+      index === 1 ? { ...record, rank: 1 } : record,
+    ),
+  }),
+  false,
+  'Table rankings must contain every rank exactly once',
+);
+
+const templateFixture = {
+  schemaVersion: '1.0.0',
+  id: 'tale:template:dashboard',
+  version: '1.0.0',
+  source: 'source/dashboard',
+  skeleton: 'skeleton/dashboard',
+  dependencies: {},
+  preview: {},
+  golden: 'golden/dashboard.tsx',
+  compatibility: {},
+  appearance: ['light', 'dark'],
+  rtl: true,
+  provenance: {},
+  license: 'MIT',
+  digest: digestFixture,
+};
+assert.equal(isValid('schemas/template.schema.json', templateFixture), true);
+assert.equal(
+  isValid('schemas/template.schema.json', { ...templateFixture, appearance: ['light'] }),
+  false,
+  'Templates must declare both supported appearances',
+);
+
+const migrationFixture = {
+  schemaVersion: '1.0.0',
+  id: 'migration.1',
+  order: 1,
+  from: '1.0.0',
+  to: '2.0.0',
+  transforms: [{ kind: 'typescript', path: 'migrations/example.ts' }],
+  affectedArtifacts: ['tale:component:button'],
+  reversible: true,
+  backupPolicy: 'required',
+  idempotent: true,
+  checksum: digestFixture,
+};
+assert.equal(isValid('schemas/migration.schema.json', migrationFixture), true);
+const { backupPolicy: omittedBackupPolicy, ...migrationWithoutBackupPolicy } = migrationFixture;
+assert.equal(omittedBackupPolicy, 'required');
+assert.equal(
+  isValid('schemas/migration.schema.json', migrationWithoutBackupPolicy),
+  false,
+  'Migrations must declare a backup policy',
+);
+
+const validationFileFixture = {
+  schemaVersion: '1.0.0',
+  requestId: 'request-1',
+  root: '/project',
+  file: 'src/example.tsx',
+  timeoutMs: 1000,
+};
+assert.equal(isValid('schemas/validation-request.schema.json', validationFileFixture), true);
+assert.equal(
+  isValid('schemas/validation-request.schema.json', {
+    ...validationFileFixture,
+    virtualFile: 'src/virtual.tsx',
+  }),
+  false,
+  'File validation mode must reject virtual-file fields',
 );
 
 const traceability = json('registry/roadmap-traceability.json');

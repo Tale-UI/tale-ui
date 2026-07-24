@@ -238,7 +238,7 @@ function chartComponentArtifacts(chartPackage, chartVersion) {
         { type: 'file', path: `docs/components/${slug}.md` },
         { type: 'package-export', path: importPath },
       ],
-      capabilities: ['artifact.get', 'artifact.search', 'component.get'],
+      capabilities: ['artifact.get', 'artifact.search'],
       source,
       metadata: {
         category: 'Charts',
@@ -354,7 +354,7 @@ function foundationArtifacts(source) {
   });
 }
 
-function pitfallArtifacts(pitfalls, componentByName) {
+function sharedPitfallArtifacts(pitfalls, componentByName) {
   return [...pitfalls.generalConventions, ...pitfalls.crossComponentPitfalls].map((pitfall) => {
     const related = (pitfall.appliesTo || [])
       .map((name) => componentByName.get(name.toLowerCase()))
@@ -381,6 +381,41 @@ function pitfallArtifacts(pitfalls, componentByName) {
       },
     });
   });
+}
+
+function componentPitfallArtifacts(components) {
+  return components.flatMap((component) =>
+    (component.pitfalls || []).map((pitfall) =>
+      artifactBase({
+        kind: 'pitfall',
+        slug: `${component.slug}--${slugify(pitfall.id)}`,
+        name: pitfall.summary,
+        description: pitfall.detail,
+        keywords: words(
+          component.name,
+          component.slug,
+          pitfall.id,
+          pitfall.summary,
+          pitfall.detail,
+        ),
+        related: [`tale:component:${component.slug}`],
+        retrieval: [
+          {
+            type: 'registry',
+            path: 'registry/components.json',
+            selector: `components[slug=${component.slug}].pitfalls[id=${pitfall.id}]`,
+          },
+        ],
+        source: `docs/components/${component.slug}.md`,
+        platforms: ['agent', 'web'],
+        metadata: {
+          ruleId: pitfall.id,
+          category: 'component',
+          component: component.name,
+        },
+      }),
+    ),
+  );
 }
 
 function publicDocPaths() {
@@ -511,23 +546,37 @@ function build() {
     ...docArtifacts(docs, componentIds),
     ...a2uiArtifacts(a2uiCatalog, packages['@tale-ui/a2ui'], componentByName),
     ...foundationArtifacts(foundationSource),
-    ...pitfallArtifacts(pitfalls, componentByName),
+    ...sharedPitfallArtifacts(pitfalls, componentByName),
+    ...componentPitfallArtifacts(componentRegistry.components),
   ].sort((a, b) => a.id.localeCompare(b.id));
 
   const ids = records.map((record) => record.id);
   const capabilityIds = new Set(capabilitySource.capabilities.map((capability) => capability.id));
+  if (capabilityIds.size !== capabilitySource.capabilities.length) {
+    throw new Error('Capability source contains duplicate IDs');
+  }
   if (new Set(ids).size !== ids.length) {
     const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
     throw new Error(`Duplicate artifact IDs: ${[...new Set(duplicates)].join(', ')}`);
   }
+  const recordById = new Map(records.map((record) => [record.id, record]));
   for (const record of records) {
     for (const relation of record.related) {
       if (!ids.includes(relation)) {
         throw new Error(`${record.id} has dangling relation ${relation}`);
       }
     }
-    if (record.replacementId && !ids.includes(record.replacementId)) {
-      throw new Error(`${record.id} has dangling replacement ${record.replacementId}`);
+    if (record.replacementId) {
+      const replacement = recordById.get(record.replacementId);
+      if (!replacement) {
+        throw new Error(`${record.id} has dangling replacement ${record.replacementId}`);
+      }
+      if (replacement.id === record.id || replacement.kind !== record.kind) {
+        throw new Error(
+          `${record.id} has incompatible replacement ${record.replacementId}; ` +
+            'replacements must be different artifacts of the same kind',
+        );
+      }
     }
     for (const capability of record.capabilities) {
       if (!capabilityIds.has(capability)) {

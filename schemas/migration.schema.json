@@ -12,6 +12,7 @@
     "transforms",
     "affectedArtifacts",
     "reversible",
+    "backupPolicy",
     "idempotent",
     "checksum"
   ],
