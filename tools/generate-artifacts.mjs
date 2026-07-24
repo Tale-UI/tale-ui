@@ -639,7 +639,16 @@ function build() {
 }
 
 try {
-  const { artifactRegistry, capabilityRegistry, traceability } = build();
+  const firstBuild = build();
+  if (CHECK_MODE) {
+    const secondBuild = build();
+    for (const key of ['artifactRegistry', 'capabilityRegistry', 'traceability']) {
+      if (canonicalJson(firstBuild[key]) !== canonicalJson(secondBuild[key])) {
+        throw new Error(`NONDETERMINISTIC: ${key} differs across consecutive builds`);
+      }
+    }
+  }
+  const { artifactRegistry, capabilityRegistry, traceability } = firstBuild;
   writeOrCheck(ARTIFACT_OUTPUT, artifactRegistry);
   writeOrCheck(CAPABILITY_OUTPUT, capabilityRegistry);
   writeOrCheck(TRACEABILITY_OUTPUT, traceability);
@@ -647,7 +656,7 @@ try {
   console.log(
     `${mode}: ${relative(ROOT, join(ROOT, ARTIFACT_OUTPUT))} ` +
       `(${artifactRegistry.artifacts.length} artifacts, ${capabilityRegistry.capabilities.length} capabilities, ` +
-      `${traceability.criteria.length} criteria)`,
+      `${traceability.criteria.length} criteria${CHECK_MODE ? ', two-build identity verified' : ''})`,
   );
 } catch (error) {
   console.error(error instanceof Error ? error.message : error);
