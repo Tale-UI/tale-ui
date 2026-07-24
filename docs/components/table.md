@@ -1,8 +1,9 @@
 # Table
 
-`import { Table } from '@tale-ui/react/table';`
+`import { Table, useTableController } from '@tale-ui/react/table';`
 
-An accessible data table with support for sorting and row selection.
+An accessible data table with support for row selection and a shared controller
+for stable client or cancellable server sorting.
 
 ## Parts
 
@@ -19,6 +20,24 @@ An accessible data table with support for sorting and row selection.
 ## Props
 
 Accepts all React Aria `Table` props plus an optional `className`. See the `@example` JSDoc on the component export for usage.
+
+## Sorting controller
+
+`useTableController` is additive: existing direct `sortDescriptor` and
+`onSortChange` props continue to work.
+
+| Option                  | Description                                                                                     |
+| ----------------------- | ----------------------------------------------------------------------------------------------- |
+| `tableId`               | Required stable request identity. Keep it unchanged across SSR/hydration and while mounted.     |
+| `sortDescriptor`        | Controlled React Aria sorting descriptor.                                                       |
+| `defaultSortDescriptor` | Initial sorting descriptor for uncontrolled use.                                                |
+| `onSortChange`          | Reports every descriptor requested through React Aria.                                          |
+| `onQueryChange`         | Starts server work with an abort signal, request ID, revision, and stale-result `accept` guard. |
+
+The returned `tableProps` belong on `Table.Root`. Use
+`controller.sorting.sortRows(rows, compare)` for stable, immutable client
+sorting. Call `controller.cancelPendingRequest()` to cancel server work
+explicitly.
 
 ## Basic Usage
 
@@ -68,13 +87,12 @@ Accepts all React Aria `Table` props plus an optional `className`. See the `@exa
 ### With Sorting
 
 ```tsx
-import { useState } from 'react';
-import type { SortDescriptor } from '@tale-ui/react/table';
+import { Table, useTableController, type Key } from '@tale-ui/react/table';
 
 function SortableTable() {
-  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-    column: 'name',
-    direction: 'ascending',
+  const controller = useTableController({
+    tableId: 'people',
+    defaultSortDescriptor: { column: 'name', direction: 'ascending' },
   });
 
   const rows = [
@@ -82,18 +100,14 @@ function SortableTable() {
     { id: '2', name: 'Bob', email: 'bob@example.com', role: 'Editor' },
   ];
 
-  const sorted = [...rows].sort((a, b) => {
-    const col = sortDescriptor.column as keyof typeof a;
-    const cmp = a[col].localeCompare(b[col]);
-    return sortDescriptor.direction === 'descending' ? -cmp : cmp;
+  const sorted = controller.sorting.sortRows(rows, (left, right, column: Key) => {
+    if (column === 'email') return left.email.localeCompare(right.email);
+    if (column === 'role') return left.role.localeCompare(right.role);
+    return left.name.localeCompare(right.name);
   });
 
   return (
-    <Table.Root
-      aria-label="People"
-      sortDescriptor={sortDescriptor}
-      onSortChange={setSortDescriptor}
-    >
+    <Table.Root {...controller.tableProps} aria-label="People">
       <Table.Header>
         <Table.Column id="name" isRowHeader allowsSorting>
           Name
@@ -110,6 +124,66 @@ function SortableTable() {
           <Table.Row key={row.id} id={row.id}>
             <Table.Cell>{row.name}</Table.Cell>
             <Table.Cell>{row.email}</Table.Cell>
+            <Table.Cell>{row.role}</Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Root>
+  );
+}
+```
+
+### Server Sorting
+
+`onQueryChange` receives a fresh request context after each sort. A newer sort
+aborts the previous signal. Apply a response through `accept` so stale or
+already-accepted work cannot commit.
+
+```tsx
+import { useState } from 'react';
+import { Table, useTableController, type SortDescriptor } from '@tale-ui/react/table';
+
+interface Person {
+  id: string;
+  name: string;
+  role: string;
+}
+
+function ServerSortedTable() {
+  const [rows, setRows] = useState<Person[]>([]);
+  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
+    column: 'name',
+    direction: 'ascending',
+  });
+  const controller = useTableController({
+    tableId: 'server-people',
+    sortDescriptor,
+    onSortChange: setSortDescriptor,
+    onQueryChange(query, request) {
+      const params = new URLSearchParams({
+        column: String(query.sortDescriptor.column),
+        direction: query.sortDescriptor.direction,
+      });
+      fetch(`/api/people?${params}`, { signal: request.signal })
+        .then((response) => response.json())
+        .then((nextRows) => request.accept(() => setRows(nextRows)));
+    },
+  });
+
+  return (
+    <Table.Root {...controller.tableProps} aria-label="People">
+      <Table.Header>
+        <Table.Column id="name" isRowHeader allowsSorting>
+          Name
+        </Table.Column>
+        <Table.Column id="role" allowsSorting>
+          Role
+        </Table.Column>
+      </Table.Header>
+      <Table.Body>
+        {rows.map((row) => (
+          <Table.Row key={row.id} id={row.id}>
+            <Table.Cell>{row.name}</Table.Cell>
             <Table.Cell>{row.role}</Table.Cell>
           </Table.Row>
         ))}
@@ -234,9 +308,21 @@ Nested rows are declared by nesting `Table.Row` children inside a parent `Table.
 
 ## Notes
 
-- Set `allowsSorting` on individual columns and provide `sortDescriptor` / `onSortChange` on `Root` to enable sorting.
+- Set `allowsSorting` on individual columns.
+- Spread `controller.tableProps` on `Table.Root`.
+- `Table.Root` still accepts `sortDescriptor` directly.
+- `Table.Root` still accepts `onSortChange` directly.
 - `selectionMode` can be `"none"`, `"single"`, or `"multiple"`.
 - Built on React Aria `Table`, `TableHeader`, `Column`, `TableBody`, `Row`, and `Cell`.
 - Columns support `data-sort-direction` (`ascending`/`descending`) when `allowsSorting` is used.
+
+## A2UI decision
+
+The sorting controller is React-only and is not added to the A2UI catalog.
+Serialized A2UI cannot safely carry a comparator or server request callback.
+The existing A2UI `Table` and `TableColumn.allowsSorting` mappings remain
+unchanged; an A2UI host may own sorting outside the catalog when it can provide
+equivalent request correlation and stale-result handling.
+
 - Columns support `data-resizable` when column resizing is enabled.
 - **`Table` is a namespace object, not a component.** Always use `<Table.Root>`, never `<Table>` directly. Writing `<Table aria-label="...">` passes the namespace object to React, which crashes with "Element type is invalid". TypeScript catches this at compile time; plain JSX does not.

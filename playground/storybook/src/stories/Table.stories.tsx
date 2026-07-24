@@ -1,7 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Table } from '@tale-ui/react/table';
-import type { SortDescriptor } from 'react-aria-components';
+import { Table, useTableController, type Key } from '@tale-ui/react/table';
 
 type Args = {
   selectionMode?: 'none' | 'single' | 'multiple';
@@ -14,6 +13,16 @@ const rows = [
   { id: '4', name: 'Dave', email: 'dave@example.com', role: 'Editor' },
   { id: '5', name: 'Eve', email: 'eve@example.com', role: 'Admin' },
 ];
+
+function compareRows(left: (typeof rows)[number], right: (typeof rows)[number], column: Key) {
+  if (column === 'email') {
+    return left.email.localeCompare(right.email);
+  }
+  if (column === 'role') {
+    return left.role.localeCompare(right.role);
+  }
+  return left.name.localeCompare(right.name);
+}
 
 const meta: Meta<Args> = {
   title: 'Components/Table',
@@ -120,23 +129,14 @@ export const WithSorting: Story = {
     controls: { disable: true },
   },
   render() {
-    const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-      column: 'name',
-      direction: 'ascending',
+    const controller = useTableController({
+      tableId: 'storybook-people',
+      defaultSortDescriptor: { column: 'name', direction: 'ascending' },
     });
-
-    const sortedRows = [...rows].sort((a, b) => {
-      const column = sortDescriptor.column as keyof typeof a;
-      const cmp = a[column].localeCompare(b[column]);
-      return sortDescriptor.direction === 'descending' ? -cmp : cmp;
-    });
+    const sortedRows = controller.sorting.sortRows(rows, compareRows);
 
     return (
-      <Table.Root
-        aria-label="People"
-        sortDescriptor={sortDescriptor}
-        onSortChange={setSortDescriptor}
-      >
+      <Table.Root {...controller.tableProps} aria-label="People">
         <Table.Header>
           <Table.Column id="name" isRowHeader allowsSorting>
             Name
@@ -165,16 +165,11 @@ export const WithSorting: Story = {
 export const AllVariations: Story = {
   parameters: { controls: { disable: true } },
   render() {
-    const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-      column: 'name',
-      direction: 'ascending',
+    const controller = useTableController({
+      tableId: 'storybook-all-people',
+      defaultSortDescriptor: { column: 'name', direction: 'ascending' },
     });
-
-    const sortedRows = [...rows].sort((a, b) => {
-      const column = sortDescriptor.column as keyof typeof a;
-      const cmp = a[column].localeCompare(b[column]);
-      return sortDescriptor.direction === 'descending' ? -cmp : cmp;
-    });
+    const sortedRows = controller.sorting.sortRows(rows, compareRows);
 
     return (
       <div className="story-sections">
@@ -199,11 +194,7 @@ export const AllVariations: Story = {
         </div>
         <div>
           <p className="story-label">Sortable</p>
-          <Table.Root
-            aria-label="People — sortable"
-            sortDescriptor={sortDescriptor}
-            onSortChange={setSortDescriptor}
-          >
+          <Table.Root {...controller.tableProps} aria-label="People — sortable">
             <Table.Header>
               <Table.Column id="name" isRowHeader allowsSorting>
                 Name

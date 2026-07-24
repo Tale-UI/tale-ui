@@ -10,6 +10,13 @@
     "useOnMount",
     "useRefWithInit",
     "useStableCallback",
+    {
+      "name": "useTableController",
+      "path": "packages/react/src/table/TableController.ts",
+      "packageName": "@tale-ui/react",
+      "exportPath": "@tale-ui/react/table",
+      "description": "Public Table controller hook for stable client sorting and correlated server sorting."
+    },
     "useTimeout"
   ]
 }

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useFilter, parseColor, Switch as AriaSwitch } from 'react-aria-components';
-import type { SortDescriptor } from 'react-aria-components';
 import '@tale-ui/react-styles/index.css';
 import './ComponentAudit.css';
 
@@ -127,7 +126,7 @@ import { GridList } from '@tale-ui/react/grid-list';
 import { Link } from '@tale-ui/react/link';
 import { Pagination } from '@tale-ui/react/pagination';
 import { PinInput } from '@tale-ui/react/pin-input';
-import { Table } from '@tale-ui/react/table';
+import { Table, useTableController } from '@tale-ui/react/table';
 import { TagGroup } from '@tale-ui/react/tag-group';
 import { Tree } from '@tale-ui/react/tree';
 
@@ -1013,23 +1012,25 @@ const tableRows = [
 ];
 
 function SortableTableDemo() {
-  const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-    column: 'name',
-    direction: 'ascending',
+  const controller = useTableController({
+    tableId: 'audit-people',
+    defaultSortDescriptor: { column: 'name', direction: 'ascending' },
   });
-
-  const sorted = [...tableRows].sort((a, b) => {
-    const col = sortDescriptor.column as keyof typeof a;
-    const cmp = a[col].localeCompare(b[col]);
-    return sortDescriptor.direction === 'descending' ? -cmp : cmp;
+  const sorted = controller.sorting.sortRows(tableRows, (left, right, column) => {
+    if (column === 'role') {
+      return left.role.localeCompare(right.role);
+    }
+    if (column === 'status') {
+      return left.status.localeCompare(right.status);
+    }
+    return left.name.localeCompare(right.name);
   });
 
   return (
     <Table.Root
+      {...controller.tableProps}
       aria-label="Sortable people"
       className="audit__demo-extra-wide"
-      sortDescriptor={sortDescriptor}
-      onSortChange={setSortDescriptor}
     >
       <Table.Header>
         <Table.Column id="name" isRowHeader allowsSorting>

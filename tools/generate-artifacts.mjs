@@ -319,24 +319,37 @@ function a2uiArtifacts(catalog, a2uiVersion, componentByName) {
   });
 }
 
-function hookArtifacts(hookSource, utilsVersion) {
-  return hookSource.hooks.map((name) => {
-    const path = `packages/utils/src/${name}.ts`;
+function hookArtifacts(hookSource, packageVersions) {
+  return hookSource.hooks.map((entry) => {
+    const definition =
+      typeof entry === 'string'
+        ? {
+            name: entry,
+            path: `packages/utils/src/${entry}.ts`,
+            packageName: '@tale-ui/utils',
+            exportPath: `@tale-ui/utils/${entry}`,
+            description: `Public React utility hook ${entry}.`,
+          }
+        : entry;
+    const { name, path, packageName, exportPath, description } = definition;
     if (!existsSync(join(ROOT, path))) {
       throw new Error(`Hook source is missing: ${path}`);
+    }
+    if (!packageVersions[packageName]) {
+      throw new Error(`Hook ${name} references unknown package ${packageName}`);
     }
     return artifactBase({
       kind: 'hook',
       slug: slugify(name),
       name,
-      description: `Public React utility hook ${name}.`,
-      packageName: '@tale-ui/utils',
-      version: utilsVersion,
+      description,
+      packageName,
+      version: packageVersions[packageName],
       aliases: [name],
       keywords: words(name, 'react hook utility'),
       retrieval: [
         { type: 'file', path },
-        { type: 'package-export', path: `@tale-ui/utils/${name}` },
+        { type: 'package-export', path: exportPath },
       ],
       source: path,
     });
@@ -546,7 +559,7 @@ function build() {
   const docs = publicDocPaths();
   const records = [
     ...components,
-    ...hookArtifacts(hookSource, packages['@tale-ui/utils']),
+    ...hookArtifacts(hookSource, packages),
     ...recipes.records,
     ...docArtifacts(docs, componentIds),
     ...a2uiArtifacts(a2uiCatalog, packages['@tale-ui/a2ui'], componentByName),
@@ -597,7 +610,9 @@ function build() {
     ...components
       .filter((record) => record.package === '@tale-ui/charts')
       .map((record) => record.provenance.source),
-    ...hookSource.hooks.map((name) => `packages/utils/src/${name}.ts`),
+    ...hookSource.hooks.map((entry) =>
+      typeof entry === 'string' ? `packages/utils/src/${entry}.ts` : entry.path,
+    ),
     ...foundationSource.foundations.map((record) => record.path),
   ].sort();
   const uniqueSources = [...new Set(generatedFrom)];

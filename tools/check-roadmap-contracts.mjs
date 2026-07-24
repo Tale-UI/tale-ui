@@ -125,6 +125,11 @@ validate(
   json('registry/roadmap-traceability.json'),
   'registry/roadmap-traceability.json',
 );
+validate(
+  'schemas/hook-source.schema.json',
+  json('registry/sources/hooks.json'),
+  'registry/sources/hooks.json',
+);
 
 const artifactRegistry = json('registry/artifacts.json');
 const { digest: artifactDigest, ...artifactPreimage } = artifactRegistry;
@@ -284,8 +289,71 @@ for (const benchmarkCase of tableBenchmark.cases) {
     `${benchmarkCase.name} summary must match its samples`,
   );
 }
+const tableSortingBenchmarkPath = 'analysis/baselines/table-sorting.json';
+const tableSortingBenchmark = json(tableSortingBenchmarkPath);
+validate(
+  'schemas/table-sorting-benchmark.schema.json',
+  tableSortingBenchmark,
+  tableSortingBenchmarkPath,
+);
+assert.deepEqual(
+  tableSortingBenchmark.cases.map(({ operation, rowCount }) => [operation, rowCount]),
+  [
+    ['stable-sort', 1000],
+    ['stable-sort', 10000],
+  ],
+  'Stable Table sorting must preserve the exact 1k/10k benchmark matrix',
+);
+for (const benchmarkCase of tableSortingBenchmark.cases) {
+  assert.equal(
+    benchmarkCase.samplesMs.length,
+    tableSortingBenchmark.method.measuredIterations,
+    `${benchmarkCase.name} must preserve every measured sample`,
+  );
+  const sortedSamples = benchmarkCase.samplesMs.toSorted((left, right) => left - right);
+  assert.deepEqual(
+    benchmarkCase.summaryMs,
+    {
+      minimum: sortedSamples[0],
+      median: sortedSamples[Math.floor(sortedSamples.length / 2)],
+      p95: sortedSamples[Math.ceil(sortedSamples.length * 0.95) - 1],
+      maximum: sortedSamples.at(-1),
+    },
+    `${benchmarkCase.name} summary must match its samples`,
+  );
+}
+assert.ok(
+  text('packages/react/src/table/index.ts').includes('useTableController'),
+  'Rank-one Table sorting must export the stable controller',
+);
+assert.ok(
+  existsSync(join(ROOT, 'packages/react/src/table/TableController.test.tsx')),
+  'Stable Table sorting requires controller fixtures',
+);
+assert.ok(
+  existsSync(join(ROOT, 'analysis/table-plugins/sorting.md')),
+  'Stable Table sorting requires its promotion and A2UI decision record',
+);
+assert.ok(
+  existsSync(join(ROOT, 'tools/golden-prompts/table-controller-sorting.json')),
+  'Stable Table sorting requires a golden prompt',
+);
 
 const artifacts = artifactRegistry.artifacts;
+const tableControllerArtifact = artifacts.find(
+  (artifact) => artifact.id === 'tale:hook:use-table-controller',
+);
+assert.equal(
+  tableControllerArtifact?.package,
+  '@tale-ui/react',
+  'Stable Table sorting requires a public controller hook registry record',
+);
+assert.ok(
+  tableControllerArtifact?.retrieval.some(
+    (pointer) => pointer.type === 'package-export' && pointer.path === '@tale-ui/react/table',
+  ),
+  'Table controller hook must be retrievable from its public package export',
+);
 assert.deepEqual(
   artifacts.map((artifact) => artifact.id),
   artifacts.map((artifact) => artifact.id).toSorted(compareCanonicalStrings),
@@ -406,6 +474,17 @@ for (const artifact of artifacts) {
 }
 
 const componentRegistry = json('registry/components.json');
+const tableComponent = componentRegistry.components.find((component) => component.slug === 'table');
+assert.ok(tableComponent, 'Table must remain in the component registry');
+assert.deepEqual(
+  tableComponent.props
+    .map((prop) => prop.name)
+    .filter((name) =>
+      ['controller', 'tableProps', 'defaultSortDescriptor', 'onQueryChange'].includes(name),
+    ),
+  [],
+  'Table controller spreads and hook options must not be misclassified as Table.Root props',
+);
 const sharedPitfallCount = [
   ...json('registry/pitfalls.json').generalConventions,
   ...json('registry/pitfalls.json').crossComponentPitfalls,

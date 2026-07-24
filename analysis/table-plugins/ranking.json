@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "status": "approved",
   "inventory": "analysis/table-plugins/inventory.json",
-  "evidenceRevision": "sha256:1724bd524ee9eac852bdc4ddfe6a48fdc995894e6d24d0f5305c626a9b091512",
+  "evidenceRevision": "sha256:889b9a4cae2533c877a370039b536ba8b00dccb022d2ff9c8f18251081b2c944",
   "methodology": "Rank repository-evidenced product need first, then React Aria compatibility, accessibility risk, explicit 1k/10k requirements, and implementation/migration/maintenance cost. Mandatory prototypes receive no automatic rank bonus.",
   "prototypeCandidates": ["selection", "sorting"],
   "records": [
