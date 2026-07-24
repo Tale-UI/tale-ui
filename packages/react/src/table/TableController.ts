@@ -1,10 +1,19 @@
 import * as React from 'react';
 import { useStableCallback } from '@tale-ui/utils/useStableCallback';
-import type { Key, SortDescriptor } from 'react-aria-components';
+import type { Key, Selection, SortDescriptor, TableLayoutProps } from 'react-aria-components';
 import type { RootProps } from './Table.styled';
 
+export interface TableFilterExpression {
+  schemaVersion: '1.0.0';
+  value: string;
+}
+
 export interface TableControllerQuery {
-  sortDescriptor: SortDescriptor;
+  sortDescriptor?: SortDescriptor;
+  selectedKeys: Selection;
+  page: number;
+  pageSize: number;
+  filter: TableFilterExpression;
 }
 
 export interface TableControllerRequestContext {
@@ -44,9 +53,33 @@ export interface TableControllerOptions {
    */
   defaultSortDescriptor?: SortDescriptor;
   onSortChange?: (descriptor: SortDescriptor) => void;
+  /** Controlled React Aria row selection. */
+  selectedKeys?: Selection;
+  /** Initial selection when `selectedKeys` is uncontrolled. */
+  defaultSelectedKeys?: Selection;
+  onSelectionChange?: (selection: Selection) => void;
+  /** Controlled one-based page. */
+  page?: number;
+  /** Initial one-based page when `page` is uncontrolled. */
+  defaultPage?: number;
+  onPageChange?: (page: number) => void;
+  /** Controlled rows per page. */
+  pageSize?: number;
+  /** Initial rows per page when `pageSize` is uncontrolled. */
+  defaultPageSize?: number;
+  onPageSizeChange?: (pageSize: number) => void;
+  /** Total server row count. Omit when the total is unknown. */
+  totalRows?: number;
+  /** Controlled, serializable filter expression. */
+  filter?: TableFilterExpression;
+  /** Initial expression when `filter` is uncontrolled. */
+  defaultFilter?: TableFilterExpression;
+  onFilterChange?: (filter: TableFilterExpression) => void;
+  /** React Aria TableLayout options for the virtualization plugin. */
+  virtualizationOptions?: TableLayoutProps;
   /**
-   * Runs for every sorting query. Use the request context to cancel work and
-   * reject stale server responses.
+   * Runs for every sorting, selection, pagination, or filtering query. Use the
+   * request context to cancel work and reject stale server responses.
    */
   onQueryChange?: (query: TableControllerQuery, context: TableControllerRequestContext) => void;
 }
@@ -60,9 +93,48 @@ export interface TableSortingController {
   sortRows: <T>(rows: readonly T[], compare: (left: T, right: T, column: Key) => number) => T[];
 }
 
+export interface TableSelectionController {
+  selectedKeys: Selection;
+  setSelectedKeys: (selection: Selection) => void;
+  isSelected: (key: Key) => boolean;
+}
+
+export interface TablePaginationController {
+  page: number;
+  pageSize: number;
+  pageCount?: number;
+  canPreviousPage: boolean;
+  canNextPage: boolean;
+  setPage: (page: number) => void;
+  setPageSize: (pageSize: number) => void;
+  paginateRows: <T>(rows: readonly T[]) => T[];
+}
+
+export interface TableFilteringController {
+  filter: TableFilterExpression;
+  setFilter: (filter: TableFilterExpression) => void;
+  filterRows: <T>(
+    rows: readonly T[],
+    predicate: (row: T, filter: TableFilterExpression) => boolean,
+  ) => T[];
+}
+
+export interface TableVirtualizationController {
+  virtualizerProps: {
+    layoutOptions?: TableLayoutProps;
+  };
+}
+
 export interface TableController {
-  tableProps: Pick<RootProps, 'sortDescriptor' | 'onSortChange'>;
+  tableProps: Pick<
+    RootProps,
+    'sortDescriptor' | 'onSortChange' | 'selectedKeys' | 'onSelectionChange'
+  >;
   sorting: TableSortingController;
+  selection: TableSelectionController;
+  pagination: TablePaginationController;
+  filtering: TableFilteringController;
+  virtualization: TableVirtualizationController;
   cancelPendingRequest: () => void;
 }
 
@@ -72,6 +144,40 @@ function assertStableTableId(tableId: string) {
       'Tale UI: Table controller requires a stable tableId for request correlation and ' +
         'hydration. Provide a non-empty portable identifier and retry. ' +
         'See https://tale-ui.com/components/table.',
+    );
+  }
+}
+
+function assertPositiveInteger(name: string, value: number) {
+  if (!Number.isInteger(value) || value < 1) {
+    throw new Error(
+      `Tale UI: Table controller ${name} must be a positive integer. ` +
+        'Provide a supported pagination value and retry. ' +
+        'See https://tale-ui.com/components/table.',
+    );
+  }
+}
+
+function assertFilter(filter: TableFilterExpression) {
+  if (filter.schemaVersion !== '1.0.0' || typeof filter.value !== 'string') {
+    throw new Error(
+      'Tale UI: Table controller filters require schemaVersion 1.0.0 and a string value. ' +
+        'See https://tale-ui.com/components/table.',
+    );
+  }
+}
+
+function copySelection(selection: Selection): Selection {
+  return selection === 'all' ? 'all' : new Set(selection);
+}
+
+function useControlledModeGuard(name: string, controlled: boolean) {
+  const initial = React.useRef(controlled);
+  if (initial.current !== controlled) {
+    throw new Error(
+      `Tale UI: Table controller ${name} changed between controlled and uncontrolled state. ` +
+        `Choose the controlled or default ${name} option for the mounted controller and keep ` +
+        'that mode stable. See https://tale-ui.com/components/table.',
     );
   }
 }
@@ -95,8 +201,9 @@ export function sortTableRows<T>(
 }
 
 /**
- * Coordinates Table sorting for client or server data while preserving React
- * Aria's accessible sorting semantics.
+ * Coordinates the stable Table sorting, selection, pagination, filtering, and
+ * virtualization plugins for client or server data while preserving React
+ * Aria's accessibility semantics.
  *
  * Existing direct `sortDescriptor` and `onSortChange` props remain supported.
  * Use this controller when sorting must also coordinate local rows or
@@ -132,20 +239,54 @@ export function useTableController(options: TableControllerOptions): TableContro
   }
 
   const sortingControlled = Object.prototype.hasOwnProperty.call(options, 'sortDescriptor');
-  const initialSortingControlled = React.useRef(sortingControlled);
-  if (initialSortingControlled.current !== sortingControlled) {
-    throw new Error(
-      'Tale UI: Table controller sorting changed between controlled and uncontrolled state. ' +
-        'Choose sortDescriptor or defaultSortDescriptor for the mounted controller and keep ' +
-        'that mode stable. See https://tale-ui.com/components/table.',
-    );
-  }
+  const selectionControlled = Object.prototype.hasOwnProperty.call(options, 'selectedKeys');
+  const pageControlled = Object.prototype.hasOwnProperty.call(options, 'page');
+  const pageSizeControlled = Object.prototype.hasOwnProperty.call(options, 'pageSize');
+  const filterControlled = Object.prototype.hasOwnProperty.call(options, 'filter');
+  useControlledModeGuard('sorting', sortingControlled);
+  useControlledModeGuard('selection', selectionControlled);
+  useControlledModeGuard('page', pageControlled);
+  useControlledModeGuard('pageSize', pageSizeControlled);
+  useControlledModeGuard('filter', filterControlled);
 
   const [uncontrolledSort, setUncontrolledSort] = React.useState<SortDescriptor | undefined>(
     options.defaultSortDescriptor,
   );
   const sortDescriptor = sortingControlled ? options.sortDescriptor : uncontrolledSort;
+  const [uncontrolledSelection, setUncontrolledSelection] = React.useState<Selection>(() =>
+    copySelection(options.defaultSelectedKeys || new Set<Key>()),
+  );
+  const selectedKeys = copySelection(
+    selectionControlled ? options.selectedKeys || new Set<Key>() : uncontrolledSelection,
+  );
+  const [uncontrolledPage, setUncontrolledPage] = React.useState(options.defaultPage || 1);
+  const page = pageControlled ? options.page! : uncontrolledPage;
+  const [uncontrolledPageSize, setUncontrolledPageSize] = React.useState(
+    options.defaultPageSize || 25,
+  );
+  const pageSize = pageSizeControlled ? options.pageSize! : uncontrolledPageSize;
+  const emptyFilter = React.useMemo<TableFilterExpression>(
+    () => ({ schemaVersion: '1.0.0', value: '' }),
+    [],
+  );
+  const [uncontrolledFilter, setUncontrolledFilter] = React.useState<TableFilterExpression>(
+    () => options.defaultFilter || emptyFilter,
+  );
+  const filter = filterControlled ? options.filter || emptyFilter : uncontrolledFilter;
+  assertPositiveInteger('page', page);
+  assertPositiveInteger('pageSize', pageSize);
+  if (
+    options.totalRows !== undefined &&
+    (!Number.isInteger(options.totalRows) || options.totalRows < 0)
+  ) {
+    throw new Error('Tale UI: Table controller totalRows must be a non-negative integer.');
+  }
+  assertFilter(filter);
   const onSortChange = useStableCallback(options.onSortChange);
+  const onSelectionChange = useStableCallback(options.onSelectionChange);
+  const onPageChange = useStableCallback(options.onPageChange);
+  const onPageSizeChange = useStableCallback(options.onPageSizeChange);
+  const onFilterChange = useStableCallback(options.onFilterChange);
   const onQueryChange = useStableCallback(options.onQueryChange);
   const sequence = React.useRef(0);
   const activeRequest = React.useRef<
@@ -163,10 +304,18 @@ export function useTableController(options: TableControllerOptions): TableContro
 
   React.useEffect(() => cancelPendingRequest, [cancelPendingRequest]);
 
-  const publishQuery = useStableCallback((query: TableControllerQuery) => {
+  const publishQuery = useStableCallback((overrides: Partial<TableControllerQuery>) => {
     if (!onQueryChange) {
       return;
     }
+    const query: TableControllerQuery = {
+      ...(sortDescriptor ? { sortDescriptor } : {}),
+      selectedKeys: copySelection(selectedKeys),
+      page,
+      pageSize,
+      filter,
+      ...overrides,
+    };
     cancelPendingRequest();
     sequence.current += 1;
     const revision = sequence.current;
@@ -205,20 +354,109 @@ export function useTableController(options: TableControllerOptions): TableContro
     publishQuery({ sortDescriptor: nextSort });
   });
 
+  const handleSelectionChange = useStableCallback((nextSelection: Selection) => {
+    const copied = copySelection(nextSelection);
+    if (!selectionControlled) {
+      setUncontrolledSelection(copied);
+    }
+    onSelectionChange?.(copied);
+    publishQuery({ selectedKeys: copied });
+  });
+
+  const setPage = useStableCallback((nextPage: number) => {
+    assertPositiveInteger('page', nextPage);
+    const pageCount =
+      options.totalRows === undefined
+        ? undefined
+        : Math.max(1, Math.ceil(options.totalRows / pageSize));
+    const resolved = pageCount === undefined ? nextPage : Math.min(nextPage, pageCount);
+    if (!pageControlled) {
+      setUncontrolledPage(resolved);
+    }
+    onPageChange?.(resolved);
+    publishQuery({ page: resolved });
+  });
+
+  const setPageSize = useStableCallback((nextPageSize: number) => {
+    assertPositiveInteger('pageSize', nextPageSize);
+    if (!pageSizeControlled) {
+      setUncontrolledPageSize(nextPageSize);
+    }
+    if (!pageControlled) {
+      setUncontrolledPage(1);
+    }
+    onPageSizeChange?.(nextPageSize);
+    onPageChange?.(1);
+    publishQuery({ page: 1, pageSize: nextPageSize });
+  });
+
+  const setFilter = useStableCallback((nextFilter: TableFilterExpression) => {
+    assertFilter(nextFilter);
+    if (!filterControlled) {
+      setUncontrolledFilter(nextFilter);
+    }
+    if (!pageControlled) {
+      setUncontrolledPage(1);
+    }
+    onFilterChange?.(nextFilter);
+    onPageChange?.(1);
+    publishQuery({ filter: nextFilter, page: 1 });
+  });
+
   const sortRows = React.useCallback(
     <T>(rows: readonly T[], compare: (left: T, right: T, column: Key) => number) =>
       sortDescriptor ? sortTableRows(rows, sortDescriptor, compare) : [...rows],
     [sortDescriptor],
   );
+  const filterRows = React.useCallback(
+    <T>(rows: readonly T[], predicate: (row: T, expression: TableFilterExpression) => boolean) =>
+      filter.value ? rows.filter((row) => predicate(row, filter)) : [...rows],
+    [filter],
+  );
+  const paginateRows = React.useCallback(
+    <T>(rows: readonly T[]) => rows.slice((page - 1) * pageSize, page * pageSize),
+    [page, pageSize],
+  );
+  const pageCount =
+    options.totalRows === undefined
+      ? undefined
+      : Math.max(1, Math.ceil(options.totalRows / pageSize));
 
   return {
     tableProps: {
       ...(sortDescriptor ? { sortDescriptor } : {}),
       onSortChange: handleSortChange,
+      selectedKeys,
+      onSelectionChange: handleSelectionChange,
     },
     sorting: {
       ...(sortDescriptor ? { sortDescriptor } : {}),
       sortRows,
+    },
+    selection: {
+      selectedKeys,
+      setSelectedKeys: handleSelectionChange,
+      isSelected: (key) => selectedKeys === 'all' || selectedKeys.has(key),
+    },
+    pagination: {
+      page,
+      pageSize,
+      ...(pageCount === undefined ? {} : { pageCount }),
+      canPreviousPage: page > 1,
+      canNextPage: pageCount === undefined || page < pageCount,
+      setPage,
+      setPageSize,
+      paginateRows,
+    },
+    filtering: {
+      filter,
+      setFilter,
+      filterRows,
+    },
+    virtualization: {
+      virtualizerProps: {
+        ...(options.virtualizationOptions ? { layoutOptions: options.virtualizationOptions } : {}),
+      },
     },
     cancelPendingRequest,
   };

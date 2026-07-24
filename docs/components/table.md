@@ -2,42 +2,49 @@
 
 `import { Table, useTableController } from '@tale-ui/react/table';`
 
-An accessible data table with support for row selection and a shared controller
-for stable client or cancellable server sorting.
+An accessible data table with stable sorting, selection, pagination, filtering,
+and React Aria virtualization plugins coordinated by one controller.
 
 ## Parts
 
-| Part           | Description                                                                                     |
-| -------------- | ----------------------------------------------------------------------------------------------- |
-| `Table.Root`   | `<table>` wrapper. Accepts `aria-label`, `selectionMode`, `sortDescriptor`, and `onSortChange`. |
-| `Table.Header` | `<thead>` section containing columns.                                                           |
-| `Table.Column` | A column header cell. Supports `isRowHeader` and `allowsSorting`.                               |
-| `Table.Body`   | `<tbody>` section containing rows.                                                              |
-| `Table.Row`    | A table row. Requires `id`.                                                                     |
-| `Table.Cell`   | A table data cell.                                                                              |
-| `Table.Footer` | Footer section for totals/summary rows (renders `<tfoot>`).                                     |
+| Part                | Description                                                                                     |
+| ------------------- | ----------------------------------------------------------------------------------------------- |
+| `Table.Root`        | `<table>` wrapper. Accepts `aria-label`, `selectionMode`, `sortDescriptor`, and `onSortChange`. |
+| `Table.Header`      | `<thead>` section containing columns.                                                           |
+| `Table.Column`      | A column header cell. Supports `isRowHeader` and `allowsSorting`.                               |
+| `Table.Body`        | `<tbody>` section containing rows.                                                              |
+| `Table.Row`         | A table row. Requires `id`.                                                                     |
+| `Table.Cell`        | A table data cell.                                                                              |
+| `Table.Footer`      | Footer section for totals/summary rows (renders `<tfoot>`).                                     |
+| `Table.Virtualizer` | React Aria `TableLayout` virtualizer for large dynamic collections.                             |
 
 ## Props
 
 Accepts all React Aria `Table` props plus an optional `className`. See the `@example` JSDoc on the component export for usage.
 
-## Sorting controller
+## Table controller
 
-`useTableController` is additive: existing direct `sortDescriptor` and
-`onSortChange` props continue to work.
+`useTableController` is additive: existing direct Table props continue to
+work. Use the controller when two or more plugins, local row transforms, or
+cancellable server requests must share one query revision.
 
-| Option                  | Description                                                                                     |
-| ----------------------- | ----------------------------------------------------------------------------------------------- |
-| `tableId`               | Required stable request identity. Keep it unchanged across SSR/hydration and while mounted.     |
-| `sortDescriptor`        | Controlled React Aria sorting descriptor.                                                       |
-| `defaultSortDescriptor` | Initial sorting descriptor for uncontrolled use.                                                |
-| `onSortChange`          | Reports every descriptor requested through React Aria.                                          |
-| `onQueryChange`         | Starts server work with an abort signal, request ID, revision, and stale-result `accept` guard. |
+| Plugin         | Controlled/default options                                                             | Returned API                                              |
+| -------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| Sorting        | `sortDescriptor`, `defaultSortDescriptor`, `onSortChange`                              | `sorting.sortRows`                                        |
+| Selection      | `selectedKeys`, `defaultSelectedKeys`, `onSelectionChange`                             | `selection.setSelectedKeys`, `selection.isSelected`       |
+| Pagination     | `page`, `defaultPage`, `pageSize`, `defaultPageSize`, `totalRows` and change callbacks | `pagination.paginateRows`, page bounds and setters        |
+| Filtering      | `filter`, `defaultFilter`, `onFilterChange`                                            | `filtering.filterRows`, `filtering.setFilter`             |
+| Virtualization | `virtualizationOptions`                                                                | `virtualization.virtualizerProps` for `Table.Virtualizer` |
+
+Filters are ordinary serializable data with
+`{schemaVersion: '1.0.0', value: string}`. Tale UI does not serialize or
+execute consumer predicates.
 
 The returned `tableProps` belong on `Table.Root`. Use
-`controller.sorting.sortRows(rows, compare)` for stable, immutable client
-sorting. Call `controller.cancelPendingRequest()` to cancel server work
-explicitly.
+`filtering.filterRows`, `sorting.sortRows`, then `pagination.paginateRows` for
+client data. Every plugin change publishes one combined query through
+`onQueryChange`; a newer query aborts the previous request. Call
+`controller.cancelPendingRequest()` to cancel explicitly.
 
 ## Basic Usage
 
@@ -133,11 +140,45 @@ function SortableTable() {
 }
 ```
 
-### Server Sorting
+### Selection, filtering, and pagination
 
-`onQueryChange` receives a fresh request context after each sort. A newer sort
-aborts the previous signal. Apply a response through `accept` so stale or
-already-accepted work cannot commit.
+```tsx
+const controller = useTableController({
+  tableId: 'people',
+  defaultSelectedKeys: new Set(),
+  defaultFilter: { schemaVersion: '1.0.0', value: '' },
+  defaultPage: 1,
+  defaultPageSize: 25,
+  totalRows: people.length,
+});
+
+const filtered = controller.filtering.filterRows(people, (person, filter) =>
+  person.name.toLowerCase().includes(filter.value.toLowerCase()),
+);
+const visibleRows = controller.pagination.paginateRows(filtered);
+
+<Table.Root {...controller.tableProps} selectionMode="multiple" aria-label="People">
+  <Table.Header>
+    <Table.Column isRowHeader>Name</Table.Column>
+  </Table.Header>
+  <Table.Body items={visibleRows}>
+    {(person) => (
+      <Table.Row id={person.id}>
+        <Table.Cell>{person.name}</Table.Cell>
+      </Table.Row>
+    )}
+  </Table.Body>
+</Table.Root>;
+```
+
+Filtering resets the requested page to one. A controlled page remains
+authoritative while `onPageChange(1)` reports the reset request.
+
+### Server queries
+
+`onQueryChange` receives the complete sort, selection, page, page-size, and
+filter snapshot. A newer query aborts the previous signal. Apply a response
+through `accept` so stale or already-accepted work cannot commit.
 
 ```tsx
 import { useState } from 'react';
@@ -161,8 +202,11 @@ function ServerSortedTable() {
     onSortChange: setSortDescriptor,
     onQueryChange(query, request) {
       const params = new URLSearchParams({
-        column: String(query.sortDescriptor.column),
-        direction: query.sortDescriptor.direction,
+        column: String(query.sortDescriptor?.column ?? ''),
+        direction: query.sortDescriptor?.direction ?? '',
+        page: String(query.page),
+        pageSize: String(query.pageSize),
+        filter: query.filter.value,
       });
       fetch(`/api/people?${params}`, { signal: request.signal })
         .then((response) => response.json())
@@ -191,6 +235,30 @@ function ServerSortedTable() {
     </Table.Root>
   );
 }
+```
+
+### Virtualized collection
+
+Use a dynamic `items` collection, stable row IDs, and a measured or estimated
+row height. `Table.Virtualizer` keeps React Aria's table collection and focus
+semantics; it is not pagination and does not change the controller query.
+
+```tsx
+<Table.Virtualizer
+  {...controller.virtualization.virtualizerProps}
+  layoutOptions={{ rowHeight: 44 }}
+>
+  <Table.Root aria-label="10,000 people">
+    <Table.Header>{/* stable columns */}</Table.Header>
+    <Table.Body items={people}>
+      {(person) => (
+        <Table.Row id={person.id}>
+          <Table.Cell>{person.name}</Table.Cell>
+        </Table.Row>
+      )}
+    </Table.Body>
+  </Table.Root>
+</Table.Virtualizer>
 ```
 
 ### Footer with totals
@@ -310,19 +378,22 @@ Nested rows are declared by nesting `Table.Row` children inside a parent `Table.
 
 - Set `allowsSorting` on individual columns.
 - Spread `controller.tableProps` on `Table.Root`.
-- `Table.Root` still accepts `sortDescriptor` directly.
-- `Table.Root` still accepts `onSortChange` directly.
+- Direct React Aria sorting and selection props remain supported.
+- Use stable row and column IDs for every plugin and across SSR/hydration.
+- Do not infer server freshness from response order; commit through `request.accept`.
+- Virtualization requires dynamic collections and does not replace pagination.
 - `selectionMode` can be `"none"`, `"single"`, or `"multiple"`.
 - Built on React Aria `Table`, `TableHeader`, `Column`, `TableBody`, `Row`, and `Cell`.
 - Columns support `data-sort-direction` (`ascending`/`descending`) when `allowsSorting` is used.
 
 ## A2UI decision
 
-The sorting controller is React-only and is not added to the A2UI catalog.
-Serialized A2UI cannot safely carry a comparator or server request callback.
-The existing A2UI `Table` and `TableColumn.allowsSorting` mappings remain
-unchanged; an A2UI host may own sorting outside the catalog when it can provide
-equivalent request correlation and stale-result handling.
+The controller and virtualizer are React-only and are not added to the A2UI
+catalog. Serialized A2UI cannot safely carry comparators, predicates, server
+callbacks, mutable selection sets, or layout instances. Existing declarative
+Table, selection, and sortable-column mappings remain unchanged. An A2UI host
+may own these plugins outside the catalog only when it provides equivalent
+stable IDs, accessibility, cancellation, and stale-result handling.
 
 - Columns support `data-resizable` when column resizing is enabled.
 - **`Table` is a namespace object, not a component.** Always use `<Table.Root>`, never `<Table>` directly. Writing `<Table aria-label="...">` passes the namespace object to React, which crashes with "Element type is invalid". TypeScript catches this at compile time; plain JSX does not.

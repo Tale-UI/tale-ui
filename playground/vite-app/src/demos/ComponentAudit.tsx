@@ -1015,8 +1015,15 @@ function SortableTableDemo() {
   const controller = useTableController({
     tableId: 'audit-people',
     defaultSortDescriptor: { column: 'name', direction: 'ascending' },
+    defaultSelectedKeys: new Set(['2']),
+    defaultFilter: { schemaVersion: '1.0.0', value: 'a' },
+    defaultPageSize: 3,
+    totalRows: tableRows.length,
   });
-  const sorted = controller.sorting.sortRows(tableRows, (left, right, column) => {
+  const filtered = controller.filtering.filterRows(tableRows, (row, filter) =>
+    `${row.name} ${row.role} ${row.status}`.toLowerCase().includes(filter.value.toLowerCase()),
+  );
+  const sorted = controller.sorting.sortRows(filtered, (left, right, column) => {
     if (column === 'role') {
       return left.role.localeCompare(right.role);
     }
@@ -1025,11 +1032,13 @@ function SortableTableDemo() {
     }
     return left.name.localeCompare(right.name);
   });
+  const visibleRows = controller.pagination.paginateRows(sorted);
 
   return (
     <Table.Root
       {...controller.tableProps}
       aria-label="Sortable people"
+      selectionMode="multiple"
       className="audit__demo-extra-wide"
     >
       <Table.Header>
@@ -1044,7 +1053,7 @@ function SortableTableDemo() {
         </Table.Column>
       </Table.Header>
       <Table.Body>
-        {sorted.map((row) => (
+        {visibleRows.map((row) => (
           <Table.Row key={row.id} id={row.id}>
             <Table.Cell>{row.name}</Table.Cell>
             <Table.Cell>{row.role}</Table.Cell>

@@ -361,11 +361,19 @@
       "difficulty": "medium"
     },
     {
+      "slug": "table-controller-data-plugins",
+      "difficulty": "complex"
+    },
+    {
       "slug": "table-controller-sorting",
       "difficulty": "complex"
     },
     {
       "slug": "table-data",
+      "difficulty": "complex"
+    },
+    {
+      "slug": "table-virtualized",
       "difficulty": "complex"
     },
     {

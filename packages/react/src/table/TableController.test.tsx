@@ -6,6 +6,7 @@ import {
   sortTableRows,
   useTableController,
   type SortDescriptor,
+  type TableFilterExpression,
   type TableControllerOptions,
   type TableControllerRequestContext,
 } from './index';
@@ -75,7 +76,52 @@ function SortableTableHarness() {
   );
 }
 
-describe('Table controller sorting', () => {
+function PluginHarness(props: Partial<TableControllerOptions> = {}) {
+  const controller = useTableController({
+    tableId: 'plugins',
+    defaultSelectedKeys: new Set(['row-1']),
+    defaultPage: 1,
+    defaultPageSize: 2,
+    defaultFilter: { schemaVersion: '1.0.0', value: '' },
+    totalRows: rows.length,
+    virtualizationOptions: { rowHeight: 44 },
+    ...props,
+  });
+  const filtered = controller.filtering.filterRows(rows, (row, expression) =>
+    row.name.toLowerCase().includes(expression.value.toLowerCase()),
+  );
+  const visible = controller.pagination.paginateRows(filtered);
+  return (
+    <React.Fragment>
+      <output data-testid="selection">
+        {controller.selection.isSelected('row-1') ? 'selected' : 'not-selected'}
+      </output>
+      <output data-testid="page">{controller.pagination.page}</output>
+      <output data-testid="visible">{visible.map((row) => row.id).join(',')}</output>
+      <output data-testid="filter">{controller.filtering.filter.value}</output>
+      <output data-testid="row-height">
+        {controller.virtualization.virtualizerProps.layoutOptions?.rowHeight}
+      </output>
+      <button
+        type="button"
+        onClick={() => controller.selection.setSelectedKeys(new Set(['row-2']))}
+      >
+        Select Bob
+      </button>
+      <button type="button" onClick={() => controller.pagination.setPage(2)}>
+        Next page
+      </button>
+      <button
+        type="button"
+        onClick={() => controller.filtering.setFilter({ schemaVersion: '1.0.0', value: 'alice' })}
+      >
+        Filter Alice
+      </button>
+    </React.Fragment>
+  );
+}
+
+describe('Table controller plugins', () => {
   const { render, renderToString } = createRenderer();
 
   it('sorts client rows stably through React Aria table props', async () => {
@@ -135,18 +181,31 @@ describe('Table controller sorting', () => {
 
   it('correlates server queries and rejects cancelled or accepted responses', async () => {
     const requests: TableControllerRequestContext[] = [];
+    const queries: Array<{
+      page: number;
+      pageSize: number;
+      filter: TableFilterExpression;
+    }> = [];
     const committed: string[] = [];
     const { user } = await render(
       <ControllerHarness
         tableId="server"
         defaultSortDescriptor={{ column: 'name', direction: 'ascending' }}
-        onQueryChange={(_, context) => requests.push(context)}
+        onQueryChange={(query, context) => {
+          queries.push(query);
+          requests.push(context);
+        }}
       />,
     );
 
     await user.click(screen.getByRole('button', { name: 'Sort rows' }));
     expect(requests[0]?.requestId).toBe('server:1');
     expect(requests[0]?.isCurrent()).toBe(true);
+    expect(queries[0]).toMatchObject({
+      page: 1,
+      pageSize: 25,
+      filter: { schemaVersion: '1.0.0', value: '' },
+    });
 
     await user.click(screen.getByRole('button', { name: 'Sort rows' }));
     expect(requests[0]?.signal.aborted).toBe(true);
@@ -210,5 +269,61 @@ describe('Table controller sorting', () => {
       'row-3',
     ]);
     expect(rows.map((row) => row.id)).toEqual(['row-1', 'row-2', 'row-3']);
+  });
+
+  it('coordinates uncontrolled selection, pagination, filtering, and virtualization', async () => {
+    const { user } = await render(<PluginHarness />);
+
+    expect(screen.getByTestId('selection').textContent).toBe('selected');
+    expect(screen.getByTestId('page').textContent).toBe('1');
+    expect(screen.getByTestId('visible').textContent).toBe('row-1,row-2');
+    expect(screen.getByTestId('row-height').textContent).toBe('44');
+
+    await user.click(screen.getByRole('button', { name: 'Next page' }));
+    expect(screen.getByTestId('page').textContent).toBe('2');
+    expect(screen.getByTestId('visible').textContent).toBe('row-3');
+
+    await user.click(screen.getByRole('button', { name: 'Filter Alice' }));
+    expect(screen.getByTestId('filter').textContent).toBe('alice');
+    expect(screen.getByTestId('page').textContent).toBe('1');
+    expect(screen.getByTestId('visible').textContent).toBe('row-2,row-3');
+
+    await user.click(screen.getByRole('button', { name: 'Select Bob' }));
+    expect(screen.getByTestId('selection').textContent).toBe('not-selected');
+  });
+
+  it('keeps controlled pagination and filtering authoritative while reporting changes', async () => {
+    const onPageChange = vi.fn();
+    const onFilterChange = vi.fn();
+    const { user } = await render(
+      <PluginHarness
+        tableId="controlled-plugins"
+        page={1}
+        pageSize={2}
+        filter={{ schemaVersion: '1.0.0', value: '' }}
+        onPageChange={onPageChange}
+        onFilterChange={onFilterChange}
+      />,
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Next page' }));
+    await user.click(screen.getByRole('button', { name: 'Filter Alice' }));
+    expect(screen.getByTestId('page').textContent).toBe('1');
+    expect(screen.getByTestId('filter').textContent).toBe('');
+    expect(onPageChange).toHaveBeenCalledWith(2);
+    expect(onPageChange).toHaveBeenCalledWith(1);
+    expect(onFilterChange).toHaveBeenCalledWith({
+      schemaVersion: '1.0.0',
+      value: 'alice',
+    });
+  });
+
+  it('preserves plugin defaults across SSR and hydration', () => {
+    const view = renderToString(<PluginHarness tableId="plugin-ssr" defaultPage={2} />);
+    expect(screen.getByTestId('page').textContent).toBe('2');
+    expect(screen.getByTestId('visible').textContent).toBe('row-3');
+    const hydrated = view.hydrate();
+    expect(screen.getByTestId('page').textContent).toBe('2');
+    hydrated.unmount();
   });
 });
