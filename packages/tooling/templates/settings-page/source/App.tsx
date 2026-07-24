@@ -12,8 +12,8 @@ import { Text } from '@tale-ui/react/text';
 export function Example() {
   return (
     <Form
-      onSubmit={(e) => {
-        e.preventDefault(); /* save settings */
+      onSubmit={(event) => {
+        event.preventDefault(); /* save settings */
       }}
     >
       <Text as="h2" variant="heading" size="m">

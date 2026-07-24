@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop -- durable mutations and recovery must preserve journal order */
 import { createHash, randomUUID } from 'node:crypto';
 import {
   constants,
@@ -12,7 +13,7 @@ import {
   stat,
 } from 'node:fs/promises';
 import { hostname } from 'node:os';
-import { basename, dirname, isAbsolute, join, normalize, relative, resolve, sep } from 'node:path';
+import { basename, dirname, isAbsolute, join, normalize, resolve, sep } from 'node:path';
 import type {
   ProjectDoctorResult,
   ProjectMutationFile,
@@ -151,10 +152,7 @@ async function targetPath(root: string, input: string) {
         );
       }
     } catch (error) {
-      if (
-        error instanceof TaleToolingError ||
-        (error as NodeJS.ErrnoException).code !== 'ENOENT'
-      ) {
+      if (error instanceof TaleToolingError || (error as NodeJS.ErrnoException).code !== 'ENOENT') {
         throw error;
       }
       break;
@@ -177,7 +175,9 @@ async function readExisting(target: string) {
 async function writeAtomic(path: string, content: string, mode = 0o600) {
   await mkdir(dirname(path), { recursive: true, mode: 0o700 });
   const temporary = join(dirname(path), `.${basename(path)}.${randomUUID()}.tmp`);
-  const handle = await open(temporary, constants.O_CREAT | constants.O_EXCL | constants.O_WRONLY, mode);
+  // eslint-disable-next-line no-bitwise -- fs open flags are a bitmask by contract.
+  const flags = constants.O_CREAT | constants.O_EXCL | constants.O_WRONLY;
+  const handle = await open(temporary, flags, mode);
   try {
     await handle.writeFile(content, 'utf8');
     await handle.sync();
@@ -274,10 +274,7 @@ async function acquireRecoveryLock(
     return acquireLock(store, owner);
   }
   const current = await readJson<LockOwner>(join(lock, 'owner.json'));
-  if (
-    current.operationId !== owner.operationId ||
-    current.rootDigest !== owner.rootDigest
-  ) {
+  if (current.operationId !== owner.operationId || current.rootDigest !== owner.rootDigest) {
     throw new TaleToolingError(
       'TALE_CONCURRENT_MUTATION',
       'Tale UI: the root lock belongs to a different operation and cannot be recovered.',
@@ -363,14 +360,14 @@ function reportFor(plan: StoredPlan): ProjectMutationPlan {
     requestId: plan.requestId,
     planDigest: plan.planDigest,
     files: plan.files.map((file): ProjectMutationFileReport => {
-      const action =
-        file.originalDigest === file.postimageDigest
-          ? 'no-op'
-          : file.originalExists && !file.overwrite
-            ? 'conflict'
-            : file.originalExists
-              ? 'update'
-              : 'create';
+      let action: ProjectMutationFileReport['action'] = 'create';
+      if (file.originalDigest === file.postimageDigest) {
+        action = 'no-op';
+      } else if (file.originalExists && !file.overwrite) {
+        action = 'conflict';
+      } else if (file.originalExists) {
+        action = 'update';
+      }
       return {
         path: file.path,
         action,
@@ -448,10 +445,7 @@ async function applyStoredPlan(
     const { target } = await targetPath(root, file.path);
     const existing = await readExisting(target);
     const existingDigest = digest(existing.content);
-    if (
-      existingDigest !== file.originalDigest &&
-      existingDigest !== file.postimageDigest
-    ) {
+    if (existingDigest !== file.originalDigest && existingDigest !== file.postimageDigest) {
       journal.state = 'manual-intervention';
       await persistJournal(operationPath, journal);
       throw new TaleToolingError(
@@ -642,9 +636,7 @@ export async function doctorProject(rootInput: string): Promise<ProjectDoctorRes
   blockedOperationIds.sort();
   return {
     schemaVersion: '1.0.0',
-    healthy:
-      blockedOperationIds.length === 0 &&
-      manualInterventionOperationIds.length === 0,
+    healthy: blockedOperationIds.length === 0 && manualInterventionOperationIds.length === 0,
     blockedOperationIds,
     manualInterventionOperationIds,
     lock: {

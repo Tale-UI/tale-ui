@@ -124,6 +124,16 @@ function managedBlock(existing: string, label: string, body: string) {
   return existing;
 }
 
+function optionalRecord(value: unknown) {
+  if (value === undefined) {
+    return {};
+  }
+  if (value && !Array.isArray(value) && typeof value === 'object') {
+    return { ...(value as Record<string, unknown>) };
+  }
+  return null;
+}
+
 async function mergeMcpConfig(root: string) {
   const existing = await readProjectFile(root, '.mcp.json');
   let config: Record<string, unknown> = {};
@@ -144,14 +154,7 @@ async function mergeMcpConfig(root: string) {
       );
     }
   }
-  const mcpServers =
-    config.mcpServers === undefined
-      ? {}
-      : config.mcpServers &&
-          !Array.isArray(config.mcpServers) &&
-          typeof config.mcpServers === 'object'
-        ? { ...(config.mcpServers as Record<string, unknown>) }
-        : null;
+  const mcpServers = optionalRecord(config.mcpServers);
   if (!mcpServers) {
     throw new TaleToolingError(
       'TALE_MALFORMED_PROJECT_CONFIG',
@@ -190,14 +193,7 @@ async function mergePackageScripts(root: string) {
       { cause: error },
     );
   }
-  const scripts =
-    manifest.scripts === undefined
-      ? {}
-      : manifest.scripts &&
-          !Array.isArray(manifest.scripts) &&
-          typeof manifest.scripts === 'object'
-        ? { ...(manifest.scripts as Record<string, unknown>) }
-        : null;
+  const scripts = optionalRecord(manifest.scripts);
   if (!scripts) {
     throw new TaleToolingError(
       'TALE_MALFORMED_PROJECT_CONFIG',

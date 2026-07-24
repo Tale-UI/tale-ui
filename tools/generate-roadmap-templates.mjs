@@ -1,16 +1,10 @@
 #!/usr/bin/env node
 
 import { createHash } from 'node:crypto';
-import {
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  readdirSync,
-  rmSync,
-  writeFileSync,
-} from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import ts from 'typescript';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const OUTPUT = join(ROOT, 'packages/tooling/templates');
@@ -90,15 +84,23 @@ function coalesceImports(code) {
   const remove = new Set();
   lines.forEach((line, index) => {
     const match = line.match(/^import\s+\{\s*([^}]+)\s*\}\s+from\s+['"]([^'"]+)['"];?\s*$/);
-    if (!match) return;
+    if (!match) {
+      return;
+    }
     const [, raw, module] = match;
-    if (!imports.has(module)) imports.set(module, { index, specs: new Map() });
+    if (!imports.has(module)) {
+      imports.set(module, { index, specs: new Map() });
+    }
     const entry = imports.get(module);
     for (const item of raw.split(',')) {
       const spec = item.trim();
-      if (spec) entry.specs.set(localImportKey(spec), spec);
+      if (spec) {
+        entry.specs.set(localImportKey(spec), spec);
+      }
     }
-    if (entry.index !== index) remove.add(index);
+    if (entry.index !== index) {
+      remove.add(index);
+    }
   });
   for (const [module, entry] of imports) {
     lines[entry.index] = `import { ${[...entry.specs.values()].join(', ')} } from '${module}';`;
@@ -112,15 +114,44 @@ function recipeSource(slug) {
     '\n',
   );
   const blocks = [...markdown.matchAll(/```tsx\n([\s\S]*?)```/g)].map((match) => match[1]);
-  if (blocks.length === 0) throw new Error(`Recipe ${slug} has no TSX source`);
-  let code = coalesceImports(blocks.join('\n\n')).replace(
-    /^import\s+['"]@tale-ui\/charts\/styles['"];?\n/gm,
-    '',
+  if (blocks.length === 0) {
+    throw new Error(`Recipe ${slug} has no TSX source`);
+  }
+  let code = blocks.join('\n\n');
+  const parsed = ts.createSourceFile(
+    'template.tsx',
+    code,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX,
   );
+  const importRanges = parsed.statements.filter(ts.isImportDeclaration).map((statement) => ({
+    start: statement.getFullStart(),
+    end: statement.getEnd(),
+    text: statement.getText(parsed),
+  }));
+  const imports = [...new Set(importRanges.map(({ text }) => text))];
+  for (const range of importRanges.toReversed()) {
+    code = `${code.slice(0, range.start)}${code.slice(range.end)}`;
+  }
+  code = coalesceImports(`${imports.join('\n')}\n\n${code.trimStart()}`)
+    .replace("import { useState } from 'react';", "import * as React from 'react';")
+    .replaceAll('useState(', 'React.useState(')
+    .replaceAll('console.log(', 'console.warn(')
+    .replace(
+      /await new Promise\(\(resolve\) => setTimeout\(resolve, (\d+)\)\);/g,
+      'await new Promise((resolve) => {\n    setTimeout(resolve, $1);\n  });',
+    )
+    .replace(/\bif \(([^\n]+)\) return ([^\n]+);/g, 'if ($1) { return $2; }')
+    .replace(/\(\s*e\s*\)\s*=>/g, '(event) =>')
+    .replace(/\be\.preventDefault\(\)/g, 'event.preventDefault()')
+    .replace(/^import\s+['"]@tale-ui\/charts\/styles['"];?\n/gm, '');
   if (!/export\s+function\s+Example\b/.test(code)) {
     const functions = [...code.matchAll(/^(export(?:\s+default)?\s+)?function\s+(\w+)/gm)];
     const target = functions.at(-1);
-    if (!target) throw new Error(`Recipe ${slug} has no function declaration`);
+    if (!target) {
+      throw new Error(`Recipe ${slug} has no function declaration`);
+    }
     code = `${code.slice(0, target.index)}export function Example${code.slice(
       target.index + target[0].length,
     )}`;
@@ -208,4 +239,3 @@ if (CHECK) {
 } else {
   process.stdout.write(`GENERATED: ${DEFINITIONS.length} roadmap templates\n`);
 }
-

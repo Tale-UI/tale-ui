@@ -24,7 +24,7 @@ export function Example() {
   });
 
   const onSubmit = (data: FormValues) => {
-    console.log(data);
+    console.warn(data);
   };
 
   return (

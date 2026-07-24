@@ -11,8 +11,8 @@ import { Check } from 'lucide-react';
 export function Example() {
   return (
     <Form
-      onSubmit={(e) => {
-        e.preventDefault(); /* handle submit */
+      onSubmit={(event) => {
+        event.preventDefault(); /* handle submit */
       }}
     >
       <Fieldset.Root>

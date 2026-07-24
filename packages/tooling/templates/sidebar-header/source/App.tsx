@@ -9,7 +9,7 @@ import { Column } from '@tale-ui/react/column';
 import { Row } from '@tale-ui/react/row';
 import { Text } from '@tale-ui/react/text';
 import { Menu, Home, Settings, Users, FileText, Bell } from 'lucide-react';
-import { useState } from 'react';
+import * as React from 'react';
 
 const navItems = [
   { href: '/', label: 'Home', icon: Home },
@@ -38,7 +38,7 @@ function SidebarNav() {
 }
 
 export function Example({ children }: { children: React.ReactNode }) {
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   return (
     <Row align="stretch" style={{ minHeight: '100vh', gap: 0 }}>

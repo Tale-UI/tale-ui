@@ -17,8 +17,8 @@ export function Example() {
   });
 
   const sorted = controller.sorting.sortRows(data, (left, right, column: Key) => {
-    if (column === 'email') return left.email.localeCompare(right.email);
-    if (column === 'role') return left.role.localeCompare(right.role);
+    if (column === 'email') { return left.email.localeCompare(right.email); }
+    if (column === 'role') { return left.role.localeCompare(right.role); }
     return left.name.localeCompare(right.name);
   });
 
@@ -53,8 +53,8 @@ export function Example() {
                   </Menu.Trigger>
                   <Menu.Popover>
                     <Menu.MenuList>
-                      <Menu.Item onAction={() => console.log('Edit', user.id)}>Edit</Menu.Item>
-                      <Menu.Item onAction={() => console.log('Delete', user.id)}>Delete</Menu.Item>
+                      <Menu.Item onAction={() => console.warn('Edit', user.id)}>Edit</Menu.Item>
+                      <Menu.Item onAction={() => console.warn('Delete', user.id)}>Delete</Menu.Item>
                     </Menu.MenuList>
                   </Menu.Popover>
                 </Menu.Root>

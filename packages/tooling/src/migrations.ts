@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop -- migration discovery and planning preserve canonical file order */
 import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { readFile, readdir } from 'node:fs/promises';
@@ -36,12 +37,7 @@ const ignoredDirectories = new Set([
   'node_modules',
   'storybook-static',
 ]);
-const sensitiveNames = [
-  /^\.env(?:\.|$)/,
-  /credential/i,
-  /private[-_.]?key/i,
-  /secret/i,
-];
+const sensitiveNames = [/^\.env(?:\.|$)/, /credential/i, /private[-_.]?key/i, /secret/i];
 
 function migrationRoot() {
   const root = migrationRootCandidates.find((candidate) => existsSync(candidate));
@@ -86,7 +82,9 @@ export async function listMigrations(): Promise<TaleMigrationManifest[]> {
       ),
     ),
   );
-  return manifests.sort((left, right) => left.order - right.order || left.id.localeCompare(right.id));
+  return manifests.sort(
+    (left, right) => left.order - right.order || left.id.localeCompare(right.id),
+  );
 }
 
 async function loadMigration(id: string) {
@@ -215,7 +213,9 @@ function transformFieldControls(content: string) {
     }
   }
   if (next.includes('<Radio.Group') || next.includes('</Radio.Group>')) {
-    next = next.replaceAll('<Radio.Group', '<RadioGroup').replaceAll('</Radio.Group>', '</RadioGroup>');
+    next = next
+      .replaceAll('<Radio.Group', '<RadioGroup')
+      .replaceAll('</Radio.Group>', '</RadioGroup>');
     const anchor = "import { RadioField } from '@tale-ui/react/radio-field';";
     if (next.includes(anchor) && !next.includes("'@tale-ui/react/radio-group'")) {
       next = next.replace(
@@ -302,9 +302,11 @@ async function assertSupported(root: string, migration: TaleMigrationManifest) {
     return;
   }
   const range =
-    manifest.dependencies?.['@tale-ui/react'] ||
-    manifest.devDependencies?.['@tale-ui/react'];
-  const version = range?.match(/(\d+)\.(\d+)\.(\d+)/)?.slice(1).map(Number);
+    manifest.dependencies?.['@tale-ui/react'] || manifest.devDependencies?.['@tale-ui/react'];
+  const version = range
+    ?.match(/(\d+)\.(\d+)\.(\d+)/)
+    ?.slice(1)
+    .map(Number);
   if (
     version &&
     (version[0]! > 2 ||

@@ -2,6 +2,9 @@ import { Table } from '@tale-ui/react/table';
 import { EmptyState } from '@tale-ui/react/empty-state';
 import { Icon } from '@tale-ui/react/icon';
 import { Inbox, FileQuestion } from 'lucide-react';
+import { List } from '@tale-ui/react/list';
+import { Column } from '@tale-ui/react/column';
+import { Text } from '@tale-ui/react/text';
 
 interface Row {
   id: string;
@@ -40,9 +43,6 @@ export function DataTable({ rows }: { rows: Row[] }) {
   );
 }
 
-
-import { List } from '@tale-ui/react/list';
-
 export function ItemList({ items }: { items: string[] }) {
   if (items.length === 0) {
     return (
@@ -63,10 +63,6 @@ export function ItemList({ items }: { items: string[] }) {
     </List.Root>
   );
 }
-
-
-import { Column } from '@tale-ui/react/column';
-import { Text } from '@tale-ui/react/text';
 
 export function Example() {
   const sampleRows = [

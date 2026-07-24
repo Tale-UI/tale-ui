@@ -1,5 +1,8 @@
 import { Spinner } from '@tale-ui/react/spinner';
 import { Row } from '@tale-ui/react/row';
+import * as React from 'react';
+import { Button } from '@tale-ui/react/button';
+import { ProgressBar } from '@tale-ui/react/progress-bar';
 
 export function LoadingSection() {
   return (
@@ -9,16 +12,14 @@ export function LoadingSection() {
   );
 }
 
-
-import { useState } from 'react';
-import { Button } from '@tale-ui/react/button';
-
 async function submitForm() {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => {
+    setTimeout(resolve, 1000);
+  });
 }
 
 export function SubmitButton() {
-  const [pending, setPending] = useState(false);
+  const [pending, setPending] = React.useState(false);
 
   async function handlePress() {
     setPending(true);
@@ -36,9 +37,6 @@ export function SubmitButton() {
   );
 }
 
-
-import { ProgressBar } from '@tale-ui/react/progress-bar';
-
 export function UploadProgress({ percent }: { percent: number }) {
   return (
     <ProgressBar.Root value={percent} minValue={0} maxValue={100}>
@@ -52,8 +50,6 @@ export function UploadProgress({ percent }: { percent: number }) {
     </ProgressBar.Root>
   );
 }
-
-
 
 export function Example() {
   return (
