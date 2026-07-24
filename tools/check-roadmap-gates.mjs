@@ -11,6 +11,10 @@ const accepted = /^- Status: Accepted$/m.test(adr);
 
 const packageManifest = join(ROOT, 'packages/tooling/package.json');
 const publishWorkflow = readFileSync(join(ROOT, '.github/workflows/publish.yml'), 'utf8');
+const capabilitySource = JSON.parse(
+  readFileSync(join(ROOT, 'registry/sources/capabilities.json'), 'utf8'),
+);
+const artifactRegistry = JSON.parse(readFileSync(join(ROOT, 'registry/artifacts.json'), 'utf8'));
 
 function findPackageManifests(directory) {
   if (!existsSync(directory)) {
@@ -61,8 +65,25 @@ if (!accepted && prematureIntegrations.length > 0) {
   );
 }
 
-console.log(
-  accepted
-    ? `OK: ${ADR_PATH} is Accepted`
-    : `OK: P-01 is enforced; ${ADR_PATH} remains Proposed and no public tooling integration exists`,
-);
+if (accepted) {
+  const toolingManifest = JSON.parse(readFileSync(packageManifest, 'utf8'));
+  if (artifactRegistry.releaseChannel === 'internal' && toolingManifest.private !== true) {
+    throw new Error('Internal tooling releases must remain private');
+  }
+  if (publishWorkflow.includes('@tale-ui/tooling')) {
+    throw new Error('Tooling publication is gated until packed validation parity passes');
+  }
+  for (const id of ['code.validate', 'project.mutate']) {
+    const capability = capabilitySource.capabilities.find((entry) => entry.id === id);
+    if (!capability || capability.status !== 'gated' || capability.availability.length !== 0) {
+      throw new Error(`${id} must remain unavailable until its capability-specific gate passes`);
+    }
+  }
+  console.log(
+    'OK: P-01 is approved; @tale-ui/tooling remains internal and validation/mutation stay gated',
+  );
+} else {
+  console.log(
+    `OK: P-01 is enforced; ${ADR_PATH} remains Proposed and no public tooling integration exists`,
+  );
+}

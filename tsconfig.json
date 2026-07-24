@@ -19,6 +19,9 @@
       "path": "packages/themes/tsconfig.json"
     },
     {
+      "path": "packages/tooling/tsconfig.json"
+    },
+    {
       "path": "scripts/tsconfig.json"
     },
     {

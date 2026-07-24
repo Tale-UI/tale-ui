@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noEmit": false,
+    "rootDir": ".",
+    "outDir": "./build-tests",
+    "types": ["node"]
+  },
+  "include": ["src/**/*.test.ts"],
+  "references": [{ "path": "./tsconfig.build.json" }]
+}

@@ -40,6 +40,10 @@
         "TALE_INVALID_TSCONFIG",
         "TALE_INTERNAL_ERROR"
       ]
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$"
     }
   },
   "oneOf": [
@@ -51,8 +55,25 @@
         "ok": { "const": true },
         "command": { "type": "string" },
         "requestId": { "type": "string", "minLength": 1 },
-        "versions": { "type": "object" },
-        "capabilities": { "type": "array", "items": { "type": "string" } },
+        "versions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["contract", "registry", "capabilityManifest", "packages"],
+          "properties": {
+            "contract": { "$ref": "#/$defs/semver" },
+            "registry": { "$ref": "#/$defs/semver" },
+            "capabilityManifest": { "$ref": "#/$defs/semver" },
+            "packages": {
+              "type": "object",
+              "additionalProperties": { "$ref": "#/$defs/semver" }
+            }
+          }
+        },
+        "capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[a-z][a-z0-9.-]+$" }
+        },
         "data": {},
         "warnings": { "type": "array", "items": { "type": "string" } },
         "metadata": { "type": "object" }

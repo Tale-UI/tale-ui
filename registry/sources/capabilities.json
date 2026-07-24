@@ -6,13 +6,19 @@
       "id": "artifact.get",
       "version": "1.0.0",
       "description": "Retrieve one artifact by stable ID or alias.",
-      "availability": ["api"]
+      "availability": ["api", "cli"]
     },
     {
       "id": "artifact.search",
       "version": "1.0.0",
       "description": "Search mixed artifact kinds with stable identifiers.",
-      "availability": ["api"]
+      "availability": ["api", "cli"]
+    },
+    {
+      "id": "manifest.get",
+      "version": "1.0.0",
+      "description": "Retrieve correlated contract, registry, package, and capability versions.",
+      "availability": ["api", "cli"]
     },
     {
       "id": "component.get",
@@ -38,7 +44,7 @@
       "description": "Validate consumer code locally. Unavailable until the packaged validator gate passes.",
       "availability": [],
       "status": "gated",
-      "gate": "P-01"
+      "gate": "P0-B-validator"
     },
     {
       "id": "project.mutate",

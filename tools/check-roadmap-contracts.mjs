@@ -389,6 +389,44 @@ for (const path of ['src/file.tsx', 'src\\file.tsx', 'app/routes/settings.tsx'])
 validate(
   'schemas/error-envelope.schema.json',
   {
+    ok: true,
+    command: 'manifest',
+    requestId: 'request-1',
+    versions: {
+      contract: '1.0.0',
+      registry: artifactRegistry.registryVersion,
+      capabilityManifest: capabilityRegistry.schemaVersion,
+      packages: artifactRegistry.packageVersions,
+    },
+    capabilities: capabilityRegistry.capabilities
+      .filter((capability) => capability.status === 'available')
+      .map((capability) => capability.id),
+    data: { releaseChannel: artifactRegistry.releaseChannel },
+    warnings: [],
+  },
+  'success envelope fixture',
+);
+assert.equal(
+  isValid('schemas/error-envelope.schema.json', {
+    ok: true,
+    command: 'manifest',
+    requestId: 'request-1',
+    versions: {
+      contract: '1.0.0',
+      registry: artifactRegistry.registryVersion,
+      packages: artifactRegistry.packageVersions,
+    },
+    capabilities: [],
+    data: {},
+    warnings: [],
+  }),
+  false,
+  'Success envelopes must include every correlated version field',
+);
+
+validate(
+  'schemas/error-envelope.schema.json',
+  {
     ok: false,
     command: 'search',
     requestId: 'request-1',

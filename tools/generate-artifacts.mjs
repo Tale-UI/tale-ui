@@ -29,6 +29,7 @@ const GENERATED_INPUTS = [
   'packages/themes/package.json',
   'packages/utils/package.json',
   'packages/charts/package.json',
+  'packages/tooling/package.json',
 ];
 
 const TOP_LEVEL_PUBLIC_DOCS = [

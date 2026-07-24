@@ -45,3 +45,43 @@ export interface TaleError {
   deprecatedIn?: string;
   replacementCode?: TaleErrorCode;
 }
+
+export function isTaleErrorCode(value: unknown): value is TaleErrorCode {
+  return typeof value === 'string' && value in TALE_ERROR_EXIT;
+}
+
+export class TaleToolingError extends Error {
+  readonly code: TaleErrorCode;
+  readonly details: Record<string, unknown>;
+  readonly retryable: boolean;
+
+  constructor(
+    code: TaleErrorCode,
+    message: string,
+    options: {
+      details?: Record<string, unknown>;
+      retryable?: boolean;
+      cause?: unknown;
+    } = {},
+  ) {
+    super(message, { cause: options.cause });
+    this.name = 'TaleToolingError';
+    this.code = code;
+    this.details = options.details || {};
+    this.retryable = options.retryable || false;
+  }
+}
+
+export function toTaleError(error: unknown): TaleError {
+  const normalized =
+    error instanceof TaleToolingError
+      ? error
+      : new TaleToolingError('TALE_INTERNAL_ERROR', 'An internal tooling error occurred.');
+  return {
+    code: normalized.code,
+    message: normalized.message,
+    details: normalized.details,
+    retryable: normalized.retryable,
+    documentation: `https://tale-ui.dev/errors/${normalized.code}`,
+  };
+}

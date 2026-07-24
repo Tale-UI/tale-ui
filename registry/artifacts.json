@@ -198,6 +198,7 @@
     "packages/styles/package.json",
     "packages/themes/package.json",
     "packages/tokens/package.json",
+    "packages/tooling/package.json",
     "packages/utils/package.json",
     "packages/utils/src/useAnimationFrame.ts",
     "packages/utils/src/useEnhancedClickHandler.ts",
@@ -216,7 +217,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:bee9195ffaab1d8e0070a53939ef4531ba2d0a51b797e4a44bbc0b0839eb1b51",
+  "sourceRevision": "sha256:a68e9cef5288d69532fe1d5710f03df03e0ffafd22ee8e3c7071a1bc716a8ee0",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -225,6 +226,7 @@
     "@tale-ui/react-styles": "2.0.0",
     "@tale-ui/themes": "2.0.0",
     "@tale-ui/tokens": "2.0.0",
+    "@tale-ui/tooling": "0.0.0-internal",
     "@tale-ui/utils": "2.0.0"
   },
   "capabilityManifestId": "tale:capability-manifest:core",
@@ -48748,5 +48750,5 @@
       "trust": "first-party"
     }
   ],
-  "digest": "sha256:bc3b66d95c1cc26c7626f65d5d0e0d5e158953b6bdb5e4395921d06b6c182c42"
+  "digest": "sha256:cda81739b609c884338ca1d37fae128fe97952166c5bb779826661db0fd94713"
 }

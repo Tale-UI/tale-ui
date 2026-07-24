@@ -1,0 +1,41 @@
+{
+  "name": "@tale-ui/tooling",
+  "version": "0.0.0-internal",
+  "description": "Tale UI registry, validation, and safe project tooling.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./api": "./src/api.ts",
+    "./contracts": "./src/contracts/index.ts",
+    "./registry": "./src/registry.ts",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "tale": "./bin/tale.mjs"
+  },
+  "scripts": {
+    "prebuild": "rimraf --glob build build-tests \"*.tsbuildinfo\"",
+    "build": "node scripts/build.mjs",
+    "test": "tsx --test src/api.test.ts",
+    "test:package": "pnpm build && publint run ./build && attw --profile esm-only --pack ./build && node scripts/test-packed.mjs",
+    "typescript": "tsc -b tsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  },
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tale-UI/tale-ui.git",
+    "directory": "packages/tooling"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "directory": "build"
+  }
+}

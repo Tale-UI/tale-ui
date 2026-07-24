@@ -8,7 +8,8 @@
       "version": "1.0.0",
       "description": "Retrieve one artifact by stable ID or alias.",
       "availability": [
-        "api"
+        "api",
+        "cli"
       ],
       "status": "available"
     },
@@ -17,7 +18,8 @@
       "version": "1.0.0",
       "description": "Search mixed artifact kinds with stable identifiers.",
       "availability": [
-        "api"
+        "api",
+        "cli"
       ],
       "status": "available"
     },
@@ -27,7 +29,7 @@
       "description": "Validate consumer code locally. Unavailable until the packaged validator gate passes.",
       "availability": [],
       "status": "gated",
-      "gate": "P-01"
+      "gate": "P0-B-validator"
     },
     {
       "id": "component.get",
@@ -36,6 +38,16 @@
       "availability": [
         "api",
         "local-mcp"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "manifest.get",
+      "version": "1.0.0",
+      "description": "Retrieve correlated contract, registry, package, and capability versions.",
+      "availability": [
+        "api",
+        "cli"
       ],
       "status": "available"
     },
@@ -68,5 +80,5 @@
       "status": "available"
     }
   ],
-  "digest": "sha256:b6eaa528b2ca4cd4fa55eab44f17bc71e06a320fa5977e8c86f4d75b9f2ca6de"
+  "digest": "sha256:1143c8f60120e9f3001b73b83220aee4aea32a5f6a583b05d8ab7b5fb292d836"
 }
