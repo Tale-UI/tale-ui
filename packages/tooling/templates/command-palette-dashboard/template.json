@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "tale:template:command-palette-dashboard",
+  "version": "1.0.0",
+  "source": "source/App.tsx",
+  "skeleton": "skeleton/App.tsx",
+  "dependencies": {
+    "@tale-ui/react": "^2.0.0",
+    "react": ">=18.0.0"
+  },
+  "preview": {
+    "recipe": "docs/recipes/command-palette-dashboard.md",
+    "accessibility": "keyboard, screen-reader, zoom, contrast, and reduced-motion review required",
+    "responsive": true
+  },
+  "golden": "tools/golden-prompts/command-palette-hook.json",
+  "compatibility": {
+    "react": ">=18.0.0",
+    "tale": ">=2.0.0 <3.0.0",
+    "frameworks": [
+      "next",
+      "vite"
+    ]
+  },
+  "appearance": [
+    "light",
+    "dark"
+  ],
+  "rtl": true,
+  "provenance": {
+    "source": "docs/recipes/command-palette-dashboard.md",
+    "firstParty": true
+  },
+  "license": "MIT",
+  "digest": "sha256:6e5901011a4fd4df511523e077e36e7de85dfe3b31bc24d789e22c7328260773"
+}

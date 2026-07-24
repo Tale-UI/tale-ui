@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "tale:template:react-hook-form",
+  "version": "1.0.0",
+  "source": "source/App.tsx",
+  "skeleton": "skeleton/App.tsx",
+  "dependencies": {
+    "@tale-ui/react": "^2.0.0",
+    "react": ">=18.0.0",
+    "lucide-react": "^0.468.0",
+    "react-hook-form": "^7.62.0"
+  },
+  "preview": {
+    "recipe": "docs/recipes/react-hook-form.md",
+    "accessibility": "keyboard, screen-reader, zoom, contrast, and reduced-motion review required",
+    "responsive": true
+  },
+  "golden": "tools/golden-prompts/form-login.json",
+  "compatibility": {
+    "react": ">=18.0.0",
+    "tale": ">=2.0.0 <3.0.0",
+    "frameworks": [
+      "next",
+      "vite"
+    ]
+  },
+  "appearance": [
+    "light",
+    "dark"
+  ],
+  "rtl": true,
+  "provenance": {
+    "source": "docs/recipes/react-hook-form.md",
+    "firstParty": true
+  },
+  "license": "MIT",
+  "digest": "sha256:138d703e92b5146a819c7cb8e90e05326736c0eae05497685bc34c88e454b0d5"
+}

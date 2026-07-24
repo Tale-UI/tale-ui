@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "passed",
+  "capability": "project.mutate",
+  "surfaces": [
+    "api",
+    "cli"
+  ],
+  "operationStore": ".tale/operations",
+  "safetyEvidence": [
+    "canonical-root-confinement",
+    "traversal-and-symlink-refusal",
+    "compare-before-write",
+    "atomic-replace-and-postimage-verification",
+    "root-wide-lock",
+    "idempotency-slot",
+    "terminal-replay",
+    "interruption-diagnosis",
+    "resume-and-rollback",
+    "read-only-doctor",
+    "installed-package-materialization"
+  ],
+  "verification": {
+    "unit": "packages/tooling/src/operations.test.ts",
+    "materialization": "packages/tooling/src/materialize.test.ts",
+    "packed": "packages/tooling/scripts/test-packed.mjs"
+  }
+}

@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const ADR_PATH = 'docs/architecture/adr-001-tooling-package.md';
 const VALIDATION_BASELINE_PATH = 'analysis/baselines/validation-runtime.json';
+const MUTATION_BASELINE_PATH = 'analysis/baselines/project-mutation-runtime.json';
 const adr = readFileSync(join(ROOT, ADR_PATH), 'utf8');
 const accepted = /^- Status: Accepted$/m.test(adr);
 
@@ -116,14 +117,43 @@ if (accepted) {
   const mutationCapability = capabilitySource.capabilities.find(
     (entry) => entry.id === 'project.mutate',
   );
-  if (
-    !mutationCapability ||
+  if (!mutationCapability) {
+    throw new Error('project.mutate must be declared in the capability source');
+  }
+  if (mutationCapability.status === 'available') {
+    if (
+      JSON.stringify(mutationCapability.availability) !== JSON.stringify(['api', 'cli'])
+    ) {
+      throw new Error('Available project.mutate must expose exact API and CLI parity');
+    }
+    const requiredEvidence = [
+      MUTATION_BASELINE_PATH,
+      'packages/tooling/src/operations.test.ts',
+      'packages/tooling/src/materialize.test.ts',
+      'packages/tooling/scripts/test-packed.mjs',
+      'packages/tooling/templates',
+    ];
+    for (const path of requiredEvidence) {
+      if (!existsSync(join(ROOT, path))) {
+        throw new Error(`project.mutate is available without required gate evidence: ${path}`);
+      }
+    }
+    const baseline = JSON.parse(readFileSync(join(ROOT, MUTATION_BASELINE_PATH), 'utf8'));
+    if (
+      baseline.status !== 'passed' ||
+      JSON.stringify(baseline.surfaces) !== JSON.stringify(['api', 'cli']) ||
+      !baseline.safetyEvidence?.includes('read-only-doctor') ||
+      !baseline.safetyEvidence?.includes('installed-package-materialization')
+    ) {
+      throw new Error('project.mutate gate evidence is incomplete or incompatible');
+    }
+  } else if (
     mutationCapability.status !== 'gated' ||
     mutationCapability.availability.length !== 0
   ) {
-    throw new Error('project.mutate must remain unavailable until its capability gate passes');
+    throw new Error('project.mutate must be available with evidence or remain fully gated');
   }
-  console.log('OK: P-01 is approved; validation evidence is enforced and mutation remains gated');
+  console.log('OK: P-01 is approved; validation and mutation evidence gates are enforced');
 } else {
   console.log(
     `OK: P-01 is enforced; ${ADR_PATH} remains Proposed and no public tooling integration exists`,

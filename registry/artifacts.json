@@ -200,6 +200,36 @@
     "packages/themes/package.json",
     "packages/tokens/package.json",
     "packages/tooling/package.json",
+    "packages/tooling/templates/app-header/skeleton/App.tsx",
+    "packages/tooling/templates/app-header/source/App.tsx",
+    "packages/tooling/templates/app-header/template.json",
+    "packages/tooling/templates/chart-dashboard/skeleton/App.tsx",
+    "packages/tooling/templates/chart-dashboard/source/App.tsx",
+    "packages/tooling/templates/chart-dashboard/template.json",
+    "packages/tooling/templates/command-palette-dashboard/skeleton/App.tsx",
+    "packages/tooling/templates/command-palette-dashboard/source/App.tsx",
+    "packages/tooling/templates/command-palette-dashboard/template.json",
+    "packages/tooling/templates/empty-state/skeleton/App.tsx",
+    "packages/tooling/templates/empty-state/source/App.tsx",
+    "packages/tooling/templates/empty-state/template.json",
+    "packages/tooling/templates/loading-patterns/skeleton/App.tsx",
+    "packages/tooling/templates/loading-patterns/source/App.tsx",
+    "packages/tooling/templates/loading-patterns/template.json",
+    "packages/tooling/templates/react-hook-form/skeleton/App.tsx",
+    "packages/tooling/templates/react-hook-form/source/App.tsx",
+    "packages/tooling/templates/react-hook-form/template.json",
+    "packages/tooling/templates/settings-page/skeleton/App.tsx",
+    "packages/tooling/templates/settings-page/source/App.tsx",
+    "packages/tooling/templates/settings-page/template.json",
+    "packages/tooling/templates/sidebar-header/skeleton/App.tsx",
+    "packages/tooling/templates/sidebar-header/source/App.tsx",
+    "packages/tooling/templates/sidebar-header/template.json",
+    "packages/tooling/templates/sortable-table/skeleton/App.tsx",
+    "packages/tooling/templates/sortable-table/source/App.tsx",
+    "packages/tooling/templates/sortable-table/template.json",
+    "packages/tooling/templates/validated-form/skeleton/App.tsx",
+    "packages/tooling/templates/validated-form/source/App.tsx",
+    "packages/tooling/templates/validated-form/template.json",
     "packages/utils/package.json",
     "packages/utils/src/useAnimationFrame.ts",
     "packages/utils/src/useEnhancedClickHandler.ts",
@@ -218,7 +248,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:5e085c80a339fb43c68e4c71e55bc69e0c84c3291b22e2ca765da497d471a059",
+  "sourceRevision": "sha256:0cd1c7ba1f0d5ecd7ee895e45cb058697fccb49713e995fdabe30d521d639f56",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -48793,7 +48823,639 @@
         "license": "MIT"
       },
       "trust": "first-party"
+    },
+    {
+      "id": "tale:template:app-header",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "app-header",
+      "name": "App Header",
+      "description": "Installable Tale UI app header template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "keywords": [
+        "app",
+        "docs",
+        "header",
+        "md",
+        "navigation",
+        "recipes"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/app-header/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:app-header"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/app-header/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:a4e0ac86bad4e49786124aa186854334c1546410cd8157504e0f2368b9cabd06"
+      }
+    },
+    {
+      "id": "tale:template:chart-dashboard",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "chart-dashboard",
+      "name": "Chart Dashboard",
+      "description": "Installable Tale UI chart dashboard template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "keywords": [
+        "chart",
+        "charts",
+        "dashboard",
+        "docs",
+        "md",
+        "recipes",
+        "with"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/chart-dashboard/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:chart-dashboard"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/chart-dashboard/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:fdd295b4fea446c7ad59efbd22fd3850822b45aed754741ce5aef7f1c7f0fcd7"
+      }
+    },
+    {
+      "id": "tale:template:command-palette-dashboard",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "command-palette-dashboard",
+      "name": "Command Palette Dashboard",
+      "description": "Installable Tale UI command palette dashboard template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "keywords": [
+        "command",
+        "dashboard",
+        "docs",
+        "md",
+        "palette",
+        "recipes"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/command-palette-dashboard/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:command-palette-dashboard"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/command-palette-dashboard/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:6e5901011a4fd4df511523e077e36e7de85dfe3b31bc24d789e22c7328260773"
+      }
+    },
+    {
+      "id": "tale:template:empty-state",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "empty-state",
+      "name": "Empty State",
+      "description": "Installable Tale UI empty state template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "keywords": [
+        "data",
+        "docs",
+        "empty",
+        "md",
+        "recipes",
+        "state"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/empty-state/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:empty-state"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/empty-state/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:d9863231b9fd0444b27e24cb74cfe11db371c96320c60bc1d5e1ea162d56ae55"
+      }
+    },
+    {
+      "id": "tale:template:loading-patterns",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "loading-patterns",
+      "name": "Loading Patterns",
+      "description": "Installable Tale UI loading patterns template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "keywords": [
+        "docs",
+        "loading",
+        "md",
+        "patterns",
+        "recipes"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/loading-patterns/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:loading-patterns"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/loading-patterns/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:a3b48faa9ba15f49d2a6ec25333feb40e39a96e1177d4195573311e0247192c4"
+      }
+    },
+    {
+      "id": "tale:template:react-hook-form",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "react-hook-form",
+      "name": "React Hook Form",
+      "description": "Installable Tale UI react hook form template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "keywords": [
+        "docs",
+        "form",
+        "hook",
+        "md",
+        "react",
+        "recipes"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/react-hook-form/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:react-hook-form"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/react-hook-form/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:138d703e92b5146a819c7cb8e90e05326736c0eae05497685bc34c88e454b0d5"
+      }
+    },
+    {
+      "id": "tale:template:settings-page",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "settings-page",
+      "name": "Settings Page",
+      "description": "Installable Tale UI settings page template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "keywords": [
+        "docs",
+        "md",
+        "page",
+        "recipes",
+        "settings"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/settings-page/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:settings-page"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/settings-page/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:64b411ce6f167f1bbf4715de659303afd0892e08197896fc16eaf8bfc1c0f11b"
+      }
+    },
+    {
+      "id": "tale:template:sidebar-header",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "sidebar-header",
+      "name": "Sidebar Header",
+      "description": "Installable Tale UI sidebar header template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "keywords": [
+        "docs",
+        "header",
+        "md",
+        "recipes",
+        "sidebar",
+        "with"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/sidebar-header/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:sidebar-header"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/sidebar-header/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:6382ccab900db5cef2df4217c5ce40205e70b5e48c865e03fecd76b95cb379d4"
+      }
+    },
+    {
+      "id": "tale:template:sortable-table",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "sortable-table",
+      "name": "Sortable Table",
+      "description": "Installable Tale UI sortable table template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "keywords": [
+        "data",
+        "docs",
+        "md",
+        "recipes",
+        "sortable",
+        "sorting",
+        "table",
+        "with"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/sortable-table/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:sortable-table"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/sortable-table/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:8b7771297eafeab36a5bc5b06868ff20fe92dc6783dec761b716789ff350c625"
+      }
+    },
+    {
+      "id": "tale:template:validated-form",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "validated-form",
+      "name": "Validated Form",
+      "description": "Installable Tale UI validated form template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "keywords": [
+        "docs",
+        "form",
+        "md",
+        "recipes",
+        "validated",
+        "validation",
+        "with"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/validated-form/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:validated-form"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/validated-form/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:72ea014ca23a68b054815c23609f82ce3910096b525553cf6950e1f6f317a680"
+      }
     }
   ],
-  "digest": "sha256:494db892687a98ec2e14fe7c89f7b66be338f72cf8fc2eb0bd1fd6f3aef34024"
+  "digest": "sha256:beb7bd4c4a035f676a7d2f2b7f479771aa1e48a943fb62f5222bf51a92274acb"
 }

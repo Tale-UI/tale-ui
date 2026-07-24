@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "tale:template:settings-page",
+  "version": "1.0.0",
+  "source": "source/App.tsx",
+  "skeleton": "skeleton/App.tsx",
+  "dependencies": {
+    "@tale-ui/react": "^2.0.0",
+    "react": ">=18.0.0"
+  },
+  "preview": {
+    "recipe": "docs/recipes/settings-page.md",
+    "accessibility": "keyboard, screen-reader, zoom, contrast, and reduced-motion review required",
+    "responsive": true
+  },
+  "golden": "tools/golden-prompts/settings-page.json",
+  "compatibility": {
+    "react": ">=18.0.0",
+    "tale": ">=2.0.0 <3.0.0",
+    "frameworks": [
+      "next",
+      "vite"
+    ]
+  },
+  "appearance": [
+    "light",
+    "dark"
+  ],
+  "rtl": true,
+  "provenance": {
+    "source": "docs/recipes/settings-page.md",
+    "firstParty": true
+  },
+  "license": "MIT",
+  "digest": "sha256:64b411ce6f167f1bbf4715de659303afd0892e08197896fc16eaf8bfc1c0f11b"
+}

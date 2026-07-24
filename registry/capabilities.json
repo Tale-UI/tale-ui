@@ -56,11 +56,13 @@
     },
     {
       "id": "project.mutate",
-      "version": "0.0.0",
-      "description": "Perform root-confined, recoverable project mutations. Unavailable until the operation and recovery gates pass.",
-      "availability": [],
-      "status": "gated",
-      "gate": "P0-B"
+      "version": "1.0.0",
+      "description": "Perform root-confined, journaled, recoverable project mutations.",
+      "availability": [
+        "api",
+        "cli"
+      ],
+      "status": "available"
     },
     {
       "id": "recipe.get",
@@ -83,5 +85,5 @@
       "status": "available"
     }
   ],
-  "digest": "sha256:5fd608f9d9363ce839ecf423e1b445946b19f4193818a987ec86498428a73632"
+  "digest": "sha256:1c79ad64ffb3f61060cfa77ab37f344e2888b7151dcd7e26ae5e0fd031ff1362"
 }

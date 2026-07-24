@@ -11,6 +11,13 @@ import {
 import type { ArtifactKind } from './contracts/artifact.js';
 import { TALE_ERROR_EXIT, TaleToolingError } from './contracts/errors.js';
 import type { ValidationRule } from './contracts/validation.js';
+import {
+  addTemplate,
+  getTemplateSource,
+  initializeProject,
+  listTemplates,
+} from './materialize.js';
+import { doctorProject, recoverProjectOperation } from './operations.js';
 import { validateCode, validateFile } from './validation/index.js';
 
 const ARTIFACT_KINDS = new Set<ArtifactKind>([
@@ -166,11 +173,72 @@ try {
     if (!validationResult.valid) {
       process.exitCode = TALE_ERROR_EXIT.TALE_VALIDATION_FAILED;
     }
+  } else if (command === 'init') {
+    data = await initializeProject({
+      schemaVersion: '1.0.0',
+      requestId,
+      root: option('--root') || process.cwd(),
+      idempotencyKey: option('--idempotency-key') || 'tale-init-v1',
+      addScripts: filteredArgs.includes('--scripts'),
+    });
+  } else if (command === 'template') {
+    if (filteredArgs.includes('--list')) {
+      data = await listTemplates();
+    } else {
+      const templates = positionalArguments(
+        new Set(['--root', '--target', '--idempotency-key']),
+      );
+      const template = templates.length === 1 ? templates[0] : undefined;
+      if (!template || templates.length > 1) {
+        throw new TaleToolingError(
+          'TALE_INVALID_ARGUMENT',
+          'Tale UI: template requires exactly one template ID or --list.',
+        );
+      }
+      if (filteredArgs.includes('--add')) {
+        data = await addTemplate({
+          schemaVersion: '1.0.0',
+          requestId,
+          root: option('--root') || process.cwd(),
+          idempotencyKey:
+            option('--idempotency-key') ||
+            `tale-template-${template}-${filteredArgs.includes('--skeleton') ? 'skeleton' : 'source'}-v1`,
+          template,
+          target: option('--target'),
+          skeleton: filteredArgs.includes('--skeleton'),
+          addDependencies: !filteredArgs.includes('--no-dependencies'),
+        });
+      } else {
+        data = await getTemplateSource(template, {
+          skeleton: filteredArgs.includes('--skeleton'),
+        });
+      }
+    }
+  } else if (command === 'doctor') {
+    data = await doctorProject(option('--root') || process.cwd());
+  } else if (command === 'recover') {
+    const operations = positionalArguments(new Set(['--root']));
+    const operationId = operations.length === 1 ? operations[0] : undefined;
+    const resume = filteredArgs.includes('--resume');
+    const rollback = filteredArgs.includes('--rollback');
+    if (!operationId || operations.length > 1 || resume === rollback) {
+      throw new TaleToolingError(
+        'TALE_INVALID_ARGUMENT',
+        'Tale UI: recover requires one operation ID and exactly one of --resume or --rollback.',
+      );
+    }
+    data = await recoverProjectOperation({
+      schemaVersion: '1.0.0',
+      requestId,
+      root: option('--root') || process.cwd(),
+      operationId,
+      action: resume ? 'resume' : 'rollback',
+    });
   } else {
     throw new TaleToolingError(
       'TALE_UNSUPPORTED_COMMAND',
       'Tale UI: the requested command is unsupported, so no tooling action ran. ' +
-        'Use manifest, search, component, or validate and retry.',
+        'Use manifest, search, component, validate, init, template, doctor, or recover and retry.',
     );
   }
   write(jsonMode ? createSuccessEnvelope(command, requestId, data, { surface: 'cli' }) : data);

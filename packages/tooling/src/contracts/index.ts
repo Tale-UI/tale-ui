@@ -19,6 +19,23 @@ export type {
 } from './envelope.js';
 export type { ToolingManifest } from './manifest.js';
 export type {
+  AddTemplateRequest,
+  InitializeProjectRequest,
+  TaleTemplateManifest,
+  TemplateMaterializationResult,
+  TemplateSourceResult,
+} from './materialize.js';
+export type {
+  ProjectDoctorResult,
+  ProjectMutationFile,
+  ProjectMutationFileReport,
+  ProjectMutationPlan,
+  ProjectMutationRequest,
+  ProjectMutationResult,
+  ProjectOperationKind,
+  ProjectRecoveryRequest,
+} from './operations.js';
+export type {
   ValidationCodeRequest,
   ValidationDiagnostic,
   ValidationFileRequest,

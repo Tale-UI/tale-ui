@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { execFileSync, spawnSync } from 'node:child_process';
-import { cp, mkdtemp, readFile, rm } from 'node:fs/promises';
+import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
@@ -34,6 +34,23 @@ if (
   !apiResult.result.results.some((artifact) => artifact.id === 'tale:component:table')
 ) {
   throw new Error('Packed API failed to load its installed registry assets');
+}
+
+const materializeOutput = execFileSync(
+  process.execPath,
+  [
+    '--input-type=module',
+    '--eval',
+    "import { listTemplates } from '@tale-ui/tooling/materialize'; const templates = await listTemplates(); process.stdout.write(JSON.stringify(templates.map(({ id }) => id)));",
+  ],
+  { cwd: fixtureRoot, encoding: 'utf8' },
+);
+const materializeResult = JSON.parse(materializeOutput);
+if (
+  materializeResult.length !== 10 ||
+  !materializeResult.includes('tale:template:sortable-table')
+) {
+  throw new Error('Packed materialization API failed to load its installed template assets');
 }
 
 const validationOutput = execFileSync(
@@ -102,6 +119,59 @@ if (
   cliResult.capabilities.includes('ui.plan')
 ) {
   throw new Error('Packed CLI reported capabilities outside the CLI surface');
+}
+const consumerRoot = join(fixtureRoot, 'materialize-app');
+await mkdir(consumerRoot);
+await writeFile(
+  join(consumerRoot, 'package.json'),
+  `${JSON.stringify({ name: 'materialize-app', private: true, scripts: {} }, null, 2)}\n`,
+);
+const initResult = JSON.parse(
+  execFileSync(cliPath, ['init', '--scripts', '--json'], {
+    cwd: consumerRoot,
+    encoding: 'utf8',
+  }),
+);
+const templateListResult = JSON.parse(
+  execFileSync(cliPath, ['template', '--list', '--json'], {
+    cwd: consumerRoot,
+    encoding: 'utf8',
+  }),
+);
+const templateSourceResult = JSON.parse(
+  execFileSync(cliPath, ['template', 'empty-state', '--skeleton', '--json'], {
+    cwd: consumerRoot,
+    encoding: 'utf8',
+  }),
+);
+const templateAddResult = JSON.parse(
+  execFileSync(cliPath, ['template', 'empty-state', '--skeleton', '--add', '--json'], {
+    cwd: consumerRoot,
+    encoding: 'utf8',
+  }),
+);
+const doctorResult = JSON.parse(
+  execFileSync(cliPath, ['doctor', '--json'], {
+    cwd: consumerRoot,
+    encoding: 'utf8',
+  }),
+);
+if (
+  !initResult.ok ||
+  initResult.data.files.length !== 4 ||
+  !templateListResult.ok ||
+  templateListResult.data.length !== 10 ||
+  !templateSourceResult.ok ||
+  templateSourceResult.data.variant !== 'skeleton' ||
+  !templateAddResult.ok ||
+  templateAddResult.data.template.id !== 'tale:template:empty-state' ||
+  !doctorResult.ok ||
+  !doctorResult.data.healthy ||
+  !(await readFile(join(consumerRoot, 'src/tale-templates/empty-state.tsx'), 'utf8')).includes(
+    'export function Example',
+  )
+) {
+  throw new Error('Packed CLI init, template, or doctor command failed');
 }
 const cliValidation = spawnSync(
   cliPath,

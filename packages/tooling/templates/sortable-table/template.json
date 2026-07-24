@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "tale:template:sortable-table",
+  "version": "1.0.0",
+  "source": "source/App.tsx",
+  "skeleton": "skeleton/App.tsx",
+  "dependencies": {
+    "@tale-ui/react": "^2.0.0",
+    "react": ">=18.0.0",
+    "lucide-react": "^0.468.0"
+  },
+  "preview": {
+    "recipe": "docs/recipes/data-table-with-sorting.md",
+    "accessibility": "keyboard, screen-reader, zoom, contrast, and reduced-motion review required",
+    "responsive": true
+  },
+  "golden": "tools/golden-prompts/table-controller-sorting.json",
+  "compatibility": {
+    "react": ">=18.0.0",
+    "tale": ">=2.0.0 <3.0.0",
+    "frameworks": [
+      "next",
+      "vite"
+    ]
+  },
+  "appearance": [
+    "light",
+    "dark"
+  ],
+  "rtl": true,
+  "provenance": {
+    "source": "docs/recipes/data-table-with-sorting.md",
+    "firstParty": true
+  },
+  "license": "MIT",
+  "digest": "sha256:8b7771297eafeab36a5bc5b06868ff20fe92dc6783dec761b716789ff350c625"
+}

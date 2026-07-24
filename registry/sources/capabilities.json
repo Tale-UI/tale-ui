@@ -47,11 +47,10 @@
     },
     {
       "id": "project.mutate",
-      "version": "0.0.0",
-      "description": "Perform root-confined, recoverable project mutations. Unavailable until the operation and recovery gates pass.",
-      "availability": [],
-      "status": "gated",
-      "gate": "P0-B"
+      "version": "1.0.0",
+      "description": "Perform root-confined, journaled, recoverable project mutations.",
+      "availability": ["api", "cli"],
+      "status": "available"
     }
   ]
 }

@@ -154,20 +154,21 @@ Discovery, RFCs, and private prototypes may overlap safely. Public API promotion
 ### Consolidated delivery protocol
 
 On 2026-07-25 the repository owner delegated implementation decisions to
-Codex and requested the fewest practical manual reviews. The remaining roadmap
-is delivered in exactly three owner-review bundles:
+Codex and requested the fewest practical manual reviews. PR #8 merged the
+initial Bundle A milestones. The repository owner subsequently approved
+combining every remaining milestone into one Bundle BC with no manual review
+between the former B and C scopes.
 
 | Bundle | Scope | Cumulative exit |
 | ------ | ----- | --------------- |
-| A — Core authoring and data workflows | Current Table RFC and sorting work; remaining Phase 0 evidence; P0-B safe operations and packed tooling; P0-C ten templates; P1-A migrations; P1-F selection, pagination, filtering, and virtualization; existing recipe/package baseline cleanup | R02–R05 and SM01–SM04 pass; previously merged R01 evidence remains green |
-| B — Design-system experience and quality | P1-C i18n; P1-E AppShell; P2-A motion/elevation; P2-B Chat and two templates; P2-C content dispositions and approved primitives; P2-D governance; P2-E accessibility/performance | R07, R09–R14, and SM06 pass; Bundle A evidence remains green |
-| C — Distribution, insight, integrations, and closure | P1-B versioned docs/hosted MCP/`llms.txt`; P1-D aggregate metrics; P3-A Figma contracts; P3-B extensions; P3-C native conformance; cumulative release reconciliation | R01–R17 and SM01–SM08 pass or carry an explicit delegated exception |
+| A — Merged foundation | PR #8: Table RFC/ranking/prototypes, stable sorting, validation cleanup, architecture decisions, and consolidated-delivery authority | The merged evidence remains green; unimplemented prerequisites from the original Bundle A scope transfer to Bundle BC |
+| BC — Complete roadmap closure | P0-B safe operations and packed tooling; P0-C ten templates; P1-A migrations; remaining P1-F Table plugins; P1-B–P1-E; P2-A–P2-E; P3-A–P3-C; package baseline cleanup; cumulative reconciliation | R01–R17 and SM01–SM08 pass or carry an explicit delegated exception |
 
-Each bundle uses one draft pull request and as many small, ordered milestone
-commits as necessary. The pull request becomes ready only after its complete
-scope and evidence manifest pass. The named review disciplines in the
-traceability matrix are consolidated into that single bundle review rather
-than separate feature approvals.
+Bundle BC uses one draft pull request and as many small, ordered milestone
+commits as necessary. It becomes ready only after its complete scope and
+evidence manifest pass. The named review disciplines in the traceability
+matrix are consolidated into one final Bundle BC review rather than separate
+feature, phase, hosting, or integration approvals.
 
 Codex may make and record candidate dispositions, thresholds, migration
 ranges, compatibility choices, and non-destructive implementation decisions

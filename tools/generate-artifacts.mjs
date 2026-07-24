@@ -284,6 +284,58 @@ function recipeArtifacts(componentIds) {
   };
 }
 
+function templateArtifacts(toolingVersion) {
+  const directories = readdirSync(join(ROOT, 'packages/tooling/templates'), {
+    withFileTypes: true,
+  })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort();
+  const paths = directories.flatMap((slug) => [
+    `packages/tooling/templates/${slug}/template.json`,
+    `packages/tooling/templates/${slug}/source/App.tsx`,
+    `packages/tooling/templates/${slug}/skeleton/App.tsx`,
+  ]);
+  const records = directories.map((slug) => {
+    const path = `packages/tooling/templates/${slug}/template.json`;
+    const template = readJson(path);
+    validate('schemas/template.schema.json', template);
+    if (template.id !== `tale:template:${slug}`) {
+      throw new Error(`${path} identity must match its directory`);
+    }
+    return artifactBase({
+      kind: 'template',
+      slug,
+      name: slug
+        .split('-')
+        .map((part) => `${part[0].toUpperCase()}${part.slice(1)}`)
+        .join(' '),
+      description: `Installable Tale UI ${slug.replaceAll('-', ' ')} template.`,
+      packageName: '@tale-ui/tooling',
+      version: toolingVersion,
+      keywords: words(slug, template.preview.recipe),
+      retrieval: [
+        { type: 'file', path },
+        {
+          type: 'package-export',
+          path: '@tale-ui/tooling/materialize',
+          selector: template.id,
+        },
+      ],
+      capabilities: ['artifact.get', 'artifact.search', 'project.mutate'],
+      source: path,
+      metadata: {
+        templateVersion: template.version,
+        compatibility: template.compatibility,
+        appearance: template.appearance,
+        rtl: template.rtl,
+        digest: template.digest,
+      },
+    });
+  });
+  return { paths, records };
+}
+
 function a2uiArtifacts(catalog, a2uiVersion, componentByName) {
   return catalog.types.map((type) => {
     const componentName = type.component.split('.')[0].toLowerCase();
@@ -556,11 +608,13 @@ function build() {
     components.map((record) => [record.name.toLowerCase(), record.id]),
   );
   const recipes = recipeArtifacts(componentIds);
+  const templates = templateArtifacts(packages['@tale-ui/tooling']);
   const docs = publicDocPaths();
   const records = [
     ...components,
     ...hookArtifacts(hookSource, packages),
     ...recipes.records,
+    ...templates.records,
     ...docArtifacts(docs, componentIds),
     ...a2uiArtifacts(a2uiCatalog, packages['@tale-ui/a2ui'], componentByName),
     ...foundationArtifacts(foundationSource),
@@ -606,6 +660,7 @@ function build() {
   const generatedFrom = [
     ...GENERATED_INPUTS,
     ...recipes.paths,
+    ...templates.paths,
     ...docs,
     ...components
       .filter((record) => record.package === '@tale-ui/charts')
