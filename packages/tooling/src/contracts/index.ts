@@ -18,3 +18,13 @@ export type {
   TaleSuccessEnvelope,
 } from './envelope.js';
 export type { ToolingManifest } from './manifest.js';
+export type {
+  ValidationCodeRequest,
+  ValidationDiagnostic,
+  ValidationFileRequest,
+  ValidationRequest,
+  ValidationResult,
+  ValidationRule,
+  ValidationRunOptions,
+  ValidationVersions,
+} from './validation.js';

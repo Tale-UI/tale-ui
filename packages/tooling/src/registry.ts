@@ -8,6 +8,7 @@ import { TaleToolingError } from './contracts/errors.js';
 const MODULE_DIRECTORY = dirname(fileURLToPath(import.meta.url));
 const registryCache = new Map<string, ArtifactRegistry>();
 const capabilityCache = new Map<string, CapabilityManifest>();
+const reactExportCache = new Map<string, ReadonlySet<string>>();
 
 function resolveAssetsRoot(assetsRoot?: string) {
   if (assetsRoot) {
@@ -56,4 +57,35 @@ export function loadCapabilityManifest(options: { assetsRoot?: string } = {}) {
     capabilityCache.set(assetsRoot, manifest);
   }
   return manifest;
+}
+
+export function loadReactExportPaths(options: { assetsRoot?: string } = {}) {
+  const assetsRoot = resolveAssetsRoot(options.assetsRoot);
+  let exports = reactExportCache.get(assetsRoot);
+  if (!exports) {
+    const installedPath = join(assetsRoot, 'registry/react-exports.json');
+    const sourcePath = join(assetsRoot, 'packages/react/package.json');
+    try {
+      const manifest = JSON.parse(
+        readFileSync(existsSync(installedPath) ? installedPath : sourcePath, 'utf8'),
+      ) as { name: string; exports: Record<string, unknown> | string[] };
+      const entries = Array.isArray(manifest.exports)
+        ? manifest.exports
+        : Object.keys(manifest.exports);
+      exports = new Set(
+        entries.map((entry) =>
+          entry === '.' ? manifest.name : `${manifest.name}/${entry.slice(2)}`,
+        ),
+      );
+      reactExportCache.set(assetsRoot, exports);
+    } catch (cause) {
+      throw new TaleToolingError(
+        'TALE_CORRUPT_REGISTRY',
+        'Tale UI: the installed React export manifest is unreadable, so registry validation ' +
+          'cannot determine public imports. Reinstall @tale-ui/tooling and retry.',
+        { cause },
+      );
+    }
+  }
+  return exports;
 }

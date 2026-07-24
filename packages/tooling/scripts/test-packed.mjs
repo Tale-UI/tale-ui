@@ -34,6 +34,30 @@ if (
   throw new Error('Packed API failed to load its installed registry assets');
 }
 
+const validationOutput = execFileSync(
+  process.execPath,
+  [
+    '--input-type=module',
+    '--eval',
+    "import { validateCode } from '@tale-ui/tooling/validation'; const base = { schemaVersion: '1.0.0', requestId: 'packed-validation', root: process.cwd(), virtualFile: 'src/example.ts', timeoutMs: 10000 }; const valid = await validateCode({ ...base, code: 'export const answer: number = 42;' }); const invalid = await validateCode({ ...base, code: 'export const answer: string = 42;' }); const registryValid = await validateCode({ ...base, code: \"import { parseColor } from '@tale-ui/react/aria'; export const color = parseColor;\", rules: ['registry'] }); let timeoutCode; let timeoutMessage; try { await validateCode({ ...base, code: 'export const value = true;', timeoutMs: 1 }); } catch (error) { timeoutCode = error.code; timeoutMessage = error.message; } const controller = new AbortController(); controller.abort(); let cancelCode; try { await validateCode({ ...base, code: 'export const value = true;' }, { signal: controller.signal }); } catch (error) { cancelCode = error.code; } process.stdout.write(JSON.stringify({ valid, invalid, registryValid, timeoutCode, timeoutMessage, cancelCode }));",
+  ],
+  { cwd: fixtureRoot, encoding: 'utf8' },
+);
+const validationResult = JSON.parse(validationOutput);
+if (
+  !validationResult.valid.valid ||
+  validationResult.invalid.valid ||
+  !validationResult.registryValid.valid ||
+  !validationResult.invalid.diagnostics.some((diagnostic) => diagnostic.code === 2322) ||
+  validationResult.timeoutCode !== 'TALE_VALIDATION_TIMEOUT' ||
+  !validationResult.timeoutMessage.includes('Increase timeoutMs') ||
+  !validationResult.timeoutMessage.includes('reduce the input') ||
+  validationResult.cancelCode !== 'TALE_VALIDATION_CANCELLED' ||
+  validationOutput.includes(fixtureRoot)
+) {
+  throw new Error('Packed validation failed compiler parity or leaked its project root');
+}
+
 const cliPath = join(fixtureRoot, 'node_modules/.bin/tale');
 const cliOutput = execFileSync(cliPath, ['manifest', '--json'], {
   cwd: fixtureRoot,
@@ -66,4 +90,6 @@ if (cliOutput.includes(fixtureRoot) || (await readFile(cliPath, 'utf8')).include
 }
 
 await rm(fixtureRoot, { recursive: true, force: true });
-process.stdout.write('Packed @tale-ui/tooling API and CLI load without monorepo paths.\n');
+process.stdout.write(
+  'Packed @tale-ui/tooling API, validation worker, and CLI load without monorepo paths.\n',
+);
