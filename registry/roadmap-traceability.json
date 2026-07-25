@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md",
-  "sourceDigest": "sha256:9dd33ff7a93fc6fc7046a4265e85b89adfc077115ae2e89d42d519b7dba9de19",
+  "sourceDigest": "sha256:d401ff93ad1a33227192f8c45e72ef243d10dfe88c9841d29594f41d5f16f22e",
   "criteria": [
     {
       "id": "R01.1",
