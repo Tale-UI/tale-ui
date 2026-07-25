@@ -270,7 +270,7 @@ Status of required artifacts for all 116 components. When adding or updating a c
 
 **Non-trivial components requiring tests:** Drawer (custom state/swipe), Meter (percentage calc), ProgressBar (percentage calc + indeterminate), ColorModeToggle (localStorage/OS preference), Tabs (MutationObserver/ResizeObserver indicator), KeyValuePairs (ResizeObserver column calculation)
 
-**Total:** 118 components | **Fully complete:** 118 | **Missing artifacts:** 0
+**Total:** 120 components | **Fully complete:** 120 | **Missing artifacts:** 0
 
 ### Form Controls
 
@@ -440,6 +440,8 @@ Status of required artifacts for all 116 components. When adding or updating a c
 
 | Component | styled | index | test | css | prim | doc | snip | rdme | idx | story | audit | a2ui | status |
 | --------- | ------ | ----- | ---- | --- | ---- | --- | ---- | ---- | --- | ----- | ----- | ---- | ------ |
+| CodeBlock | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | experimental |
+| Kbd       | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | experimental |
 | Text      | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
 
 ### Utility

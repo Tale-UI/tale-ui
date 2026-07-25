@@ -1,0 +1,7 @@
+{
+  "slug": "code-block-plain-text",
+  "difficulty": "simple",
+  "prompt": "Render a TypeScript snippet as a safe plain-text Tale UI code block.",
+  "reference": "import { CodeBlock } from '@tale-ui/react/code-block';\n\nexport function TypeScriptSnippet() {\n  return <CodeBlock language=\"ts\">{'export const ready: boolean = true;'}</CodeBlock>;\n}",
+  "tags": ["CodeBlock"]
+}

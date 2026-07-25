@@ -25,6 +25,11 @@ All container components accept a `children` array of child component IDs. This 
 | **Text** | `usageHint` | `display-l`, `display-m`, `display-s`, `heading-l`, `heading-m`, `heading-s`, `heading`, `title`, `label`, `body`, `body-s`, `caption`, `mono` |
 |  | `color` | `default`, `muted`, `accent` |
 |  | `content` | string |
+| **Kbd** | `size` | `sm`, `md` |
+|  | `content` | string |
+| **CodeBlock** | `language` | informational language identifier string |
+|  | `wrap` | boolean |
+|  | `content` | string |
 
 ### Layout
 

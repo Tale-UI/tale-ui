@@ -27,6 +27,7 @@
     "docs/components/checkbox-field.md",
     "docs/components/checkbox-group.md",
     "docs/components/checkbox.md",
+    "docs/components/code-block.md",
     "docs/components/color-area.md",
     "docs/components/color-field.md",
     "docs/components/color-mode-toggle.md",
@@ -69,6 +70,7 @@
     "docs/components/input-tags.md",
     "docs/components/input.md",
     "docs/components/iphone-mockup.md",
+    "docs/components/kbd.md",
     "docs/components/key-value-pairs.md",
     "docs/components/line-chart.md",
     "docs/components/link.md",
@@ -266,7 +268,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:eb030914c50782526035c3e5daf491b3adf7d79dc286e782334ec61030caa0a4",
+  "sourceRevision": "sha256:49476952f53c61a9b1db4e2045ff44d5bd125ea687a4b894aba3fa164cd1858d",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -1884,6 +1886,61 @@
       "metadata": {
         "category": "Additional Form Controls",
         "component": "CheckboxGroup",
+        "isSubPart": false
+      }
+    },
+    {
+      "id": "tale:a2ui-type:code-block",
+      "namespace": "tale",
+      "kind": "a2ui-type",
+      "slug": "code-block",
+      "name": "CodeBlock",
+      "description": "Plain-text code surface without parsing or execution",
+      "lifecycle": "stable",
+      "package": "@tale-ui/a2ui",
+      "version": "0.1.5",
+      "aliases": [
+        "CodeBlock"
+      ],
+      "keywords": [
+        "code",
+        "codeblock",
+        "execution",
+        "or",
+        "parsing",
+        "plain",
+        "surface",
+        "text",
+        "typography",
+        "without"
+      ],
+      "related": [
+        "tale:component:code-block"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/a2ui-catalog.json",
+          "selector": "types[name=CodeBlock]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/a2ui/src/catalog.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Typography",
+        "component": "CodeBlock",
         "isSubPart": false
       }
     },
@@ -4197,6 +4254,59 @@
       "metadata": {
         "category": "Marketing",
         "component": "InputTags.Root",
+        "isSubPart": false
+      }
+    },
+    {
+      "id": "tale:a2ui-type:kbd",
+      "namespace": "tale",
+      "kind": "a2ui-type",
+      "slug": "kbd",
+      "name": "Kbd",
+      "description": "Semantic keyboard input or shortcut hint",
+      "lifecycle": "stable",
+      "package": "@tale-ui/a2ui",
+      "version": "0.1.5",
+      "aliases": [
+        "Kbd"
+      ],
+      "keywords": [
+        "hint",
+        "input",
+        "kbd",
+        "keyboard",
+        "or",
+        "semantic",
+        "shortcut",
+        "typography"
+      ],
+      "related": [
+        "tale:component:kbd"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/a2ui-catalog.json",
+          "selector": "types[name=Kbd]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/a2ui/src/catalog.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Typography",
+        "component": "Kbd",
         "isSubPart": false
       }
     },
@@ -9941,6 +10051,64 @@
       }
     },
     {
+      "id": "tale:component:code-block",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "code-block",
+      "name": "CodeBlock",
+      "description": "Plain-text code surface without parsing, highlighting, or execution",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "2.0.0",
+      "aliases": [
+        "CodeBlock"
+      ],
+      "keywords": [
+        "code",
+        "codeblock",
+        "execution",
+        "highlighting",
+        "or",
+        "parsing",
+        "plain",
+        "surface",
+        "text",
+        "typography",
+        "without"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=code-block]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/code-block"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/code-block/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Typography",
+        "componentKind": "simple"
+      }
+    },
+    {
       "id": "tale:component:color-area",
       "namespace": "tale",
       "kind": "component",
@@ -12257,6 +12425,61 @@
       "trust": "first-party",
       "metadata": {
         "category": null,
+        "componentKind": "simple"
+      }
+    },
+    {
+      "id": "tale:component:kbd",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "kbd",
+      "name": "Kbd",
+      "description": "Semantic keyboard input or shortcut hint",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "2.0.0",
+      "aliases": [
+        "Kbd"
+      ],
+      "keywords": [
+        "hint",
+        "input",
+        "kbd",
+        "keyboard",
+        "or",
+        "semantic",
+        "shortcut",
+        "typography"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=kbd]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/kbd"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/kbd/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Typography",
         "componentKind": "simple"
       }
     },
@@ -16603,6 +16826,46 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:doc:docs-components-code-block",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-code-block",
+      "name": "CodeBlock",
+      "description": "Public Tale UI documentation: CodeBlock",
+      "lifecycle": "stable",
+      "keywords": [
+        "block",
+        "code",
+        "codeblock",
+        "components",
+        "docs",
+        "md"
+      ],
+      "related": [
+        "tale:component:code-block"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/code-block.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/code-block.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:doc:docs-components-color-area",
       "namespace": "tale",
       "kind": "doc",
@@ -18254,6 +18517,44 @@
       ],
       "provenance": {
         "source": "docs/components/iphone-mockup.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:doc:docs-components-kbd",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-kbd",
+      "name": "Kbd",
+      "description": "Public Tale UI documentation: Kbd",
+      "lifecycle": "stable",
+      "keywords": [
+        "components",
+        "docs",
+        "kbd",
+        "md"
+      ],
+      "related": [
+        "tale:component:kbd"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/kbd.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/kbd.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -26590,6 +26891,65 @@
         "ruleId": "checkbox-group-string-array-not-set",
         "category": "component",
         "component": "CheckboxGroup"
+      }
+    },
+    {
+      "id": "tale:pitfall:code-block--code-block-plain-text",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "code-block--code-block-plain-text",
+      "name": "Pass plain text to CodeBlock",
+      "description": "the component intentionally excludes raw HTML, Markdown, syntax highlighting, and executable renderers.",
+      "lifecycle": "stable",
+      "keywords": [
+        "and",
+        "block",
+        "code",
+        "codeblock",
+        "component",
+        "excludes",
+        "executable",
+        "highlighting",
+        "html",
+        "intentionally",
+        "markdown",
+        "pass",
+        "plain",
+        "raw",
+        "renderers",
+        "syntax",
+        "text",
+        "the",
+        "to"
+      ],
+      "related": [
+        "tale:component:code-block"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=code-block].pitfalls[id=code-block-plain-text]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/code-block.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "code-block-plain-text",
+        "category": "component",
+        "component": "CodeBlock"
       }
     },
     {
@@ -36482,6 +36842,66 @@
       "metadata": {
         "ruleId": "isopen-on-dialog-and-alert-dialog",
         "category": "overlay-state"
+      }
+    },
+    {
+      "id": "tale:pitfall:kbd--kbd-no-shortcut-behavior",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "kbd--kbd-no-shortcut-behavior",
+      "name": "Do not use Kbd to register shortcuts",
+      "description": "it is semantic display content, so application keyboard behavior remains separate.",
+      "lifecycle": "stable",
+      "keywords": [
+        "application",
+        "behavior",
+        "content",
+        "display",
+        "do",
+        "is",
+        "it",
+        "kbd",
+        "keyboard",
+        "no",
+        "not",
+        "register",
+        "remains",
+        "semantic",
+        "separate",
+        "shortcut",
+        "shortcuts",
+        "so",
+        "to",
+        "use"
+      ],
+      "related": [
+        "tale:component:kbd"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=kbd].pitfalls[id=kbd-no-shortcut-behavior]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/kbd.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "kbd-no-shortcut-behavior",
+        "category": "component",
+        "component": "Kbd"
       }
     },
     {
@@ -47769,6 +48189,7 @@
       "related": [
         "tale:component:button",
         "tale:component:chat",
+        "tale:component:code-block",
         "tale:component:text",
         "tale:component:text-area"
       ],
@@ -50324,5 +50745,5 @@
       }
     }
   ],
-  "digest": "sha256:6ea006ba0a3fd70693d21f6fed2fbcd0075830713c53773e3b19bad96a887ab8"
+  "digest": "sha256:2bbad4dac051e4693e404d0686fba24afb5283b206290799987c669df90f0816"
 }

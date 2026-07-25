@@ -156,7 +156,7 @@ When clicked, your `onAction` callback receives `("main", { name: "save", contex
 
 ## Catalog Reference
 
-The default catalog maps all 149 A2UI standard component types to Tale UI.
+The default catalog maps all 151 A2UI standard component types to Tale UI.
 
 For new surfaces, prefer `CheckboxField`, `RadioField` with `RadioFieldOption`
 children, and `SwitchField`. `Checkbox`, `Radio` with `RadioOption` children,
@@ -166,6 +166,8 @@ and `Switch` remain available for compatibility with existing payloads.
 | A2UI Type | Tale UI Component | Key A2UI Props |
 |-----------|-------------------|----------------|
 | `Text` | `Text` | `usageHint`, `color`, `content` |
+| `Kbd` | `Kbd` | `size`, `content` |
+| `CodeBlock` | `CodeBlock` | `language`, `wrap`, `content` |
 | `Row` | `Row` | `spacing`, `alignment`, `justify`, `wrap` |
 | `Column` | `Column` | `spacing`, `alignment`, `justify` |
 | `Card` | `Card.Root` | `variant`, `padding` |

@@ -19,7 +19,7 @@ Use **only** components from `@tale-ui/react` for all UI. Never invent new impor
 
 **Namespace** (use `.Root`): Accordion, AlertDialog, AppShell, Autocomplete, Avatar, BadgeGroup, Banner, Breadcrumbs, Calendar, Card, Carousel, Chat, CheckboxField, ColorArea, ColorField, ColorPicker, ColorSlider, ColorSwatchPicker, ColorWheel, Combobox, CommandPalette, ContextMenu, CreditCard, DateField, DatePicker, DateRangePicker, Dialog, Disclosure, Drawer, EmptyState, Field, Fieldset, FileUpload, GridList, HeaderNav, ImageCropper, Input, InputGroup, InputTags, KeyValuePairs, List, ListBox, Menu, Menubar, Meter, MultiSelect, NavigationMenu, NumberField, Pagination, PaymentInput, PinInput, Popover, PreviewCard, ProgressBar, ProgressCircle, QRCode, RadioField, RangeCalendar, ScrollArea, SearchField, Select, Sidebar, Slider, SwitchField, Table, Tabs, TagGroup, TagSelect, TextArea, TextEditor, TextField, TimeField, Toolbar, Tooltip, Tree, VideoPlayer.
 
-**Simple** (direct use): AppStoreButton, BackgroundPattern, Badge, Button, CSPProvider, CheckboxGroup, ColorModeToggle, ColorSwatch, Column, Container, DotIcon, DropZone, FeaturedIcon, FileTrigger, Form, I18nProvider, Icon, IconButton, Illustration, Image, IphoneMockup, Link, PaginationDot, PaginationLine, RadioGroup, RatingBadge, RatingStars, Row, SectionDivider, SelectNative, Separator, SocialButton, SocialButtonGroup, Spinner, Text, ToggleButton, ToggleButtonGroup, Virtualizer, mergeProps.
+**Simple** (direct use): AppStoreButton, BackgroundPattern, Badge, Button, CSPProvider, CheckboxGroup, CodeBlock, ColorModeToggle, ColorSwatch, Column, Container, DotIcon, DropZone, FeaturedIcon, FileTrigger, Form, I18nProvider, Icon, IconButton, Illustration, Image, IphoneMockup, Kbd, Link, PaginationDot, PaginationLine, RadioGroup, RatingBadge, RatingStars, Row, SectionDivider, SelectNative, Separator, SocialButton, SocialButtonGroup, Spinner, Text, ToggleButton, ToggleButtonGroup, Virtualizer, mergeProps.
 
 **Deprecated** (still functional; avoid in new code): Checkbox (use CheckboxField), Radio (use RadioField), Switch (use SwitchField).
 
@@ -102,6 +102,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [CheckboxField] The label text goes inside CheckboxField.Button, not directly in CheckboxField.Root
 - [CheckboxField] CheckboxField.Indicator needs an <Icon> child — it does not render a checkmark automatically
 - [CheckboxGroup] CheckboxGroup controlled-state uses string[] (plain array), NOT Set<string>.
+- [CodeBlock] Pass plain text to CodeBlock
 - [ColorArea] Only Root and Thumb sub-parts — no ColorArea.Gradient
 - [ColorArea] yChannel value depends on color space
 - [ColorField] There is no HexColorField component
@@ -223,6 +224,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [IphoneMockup] image is required
 - [IphoneMockup] Image size should ideally be 750 × 1624 px
 - [IphoneMockup] The exported name is IPhoneMockup (capital P), not IphoneMockup
+- [Kbd] Do not use Kbd to register shortcuts
 - [KeyValuePairs] Use KeyValuePairs.Root, not <KeyValuePairs> directly
 - [KeyValuePairs] Use standard React aria-label and aria-labelledby props
 - [KeyValuePairs] columns accepts only 1, 2, 3, or 4

@@ -1,0 +1,7 @@
+{
+  "slug": "kbd-shortcut",
+  "difficulty": "simple",
+  "prompt": "Show the keyboard shortcut Command K using Tale UI semantic keyboard hints.",
+  "reference": "import { Kbd } from '@tale-ui/react/kbd';\nimport { Text } from '@tale-ui/react/text';\n\nexport function SearchShortcut() {\n  return <Text>Open search with <Kbd>⌘</Kbd> <Kbd>K</Kbd></Text>;\n}",
+  "tags": ["Kbd", "Text"]
+}

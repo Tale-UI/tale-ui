@@ -160,6 +160,8 @@ import { PaginationDot } from '@tale-ui/react/pagination-dot';
 import { PaginationLine } from '@tale-ui/react/pagination-line';
 import { PaymentInput } from '@tale-ui/react/payment-input';
 import { Text } from '@tale-ui/react/text';
+import { Kbd } from '@tale-ui/react/kbd';
+import { CodeBlock } from '@tale-ui/react/code-block';
 import { QRCode } from '@tale-ui/react/qr-code';
 import { ImageCropper } from '@tale-ui/react/image-cropper';
 import { VideoPlayer } from '@tale-ui/react/video-player';
@@ -439,7 +441,14 @@ const TOC = [
       { id: 'text-editor', label: 'TextEditor' },
     ],
   },
-  { category: 'Typography', items: [{ id: 'text', label: 'Text' }] },
+  {
+    category: 'Typography',
+    items: [
+      { id: 'code-block', label: 'CodeBlock' },
+      { id: 'kbd', label: 'Kbd' },
+      { id: 'text', label: 'Text' },
+    ],
+  },
   {
     category: 'Marketing',
     items: [
@@ -6830,6 +6839,33 @@ export default function ComponentAudit() {
         {/* ============================================================= */}
         {/* TYPOGRAPHY                                                     */}
         {/* ============================================================= */}
+
+        <Section
+          id="code-block"
+          title="CodeBlock"
+          classes={['tale-code-block', 'tale-code-block--wrap']}
+        >
+          <SubHeading>Plain text</SubHeading>
+          <CodeBlock language="tsx">{`export function App() {
+  return <main>Hello</main>;
+}`}</CodeBlock>
+          <SubHeading>Wrapped</SubHeading>
+          <CodeBlock wrap>
+            This long plain-text line wraps without loading a parser or syntax highlighter.
+          </CodeBlock>
+        </Section>
+
+        <Section id="kbd" title="Kbd" classes={['tale-kbd', 'tale-kbd--sm', 'tale-kbd--md']}>
+          <SubHeading>Shortcut</SubHeading>
+          <Text>
+            Open search with <Kbd>⌘</Kbd> <Kbd>K</Kbd>
+          </Text>
+          <SubHeading>Sizes</SubHeading>
+          <div style={{ display: 'flex', gap: 'var(--space-xs)' }}>
+            <Kbd size="sm">Esc</Kbd>
+            <Kbd size="md">Enter</Kbd>
+          </div>
+        </Section>
 
         <Section
           id="text"

@@ -44,6 +44,52 @@
       "description": "Typography wrapper with variant, size, and colour props"
     },
     {
+      "name": "Kbd",
+      "category": "Typography",
+      "component": "Kbd",
+      "props": [
+        {
+          "name": "size",
+          "hint": "`sm`, `md`",
+          "allowedValues": [
+            "sm",
+            "md"
+          ]
+        },
+        {
+          "name": "content",
+          "hint": "string",
+          "allowedValues": null
+        }
+      ],
+      "isSubPart": false,
+      "description": "Semantic keyboard input or shortcut hint"
+    },
+    {
+      "name": "CodeBlock",
+      "category": "Typography",
+      "component": "CodeBlock",
+      "props": [
+        {
+          "name": "language",
+          "hint": "informational language identifier string",
+          "allowedValues": null
+        },
+        {
+          "name": "wrap",
+          "hint": "boolean",
+          "allowedValues": null
+        },
+        {
+          "name": "content",
+          "hint": "string",
+          "allowedValues": null
+        }
+      ],
+      "isSubPart": false,
+      "description": "Plain-text code surface without parsing or execution"
+    },
+    {
       "name": "Row",
       "category": "Layout",
       "component": "Row",
@@ -6243,7 +6289,7 @@
       ]
     },
     "full-showcase": {
-      "description": "Full showcase — all 149 A2UI types, all prop variations (AllVariations pattern)",
+      "description": "Full showcase — all 151 A2UI types, all prop variations (AllVariations pattern)",
       "messages": [
         {
           "type": "beginRendering",
@@ -6262,6 +6308,8 @@
                   "children": [
                     "heading",
                     "subtitle",
+                    "kbd-example",
+                    "code-example",
                     "sec-txt",
                     "sec-lay",
                     "sec-btn",
@@ -6367,6 +6415,25 @@
                   "content": "All 149 catalog types — every meaningful prop variation shown side-by-side",
                   "usageHint": "body",
                   "color": "muted"
+                }
+              }
+            },
+            {
+              "id": "kbd-example",
+              "component": {
+                "Kbd": {
+                  "content": "⌘ K",
+                  "size": "md"
+                }
+              }
+            },
+            {
+              "id": "code-example",
+              "component": {
+                "CodeBlock": {
+                  "content": "export const ready = true;",
+                  "language": "ts",
+                  "wrap": false
                 }
               }
             },

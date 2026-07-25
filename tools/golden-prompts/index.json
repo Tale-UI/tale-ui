@@ -101,6 +101,10 @@
       "difficulty": "medium"
     },
     {
+      "slug": "code-block-plain-text",
+      "difficulty": "simple"
+    },
+    {
       "slug": "combobox-search",
       "difficulty": "medium"
     },
@@ -207,6 +211,10 @@
     {
       "slug": "i18n-provider-pseudo",
       "difficulty": "medium"
+    },
+    {
+      "slug": "kbd-shortcut",
+      "difficulty": "simple"
     },
     {
       "slug": "iphone-mockup-screenshot",

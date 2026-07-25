@@ -12,6 +12,8 @@ import * as React from 'react';
 // into bundles that only use a subset of the catalog.
 
 import { Text } from '@tale-ui/react/text';
+import { Kbd } from '@tale-ui/react/kbd';
+import { CodeBlock } from '@tale-ui/react/code-block';
 import { Row } from '@tale-ui/react/row';
 import { Column } from '@tale-ui/react/column';
 import { Card } from '@tale-ui/react/card';
@@ -195,6 +197,23 @@ export const taleUICatalog: Catalog = {
         children: props.content ?? ctx.children,
       };
     },
+  } as CatalogEntry,
+
+  Kbd: {
+    component: Kbd,
+    adapter: (props, ctx) => ({
+      size: props.size as string | undefined,
+      children: props.content ?? ctx.children,
+    }),
+  } as CatalogEntry,
+
+  CodeBlock: {
+    component: CodeBlock,
+    adapter: (props) => ({
+      language: props.language as string | undefined,
+      wrap: props.wrap === true,
+      children: String(props.content ?? ''),
+    }),
   } as CatalogEntry,
 
   /* ── Layout ──────────────────────────────────────────────────────────── */

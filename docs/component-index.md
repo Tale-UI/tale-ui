@@ -1,6 +1,6 @@
 # Component Index
 
-Quick-reference table for all 118 `@tale-ui/react` components plus 6 `@tale-ui/charts` components.
+Quick-reference table for all 120 `@tale-ui/react` components plus 6 `@tale-ui/charts` components.
 For detailed usage, see the per-component docs in [docs/components/](components/index.md).
 
 ## Form Controls (27)
@@ -153,11 +153,13 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | ImageCropper | Interactive image crop region with aspect ratio and circular crop support | `@tale-ui/react/image-cropper` | Root, Img                                                                                                                                                                                      |
 | TextEditor   | Rich-text editor built on Tiptap v3 with simple and advanced toolbars     | `@tale-ui/react/text-editor`   | Root, Label, HintText, Content, Toolbar, BubbleMenu, Bold, Italic, Underline, BulletList, AlignLeft, AlignCenter, AlignRight, AlignJustify, Link, Image, Color, FontFamily, FontSize, Generate |
 
-## Typography (1)
+## Typography (3)
 
-| Component | Description                                                         | Import                | Parts |
-| --------- | ------------------------------------------------------------------- | --------------------- | ----- |
-| Text      | Polymorphic typography wrapper with variant, size, and colour props | `@tale-ui/react/text` | --    |
+| Component | Description                                                         | Import                      | Parts |
+| --------- | ------------------------------------------------------------------- | --------------------------- | ----- |
+| CodeBlock | Plain-text code surface without parsing, highlighting, or execution | `@tale-ui/react/code-block` | --    |
+| Kbd       | Semantic keyboard input or shortcut hint                            | `@tale-ui/react/kbd`        | --    |
+| Text      | Polymorphic typography wrapper with variant, size, and colour props  | `@tale-ui/react/text`       | --    |
 
 ## Utility (8)
 

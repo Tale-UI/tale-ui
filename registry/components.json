@@ -2083,6 +2083,53 @@
       ]
     },
     {
+      "name": "CodeBlock",
+      "slug": "code-block",
+      "import": "@tale-ui/react/code-block",
+      "category": "Typography",
+      "description": "Plain-text code surface without parsing, highlighting, or execution",
+      "kind": "simple",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "language",
+          "type": "string",
+          "required": false,
+          "description": "Informational language identifier. No highlighting is performed.",
+          "default": null
+        },
+        {
+          "name": "wrap",
+          "type": "boolean",
+          "required": false,
+          "description": "Wrap long lines instead of horizontal scrolling. @default false",
+          "default": "false"
+        }
+      ],
+      "parts": null,
+      "examples": [
+        "import { CodeBlock } from '@tale-ui/react/code-block';\n\nexport function ExampleCode() {\n  return (\n    <CodeBlock language=\"tsx\">{`export function App() {\n  return <main>Hello</main>;\n}`}</CodeBlock>\n  );\n}"
+      ],
+      "cssClasses": [
+        "tale-code-block",
+        "tale-code-block--wrap"
+      ],
+      "pitfalls": [
+        {
+          "id": "code-block-plain-text",
+          "summary": "Pass plain text to CodeBlock",
+          "detail": "the component intentionally excludes raw HTML, Markdown, syntax highlighting, and executable renderers.",
+          "antiPatterns": [
+            "<CodeBlock dangerouslySetInnerHTML={{ __html: generatedCode }} />"
+          ],
+          "fixes": [
+            "<CodeBlock>{generatedCode}</CodeBlock>"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
       "name": "ColorArea",
       "slug": "color-area",
       "import": "@tale-ui/react/color-area",
@@ -5848,6 +5895,51 @@
           ],
           "fixes": [
             "import { IPhoneMockup } from '@tale-ui/react/iphone-mockup';"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
+      "name": "Kbd",
+      "slug": "kbd",
+      "import": "@tale-ui/react/kbd",
+      "category": "Typography",
+      "description": "Semantic keyboard input or shortcut hint",
+      "kind": "simple",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "size",
+          "type": "KbdSize",
+          "required": false,
+          "description": "Visual size. @default 'md'",
+          "default": "'md'",
+          "allowedValues": [
+            "sm",
+            "md"
+          ]
+        }
+      ],
+      "parts": null,
+      "examples": [
+        "import { Kbd } from '@tale-ui/react/kbd';\nimport { Text } from '@tale-ui/react/text';\n\nexport function SearchShortcut() {\n  return (\n    <Text>\n      Open search with <Kbd>⌘</Kbd> <Kbd>K</Kbd>\n    </Text>\n  );\n}"
+      ],
+      "cssClasses": [
+        "tale-kbd",
+        "tale-kbd--md",
+        "tale-kbd--sm"
+      ],
+      "pitfalls": [
+        {
+          "id": "kbd-no-shortcut-behavior",
+          "summary": "Do not use Kbd to register shortcuts",
+          "detail": "it is semantic display content, so application keyboard behavior remains separate.",
+          "antiPatterns": [
+            "<Kbd onKeyDown={openSearch}>⌘ K</Kbd>"
+          ],
+          "fixes": [
+            "<Text>Open search with <Kbd>⌘</Kbd> <Kbd>K</Kbd></Text>"
           ]
         }
       ],

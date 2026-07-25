@@ -77,6 +77,8 @@
 
 /* ─── Typography ───────────────────────────────────────────────────────────── */
 @import './text.css';
+@import './kbd.css';
+@import './code-block.css';
 
 /* ─── Feedback / display ────────────────────────────────────────────────────── */
 @import './badge.css';
