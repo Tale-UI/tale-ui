@@ -1,0 +1,7 @@
+{
+  "slug": "i18n-provider-pseudo",
+  "difficulty": "medium",
+  "prompt": "Show Tale UI's pseudo-locale QA mode with a localized table page status.",
+  "reference": "import { I18nProvider, useTaleI18n } from '@tale-ui/react/i18n-provider';\nimport { Text } from '@tale-ui/react/text';\n\nfunction PageStatus() {\n  const { formatMessage } = useTaleI18n();\n  return <Text>{formatMessage('table.page', { page: 2, pageCount: 8 })}</Text>;\n}\n\nexport function PseudoLocalePreview() {\n  return (\n    <I18nProvider mode=\"pseudo\">\n      <PageStatus />\n    </I18nProvider>\n  );\n}",
+  "tags": ["I18nProvider", "Text"]
+}

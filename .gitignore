@@ -71,6 +71,7 @@ storybook-static/
 !/analysis/baselines/table-controller.json
 !/analysis/baselines/table-sorting.json
 !/analysis/baselines/project-mutation-runtime.json
+!/analysis/baselines/i18n-message-inventory.json
 !/analysis/app-shell/
 /analysis/app-shell/*
 !/analysis/app-shell/inventory.json

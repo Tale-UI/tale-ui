@@ -7,6 +7,7 @@
     "noEmit": false,
     "module": "esnext",
     "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "rootDir": ".",
     "outDir": "build-tests",
     "types": ["vitest/globals", "@types/chai", "@types/chai-dom"]
@@ -16,6 +17,7 @@
     "test/chai-matchers.d.ts",
     "src/**/*.spec.ts*",
     "src/**/*.test.ts*",
+    "src/**/*.json",
     "src/index.test.ts",
     "test",
     "test/addChaiAssertions.ts",

@@ -4763,16 +4763,63 @@
           "required": false,
           "description": "The locale to apply to the children (e.g. `\"en-US\"`, `\"ar-AE\"`).",
           "default": null
+        },
+        {
+          "name": "catalogs",
+          "type": "TaleMessageCatalogs",
+          "required": false,
+          "description": "Locale catalogs containing Tale-owned operational strings only.",
+          "default": null
+        },
+        {
+          "name": "messages",
+          "type": "TaleMessageCatalog",
+          "required": false,
+          "description": "Per-provider overrides with higher precedence than locale catalogs.",
+          "default": null
+        },
+        {
+          "name": "fallbackLocale",
+          "type": "string",
+          "required": false,
+          "description": "Catalog to use before the built-in English fallback.",
+          "default": null
+        },
+        {
+          "name": "mode",
+          "type": "'default' | 'pseudo' | 'rtl'",
+          "required": false,
+          "description": "Pseudo-localization and forced-RTL QA modes.",
+          "default": null,
+          "allowedValues": [
+            "default",
+            "pseudo",
+            "rtl"
+          ]
         }
       ],
       "parts": null,
       "examples": [
-        "import { I18nProvider } from '@tale-ui/react/i18n-provider';\n\n<I18nProvider locale=\"en-US\">\n  <App />\n</I18nProvider>",
+        "import { I18nProvider } from '@tale-ui/react/i18n-provider';\n\n<I18nProvider locale=\"en-US\">\n  <App />\n</I18nProvider>;",
         "<I18nProvider locale=\"ar-AE\">\n  <App />\n</I18nProvider>",
-        "import { useLocale } from '@tale-ui/react/i18n-provider';\n\nfunction LocaleDisplay() {\n  const { locale, direction } = useLocale();\n  return <p>Locale: {locale}, Direction: {direction}</p>;\n}"
+        "import { useLocale } from '@tale-ui/react/i18n-provider';\n\nfunction LocaleDisplay() {\n  const { locale, direction } = useLocale();\n  return (\n    <p>\n      Locale: {locale}, Direction: {direction}\n    </p>\n  );\n}",
+        "import { useTaleI18n } from '@tale-ui/react/i18n-provider';\n\nfunction PageStatus() {\n  const { formatMessage } = useTaleI18n();\n  return <output>{formatMessage('table.page', { page: 2, pageCount: 8 })}</output>;\n}",
+        "<I18nProvider mode=\"pseudo\">\n  <App />\n</I18nProvider>\n\n<I18nProvider mode=\"rtl\">\n  <App />\n</I18nProvider>"
       ],
       "cssClasses": null,
-      "pitfalls": null,
+      "pitfalls": [
+        {
+          "id": "i18n-provider-no-application-copy",
+          "summary": "Do not put application copy in I18nProvider catalogs",
+          "detail": "catalogs are limited to Tale-owned operational labels and statuses.",
+          "antiPatterns": [
+            "<I18nProvider messages={{ 'product.welcome': 'Welcome back' }}>"
+          ],
+          "fixes": [
+            "<Text>{appMessages.welcome}</Text>"
+          ]
+        }
+      ],
       "crossPitfallRefs": null
     },
     {

@@ -256,7 +256,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:924cc0c5aa2c2cd12cbc74e00b45072dc15d35c0849f1921fb69e1f3e4c342cb",
+  "sourceRevision": "sha256:236a2412c618bb61e27723586f6c61392081b136407f3fbb78c2ee5d4ca212fe",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -34126,6 +34126,66 @@
       }
     },
     {
+      "id": "tale:pitfall:i18n-provider--i18n-provider-no-application-copy",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "i18n-provider--i18n-provider-no-application-copy",
+      "name": "Do not put application copy in I18nProvider catalogs",
+      "description": "catalogs are limited to Tale-owned operational labels and statuses.",
+      "lifecycle": "stable",
+      "keywords": [
+        "and",
+        "application",
+        "are",
+        "catalogs",
+        "copy",
+        "do",
+        "i18n",
+        "i18nprovider",
+        "in",
+        "labels",
+        "limited",
+        "no",
+        "not",
+        "operational",
+        "owned",
+        "provider",
+        "put",
+        "statuses",
+        "tale",
+        "to"
+      ],
+      "related": [
+        "tale:component:i18n-provider"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=i18n-provider].pitfalls[id=i18n-provider-no-application-copy]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/i18n-provider.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "i18n-provider-no-application-copy",
+        "category": "component",
+        "component": "I18nProvider"
+      }
+    },
+    {
       "id": "tale:pitfall:icon--icon-image-name-collision",
       "namespace": "tale",
       "kind": "pitfall",
@@ -49737,5 +49797,5 @@
       }
     }
   ],
-  "digest": "sha256:62e2641032ecc27fbd062ab18879cbfad8e173860e7378b4c3fa109f484d43e5"
+  "digest": "sha256:c918aa9e1ceba9b7828d69251fa308ea38cd0cbe0a3ddd7eb2990a3730ddf774"
 }

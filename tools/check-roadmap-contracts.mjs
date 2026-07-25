@@ -130,6 +130,23 @@ validate(
   json('registry/sources/hooks.json'),
   'registry/sources/hooks.json',
 );
+validate(
+  'schemas/i18n-catalog.schema.json',
+  json('packages/react/src/i18n-provider/catalogs/en.json'),
+  'packages/react/src/i18n-provider/catalogs/en.json',
+);
+const i18nCatalog = json('packages/react/src/i18n-provider/catalogs/en.json');
+const i18nInventory = json('analysis/baselines/i18n-message-inventory.json');
+assert.deepEqual(
+  Object.keys(i18nCatalog.messages).toSorted(compareCanonicalStrings),
+  i18nInventory.messageIds.toSorted(compareCanonicalStrings),
+  'The Tale-owned English message catalog must preserve the approved exact inventory',
+);
+assert.equal(
+  i18nInventory.applicationCopy,
+  'excluded',
+  'The Tale message catalog must not absorb application copy',
+);
 
 const artifactRegistry = json('registry/artifacts.json');
 const { digest: artifactDigest, ...artifactPreimage } = artifactRegistry;

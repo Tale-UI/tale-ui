@@ -9,6 +9,7 @@ import { IconButton } from '@tale-ui/react/icon-button';
 import { Input } from '@tale-ui/react/input';
 import { ToggleButton, ToggleButtonGroup } from '@tale-ui/react/toggle-button';
 import { Separator } from '@tale-ui/react/separator';
+import { I18nProvider, useTaleI18n } from '@tale-ui/react/i18n-provider';
 
 // Compound components
 import { Checkbox } from '@tale-ui/react/checkbox';
@@ -453,11 +454,21 @@ const TOC = [
     category: 'Utility',
     items: [
       { id: 'color-mode-toggle', label: 'ColorModeToggle' },
+      { id: 'i18n-provider', label: 'I18nProvider' },
       { id: 'icon', label: 'Icon' },
       { id: 'container', label: 'Container' },
     ],
   },
 ];
+
+function I18nAuditValue() {
+  const { formatMessage, mode } = useTaleI18n();
+  return (
+    <Text>
+      {mode}: {formatMessage('table.page', { page: 2, pageCount: 8 })}
+    </Text>
+  );
+}
 
 const TOC_ITEMS = TOC.flatMap(({ items }) => items).sort((a, b) => a.label.localeCompare(b.label));
 
@@ -1358,6 +1369,17 @@ export default function ComponentAudit() {
           <Row>
             <InertColorModeToggle disabled />
           </Row>
+        </Section>
+
+        <Section id="i18n-provider" title="I18nProvider" classes={[]}>
+          <SubHeading>Pseudo-locale expansion</SubHeading>
+          <I18nProvider mode="pseudo">
+            <I18nAuditValue />
+          </I18nProvider>
+          <SubHeading>Forced RTL</SubHeading>
+          <I18nProvider mode="rtl">
+            <I18nAuditValue />
+          </I18nProvider>
         </Section>
 
         <Section

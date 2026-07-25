@@ -194,6 +194,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [GridList] Use GridList for any prompt that asks for a selectable grid list, image card grid, or multi-select card grid
 - [HeaderNav] HeaderNav.MobileTrigger requires children — omitting them causes a TypeScript error 'Property children is missing in type {} but required in type HeaderNavMobileTriggerProps'
 - [HeaderNav] Always import Text from @tale-ui/react/text when rendering text inside HeaderNav sub-parts such as HeaderNav.Logo
+- [I18nProvider] Do not put application copy in I18nProvider catalogs
 - [Icon] icon prop takes a component reference, not an instance
 - [Icon] Import lucide icons from lucide-react root, not deep subpaths
 - [Icon] Avoid Icon Image name collisions
