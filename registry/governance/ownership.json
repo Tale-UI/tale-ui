@@ -1,0 +1,41 @@
+{
+  "$schema": "../../schemas/ownership.schema.json",
+  "schemaVersion": "1.0.0",
+  "defaultOwner": "design-systems",
+  "owners": [
+    {
+      "id": "design-systems",
+      "name": "Design Systems",
+      "contact": "@tale-ui/design-systems",
+      "responsibilities": ["components", "foundations", "themes", "lifecycle decisions"]
+    },
+    {
+      "id": "developer-experience",
+      "name": "Developer Experience",
+      "contact": "@tale-ui/developer-experience",
+      "responsibilities": ["tooling", "migrations", "templates", "package contracts"]
+    },
+    {
+      "id": "ai-experience",
+      "name": "AI Experience",
+      "contact": "@tale-ui/ai-experience",
+      "responsibilities": ["A2UI types", "agent guidance", "recipes", "validation artifacts"]
+    },
+    {
+      "id": "data-visualization",
+      "name": "Data Visualization",
+      "contact": "@tale-ui/data-visualization",
+      "responsibilities": ["charts", "visualization accessibility", "chart performance"]
+    }
+  ],
+  "rules": [
+    { "owner": "data-visualization", "match": { "package": "@tale-ui/charts" } },
+    { "owner": "ai-experience", "match": { "kind": "a2ui-type" } },
+    { "owner": "ai-experience", "match": { "kind": "recipe" } },
+    { "owner": "ai-experience", "match": { "kind": "pitfall" } },
+    { "owner": "ai-experience", "match": { "kind": "validation" } },
+    { "owner": "developer-experience", "match": { "kind": "template" } },
+    { "owner": "developer-experience", "match": { "kind": "codemod" } },
+    { "owner": "developer-experience", "match": { "package": "@tale-ui/tooling" } }
+  ]
+}

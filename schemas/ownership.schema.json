@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/ownership.schema.json",
+  "title": "Artifact ownership rules",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "defaultOwner", "owners", "rules"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": "1.0.0" },
+    "defaultOwner": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" },
+    "owners": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "contact", "responsibilities"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" },
+          "name": { "type": "string", "minLength": 1 },
+          "contact": { "type": "string", "pattern": "^@tale-ui/[a-z0-9-]+$" },
+          "responsibilities": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["owner", "match"],
+        "properties": {
+          "owner": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" },
+          "match": {
+            "type": "object",
+            "additionalProperties": false,
+            "minProperties": 1,
+            "properties": {
+              "kind": { "type": "string" },
+              "package": { "type": "string" },
+              "idPrefix": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

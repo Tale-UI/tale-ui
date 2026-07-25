@@ -3,25 +3,138 @@
   "$id": "https://tale-ui.dev/schemas/lifecycle.schema.json",
   "title": "Artifact lifecycle policy",
   "type": "object",
-  "required": ["schemaVersion", "states", "promotionGates", "deprecationPolicy", "exceptionPolicy"],
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "states",
+    "promotionGates",
+    "deprecationPolicy",
+    "retirementPolicy",
+    "ownershipPolicy",
+    "proposalPolicy",
+    "reviewPolicy",
+    "exceptionPolicy"
+  ],
   "properties": {
+    "$schema": { "type": "string" },
     "schemaVersion": { "const": "1.0.0" },
     "states": {
-      "type": "array",
-      "items": { "enum": ["experimental", "stable", "deprecated", "retired"] },
-      "minItems": 4,
-      "maxItems": 4,
-      "uniqueItems": true
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["experimental", "stable", "deprecated", "retired"],
+      "properties": {
+        "experimental": { "$ref": "#/$defs/state" },
+        "stable": { "$ref": "#/$defs/state" },
+        "deprecated": { "$ref": "#/$defs/state" },
+        "retired": { "$ref": "#/$defs/state" }
+      }
     },
-    "promotionGates": { "type": "array", "items": { "type": "string" } },
-    "deprecationPolicy": { "type": "object" },
+    "promotionGates": {
+      "type": "array",
+      "minItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "approved-proposal",
+          "named-owner",
+          "api-and-compatibility",
+          "accessibility",
+          "security-and-privacy",
+          "ssr-and-hydration",
+          "performance-budget",
+          "documentation-and-examples",
+          "migration-and-rollback",
+          "package-and-generated-artifacts"
+        ]
+      }
+    },
+    "deprecationPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimumNoticeDays",
+        "replacementRequired",
+        "migrationTreatmentRequired",
+        "changelogRequired"
+      ],
+      "properties": {
+        "minimumNoticeDays": { "type": "integer", "minimum": 90 },
+        "replacementRequired": { "const": true },
+        "migrationTreatmentRequired": { "const": true },
+        "changelogRequired": { "const": true }
+      }
+    },
+    "retirementPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requiresMajorRelease", "archiveDocs", "preserveStableId"],
+      "properties": {
+        "requiresMajorRelease": { "const": true },
+        "archiveDocs": { "const": true },
+        "preserveStableId": { "const": true }
+      }
+    },
+    "ownershipPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coverage", "escalationDays"],
+      "properties": {
+        "coverage": { "const": "all-artifacts" },
+        "escalationDays": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "proposalPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["template", "decisionRecordRequired"],
+      "properties": {
+        "template": { "type": "string", "pattern": "^\\.github/" },
+        "decisionRecordRequired": { "const": true }
+      }
+    },
+    "reviewPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rubric", "requiredReviewDomains"],
+      "properties": {
+        "rubric": { "type": "string", "pattern": "^docs/" },
+        "requiredReviewDomains": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "design-systems",
+              "accessibility",
+              "developer-experience",
+              "security-privacy",
+              "performance",
+              "release-engineering"
+            ]
+          }
+        }
+      }
+    },
     "exceptionPolicy": {
       "type": "object",
-      "required": ["owner", "rationale", "expires"],
+      "additionalProperties": false,
+      "required": ["maximumDays", "ownerRequired", "rationaleRequired", "expiryRequired"],
       "properties": {
-        "owner": { "type": "string" },
-        "rationale": { "type": "string" },
-        "expires": { "type": "string", "format": "date" }
+        "maximumDays": { "type": "integer", "minimum": 1, "maximum": 365 },
+        "ownerRequired": { "const": true },
+        "rationaleRequired": { "const": true },
+        "expiryRequired": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["definition", "consumerCommitment"],
+      "properties": {
+        "definition": { "type": "string", "minLength": 1 },
+        "consumerCommitment": { "type": "string", "minLength": 1 }
       }
     }
   }

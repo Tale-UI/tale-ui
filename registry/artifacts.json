@@ -136,6 +136,7 @@
     "docs/consuming-design-system.md",
     "docs/design-philosophy.md",
     "docs/foundations/motion-and-elevation.md",
+    "docs/governance/lifecycle.md",
     "docs/managing-packages.md",
     "docs/package-dependencies.md",
     "docs/react-aria-deviations.md",
@@ -269,7 +270,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:52b4920a990a7840077c973e02ccb830eee15d3adedfa5bec775689797feb8e3",
+  "sourceRevision": "sha256:1ca23304dce0d292a76e7546b71438f1b58a96ac0779e4d90d3e3ac66607a2d2",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -21701,6 +21702,42 @@
       ],
       "provenance": {
         "source": "packages/css/docs/framework-integration.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:foundation:lifecycle-and-governance",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "lifecycle-and-governance",
+      "name": "Lifecycle and governance",
+      "description": "Tale UI foundation guidance for Lifecycle and governance.",
+      "lifecycle": "stable",
+      "keywords": [
+        "exceptions",
+        "governance",
+        "lifecycle",
+        "ownership"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/governance/lifecycle.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/governance/lifecycle.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -50782,5 +50819,5 @@
       }
     }
   ],
-  "digest": "sha256:b32b34a749736a804a82973c2bbed6669b15e0efde479fffa3123be71fe2fc7d"
+  "digest": "sha256:51565d19762250a4606781e56ae7629520ac2a9016d27aa86793989503c5285d"
 }

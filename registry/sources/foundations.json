@@ -20,6 +20,12 @@
       "keywords": ["motion", "elevation", "reduced-motion", "transitions"]
     },
     {
+      "slug": "lifecycle-and-governance",
+      "title": "Lifecycle and governance",
+      "path": "docs/governance/lifecycle.md",
+      "keywords": ["lifecycle", "ownership", "governance", "exceptions"]
+    },
+    {
       "slug": "css-architecture",
       "title": "CSS architecture",
       "path": "packages/css/docs/architecture.md",

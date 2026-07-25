@@ -1,0 +1,70 @@
+{
+  "$schema": "../../schemas/lifecycle.schema.json",
+  "schemaVersion": "1.0.0",
+  "states": {
+    "experimental": {
+      "definition": "Available for evidence gathering; API changes may occur with release notes.",
+      "consumerCommitment": "No silent removal and a documented promotion, deprecation, or retirement decision."
+    },
+    "stable": {
+      "definition": "Supported public contract that passed every promotion gate.",
+      "consumerCommitment": "Semantic-versioning compatibility and a migration path for breaking changes."
+    },
+    "deprecated": {
+      "definition": "Supported temporarily while consumers move to a named replacement.",
+      "consumerCommitment": "Notice, replacement guidance, migration treatment, and support through the notice window."
+    },
+    "retired": {
+      "definition": "Unavailable in current packages but retained in historical metadata.",
+      "consumerCommitment": "Stable identifier, archived documentation, and the final replacement record remain discoverable."
+    }
+  },
+  "promotionGates": [
+    "approved-proposal",
+    "named-owner",
+    "api-and-compatibility",
+    "accessibility",
+    "security-and-privacy",
+    "ssr-and-hydration",
+    "performance-budget",
+    "documentation-and-examples",
+    "migration-and-rollback",
+    "package-and-generated-artifacts"
+  ],
+  "deprecationPolicy": {
+    "minimumNoticeDays": 180,
+    "replacementRequired": true,
+    "migrationTreatmentRequired": true,
+    "changelogRequired": true
+  },
+  "retirementPolicy": {
+    "requiresMajorRelease": true,
+    "archiveDocs": true,
+    "preserveStableId": true
+  },
+  "ownershipPolicy": {
+    "coverage": "all-artifacts",
+    "escalationDays": 5
+  },
+  "proposalPolicy": {
+    "template": ".github/ISSUE_TEMPLATE/design-system-proposal.yml",
+    "decisionRecordRequired": true
+  },
+  "reviewPolicy": {
+    "rubric": "docs/governance/review-rubric.md",
+    "requiredReviewDomains": [
+      "design-systems",
+      "accessibility",
+      "developer-experience",
+      "security-privacy",
+      "performance",
+      "release-engineering"
+    ]
+  },
+  "exceptionPolicy": {
+    "maximumDays": 180,
+    "ownerRequired": true,
+    "rationaleRequired": true,
+    "expiryRequired": true
+  }
+}

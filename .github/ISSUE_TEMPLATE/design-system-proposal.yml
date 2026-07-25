@@ -1,0 +1,55 @@
+name: Design-system proposal
+description: Propose a new public contract or a material stable API change
+title: '[Proposal] '
+labels:
+  - proposal
+body:
+  - type: markdown
+    attributes:
+      value: Complete the evidence before requesting promotion.
+  - type: input
+    id: owner
+    attributes:
+      label: Accountable owner
+      description: Functional owner from registry/governance/ownership.json
+    validations:
+      required: true
+  - type: dropdown
+    id: lifecycle
+    attributes:
+      label: Intended lifecycle
+      options:
+        - experimental
+        - stable
+        - deprecated
+        - retired
+    validations:
+      required: true
+  - type: textarea
+    id: demand
+    attributes:
+      label: Demand and ownership boundary
+      description: Cite repeated evidence and explain why this belongs in Tale UI.
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: Proposed contract and alternatives
+      description: Include rejected alternatives and compatibility implications.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Review evidence
+      description: Cover accessibility, security/privacy, SSR/hydration, performance, docs, and packages.
+    validations:
+      required: true
+  - type: textarea
+    id: migration
+    attributes:
+      label: Migration and rollback
+      description: Describe adoption, deprecation, recovery, and rollback treatment.
+    validations:
+      required: true
