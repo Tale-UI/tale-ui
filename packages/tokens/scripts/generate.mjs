@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { createHash } from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { inspect } from 'node:util';
@@ -10,9 +11,14 @@ const repoRoot = path.resolve(packageRoot, '../..');
 const sourcePath = path.join(packageRoot, 'tokens.json');
 const cssTokenDir = path.join(repoRoot, 'packages/css/src/tokens');
 const generatedPath = path.join(packageRoot, 'src/generated.ts');
+const figmaModulePath = path.join(packageRoot, 'src/figma.ts');
+const nativeJsonPath = path.join(packageRoot, 'native.json');
+const figmaVariablesPath = path.join(packageRoot, 'figma/variables.json');
 const checkOnly = process.argv.includes('--check');
 
-const source = JSON.parse(await fs.readFile(sourcePath, 'utf8'));
+const sourceText = (await fs.readFile(sourcePath, 'utf8')).replaceAll('\r\n', '\n');
+const source = JSON.parse(sourceText);
+const sourceDigest = `sha256:${createHash('sha256').update(sourceText).digest('hex')}`;
 
 if (source.formatVersion !== 1) {
   throw new Error(`Unsupported token source format: ${source.formatVersion}`);
@@ -161,6 +167,10 @@ const createNativeMode = (overrides = {}) => {
 
 const light = createNativeMode(lightModeAliases);
 const dark = createNativeMode(darkModeAliases);
+const portableNames = Object.keys(light.byCssName).filter((name) =>
+  Object.hasOwn(dark.byCssName, name),
+);
+const unsupported = Object.keys(rootTokens).filter((name) => !portableNames.includes(name));
 
 const formatObject = (value) =>
   inspect(value, {
@@ -198,12 +208,76 @@ export type NativeColorMode = keyof typeof nativeTokenModes;
   { parser: 'typescript', printWidth: 100, singleQuote: true, trailingComma: 'all' },
 );
 
+const nativeJson = `${JSON.stringify(
+  {
+    schemaVersion: '1.0.0',
+    source: 'tokens.json',
+    sourceDigest,
+    baseFontSize: source.baseFontSize,
+    modes: {
+      light: light.byCssName,
+      dark: dark.byCssName,
+    },
+    portableTokenNames: portableNames,
+    unsupportedTokenNames: unsupported,
+  },
+  null,
+  2,
+)}\n`;
+
+const figmaVariableType = (value) => {
+  if (typeof value === 'number') {
+    return 'FLOAT';
+  }
+  if (/^#|^rgba?\(/i.test(value)) {
+    return 'COLOR';
+  }
+  return 'STRING';
+};
+
+const figmaPayload = {
+  schemaVersion: '1.0.0',
+  source: 'packages/tokens/tokens.json',
+  sourceDigest,
+  owner: 'design-systems',
+  collections: [
+    {
+      id: 'tale-ui-foundations',
+      name: 'Tale UI foundations',
+      registryId: 'tale:foundation:design-tokens',
+      modes: ['light', 'dark'],
+      variables: portableNames.map((name) => {
+        const lightValue = light.byCssName[name];
+        const darkValue = dark.byCssName[name];
+        return {
+          id: `tale/token/${name.slice(2)}`,
+          name: name.slice(2).replaceAll('-', '/'),
+          codeName: name,
+          resolvedType: figmaVariableType(lightValue),
+          valuesByMode: { light: lightValue, dark: darkValue },
+        };
+      }),
+    },
+  ],
+};
+const figmaVariables = `${JSON.stringify(figmaPayload, null, 2)}\n`;
+const figmaModule = await format(
+  `/* This file is generated from ../tokens.json. Do not edit directly. */
+export const figmaVariables = ${formatObject(figmaPayload)} as const;
+export default figmaVariables;
+`,
+  { parser: 'typescript', printWidth: 100, singleQuote: true, trailingComma: 'all' },
+);
+
 const outputs = [
   ...Object.entries(source.files).map(([filename, rules]) => ({
     path: path.join(cssTokenDir, filename),
     content: renderCss(filename, rules),
   })),
   { path: generatedPath, content: generatedTs },
+  { path: figmaModulePath, content: figmaModule },
+  { path: nativeJsonPath, content: nativeJson },
+  { path: figmaVariablesPath, content: figmaVariables },
 ];
 
 const outputResults = await Promise.all(

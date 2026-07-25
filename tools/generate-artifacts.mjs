@@ -26,6 +26,7 @@ const GENERATED_INPUTS = [
   'registry/sources/capabilities.json',
   'registry/sources/foundations.json',
   'registry/sources/hooks.json',
+  'registry/extensions/trust.json',
   'packages/react/package.json',
   'packages/a2ui/package.json',
   'packages/css/package.json',

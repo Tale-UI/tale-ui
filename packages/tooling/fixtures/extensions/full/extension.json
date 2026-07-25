@@ -1,0 +1,99 @@
+{
+  "$schema": "../../../../../schemas/extension.schema.json",
+  "schemaVersion": "1.0.0",
+  "namespace": "fixture.tale-extension",
+  "package": "@fixture/tale-extension",
+  "version": "1.0.0",
+  "publisher": "fixture.tale-ui.dev",
+  "provenance": {
+    "repository": "https://example.com/fixture/tale-extension",
+    "npmProvenance": true
+  },
+  "integrity": "sha512-MsgCGCc5K35IkjlYRQdTDCpndOD0Fjf6C06fNFBQEC6xF4013xW2UcwMerii0t15JagdPzXjaQcWA3vC3pbnMw==",
+  "license": "MIT",
+  "contributionClasses": [
+    "components-and-docs",
+    "recipes-and-templates",
+    "validations-and-pitfalls",
+    "codemods",
+    "a2ui-types"
+  ],
+  "contributions": [
+    {
+      "class": "components-and-docs",
+      "artifacts": [
+        {
+          "id": "fixture.tale-extension:component:fixture-card",
+          "kind": "component",
+          "slug": "fixture-card",
+          "path": "./artifacts/component.json",
+          "executable": false,
+          "capabilities": []
+        }
+      ]
+    },
+    {
+      "class": "recipes-and-templates",
+      "artifacts": [
+        {
+          "id": "fixture.tale-extension:template:fixture-dashboard",
+          "kind": "template",
+          "slug": "fixture-dashboard",
+          "path": "./artifacts/template.json",
+          "executable": false,
+          "capabilities": []
+        }
+      ]
+    },
+    {
+      "class": "validations-and-pitfalls",
+      "artifacts": [
+        {
+          "id": "fixture.tale-extension:validation:fixture-validation",
+          "kind": "validation",
+          "slug": "fixture-validation",
+          "path": "./artifacts/validation.json",
+          "executable": true,
+          "entrypoint": "./executables/validation.mjs",
+          "capabilities": ["validation.run"]
+        }
+      ]
+    },
+    {
+      "class": "codemods",
+      "artifacts": [
+        {
+          "id": "fixture.tale-extension:codemod:fixture-codemod",
+          "kind": "codemod",
+          "slug": "fixture-codemod",
+          "path": "./artifacts/codemod.json",
+          "executable": true,
+          "entrypoint": "./executables/codemod.mjs",
+          "capabilities": ["codemod.run"]
+        }
+      ]
+    },
+    {
+      "class": "a2ui-types",
+      "artifacts": [
+        {
+          "id": "fixture.tale-extension:a2ui-type:fixture-card",
+          "kind": "a2ui-type",
+          "slug": "fixture-card",
+          "path": "./artifacts/a2ui.json",
+          "executable": false,
+          "capabilities": []
+        }
+      ]
+    }
+  ],
+  "contractRanges": {
+    "tale": "^1.0.0",
+    "extension": "^1.0.0"
+  },
+  "capabilities": ["validation.run", "codemod.run"],
+  "permissions": ["project-read", "project-write-approved-files"],
+  "trust": "untrusted",
+  "sourceLinks": ["https://example.com/fixture/tale-extension"],
+  "revocation": null
+}

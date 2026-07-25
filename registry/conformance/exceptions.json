@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0.0",
+  "exceptions": [
+    {
+      "tokenPattern": "^--(?:display|heading|title|label|text|mono)-letter-spacing$",
+      "unsupportedBehavior": "CSS keyword letter spacing is not a React Native numeric value.",
+      "fallback": "Use 0 unless the platform typography owner supplies a measured numeric override.",
+      "evidence": "packages/tokens/native.json#unsupportedTokenNames",
+      "owner": "@tale-ui/tokens",
+      "reviewBy": "2026-10-31",
+      "expiresOn": "2026-12-31"
+    },
+    {
+      "tokenPattern": "^--motion-(?:.+-)?easing(?:-.+)?$",
+      "unsupportedBehavior": "CSS cubic-bezier strings are not directly accepted by React Native animation drivers.",
+      "fallback": "Map the semantic role to the platform animation driver's equivalent easing function.",
+      "evidence": "docs/native-token-conformance.md#motion",
+      "owner": "@tale-ui/tokens",
+      "reviewBy": "2026-10-31",
+      "expiresOn": "2026-12-31"
+    },
+    {
+      "tokenPattern": "^--(?:shadow|elevation)-",
+      "unsupportedBehavior": "CSS multi-shadow expressions do not map one-to-one to iOS and Android elevation APIs.",
+      "fallback": "Use the documented platform shadow recipe for the same semantic elevation role.",
+      "evidence": "docs/native-token-conformance.md#elevation",
+      "owner": "@tale-ui/tokens",
+      "reviewBy": "2026-10-31",
+      "expiresOn": "2026-12-31"
+    },
+    {
+      "tokenPattern": "^--scrim(?:-.+)?$",
+      "unsupportedBehavior": "Modern CSS relative rgb syntax requires platform color normalization.",
+      "fallback": "Resolve the active neutral color and apply the documented alpha on the native platform.",
+      "evidence": "docs/native-token-conformance.md#scrims",
+      "owner": "@tale-ui/tokens",
+      "reviewBy": "2026-10-31",
+      "expiresOn": "2026-12-31"
+    }
+  ]
+}

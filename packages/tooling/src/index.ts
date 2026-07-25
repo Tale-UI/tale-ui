@@ -24,4 +24,18 @@ export {
   listTemplates,
 } from './materialize.js';
 export { applyMigration, listMigrations, planMigration } from './migrations.js';
+export {
+  EXTENSION_CONTRACT_VERSION,
+  authorizeExtensionExecution,
+  createVirtualExtensionRegistry,
+  discoverExtension,
+  loadExtensionTrustRegistry,
+  verifyExtensionIntegrity,
+} from './extensions.js';
+export type {
+  ExtensionApproval,
+  ExtensionArtifact,
+  ExtensionManifest,
+  ExtensionTrustRegistry,
+} from './extensions.js';
 export * from './contracts/index.js';

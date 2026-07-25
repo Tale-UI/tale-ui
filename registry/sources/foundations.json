@@ -44,6 +44,24 @@
       "keywords": ["adoption", "health", "metrics", "privacy", "dashboard"]
     },
     {
+      "slug": "figma-code-parity",
+      "title": "Figma and code parity",
+      "path": "docs/figma-integration.md",
+      "keywords": ["figma", "variables", "mapping", "parity", "privacy"]
+    },
+    {
+      "slug": "extension-trust",
+      "title": "Extension trust",
+      "path": "docs/extensions.md",
+      "keywords": ["extensions", "trust", "integrity", "revocation", "namespaces"]
+    },
+    {
+      "slug": "native-token-conformance",
+      "title": "Native token conformance",
+      "path": "docs/native-token-conformance.md",
+      "keywords": ["native", "tokens", "conformance", "high-contrast", "dark-mode"]
+    },
+    {
       "slug": "css-architecture",
       "title": "CSS architecture",
       "path": "packages/css/docs/architecture.md",

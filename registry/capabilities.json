@@ -48,6 +48,24 @@
       "status": "available"
     },
     {
+      "id": "extension.authorize",
+      "version": "1.0.0",
+      "description": "Authorize an exact project-local extension entrypoint after integrity, trust, revocation, and capability checks.",
+      "availability": [
+        "api"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "extension.discover",
+      "version": "1.0.0",
+      "description": "Discover and validate namespaced extension manifests without executing code.",
+      "availability": [
+        "api"
+      ],
+      "status": "available"
+    },
+    {
       "id": "manifest.get",
       "version": "1.0.0",
       "description": "Retrieve correlated contract, registry, package, and capability versions.",
@@ -90,5 +108,5 @@
       "status": "available"
     }
   ],
-  "digest": "sha256:a6d042d2247de3258a0b9e80b397796f0321207763e422ad6f23c363a69c4aa5"
+  "digest": "sha256:468468fc4e1ca003872c5027c178fd5a9a83327857b30316c41721b76856337e"
 }

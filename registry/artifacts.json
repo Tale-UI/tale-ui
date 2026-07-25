@@ -136,11 +136,14 @@
     "docs/components/visual-exports.md",
     "docs/consuming-design-system.md",
     "docs/design-philosophy.md",
+    "docs/extensions.md",
+    "docs/figma-integration.md",
     "docs/foundations/motion-and-elevation.md",
     "docs/governance/accessibility-and-performance.md",
     "docs/governance/lifecycle.md",
     "docs/hosted-services.md",
     "docs/managing-packages.md",
+    "docs/native-token-conformance.md",
     "docs/package-dependencies.md",
     "docs/react-aria-deviations.md",
     "docs/react-setup.md",
@@ -268,12 +271,13 @@
     "packages/utils/src/useTimeout.ts",
     "registry/a2ui-catalog.json",
     "registry/components.json",
+    "registry/extensions/trust.json",
     "registry/pitfalls.json",
     "registry/sources/capabilities.json",
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:60a8bd148c28dd4e2e4be196ee1d99b58ad1c1185620b90245101d660351bd1d",
+  "sourceRevision": "sha256:0f05adc3e1faf713e79a1c1d24258949f417916b619e81747ddc270f99750dd8",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -21748,6 +21752,80 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:foundation:extension-trust",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "extension-trust",
+      "name": "Extension trust",
+      "description": "Tale UI foundation guidance for Extension trust.",
+      "lifecycle": "stable",
+      "keywords": [
+        "extensions",
+        "integrity",
+        "namespaces",
+        "revocation",
+        "trust"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/extensions.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/extensions.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:foundation:figma-code-parity",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "figma-code-parity",
+      "name": "Figma and code parity",
+      "description": "Tale UI foundation guidance for Figma and code parity.",
+      "lifecycle": "stable",
+      "keywords": [
+        "figma",
+        "mapping",
+        "parity",
+        "privacy",
+        "variables"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/figma-integration.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/figma-integration.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:foundation:framework-integration",
       "namespace": "tale",
       "kind": "foundation",
@@ -21922,6 +22000,43 @@
       ],
       "provenance": {
         "source": "packages/css/docs/naming-conventions.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:foundation:native-token-conformance",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "native-token-conformance",
+      "name": "Native token conformance",
+      "description": "Tale UI foundation guidance for Native token conformance.",
+      "lifecycle": "stable",
+      "keywords": [
+        "conformance",
+        "dark-mode",
+        "high-contrast",
+        "native",
+        "tokens"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/native-token-conformance.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/native-token-conformance.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -50932,5 +51047,5 @@
       }
     }
   ],
-  "digest": "sha256:c25b2a1bcd3a81e1e48d1a81084d82352be8787c65274968948dc6259587d7e4"
+  "digest": "sha256:cacdc4bdbd9bbd0c25033355565591cc3c9403e4b631579ff1b357dab5d1b96c"
 }

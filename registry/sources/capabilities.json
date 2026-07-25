@@ -51,6 +51,20 @@
       "description": "Perform root-confined, journaled, recoverable project mutations.",
       "availability": ["api", "cli"],
       "status": "available"
+    },
+    {
+      "id": "extension.discover",
+      "version": "1.0.0",
+      "description": "Discover and validate namespaced extension manifests without executing code.",
+      "availability": ["api"],
+      "status": "available"
+    },
+    {
+      "id": "extension.authorize",
+      "version": "1.0.0",
+      "description": "Authorize an exact project-local extension entrypoint after integrity, trust, revocation, and capability checks.",
+      "availability": ["api"],
+      "status": "available"
     }
   ]
 }

@@ -47,8 +47,9 @@ const materializeOutput = execFileSync(
 );
 const materializeResult = JSON.parse(materializeOutput);
 if (
-  materializeResult.length !== 10 ||
-  !materializeResult.includes('tale:template:sortable-table')
+  materializeResult.length !== 12 ||
+  !materializeResult.includes('tale:template:sortable-table') ||
+  !materializeResult.includes('tale:template:chat-mobile')
 ) {
   throw new Error('Packed materialization API failed to load its installed template assets');
 }
@@ -63,6 +64,23 @@ const migrationOutput = execFileSync(
 );
 if (JSON.parse(migrationOutput).length !== 4) {
   throw new Error('Packed migration API failed to load its installed transform assets');
+}
+const extensionTrustOutput = execFileSync(
+  process.execPath,
+  [
+    '--input-type=module',
+    '--eval',
+    "import { EXTENSION_CONTRACT_VERSION, loadExtensionTrustRegistry } from '@tale-ui/tooling/extensions'; const trust = loadExtensionTrustRegistry(); process.stdout.write(JSON.stringify({ contract: EXTENSION_CONTRACT_VERSION, trust }));",
+  ],
+  { cwd: fixtureRoot, encoding: 'utf8' },
+);
+const extensionTrust = JSON.parse(extensionTrustOutput);
+if (
+  extensionTrust.contract !== '1.0.0' ||
+  extensionTrust.trust.freshness.failAfterDays !== 30 ||
+  extensionTrust.trust.publishers.length !== 0
+) {
+  throw new Error('Packed extension API failed to load deny-by-default trust assets');
 }
 
 const validationOutput = execFileSync(
@@ -199,7 +217,7 @@ if (
   !initResult.ok ||
   initResult.data.files.length !== 4 ||
   !templateListResult.ok ||
-  templateListResult.data.length !== 10 ||
+  templateListResult.data.length !== 12 ||
   !templateSourceResult.ok ||
   templateSourceResult.data.variant !== 'skeleton' ||
   !templateAddResult.ok ||

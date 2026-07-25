@@ -176,7 +176,7 @@
         "asOf": "2026-07-25T00:00:00.000Z"
       },
       "value": {
-        "artifacts": 874,
+        "artifacts": 877,
         "components": 120,
         "componentDocs": 120,
         "templates": 12,
@@ -277,5 +277,5 @@
       "decisionUse": false
     }
   ],
-  "digest": "sha256:b7e890c3699940ba5c71a654aec7f26bd8737bccad63dd8d13045ea3b309f7a1"
+  "digest": "sha256:905d55533eb6a666430476eb4ac28242552c9c79b49bddb7675aa1f5f712b043"
 }

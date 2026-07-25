@@ -26,6 +26,9 @@ await Promise.all(
     cp(join(REPOSITORY_ROOT, 'registry', file), join(BUILD_ROOT, 'registry', file)),
   ),
 );
+await cp(join(REPOSITORY_ROOT, 'registry/extensions'), join(BUILD_ROOT, 'registry/extensions'), {
+  recursive: true,
+});
 const reactPackage = JSON.parse(
   await readFile(join(REPOSITORY_ROOT, 'packages/react/package.json'), 'utf8'),
 );
@@ -60,6 +63,11 @@ const buildManifest = {
       types: './contracts/index.d.ts',
       import: './contracts/index.js',
       default: './contracts/index.js',
+    },
+    './extensions': {
+      types: './extensions.d.ts',
+      import: './extensions.js',
+      default: './extensions.js',
     },
     './registry': {
       types: './registry.d.ts',

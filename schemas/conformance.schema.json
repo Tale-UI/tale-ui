@@ -3,6 +3,7 @@
   "$id": "https://tale-ui.dev/schemas/conformance.schema.json",
   "title": "Cross-platform token conformance report",
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "schemaVersion",
     "sourceDigest",
@@ -19,16 +20,29 @@
     "appearance": { "enum": ["light", "dark"] },
     "highContrast": { "enum": ["supported", "guided", "not-applicable"] },
     "matched": { "type": "array", "items": { "type": "string" } },
+    "unmatched": { "type": "array", "items": { "type": "string" } },
     "exceptions": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["token", "reason", "owner", "reviewBy"],
+        "additionalProperties": false,
+        "required": [
+          "tokenPattern",
+          "unsupportedBehavior",
+          "fallback",
+          "evidence",
+          "owner",
+          "reviewBy",
+          "expiresOn"
+        ],
         "properties": {
-          "token": { "type": "string" },
-          "reason": { "type": "string" },
+          "tokenPattern": { "type": "string" },
+          "unsupportedBehavior": { "type": "string" },
+          "fallback": { "type": "string" },
+          "evidence": { "type": "string" },
           "owner": { "type": "string" },
-          "reviewBy": { "type": "string", "format": "date" }
+          "reviewBy": { "type": "string", "format": "date" },
+          "expiresOn": { "type": "string", "format": "date" }
         }
       }
     }

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/figma-allowlist.schema.json",
+  "title": "Private Figma file binding allowlist",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "classification", "files", "policy"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": "1.0.0" },
+    "classification": { "const": "private" },
+    "files": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["alias", "secretBinding"],
+        "properties": {
+          "alias": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]+$" },
+          "secretBinding": {
+            "enum": ["FIGMA_FILE_1", "FIGMA_FILE_2", "FIGMA_FILE_3", "FIGMA_FILE_4", "FIGMA_FILE_5"]
+          }
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "access",
+        "writesRequireSeparateApproval",
+        "rawResponseRetention",
+        "internalReportRetentionDays",
+        "publicReportMayContainReferences"
+      ],
+      "properties": {
+        "access": { "const": "read-only" },
+        "writesRequireSeparateApproval": { "const": true },
+        "rawResponseRetention": { "const": "job-memory-only" },
+        "internalReportRetentionDays": { "const": 30 },
+        "publicReportMayContainReferences": { "const": false }
+      }
+    }
+  }
+}

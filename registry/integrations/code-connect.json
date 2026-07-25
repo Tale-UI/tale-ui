@@ -1,0 +1,1820 @@
+{
+  "schemaVersion": "1.0.0",
+  "sourceDigest": "sha256:f520efe857cfd3be9c10098de778ad5fba10475a0fe8df9f197bde914a15a226",
+  "mappingKind": "code-connect-equivalent",
+  "mappings": [
+    {
+      "registryId": "tale:component:accordion",
+      "componentName": "Accordion",
+      "package": "@tale-ui/react/accordion",
+      "source": "packages/react/src/accordion/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:alert-dialog",
+      "componentName": "AlertDialog",
+      "package": "@tale-ui/react/alert-dialog",
+      "source": "packages/react/src/alert-dialog/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:app-shell",
+      "componentName": "AppShell",
+      "package": "@tale-ui/react/app-shell",
+      "source": "packages/react/src/app-shell/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:app-store-button",
+      "componentName": "AppStoreButton",
+      "package": "@tale-ui/react/app-store-button",
+      "source": "packages/react/src/app-store-button/index.ts",
+      "properties": {
+        "store": [
+          "apple",
+          "google"
+        ],
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:autocomplete",
+      "componentName": "Autocomplete",
+      "package": "@tale-ui/react/autocomplete",
+      "source": "packages/react/src/autocomplete/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:avatar",
+      "componentName": "Avatar",
+      "package": "@tale-ui/react/avatar",
+      "source": "packages/react/src/avatar/index.ts",
+      "properties": {
+        "size": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:background-pattern",
+      "componentName": "BackgroundPattern",
+      "package": "@tale-ui/react/background-pattern",
+      "source": "packages/react/src/background-pattern/index.ts",
+      "properties": {
+        "pattern": [
+          "circle",
+          "square",
+          "grid",
+          "grid-check"
+        ],
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:badge",
+      "componentName": "Badge",
+      "package": "@tale-ui/react/badge",
+      "source": "packages/react/src/badge/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "type": [
+          "pill",
+          "rounded",
+          "modern"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:badge-group",
+      "componentName": "BadgeGroup",
+      "package": "@tale-ui/react/badge-group",
+      "source": "packages/react/src/badge-group/index.ts",
+      "properties": {
+        "size": [
+          "md",
+          "lg"
+        ],
+        "color": [
+          "brand",
+          "warning",
+          "error",
+          "gray",
+          "success"
+        ],
+        "theme": [
+          "light",
+          "modern"
+        ],
+        "align": [
+          "leading",
+          "trailing"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:banner",
+      "componentName": "Banner",
+      "package": "@tale-ui/react/banner",
+      "source": "packages/react/src/banner/index.ts",
+      "properties": {
+        "variant": [
+          "info",
+          "success",
+          "warning",
+          "error"
+        ],
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:breadcrumbs",
+      "componentName": "Breadcrumbs",
+      "package": "@tale-ui/react/breadcrumbs",
+      "source": "packages/react/src/breadcrumbs/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:button",
+      "componentName": "Button",
+      "package": "@tale-ui/react/button",
+      "source": "packages/react/src/button/index.ts",
+      "properties": {
+        "variant": [
+          "primary",
+          "neutral",
+          "ghost",
+          "danger",
+          "danger-neutral",
+          "danger-ghost",
+          "inverse"
+        ],
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:calendar",
+      "componentName": "Calendar",
+      "package": "@tale-ui/react/calendar",
+      "source": "packages/react/src/calendar/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:card",
+      "componentName": "Card",
+      "package": "@tale-ui/react/card",
+      "source": "packages/react/src/card/index.ts",
+      "properties": {
+        "variant": [
+          "elevated",
+          "outlined",
+          "filled"
+        ],
+        "padding": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:carousel",
+      "componentName": "Carousel",
+      "package": "@tale-ui/react/carousel",
+      "source": "packages/react/src/carousel/index.ts",
+      "properties": {
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:chat",
+      "componentName": "Chat",
+      "package": "@tale-ui/react/chat",
+      "source": "packages/react/src/chat/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:checkbox",
+      "componentName": "Checkbox",
+      "package": "@tale-ui/react/checkbox",
+      "source": "packages/react/src/checkbox/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:checkbox-field",
+      "componentName": "CheckboxField",
+      "package": "@tale-ui/react/checkbox-field",
+      "source": "packages/react/src/checkbox-field/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:checkbox-group",
+      "componentName": "CheckboxGroup",
+      "package": "@tale-ui/react/checkbox-group",
+      "source": "packages/react/src/checkbox-group/index.ts",
+      "properties": {
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ],
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:code-block",
+      "componentName": "CodeBlock",
+      "package": "@tale-ui/react/code-block",
+      "source": "packages/react/src/code-block/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:color-area",
+      "componentName": "ColorArea",
+      "package": "@tale-ui/react/color-area",
+      "source": "packages/react/src/color-area/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:color-field",
+      "componentName": "ColorField",
+      "package": "@tale-ui/react/color-field",
+      "source": "packages/react/src/color-field/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:color-mode-toggle",
+      "componentName": "ColorModeToggle",
+      "package": "@tale-ui/react/color-mode-toggle",
+      "source": "packages/react/src/color-mode-toggle/index.ts",
+      "properties": {
+        "defaultMode": [
+          "light",
+          "dark"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:color-picker",
+      "componentName": "ColorPicker",
+      "package": "@tale-ui/react/color-picker",
+      "source": "packages/react/src/color-picker/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:color-slider",
+      "componentName": "ColorSlider",
+      "package": "@tale-ui/react/color-slider",
+      "source": "packages/react/src/color-slider/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:color-swatch",
+      "componentName": "ColorSwatch",
+      "package": "@tale-ui/react/color-swatch",
+      "source": "packages/react/src/color-swatch/index.ts",
+      "properties": {
+        "shape": [
+          "square",
+          "circle"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:color-swatch-picker",
+      "componentName": "ColorSwatchPicker",
+      "package": "@tale-ui/react/color-swatch-picker",
+      "source": "packages/react/src/color-swatch-picker/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:color-wheel",
+      "componentName": "ColorWheel",
+      "package": "@tale-ui/react/color-wheel",
+      "source": "packages/react/src/color-wheel/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:column",
+      "componentName": "Column",
+      "package": "@tale-ui/react/column",
+      "source": "packages/react/src/column/index.ts",
+      "properties": {
+        "gap": [
+          "4xs",
+          "3xs",
+          "2xs",
+          "xs",
+          "s",
+          "m",
+          "l",
+          "xl",
+          "2xl"
+        ],
+        "align": [
+          "start",
+          "center",
+          "end",
+          "stretch",
+          "baseline"
+        ],
+        "justify": [
+          "start",
+          "center",
+          "end",
+          "between"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:combobox",
+      "componentName": "Combobox",
+      "package": "@tale-ui/react/combobox",
+      "source": "packages/react/src/combobox/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:command-palette",
+      "componentName": "CommandPalette",
+      "package": "@tale-ui/react/command-palette",
+      "source": "packages/react/src/command-palette/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:container",
+      "componentName": "Container",
+      "package": "@tale-ui/react/container",
+      "source": "packages/react/src/container/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:context-menu",
+      "componentName": "ContextMenu",
+      "package": "@tale-ui/react/context-menu",
+      "source": "packages/react/src/context-menu/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:credit-card",
+      "componentName": "CreditCard",
+      "package": "@tale-ui/react/credit-card",
+      "source": "packages/react/src/credit-card/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:csp-provider",
+      "componentName": "CSPProvider",
+      "package": "@tale-ui/react/csp-provider",
+      "source": "packages/react/src/csp-provider/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:date-field",
+      "componentName": "DateField",
+      "package": "@tale-ui/react/date-field",
+      "source": "packages/react/src/date-field/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:date-picker",
+      "componentName": "DatePicker",
+      "package": "@tale-ui/react/date-picker",
+      "source": "packages/react/src/date-picker/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:date-range-picker",
+      "componentName": "DateRangePicker",
+      "package": "@tale-ui/react/date-range-picker",
+      "source": "packages/react/src/date-range-picker/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:dialog",
+      "componentName": "Dialog",
+      "package": "@tale-ui/react/dialog",
+      "source": "packages/react/src/dialog/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:disclosure",
+      "componentName": "Disclosure",
+      "package": "@tale-ui/react/disclosure",
+      "source": "packages/react/src/disclosure/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:dot-icon",
+      "componentName": "DotIcon",
+      "package": "@tale-ui/react/dot-icon",
+      "source": "packages/react/src/dot-icon/index.ts",
+      "properties": {
+        "color": [
+          "neutral",
+          "brand",
+          "error",
+          "warning",
+          "success"
+        ],
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:drawer",
+      "componentName": "Drawer",
+      "package": "@tale-ui/react/drawer",
+      "source": "packages/react/src/drawer/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:drop-zone",
+      "componentName": "DropZone",
+      "package": "@tale-ui/react/drop-zone",
+      "source": "packages/react/src/drop-zone/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:empty-state",
+      "componentName": "EmptyState",
+      "package": "@tale-ui/react/empty-state",
+      "source": "packages/react/src/empty-state/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:featured-icon",
+      "componentName": "FeaturedIcon",
+      "package": "@tale-ui/react/featured-icon",
+      "source": "packages/react/src/featured-icon/index.ts",
+      "properties": {
+        "variant": [
+          "brand",
+          "error",
+          "warning",
+          "success",
+          "neutral"
+        ],
+        "shape": [
+          "circle",
+          "square"
+        ],
+        "size": [
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ],
+        "theme": [
+          "light",
+          "gradient",
+          "dark",
+          "outline",
+          "modern",
+          "modern-neue"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:field",
+      "componentName": "Field",
+      "package": "@tale-ui/react/field",
+      "source": "packages/react/src/field/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:fieldset",
+      "componentName": "Fieldset",
+      "package": "@tale-ui/react/fieldset",
+      "source": "packages/react/src/fieldset/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:file-trigger",
+      "componentName": "FileTrigger",
+      "package": "@tale-ui/react/file-trigger",
+      "source": "packages/react/src/file-trigger/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:file-upload",
+      "componentName": "FileUpload",
+      "package": "@tale-ui/react/file-upload",
+      "source": "packages/react/src/file-upload/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:form",
+      "componentName": "Form",
+      "package": "@tale-ui/react/form",
+      "source": "packages/react/src/form/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:grid-list",
+      "componentName": "GridList",
+      "package": "@tale-ui/react/grid-list",
+      "source": "packages/react/src/grid-list/index.ts",
+      "properties": {
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:header-nav",
+      "componentName": "HeaderNav",
+      "package": "@tale-ui/react/header-nav",
+      "source": "packages/react/src/header-nav/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:i18n-provider",
+      "componentName": "I18nProvider",
+      "package": "@tale-ui/react/i18n-provider",
+      "source": "packages/react/src/i18n-provider/index.ts",
+      "properties": {
+        "mode": [
+          "default",
+          "pseudo",
+          "rtl"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:icon",
+      "componentName": "Icon",
+      "package": "@tale-ui/react/icon",
+      "source": "packages/react/src/icon/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:icon-button",
+      "componentName": "IconButton",
+      "package": "@tale-ui/react/icon-button",
+      "source": "packages/react/src/icon-button/index.ts",
+      "properties": {
+        "variant": [
+          "primary",
+          "neutral",
+          "ghost",
+          "danger",
+          "inverse"
+        ],
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:illustration",
+      "componentName": "Illustration",
+      "package": "@tale-ui/react/illustration",
+      "source": "packages/react/src/illustration/index.ts",
+      "properties": {
+        "type": [
+          "box",
+          "cloud",
+          "documents",
+          "credit-card"
+        ],
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:image",
+      "componentName": "Image",
+      "package": "@tale-ui/react/image",
+      "source": "packages/react/src/image/index.ts",
+      "properties": {
+        "radius": [
+          "none",
+          "sm",
+          "md",
+          "lg",
+          "full"
+        ],
+        "fit": [
+          "cover",
+          "contain",
+          "fill",
+          "none"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:image-cropper",
+      "componentName": "ImageCropper",
+      "package": "@tale-ui/react/image-cropper",
+      "source": "packages/react/src/image-cropper/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:input",
+      "componentName": "Input",
+      "package": "@tale-ui/react/input",
+      "source": "packages/react/src/input/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:input-group",
+      "componentName": "InputGroup",
+      "package": "@tale-ui/react/input-group",
+      "source": "packages/react/src/input-group/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:input-tags",
+      "componentName": "InputTags",
+      "package": "@tale-ui/react/input-tags",
+      "source": "packages/react/src/input-tags/index.ts",
+      "properties": {
+        "tagPlacement": [
+          "inline",
+          "below"
+        ],
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:iphone-mockup",
+      "componentName": "IphoneMockup",
+      "package": "@tale-ui/react/iphone-mockup",
+      "source": "packages/react/src/iphone-mockup/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:kbd",
+      "componentName": "Kbd",
+      "package": "@tale-ui/react/kbd",
+      "source": "packages/react/src/kbd/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:key-value-pairs",
+      "componentName": "KeyValuePairs",
+      "package": "@tale-ui/react/key-value-pairs",
+      "source": "packages/react/src/key-value-pairs/index.ts",
+      "properties": {
+        "variant": [
+          "plain",
+          "divided"
+        ],
+        "density": [
+          "compact",
+          "default",
+          "spacious"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:link",
+      "componentName": "Link",
+      "package": "@tale-ui/react/link",
+      "source": "packages/react/src/link/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:list",
+      "componentName": "List",
+      "package": "@tale-ui/react/list",
+      "source": "packages/react/src/list/index.ts",
+      "properties": {
+        "variant": [
+          "plain",
+          "divided"
+        ],
+        "density": [
+          "compact",
+          "default",
+          "spacious"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:list-box",
+      "componentName": "ListBox",
+      "package": "@tale-ui/react/list-box",
+      "source": "packages/react/src/list-box/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:menu",
+      "componentName": "Menu",
+      "package": "@tale-ui/react/menu",
+      "source": "packages/react/src/menu/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:menubar",
+      "componentName": "Menubar",
+      "package": "@tale-ui/react/menubar",
+      "source": "packages/react/src/menubar/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:merge-props",
+      "componentName": "mergeProps",
+      "package": "@tale-ui/react/merge-props",
+      "source": "packages/react/src/merge-props/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:meter",
+      "componentName": "Meter",
+      "package": "@tale-ui/react/meter",
+      "source": "packages/react/src/meter/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:multi-select",
+      "componentName": "MultiSelect",
+      "package": "@tale-ui/react/multi-select",
+      "source": "packages/react/src/multi-select/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:navigation-menu",
+      "componentName": "NavigationMenu",
+      "package": "@tale-ui/react/navigation-menu",
+      "source": "packages/react/src/navigation-menu/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:number-field",
+      "componentName": "NumberField",
+      "package": "@tale-ui/react/number-field",
+      "source": "packages/react/src/number-field/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:pagination",
+      "componentName": "Pagination",
+      "package": "@tale-ui/react/pagination",
+      "source": "packages/react/src/pagination/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:pagination-dot",
+      "componentName": "PaginationDot",
+      "package": "@tale-ui/react/pagination-dot",
+      "source": "packages/react/src/pagination-dot/index.ts",
+      "properties": {
+        "size": [
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:pagination-line",
+      "componentName": "PaginationLine",
+      "package": "@tale-ui/react/pagination-line",
+      "source": "packages/react/src/pagination-line/index.ts",
+      "properties": {
+        "size": [
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:payment-input",
+      "componentName": "PaymentInput",
+      "package": "@tale-ui/react/payment-input",
+      "source": "packages/react/src/payment-input/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:pin-input",
+      "componentName": "PinInput",
+      "package": "@tale-ui/react/pin-input",
+      "source": "packages/react/src/pin-input/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:popover",
+      "componentName": "Popover",
+      "package": "@tale-ui/react/popover",
+      "source": "packages/react/src/popover/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:preview-card",
+      "componentName": "PreviewCard",
+      "package": "@tale-ui/react/preview-card",
+      "source": "packages/react/src/preview-card/index.ts",
+      "properties": {
+        "placement": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:progress-bar",
+      "componentName": "ProgressBar",
+      "package": "@tale-ui/react/progress-bar",
+      "source": "packages/react/src/progress-bar/index.ts",
+      "properties": {
+        "labelPosition": [
+          "top",
+          "right",
+          "bottom",
+          "top-floating",
+          "bottom-floating"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:progress-circle",
+      "componentName": "ProgressCircle",
+      "package": "@tale-ui/react/progress-circle",
+      "source": "packages/react/src/progress-circle/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:qr-code",
+      "componentName": "QRCode",
+      "package": "@tale-ui/react/qr-code",
+      "source": "packages/react/src/qr-code/index.ts",
+      "properties": {
+        "size": [
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:radio",
+      "componentName": "Radio",
+      "package": "@tale-ui/react/radio",
+      "source": "packages/react/src/radio/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:radio-field",
+      "componentName": "RadioField",
+      "package": "@tale-ui/react/radio-field",
+      "source": "packages/react/src/radio-field/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:radio-group",
+      "componentName": "RadioGroup",
+      "package": "@tale-ui/react/radio-group",
+      "source": "packages/react/src/radio-group/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:range-calendar",
+      "componentName": "RangeCalendar",
+      "package": "@tale-ui/react/range-calendar",
+      "source": "packages/react/src/range-calendar/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:rating-badge",
+      "componentName": "RatingBadge",
+      "package": "@tale-ui/react/rating-badge",
+      "source": "packages/react/src/rating-badge/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:rating-stars",
+      "componentName": "RatingStars",
+      "package": "@tale-ui/react/rating-stars",
+      "source": "packages/react/src/rating-stars/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:row",
+      "componentName": "Row",
+      "package": "@tale-ui/react/row",
+      "source": "packages/react/src/row/index.ts",
+      "properties": {
+        "gap": [
+          "4xs",
+          "3xs",
+          "2xs",
+          "xs",
+          "s",
+          "m",
+          "l",
+          "xl",
+          "2xl"
+        ],
+        "align": [
+          "start",
+          "center",
+          "end",
+          "stretch",
+          "baseline"
+        ],
+        "justify": [
+          "start",
+          "center",
+          "end",
+          "between"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:scroll-area",
+      "componentName": "ScrollArea",
+      "package": "@tale-ui/react/scroll-area",
+      "source": "packages/react/src/scroll-area/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:search-field",
+      "componentName": "SearchField",
+      "package": "@tale-ui/react/search-field",
+      "source": "packages/react/src/search-field/index.ts",
+      "properties": {
+        "variant": [
+          "default",
+          "inline"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:section-divider",
+      "componentName": "SectionDivider",
+      "package": "@tale-ui/react/section-divider",
+      "source": "packages/react/src/section-divider/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:select",
+      "componentName": "Select",
+      "package": "@tale-ui/react/select",
+      "source": "packages/react/src/select/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:select-native",
+      "componentName": "SelectNative",
+      "package": "@tale-ui/react/select-native",
+      "source": "packages/react/src/select-native/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:separator",
+      "componentName": "Separator",
+      "package": "@tale-ui/react/separator",
+      "source": "packages/react/src/separator/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:sidebar",
+      "componentName": "Sidebar",
+      "package": "@tale-ui/react/sidebar",
+      "source": "packages/react/src/sidebar/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:slider",
+      "componentName": "Slider",
+      "package": "@tale-ui/react/slider",
+      "source": "packages/react/src/slider/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:social-button",
+      "componentName": "SocialButton",
+      "package": "@tale-ui/react/social-button",
+      "source": "packages/react/src/social-button/index.ts",
+      "properties": {
+        "provider": [
+          "google",
+          "github",
+          "apple",
+          "x",
+          "facebook"
+        ],
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:social-button-group",
+      "componentName": "SocialButtonGroup",
+      "package": "@tale-ui/react/social-button-group",
+      "source": "packages/react/src/social-button-group/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:spinner",
+      "componentName": "Spinner",
+      "package": "@tale-ui/react/spinner",
+      "source": "packages/react/src/spinner/index.ts",
+      "properties": {
+        "variant": [
+          "circle",
+          "line",
+          "dots"
+        ],
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:switch",
+      "componentName": "Switch",
+      "package": "@tale-ui/react/switch",
+      "source": "packages/react/src/switch/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:switch-field",
+      "componentName": "SwitchField",
+      "package": "@tale-ui/react/switch-field",
+      "source": "packages/react/src/switch-field/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:table",
+      "componentName": "Table",
+      "package": "@tale-ui/react/table",
+      "source": "packages/react/src/table/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:tabs",
+      "componentName": "Tabs",
+      "package": "@tale-ui/react/tabs",
+      "source": "packages/react/src/tabs/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:tag-group",
+      "componentName": "TagGroup",
+      "package": "@tale-ui/react/tag-group",
+      "source": "packages/react/src/tag-group/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:tag-select",
+      "componentName": "TagSelect",
+      "package": "@tale-ui/react/tag-select",
+      "source": "packages/react/src/tag-select/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:text",
+      "componentName": "Text",
+      "package": "@tale-ui/react/text",
+      "source": "packages/react/src/text/index.ts",
+      "properties": {
+        "variant": [
+          "display",
+          "heading",
+          "title",
+          "label",
+          "text",
+          "mono"
+        ],
+        "size": [
+          "xs",
+          "s",
+          "m",
+          "l"
+        ],
+        "as": [
+          "p",
+          "span",
+          "h1",
+          "h2",
+          "h3",
+          "h4",
+          "h5",
+          "h6",
+          "div",
+          "label"
+        ],
+        "color": [
+          "default",
+          "muted",
+          "accent"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:text-area",
+      "componentName": "TextArea",
+      "package": "@tale-ui/react/text-area",
+      "source": "packages/react/src/text-area/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:text-editor",
+      "componentName": "TextEditor",
+      "package": "@tale-ui/react/text-editor",
+      "source": "packages/react/src/text-editor/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:text-field",
+      "componentName": "TextField",
+      "package": "@tale-ui/react/text-field",
+      "source": "packages/react/src/text-field/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:time-field",
+      "componentName": "TimeField",
+      "package": "@tale-ui/react/time-field",
+      "source": "packages/react/src/time-field/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:toggle-button",
+      "componentName": "ToggleButton",
+      "package": "@tale-ui/react/toggle-button",
+      "source": "packages/react/src/toggle-button/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:toggle-group",
+      "componentName": "ToggleButtonGroup",
+      "package": "@tale-ui/react/toggle-group",
+      "source": "packages/react/src/toggle-group/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:toolbar",
+      "componentName": "Toolbar",
+      "package": "@tale-ui/react/toolbar",
+      "source": "packages/react/src/toolbar/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:tooltip",
+      "componentName": "Tooltip",
+      "package": "@tale-ui/react/tooltip",
+      "source": "packages/react/src/tooltip/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:tree",
+      "componentName": "Tree",
+      "package": "@tale-ui/react/tree",
+      "source": "packages/react/src/tree/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:video-player",
+      "componentName": "VideoPlayer",
+      "package": "@tale-ui/react/video-player",
+      "source": "packages/react/src/video-player/index.ts",
+      "properties": {
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:virtualizer",
+      "componentName": "Virtualizer",
+      "package": "@tale-ui/react/virtualizer",
+      "source": "packages/react/src/virtualizer/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    }
+  ]
+}

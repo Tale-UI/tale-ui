@@ -303,7 +303,10 @@ if (!minimalBuild) {
 for (const file of extraCopy) {
   const source = path.resolve(cwd, file);
   if (await fileExists(source)) {
-    await fs.cp(source, path.join(buildDir, path.basename(file)));
+    const sourceStats = await fs.stat(source);
+    await fs.cp(source, path.join(buildDir, path.basename(file)), {
+      recursive: sourceStats.isDirectory(),
+    });
     copied++;
   }
 }

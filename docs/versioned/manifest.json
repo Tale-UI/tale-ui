@@ -6,8 +6,8 @@
     {
       "major": 2,
       "source": "working-tree-public-docs",
-      "sourceRevision": "sha256:60a8bd148c28dd4e2e4be196ee1d99b58ad1c1185620b90245101d660351bd1d",
-      "contentDigest": "sha256:e42837da54a1bc2b58de7743197fb4880a45900bff1d40fcc002218ca00ea81f",
+      "sourceRevision": "sha256:0f05adc3e1faf713e79a1c1d24258949f417916b619e81747ddc270f99750dd8",
+      "contentDigest": "sha256:3eb7e36f374f331ae023d087ea4c656ff55b8a3512248adad0ccb6eccbd8584b",
       "packageVersions": {
         "@tale-ui/a2ui": "0.1.5",
         "@tale-ui/charts": "0.1.5",
@@ -157,8 +157,11 @@
         "docs/consumer-claude-md-snippet.md",
         "docs/consuming-design-system.md",
         "docs/design-philosophy.md",
+        "docs/extensions.md",
+        "docs/figma-integration.md",
         "docs/hosted-services.md",
         "docs/managing-packages.md",
+        "docs/native-token-conformance.md",
         "docs/package-dependencies.md",
         "docs/pitfalls.md",
         "docs/react-aria-deviations.md",

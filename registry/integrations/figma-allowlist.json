@@ -1,0 +1,13 @@
+{
+  "$schema": "../../schemas/figma-allowlist.schema.json",
+  "schemaVersion": "1.0.0",
+  "classification": "private",
+  "files": [],
+  "policy": {
+    "access": "read-only",
+    "writesRequireSeparateApproval": true,
+    "rawResponseRetention": "job-memory-only",
+    "internalReportRetentionDays": 30,
+    "publicReportMayContainReferences": false
+  }
+}

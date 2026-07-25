@@ -1,0 +1,6429 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "packages/tokens/tokens.json",
+  "sourceDigest": "sha256:83b72fc79b34932ae1afa44d21f74460a23fa693407bc319fdfafb3a2bb64a86",
+  "owner": "design-systems",
+  "collections": [
+    {
+      "id": "tale-ui-foundations",
+      "name": "Tale UI foundations",
+      "registryId": "tale:foundation:design-tokens",
+      "modes": [
+        "light",
+        "dark"
+      ],
+      "variables": [
+        {
+          "id": "tale/token/amber",
+          "name": "amber",
+          "codeName": "--amber",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#df8d2e",
+            "dark": "#df8d2e"
+          }
+        },
+        {
+          "id": "tale/token/amber-10",
+          "name": "amber/10",
+          "codeName": "--amber-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9e8d5",
+            "dark": "#f9e8d5"
+          }
+        },
+        {
+          "id": "tale/token/amber-100",
+          "name": "amber/100",
+          "codeName": "--amber-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#612300",
+            "dark": "#612300"
+          }
+        },
+        {
+          "id": "tale/token/amber-20",
+          "name": "amber/20",
+          "codeName": "--amber-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f4d6b4",
+            "dark": "#f4d6b4"
+          }
+        },
+        {
+          "id": "tale/token/amber-30",
+          "name": "amber/30",
+          "codeName": "--amber-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#eec492",
+            "dark": "#eec492"
+          }
+        },
+        {
+          "id": "tale/token/amber-40",
+          "name": "amber/40",
+          "codeName": "--amber-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e9b271",
+            "dark": "#e9b271"
+          }
+        },
+        {
+          "id": "tale/token/amber-5",
+          "name": "amber/5",
+          "codeName": "--amber-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fcf4ea",
+            "dark": "#fcf4ea"
+          }
+        },
+        {
+          "id": "tale/token/amber-50",
+          "name": "amber/50",
+          "codeName": "--amber-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e49f4f",
+            "dark": "#e49f4f"
+          }
+        },
+        {
+          "id": "tale/token/amber-60",
+          "name": "amber/60",
+          "codeName": "--amber-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#df8d2e",
+            "dark": "#df8d2e"
+          }
+        },
+        {
+          "id": "tale/token/amber-70",
+          "name": "amber/70",
+          "codeName": "--amber-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#cc7117",
+            "dark": "#cc7117"
+          }
+        },
+        {
+          "id": "tale/token/amber-80",
+          "name": "amber/80",
+          "codeName": "--amber-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#b05506",
+            "dark": "#b05506"
+          }
+        },
+        {
+          "id": "tale/token/amber-90",
+          "name": "amber/90",
+          "codeName": "--amber-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#883a00",
+            "dark": "#883a00"
+          }
+        },
+        {
+          "id": "tale/token/background",
+          "name": "background",
+          "codeName": "--background",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/bg-body",
+          "name": "bg/body",
+          "codeName": "--bg-body",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#edeceb",
+            "dark": "#1b1a18"
+          }
+        },
+        {
+          "id": "tale/token/body-font",
+          "name": "body/font",
+          "codeName": "--body-font",
+          "resolvedType": "STRING",
+          "valuesByMode": {
+            "light": "Inter",
+            "dark": "Inter"
+          }
+        },
+        {
+          "id": "tale/token/brand-10",
+          "name": "brand/10",
+          "codeName": "--brand-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#cce1e1",
+            "dark": "#cce1e1"
+          }
+        },
+        {
+          "id": "tale/token/brand-100",
+          "name": "brand/100",
+          "codeName": "--brand-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#012334",
+            "dark": "#012334"
+          }
+        },
+        {
+          "id": "tale/token/brand-20",
+          "name": "brand/20",
+          "codeName": "--brand-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#a4c7c9",
+            "dark": "#a4c7c9"
+          }
+        },
+        {
+          "id": "tale/token/brand-30",
+          "name": "brand/30",
+          "codeName": "--brand-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#7badb1",
+            "dark": "#7badb1"
+          }
+        },
+        {
+          "id": "tale/token/brand-40",
+          "name": "brand/40",
+          "codeName": "--brand-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#539198",
+            "dark": "#539198"
+          }
+        },
+        {
+          "id": "tale/token/brand-5",
+          "name": "brand/5",
+          "codeName": "--brand-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e6f0f0",
+            "dark": "#e6f0f0"
+          }
+        },
+        {
+          "id": "tale/token/brand-50",
+          "name": "brand/50",
+          "codeName": "--brand-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2b7580",
+            "dark": "#2b7580"
+          }
+        },
+        {
+          "id": "tale/token/brand-60",
+          "name": "brand/60",
+          "codeName": "--brand-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#025768",
+            "dark": "#025768"
+          }
+        },
+        {
+          "id": "tale/token/brand-70",
+          "name": "brand/70",
+          "codeName": "--brand-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#02485b",
+            "dark": "#02485b"
+          }
+        },
+        {
+          "id": "tale/token/brand-80",
+          "name": "brand/80",
+          "codeName": "--brand-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#023b4e",
+            "dark": "#023b4e"
+          }
+        },
+        {
+          "id": "tale/token/brand-90",
+          "name": "brand/90",
+          "codeName": "--brand-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#012e41",
+            "dark": "#012e41"
+          }
+        },
+        {
+          "id": "tale/token/color-10",
+          "name": "color/10",
+          "codeName": "--color-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#cce1e1",
+            "dark": "#012e41"
+          }
+        },
+        {
+          "id": "tale/token/color-10-fg",
+          "name": "color/10/fg",
+          "codeName": "--color-10-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#012334",
+            "dark": "#e6f0f0"
+          }
+        },
+        {
+          "id": "tale/token/color-100",
+          "name": "color/100",
+          "codeName": "--color-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#012334",
+            "dark": "#e6f0f0"
+          }
+        },
+        {
+          "id": "tale/token/color-100-fg",
+          "name": "color/100/fg",
+          "codeName": "--color-100-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e6f0f0",
+            "dark": "#012334"
+          }
+        },
+        {
+          "id": "tale/token/color-20",
+          "name": "color/20",
+          "codeName": "--color-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#a4c7c9",
+            "dark": "#023b4e"
+          }
+        },
+        {
+          "id": "tale/token/color-20-fg",
+          "name": "color/20/fg",
+          "codeName": "--color-20-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#012334",
+            "dark": "#e6f0f0"
+          }
+        },
+        {
+          "id": "tale/token/color-30",
+          "name": "color/30",
+          "codeName": "--color-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#7badb1",
+            "dark": "#02485b"
+          }
+        },
+        {
+          "id": "tale/token/color-30-fg",
+          "name": "color/30/fg",
+          "codeName": "--color-30-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#012334",
+            "dark": "#e6f0f0"
+          }
+        },
+        {
+          "id": "tale/token/color-40",
+          "name": "color/40",
+          "codeName": "--color-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#539198",
+            "dark": "#025768"
+          }
+        },
+        {
+          "id": "tale/token/color-40-fg",
+          "name": "color/40/fg",
+          "codeName": "--color-40-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#012334",
+            "dark": "#e6f0f0"
+          }
+        },
+        {
+          "id": "tale/token/color-5",
+          "name": "color/5",
+          "codeName": "--color-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e6f0f0",
+            "dark": "#012334"
+          }
+        },
+        {
+          "id": "tale/token/color-5-fg",
+          "name": "color/5/fg",
+          "codeName": "--color-5-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#012334",
+            "dark": "#e6f0f0"
+          }
+        },
+        {
+          "id": "tale/token/color-50",
+          "name": "color/50",
+          "codeName": "--color-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2b7580",
+            "dark": "#2b7580"
+          }
+        },
+        {
+          "id": "tale/token/color-50-fg",
+          "name": "color/50/fg",
+          "codeName": "--color-50-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#012334",
+            "dark": "#e6f0f0"
+          }
+        },
+        {
+          "id": "tale/token/color-60",
+          "name": "color/60",
+          "codeName": "--color-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#025768",
+            "dark": "#539198"
+          }
+        },
+        {
+          "id": "tale/token/color-60-fg",
+          "name": "color/60/fg",
+          "codeName": "--color-60-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e6f0f0",
+            "dark": "#012334"
+          }
+        },
+        {
+          "id": "tale/token/color-70",
+          "name": "color/70",
+          "codeName": "--color-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#02485b",
+            "dark": "#7badb1"
+          }
+        },
+        {
+          "id": "tale/token/color-70-fg",
+          "name": "color/70/fg",
+          "codeName": "--color-70-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e6f0f0",
+            "dark": "#012334"
+          }
+        },
+        {
+          "id": "tale/token/color-80",
+          "name": "color/80",
+          "codeName": "--color-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#023b4e",
+            "dark": "#a4c7c9"
+          }
+        },
+        {
+          "id": "tale/token/color-80-fg",
+          "name": "color/80/fg",
+          "codeName": "--color-80-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e6f0f0",
+            "dark": "#012334"
+          }
+        },
+        {
+          "id": "tale/token/color-90",
+          "name": "color/90",
+          "codeName": "--color-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#012e41",
+            "dark": "#cce1e1"
+          }
+        },
+        {
+          "id": "tale/token/color-90-fg",
+          "name": "color/90/fg",
+          "codeName": "--color-90-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e6f0f0",
+            "dark": "#012334"
+          }
+        },
+        {
+          "id": "tale/token/cyan",
+          "name": "cyan",
+          "codeName": "--cyan",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#06b6d4",
+            "dark": "#06b6d4"
+          }
+        },
+        {
+          "id": "tale/token/cyan-10",
+          "name": "cyan/10",
+          "codeName": "--cyan-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#daf9f8",
+            "dark": "#daf9f8"
+          }
+        },
+        {
+          "id": "tale/token/cyan-100",
+          "name": "cyan/100",
+          "codeName": "--cyan-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#004061",
+            "dark": "#004061"
+          }
+        },
+        {
+          "id": "tale/token/cyan-20",
+          "name": "cyan/20",
+          "codeName": "--cyan-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#aff0f1",
+            "dark": "#aff0f1"
+          }
+        },
+        {
+          "id": "tale/token/cyan-30",
+          "name": "cyan/30",
+          "codeName": "--cyan-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#85e5ea",
+            "dark": "#85e5ea"
+          }
+        },
+        {
+          "id": "tale/token/cyan-40",
+          "name": "cyan/40",
+          "codeName": "--cyan-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#5bd8e3",
+            "dark": "#5bd8e3"
+          }
+        },
+        {
+          "id": "tale/token/cyan-5",
+          "name": "cyan/5",
+          "codeName": "--cyan-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e6fbfb",
+            "dark": "#e6fbfb"
+          }
+        },
+        {
+          "id": "tale/token/cyan-50",
+          "name": "cyan/50",
+          "codeName": "--cyan-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#30c8db",
+            "dark": "#30c8db"
+          }
+        },
+        {
+          "id": "tale/token/cyan-60",
+          "name": "cyan/60",
+          "codeName": "--cyan-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#06b6d4",
+            "dark": "#06b6d4"
+          }
+        },
+        {
+          "id": "tale/token/cyan-70",
+          "name": "cyan/70",
+          "codeName": "--cyan-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#0098bb",
+            "dark": "#0098bb"
+          }
+        },
+        {
+          "id": "tale/token/cyan-80",
+          "name": "cyan/80",
+          "codeName": "--cyan-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#00799f",
+            "dark": "#00799f"
+          }
+        },
+        {
+          "id": "tale/token/cyan-90",
+          "name": "cyan/90",
+          "codeName": "--cyan-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#005c81",
+            "dark": "#005c81"
+          }
+        },
+        {
+          "id": "tale/token/display-color",
+          "name": "display/color",
+          "codeName": "--display-color",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2b2826",
+            "dark": "#dfdcdb"
+          }
+        },
+        {
+          "id": "tale/token/display-default-color",
+          "name": "display/default/color",
+          "codeName": "--display-default-color",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2b2826",
+            "dark": "#2b2826"
+          }
+        },
+        {
+          "id": "tale/token/display-font",
+          "name": "display/font",
+          "codeName": "--display-font",
+          "resolvedType": "STRING",
+          "valuesByMode": {
+            "light": "Inter",
+            "dark": "Inter"
+          }
+        },
+        {
+          "id": "tale/token/display-font-family",
+          "name": "display/font/family",
+          "codeName": "--display-font-family",
+          "resolvedType": "STRING",
+          "valuesByMode": {
+            "light": "Inter",
+            "dark": "Inter"
+          }
+        },
+        {
+          "id": "tale/token/display-font-weight",
+          "name": "display/font/weight",
+          "codeName": "--display-font-weight",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 600,
+            "dark": 600
+          }
+        },
+        {
+          "id": "tale/token/display-l-font-size",
+          "name": "display/l/font/size",
+          "codeName": "--display-l-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 41,
+            "dark": 41
+          }
+        },
+        {
+          "id": "tale/token/display-line-height",
+          "name": "display/line/height",
+          "codeName": "--display-line-height",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 1.5,
+            "dark": 1.5
+          }
+        },
+        {
+          "id": "tale/token/display-m-font-size",
+          "name": "display/m/font/size",
+          "codeName": "--display-m-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 38,
+            "dark": 38
+          }
+        },
+        {
+          "id": "tale/token/display-s-font-size",
+          "name": "display/s/font/size",
+          "codeName": "--display-s-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 34,
+            "dark": 34
+          }
+        },
+        {
+          "id": "tale/token/emerald",
+          "name": "emerald",
+          "codeName": "--emerald",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#10b981",
+            "dark": "#10b981"
+          }
+        },
+        {
+          "id": "tale/token/emerald-10",
+          "name": "emerald/10",
+          "codeName": "--emerald-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e2f7ed",
+            "dark": "#e2f7ed"
+          }
+        },
+        {
+          "id": "tale/token/emerald-100",
+          "name": "emerald/100",
+          "codeName": "--emerald-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#004136",
+            "dark": "#004136"
+          }
+        },
+        {
+          "id": "tale/token/emerald-20",
+          "name": "emerald/20",
+          "codeName": "--emerald-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#b8ead3",
+            "dark": "#b8ead3"
+          }
+        },
+        {
+          "id": "tale/token/emerald-30",
+          "name": "emerald/30",
+          "codeName": "--emerald-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#8edebc",
+            "dark": "#8edebc"
+          }
+        },
+        {
+          "id": "tale/token/emerald-40",
+          "name": "emerald/40",
+          "codeName": "--emerald-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#64d2a6",
+            "dark": "#64d2a6"
+          }
+        },
+        {
+          "id": "tale/token/emerald-5",
+          "name": "emerald/5",
+          "codeName": "--emerald-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f1fbf6",
+            "dark": "#f1fbf6"
+          }
+        },
+        {
+          "id": "tale/token/emerald-50",
+          "name": "emerald/50",
+          "codeName": "--emerald-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#3ac593",
+            "dark": "#3ac593"
+          }
+        },
+        {
+          "id": "tale/token/emerald-60",
+          "name": "emerald/60",
+          "codeName": "--emerald-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#10b981",
+            "dark": "#10b981"
+          }
+        },
+        {
+          "id": "tale/token/emerald-70",
+          "name": "emerald/70",
+          "codeName": "--emerald-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#089e73",
+            "dark": "#089e73"
+          }
+        },
+        {
+          "id": "tale/token/emerald-80",
+          "name": "emerald/80",
+          "codeName": "--emerald-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#028262",
+            "dark": "#028262"
+          }
+        },
+        {
+          "id": "tale/token/emerald-90",
+          "name": "emerald/90",
+          "codeName": "--emerald-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#00624e",
+            "dark": "#00624e"
+          }
+        },
+        {
+          "id": "tale/token/error",
+          "name": "error",
+          "codeName": "--error",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#cc3330",
+            "dark": "#cc3330"
+          }
+        },
+        {
+          "id": "tale/token/error-10",
+          "name": "error/10",
+          "codeName": "--error-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f6dada",
+            "dark": "#f6dada"
+          }
+        },
+        {
+          "id": "tale/token/error-10-fg",
+          "name": "error/10/fg",
+          "codeName": "--error-10-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#52131c",
+            "dark": "#52131c"
+          }
+        },
+        {
+          "id": "tale/token/error-100",
+          "name": "error/100",
+          "codeName": "--error-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#52131c",
+            "dark": "#52131c"
+          }
+        },
+        {
+          "id": "tale/token/error-100-fg",
+          "name": "error/100/fg",
+          "codeName": "--error-100-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fbeded",
+            "dark": "#fbeded"
+          }
+        },
+        {
+          "id": "tale/token/error-20",
+          "name": "error/20",
+          "codeName": "--error-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#eeb9b8",
+            "dark": "#eeb9b8"
+          }
+        },
+        {
+          "id": "tale/token/error-20-fg",
+          "name": "error/20/fg",
+          "codeName": "--error-20-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#52131c",
+            "dark": "#52131c"
+          }
+        },
+        {
+          "id": "tale/token/error-30",
+          "name": "error/30",
+          "codeName": "--error-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e59796",
+            "dark": "#e59796"
+          }
+        },
+        {
+          "id": "tale/token/error-30-fg",
+          "name": "error/30/fg",
+          "codeName": "--error-30-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#52131c",
+            "dark": "#52131c"
+          }
+        },
+        {
+          "id": "tale/token/error-40",
+          "name": "error/40",
+          "codeName": "--error-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dd7674",
+            "dark": "#dd7674"
+          }
+        },
+        {
+          "id": "tale/token/error-40-fg",
+          "name": "error/40/fg",
+          "codeName": "--error-40-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#52131c",
+            "dark": "#52131c"
+          }
+        },
+        {
+          "id": "tale/token/error-5",
+          "name": "error/5",
+          "codeName": "--error-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fbeded",
+            "dark": "#fbeded"
+          }
+        },
+        {
+          "id": "tale/token/error-5-fg",
+          "name": "error/5/fg",
+          "codeName": "--error-5-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#52131c",
+            "dark": "#52131c"
+          }
+        },
+        {
+          "id": "tale/token/error-50",
+          "name": "error/50",
+          "codeName": "--error-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d45552",
+            "dark": "#d45552"
+          }
+        },
+        {
+          "id": "tale/token/error-50-fg",
+          "name": "error/50/fg",
+          "codeName": "--error-50-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#52131c",
+            "dark": "#52131c"
+          }
+        },
+        {
+          "id": "tale/token/error-60",
+          "name": "error/60",
+          "codeName": "--error-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#cc3330",
+            "dark": "#cc3330"
+          }
+        },
+        {
+          "id": "tale/token/error-60-fg",
+          "name": "error/60/fg",
+          "codeName": "--error-60-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fbeded",
+            "dark": "#fbeded"
+          }
+        },
+        {
+          "id": "tale/token/error-70",
+          "name": "error/70",
+          "codeName": "--error-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ad292c",
+            "dark": "#ad292c"
+          }
+        },
+        {
+          "id": "tale/token/error-70-fg",
+          "name": "error/70/fg",
+          "codeName": "--error-70-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fbeded",
+            "dark": "#fbeded"
+          }
+        },
+        {
+          "id": "tale/token/error-80",
+          "name": "error/80",
+          "codeName": "--error-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#8f2229",
+            "dark": "#8f2229"
+          }
+        },
+        {
+          "id": "tale/token/error-80-fg",
+          "name": "error/80/fg",
+          "codeName": "--error-80-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fbeded",
+            "dark": "#fbeded"
+          }
+        },
+        {
+          "id": "tale/token/error-90",
+          "name": "error/90",
+          "codeName": "--error-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#701a24",
+            "dark": "#701a24"
+          }
+        },
+        {
+          "id": "tale/token/error-90-fg",
+          "name": "error/90/fg",
+          "codeName": "--error-90-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fbeded",
+            "dark": "#fbeded"
+          }
+        },
+        {
+          "id": "tale/token/expressive-font",
+          "name": "expressive/font",
+          "codeName": "--expressive-font",
+          "resolvedType": "STRING",
+          "valuesByMode": {
+            "light": "Playfair Display",
+            "dark": "Playfair Display"
+          }
+        },
+        {
+          "id": "tale/token/expressive-font-family",
+          "name": "expressive/font/family",
+          "codeName": "--expressive-font-family",
+          "resolvedType": "STRING",
+          "valuesByMode": {
+            "light": "Playfair Display",
+            "dark": "Playfair Display"
+          }
+        },
+        {
+          "id": "tale/token/fuchsia",
+          "name": "fuchsia",
+          "codeName": "--fuchsia",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c025c2",
+            "dark": "#c025c2"
+          }
+        },
+        {
+          "id": "tale/token/fuchsia-10",
+          "name": "fuchsia/10",
+          "codeName": "--fuchsia-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f5e7f8",
+            "dark": "#f5e7f8"
+          }
+        },
+        {
+          "id": "tale/token/fuchsia-100",
+          "name": "fuchsia/100",
+          "codeName": "--fuchsia-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#57054b",
+            "dark": "#57054b"
+          }
+        },
+        {
+          "id": "tale/token/fuchsia-20",
+          "name": "fuchsia/20",
+          "codeName": "--fuchsia-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e7c0ed",
+            "dark": "#e7c0ed"
+          }
+        },
+        {
+          "id": "tale/token/fuchsia-30",
+          "name": "fuchsia/30",
+          "codeName": "--fuchsia-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#da99e3",
+            "dark": "#da99e3"
+          }
+        },
+        {
+          "id": "tale/token/fuchsia-40",
+          "name": "fuchsia/40",
+          "codeName": "--fuchsia-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d073d8",
+            "dark": "#d073d8"
+          }
+        },
+        {
+          "id": "tale/token/fuchsia-5",
+          "name": "fuchsia/5",
+          "codeName": "--fuchsia-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#faf3fc",
+            "dark": "#faf3fc"
+          }
+        },
+        {
+          "id": "tale/token/fuchsia-50",
+          "name": "fuchsia/50",
+          "codeName": "--fuchsia-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c74ccd",
+            "dark": "#c74ccd"
+          }
+        },
+        {
+          "id": "tale/token/fuchsia-60",
+          "name": "fuchsia/60",
+          "codeName": "--fuchsia-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c025c2",
+            "dark": "#c025c2"
+          }
+        },
+        {
+          "id": "tale/token/fuchsia-70",
+          "name": "fuchsia/70",
+          "codeName": "--fuchsia-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#aa1aa6",
+            "dark": "#aa1aa6"
+          }
+        },
+        {
+          "id": "tale/token/fuchsia-80",
+          "name": "fuchsia/80",
+          "codeName": "--fuchsia-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#901287",
+            "dark": "#901287"
+          }
+        },
+        {
+          "id": "tale/token/fuchsia-90",
+          "name": "fuchsia/90",
+          "codeName": "--fuchsia-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#740b69",
+            "dark": "#740b69"
+          }
+        },
+        {
+          "id": "tale/token/green",
+          "name": "green",
+          "codeName": "--green",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#22c55e",
+            "dark": "#22c55e"
+          }
+        },
+        {
+          "id": "tale/token/green-10",
+          "name": "green/10",
+          "codeName": "--green-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#def6e3",
+            "dark": "#def6e3"
+          }
+        },
+        {
+          "id": "tale/token/green-100",
+          "name": "green/100",
+          "codeName": "--green-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#02371f",
+            "dark": "#02371f"
+          }
+        },
+        {
+          "id": "tale/token/green-20",
+          "name": "green/20",
+          "codeName": "--green-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#b8ecc5",
+            "dark": "#b8ecc5"
+          }
+        },
+        {
+          "id": "tale/token/green-30",
+          "name": "green/30",
+          "codeName": "--green-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#93e3a8",
+            "dark": "#93e3a8"
+          }
+        },
+        {
+          "id": "tale/token/green-40",
+          "name": "green/40",
+          "codeName": "--green-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#6dd98e",
+            "dark": "#6dd98e"
+          }
+        },
+        {
+          "id": "tale/token/green-5",
+          "name": "green/5",
+          "codeName": "--green-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#effbf1",
+            "dark": "#effbf1"
+          }
+        },
+        {
+          "id": "tale/token/green-50",
+          "name": "green/50",
+          "codeName": "--green-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#48cf75",
+            "dark": "#48cf75"
+          }
+        },
+        {
+          "id": "tale/token/green-60",
+          "name": "green/60",
+          "codeName": "--green-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#22c55e",
+            "dark": "#22c55e"
+          }
+        },
+        {
+          "id": "tale/token/green-70",
+          "name": "green/70",
+          "codeName": "--green-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#17a551",
+            "dark": "#17a551"
+          }
+        },
+        {
+          "id": "tale/token/green-80",
+          "name": "green/80",
+          "codeName": "--green-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#0e8343",
+            "dark": "#0e8343"
+          }
+        },
+        {
+          "id": "tale/token/green-90",
+          "name": "green/90",
+          "codeName": "--green-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#075e32",
+            "dark": "#075e32"
+          }
+        },
+        {
+          "id": "tale/token/heading-font-family",
+          "name": "heading/font/family",
+          "codeName": "--heading-font-family",
+          "resolvedType": "STRING",
+          "valuesByMode": {
+            "light": "Inter",
+            "dark": "Inter"
+          }
+        },
+        {
+          "id": "tale/token/heading-font-weight",
+          "name": "heading/font/weight",
+          "codeName": "--heading-font-weight",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 600,
+            "dark": 600
+          }
+        },
+        {
+          "id": "tale/token/heading-l-font-size",
+          "name": "heading/l/font/size",
+          "codeName": "--heading-l-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 30,
+            "dark": 30
+          }
+        },
+        {
+          "id": "tale/token/heading-line-height",
+          "name": "heading/line/height",
+          "codeName": "--heading-line-height",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 1.5,
+            "dark": 1.5
+          }
+        },
+        {
+          "id": "tale/token/heading-m-font-size",
+          "name": "heading/m/font/size",
+          "codeName": "--heading-m-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 27.3,
+            "dark": 27.3
+          }
+        },
+        {
+          "id": "tale/token/heading-s-font-size",
+          "name": "heading/s/font/size",
+          "codeName": "--heading-s-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 24.6,
+            "dark": 24.6
+          }
+        },
+        {
+          "id": "tale/token/indigo",
+          "name": "indigo",
+          "codeName": "--indigo",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#5d5aeb",
+            "dark": "#5d5aeb"
+          }
+        },
+        {
+          "id": "tale/token/indigo-10",
+          "name": "indigo/10",
+          "codeName": "--indigo-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e0e4fb",
+            "dark": "#e0e4fb"
+          }
+        },
+        {
+          "id": "tale/token/indigo-100",
+          "name": "indigo/100",
+          "codeName": "--indigo-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#25195c",
+            "dark": "#25195c"
+          }
+        },
+        {
+          "id": "tale/token/indigo-20",
+          "name": "indigo/20",
+          "codeName": "--indigo-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c5cbf8",
+            "dark": "#c5cbf8"
+          }
+        },
+        {
+          "id": "tale/token/indigo-30",
+          "name": "indigo/30",
+          "codeName": "--indigo-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#aab0f5",
+            "dark": "#aab0f5"
+          }
+        },
+        {
+          "id": "tale/token/indigo-40",
+          "name": "indigo/40",
+          "codeName": "--indigo-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#9094f2",
+            "dark": "#9094f2"
+          }
+        },
+        {
+          "id": "tale/token/indigo-5",
+          "name": "indigo/5",
+          "codeName": "--indigo-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f2f4fe",
+            "dark": "#f2f4fe"
+          }
+        },
+        {
+          "id": "tale/token/indigo-50",
+          "name": "indigo/50",
+          "codeName": "--indigo-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#7576ee",
+            "dark": "#7576ee"
+          }
+        },
+        {
+          "id": "tale/token/indigo-60",
+          "name": "indigo/60",
+          "codeName": "--indigo-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#5d5aeb",
+            "dark": "#5d5aeb"
+          }
+        },
+        {
+          "id": "tale/token/indigo-70",
+          "name": "indigo/70",
+          "codeName": "--indigo-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#4f47ca",
+            "dark": "#4f47ca"
+          }
+        },
+        {
+          "id": "tale/token/indigo-80",
+          "name": "indigo/80",
+          "codeName": "--indigo-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#4236a7",
+            "dark": "#4236a7"
+          }
+        },
+        {
+          "id": "tale/token/indigo-90",
+          "name": "indigo/90",
+          "codeName": "--indigo-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#342683",
+            "dark": "#342683"
+          }
+        },
+        {
+          "id": "tale/token/label-font-family",
+          "name": "label/font/family",
+          "codeName": "--label-font-family",
+          "resolvedType": "STRING",
+          "valuesByMode": {
+            "light": "Inter",
+            "dark": "Inter"
+          }
+        },
+        {
+          "id": "tale/token/label-font-weight",
+          "name": "label/font/weight",
+          "codeName": "--label-font-weight",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 500,
+            "dark": 500
+          }
+        },
+        {
+          "id": "tale/token/label-l-font-size",
+          "name": "label/l/font/size",
+          "codeName": "--label-l-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 19.2,
+            "dark": 19.2
+          }
+        },
+        {
+          "id": "tale/token/label-line-height",
+          "name": "label/line/height",
+          "codeName": "--label-line-height",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 1.5,
+            "dark": 1.5
+          }
+        },
+        {
+          "id": "tale/token/label-m-font-size",
+          "name": "label/m/font/size",
+          "codeName": "--label-m-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 16,
+            "dark": 16
+          }
+        },
+        {
+          "id": "tale/token/label-s-font-size",
+          "name": "label/s/font/size",
+          "codeName": "--label-s-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 13.3,
+            "dark": 13.3
+          }
+        },
+        {
+          "id": "tale/token/label-xs-font-size",
+          "name": "label/xs/font/size",
+          "codeName": "--label-xs-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 12.3,
+            "dark": 12.3
+          }
+        },
+        {
+          "id": "tale/token/lime",
+          "name": "lime",
+          "codeName": "--lime",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#85bc31",
+            "dark": "#85bc31"
+          }
+        },
+        {
+          "id": "tale/token/lime-10",
+          "name": "lime/10",
+          "codeName": "--lime-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f1f4de",
+            "dark": "#f1f4de"
+          }
+        },
+        {
+          "id": "tale/token/lime-100",
+          "name": "lime/100",
+          "codeName": "--lime-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#1f3c09",
+            "dark": "#1f3c09"
+          }
+        },
+        {
+          "id": "tale/token/lime-20",
+          "name": "lime/20",
+          "codeName": "--lime-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e0e9bb",
+            "dark": "#e0e9bb"
+          }
+        },
+        {
+          "id": "tale/token/lime-30",
+          "name": "lime/30",
+          "codeName": "--lime-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#cdde99",
+            "dark": "#cdde99"
+          }
+        },
+        {
+          "id": "tale/token/lime-40",
+          "name": "lime/40",
+          "codeName": "--lime-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#b7d376",
+            "dark": "#b7d376"
+          }
+        },
+        {
+          "id": "tale/token/lime-5",
+          "name": "lime/5",
+          "codeName": "--lime-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f8faef",
+            "dark": "#f8faef"
+          }
+        },
+        {
+          "id": "tale/token/lime-50",
+          "name": "lime/50",
+          "codeName": "--lime-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#9fc754",
+            "dark": "#9fc754"
+          }
+        },
+        {
+          "id": "tale/token/lime-60",
+          "name": "lime/60",
+          "codeName": "--lime-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#85bc31",
+            "dark": "#85bc31"
+          }
+        },
+        {
+          "id": "tale/token/lime-70",
+          "name": "lime/70",
+          "codeName": "--lime-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#699e25",
+            "dark": "#699e25"
+          }
+        },
+        {
+          "id": "tale/token/lime-80",
+          "name": "lime/80",
+          "codeName": "--lime-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#4f7f1a",
+            "dark": "#4f7f1a"
+          }
+        },
+        {
+          "id": "tale/token/lime-90",
+          "name": "lime/90",
+          "codeName": "--lime-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#365e11",
+            "dark": "#365e11"
+          }
+        },
+        {
+          "id": "tale/token/max-screen-width",
+          "name": "max/screen/width",
+          "codeName": "--max-screen-width",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 1600,
+            "dark": 1600
+          }
+        },
+        {
+          "id": "tale/token/min-screen-width",
+          "name": "min/screen/width",
+          "codeName": "--min-screen-width",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 480,
+            "dark": 480
+          }
+        },
+        {
+          "id": "tale/token/mono-color",
+          "name": "mono/color",
+          "codeName": "--mono-color",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2b2826",
+            "dark": "#dfdcdb"
+          }
+        },
+        {
+          "id": "tale/token/mono-default-color",
+          "name": "mono/default/color",
+          "codeName": "--mono-default-color",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2b2826",
+            "dark": "#2b2826"
+          }
+        },
+        {
+          "id": "tale/token/mono-font",
+          "name": "mono/font",
+          "codeName": "--mono-font",
+          "resolvedType": "STRING",
+          "valuesByMode": {
+            "light": "Roboto Mono",
+            "dark": "Roboto Mono"
+          }
+        },
+        {
+          "id": "tale/token/mono-font-family",
+          "name": "mono/font/family",
+          "codeName": "--mono-font-family",
+          "resolvedType": "STRING",
+          "valuesByMode": {
+            "light": "Roboto Mono",
+            "dark": "Roboto Mono"
+          }
+        },
+        {
+          "id": "tale/token/mono-font-weight",
+          "name": "mono/font/weight",
+          "codeName": "--mono-font-weight",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 400,
+            "dark": 400
+          }
+        },
+        {
+          "id": "tale/token/mono-l-font-size",
+          "name": "mono/l/font/size",
+          "codeName": "--mono-l-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 19.2,
+            "dark": 19.2
+          }
+        },
+        {
+          "id": "tale/token/mono-line-height",
+          "name": "mono/line/height",
+          "codeName": "--mono-line-height",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 1.5,
+            "dark": 1.5
+          }
+        },
+        {
+          "id": "tale/token/mono-m-font-size",
+          "name": "mono/m/font/size",
+          "codeName": "--mono-m-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 16,
+            "dark": 16
+          }
+        },
+        {
+          "id": "tale/token/mono-s-font-size",
+          "name": "mono/s/font/size",
+          "codeName": "--mono-s-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 13.3,
+            "dark": 13.3
+          }
+        },
+        {
+          "id": "tale/token/mono-xs-font-size",
+          "name": "mono/xs/font/size",
+          "codeName": "--mono-xs-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 12.3,
+            "dark": 12.3
+          }
+        },
+        {
+          "id": "tale/token/motion-content-duration",
+          "name": "motion/content/duration",
+          "codeName": "--motion-content-duration",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 0,
+            "dark": 0
+          }
+        },
+        {
+          "id": "tale/token/motion-duration-deliberate",
+          "name": "motion/duration/deliberate",
+          "codeName": "--motion-duration-deliberate",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 500,
+            "dark": 500
+          }
+        },
+        {
+          "id": "tale/token/motion-duration-fast",
+          "name": "motion/duration/fast",
+          "codeName": "--motion-duration-fast",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 120,
+            "dark": 120
+          }
+        },
+        {
+          "id": "tale/token/motion-duration-instant",
+          "name": "motion/duration/instant",
+          "codeName": "--motion-duration-instant",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 0,
+            "dark": 0
+          }
+        },
+        {
+          "id": "tale/token/motion-duration-moderate",
+          "name": "motion/duration/moderate",
+          "codeName": "--motion-duration-moderate",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 180,
+            "dark": 180
+          }
+        },
+        {
+          "id": "tale/token/motion-duration-quick",
+          "name": "motion/duration/quick",
+          "codeName": "--motion-duration-quick",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 80,
+            "dark": 80
+          }
+        },
+        {
+          "id": "tale/token/motion-duration-slow",
+          "name": "motion/duration/slow",
+          "codeName": "--motion-duration-slow",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 300,
+            "dark": 300
+          }
+        },
+        {
+          "id": "tale/token/motion-enter-duration",
+          "name": "motion/enter/duration",
+          "codeName": "--motion-enter-duration",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 0,
+            "dark": 0
+          }
+        },
+        {
+          "id": "tale/token/motion-exit-duration",
+          "name": "motion/exit/duration",
+          "codeName": "--motion-exit-duration",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 0,
+            "dark": 0
+          }
+        },
+        {
+          "id": "tale/token/motion-feedback-duration",
+          "name": "motion/feedback/duration",
+          "codeName": "--motion-feedback-duration",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 0,
+            "dark": 0
+          }
+        },
+        {
+          "id": "tale/token/motion-state-duration",
+          "name": "motion/state/duration",
+          "codeName": "--motion-state-duration",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 0,
+            "dark": 0
+          }
+        },
+        {
+          "id": "tale/token/neutral-10",
+          "name": "neutral/10",
+          "codeName": "--neutral-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f2f1f0",
+            "dark": "#161514"
+          }
+        },
+        {
+          "id": "tale/token/neutral-10-fg",
+          "name": "neutral/10/fg",
+          "codeName": "--neutral-10-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-100",
+          "name": "neutral/100",
+          "codeName": "--neutral-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-100-fg",
+          "name": "neutral/100/fg",
+          "codeName": "--neutral-100-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-12",
+          "name": "neutral/12",
+          "codeName": "--neutral-12",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#edeceb",
+            "dark": "#1b1a18"
+          }
+        },
+        {
+          "id": "tale/token/neutral-12-fg",
+          "name": "neutral/12/fg",
+          "codeName": "--neutral-12-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-14",
+          "name": "neutral/14",
+          "codeName": "--neutral-14",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e8e7e6",
+            "dark": "#211e1d"
+          }
+        },
+        {
+          "id": "tale/token/neutral-14-fg",
+          "name": "neutral/14/fg",
+          "codeName": "--neutral-14-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-16",
+          "name": "neutral/16",
+          "codeName": "--neutral-16",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e4e1e0",
+            "dark": "#262321"
+          }
+        },
+        {
+          "id": "tale/token/neutral-16-fg",
+          "name": "neutral/16/fg",
+          "codeName": "--neutral-16-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-18",
+          "name": "neutral/18",
+          "codeName": "--neutral-18",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dfdcdb",
+            "dark": "#2b2826"
+          }
+        },
+        {
+          "id": "tale/token/neutral-18-fg",
+          "name": "neutral/18/fg",
+          "codeName": "--neutral-18-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-20",
+          "name": "neutral/20",
+          "codeName": "--neutral-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dad7d6",
+            "dark": "#302d2b"
+          }
+        },
+        {
+          "id": "tale/token/neutral-20-fg",
+          "name": "neutral/20/fg",
+          "codeName": "--neutral-20-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-22",
+          "name": "neutral/22",
+          "codeName": "--neutral-22",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d5d2d1",
+            "dark": "#35322f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-22-fg",
+          "name": "neutral/22/fg",
+          "codeName": "--neutral-22-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-24",
+          "name": "neutral/24",
+          "codeName": "--neutral-24",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d0cdcb",
+            "dark": "#3b3634"
+          }
+        },
+        {
+          "id": "tale/token/neutral-24-fg",
+          "name": "neutral/24/fg",
+          "codeName": "--neutral-24-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-26",
+          "name": "neutral/26",
+          "codeName": "--neutral-26",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#cbc8c6",
+            "dark": "#403b38"
+          }
+        },
+        {
+          "id": "tale/token/neutral-26-fg",
+          "name": "neutral/26/fg",
+          "codeName": "--neutral-26-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-28",
+          "name": "neutral/28",
+          "codeName": "--neutral-28",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c6c3c0",
+            "dark": "#45403d"
+          }
+        },
+        {
+          "id": "tale/token/neutral-28-fg",
+          "name": "neutral/28/fg",
+          "codeName": "--neutral-28-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-30",
+          "name": "neutral/30",
+          "codeName": "--neutral-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c1bebb",
+            "dark": "#5f5954"
+          }
+        },
+        {
+          "id": "tale/token/neutral-30-fg",
+          "name": "neutral/30/fg",
+          "codeName": "--neutral-30-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-40",
+          "name": "neutral/40",
+          "codeName": "--neutral-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#a9a4a0",
+            "dark": "#79716b"
+          }
+        },
+        {
+          "id": "tale/token/neutral-40-fg",
+          "name": "neutral/40/fg",
+          "codeName": "--neutral-40-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-5",
+          "name": "neutral/5",
+          "codeName": "--neutral-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-5-fg",
+          "name": "neutral/5/fg",
+          "codeName": "--neutral-5-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-50",
+          "name": "neutral/50",
+          "codeName": "--neutral-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#918b86",
+            "dark": "#918b86"
+          }
+        },
+        {
+          "id": "tale/token/neutral-50-fg",
+          "name": "neutral/50/fg",
+          "codeName": "--neutral-50-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-60",
+          "name": "neutral/60",
+          "codeName": "--neutral-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#79716b",
+            "dark": "#a9a4a0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-60-fg",
+          "name": "neutral/60/fg",
+          "codeName": "--neutral-60-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-70",
+          "name": "neutral/70",
+          "codeName": "--neutral-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#5f5954",
+            "dark": "#c1bebb"
+          }
+        },
+        {
+          "id": "tale/token/neutral-70-fg",
+          "name": "neutral/70/fg",
+          "codeName": "--neutral-70-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-80",
+          "name": "neutral/80",
+          "codeName": "--neutral-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#45403d",
+            "dark": "#c6c3c0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-80-fg",
+          "name": "neutral/80/fg",
+          "codeName": "--neutral-80-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-82",
+          "name": "neutral/82",
+          "codeName": "--neutral-82",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#403b38",
+            "dark": "#cbc8c6"
+          }
+        },
+        {
+          "id": "tale/token/neutral-82-fg",
+          "name": "neutral/82/fg",
+          "codeName": "--neutral-82-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-84",
+          "name": "neutral/84",
+          "codeName": "--neutral-84",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#3b3634",
+            "dark": "#d0cdcb"
+          }
+        },
+        {
+          "id": "tale/token/neutral-84-fg",
+          "name": "neutral/84/fg",
+          "codeName": "--neutral-84-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-86",
+          "name": "neutral/86",
+          "codeName": "--neutral-86",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#35322f",
+            "dark": "#d5d2d1"
+          }
+        },
+        {
+          "id": "tale/token/neutral-86-fg",
+          "name": "neutral/86/fg",
+          "codeName": "--neutral-86-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-88",
+          "name": "neutral/88",
+          "codeName": "--neutral-88",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#302d2b",
+            "dark": "#dad7d6"
+          }
+        },
+        {
+          "id": "tale/token/neutral-88-fg",
+          "name": "neutral/88/fg",
+          "codeName": "--neutral-88-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-90",
+          "name": "neutral/90",
+          "codeName": "--neutral-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2b2826",
+            "dark": "#dfdcdb"
+          }
+        },
+        {
+          "id": "tale/token/neutral-90-fg",
+          "name": "neutral/90/fg",
+          "codeName": "--neutral-90-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-92",
+          "name": "neutral/92",
+          "codeName": "--neutral-92",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#262321",
+            "dark": "#e4e1e0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-92-fg",
+          "name": "neutral/92/fg",
+          "codeName": "--neutral-92-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-94",
+          "name": "neutral/94",
+          "codeName": "--neutral-94",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#211e1d",
+            "dark": "#e8e7e6"
+          }
+        },
+        {
+          "id": "tale/token/neutral-94-fg",
+          "name": "neutral/94/fg",
+          "codeName": "--neutral-94-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-96",
+          "name": "neutral/96",
+          "codeName": "--neutral-96",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#1b1a18",
+            "dark": "#edeceb"
+          }
+        },
+        {
+          "id": "tale/token/neutral-96-fg",
+          "name": "neutral/96/fg",
+          "codeName": "--neutral-96-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-98",
+          "name": "neutral/98",
+          "codeName": "--neutral-98",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#161514",
+            "dark": "#f2f1f0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-98-fg",
+          "name": "neutral/98/fg",
+          "codeName": "--neutral-98-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-10",
+          "name": "neutral/cool/10",
+          "codeName": "--neutral-cool-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#eff0f4",
+            "dark": "#eff0f4"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-100",
+          "name": "neutral/cool/100",
+          "codeName": "--neutral-cool-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#0d0f14",
+            "dark": "#0d0f14"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-12",
+          "name": "neutral/cool/12",
+          "codeName": "--neutral-cool-12",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e9ebf0",
+            "dark": "#e9ebf0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-14",
+          "name": "neutral/cool/14",
+          "codeName": "--neutral-cool-14",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e4e6ec",
+            "dark": "#e4e6ec"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-16",
+          "name": "neutral/cool/16",
+          "codeName": "--neutral-cool-16",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dee0e8",
+            "dark": "#dee0e8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-18",
+          "name": "neutral/cool/18",
+          "codeName": "--neutral-cool-18",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d9dbe4",
+            "dark": "#d9dbe4"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-20",
+          "name": "neutral/cool/20",
+          "codeName": "--neutral-cool-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d3d6e0",
+            "dark": "#d3d6e0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-22",
+          "name": "neutral/cool/22",
+          "codeName": "--neutral-cool-22",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#cdd1dc",
+            "dark": "#cdd1dc"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-24",
+          "name": "neutral/cool/24",
+          "codeName": "--neutral-cool-24",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c7cbd8",
+            "dark": "#c7cbd8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-26",
+          "name": "neutral/cool/26",
+          "codeName": "--neutral-cool-26",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c2c6d4",
+            "dark": "#c2c6d4"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-28",
+          "name": "neutral/cool/28",
+          "codeName": "--neutral-cool-28",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#bcc0d0",
+            "dark": "#bcc0d0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-30",
+          "name": "neutral/cool/30",
+          "codeName": "--neutral-cool-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#b6bbcc",
+            "dark": "#b6bbcc"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-40",
+          "name": "neutral/cool/40",
+          "codeName": "--neutral-cool-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#99a0b8",
+            "dark": "#99a0b8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-5",
+          "name": "neutral/cool/5",
+          "codeName": "--neutral-cool-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f7f8fa",
+            "dark": "#f7f8fa"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-50",
+          "name": "neutral/cool/50",
+          "codeName": "--neutral-cool-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#7d86a4",
+            "dark": "#7d86a4"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-60",
+          "name": "neutral/cool/60",
+          "codeName": "--neutral-cool-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#606b90",
+            "dark": "#606b90"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-70",
+          "name": "neutral/cool/70",
+          "codeName": "--neutral-cool-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#4b5471",
+            "dark": "#4b5471"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-80",
+          "name": "neutral/cool/80",
+          "codeName": "--neutral-cool-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#373d52",
+            "dark": "#373d52"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-82",
+          "name": "neutral/cool/82",
+          "codeName": "--neutral-cool-82",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#33384c",
+            "dark": "#33384c"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-84",
+          "name": "neutral/cool/84",
+          "codeName": "--neutral-cool-84",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2f3446",
+            "dark": "#2f3446"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-86",
+          "name": "neutral/cool/86",
+          "codeName": "--neutral-cool-86",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2a2f3f",
+            "dark": "#2a2f3f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-88",
+          "name": "neutral/cool/88",
+          "codeName": "--neutral-cool-88",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#262b39",
+            "dark": "#262b39"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-90",
+          "name": "neutral/cool/90",
+          "codeName": "--neutral-cool-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#222633",
+            "dark": "#222633"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-92",
+          "name": "neutral/cool/92",
+          "codeName": "--neutral-cool-92",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#1e212d",
+            "dark": "#1e212d"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-94",
+          "name": "neutral/cool/94",
+          "codeName": "--neutral-cool-94",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#1a1d27",
+            "dark": "#1a1d27"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-96",
+          "name": "neutral/cool/96",
+          "codeName": "--neutral-cool-96",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#151820",
+            "dark": "#151820"
+          }
+        },
+        {
+          "id": "tale/token/neutral-cool-98",
+          "name": "neutral/cool/98",
+          "codeName": "--neutral-cool-98",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11141a",
+            "dark": "#11141a"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default",
+          "name": "neutral/default",
+          "codeName": "--neutral-default",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#79716b",
+            "dark": "#79716b"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-10",
+          "name": "neutral/default/10",
+          "codeName": "--neutral-default-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f2f1f0",
+            "dark": "#f2f1f0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-100",
+          "name": "neutral/default/100",
+          "codeName": "--neutral-default-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-12",
+          "name": "neutral/default/12",
+          "codeName": "--neutral-default-12",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#edeceb",
+            "dark": "#edeceb"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-14",
+          "name": "neutral/default/14",
+          "codeName": "--neutral-default-14",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e8e7e6",
+            "dark": "#e8e7e6"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-16",
+          "name": "neutral/default/16",
+          "codeName": "--neutral-default-16",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e4e1e0",
+            "dark": "#e4e1e0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-18",
+          "name": "neutral/default/18",
+          "codeName": "--neutral-default-18",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dfdcdb",
+            "dark": "#dfdcdb"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-20",
+          "name": "neutral/default/20",
+          "codeName": "--neutral-default-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dad7d6",
+            "dark": "#dad7d6"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-22",
+          "name": "neutral/default/22",
+          "codeName": "--neutral-default-22",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d5d2d1",
+            "dark": "#d5d2d1"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-24",
+          "name": "neutral/default/24",
+          "codeName": "--neutral-default-24",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d0cdcb",
+            "dark": "#d0cdcb"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-26",
+          "name": "neutral/default/26",
+          "codeName": "--neutral-default-26",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#cbc8c6",
+            "dark": "#cbc8c6"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-28",
+          "name": "neutral/default/28",
+          "codeName": "--neutral-default-28",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c6c3c0",
+            "dark": "#c6c3c0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-30",
+          "name": "neutral/default/30",
+          "codeName": "--neutral-default-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c1bebb",
+            "dark": "#c1bebb"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-40",
+          "name": "neutral/default/40",
+          "codeName": "--neutral-default-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#a9a4a0",
+            "dark": "#a9a4a0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-5",
+          "name": "neutral/default/5",
+          "codeName": "--neutral-default-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-50",
+          "name": "neutral/default/50",
+          "codeName": "--neutral-default-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#918b86",
+            "dark": "#918b86"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-60",
+          "name": "neutral/default/60",
+          "codeName": "--neutral-default-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#79716b",
+            "dark": "#79716b"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-70",
+          "name": "neutral/default/70",
+          "codeName": "--neutral-default-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#5f5954",
+            "dark": "#5f5954"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-80",
+          "name": "neutral/default/80",
+          "codeName": "--neutral-default-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#45403d",
+            "dark": "#45403d"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-82",
+          "name": "neutral/default/82",
+          "codeName": "--neutral-default-82",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#403b38",
+            "dark": "#403b38"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-84",
+          "name": "neutral/default/84",
+          "codeName": "--neutral-default-84",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#3b3634",
+            "dark": "#3b3634"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-86",
+          "name": "neutral/default/86",
+          "codeName": "--neutral-default-86",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#35322f",
+            "dark": "#35322f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-88",
+          "name": "neutral/default/88",
+          "codeName": "--neutral-default-88",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#302d2b",
+            "dark": "#302d2b"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-90",
+          "name": "neutral/default/90",
+          "codeName": "--neutral-default-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2b2826",
+            "dark": "#2b2826"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-92",
+          "name": "neutral/default/92",
+          "codeName": "--neutral-default-92",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#262321",
+            "dark": "#262321"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-94",
+          "name": "neutral/default/94",
+          "codeName": "--neutral-default-94",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#211e1d",
+            "dark": "#211e1d"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-96",
+          "name": "neutral/default/96",
+          "codeName": "--neutral-default-96",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#1b1a18",
+            "dark": "#1b1a18"
+          }
+        },
+        {
+          "id": "tale/token/neutral-default-98",
+          "name": "neutral/default/98",
+          "codeName": "--neutral-default-98",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#161514",
+            "dark": "#161514"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-10",
+          "name": "neutral/gray/10",
+          "codeName": "--neutral-gray-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f0f1f3",
+            "dark": "#f0f1f3"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-100",
+          "name": "neutral/gray/100",
+          "codeName": "--neutral-gray-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#0e1013",
+            "dark": "#0e1013"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-12",
+          "name": "neutral/gray/12",
+          "codeName": "--neutral-gray-12",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#eaecef",
+            "dark": "#eaecef"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-14",
+          "name": "neutral/gray/14",
+          "codeName": "--neutral-gray-14",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e5e7ea",
+            "dark": "#e5e7ea"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-16",
+          "name": "neutral/gray/16",
+          "codeName": "--neutral-gray-16",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dfe1e6",
+            "dark": "#dfe1e6"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-18",
+          "name": "neutral/gray/18",
+          "codeName": "--neutral-gray-18",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dadce1",
+            "dark": "#dadce1"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-20",
+          "name": "neutral/gray/20",
+          "codeName": "--neutral-gray-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d4d7dd",
+            "dark": "#d4d7dd"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-22",
+          "name": "neutral/gray/22",
+          "codeName": "--neutral-gray-22",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#cfd2d8",
+            "dark": "#cfd2d8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-24",
+          "name": "neutral/gray/24",
+          "codeName": "--neutral-gray-24",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c9cdd4",
+            "dark": "#c9cdd4"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-26",
+          "name": "neutral/gray/26",
+          "codeName": "--neutral-gray-26",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c4c8cf",
+            "dark": "#c4c8cf"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-28",
+          "name": "neutral/gray/28",
+          "codeName": "--neutral-gray-28",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#bec3cb",
+            "dark": "#bec3cb"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-30",
+          "name": "neutral/gray/30",
+          "codeName": "--neutral-gray-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#b9bec6",
+            "dark": "#b9bec6"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-40",
+          "name": "neutral/gray/40",
+          "codeName": "--neutral-gray-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#9fa5af",
+            "dark": "#9fa5af"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-5",
+          "name": "neutral/gray/5",
+          "codeName": "--neutral-gray-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f8f8f9",
+            "dark": "#f8f8f9"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-50",
+          "name": "neutral/gray/50",
+          "codeName": "--neutral-gray-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#858c97",
+            "dark": "#858c97"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-60",
+          "name": "neutral/gray/60",
+          "codeName": "--neutral-gray-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#6c737f",
+            "dark": "#6c737f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-70",
+          "name": "neutral/gray/70",
+          "codeName": "--neutral-gray-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#535a65",
+            "dark": "#535a65"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-80",
+          "name": "neutral/gray/80",
+          "codeName": "--neutral-gray-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#3b414b",
+            "dark": "#3b414b"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-82",
+          "name": "neutral/gray/82",
+          "codeName": "--neutral-gray-82",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#373c45",
+            "dark": "#373c45"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-84",
+          "name": "neutral/gray/84",
+          "codeName": "--neutral-gray-84",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#323740",
+            "dark": "#323740"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-86",
+          "name": "neutral/gray/86",
+          "codeName": "--neutral-gray-86",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2e323a",
+            "dark": "#2e323a"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-88",
+          "name": "neutral/gray/88",
+          "codeName": "--neutral-gray-88",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#292d35",
+            "dark": "#292d35"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-90",
+          "name": "neutral/gray/90",
+          "codeName": "--neutral-gray-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#25292f",
+            "dark": "#25292f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-92",
+          "name": "neutral/gray/92",
+          "codeName": "--neutral-gray-92",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#202429",
+            "dark": "#202429"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-94",
+          "name": "neutral/gray/94",
+          "codeName": "--neutral-gray-94",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#1c1f24",
+            "dark": "#1c1f24"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-96",
+          "name": "neutral/gray/96",
+          "codeName": "--neutral-gray-96",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#171a1e",
+            "dark": "#171a1e"
+          }
+        },
+        {
+          "id": "tale/token/neutral-gray-98",
+          "name": "neutral/gray/98",
+          "codeName": "--neutral-gray-98",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#131519",
+            "dark": "#131519"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-10",
+          "name": "neutral/mono/10",
+          "codeName": "--neutral-mono-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f1f1f1",
+            "dark": "#f1f1f1"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-100",
+          "name": "neutral/mono/100",
+          "codeName": "--neutral-mono-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#101010",
+            "dark": "#101010"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-12",
+          "name": "neutral/mono/12",
+          "codeName": "--neutral-mono-12",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ececec",
+            "dark": "#ececec"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-14",
+          "name": "neutral/mono/14",
+          "codeName": "--neutral-mono-14",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e7e7e7",
+            "dark": "#e7e7e7"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-16",
+          "name": "neutral/mono/16",
+          "codeName": "--neutral-mono-16",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e2e2e2",
+            "dark": "#e2e2e2"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-18",
+          "name": "neutral/mono/18",
+          "codeName": "--neutral-mono-18",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dddddd",
+            "dark": "#dddddd"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-20",
+          "name": "neutral/mono/20",
+          "codeName": "--neutral-mono-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d8d8d8",
+            "dark": "#d8d8d8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-22",
+          "name": "neutral/mono/22",
+          "codeName": "--neutral-mono-22",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d3d3d3",
+            "dark": "#d3d3d3"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-24",
+          "name": "neutral/mono/24",
+          "codeName": "--neutral-mono-24",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#cecece",
+            "dark": "#cecece"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-26",
+          "name": "neutral/mono/26",
+          "codeName": "--neutral-mono-26",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c8c8c8",
+            "dark": "#c8c8c8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-28",
+          "name": "neutral/mono/28",
+          "codeName": "--neutral-mono-28",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c3c3c3",
+            "dark": "#c3c3c3"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-30",
+          "name": "neutral/mono/30",
+          "codeName": "--neutral-mono-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#bebebe",
+            "dark": "#bebebe"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-40",
+          "name": "neutral/mono/40",
+          "codeName": "--neutral-mono-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#a5a5a5",
+            "dark": "#a5a5a5"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-5",
+          "name": "neutral/mono/5",
+          "codeName": "--neutral-mono-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f8f8f8",
+            "dark": "#f8f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-50",
+          "name": "neutral/mono/50",
+          "codeName": "--neutral-mono-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#8b8b8b",
+            "dark": "#8b8b8b"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-60",
+          "name": "neutral/mono/60",
+          "codeName": "--neutral-mono-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#727272",
+            "dark": "#727272"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-70",
+          "name": "neutral/mono/70",
+          "codeName": "--neutral-mono-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#5a5a5a",
+            "dark": "#5a5a5a"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-80",
+          "name": "neutral/mono/80",
+          "codeName": "--neutral-mono-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#414141",
+            "dark": "#414141"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-82",
+          "name": "neutral/mono/82",
+          "codeName": "--neutral-mono-82",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#3c3c3c",
+            "dark": "#3c3c3c"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-84",
+          "name": "neutral/mono/84",
+          "codeName": "--neutral-mono-84",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#373737",
+            "dark": "#373737"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-86",
+          "name": "neutral/mono/86",
+          "codeName": "--neutral-mono-86",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#323232",
+            "dark": "#323232"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-88",
+          "name": "neutral/mono/88",
+          "codeName": "--neutral-mono-88",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2d2d2d",
+            "dark": "#2d2d2d"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-90",
+          "name": "neutral/mono/90",
+          "codeName": "--neutral-mono-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#292929",
+            "dark": "#292929"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-92",
+          "name": "neutral/mono/92",
+          "codeName": "--neutral-mono-92",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#242424",
+            "dark": "#242424"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-94",
+          "name": "neutral/mono/94",
+          "codeName": "--neutral-mono-94",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#1f1f1f",
+            "dark": "#1f1f1f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-96",
+          "name": "neutral/mono/96",
+          "codeName": "--neutral-mono-96",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#1a1a1a",
+            "dark": "#1a1a1a"
+          }
+        },
+        {
+          "id": "tale/token/neutral-mono-98",
+          "name": "neutral/mono/98",
+          "codeName": "--neutral-mono-98",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#151515",
+            "dark": "#151515"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-10",
+          "name": "neutral/onyx/10",
+          "codeName": "--neutral-onyx-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f0f0f2",
+            "dark": "#f0f0f2"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-100",
+          "name": "neutral/onyx/100",
+          "codeName": "--neutral-onyx-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#0f0f12",
+            "dark": "#0f0f12"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-12",
+          "name": "neutral/onyx/12",
+          "codeName": "--neutral-onyx-12",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ebebed",
+            "dark": "#ebebed"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-14",
+          "name": "neutral/onyx/14",
+          "codeName": "--neutral-onyx-14",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e6e6e9",
+            "dark": "#e6e6e9"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-16",
+          "name": "neutral/onyx/16",
+          "codeName": "--neutral-onyx-16",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e0e0e4",
+            "dark": "#e0e0e4"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-18",
+          "name": "neutral/onyx/18",
+          "codeName": "--neutral-onyx-18",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dbdbe0",
+            "dark": "#dbdbe0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-20",
+          "name": "neutral/onyx/20",
+          "codeName": "--neutral-onyx-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d6d6db",
+            "dark": "#d6d6db"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-22",
+          "name": "neutral/onyx/22",
+          "codeName": "--neutral-onyx-22",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d1d1d6",
+            "dark": "#d1d1d6"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-24",
+          "name": "neutral/onyx/24",
+          "codeName": "--neutral-onyx-24",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ccccd2",
+            "dark": "#ccccd2"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-26",
+          "name": "neutral/onyx/26",
+          "codeName": "--neutral-onyx-26",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c6c6cd",
+            "dark": "#c6c6cd"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-28",
+          "name": "neutral/onyx/28",
+          "codeName": "--neutral-onyx-28",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c1c1c9",
+            "dark": "#c1c1c9"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-30",
+          "name": "neutral/onyx/30",
+          "codeName": "--neutral-onyx-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#bcbcc4",
+            "dark": "#bcbcc4"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-40",
+          "name": "neutral/onyx/40",
+          "codeName": "--neutral-onyx-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#a2a2ac",
+            "dark": "#a2a2ac"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-5",
+          "name": "neutral/onyx/5",
+          "codeName": "--neutral-onyx-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f8f8f9",
+            "dark": "#f8f8f9"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-50",
+          "name": "neutral/onyx/50",
+          "codeName": "--neutral-onyx-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#898994",
+            "dark": "#898994"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-60",
+          "name": "neutral/onyx/60",
+          "codeName": "--neutral-onyx-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#70707b",
+            "dark": "#70707b"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-70",
+          "name": "neutral/onyx/70",
+          "codeName": "--neutral-onyx-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#575762",
+            "dark": "#575762"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-80",
+          "name": "neutral/onyx/80",
+          "codeName": "--neutral-onyx-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#3e3e48",
+            "dark": "#3e3e48"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-82",
+          "name": "neutral/onyx/82",
+          "codeName": "--neutral-onyx-82",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#393943",
+            "dark": "#393943"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-84",
+          "name": "neutral/onyx/84",
+          "codeName": "--neutral-onyx-84",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#35353d",
+            "dark": "#35353d"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-86",
+          "name": "neutral/onyx/86",
+          "codeName": "--neutral-onyx-86",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#303038",
+            "dark": "#303038"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-88",
+          "name": "neutral/onyx/88",
+          "codeName": "--neutral-onyx-88",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2b2b32",
+            "dark": "#2b2b32"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-90",
+          "name": "neutral/onyx/90",
+          "codeName": "--neutral-onyx-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#27272d",
+            "dark": "#27272d"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-92",
+          "name": "neutral/onyx/92",
+          "codeName": "--neutral-onyx-92",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#222228",
+            "dark": "#222228"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-94",
+          "name": "neutral/onyx/94",
+          "codeName": "--neutral-onyx-94",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#1d1d22",
+            "dark": "#1d1d22"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-96",
+          "name": "neutral/onyx/96",
+          "codeName": "--neutral-onyx-96",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#18181d",
+            "dark": "#18181d"
+          }
+        },
+        {
+          "id": "tale/token/neutral-onyx-98",
+          "name": "neutral/onyx/98",
+          "codeName": "--neutral-onyx-98",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#141417",
+            "dark": "#141417"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-10",
+          "name": "neutral/slate/10",
+          "codeName": "--neutral-slate-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#eef1f4",
+            "dark": "#eef1f4"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-100",
+          "name": "neutral/slate/100",
+          "codeName": "--neutral-slate-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#0d1014",
+            "dark": "#0d1014"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-12",
+          "name": "neutral/slate/12",
+          "codeName": "--neutral-slate-12",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e8ecf0",
+            "dark": "#e8ecf0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-14",
+          "name": "neutral/slate/14",
+          "codeName": "--neutral-slate-14",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e2e7ec",
+            "dark": "#e2e7ec"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-16",
+          "name": "neutral/slate/16",
+          "codeName": "--neutral-slate-16",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dde1e7",
+            "dark": "#dde1e7"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-18",
+          "name": "neutral/slate/18",
+          "codeName": "--neutral-slate-18",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d7dce3",
+            "dark": "#d7dce3"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-20",
+          "name": "neutral/slate/20",
+          "codeName": "--neutral-slate-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d1d7df",
+            "dark": "#d1d7df"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-22",
+          "name": "neutral/slate/22",
+          "codeName": "--neutral-slate-22",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#cbd2db",
+            "dark": "#cbd2db"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-24",
+          "name": "neutral/slate/24",
+          "codeName": "--neutral-slate-24",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c6cdd7",
+            "dark": "#c6cdd7"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-26",
+          "name": "neutral/slate/26",
+          "codeName": "--neutral-slate-26",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c0c8d2",
+            "dark": "#c0c8d2"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-28",
+          "name": "neutral/slate/28",
+          "codeName": "--neutral-slate-28",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#bbc3ce",
+            "dark": "#bbc3ce"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-30",
+          "name": "neutral/slate/30",
+          "codeName": "--neutral-slate-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#b5beca",
+            "dark": "#b5beca"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-40",
+          "name": "neutral/slate/40",
+          "codeName": "--neutral-slate-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#9aa5b3",
+            "dark": "#9aa5b3"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-5",
+          "name": "neutral/slate/5",
+          "codeName": "--neutral-slate-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f7f8fa",
+            "dark": "#f7f8fa"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-50",
+          "name": "neutral/slate/50",
+          "codeName": "--neutral-slate-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#808c9c",
+            "dark": "#808c9c"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-60",
+          "name": "neutral/slate/60",
+          "codeName": "--neutral-slate-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#677383",
+            "dark": "#677383"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-70",
+          "name": "neutral/slate/70",
+          "codeName": "--neutral-slate-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#4e5a6a",
+            "dark": "#4e5a6a"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-80",
+          "name": "neutral/slate/80",
+          "codeName": "--neutral-slate-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#37414f",
+            "dark": "#37414f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-82",
+          "name": "neutral/slate/82",
+          "codeName": "--neutral-slate-82",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#333c49",
+            "dark": "#333c49"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-84",
+          "name": "neutral/slate/84",
+          "codeName": "--neutral-slate-84",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2f3743",
+            "dark": "#2f3743"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-86",
+          "name": "neutral/slate/86",
+          "codeName": "--neutral-slate-86",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2a323d",
+            "dark": "#2a323d"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-88",
+          "name": "neutral/slate/88",
+          "codeName": "--neutral-slate-88",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#262d37",
+            "dark": "#262d37"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-90",
+          "name": "neutral/slate/90",
+          "codeName": "--neutral-slate-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#222932",
+            "dark": "#222932"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-92",
+          "name": "neutral/slate/92",
+          "codeName": "--neutral-slate-92",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#1e242c",
+            "dark": "#1e242c"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-94",
+          "name": "neutral/slate/94",
+          "codeName": "--neutral-slate-94",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#1a1f26",
+            "dark": "#1a1f26"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-96",
+          "name": "neutral/slate/96",
+          "codeName": "--neutral-slate-96",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#151a20",
+            "dark": "#151a20"
+          }
+        },
+        {
+          "id": "tale/token/neutral-slate-98",
+          "name": "neutral/slate/98",
+          "codeName": "--neutral-slate-98",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11151a",
+            "dark": "#11151a"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-10",
+          "name": "neutral/warm/10",
+          "codeName": "--neutral-warm-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f2f1f0",
+            "dark": "#f2f1f0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-100",
+          "name": "neutral/warm/100",
+          "codeName": "--neutral-warm-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#11100f",
+            "dark": "#11100f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-12",
+          "name": "neutral/warm/12",
+          "codeName": "--neutral-warm-12",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#edeceb",
+            "dark": "#edeceb"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-14",
+          "name": "neutral/warm/14",
+          "codeName": "--neutral-warm-14",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e8e7e6",
+            "dark": "#e8e7e6"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-16",
+          "name": "neutral/warm/16",
+          "codeName": "--neutral-warm-16",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e4e1e0",
+            "dark": "#e4e1e0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-18",
+          "name": "neutral/warm/18",
+          "codeName": "--neutral-warm-18",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dfdcdb",
+            "dark": "#dfdcdb"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-20",
+          "name": "neutral/warm/20",
+          "codeName": "--neutral-warm-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dad7d6",
+            "dark": "#dad7d6"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-22",
+          "name": "neutral/warm/22",
+          "codeName": "--neutral-warm-22",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d5d2d1",
+            "dark": "#d5d2d1"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-24",
+          "name": "neutral/warm/24",
+          "codeName": "--neutral-warm-24",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d0cdcb",
+            "dark": "#d0cdcb"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-26",
+          "name": "neutral/warm/26",
+          "codeName": "--neutral-warm-26",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#cbc8c6",
+            "dark": "#cbc8c6"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-28",
+          "name": "neutral/warm/28",
+          "codeName": "--neutral-warm-28",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c6c3c0",
+            "dark": "#c6c3c0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-30",
+          "name": "neutral/warm/30",
+          "codeName": "--neutral-warm-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c1bebb",
+            "dark": "#c1bebb"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-40",
+          "name": "neutral/warm/40",
+          "codeName": "--neutral-warm-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#a9a4a0",
+            "dark": "#a9a4a0"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-5",
+          "name": "neutral/warm/5",
+          "codeName": "--neutral-warm-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9f8f8",
+            "dark": "#f9f8f8"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-50",
+          "name": "neutral/warm/50",
+          "codeName": "--neutral-warm-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#918b86",
+            "dark": "#918b86"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-60",
+          "name": "neutral/warm/60",
+          "codeName": "--neutral-warm-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#79716b",
+            "dark": "#79716b"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-70",
+          "name": "neutral/warm/70",
+          "codeName": "--neutral-warm-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#5f5954",
+            "dark": "#5f5954"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-80",
+          "name": "neutral/warm/80",
+          "codeName": "--neutral-warm-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#45403d",
+            "dark": "#45403d"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-82",
+          "name": "neutral/warm/82",
+          "codeName": "--neutral-warm-82",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#403b38",
+            "dark": "#403b38"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-84",
+          "name": "neutral/warm/84",
+          "codeName": "--neutral-warm-84",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#3b3634",
+            "dark": "#3b3634"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-86",
+          "name": "neutral/warm/86",
+          "codeName": "--neutral-warm-86",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#35322f",
+            "dark": "#35322f"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-88",
+          "name": "neutral/warm/88",
+          "codeName": "--neutral-warm-88",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#302d2b",
+            "dark": "#302d2b"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-90",
+          "name": "neutral/warm/90",
+          "codeName": "--neutral-warm-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2b2826",
+            "dark": "#2b2826"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-92",
+          "name": "neutral/warm/92",
+          "codeName": "--neutral-warm-92",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#262321",
+            "dark": "#262321"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-94",
+          "name": "neutral/warm/94",
+          "codeName": "--neutral-warm-94",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#211e1d",
+            "dark": "#211e1d"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-96",
+          "name": "neutral/warm/96",
+          "codeName": "--neutral-warm-96",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#1b1a18",
+            "dark": "#1b1a18"
+          }
+        },
+        {
+          "id": "tale/token/neutral-warm-98",
+          "name": "neutral/warm/98",
+          "codeName": "--neutral-warm-98",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#161514",
+            "dark": "#161514"
+          }
+        },
+        {
+          "id": "tale/token/orange",
+          "name": "orange",
+          "codeName": "--orange",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f97316",
+            "dark": "#f97316"
+          }
+        },
+        {
+          "id": "tale/token/orange-10",
+          "name": "orange/10",
+          "codeName": "--orange-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fee3d0",
+            "dark": "#fee3d0"
+          }
+        },
+        {
+          "id": "tale/token/orange-100",
+          "name": "orange/100",
+          "codeName": "--orange-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#661300",
+            "dark": "#661300"
+          }
+        },
+        {
+          "id": "tale/token/orange-20",
+          "name": "orange/20",
+          "codeName": "--orange-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fdcdab",
+            "dark": "#fdcdab"
+          }
+        },
+        {
+          "id": "tale/token/orange-30",
+          "name": "orange/30",
+          "codeName": "--orange-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fcb686",
+            "dark": "#fcb686"
+          }
+        },
+        {
+          "id": "tale/token/orange-40",
+          "name": "orange/40",
+          "codeName": "--orange-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fba061",
+            "dark": "#fba061"
+          }
+        },
+        {
+          "id": "tale/token/orange-5",
+          "name": "orange/5",
+          "codeName": "--orange-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fff1e8",
+            "dark": "#fff1e8"
+          }
+        },
+        {
+          "id": "tale/token/orange-50",
+          "name": "orange/50",
+          "codeName": "--orange-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fa893b",
+            "dark": "#fa893b"
+          }
+        },
+        {
+          "id": "tale/token/orange-60",
+          "name": "orange/60",
+          "codeName": "--orange-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f97316",
+            "dark": "#f97316"
+          }
+        },
+        {
+          "id": "tale/token/orange-70",
+          "name": "orange/70",
+          "codeName": "--orange-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d95707",
+            "dark": "#d95707"
+          }
+        },
+        {
+          "id": "tale/token/orange-80",
+          "name": "orange/80",
+          "codeName": "--orange-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#b33c00",
+            "dark": "#b33c00"
+          }
+        },
+        {
+          "id": "tale/token/orange-90",
+          "name": "orange/90",
+          "codeName": "--orange-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#8c2600",
+            "dark": "#8c2600"
+          }
+        },
+        {
+          "id": "tale/token/pink",
+          "name": "pink",
+          "codeName": "--pink",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d02a67",
+            "dark": "#d02a67"
+          }
+        },
+        {
+          "id": "tale/token/pink-10",
+          "name": "pink/10",
+          "codeName": "--pink-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9e3ef",
+            "dark": "#f9e3ef"
+          }
+        },
+        {
+          "id": "tale/token/pink-100",
+          "name": "pink/100",
+          "codeName": "--pink-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#5d0718",
+            "dark": "#5d0718"
+          }
+        },
+        {
+          "id": "tale/token/pink-20",
+          "name": "pink/20",
+          "codeName": "--pink-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f1bed8",
+            "dark": "#f1bed8"
+          }
+        },
+        {
+          "id": "tale/token/pink-30",
+          "name": "pink/30",
+          "codeName": "--pink-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e999be",
+            "dark": "#e999be"
+          }
+        },
+        {
+          "id": "tale/token/pink-40",
+          "name": "pink/40",
+          "codeName": "--pink-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e074a3",
+            "dark": "#e074a3"
+          }
+        },
+        {
+          "id": "tale/token/pink-5",
+          "name": "pink/5",
+          "codeName": "--pink-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fcf1f7",
+            "dark": "#fcf1f7"
+          }
+        },
+        {
+          "id": "tale/token/pink-50",
+          "name": "pink/50",
+          "codeName": "--pink-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d84f86",
+            "dark": "#d84f86"
+          }
+        },
+        {
+          "id": "tale/token/pink-60",
+          "name": "pink/60",
+          "codeName": "--pink-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d02a67",
+            "dark": "#d02a67"
+          }
+        },
+        {
+          "id": "tale/token/pink-70",
+          "name": "pink/70",
+          "codeName": "--pink-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#b61e50",
+            "dark": "#b61e50"
+          }
+        },
+        {
+          "id": "tale/token/pink-80",
+          "name": "pink/80",
+          "codeName": "--pink-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#9a153b",
+            "dark": "#9a153b"
+          }
+        },
+        {
+          "id": "tale/token/pink-90",
+          "name": "pink/90",
+          "codeName": "--pink-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#7d0d28",
+            "dark": "#7d0d28"
+          }
+        },
+        {
+          "id": "tale/token/primary",
+          "name": "primary",
+          "codeName": "--primary",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#025768",
+            "dark": "#539198"
+          }
+        },
+        {
+          "id": "tale/token/purple",
+          "name": "purple",
+          "codeName": "--purple",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#9543d7",
+            "dark": "#9543d7"
+          }
+        },
+        {
+          "id": "tale/token/purple-10",
+          "name": "purple/10",
+          "codeName": "--purple-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e9dff8",
+            "dark": "#e9dff8"
+          }
+        },
+        {
+          "id": "tale/token/purple-100",
+          "name": "purple/100",
+          "codeName": "--purple-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#49125f",
+            "dark": "#49125f"
+          }
+        },
+        {
+          "id": "tale/token/purple-20",
+          "name": "purple/20",
+          "codeName": "--purple-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d5c0f2",
+            "dark": "#d5c0f2"
+          }
+        },
+        {
+          "id": "tale/token/purple-30",
+          "name": "purple/30",
+          "codeName": "--purple-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c2a1eb",
+            "dark": "#c2a1eb"
+          }
+        },
+        {
+          "id": "tale/token/purple-40",
+          "name": "purple/40",
+          "codeName": "--purple-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#b281e4",
+            "dark": "#b281e4"
+          }
+        },
+        {
+          "id": "tale/token/purple-5",
+          "name": "purple/5",
+          "codeName": "--purple-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f4effc",
+            "dark": "#f4effc"
+          }
+        },
+        {
+          "id": "tale/token/purple-50",
+          "name": "purple/50",
+          "codeName": "--purple-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#a362de",
+            "dark": "#a362de"
+          }
+        },
+        {
+          "id": "tale/token/purple-60",
+          "name": "purple/60",
+          "codeName": "--purple-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#9543d7",
+            "dark": "#9543d7"
+          }
+        },
+        {
+          "id": "tale/token/purple-70",
+          "name": "purple/70",
+          "codeName": "--purple-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#8534bc",
+            "dark": "#8534bc"
+          }
+        },
+        {
+          "id": "tale/token/purple-80",
+          "name": "purple/80",
+          "codeName": "--purple-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#73279e",
+            "dark": "#73279e"
+          }
+        },
+        {
+          "id": "tale/token/purple-90",
+          "name": "purple/90",
+          "codeName": "--purple-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#5f1c7f",
+            "dark": "#5f1c7f"
+          }
+        },
+        {
+          "id": "tale/token/radius-2xl",
+          "name": "radius/2xl",
+          "codeName": "--radius-2xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 30,
+            "dark": 30
+          }
+        },
+        {
+          "id": "tale/token/radius-full",
+          "name": "radius/full",
+          "codeName": "--radius-full",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 9999,
+            "dark": 9999
+          }
+        },
+        {
+          "id": "tale/token/radius-l",
+          "name": "radius/l",
+          "codeName": "--radius-l",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 15,
+            "dark": 15
+          }
+        },
+        {
+          "id": "tale/token/radius-m",
+          "name": "radius/m",
+          "codeName": "--radius-m",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 10,
+            "dark": 10
+          }
+        },
+        {
+          "id": "tale/token/radius-none",
+          "name": "radius/none",
+          "codeName": "--radius-none",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 0,
+            "dark": 0
+          }
+        },
+        {
+          "id": "tale/token/radius-s",
+          "name": "radius/s",
+          "codeName": "--radius-s",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 7.5,
+            "dark": 7.5
+          }
+        },
+        {
+          "id": "tale/token/radius-xl",
+          "name": "radius/xl",
+          "codeName": "--radius-xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 20,
+            "dark": 20
+          }
+        },
+        {
+          "id": "tale/token/radius-xs",
+          "name": "radius/xs",
+          "codeName": "--radius-xs",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 5,
+            "dark": 5
+          }
+        },
+        {
+          "id": "tale/token/red",
+          "name": "red",
+          "codeName": "--red",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dc2626",
+            "dark": "#dc2626"
+          }
+        },
+        {
+          "id": "tale/token/red-10",
+          "name": "red/10",
+          "codeName": "--red-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fcecec",
+            "dark": "#fcecec"
+          }
+        },
+        {
+          "id": "tale/token/red-100",
+          "name": "red/100",
+          "codeName": "--red-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#66000f",
+            "dark": "#66000f"
+          }
+        },
+        {
+          "id": "tale/token/red-20",
+          "name": "red/20",
+          "codeName": "--red-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f6c4c4",
+            "dark": "#f6c4c4"
+          }
+        },
+        {
+          "id": "tale/token/red-30",
+          "name": "red/30",
+          "codeName": "--red-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ef9d9d",
+            "dark": "#ef9d9d"
+          }
+        },
+        {
+          "id": "tale/token/red-40",
+          "name": "red/40",
+          "codeName": "--red-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e97575",
+            "dark": "#e97575"
+          }
+        },
+        {
+          "id": "tale/token/red-5",
+          "name": "red/5",
+          "codeName": "--red-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fef6f6",
+            "dark": "#fef6f6"
+          }
+        },
+        {
+          "id": "tale/token/red-50",
+          "name": "red/50",
+          "codeName": "--red-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e24e4e",
+            "dark": "#e24e4e"
+          }
+        },
+        {
+          "id": "tale/token/red-60",
+          "name": "red/60",
+          "codeName": "--red-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#dc2626",
+            "dark": "#dc2626"
+          }
+        },
+        {
+          "id": "tale/token/red-70",
+          "name": "red/70",
+          "codeName": "--red-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c5171e",
+            "dark": "#c5171e"
+          }
+        },
+        {
+          "id": "tale/token/red-80",
+          "name": "red/80",
+          "codeName": "--red-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#aa0b18",
+            "dark": "#aa0b18"
+          }
+        },
+        {
+          "id": "tale/token/red-90",
+          "name": "red/90",
+          "codeName": "--red-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#8c0213",
+            "dark": "#8c0213"
+          }
+        },
+        {
+          "id": "tale/token/rose",
+          "name": "rose",
+          "codeName": "--rose",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d32837",
+            "dark": "#d32837"
+          }
+        },
+        {
+          "id": "tale/token/rose-10",
+          "name": "rose/10",
+          "codeName": "--rose-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ffdbe1",
+            "dark": "#ffdbe1"
+          }
+        },
+        {
+          "id": "tale/token/rose-100",
+          "name": "rose/100",
+          "codeName": "--rose-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#5a0629",
+            "dark": "#5a0629"
+          }
+        },
+        {
+          "id": "tale/token/rose-20",
+          "name": "rose/20",
+          "codeName": "--rose-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ffafbc",
+            "dark": "#ffafbc"
+          }
+        },
+        {
+          "id": "tale/token/rose-30",
+          "name": "rose/30",
+          "codeName": "--rose-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ff8497",
+            "dark": "#ff8497"
+          }
+        },
+        {
+          "id": "tale/token/rose-40",
+          "name": "rose/40",
+          "codeName": "--rose-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f95c74",
+            "dark": "#f95c74"
+          }
+        },
+        {
+          "id": "tale/token/rose-5",
+          "name": "rose/5",
+          "codeName": "--rose-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ffedf0",
+            "dark": "#ffedf0"
+          }
+        },
+        {
+          "id": "tale/token/rose-50",
+          "name": "rose/50",
+          "codeName": "--rose-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e93f53",
+            "dark": "#e93f53"
+          }
+        },
+        {
+          "id": "tale/token/rose-60",
+          "name": "rose/60",
+          "codeName": "--rose-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d32837",
+            "dark": "#d32837"
+          }
+        },
+        {
+          "id": "tale/token/rose-70",
+          "name": "rose/70",
+          "codeName": "--rose-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#b81c37",
+            "dark": "#b81c37"
+          }
+        },
+        {
+          "id": "tale/token/rose-80",
+          "name": "rose/80",
+          "codeName": "--rose-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#9a1335",
+            "dark": "#9a1335"
+          }
+        },
+        {
+          "id": "tale/token/rose-90",
+          "name": "rose/90",
+          "codeName": "--rose-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#7b0b31",
+            "dark": "#7b0b31"
+          }
+        },
+        {
+          "id": "tale/token/scale",
+          "name": "scale",
+          "codeName": "--scale",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 1.25,
+            "dark": 1.25
+          }
+        },
+        {
+          "id": "tale/token/section-space-l",
+          "name": "section/space/l",
+          "codeName": "--section-space-l",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 158.3,
+            "dark": 158.3
+          }
+        },
+        {
+          "id": "tale/token/section-space-m",
+          "name": "section/space/m",
+          "codeName": "--section-space-m",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 111.9,
+            "dark": 111.9
+          }
+        },
+        {
+          "id": "tale/token/section-space-s",
+          "name": "section/space/s",
+          "codeName": "--section-space-s",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 79.2,
+            "dark": 79.2
+          }
+        },
+        {
+          "id": "tale/token/section-space-xl",
+          "name": "section/space/xl",
+          "codeName": "--section-space-xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 223.7,
+            "dark": 223.7
+          }
+        },
+        {
+          "id": "tale/token/section-space-xs",
+          "name": "section/space/xs",
+          "codeName": "--section-space-xs",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 39.6,
+            "dark": 39.6
+          }
+        },
+        {
+          "id": "tale/token/sky",
+          "name": "sky",
+          "codeName": "--sky",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#0ea5e9",
+            "dark": "#0ea5e9"
+          }
+        },
+        {
+          "id": "tale/token/sky-10",
+          "name": "sky/10",
+          "codeName": "--sky-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#cff4fb",
+            "dark": "#cff4fb"
+          }
+        },
+        {
+          "id": "tale/token/sky-100",
+          "name": "sky/100",
+          "codeName": "--sky-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#003466",
+            "dark": "#003466"
+          }
+        },
+        {
+          "id": "tale/token/sky-20",
+          "name": "sky/20",
+          "codeName": "--sky-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#a8e9f7",
+            "dark": "#a8e9f7"
+          }
+        },
+        {
+          "id": "tale/token/sky-30",
+          "name": "sky/30",
+          "codeName": "--sky-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#82dcf4",
+            "dark": "#82dcf4"
+          }
+        },
+        {
+          "id": "tale/token/sky-40",
+          "name": "sky/40",
+          "codeName": "--sky-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#5bccf0",
+            "dark": "#5bccf0"
+          }
+        },
+        {
+          "id": "tale/token/sky-5",
+          "name": "sky/5",
+          "codeName": "--sky-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#e7fafd",
+            "dark": "#e7fafd"
+          }
+        },
+        {
+          "id": "tale/token/sky-50",
+          "name": "sky/50",
+          "codeName": "--sky-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#35baed",
+            "dark": "#35baed"
+          }
+        },
+        {
+          "id": "tale/token/sky-60",
+          "name": "sky/60",
+          "codeName": "--sky-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#0ea5e9",
+            "dark": "#0ea5e9"
+          }
+        },
+        {
+          "id": "tale/token/sky-70",
+          "name": "sky/70",
+          "codeName": "--sky-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#0587cd",
+            "dark": "#0587cd"
+          }
+        },
+        {
+          "id": "tale/token/sky-80",
+          "name": "sky/80",
+          "codeName": "--sky-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#0069af",
+            "dark": "#0069af"
+          }
+        },
+        {
+          "id": "tale/token/sky-90",
+          "name": "sky/90",
+          "codeName": "--sky-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#004d8c",
+            "dark": "#004d8c"
+          }
+        },
+        {
+          "id": "tale/token/space-2xl",
+          "name": "space/2xl",
+          "codeName": "--space-2xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 79.2,
+            "dark": 79.2
+          }
+        },
+        {
+          "id": "tale/token/space-2xs",
+          "name": "space/2xs",
+          "codeName": "--space-2xs",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 9.9,
+            "dark": 9.9
+          }
+        },
+        {
+          "id": "tale/token/space-3xl",
+          "name": "space/3xl",
+          "codeName": "--space-3xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 111.9,
+            "dark": 111.9
+          }
+        },
+        {
+          "id": "tale/token/space-3xs",
+          "name": "space/3xs",
+          "codeName": "--space-3xs",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 7,
+            "dark": 7
+          }
+        },
+        {
+          "id": "tale/token/space-4xl",
+          "name": "space/4xl",
+          "codeName": "--space-4xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 158.3,
+            "dark": 158.3
+          }
+        },
+        {
+          "id": "tale/token/space-4xs",
+          "name": "space/4xs",
+          "codeName": "--space-4xs",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 5.2,
+            "dark": 5.2
+          }
+        },
+        {
+          "id": "tale/token/space-l",
+          "name": "space/l",
+          "codeName": "--space-l",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 39.6,
+            "dark": 39.6
+          }
+        },
+        {
+          "id": "tale/token/space-m",
+          "name": "space/m",
+          "codeName": "--space-m",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 28,
+            "dark": 28
+          }
+        },
+        {
+          "id": "tale/token/space-s",
+          "name": "space/s",
+          "codeName": "--space-s",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 19.8,
+            "dark": 19.8
+          }
+        },
+        {
+          "id": "tale/token/space-xl",
+          "name": "space/xl",
+          "codeName": "--space-xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 56,
+            "dark": 56
+          }
+        },
+        {
+          "id": "tale/token/space-xs",
+          "name": "space/xs",
+          "codeName": "--space-xs",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 14,
+            "dark": 14
+          }
+        },
+        {
+          "id": "tale/token/success",
+          "name": "success",
+          "codeName": "--success",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#3cbe7e",
+            "dark": "#3cbe7e"
+          }
+        },
+        {
+          "id": "tale/token/success-10",
+          "name": "success/10",
+          "codeName": "--success-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d8f2e1",
+            "dark": "#d8f2e1"
+          }
+        },
+        {
+          "id": "tale/token/success-10-fg",
+          "name": "success/10/fg",
+          "codeName": "--success-10-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#144132",
+            "dark": "#144132"
+          }
+        },
+        {
+          "id": "tale/token/success-100",
+          "name": "success/100",
+          "codeName": "--success-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#144132",
+            "dark": "#144132"
+          }
+        },
+        {
+          "id": "tale/token/success-100-fg",
+          "name": "success/100/fg",
+          "codeName": "--success-100-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ecf9f0",
+            "dark": "#ecf9f0"
+          }
+        },
+        {
+          "id": "tale/token/success-20",
+          "name": "success/20",
+          "codeName": "--success-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#b9e8ca",
+            "dark": "#b9e8ca"
+          }
+        },
+        {
+          "id": "tale/token/success-20-fg",
+          "name": "success/20/fg",
+          "codeName": "--success-20-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#144132",
+            "dark": "#144132"
+          }
+        },
+        {
+          "id": "tale/token/success-30",
+          "name": "success/30",
+          "codeName": "--success-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#9addb5",
+            "dark": "#9addb5"
+          }
+        },
+        {
+          "id": "tale/token/success-30-fg",
+          "name": "success/30/fg",
+          "codeName": "--success-30-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#144132",
+            "dark": "#144132"
+          }
+        },
+        {
+          "id": "tale/token/success-40",
+          "name": "success/40",
+          "codeName": "--success-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#7ad3a1",
+            "dark": "#7ad3a1"
+          }
+        },
+        {
+          "id": "tale/token/success-40-fg",
+          "name": "success/40/fg",
+          "codeName": "--success-40-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#144132",
+            "dark": "#144132"
+          }
+        },
+        {
+          "id": "tale/token/success-5",
+          "name": "success/5",
+          "codeName": "--success-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ecf9f0",
+            "dark": "#ecf9f0"
+          }
+        },
+        {
+          "id": "tale/token/success-5-fg",
+          "name": "success/5/fg",
+          "codeName": "--success-5-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#144132",
+            "dark": "#144132"
+          }
+        },
+        {
+          "id": "tale/token/success-50",
+          "name": "success/50",
+          "codeName": "--success-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#5bc88f",
+            "dark": "#5bc88f"
+          }
+        },
+        {
+          "id": "tale/token/success-50-fg",
+          "name": "success/50/fg",
+          "codeName": "--success-50-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#144132",
+            "dark": "#144132"
+          }
+        },
+        {
+          "id": "tale/token/success-60",
+          "name": "success/60",
+          "codeName": "--success-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#3cbe7e",
+            "dark": "#3cbe7e"
+          }
+        },
+        {
+          "id": "tale/token/success-60-fg",
+          "name": "success/60/fg",
+          "codeName": "--success-60-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#144132",
+            "dark": "#144132"
+          }
+        },
+        {
+          "id": "tale/token/success-70",
+          "name": "success/70",
+          "codeName": "--success-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#329f6e",
+            "dark": "#329f6e"
+          }
+        },
+        {
+          "id": "tale/token/success-70-fg",
+          "name": "success/70/fg",
+          "codeName": "--success-70-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ecf9f0",
+            "dark": "#ecf9f0"
+          }
+        },
+        {
+          "id": "tale/token/success-80",
+          "name": "success/80",
+          "codeName": "--success-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#287f5c",
+            "dark": "#287f5c"
+          }
+        },
+        {
+          "id": "tale/token/success-80-fg",
+          "name": "success/80/fg",
+          "codeName": "--success-80-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ecf9f0",
+            "dark": "#ecf9f0"
+          }
+        },
+        {
+          "id": "tale/token/success-90",
+          "name": "success/90",
+          "codeName": "--success-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#1e6048",
+            "dark": "#1e6048"
+          }
+        },
+        {
+          "id": "tale/token/success-90-fg",
+          "name": "success/90/fg",
+          "codeName": "--success-90-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ecf9f0",
+            "dark": "#ecf9f0"
+          }
+        },
+        {
+          "id": "tale/token/teal",
+          "name": "teal",
+          "codeName": "--teal",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#14b8a6",
+            "dark": "#14b8a6"
+          }
+        },
+        {
+          "id": "tale/token/teal-10",
+          "name": "teal/10",
+          "codeName": "--teal-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#def5ef",
+            "dark": "#def5ef"
+          }
+        },
+        {
+          "id": "tale/token/teal-100",
+          "name": "teal/100",
+          "codeName": "--teal-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#00393d",
+            "dark": "#00393d"
+          }
+        },
+        {
+          "id": "tale/token/teal-20",
+          "name": "teal/20",
+          "codeName": "--teal-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#b6e9dc",
+            "dark": "#b6e9dc"
+          }
+        },
+        {
+          "id": "tale/token/teal-30",
+          "name": "teal/30",
+          "codeName": "--teal-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#8dddcc",
+            "dark": "#8dddcc"
+          }
+        },
+        {
+          "id": "tale/token/teal-40",
+          "name": "teal/40",
+          "codeName": "--teal-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#65d0bd",
+            "dark": "#65d0bd"
+          }
+        },
+        {
+          "id": "tale/token/teal-5",
+          "name": "teal/5",
+          "codeName": "--teal-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#effaf7",
+            "dark": "#effaf7"
+          }
+        },
+        {
+          "id": "tale/token/teal-50",
+          "name": "teal/50",
+          "codeName": "--teal-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#3cc4b1",
+            "dark": "#3cc4b1"
+          }
+        },
+        {
+          "id": "tale/token/teal-60",
+          "name": "teal/60",
+          "codeName": "--teal-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#14b8a6",
+            "dark": "#14b8a6"
+          }
+        },
+        {
+          "id": "tale/token/teal-70",
+          "name": "teal/70",
+          "codeName": "--teal-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#0b9c93",
+            "dark": "#0b9c93"
+          }
+        },
+        {
+          "id": "tale/token/teal-80",
+          "name": "teal/80",
+          "codeName": "--teal-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#057f7b",
+            "dark": "#057f7b"
+          }
+        },
+        {
+          "id": "tale/token/teal-90",
+          "name": "teal/90",
+          "codeName": "--teal-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#015d5f",
+            "dark": "#015d5f"
+          }
+        },
+        {
+          "id": "tale/token/text-2xl",
+          "name": "text/2xl",
+          "codeName": "--text-2xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 24.6,
+            "dark": 24.6
+          }
+        },
+        {
+          "id": "tale/token/text-3xl",
+          "name": "text/3xl",
+          "codeName": "--text-3xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 27.3,
+            "dark": 27.3
+          }
+        },
+        {
+          "id": "tale/token/text-4xl",
+          "name": "text/4xl",
+          "codeName": "--text-4xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 30,
+            "dark": 30
+          }
+        },
+        {
+          "id": "tale/token/text-5xl",
+          "name": "text/5xl",
+          "codeName": "--text-5xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 34,
+            "dark": 34
+          }
+        },
+        {
+          "id": "tale/token/text-6xl",
+          "name": "text/6xl",
+          "codeName": "--text-6xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 38,
+            "dark": 38
+          }
+        },
+        {
+          "id": "tale/token/text-7xl",
+          "name": "text/7xl",
+          "codeName": "--text-7xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 41,
+            "dark": 41
+          }
+        },
+        {
+          "id": "tale/token/text-8xl",
+          "name": "text/8xl",
+          "codeName": "--text-8xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 45,
+            "dark": 45
+          }
+        },
+        {
+          "id": "tale/token/text-color",
+          "name": "text/color",
+          "codeName": "--text-color",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2b2826",
+            "dark": "#dfdcdb"
+          }
+        },
+        {
+          "id": "tale/token/text-default-color",
+          "name": "text/default/color",
+          "codeName": "--text-default-color",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#2b2826",
+            "dark": "#2b2826"
+          }
+        },
+        {
+          "id": "tale/token/text-font-family",
+          "name": "text/font/family",
+          "codeName": "--text-font-family",
+          "resolvedType": "STRING",
+          "valuesByMode": {
+            "light": "Inter",
+            "dark": "Inter"
+          }
+        },
+        {
+          "id": "tale/token/text-font-weight",
+          "name": "text/font/weight",
+          "codeName": "--text-font-weight",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 400,
+            "dark": 400
+          }
+        },
+        {
+          "id": "tale/token/text-l",
+          "name": "text/l",
+          "codeName": "--text-l",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 19.2,
+            "dark": 19.2
+          }
+        },
+        {
+          "id": "tale/token/text-l-font-size",
+          "name": "text/l/font/size",
+          "codeName": "--text-l-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 19.2,
+            "dark": 19.2
+          }
+        },
+        {
+          "id": "tale/token/text-line-height",
+          "name": "text/line/height",
+          "codeName": "--text-line-height",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 1.5,
+            "dark": 1.5
+          }
+        },
+        {
+          "id": "tale/token/text-m",
+          "name": "text/m",
+          "codeName": "--text-m",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 16,
+            "dark": 16
+          }
+        },
+        {
+          "id": "tale/token/text-m-font-size",
+          "name": "text/m/font/size",
+          "codeName": "--text-m-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 16,
+            "dark": 16
+          }
+        },
+        {
+          "id": "tale/token/text-s",
+          "name": "text/s",
+          "codeName": "--text-s",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 13.3,
+            "dark": 13.3
+          }
+        },
+        {
+          "id": "tale/token/text-s-font-size",
+          "name": "text/s/font/size",
+          "codeName": "--text-s-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 13.3,
+            "dark": 13.3
+          }
+        },
+        {
+          "id": "tale/token/text-xl",
+          "name": "text/xl",
+          "codeName": "--text-xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 21.9,
+            "dark": 21.9
+          }
+        },
+        {
+          "id": "tale/token/text-xs",
+          "name": "text/xs",
+          "codeName": "--text-xs",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 12.3,
+            "dark": 12.3
+          }
+        },
+        {
+          "id": "tale/token/text-xs-font-size",
+          "name": "text/xs/font/size",
+          "codeName": "--text-xs-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 12.3,
+            "dark": 12.3
+          }
+        },
+        {
+          "id": "tale/token/title-font-family",
+          "name": "title/font/family",
+          "codeName": "--title-font-family",
+          "resolvedType": "STRING",
+          "valuesByMode": {
+            "light": "Inter",
+            "dark": "Inter"
+          }
+        },
+        {
+          "id": "tale/token/title-font-weight",
+          "name": "title/font/weight",
+          "codeName": "--title-font-weight",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 600,
+            "dark": 600
+          }
+        },
+        {
+          "id": "tale/token/title-l-font-size",
+          "name": "title/l/font/size",
+          "codeName": "--title-l-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 24.09,
+            "dark": 24.09
+          }
+        },
+        {
+          "id": "tale/token/title-line-height",
+          "name": "title/line/height",
+          "codeName": "--title-line-height",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 1.5,
+            "dark": 1.5
+          }
+        },
+        {
+          "id": "tale/token/title-m-font-size",
+          "name": "title/m/font/size",
+          "codeName": "--title-m-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 21.9,
+            "dark": 21.9
+          }
+        },
+        {
+          "id": "tale/token/title-s-font-size",
+          "name": "title/s/font/size",
+          "codeName": "--title-s-font-size",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "light": 21.12,
+            "dark": 21.12
+          }
+        },
+        {
+          "id": "tale/token/violet",
+          "name": "violet",
+          "codeName": "--violet",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#7e4bdc",
+            "dark": "#7e4bdc"
+          }
+        },
+        {
+          "id": "tale/token/violet-10",
+          "name": "violet/10",
+          "codeName": "--violet-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#eae6fa",
+            "dark": "#eae6fa"
+          }
+        },
+        {
+          "id": "tale/token/violet-100",
+          "name": "violet/100",
+          "codeName": "--violet-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#3c1561",
+            "dark": "#3c1561"
+          }
+        },
+        {
+          "id": "tale/token/violet-20",
+          "name": "violet/20",
+          "codeName": "--violet-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d1c7f4",
+            "dark": "#d1c7f4"
+          }
+        },
+        {
+          "id": "tale/token/violet-30",
+          "name": "violet/30",
+          "codeName": "--violet-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#baa8ee",
+            "dark": "#baa8ee"
+          }
+        },
+        {
+          "id": "tale/token/violet-40",
+          "name": "violet/40",
+          "codeName": "--violet-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#a489e8",
+            "dark": "#a489e8"
+          }
+        },
+        {
+          "id": "tale/token/violet-5",
+          "name": "violet/5",
+          "codeName": "--violet-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f1effe",
+            "dark": "#f1effe"
+          }
+        },
+        {
+          "id": "tale/token/violet-50",
+          "name": "violet/50",
+          "codeName": "--violet-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#906ae2",
+            "dark": "#906ae2"
+          }
+        },
+        {
+          "id": "tale/token/violet-60",
+          "name": "violet/60",
+          "codeName": "--violet-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#7e4bdc",
+            "dark": "#7e4bdc"
+          }
+        },
+        {
+          "id": "tale/token/violet-70",
+          "name": "violet/70",
+          "codeName": "--violet-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#6f3bc0",
+            "dark": "#6f3bc0"
+          }
+        },
+        {
+          "id": "tale/token/violet-80",
+          "name": "violet/80",
+          "codeName": "--violet-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#602da2",
+            "dark": "#602da2"
+          }
+        },
+        {
+          "id": "tale/token/violet-90",
+          "name": "violet/90",
+          "codeName": "--violet-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#4f2082",
+            "dark": "#4f2082"
+          }
+        },
+        {
+          "id": "tale/token/warning",
+          "name": "warning",
+          "codeName": "--warning",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f79009",
+            "dark": "#f79009"
+          }
+        },
+        {
+          "id": "tale/token/warning-10",
+          "name": "warning/10",
+          "codeName": "--warning-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fde9ce",
+            "dark": "#fde9ce"
+          }
+        },
+        {
+          "id": "tale/token/warning-10-fg",
+          "name": "warning/10/fg",
+          "codeName": "--warning-10-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#632a04",
+            "dark": "#632a04"
+          }
+        },
+        {
+          "id": "tale/token/warning-100",
+          "name": "warning/100",
+          "codeName": "--warning-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#632a04",
+            "dark": "#632a04"
+          }
+        },
+        {
+          "id": "tale/token/warning-100-fg",
+          "name": "warning/100/fg",
+          "codeName": "--warning-100-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fef4e7",
+            "dark": "#fef4e7"
+          }
+        },
+        {
+          "id": "tale/token/warning-20",
+          "name": "warning/20",
+          "codeName": "--warning-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fcd7a6",
+            "dark": "#fcd7a6"
+          }
+        },
+        {
+          "id": "tale/token/warning-20-fg",
+          "name": "warning/20/fg",
+          "codeName": "--warning-20-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#632a04",
+            "dark": "#632a04"
+          }
+        },
+        {
+          "id": "tale/token/warning-30",
+          "name": "warning/30",
+          "codeName": "--warning-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fbc57f",
+            "dark": "#fbc57f"
+          }
+        },
+        {
+          "id": "tale/token/warning-30-fg",
+          "name": "warning/30/fg",
+          "codeName": "--warning-30-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#632a04",
+            "dark": "#632a04"
+          }
+        },
+        {
+          "id": "tale/token/warning-40",
+          "name": "warning/40",
+          "codeName": "--warning-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fab458",
+            "dark": "#fab458"
+          }
+        },
+        {
+          "id": "tale/token/warning-40-fg",
+          "name": "warning/40/fg",
+          "codeName": "--warning-40-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#632a04",
+            "dark": "#632a04"
+          }
+        },
+        {
+          "id": "tale/token/warning-5",
+          "name": "warning/5",
+          "codeName": "--warning-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fef4e7",
+            "dark": "#fef4e7"
+          }
+        },
+        {
+          "id": "tale/token/warning-5-fg",
+          "name": "warning/5/fg",
+          "codeName": "--warning-5-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#632a04",
+            "dark": "#632a04"
+          }
+        },
+        {
+          "id": "tale/token/warning-50",
+          "name": "warning/50",
+          "codeName": "--warning-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f8a230",
+            "dark": "#f8a230"
+          }
+        },
+        {
+          "id": "tale/token/warning-50-fg",
+          "name": "warning/50/fg",
+          "codeName": "--warning-50-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#632a04",
+            "dark": "#632a04"
+          }
+        },
+        {
+          "id": "tale/token/warning-60",
+          "name": "warning/60",
+          "codeName": "--warning-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f79009",
+            "dark": "#f79009"
+          }
+        },
+        {
+          "id": "tale/token/warning-60-fg",
+          "name": "warning/60/fg",
+          "codeName": "--warning-60-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#632a04",
+            "dark": "#632a04"
+          }
+        },
+        {
+          "id": "tale/token/warning-70",
+          "name": "warning/70",
+          "codeName": "--warning-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#d27208",
+            "dark": "#d27208"
+          }
+        },
+        {
+          "id": "tale/token/warning-70-fg",
+          "name": "warning/70/fg",
+          "codeName": "--warning-70-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fef4e7",
+            "dark": "#fef4e7"
+          }
+        },
+        {
+          "id": "tale/token/warning-80",
+          "name": "warning/80",
+          "codeName": "--warning-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#ad5706",
+            "dark": "#ad5706"
+          }
+        },
+        {
+          "id": "tale/token/warning-80-fg",
+          "name": "warning/80/fg",
+          "codeName": "--warning-80-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fef4e7",
+            "dark": "#fef4e7"
+          }
+        },
+        {
+          "id": "tale/token/warning-90",
+          "name": "warning/90",
+          "codeName": "--warning-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#883f05",
+            "dark": "#883f05"
+          }
+        },
+        {
+          "id": "tale/token/warning-90-fg",
+          "name": "warning/90/fg",
+          "codeName": "--warning-90-fg",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fef4e7",
+            "dark": "#fef4e7"
+          }
+        },
+        {
+          "id": "tale/token/yellow",
+          "name": "yellow",
+          "codeName": "--yellow",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#eab308",
+            "dark": "#eab308"
+          }
+        },
+        {
+          "id": "tale/token/yellow-10",
+          "name": "yellow/10",
+          "codeName": "--yellow-10",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fef8e6",
+            "dark": "#fef8e6"
+          }
+        },
+        {
+          "id": "tale/token/yellow-100",
+          "name": "yellow/100",
+          "codeName": "--yellow-100",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#4d2e00",
+            "dark": "#4d2e00"
+          }
+        },
+        {
+          "id": "tale/token/yellow-20",
+          "name": "yellow/20",
+          "codeName": "--yellow-20",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fcebb8",
+            "dark": "#fcebb8"
+          }
+        },
+        {
+          "id": "tale/token/yellow-30",
+          "name": "yellow/30",
+          "codeName": "--yellow-30",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f9de8a",
+            "dark": "#f9de8a"
+          }
+        },
+        {
+          "id": "tale/token/yellow-40",
+          "name": "yellow/40",
+          "codeName": "--yellow-40",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f5d05e",
+            "dark": "#f5d05e"
+          }
+        },
+        {
+          "id": "tale/token/yellow-5",
+          "name": "yellow/5",
+          "codeName": "--yellow-5",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#fffcf3",
+            "dark": "#fffcf3"
+          }
+        },
+        {
+          "id": "tale/token/yellow-50",
+          "name": "yellow/50",
+          "codeName": "--yellow-50",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#f0c233",
+            "dark": "#f0c233"
+          }
+        },
+        {
+          "id": "tale/token/yellow-60",
+          "name": "yellow/60",
+          "codeName": "--yellow-60",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#eab308",
+            "dark": "#eab308"
+          }
+        },
+        {
+          "id": "tale/token/yellow-70",
+          "name": "yellow/70",
+          "codeName": "--yellow-70",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#c48d05",
+            "dark": "#c48d05"
+          }
+        },
+        {
+          "id": "tale/token/yellow-80",
+          "name": "yellow/80",
+          "codeName": "--yellow-80",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#9d6b03",
+            "dark": "#9d6b03"
+          }
+        },
+        {
+          "id": "tale/token/yellow-90",
+          "name": "yellow/90",
+          "codeName": "--yellow-90",
+          "resolvedType": "COLOR",
+          "valuesByMode": {
+            "light": "#754b01",
+            "dark": "#754b01"
+          }
+        }
+      ]
+    }
+  ]
+}
