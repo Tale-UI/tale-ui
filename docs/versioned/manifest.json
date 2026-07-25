@@ -6,8 +6,8 @@
     {
       "major": 2,
       "source": "working-tree-public-docs",
-      "sourceRevision": "sha256:b401df684bc9616b23313d7e83860bfb65acce9c8948f0724628ceec196a7e83",
-      "contentDigest": "sha256:3b151c16081f18b62b32add89d704f20fea093f4818c7eebedd744b505f0d171",
+      "sourceRevision": "sha256:562cc1c5eb4e08fdde59ff4e11c6cc8d616bbb28003643a2be16160edcd31e9e",
+      "contentDigest": "sha256:6c2430c9711c58aaf3138714dc9f274abf6879eb8de5986d2b97dec081faabec",
       "packageVersions": {
         "@tale-ui/a2ui": "0.1.5",
         "@tale-ui/charts": "0.1.5",

@@ -39,7 +39,7 @@
       "criterion": "R03.5",
       "source": "packages/tooling/templates/chat-artifact-panel/source/App.tsx",
       "snapshot": "test/visual/snapshots/roadmap.spec.ts/chat-artifact-panel-light.png",
-      "sourceDigest": "sha256:2e8a83c2be72e8c311b4d1bf611e254631e2dc2df3aa69f0a36fe6856c2dcc73",
+      "sourceDigest": "sha256:74907a0552c2c9c774b40bd53ca9d97082f1283cddd85dee05f2abd98aa4d65d",
       "snapshotDigest": "sha256:fc5953099c5eac4f8b06d1fc42fa2cbface81aa13c8da64c3bb730032a14ed0f"
     },
     {
@@ -47,7 +47,7 @@
       "criterion": "R03.5",
       "source": "packages/tooling/templates/chat-artifact-panel/source/App.tsx",
       "snapshot": "test/visual/snapshots/roadmap.spec.ts/chat-artifact-panel-dark.png",
-      "sourceDigest": "sha256:2e8a83c2be72e8c311b4d1bf611e254631e2dc2df3aa69f0a36fe6856c2dcc73",
+      "sourceDigest": "sha256:74907a0552c2c9c774b40bd53ca9d97082f1283cddd85dee05f2abd98aa4d65d",
       "snapshotDigest": "sha256:894f9868ed0afa924f7292bb3c7d98e299f2728f314a41fb9e75d279759ec5e3"
     },
     {
@@ -55,7 +55,7 @@
       "criterion": "R03.5",
       "source": "packages/tooling/templates/chat-mobile/source/App.tsx",
       "snapshot": "test/visual/snapshots/roadmap.spec.ts/chat-mobile-light.png",
-      "sourceDigest": "sha256:e4fa23630592d9c98866ba33d7b29233266ff1a91ffe2e97f4513b77c7609d1b",
+      "sourceDigest": "sha256:f849b538e2a1e685acf453dbee9347f23cb20590814aee66203257538a3df9fa",
       "snapshotDigest": "sha256:76022b88a61a2d66ac1d024f2aa260e288dcd0190fe9c2b52c8fb9248299d646"
     },
     {
@@ -63,7 +63,7 @@
       "criterion": "R03.5",
       "source": "packages/tooling/templates/chat-mobile/source/App.tsx",
       "snapshot": "test/visual/snapshots/roadmap.spec.ts/chat-mobile-dark.png",
-      "sourceDigest": "sha256:e4fa23630592d9c98866ba33d7b29233266ff1a91ffe2e97f4513b77c7609d1b",
+      "sourceDigest": "sha256:f849b538e2a1e685acf453dbee9347f23cb20590814aee66203257538a3df9fa",
       "snapshotDigest": "sha256:03fd0f25bd937e691086c3bf243dc2c06ac90b34e96579a1d63da8fef6cfd3f3"
     },
     {
@@ -208,7 +208,7 @@
       "source": "playground/storybook/src/stories/I18nProvider.stories.tsx",
       "snapshot": "test/visual/snapshots/roadmap.spec.ts/components-i18nprovider--forced-rtl.png",
       "sourceDigest": "sha256:cda1c98640cd873a75fbb36313d221a3d6b5b9fa2794d09116bef1f2097eb0c5",
-      "snapshotDigest": "sha256:8ce05f2f23dd07e1fcd8d86a2b5ac03eac00c3a495ecbff9753a07807e662b86"
+      "snapshotDigest": "sha256:8a9f2fe0e3ec289bfebcbae527c33f3fdc36cc1c002d8a3a3dd788222c624aa3"
     },
     {
       "id": "foundations-motion-and-elevation--transition-matrix",

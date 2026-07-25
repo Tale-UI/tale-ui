@@ -81,7 +81,8 @@
 }
 
 @media (width <= 48rem) {
-  .tale-app-shell--with-sidebar {
+  .tale-app-shell--with-sidebar,
+  [dir='rtl'] .tale-app-shell--with-sidebar {
     grid-template-areas:
       'header'
       'main'

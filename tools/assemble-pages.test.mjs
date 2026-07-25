@@ -17,6 +17,14 @@ test('Pages assembly exposes current, previous, agent, and rollback routes', asy
   assert.ok(result.previousRoutes.length >= 100);
   assert.equal(readFileSync(join(pagesOutput, 'docs/index.html'), 'utf8'), '<h1>Current</h1>');
   assert.match(readFileSync(join(pagesOutput, 'docs/v1/index.html'), 'utf8'), /react-v1\.3\.56/);
+  const recipeIndex = readFileSync(join(pagesOutput, 'docs/v1/recipes/index/index.html'), 'utf8');
+  assert.match(recipeIndex, /\/tale-ui\/docs\/v1\/recipes\/form-with-validation\//);
+  assert.doesNotMatch(recipeIndex, /href="form-with-validation\.md"/);
+  const philosophy = readFileSync(
+    join(pagesOutput, 'docs/v1/design-philosophy/index.html'),
+    'utf8',
+  );
+  assert.match(philosophy, /\/tale-ui\/docs\/v1\/css\/framework-integration\//);
   assert.match(readFileSync(join(pagesOutput, 'llms.txt'), 'utf8'), /tale-ui/);
   assert.match(readFileSync(join(pagesOutput, 'docs/rollback.json'), 'utf8'), /lastKnownGood/);
 });

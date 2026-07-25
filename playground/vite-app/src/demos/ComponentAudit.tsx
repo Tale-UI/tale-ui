@@ -4237,12 +4237,7 @@ export default function ComponentAudit() {
               <Chat.Message speaker="assistant" aria-label="Assistant message">
                 <Chat.Bubble>The build passed.</Chat.Bubble>
                 <Chat.Metadata>Just now</Chat.Metadata>
-                <Chat.ToolCall
-                  state="success"
-                  label="Read checks"
-                  statusLabel="Complete"
-                  open
-                >
+                <Chat.ToolCall state="success" label="Read checks" statusLabel="Complete" open>
                   All checks passed.
                 </Chat.ToolCall>
               </Chat.Message>
@@ -4251,7 +4246,9 @@ export default function ComponentAudit() {
               aria-label="Message composer"
               onSubmit={(event) => event.preventDefault()}
             >
-              <TextArea.Root aria-label="Message" />
+              <TextArea.Root>
+                <TextArea.TextArea aria-label="Message" />
+              </TextArea.Root>
               <Button type="submit">Send</Button>
             </Chat.Composer>
           </Chat.Root>

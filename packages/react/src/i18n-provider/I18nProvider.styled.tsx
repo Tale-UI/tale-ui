@@ -79,9 +79,17 @@ export function I18nProvider({
     }),
     [catalogs, fallbackLocale, language, locale, messages, mode, resolvedLocale],
   );
+  const contents =
+    mode === 'rtl' ? (
+      <div dir="rtl" style={{ display: 'contents' }}>
+        {children}
+      </div>
+    ) : (
+      children
+    );
   return (
     <TaleI18nContext.Provider value={value}>
-      <AriaI18nProvider locale={resolvedLocale}>{children}</AriaI18nProvider>
+      <AriaI18nProvider locale={resolvedLocale}>{contents}</AriaI18nProvider>
     </TaleI18nContext.Provider>
   );
 }

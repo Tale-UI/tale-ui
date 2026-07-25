@@ -5,10 +5,12 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Ajv2020 from 'ajv/dist/2020.js';
+import { format, resolveConfig } from 'prettier';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const CHECK = process.argv.includes('--check');
 const OUTPUT_ROOT = join(ROOT, 'registry/integrations');
+const prettierConfig = (await resolveConfig(join(ROOT, 'package.json'))) ?? {};
 
 function readJson(path) {
   return JSON.parse(readFileSync(join(ROOT, path), 'utf8'));
@@ -169,7 +171,7 @@ for (const [name, value] of [
   ['figma-parity-public.json', publicParity],
 ]) {
   const path = join(OUTPUT_ROOT, name);
-  const rendered = canonical(value);
+  const rendered = await format(canonical(value), { ...prettierConfig, filepath: path });
   if (CHECK) {
     if (readFileSync(path, 'utf8') !== rendered) {
       throw new Error(`${path} is stale; run pnpm figma:generate.`);

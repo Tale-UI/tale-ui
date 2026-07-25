@@ -232,6 +232,13 @@ function jsonRpcError(id: JsonRpcRequest['id'], code: number, message: string, s
   );
 }
 
+function notificationAccepted() {
+  return new Response(null, {
+    status: 202,
+    headers: { 'cache-control': 'no-store' },
+  });
+}
+
 async function hmac(value: string, secret: string) {
   const encoder = new TextEncoder();
   const key = await crypto.subtle.importKey(
@@ -275,6 +282,9 @@ async function handleMcp(request: Request) {
   }
   if (message.jsonrpc !== '2.0' || typeof message.method !== 'string') {
     return jsonRpcError(message.id, -32600, 'Invalid JSON-RPC request.');
+  }
+  if (message.id === undefined) {
+    return notificationAccepted();
   }
   if (message.method === 'initialize') {
     return jsonRpc(message.id, {

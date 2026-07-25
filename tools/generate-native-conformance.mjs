@@ -8,8 +8,9 @@ import addFormats from 'ajv-formats';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const CHECK = process.argv.includes('--check');
-const TODAY = new Date().toISOString().slice(0, 10);
-const MAX_EXPIRY = '2027-01-21';
+const now = new Date();
+const TODAY = now.toISOString().slice(0, 10);
+const MAX_EXPIRY = new Date(now.getTime() + 180 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
 
 function readJson(path) {
   return JSON.parse(readFileSync(join(ROOT, path), 'utf8'));

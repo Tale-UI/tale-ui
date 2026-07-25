@@ -26,11 +26,10 @@ export function Example() {
           </Chat.ToolCall>
         </Chat.Message>
       </Chat.List>
-      <Chat.Composer
-        aria-label="Message composer"
-        onSubmit={(event) => event.preventDefault()}
-      >
-        <TextArea.Root aria-label="Message" />
+      <Chat.Composer aria-label="Message composer" onSubmit={(event) => event.preventDefault()}>
+        <TextArea.Root>
+          <TextArea.TextArea aria-label="Message" />
+        </TextArea.Root>
         <Button type="submit">Send</Button>
       </Chat.Composer>
     </Chat.Root>

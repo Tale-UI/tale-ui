@@ -1,15 +1,18 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import {
   access,
+  chmod,
   mkdtemp,
   mkdir,
   readFile,
   readdir,
   rm,
+  stat,
   symlink,
   writeFile,
 } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
+import { hostname, tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 import { TaleToolingError } from './contracts/errors.js';
@@ -22,6 +25,10 @@ import {
 
 async function fixture() {
   return mkdtemp(join(tmpdir(), 'tale-operations-'));
+}
+
+function hostDigest() {
+  return `sha256:${createHash('sha256').update(hostname()).digest('hex')}`;
 }
 
 test('project mutation plans, applies, and terminally replays without rewriting', async () => {
@@ -134,8 +141,7 @@ test('project mutation refuses corrupt idempotency state instead of replacing it
     await writeFile(join(root, '.tale/operations/slots', slot!), '{not-json');
     await assert.rejects(
       () => applyProjectMutation({ ...request, requestId: 'request-2' }),
-      (error) =>
-        error instanceof TaleToolingError && error.code === 'TALE_CORRUPT_OPERATION_STATE',
+      (error) => error instanceof TaleToolingError && error.code === 'TALE_CORRUPT_OPERATION_STATE',
     );
     assert.equal(await readFile(join(root, 'created.txt'), 'utf8'), 'first');
     assert.ok(result.operationId);
@@ -177,8 +183,7 @@ test('doctor identifies interrupted state and rollback restores verified preimag
           idempotencyKey: 'blocked-key',
           files: [{ path: 'blocked.txt', content: 'blocked' }],
         }),
-      (error) =>
-        error instanceof TaleToolingError && error.code === 'TALE_OPERATION_IN_PROGRESS',
+      (error) => error instanceof TaleToolingError && error.code === 'TALE_OPERATION_IN_PROGRESS',
     );
     const recovery = await recoverProjectOperation({
       schemaVersion: '1.0.0',
@@ -218,8 +223,8 @@ test('explicit recovery can assume the matching interrupted root lock', async ()
         {
           operationId: result.operationId,
           rootDigest: journal.rootDigest,
-          processId: 1,
-          hostDigest: `sha256:${'0'.repeat(64)}`,
+          processId: 2 ** 30,
+          hostDigest: hostDigest(),
           startedAt: '2026-01-01T00:00:00.000Z',
         },
         null,
@@ -239,6 +244,134 @@ test('explicit recovery can assume the matching interrupted root lock', async ()
     assert.equal(recovery.state, 'rolled-back');
     await assert.rejects(() => access(lock));
     await assert.rejects(() => access(join(root, 'created.txt')));
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('recovery refuses to take over a matching live root lock', async () => {
+  const root = await fixture();
+  try {
+    const result = await applyProjectMutation({
+      schemaVersion: '1.0.0',
+      requestId: 'request',
+      root,
+      operation: 'generate',
+      idempotencyKey: 'live-lock',
+      files: [{ path: 'created.txt', content: 'created' }],
+    });
+    const operationRoot = join(root, '.tale/operations', result.operationId);
+    const journalPath = join(operationRoot, 'journal.json');
+    const journal = JSON.parse(await readFile(journalPath, 'utf8'));
+    journal.state = 'in-progress';
+    await writeFile(journalPath, `${JSON.stringify(journal, null, 2)}\n`);
+    const lock = join(root, '.tale/operations/.lock');
+    await mkdir(lock);
+    const owner = {
+      operationId: result.operationId,
+      rootDigest: journal.rootDigest,
+      processId: process.pid,
+      hostDigest: hostDigest(),
+      startedAt: new Date().toISOString(),
+    };
+    await writeFile(join(lock, 'owner.json'), `${JSON.stringify(owner, null, 2)}\n`);
+
+    await assert.rejects(
+      () =>
+        recoverProjectOperation({
+          schemaVersion: '1.0.0',
+          requestId: 'recovery',
+          root,
+          operationId: result.operationId,
+          action: 'rollback',
+        }),
+      (error) => error instanceof TaleToolingError && error.code === 'TALE_CONCURRENT_MUTATION',
+    );
+    assert.deepEqual(JSON.parse(await readFile(join(lock, 'owner.json'), 'utf8')), owner);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('rollback accepts original preimages before backups exist and for no-op files', async () => {
+  const root = await fixture();
+  try {
+    await writeFile(join(root, 'changed.txt'), 'before');
+    await writeFile(join(root, 'unchanged.txt'), 'same');
+    const result = await applyProjectMutation({
+      schemaVersion: '1.0.0',
+      requestId: 'request',
+      root,
+      operation: 'upgrade',
+      idempotencyKey: 'pre-backup',
+      files: [
+        { path: 'changed.txt', content: 'after', overwrite: true },
+        { path: 'unchanged.txt', content: 'same', overwrite: true },
+      ],
+    });
+    const operationRoot = join(root, '.tale/operations', result.operationId);
+    const journalPath = join(operationRoot, 'journal.json');
+    const planPath = join(operationRoot, 'plan.json');
+    const journal = JSON.parse(await readFile(journalPath, 'utf8'));
+    const plan = JSON.parse(await readFile(planPath, 'utf8'));
+    journal.state = 'journal-linked';
+    delete plan.files[0].backup;
+    await writeFile(join(root, 'changed.txt'), 'before');
+    await writeFile(journalPath, `${JSON.stringify(journal, null, 2)}\n`);
+    await writeFile(planPath, `${JSON.stringify(plan, null, 2)}\n`);
+
+    const recovery = await recoverProjectOperation({
+      schemaVersion: '1.0.0',
+      requestId: 'recovery',
+      root,
+      operationId: result.operationId,
+      action: 'rollback',
+    });
+    assert.equal(recovery.state, 'rolled-back');
+    assert.equal(await readFile(join(root, 'changed.txt'), 'utf8'), 'before');
+    assert.equal(await readFile(join(root, 'unchanged.txt'), 'utf8'), 'same');
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('updates and rollback preserve executable file permissions', async () => {
+  const root = await fixture();
+  try {
+    const executable = join(root, 'script.mjs');
+    await writeFile(executable, '#!/usr/bin/env node\nconsole.log("before");\n');
+    await chmod(executable, 0o755);
+    const result = await applyProjectMutation({
+      schemaVersion: '1.0.0',
+      requestId: 'request',
+      root,
+      operation: 'upgrade',
+      idempotencyKey: 'executable-mode',
+      files: [
+        {
+          path: 'script.mjs',
+          content: '#!/usr/bin/env node\nconsole.log("after");\n',
+          overwrite: true,
+        },
+      ],
+    });
+    // eslint-disable-next-line no-bitwise -- POSIX permission bits are encoded as a bitmask.
+    assert.equal((await stat(executable)).mode & 0o777, 0o755);
+    const journalPath = join(root, '.tale/operations', result.operationId, 'journal.json');
+    const journal = JSON.parse(await readFile(journalPath, 'utf8'));
+    journal.state = 'in-progress';
+    await writeFile(journalPath, `${JSON.stringify(journal, null, 2)}\n`);
+
+    await recoverProjectOperation({
+      schemaVersion: '1.0.0',
+      requestId: 'recovery',
+      root,
+      operationId: result.operationId,
+      action: 'rollback',
+    });
+    assert.match(await readFile(executable, 'utf8'), /before/);
+    // eslint-disable-next-line no-bitwise -- POSIX permission bits are encoded as a bitmask.
+    assert.equal((await stat(executable)).mode & 0o777, 0o755);
   } finally {
     await rm(root, { recursive: true, force: true });
   }

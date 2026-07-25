@@ -8,15 +8,15 @@ render Markdown/HTML, execute tools, or own transport state.
 
 ## Parts
 
-| Part            | Candidate mapping    | Description                                  |
-| --------------- | -------------------- | -------------------------------------------- |
-| `Chat.Root`     | ChatLayout           | Responsive conversation and artifact layout |
-| `Chat.List`     | MessageList          | Message log with configurable live behavior |
-| `Chat.Message`  | Message              | Stable role-aware message article            |
-| `Chat.Bubble`   | MessageBubble        | Plain-content message surface                |
-| `Chat.Metadata` | MessageMetadata      | Caller-formatted metadata slot               |
-| `Chat.Composer` | Composer             | Native form composition wrapper              |
-| `Chat.ToolCall` | ToolCall             | Display-only native tool disclosure          |
+| Part            | Candidate mapping | Description                                 |
+| --------------- | ----------------- | ------------------------------------------- |
+| `Chat.Root`     | ChatLayout        | Responsive conversation and artifact layout |
+| `Chat.List`     | MessageList       | Message log with configurable live behavior |
+| `Chat.Message`  | Message           | Stable role-aware message article           |
+| `Chat.Bubble`   | MessageBubble     | Plain-content message surface               |
+| `Chat.Metadata` | MessageMetadata   | Caller-formatted metadata slot              |
+| `Chat.Composer` | Composer          | Native form composition wrapper             |
+| `Chat.ToolCall` | ToolCall          | Display-only native tool disclosure         |
 
 Use `Chat.Message speaker="system"` for system output. A separate
 `SystemMessage` component was rejected because it would duplicate Message.
@@ -32,28 +32,28 @@ Use `Chat.Message speaker="system"` for system output. A separate
 
 ### List
 
-| Prop   | Type                  | Default    | Description                       |
-| ------ | --------------------- | ---------- | --------------------------------- |
+| Prop   | Type                | Default    | Description                       |
+| ------ | ------------------- | ---------- | --------------------------------- |
 | `live` | `"off" \| "polite"` | `"polite"` | Batched message announcement mode |
 
 ### Message
 
-| Prop      | Type                                  | Default | Description                      |
-| --------- | ------------------------------------- | ------- | -------------------------------- |
+| Prop      | Type                                | Default | Description                      |
+| --------- | ----------------------------------- | ------- | -------------------------------- |
 | `speaker` | `"user" \| "assistant" \| "system"` | —       | Speaker alignment and data state |
 
 ### Composer
 
-| Prop     | Type      | Default | Description                                |
-| -------- | --------- | ------- | ------------------------------------------ |
+| Prop     | Type      | Default | Description                               |
+| -------- | --------- | ------- | ----------------------------------------- |
 | `isBusy` | `boolean` | —       | Sets busy semantics for caller-owned work |
 
 ### ToolCall
 
-| Prop          | Type                                               | Default | Description                    |
-| ------------- | -------------------------------------------------- | ------- | ------------------------------ |
-| `state`       | `"collapsed" \| "running" \| "success" \| "error"` | —       | Display-only tool state        |
-| `label`       | `ReactNode`                                        | —       | Tool name in the summary       |
+| Prop          | Type                                               | Default | Description                   |
+| ------------- | -------------------------------------------------- | ------- | ----------------------------- |
+| `state`       | `"collapsed" \| "running" \| "success" \| "error"` | —       | Display-only tool state       |
+| `label`       | `ReactNode`                                        | —       | Tool name in the summary      |
 | `statusLabel` | `ReactNode`                                        | —       | Localized visible status text |
 
 `Bubble` and `Metadata` accept native `<div>` props. Other parts accept the
@@ -75,11 +75,10 @@ export function Conversation() {
           <Chat.Metadata>Just now</Chat.Metadata>
         </Chat.Message>
       </Chat.List>
-      <Chat.Composer
-        aria-label="Message composer"
-        onSubmit={(event) => event.preventDefault()}
-      >
-        <TextArea.Root aria-label="Message" />
+      <Chat.Composer aria-label="Message composer" onSubmit={(event) => event.preventDefault()}>
+        <TextArea.Root>
+          <TextArea.TextArea aria-label="Message" />
+        </TextArea.Root>
         <Button type="submit">Send</Button>
       </Chat.Composer>
     </Chat.Root>

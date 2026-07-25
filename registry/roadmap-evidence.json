@@ -20,7 +20,7 @@
       "evidence": [
         {
           "path": "registry/artifacts.json",
-          "digest": "sha256:fcc79b2dc3ca509d0efe9e388a0853fae649565b98534ba9aa8bf39c58162340"
+          "digest": "sha256:e04cf0b8ef7519ace3e6e597511bac835e24c38450ee3a21e06eedcaa6d93a95"
         },
         {
           "path": "tools/check-roadmap-contracts.mjs",
@@ -48,7 +48,7 @@
       "evidence": [
         {
           "path": "registry/reports/replacements.json",
-          "digest": "sha256:1b754442e6c629d9924aab106a20c4b8c039d42edfd50e849cba297f34325648"
+          "digest": "sha256:2f78bcbd73166f1fd478636f6163731cf38ebe4e0d618727c73adefe08a77edc"
         },
         {
           "path": "tools/generate-governance-reports.mjs",
@@ -100,7 +100,7 @@
         },
         {
           "path": "packages/tooling/src/operations.test.ts",
-          "digest": "sha256:057e9a0c07b7aa70f652cd878969bf2a958f6548d9496067e60e5c9d3ca0284a"
+          "digest": "sha256:29e2d6047dc7cb6ef73bd55ab035d90ec8dd225a6b393fd84ffc4d5d5cd620f5"
         }
       ]
     },
@@ -196,7 +196,7 @@
         },
         {
           "path": "packages/tooling/src/operations.test.ts",
-          "digest": "sha256:057e9a0c07b7aa70f652cd878969bf2a958f6548d9496067e60e5c9d3ca0284a"
+          "digest": "sha256:29e2d6047dc7cb6ef73bd55ab035d90ec8dd225a6b393fd84ffc4d5d5cd620f5"
         }
       ]
     },
@@ -220,7 +220,7 @@
       "evidence": [
         {
           "path": "registry/reports/roadmap-visuals.json",
-          "digest": "sha256:16a485f3ae38855032c0e871840da38243db87c77ed695e98e6af243605b1009"
+          "digest": "sha256:6879fb5b6983b0569a80be5a8e8105ff3c6c6d0948c345c9303e73ed8545b74e"
         },
         {
           "path": "test/visual/roadmap.spec.ts",
@@ -308,7 +308,7 @@
         },
         {
           "path": "packages/tooling/src/migrations.test.ts",
-          "digest": "sha256:0e65425514448e3f2253e8b7652e3dd1adcc5ab66866cf393636019a1c8c03cc"
+          "digest": "sha256:3f50043ebcf232905ad4e765a996914e0e54b70b591bab36ccdbf12439b1ee70"
         }
       ]
     },
@@ -320,11 +320,11 @@
       "evidence": [
         {
           "path": "packages/tooling/src/migrations.test.ts",
-          "digest": "sha256:0e65425514448e3f2253e8b7652e3dd1adcc5ab66866cf393636019a1c8c03cc"
+          "digest": "sha256:3f50043ebcf232905ad4e765a996914e0e54b70b591bab36ccdbf12439b1ee70"
         },
         {
           "path": "registry/reports/migrations.json",
-          "digest": "sha256:295a1f5bfb779ecd32d57203b6f10d05a6586f8ca8a92d50be424c8326361a0e"
+          "digest": "sha256:6ac34037002fae241da77cd044f4723dd64f935fd9b5bd208ece68f2d9d92ce8"
         }
       ]
     },
@@ -336,7 +336,7 @@
       "evidence": [
         {
           "path": "packages/tooling/src/migrations.test.ts",
-          "digest": "sha256:0e65425514448e3f2253e8b7652e3dd1adcc5ab66866cf393636019a1c8c03cc"
+          "digest": "sha256:3f50043ebcf232905ad4e765a996914e0e54b70b591bab36ccdbf12439b1ee70"
         },
         {
           "path": "packages/tooling/migrations/10-package-rename/manifest.json",
@@ -352,7 +352,7 @@
       "evidence": [
         {
           "path": "docs/versioned/manifest.json",
-          "digest": "sha256:3862c15d68d374bb9ae2bdf339067c337a8f3b16e2c6b2599260c9b9652ba46c"
+          "digest": "sha256:cd85b7d472e767a1c18e72e5ae6fb8328061bfbad8260df4419084358a194756"
         },
         {
           "path": "tools/generate-versioned-docs.mjs",
@@ -372,7 +372,7 @@
         },
         {
           "path": "tools/assemble-pages.mjs",
-          "digest": "sha256:6fda9782f173664cd9fa1145c895b649c33d893033616bf97a242f3d9995c80d"
+          "digest": "sha256:fc31b72f59e9a92a391cf5c5c49b09fe76703e5ac7f9b5b8c39083fadeadf565"
         }
       ]
     },
@@ -384,11 +384,11 @@
       "evidence": [
         {
           "path": "apps/hosted-mcp/src/worker.test.ts",
-          "digest": "sha256:666abb74e991eca53bf03b2aa46809f0a1f7682c0aed5440a3c71fedda576af3"
+          "digest": "sha256:0651f27b0add0d11c9adff5e437b821782f7a098584e5b833840da7db6f87937"
         },
         {
           "path": "apps/hosted-mcp/src/worker.ts",
-          "digest": "sha256:bbc1d07f39949fc8ff5ea4d347c6277db8cb4154b988c8ae5bdce1f0a26ce892"
+          "digest": "sha256:79d7f03bf1761741df3a9891e75db5cd8b49772fd696bb084b0b935e791f9ca2"
         }
       ]
     },
@@ -400,7 +400,7 @@
       "evidence": [
         {
           "path": "apps/hosted-mcp/src/worker.test.ts",
-          "digest": "sha256:666abb74e991eca53bf03b2aa46809f0a1f7682c0aed5440a3c71fedda576af3"
+          "digest": "sha256:0651f27b0add0d11c9adff5e437b821782f7a098584e5b833840da7db6f87937"
         },
         {
           "path": "apps/hosted-mcp/README.md",
@@ -432,11 +432,11 @@
       "evidence": [
         {
           "path": "packages/react/src/i18n-provider/I18nProvider.test.tsx",
-          "digest": "sha256:dc37f13a73a0d098476c2f100ba08e6559baece3916d94f132c23dd4e8925ea4"
+          "digest": "sha256:6d710a6261a7f0192811e72099482d84a1418c65f187273758651197767cb829"
         },
         {
           "path": "registry/reports/roadmap-visuals.json",
-          "digest": "sha256:16a485f3ae38855032c0e871840da38243db87c77ed695e98e6af243605b1009"
+          "digest": "sha256:6879fb5b6983b0569a80be5a8e8105ff3c6c6d0948c345c9303e73ed8545b74e"
         }
       ]
     },
@@ -548,7 +548,7 @@
         },
         {
           "path": "registry/reports/roadmap-visuals.json",
-          "digest": "sha256:16a485f3ae38855032c0e871840da38243db87c77ed695e98e6af243605b1009"
+          "digest": "sha256:6879fb5b6983b0569a80be5a8e8105ff3c6c6d0948c345c9303e73ed8545b74e"
         }
       ]
     },
@@ -580,7 +580,7 @@
         },
         {
           "path": "docs/components/chat.md",
-          "digest": "sha256:1a02ff11ff6ecafb1de17dbc58a0083d8a2b54544a8fa47fd3f6c03fa507b0f9"
+          "digest": "sha256:a6f08b5d1a153033f204689632fb3150fbf46fd7de82285a44504f92e0f522d6"
         }
       ]
     },
@@ -660,7 +660,7 @@
         },
         {
           "path": "registry/reports/status.json",
-          "digest": "sha256:a3ced71124345b1a16c3ac5ae82472ab7aac05ddfa72e31b37c72e00aaca4d58"
+          "digest": "sha256:72e5305781536aa62f3625ba4faa6e8eb2aff98bc8f0055cf1dfd31a8025efe5"
         }
       ]
     },
@@ -704,7 +704,7 @@
       "evidence": [
         {
           "path": "registry/integrations/figma-public.json",
-          "digest": "sha256:a362292a3938aa181adcb7b3166f52d55ca90cb2be8533b1f1dba7a5f98d681d"
+          "digest": "sha256:a44ea347858e169d375c094a7893a4a6afbb9071704bdcca032e8b83d6d3537a"
         },
         {
           "path": "tools/figma-integration.test.mjs",
@@ -720,11 +720,11 @@
       "evidence": [
         {
           "path": "registry/integrations/code-connect.json",
-          "digest": "sha256:c22e01a03d81ca2e8d3782e1ce12b60e65f2f506760d50c540835097bb167158"
+          "digest": "sha256:69466a63916740711399b9d65773acb30b62d43585cf3ce9fbd74adfa786a8e3"
         },
         {
           "path": "registry/integrations/figma-parity-public.json",
-          "digest": "sha256:8c6dccba5bc5f921e8f55e6aef06df0d82724646f836ed4dc5e07b2a9c1143cc"
+          "digest": "sha256:953f55a256068dd1a9116946ff5462b321eea26decf47fa44183f9bcc044de80"
         }
       ]
     },
@@ -736,7 +736,7 @@
       "evidence": [
         {
           "path": "packages/tooling/src/extensions.test.ts",
-          "digest": "sha256:afaf0165ccfb0847d20389d32ae322c0952469975126eb7bb38fcad47bff6e30"
+          "digest": "sha256:b6b5c949a8cdf6ebcc6e3bb636aa667bbef2eb9f017c028e01dcc0976e5210b1"
         },
         {
           "path": "analysis/extensions/inventory.json",
@@ -752,7 +752,7 @@
       "evidence": [
         {
           "path": "packages/tooling/src/extensions.test.ts",
-          "digest": "sha256:afaf0165ccfb0847d20389d32ae322c0952469975126eb7bb38fcad47bff6e30"
+          "digest": "sha256:b6b5c949a8cdf6ebcc6e3bb636aa667bbef2eb9f017c028e01dcc0976e5210b1"
         },
         {
           "path": "registry/extensions/trust.json",
@@ -784,7 +784,7 @@
       "evidence": [
         {
           "path": "tools/generate-native-conformance.mjs",
-          "digest": "sha256:03aa2edbf82acd75ddedaf83037aaf1c4b6f3eb50fb0aa03404ae9310fa698df"
+          "digest": "sha256:f4589e75269cb101215430a207b56287d185901584b555ea1cf2ffc8db87184e"
         }
       ]
     },
@@ -840,11 +840,11 @@
       "evidence": [
         {
           "path": "packages/tooling/src/migrations.test.ts",
-          "digest": "sha256:0e65425514448e3f2253e8b7652e3dd1adcc5ab66866cf393636019a1c8c03cc"
+          "digest": "sha256:3f50043ebcf232905ad4e765a996914e0e54b70b591bab36ccdbf12439b1ee70"
         },
         {
           "path": "registry/reports/migrations.json",
-          "digest": "sha256:295a1f5bfb779ecd32d57203b6f10d05a6586f8ca8a92d50be424c8326361a0e"
+          "digest": "sha256:6ac34037002fae241da77cd044f4723dd64f935fd9b5bd208ece68f2d9d92ce8"
         }
       ]
     },
@@ -856,7 +856,7 @@
       "evidence": [
         {
           "path": "registry/artifacts.json",
-          "digest": "sha256:fcc79b2dc3ca509d0efe9e388a0853fae649565b98534ba9aa8bf39c58162340"
+          "digest": "sha256:e04cf0b8ef7519ace3e6e597511bac835e24c38450ee3a21e06eedcaa6d93a95"
         },
         {
           "path": "analysis/baselines/tooling-package-release.json",

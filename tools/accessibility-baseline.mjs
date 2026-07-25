@@ -7,3 +7,12 @@ export function normalizeAxeTarget(target) {
 export function accessibilityViolationKey({ storyId, rule, target }) {
   return `${storyId}\n${rule}\n${normalizeAxeTarget(target)}`;
 }
+
+export function resolvedAccessibilityViolations(known, current, scannedStoryIds) {
+  const scanned = new Set(scannedStoryIds);
+  const currentKeys = new Set(current.map(accessibilityViolationKey));
+  return known.filter(
+    (violation) =>
+      scanned.has(violation.storyId) && !currentKeys.has(accessibilityViolationKey(violation)),
+  );
+}

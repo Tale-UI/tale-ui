@@ -17,7 +17,8 @@ Executable validators, codemods, and adapters are denied unless all of these
 local checks pass:
 
 1. package and extension contract versions are compatible;
-2. the tarball matches its npm-compatible SHA-512 integrity;
+2. the tarball matches npm or lockfile SHA-512 integrity supplied outside the
+   package (the extension manifest cannot self-attest its own tarball);
 3. required npm provenance is present;
 4. the publisher/package pair is trusted and not revoked;
 5. the trust registry is no more than 30 days old; and

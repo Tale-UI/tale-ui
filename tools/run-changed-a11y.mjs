@@ -9,7 +9,10 @@ import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import axe from 'axe-core';
 import { JSDOM } from 'jsdom';
-import { accessibilityViolationKey } from './accessibility-baseline.mjs';
+import {
+  accessibilityViolationKey,
+  resolvedAccessibilityViolations,
+} from './accessibility-baseline.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -289,9 +292,10 @@ const isExcepted = (violation) =>
 const newViolations = violations.filter(
   (violation) => !known.has(accessibilityViolationKey(violation)) && !isExcepted(violation),
 );
-const currentKeys = new Set(violations.map(accessibilityViolationKey));
-const resolved = baseline.knownViolations.filter(
-  (violation) => !currentKeys.has(accessibilityViolationKey(violation)),
+const resolved = resolvedAccessibilityViolations(
+  baseline.knownViolations,
+  violations,
+  selected.map(({ id }) => id),
 );
 
 const report = {

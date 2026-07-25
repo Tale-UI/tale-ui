@@ -87,7 +87,11 @@ jobs:
           else
             echo "scope=${{ inputs.scope }}" >> "$GITHUB_OUTPUT"
             echo "version=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
-            echo "dist_tag=${{ inputs.dist-tag }}" >> "$GITHUB_OUTPUT"
+            if [ "${{ inputs.scope }}" = "tooling" ]; then
+              echo "dist_tag=next" >> "$GITHUB_OUTPUT"
+            else
+              echo "dist_tag=${{ inputs.dist-tag }}" >> "$GITHUB_OUTPUT"
+            fi
             echo "dry_run=${{ inputs.dry-run }}" >> "$GITHUB_OUTPUT"
           fi
 

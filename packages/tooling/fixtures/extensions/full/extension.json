@@ -9,7 +9,6 @@
     "repository": "https://example.com/fixture/tale-extension",
     "npmProvenance": true
   },
-  "integrity": "sha512-MsgCGCc5K35IkjlYRQdTDCpndOD0Fjf6C06fNFBQEC6xF4013xW2UcwMerii0t15JagdPzXjaQcWA3vC3pbnMw==",
   "license": "MIT",
   "contributionClasses": [
     "components-and-docs",

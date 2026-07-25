@@ -9,7 +9,7 @@ import {
   statSync,
   writeFileSync,
 } from 'node:fs';
-import { basename, dirname, join, relative, resolve } from 'node:path';
+import { basename, dirname, join, posix, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
 
@@ -39,7 +39,32 @@ function historicalRoute(path) {
     .replace(/\.md$/, '');
 }
 
-function historicalPage(title, content, source, basePath) {
+function rewriteHistoricalHref(href, source, publicSources, basePath) {
+  if (/^(?:[a-z]+:|#|\/)/i.test(href)) {
+    return href;
+  }
+  const match = href.match(/^([^?#]+\.md)([?#].*)?$/);
+  if (!match) {
+    return href;
+  }
+  const target =
+    match[1].startsWith('docs/') || match[1].startsWith('packages/')
+      ? posix.normalize(match[1])
+      : posix.normalize(posix.join(posix.dirname(source), match[1]));
+  if (!publicSources.has(target)) {
+    return href;
+  }
+  return `${basePath}/docs/v1/${historicalRoute(target)}/${match[2] ?? ''}`;
+}
+
+function historicalPage(title, content, source, sourcePath, publicSources, basePath) {
+  const rendered = marked.parse(content, {
+    walkTokens(token) {
+      if (token.type === 'link') {
+        token.href = rewriteHistoricalHref(token.href, sourcePath, publicSources, basePath);
+      }
+    },
+  });
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -55,7 +80,7 @@ function historicalPage(title, content, source, basePath) {
   </head>
   <body>
     <p class="version-banner">Archived Tale UI v1 documentation. <a href="${basePath}/docs/">View current v2 documentation</a>.</p>
-    <article>${marked.parse(content)}</article>
+    <article>${rendered}</article>
     <footer><p>Immutable source: <code>${escapeHtml(source)}</code></p></footer>
   </body>
 </html>
@@ -76,6 +101,7 @@ export function assemblePages({ docsOutput, pagesOutput, basePath = '', root = R
     throw new Error('Version manifest does not contain v1.');
   }
   const snapshotRoot = join(root, 'docs/versioned/v1/content');
+  const publicSources = new Set(v1.publicAllowlist);
   const links = [];
   for (const source of v1.publicAllowlist) {
     const snapshot = join(snapshotRoot, source);
@@ -87,7 +113,10 @@ export function assemblePages({ docsOutput, pagesOutput, basePath = '', root = R
     const route = historicalRoute(source);
     const output = join(docsTarget, 'v1', route, 'index.html');
     mkdirSync(dirname(output), { recursive: true });
-    writeFileSync(output, historicalPage(title, content, `${v1.source}:${source}`, basePath));
+    writeFileSync(
+      output,
+      historicalPage(title, content, `${v1.source}:${source}`, source, publicSources, basePath),
+    );
     links.push({ route, title });
   }
   const v1Index = `<!doctype html><html lang="en"><head><meta charset="utf-8" />

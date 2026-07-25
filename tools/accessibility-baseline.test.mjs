@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { accessibilityViolationKey, normalizeAxeTarget } from './accessibility-baseline.mjs';
+import {
+  accessibilityViolationKey,
+  normalizeAxeTarget,
+  resolvedAccessibilityViolations,
+} from './accessibility-baseline.mjs';
 
 test('normalizes generated React Aria prefixes in axe selectors', () => {
   assert.equal(normalizeAxeTarget('#react-aria2529365808-_r_28_'), '#react-aria-_r_28_');
@@ -34,4 +38,14 @@ test('keeps stable selector details in accessibility violation keys', () => {
 
 test('does not normalize unrelated numeric IDs', () => {
   assert.equal(normalizeAxeTarget('#invoice123-row'), '#invoice123-row');
+});
+
+test('only resolves baseline violations for stories included in the scan', () => {
+  const known = [
+    { storyId: 'components-button--default', rule: 'button-name', target: 'button' },
+    { storyId: 'components-table--default', rule: 'label', target: 'input' },
+  ];
+  assert.deepEqual(resolvedAccessibilityViolations(known, [], ['components-button--default']), [
+    known[0],
+  ]);
 });

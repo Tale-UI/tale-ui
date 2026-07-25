@@ -2,6 +2,7 @@ import { createHash, timingSafeEqual } from 'node:crypto';
 import { lstatSync, readFileSync, realpathSync } from 'node:fs';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { intersects, validRange } from 'semver';
 import { z } from 'zod';
 import { TaleToolingError } from './contracts/errors.js';
 
@@ -67,7 +68,6 @@ const extensionSchema = z
     version: z.string().regex(/^\d+\.\d+\.\d+(?:-[a-z0-9.-]+)?$/),
     publisher: z.string().regex(/^[a-z0-9][a-z0-9._-]+$/),
     provenance: z.object({ repository: z.string().url(), npmProvenance: z.boolean() }).strict(),
-    integrity: z.string().regex(/^sha512-[A-Za-z0-9+/]+={0,2}$/),
     license: z.string().min(1),
     contributionClasses: z
       .array(z.enum(CONTRIBUTION_CLASSES))
@@ -237,11 +237,15 @@ export function verifyExtensionIntegrity(bytes: Uint8Array, expected: string) {
 }
 
 export function createVirtualExtensionRegistry(
-  entries: Array<{ manifest: ExtensionManifest; packageBytes: Uint8Array }>,
+  entries: Array<{
+    manifest: ExtensionManifest;
+    packageBytes: Uint8Array;
+    packageIntegrity: string;
+  }>,
 ) {
   const ids = new Set<string>();
-  return entries.flatMap(({ manifest, packageBytes }) => {
-    if (!verifyExtensionIntegrity(packageBytes, manifest.integrity)) {
+  return entries.flatMap(({ manifest, packageBytes, packageIntegrity }) => {
+    if (!verifyExtensionIntegrity(packageBytes, packageIntegrity)) {
       throw new TaleToolingError(
         'TALE_EXTENSION_UNTRUSTED',
         `Extension ${manifest.package} failed its SHA-512 integrity check.`,
@@ -263,7 +267,7 @@ export function createVirtualExtensionRegistry(
           package: manifest.package,
           version: manifest.version,
           publisher: manifest.publisher,
-          integrity: manifest.integrity,
+          integrity: packageIntegrity,
           trust: 'untrusted' as const,
           provenance: manifest.provenance,
         };
@@ -273,7 +277,11 @@ export function createVirtualExtensionRegistry(
 }
 
 function supportsV1(range: string) {
-  return /(?:^|\s|\^)1(?:\.|$)|>=\s*1/.test(range) && !/<\s*1/.test(range);
+  try {
+    return validRange(range) !== null && intersects(range, '>=1.0.0 <2.0.0');
+  } catch {
+    return false;
+  }
 }
 
 function defaultTrustRegistryPath() {
@@ -292,6 +300,8 @@ export function authorizeExtensionExecution(options: {
   packageRoot: string;
   artifactId: string;
   packageBytes: Uint8Array;
+  /** SHA-512 integrity obtained from external npm or lockfile metadata. */
+  packageIntegrity: string;
   trustRegistry: ExtensionTrustRegistry;
   approval: ExtensionApproval;
   projectId: string;
@@ -310,7 +320,7 @@ export function authorizeExtensionExecution(options: {
   if (!artifact?.executable || !artifact.entrypoint) {
     reasons.push('Artifact is not executable.');
   }
-  if (!verifyExtensionIntegrity(options.packageBytes, manifest.integrity)) {
+  if (!verifyExtensionIntegrity(options.packageBytes, options.packageIntegrity)) {
     reasons.push('Package integrity does not match the approved SHA-512.');
   }
   if (!supportsV1(manifest.contractRanges.tale) || !supportsV1(manifest.contractRanges.extension)) {
@@ -348,7 +358,7 @@ export function authorizeExtensionExecution(options: {
     approval.package !== manifest.package ||
     approval.publisher !== manifest.publisher ||
     approval.version !== manifest.version ||
-    approval.integrity !== manifest.integrity ||
+    approval.integrity !== options.packageIntegrity ||
     requestedCapabilities.some((capability) => !approval?.capabilities.includes(capability))
   ) {
     reasons.push('Exact project-local execution approval is absent or revoked.');

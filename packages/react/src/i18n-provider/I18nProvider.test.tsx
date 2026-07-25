@@ -48,7 +48,9 @@ describe('I18nProvider operations', () => {
         <Consumer />
       </I18nProvider>,
     );
-    expect(screen.getByRole('status').textContent).toContain('ar-XB|rtl|rtl|');
+    const rtlStatus = screen.getByRole('status');
+    expect(rtlStatus.textContent).toContain('ar-XB|rtl|rtl|');
+    expect(rtlStatus.closest('[dir="rtl"]')).not.toBeNull();
   });
 
   it('preserves locale and message output across SSR and hydration', () => {

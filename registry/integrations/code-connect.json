@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "sourceDigest": "sha256:f520efe857cfd3be9c10098de778ad5fba10475a0fe8df9f197bde914a15a226",
+  "sourceDigest": "sha256:12c33ebda506207bfd1e4a6af965fcba0592b9935352cc7351a2ec99cf8371df",
   "mappingKind": "code-connect-equivalent",
   "mappings": [
     {
@@ -42,15 +42,8 @@
       "package": "@tale-ui/react/app-store-button",
       "source": "packages/react/src/app-store-button/index.ts",
       "properties": {
-        "store": [
-          "apple",
-          "google"
-        ],
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "store": ["apple", "google"],
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -63,10 +56,7 @@
       "package": "@tale-ui/react/autocomplete",
       "source": "packages/react/src/autocomplete/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md"
-        ]
+        "size": ["sm", "md"]
       },
       "ownership": {
         "design": "design-systems",
@@ -79,14 +69,7 @@
       "package": "@tale-ui/react/avatar",
       "source": "packages/react/src/avatar/index.ts",
       "properties": {
-        "size": [
-          "xs",
-          "sm",
-          "md",
-          "lg",
-          "xl",
-          "2xl"
-        ]
+        "size": ["xs", "sm", "md", "lg", "xl", "2xl"]
       },
       "ownership": {
         "design": "design-systems",
@@ -99,17 +82,8 @@
       "package": "@tale-ui/react/background-pattern",
       "source": "packages/react/src/background-pattern/index.ts",
       "properties": {
-        "pattern": [
-          "circle",
-          "square",
-          "grid",
-          "grid-check"
-        ],
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "pattern": ["circle", "square", "grid", "grid-check"],
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -122,16 +96,8 @@
       "package": "@tale-ui/react/badge",
       "source": "packages/react/src/badge/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ],
-        "type": [
-          "pill",
-          "rounded",
-          "modern"
-        ]
+        "size": ["sm", "md", "lg"],
+        "type": ["pill", "rounded", "modern"]
       },
       "ownership": {
         "design": "design-systems",
@@ -144,25 +110,10 @@
       "package": "@tale-ui/react/badge-group",
       "source": "packages/react/src/badge-group/index.ts",
       "properties": {
-        "size": [
-          "md",
-          "lg"
-        ],
-        "color": [
-          "brand",
-          "warning",
-          "error",
-          "gray",
-          "success"
-        ],
-        "theme": [
-          "light",
-          "modern"
-        ],
-        "align": [
-          "leading",
-          "trailing"
-        ]
+        "size": ["md", "lg"],
+        "color": ["brand", "warning", "error", "gray", "success"],
+        "theme": ["light", "modern"],
+        "align": ["leading", "trailing"]
       },
       "ownership": {
         "design": "design-systems",
@@ -175,16 +126,8 @@
       "package": "@tale-ui/react/banner",
       "source": "packages/react/src/banner/index.ts",
       "properties": {
-        "variant": [
-          "info",
-          "success",
-          "warning",
-          "error"
-        ],
-        "size": [
-          "sm",
-          "md"
-        ]
+        "variant": ["info", "success", "warning", "error"],
+        "size": ["sm", "md"]
       },
       "ownership": {
         "design": "design-systems",
@@ -217,11 +160,7 @@
           "danger-ghost",
           "inverse"
         ],
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -245,16 +184,8 @@
       "package": "@tale-ui/react/card",
       "source": "packages/react/src/card/index.ts",
       "properties": {
-        "variant": [
-          "elevated",
-          "outlined",
-          "filled"
-        ],
-        "padding": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "variant": ["elevated", "outlined", "filled"],
+        "padding": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -267,10 +198,7 @@
       "package": "@tale-ui/react/carousel",
       "source": "packages/react/src/carousel/index.ts",
       "properties": {
-        "orientation": [
-          "horizontal",
-          "vertical"
-        ]
+        "orientation": ["horizontal", "vertical"]
       },
       "ownership": {
         "design": "design-systems",
@@ -294,10 +222,7 @@
       "package": "@tale-ui/react/checkbox",
       "source": "packages/react/src/checkbox/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md"
-        ]
+        "size": ["sm", "md"]
       },
       "ownership": {
         "design": "design-systems",
@@ -310,10 +235,7 @@
       "package": "@tale-ui/react/checkbox-field",
       "source": "packages/react/src/checkbox-field/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md"
-        ]
+        "size": ["sm", "md"]
       },
       "ownership": {
         "design": "design-systems",
@@ -326,14 +248,8 @@
       "package": "@tale-ui/react/checkbox-group",
       "source": "packages/react/src/checkbox-group/index.ts",
       "properties": {
-        "orientation": [
-          "horizontal",
-          "vertical"
-        ],
-        "size": [
-          "sm",
-          "md"
-        ]
+        "orientation": ["horizontal", "vertical"],
+        "size": ["sm", "md"]
       },
       "ownership": {
         "design": "design-systems",
@@ -379,10 +295,7 @@
       "package": "@tale-ui/react/color-mode-toggle",
       "source": "packages/react/src/color-mode-toggle/index.ts",
       "properties": {
-        "defaultMode": [
-          "light",
-          "dark"
-        ]
+        "defaultMode": ["light", "dark"]
       },
       "ownership": {
         "design": "design-systems",
@@ -417,10 +330,7 @@
       "package": "@tale-ui/react/color-swatch",
       "source": "packages/react/src/color-swatch/index.ts",
       "properties": {
-        "shape": [
-          "square",
-          "circle"
-        ]
+        "shape": ["square", "circle"]
       },
       "ownership": {
         "design": "design-systems",
@@ -455,30 +365,9 @@
       "package": "@tale-ui/react/column",
       "source": "packages/react/src/column/index.ts",
       "properties": {
-        "gap": [
-          "4xs",
-          "3xs",
-          "2xs",
-          "xs",
-          "s",
-          "m",
-          "l",
-          "xl",
-          "2xl"
-        ],
-        "align": [
-          "start",
-          "center",
-          "end",
-          "stretch",
-          "baseline"
-        ],
-        "justify": [
-          "start",
-          "center",
-          "end",
-          "between"
-        ]
+        "gap": ["4xs", "3xs", "2xs", "xs", "s", "m", "l", "xl", "2xl"],
+        "align": ["start", "center", "end", "stretch", "baseline"],
+        "justify": ["start", "center", "end", "between"]
       },
       "ownership": {
         "design": "design-systems",
@@ -491,10 +380,7 @@
       "package": "@tale-ui/react/combobox",
       "source": "packages/react/src/combobox/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md"
-        ]
+        "size": ["sm", "md"]
       },
       "ownership": {
         "design": "design-systems",
@@ -507,11 +393,7 @@
       "package": "@tale-ui/react/command-palette",
       "source": "packages/react/src/command-palette/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -535,10 +417,7 @@
       "package": "@tale-ui/react/context-menu",
       "source": "packages/react/src/context-menu/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md"
-        ]
+        "size": ["sm", "md"]
       },
       "ownership": {
         "design": "design-systems",
@@ -628,18 +507,8 @@
       "package": "@tale-ui/react/dot-icon",
       "source": "packages/react/src/dot-icon/index.ts",
       "properties": {
-        "color": [
-          "neutral",
-          "brand",
-          "error",
-          "warning",
-          "success"
-        ],
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "color": ["neutral", "brand", "error", "warning", "success"],
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -674,11 +543,7 @@
       "package": "@tale-ui/react/empty-state",
       "source": "packages/react/src/empty-state/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -691,31 +556,10 @@
       "package": "@tale-ui/react/featured-icon",
       "source": "packages/react/src/featured-icon/index.ts",
       "properties": {
-        "variant": [
-          "brand",
-          "error",
-          "warning",
-          "success",
-          "neutral"
-        ],
-        "shape": [
-          "circle",
-          "square"
-        ],
-        "size": [
-          "sm",
-          "md",
-          "lg",
-          "xl"
-        ],
-        "theme": [
-          "light",
-          "gradient",
-          "dark",
-          "outline",
-          "modern",
-          "modern-neue"
-        ]
+        "variant": ["brand", "error", "warning", "success", "neutral"],
+        "shape": ["circle", "square"],
+        "size": ["sm", "md", "lg", "xl"],
+        "theme": ["light", "gradient", "dark", "outline", "modern", "modern-neue"]
       },
       "ownership": {
         "design": "design-systems",
@@ -783,10 +627,7 @@
       "package": "@tale-ui/react/grid-list",
       "source": "packages/react/src/grid-list/index.ts",
       "properties": {
-        "orientation": [
-          "horizontal",
-          "vertical"
-        ]
+        "orientation": ["horizontal", "vertical"]
       },
       "ownership": {
         "design": "design-systems",
@@ -810,11 +651,7 @@
       "package": "@tale-ui/react/i18n-provider",
       "source": "packages/react/src/i18n-provider/index.ts",
       "properties": {
-        "mode": [
-          "default",
-          "pseudo",
-          "rtl"
-        ]
+        "mode": ["default", "pseudo", "rtl"]
       },
       "ownership": {
         "design": "design-systems",
@@ -827,12 +664,7 @@
       "package": "@tale-ui/react/icon",
       "source": "packages/react/src/icon/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md",
-          "lg",
-          "xl"
-        ]
+        "size": ["sm", "md", "lg", "xl"]
       },
       "ownership": {
         "design": "design-systems",
@@ -845,18 +677,8 @@
       "package": "@tale-ui/react/icon-button",
       "source": "packages/react/src/icon-button/index.ts",
       "properties": {
-        "variant": [
-          "primary",
-          "neutral",
-          "ghost",
-          "danger",
-          "inverse"
-        ],
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "variant": ["primary", "neutral", "ghost", "danger", "inverse"],
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -869,17 +691,8 @@
       "package": "@tale-ui/react/illustration",
       "source": "packages/react/src/illustration/index.ts",
       "properties": {
-        "type": [
-          "box",
-          "cloud",
-          "documents",
-          "credit-card"
-        ],
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "type": ["box", "cloud", "documents", "credit-card"],
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -892,19 +705,8 @@
       "package": "@tale-ui/react/image",
       "source": "packages/react/src/image/index.ts",
       "properties": {
-        "radius": [
-          "none",
-          "sm",
-          "md",
-          "lg",
-          "full"
-        ],
-        "fit": [
-          "cover",
-          "contain",
-          "fill",
-          "none"
-        ]
+        "radius": ["none", "sm", "md", "lg", "full"],
+        "fit": ["cover", "contain", "fill", "none"]
       },
       "ownership": {
         "design": "design-systems",
@@ -928,11 +730,7 @@
       "package": "@tale-ui/react/input",
       "source": "packages/react/src/input/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -956,15 +754,8 @@
       "package": "@tale-ui/react/input-tags",
       "source": "packages/react/src/input-tags/index.ts",
       "properties": {
-        "tagPlacement": [
-          "inline",
-          "below"
-        ],
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "tagPlacement": ["inline", "below"],
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -988,10 +779,7 @@
       "package": "@tale-ui/react/kbd",
       "source": "packages/react/src/kbd/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md"
-        ]
+        "size": ["sm", "md"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1004,15 +792,8 @@
       "package": "@tale-ui/react/key-value-pairs",
       "source": "packages/react/src/key-value-pairs/index.ts",
       "properties": {
-        "variant": [
-          "plain",
-          "divided"
-        ],
-        "density": [
-          "compact",
-          "default",
-          "spacious"
-        ]
+        "variant": ["plain", "divided"],
+        "density": ["compact", "default", "spacious"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1036,15 +817,8 @@
       "package": "@tale-ui/react/list",
       "source": "packages/react/src/list/index.ts",
       "properties": {
-        "variant": [
-          "plain",
-          "divided"
-        ],
-        "density": [
-          "compact",
-          "default",
-          "spacious"
-        ]
+        "variant": ["plain", "divided"],
+        "density": ["compact", "default", "spacious"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1068,10 +842,7 @@
       "package": "@tale-ui/react/menu",
       "source": "packages/react/src/menu/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md"
-        ]
+        "size": ["sm", "md"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1161,10 +932,7 @@
       "package": "@tale-ui/react/pagination-dot",
       "source": "packages/react/src/pagination-dot/index.ts",
       "properties": {
-        "size": [
-          "md",
-          "lg"
-        ]
+        "size": ["md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1177,10 +945,7 @@
       "package": "@tale-ui/react/pagination-line",
       "source": "packages/react/src/pagination-line/index.ts",
       "properties": {
-        "size": [
-          "md",
-          "lg"
-        ]
+        "size": ["md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1226,12 +991,7 @@
       "package": "@tale-ui/react/preview-card",
       "source": "packages/react/src/preview-card/index.ts",
       "properties": {
-        "placement": [
-          "top",
-          "bottom",
-          "left",
-          "right"
-        ]
+        "placement": ["top", "bottom", "left", "right"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1244,13 +1004,7 @@
       "package": "@tale-ui/react/progress-bar",
       "source": "packages/react/src/progress-bar/index.ts",
       "properties": {
-        "labelPosition": [
-          "top",
-          "right",
-          "bottom",
-          "top-floating",
-          "bottom-floating"
-        ]
+        "labelPosition": ["top", "right", "bottom", "top-floating", "bottom-floating"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1263,11 +1017,7 @@
       "package": "@tale-ui/react/progress-circle",
       "source": "packages/react/src/progress-circle/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1280,10 +1030,7 @@
       "package": "@tale-ui/react/qr-code",
       "source": "packages/react/src/qr-code/index.ts",
       "properties": {
-        "size": [
-          "md",
-          "lg"
-        ]
+        "size": ["md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1296,10 +1043,7 @@
       "package": "@tale-ui/react/radio",
       "source": "packages/react/src/radio/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md"
-        ]
+        "size": ["sm", "md"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1312,10 +1056,7 @@
       "package": "@tale-ui/react/radio-field",
       "source": "packages/react/src/radio-field/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md"
-        ]
+        "size": ["sm", "md"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1350,11 +1091,7 @@
       "package": "@tale-ui/react/rating-badge",
       "source": "packages/react/src/rating-badge/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1367,11 +1104,7 @@
       "package": "@tale-ui/react/rating-stars",
       "source": "packages/react/src/rating-stars/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1384,30 +1117,9 @@
       "package": "@tale-ui/react/row",
       "source": "packages/react/src/row/index.ts",
       "properties": {
-        "gap": [
-          "4xs",
-          "3xs",
-          "2xs",
-          "xs",
-          "s",
-          "m",
-          "l",
-          "xl",
-          "2xl"
-        ],
-        "align": [
-          "start",
-          "center",
-          "end",
-          "stretch",
-          "baseline"
-        ],
-        "justify": [
-          "start",
-          "center",
-          "end",
-          "between"
-        ]
+        "gap": ["4xs", "3xs", "2xs", "xs", "s", "m", "l", "xl", "2xl"],
+        "align": ["start", "center", "end", "stretch", "baseline"],
+        "justify": ["start", "center", "end", "between"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1431,10 +1143,7 @@
       "package": "@tale-ui/react/search-field",
       "source": "packages/react/src/search-field/index.ts",
       "properties": {
-        "variant": [
-          "default",
-          "inline"
-        ]
+        "variant": ["default", "inline"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1458,11 +1167,7 @@
       "package": "@tale-ui/react/select",
       "source": "packages/react/src/select/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1475,10 +1180,7 @@
       "package": "@tale-ui/react/select-native",
       "source": "packages/react/src/select-native/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md"
-        ]
+        "size": ["sm", "md"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1524,17 +1226,8 @@
       "package": "@tale-ui/react/social-button",
       "source": "packages/react/src/social-button/index.ts",
       "properties": {
-        "provider": [
-          "google",
-          "github",
-          "apple",
-          "x",
-          "facebook"
-        ],
-        "size": [
-          "sm",
-          "md"
-        ]
+        "provider": ["google", "github", "apple", "x", "facebook"],
+        "size": ["sm", "md"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1558,16 +1251,8 @@
       "package": "@tale-ui/react/spinner",
       "source": "packages/react/src/spinner/index.ts",
       "properties": {
-        "variant": [
-          "circle",
-          "line",
-          "dots"
-        ],
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "variant": ["circle", "line", "dots"],
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1646,37 +1331,10 @@
       "package": "@tale-ui/react/text",
       "source": "packages/react/src/text/index.ts",
       "properties": {
-        "variant": [
-          "display",
-          "heading",
-          "title",
-          "label",
-          "text",
-          "mono"
-        ],
-        "size": [
-          "xs",
-          "s",
-          "m",
-          "l"
-        ],
-        "as": [
-          "p",
-          "span",
-          "h1",
-          "h2",
-          "h3",
-          "h4",
-          "h5",
-          "h6",
-          "div",
-          "label"
-        ],
-        "color": [
-          "default",
-          "muted",
-          "accent"
-        ]
+        "variant": ["display", "heading", "title", "label", "text", "mono"],
+        "size": ["xs", "s", "m", "l"],
+        "as": ["p", "span", "h1", "h2", "h3", "h4", "h5", "h6", "div", "label"],
+        "color": ["default", "muted", "accent"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1733,11 +1391,7 @@
       "package": "@tale-ui/react/toggle-button",
       "source": "packages/react/src/toggle-button/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",
@@ -1794,11 +1448,7 @@
       "package": "@tale-ui/react/video-player",
       "source": "packages/react/src/video-player/index.ts",
       "properties": {
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ]
+        "size": ["sm", "md", "lg"]
       },
       "ownership": {
         "design": "design-systems",

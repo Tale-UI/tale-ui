@@ -13,6 +13,8 @@ import {
 
 const fixtureRoot = resolve('fixtures/extensions/full');
 const packageBytes = Buffer.from('fixture tarball bytes');
+const packageIntegrity =
+  'sha512-MsgCGCc5K35IkjlYRQdTDCpndOD0Fjf6C06fNFBQEC6xF4013xW2UcwMerii0t15JagdPzXjaQcWA3vC3pbnMw==';
 const projectId = `sha256:${createHash('sha256').update('fixture-project').digest('hex')}`;
 
 async function mutatedFixture(
@@ -58,8 +60,7 @@ function approval() {
     package: '@fixture/tale-extension',
     publisher: 'fixture.tale-ui.dev',
     version: '1.0.0',
-    integrity:
-      'sha512-MsgCGCc5K35IkjlYRQdTDCpndOD0Fjf6C06fNFBQEC6xF4013xW2UcwMerii0t15JagdPzXjaQcWA3vC3pbnMw==',
+    integrity: packageIntegrity,
     capabilities: ['validation.run', 'codemod.run'],
     approvedAt: '2026-07-25T00:00:00.000Z',
     revoked: false,
@@ -69,8 +70,8 @@ function approval() {
 test('schema-only discovery covers all five namespaced contribution classes', () => {
   const { manifest } = discoverExtension(fixtureRoot);
   assert.equal(manifest.contributions.length, 5);
-  assert.equal(verifyExtensionIntegrity(packageBytes, manifest.integrity), true);
-  const virtual = createVirtualExtensionRegistry([{ manifest, packageBytes }]);
+  assert.equal(verifyExtensionIntegrity(packageBytes, packageIntegrity), true);
+  const virtual = createVirtualExtensionRegistry([{ manifest, packageBytes, packageIntegrity }]);
   assert.deepEqual(
     new Set(virtual.map(({ contributionClass }) => contributionClass)),
     new Set([
@@ -89,6 +90,7 @@ test('local execution authorization returns a confined path without importing it
     packageRoot: fixtureRoot,
     artifactId: 'fixture.tale-extension:validation:fixture-validation',
     packageBytes,
+    packageIntegrity,
     trustRegistry: trust(),
     approval: approval(),
     projectId,
@@ -105,6 +107,7 @@ test('hosted, revoked, stale, unapproved, and corrupt execution fail closed', ()
     packageRoot: fixtureRoot,
     artifactId: 'fixture.tale-extension:codemod:fixture-codemod',
     packageBytes,
+    packageIntegrity,
     trustRegistry: trust(),
     approval: approval(),
     projectId,
@@ -117,6 +120,7 @@ test('hosted, revoked, stale, unapproved, and corrupt execution fail closed', ()
     { now: new Date('2026-09-01T00:00:00.000Z') },
     { approval: { ...approval(), revoked: true } },
     { packageBytes: Buffer.from('corrupt') },
+    { packageIntegrity: `sha512-${Buffer.alloc(64).toString('base64')}` },
   ]) {
     assert.throws(
       () => authorizeExtensionExecution({ ...base, ...override }),
@@ -125,11 +129,11 @@ test('hosted, revoked, stale, unapproved, and corrupt execution fail closed', ()
   }
 });
 
-test('discovery rejects corrupt schemas, missing integrity, and package identity drift', async () => {
+test('discovery rejects corrupt schemas, embedded integrity, and package identity drift', async () => {
   await Promise.all(
     [
       (manifest: Record<string, unknown>) => ({ ...manifest, schemaVersion: '2.0.0' }),
-      ({ integrity: _, ...manifest }: Record<string, unknown>) => manifest,
+      (manifest: Record<string, unknown>) => ({ ...manifest, integrity: packageIntegrity }),
       (manifest: Record<string, unknown>) => ({ ...manifest, package: '@fixture/other' }),
     ].map(async (mutate) => {
       const root = await mutatedFixture(mutate);
@@ -147,8 +151,8 @@ test('virtual registry refuses duplicate namespaced artifacts', () => {
   assert.throws(
     () =>
       createVirtualExtensionRegistry([
-        { manifest, packageBytes },
-        { manifest, packageBytes },
+        { manifest, packageBytes, packageIntegrity },
+        { manifest, packageBytes, packageIntegrity },
       ]),
     /Duplicate virtual extension artifact/,
   );
@@ -157,7 +161,7 @@ test('virtual registry refuses duplicate namespaced artifacts', () => {
 test('contract, provenance, publisher, capability, and project approvals are exact', async () => {
   const incompatibleRoot = await mutatedFixture((manifest) => ({
     ...manifest,
-    contractRanges: { tale: '^2.0.0', extension: '^2.0.0' },
+    contractRanges: { tale: '>=10.0.0', extension: '>=10.0.0' },
   }));
   const noProvenanceRoot = await mutatedFixture((manifest) => ({
     ...manifest,
@@ -180,6 +184,7 @@ test('contract, provenance, publisher, capability, and project approvals are exa
             packageRoot: fixtureRoot,
             artifactId: 'fixture.tale-extension:validation:fixture-validation',
             packageBytes,
+            packageIntegrity,
             trustRegistry: trust(),
             approval: approval(),
             projectId,
@@ -201,6 +206,7 @@ test('trust registry age warns before it fails', () => {
     packageRoot: fixtureRoot,
     artifactId: 'fixture.tale-extension:validation:fixture-validation',
     packageBytes,
+    packageIntegrity,
     trustRegistry: trust(),
     approval: approval(),
     projectId,

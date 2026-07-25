@@ -65,7 +65,7 @@ test('field-control migration preserves labels inside field buttons', async () =
     await writeFile(
       join(root, 'src/controls.tsx'),
       [
-        "import { Checkbox } from '@tale-ui/react/checkbox';",
+        "import { Checkbox, type CheckboxRootProps } from '@tale-ui/react/checkbox';",
         "import { Radio } from '@tale-ui/react/radio';",
         "import { Switch } from '@tale-ui/react/switch';",
         '<Checkbox.Root><Checkbox.Indicator />Accept</Checkbox.Root>',
@@ -85,7 +85,10 @@ test('field-control migration preserves labels inside field buttons', async () =
     assert.match(output, /RadioGroup>/);
     assert.match(output, /RadioField\.Button>/);
     assert.match(output, /SwitchField\.Button>/);
-    assert.doesNotMatch(output, /@tale-ui\/react\/(?:checkbox|radio|switch)'/);
+    assert.match(output, /import \{ type CheckboxRootProps \} from '@tale-ui\/react\/checkbox';/);
+    assert.match(output, /import \{ CheckboxField \} from '@tale-ui\/react\/checkbox-field';/);
+    assert.doesNotMatch(output, /import \{ Checkbox(?:,|\s*\})/);
+    assert.doesNotMatch(output, /@tale-ui\/react\/(?:radio|switch)'/);
   } finally {
     await rm(root, { recursive: true, force: true });
   }
@@ -156,8 +159,7 @@ test('migration rejects mixed, unsupported, stale, and unapproved sensitive stat
           root: unsupported,
           migration: 'known-import-path-corrections',
         }),
-      (error) =>
-        error instanceof TaleToolingError && error.code === 'TALE_VERSION_RANGE_MISMATCH',
+      (error) => error instanceof TaleToolingError && error.code === 'TALE_VERSION_RANGE_MISMATCH',
     );
     await writeFile(join(stale, 'src/file.ts'), "import '@tale-ui/core';\n");
     const request = {

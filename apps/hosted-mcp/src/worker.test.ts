@@ -38,6 +38,19 @@ test('hosted MCP exposes only bounded retrieval and planning tools', async () =>
   );
 });
 
+test('hosted MCP accepts lifecycle notifications without a JSON-RPC response', async () => {
+  const response = await fetch(
+    new Request('https://mcp.tale-ui.dev/mcp', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', method: 'notifications/initialized' }),
+    }),
+    testEnvironment,
+  );
+  assert.equal(response.status, 202);
+  assert.equal(await response.text(), '');
+});
+
 test('tool responses correlate the registry and immutable source', async () => {
   const response = await call('tools/call', {
     name: 'get_artifact',

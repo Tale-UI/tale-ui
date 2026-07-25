@@ -2,6 +2,7 @@
 import { createHash, randomUUID } from 'node:crypto';
 import {
   constants,
+  chmod,
   lstat,
   mkdir,
   open,
@@ -35,6 +36,7 @@ interface StoredPlanFile extends ProjectMutationFile {
   path: string;
   originalExists: boolean;
   originalDigest: `sha256:${string}`;
+  originalMode?: number;
   postimageDigest: `sha256:${string}`;
   postimageSize: number;
   backup?: string;
@@ -163,10 +165,12 @@ async function targetPath(root: string, input: string) {
 
 async function readExisting(target: string) {
   try {
-    return { exists: true, content: await readFile(target, 'utf8') };
+    const [content, details] = await Promise.all([readFile(target, 'utf8'), stat(target)]);
+    // eslint-disable-next-line no-bitwise -- POSIX permission bits are encoded as a bitmask.
+    return { exists: true, content, mode: details.mode & 0o777 };
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-      return { exists: false, content: '' };
+      return { exists: false, content: '', mode: undefined };
     }
     throw error;
   }
@@ -281,12 +285,29 @@ async function acquireRecoveryLock(
       { retryable: true },
     );
   }
+  const localHostDigest = digest(hostname());
+  let ownerIsLive = current.hostDigest !== localHostDigest;
+  if (!ownerIsLive) {
+    try {
+      process.kill(current.processId, 0);
+      ownerIsLive = true;
+    } catch (error) {
+      ownerIsLive = (error as NodeJS.ErrnoException).code !== 'ESRCH';
+    }
+  }
+  if (ownerIsLive) {
+    throw new TaleToolingError(
+      'TALE_CONCURRENT_MUTATION',
+      'Tale UI: recovery refused to take over a lock whose recorded owner may still be running.',
+      { retryable: true },
+    );
+  }
   await writeAtomic(
     join(lock, 'owner.json'),
     canonical({
       ...current,
       processId: process.pid,
-      hostDigest: digest(hostname()),
+      hostDigest: localHostDigest,
       startedAt: new Date().toISOString(),
     } satisfies LockOwner),
   );
@@ -339,6 +360,7 @@ async function buildStoredPlan(
       ...(input.overwrite ? { overwrite: true } : {}),
       originalExists: existing.exists,
       originalDigest: digest(existing.content),
+      ...(existing.mode === undefined ? {} : { originalMode: existing.mode }),
       postimageDigest: digest(input.content.replace(/\r\n/g, '\n')),
       postimageSize: Buffer.byteLength(input.content.replace(/\r\n/g, '\n')),
     });
@@ -462,7 +484,7 @@ async function applyStoredPlan(
       file.backup = backup;
       await writeAtomic(join(operationPath, PLAN_FILE), canonical(plan));
     }
-    await writeAtomic(target, file.content, 0o644);
+    await writeAtomic(target, file.content, file.originalMode ?? 0o644);
     const committed = await readExisting(target);
     if (!committed.exists || digest(committed.content) !== file.postimageDigest) {
       journal.state = 'manual-intervention';
@@ -671,13 +693,23 @@ async function rollbackStoredPlan(
       );
     }
     if (file.originalExists) {
+      if (existing.exists && currentDigest === file.originalDigest) {
+        if (file.originalMode !== undefined) {
+          await chmod(target, file.originalMode);
+        }
+        continue;
+      }
       if (!file.backup) {
         throw new TaleToolingError(
           'TALE_CORRUPT_OPERATION_STATE',
           'Tale UI: rollback metadata is missing its required backup.',
         );
       }
-      await writeAtomic(target, await readFile(join(operationPath, file.backup), 'utf8'), 0o644);
+      await writeAtomic(
+        target,
+        await readFile(join(operationPath, file.backup), 'utf8'),
+        file.originalMode ?? 0o644,
+      );
     } else if (existing.exists) {
       await rm(target);
     }

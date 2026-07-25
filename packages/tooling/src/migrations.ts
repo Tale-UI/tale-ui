@@ -183,6 +183,46 @@ function replaceElement(
   return { content: next, replacements };
 }
 
+function hasNamedImport(content: string, name: string, source: string) {
+  const pattern = new RegExp(
+    `import\\s*\\{[^}]*\\b${name}\\b[^}]*\\}\\s*from\\s*['"]${source.replaceAll('/', '\\/')}['"]`,
+  );
+  return pattern.test(content);
+}
+
+function replaceFieldControlImport(
+  content: string,
+  oldName: string,
+  newName: string,
+  oldSource: string,
+  newSource: string,
+) {
+  let updated = false;
+  const oldImport = new RegExp(
+    `import\\s*\\{([^}]*)\\}\\s*from\\s*(['"])${oldSource.replaceAll('/', '\\/')}\\2\\s*;?`,
+    'g',
+  );
+  const next = content.replace(oldImport, (statement, specifierText: string, quote: string) => {
+    const specifiers = specifierText
+      .split(',')
+      .map((specifier) => specifier.trim())
+      .filter(Boolean);
+    const remaining = specifiers.filter((specifier) => specifier !== oldName);
+    if (remaining.length === specifiers.length) {
+      return statement;
+    }
+    updated = true;
+    const preserved = remaining.length
+      ? `import { ${remaining.join(', ')} } from ${quote}${oldSource}${quote};\n`
+      : '';
+    const replacement = hasNamedImport(content, newName, newSource)
+      ? ''
+      : `import { ${newName} } from ${quote}${newSource}${quote};`;
+    return `${preserved}${replacement}`;
+  });
+  return { content: next, updated };
+}
+
 function transformFieldControls(content: string) {
   for (const unsupported of ['Checkbox.Visual', 'Radio.Visual', 'Switch.Visual']) {
     if (content.includes(unsupported)) {
@@ -202,14 +242,22 @@ function transformFieldControls(content: string) {
     const element = replaceElement(next, oldName, newName, [...parts]);
     next = element.content;
     replacements += element.replacements;
-    const newImport = `import { ${newName} } from '@tale-ui/react/${path}-field';`;
-    const oldImport = new RegExp(
-      `import\\s*\\{\\s*${oldName}\\s*\\}\\s*from\\s*(['"])@tale-ui/react/${path}\\1\\s*;?`,
-      'g',
-    );
-    if (oldImport.test(next) && element.replacements > 0) {
-      next = next.replace(oldImport, newImport);
+    const oldSource = `@tale-ui/react/${path}`;
+    const newSource = `@tale-ui/react/${path}-field`;
+    const imported = replaceFieldControlImport(next, oldName, newName, oldSource, newSource);
+    next = imported.content;
+    if (imported.updated && element.replacements > 0) {
       replacements += 1;
+    }
+    if (
+      element.replacements > 0 &&
+      !imported.updated &&
+      !hasNamedImport(next, newName, newSource)
+    ) {
+      throw new TaleToolingError(
+        'TALE_MIGRATION_UNAVAILABLE',
+        `Tale UI: the ${oldName} import uses an alias or composition that cannot be migrated safely.`,
+      );
     }
   }
   if (next.includes('<Radio.Group') || next.includes('</Radio.Group>')) {
