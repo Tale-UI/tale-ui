@@ -1,0 +1,60 @@
+{
+  "$schema": "../../schemas/manual-accessibility-evidence.schema.json",
+  "schemaVersion": "1.0.0",
+  "policy": {
+    "stablePromotionRequiresPass": true,
+    "retention": "repository-record"
+  },
+  "modalities": [
+    {
+      "modality": "screen-reader",
+      "status": "pending-manual",
+      "scope": "Bundle BC experimental AppShell, Chat, Kbd, and CodeBlock surfaces",
+      "owner": "Accessibility",
+      "reviewBy": "2026-08-31",
+      "evidence": [
+        "Axe results are automated evidence and are not misrepresented as screen-reader testing."
+      ]
+    },
+    {
+      "modality": "zoom-reflow",
+      "status": "pending-manual",
+      "scope": "Bundle BC responsive stories at 200% and 400%",
+      "owner": "Accessibility",
+      "reviewBy": "2026-08-31",
+      "evidence": [
+        "AppShell and Chat responsive contracts identify reflow as a stable-promotion gate."
+      ]
+    },
+    {
+      "modality": "keyboard",
+      "status": "pending-manual",
+      "scope": "Bundle BC focus order, skip link, composer, disclosures, and Table controls",
+      "owner": "Accessibility",
+      "reviewBy": "2026-08-31",
+      "evidence": [
+        "Unit interaction tests remain supporting evidence, not a substitute for manual traversal."
+      ]
+    },
+    {
+      "modality": "touch",
+      "status": "pending-manual",
+      "scope": "Bundle BC mobile templates and compact controls",
+      "owner": "Accessibility",
+      "reviewBy": "2026-08-31",
+      "evidence": [
+        "Chat mobile and AppShell mobile-navigation stories provide the retained review fixtures."
+      ]
+    },
+    {
+      "modality": "reduced-motion",
+      "status": "pending-manual",
+      "scope": "Motion transition matrix and Bundle BC animated surfaces",
+      "owner": "Accessibility",
+      "reviewBy": "2026-08-31",
+      "evidence": [
+        "Foundations/Motion and elevation provides the retained preference-toggle fixture."
+      ]
+    }
+  ]
+}

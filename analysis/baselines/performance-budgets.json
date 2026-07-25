@@ -1,0 +1,101 @@
+{
+  "$schema": "../../schemas/performance-budget.schema.json",
+  "schemaVersion": "1.0.0",
+  "capturedOn": "2026-07-25",
+  "runner": {
+    "nodeMajor": 24,
+    "vite": "7.3.1",
+    "samples": 15
+  },
+  "budgets": [
+    {
+      "id": "react-esm-gzip",
+      "surface": "esm",
+      "description": "Minified first-party JavaScript in the @tale-ui/react ESM entry.",
+      "unit": "bytes-gzip",
+      "baseline": 99553,
+      "warnAt": 109509,
+      "blockAt": 124442,
+      "owner": "Design Systems",
+      "evidence": "Vite library build with third-party and workspace bare imports externalized."
+    },
+    {
+      "id": "minimal-app-js-gzip",
+      "surface": "minimal-app-js",
+      "description": "Minified first-party JavaScript for a minimal Button import.",
+      "unit": "bytes-gzip",
+      "baseline": 978,
+      "warnAt": 1490,
+      "blockAt": 2002,
+      "owner": "Design Systems",
+      "evidence": "Vite library build of the smallest representative interactive entry."
+    },
+    {
+      "id": "css-gzip",
+      "surface": "css",
+      "description": "Published minified CSS foundation and component dependency surface.",
+      "unit": "bytes-gzip",
+      "baseline": 14371,
+      "warnAt": 15809,
+      "blockAt": 17964,
+      "owner": "Design Systems",
+      "evidence": "tools/build-css.js output at packages/css/dist/style.min.css."
+    },
+    {
+      "id": "ssr-median",
+      "surface": "ssr",
+      "description": "Median renderToString time for a deterministic AppShell fixture.",
+      "unit": "milliseconds",
+      "baseline": 0.254,
+      "warnAt": 5.254,
+      "blockAt": 10.254,
+      "owner": "Design Systems",
+      "evidence": "15 in-process React server-render samples."
+    },
+    {
+      "id": "hydration-median",
+      "surface": "hydration",
+      "description": "Median hydrateRoot commit time for the AppShell SSR fixture.",
+      "unit": "milliseconds",
+      "baseline": 0.912,
+      "warnAt": 5.912,
+      "blockAt": 10.912,
+      "owner": "Design Systems",
+      "evidence": "Seven isolated JSDOM hydration samples after deterministic SSR."
+    },
+    {
+      "id": "table-10k-p95",
+      "surface": "table",
+      "description": "Worst recorded p95 across maintained 10k Table controller and sorting cases.",
+      "unit": "milliseconds",
+      "baseline": 0.5082,
+      "warnAt": 5.508,
+      "blockAt": 10.508,
+      "owner": "Design Systems",
+      "evidence": "analysis/baselines/table-controller.json and table-sorting.json."
+    },
+    {
+      "id": "charts-esm-gzip",
+      "surface": "charts",
+      "description": "Minified first-party JavaScript in the @tale-ui/charts ESM entry.",
+      "unit": "bytes-gzip",
+      "baseline": 2304,
+      "warnAt": 2816,
+      "blockAt": 3328,
+      "owner": "Data Visualization",
+      "evidence": "Vite library build with React and Recharts externalized."
+    },
+    {
+      "id": "a2ui-esm-gzip",
+      "surface": "a2ui",
+      "description": "Minified first-party JavaScript in the @tale-ui/a2ui ESM entry.",
+      "unit": "bytes-gzip",
+      "baseline": 12062,
+      "warnAt": 13269,
+      "blockAt": 15078,
+      "owner": "AI Experience",
+      "evidence": "Vite library build with renderer dependencies externalized."
+    }
+  ],
+  "exceptions": []
+}

@@ -120,7 +120,7 @@ describe('Chat components', () => {
     expect(screen.getByRole('article').getAttribute('data-role')).toBe('assistant');
     expect(screen.getByText('Search').closest('details')?.getAttribute('data-state')).toBe('running');
     expect(screen.getByRole('form').getAttribute('aria-busy')).toBe('true');
-    expect(screen.getByRole('complementary', { name: 'Artifact panel' })).toBeTruthy();
+    expect(screen.getByRole('region', { name: 'Artifact panel' })).toBeTruthy();
   });
 
   it('preserves content across SSR and hydration', () => {

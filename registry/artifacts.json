@@ -136,6 +136,7 @@
     "docs/consuming-design-system.md",
     "docs/design-philosophy.md",
     "docs/foundations/motion-and-elevation.md",
+    "docs/governance/accessibility-and-performance.md",
     "docs/governance/lifecycle.md",
     "docs/managing-packages.md",
     "docs/package-dependencies.md",
@@ -270,7 +271,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:1ca23304dce0d292a76e7546b71438f1b58a96ac0779e4d90d3e3ac66607a2d2",
+  "sourceRevision": "sha256:9c196496bfdb89f1478b07a4716433e7ddac8b7ad3b158055480a5ba0a66c997",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -21522,6 +21523,42 @@
       ],
       "provenance": {
         "source": "docs/a2ui-integration.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:foundation:accessibility-and-performance-gates",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "accessibility-and-performance-gates",
+      "name": "Accessibility and performance gates",
+      "description": "Tale UI foundation guidance for Accessibility and performance gates.",
+      "lifecycle": "stable",
+      "keywords": [
+        "accessibility",
+        "axe",
+        "budgets",
+        "performance"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/governance/accessibility-and-performance.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/governance/accessibility-and-performance.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -50819,5 +50856,5 @@
       }
     }
   ],
-  "digest": "sha256:51565d19762250a4606781e56ae7629520ac2a9016d27aa86793989503c5285d"
+  "digest": "sha256:1a88a19bb60f4d27b1334024eb1ef7f14f20f76506ebac1b90228233b0336fd7"
 }

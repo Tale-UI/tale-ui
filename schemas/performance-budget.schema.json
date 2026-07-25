@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/performance-budget.schema.json",
+  "title": "Maintained roadmap performance budgets",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "capturedOn", "runner", "budgets", "exceptions"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": "1.0.0" },
+    "capturedOn": { "type": "string", "format": "date" },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeMajor", "vite", "samples"],
+      "properties": {
+        "nodeMajor": { "type": "integer", "minimum": 22 },
+        "vite": { "type": "string" },
+        "samples": { "type": "integer", "minimum": 5 }
+      }
+    },
+    "budgets": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "surface",
+          "description",
+          "unit",
+          "baseline",
+          "warnAt",
+          "blockAt",
+          "owner",
+          "evidence"
+        ],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" },
+          "surface": {
+            "enum": ["esm", "minimal-app-js", "css", "ssr", "hydration", "table", "charts", "a2ui"]
+          },
+          "description": { "type": "string", "minLength": 1 },
+          "unit": { "enum": ["bytes-gzip", "milliseconds"] },
+          "baseline": { "type": "number", "minimum": 0 },
+          "warnAt": { "type": "number", "minimum": 0 },
+          "blockAt": { "type": "number", "minimum": 0 },
+          "owner": { "type": "string", "minLength": 1 },
+          "evidence": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "budgetId", "maximum", "owner", "rationale", "expiresOn"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^PERF-[0-9]{4}$" },
+          "budgetId": { "type": "string" },
+          "maximum": { "type": "number", "minimum": 0 },
+          "owner": { "type": "string", "minLength": 1 },
+          "rationale": { "type": "string", "minLength": 20 },
+          "expiresOn": { "type": "string", "format": "date" },
+          "trackingIssue": { "type": "string", "format": "uri" }
+        }
+      }
+    }
+  }
+}

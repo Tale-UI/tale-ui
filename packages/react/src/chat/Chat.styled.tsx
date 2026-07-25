@@ -39,9 +39,9 @@ export const Root = React.forwardRef<HTMLElement, ChatRootProps>(
     >
       <div className="tale-chat__conversation">{children}</div>
       {artifactPanel ? (
-        <aside className="tale-chat__artifact-panel" aria-label={artifactPanelLabel}>
+        <section className="tale-chat__artifact-panel" aria-label={artifactPanelLabel}>
           {artifactPanel}
-        </aside>
+        </section>
       ) : null}
     </section>
   ),

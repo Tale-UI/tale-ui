@@ -26,6 +26,12 @@
       "keywords": ["lifecycle", "ownership", "governance", "exceptions"]
     },
     {
+      "slug": "accessibility-and-performance-gates",
+      "title": "Accessibility and performance gates",
+      "path": "docs/governance/accessibility-and-performance.md",
+      "keywords": ["accessibility", "axe", "performance", "budgets"]
+    },
+    {
       "slug": "css-architecture",
       "title": "CSS architecture",
       "path": "packages/css/docs/architecture.md",

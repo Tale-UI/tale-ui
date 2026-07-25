@@ -57,6 +57,7 @@ playwright-report/
 # Storybook / Vite / Playground build outputs
 /playground/vite-app/src/demos/EvalReview.tsx
 storybook-static/
+/.artifacts/
 
 # Analysis (local research notes; canonical roadmap inventories are tracked)
 /analysis/*
@@ -72,6 +73,7 @@ storybook-static/
 !/analysis/baselines/table-sorting.json
 !/analysis/baselines/project-mutation-runtime.json
 !/analysis/baselines/i18n-message-inventory.json
+!/analysis/baselines/performance-budgets.json
 !/analysis/app-shell/
 /analysis/app-shell/*
 !/analysis/app-shell/inventory.json

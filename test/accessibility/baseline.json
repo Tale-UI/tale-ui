@@ -1,0 +1,1290 @@
+{
+  "$schema": "../../schemas/accessibility-baseline.schema.json",
+  "schemaVersion": "1.0.0",
+  "capturedOn": "2026-07-25",
+  "runner": {
+    "name": "axe-core",
+    "version": "4.11.1",
+    "storybook": "10.3.3"
+  },
+  "knownViolations": [
+    {
+      "storyId": "components-autocomplete--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria2529365808-_r_28_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-autocomplete--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria2529365808-_r_2f_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-autocomplete--all-variations",
+      "rule": "scrollable-region-focusable",
+      "target": "#storybook-root > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-amber.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-amber.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-amber.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-cyan.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-cyan.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-cyan.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-emerald.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-emerald.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-emerald.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-green.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-green.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-green.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-lime.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-lime.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-lime.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-orange.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-orange.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-orange.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-red.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-red.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-red.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-sky.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-sky.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-sky.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-success.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-success.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-success.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-teal.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-teal.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-teal.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-warning.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-warning.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-warning.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-yellow.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-yellow.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-yellow.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-amber.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-amber.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-amber.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-cyan.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-cyan.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-cyan.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-emerald.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-emerald.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-emerald.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-green.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-green.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-green.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-lime.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-lime.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-lime.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-orange.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-orange.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-orange.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-red.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-red.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-red.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-sky.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-sky.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-sky.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-success.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-success.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-success.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-teal.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-teal.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-teal.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-warning.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-warning.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-warning.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-yellow.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-yellow.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-yellow.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-success.tale-banner--sm.tale-banner > .tale-banner__description",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-success.tale-banner--sm.tale-banner > .tale-banner__title",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-warning.tale-banner--sm.tale-banner > .tale-banner__description",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-warning.tale-banner--sm.tale-banner > .tale-banner__title",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(2) > .color-success.tale-banner[role=\"status\"] > .tale-banner__description",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(2) > .color-success.tale-banner[role=\"status\"] > .tale-banner__title",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(2) > .color-warning.tale-banner[role=\"status\"] > .tale-banner__description",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(2) > .color-warning.tale-banner[role=\"status\"] > .tale-banner__title",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-button--all-variations",
+      "rule": "button-name",
+      "target": "#react-aria1792283246-_r_1o_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-button--all-variations",
+      "rule": "button-name",
+      "target": "#react-aria1792283246-_r_1q_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-button--all-variations",
+      "rule": "button-name",
+      "target": "#react-aria1792283246-_r_1s_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-button--all-variations",
+      "rule": "button-name",
+      "target": "#react-aria1792283246-_r_1u_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-button--all-variations",
+      "rule": "button-name",
+      "target": "#react-aria1792283246-_r_20_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-button--all-variations",
+      "rule": "button-name",
+      "target": "#react-aria1792283246-_r_22_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-button--all-variations",
+      "rule": "button-name",
+      "target": "#react-aria1792283246-_r_24_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-carousel--all-variations",
+      "rule": "landmark-unique",
+      "target": "div:nth-child(1) > .tale-carousel[data-orientation=\"horizontal\"][role=\"region\"]",
+      "impact": "moderate"
+    },
+    {
+      "storyId": "components-container--all-variations",
+      "rule": "color-contrast",
+      "target": ".story-container-demo:nth-child(13) > .story-container-label",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-container--all-variations",
+      "rule": "color-contrast",
+      "target": ".story-container-demo:nth-child(15) > .story-container-label",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-container--all-variations",
+      "rule": "color-contrast",
+      "target": ".story-container-demo:nth-child(16) > .story-container-label",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-container--all-variations",
+      "rule": "color-contrast",
+      "target": ".story-container-demo:nth-child(17) > .story-container-label",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-container--all-variations",
+      "rule": "color-contrast",
+      "target": ".story-container-demo:nth-child(18) > .story-container-label",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-container--all-variations",
+      "rule": "color-contrast",
+      "target": ".story-container-demo:nth-child(3) > .story-container-label",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datefield--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria9509054298-_r_13_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datefield--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria9509054298-_r_17_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datefield--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria9509054298-_r_1b_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datefield--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria9509054298-_r_5_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datefield--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria9509054298-_r_9_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datefield--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria9509054298-_r_d_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria2783616492-_r_d_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria2783616492-_r_h_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria2783616492-_r_l_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-daterangepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7434838418-_r_13_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-daterangepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7434838418-_r_c_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-daterangepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7434838418-_r_g_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-daterangepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7434838418-_r_k_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-daterangepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7434838418-_r_r_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-daterangepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7434838418-_r_v_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-fieldset--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7240908059-_r_c_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-fieldset--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7240908059-_r_d_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-fieldset--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7240908059-_r_h_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-fieldset--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7240908059-_r_i_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-fieldset--all-variations",
+      "rule": "color-contrast",
+      "target": "#tale-ui-_r_b_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-file-components--all-variations",
+      "rule": "color-contrast",
+      "target": ".story-dropzone-basic > p",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-fileupload--default",
+      "rule": "label",
+      "target": "#_r_0_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-headernav--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > header > .tale-header-nav__actions > .tale-button--neutral.tale-button[href$=\"login\"]",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-headernav--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > header > .tale-header-nav__logo > .tale-header-nav__logo-link[href=\"/\"]",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-headernav--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(2) > header > .tale-header-nav__actions > .tale-button--neutral.tale-button[href$=\"login\"]",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-headernav--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(2) > header > .tale-header-nav__logo > .tale-header-nav__logo-link[href=\"/\"]",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-headernav--all-variations",
+      "rule": "landmark-no-duplicate-banner",
+      "target": "div:nth-child(1) > header",
+      "impact": "moderate"
+    },
+    {
+      "storyId": "components-headernav--all-variations",
+      "rule": "landmark-unique",
+      "target": "div:nth-child(1) > header",
+      "impact": "moderate"
+    },
+    {
+      "storyId": "components-inputgroup--default",
+      "rule": "color-contrast",
+      "target": ".tale-input-group__addon",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-keyvaluepairs--default",
+      "rule": "color-contrast",
+      "target": ".tale-badge",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-menubar--all-variations",
+      "rule": "aria-required-children",
+      "target": ".tale-menubar",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-meter--all-variations",
+      "rule": "aria-allowed-attr",
+      "target": "#react-aria7071711420-_r_0_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-meter--all-variations",
+      "rule": "aria-allowed-attr",
+      "target": "#react-aria7071711420-_r_3_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-meter--all-variations",
+      "rule": "aria-allowed-attr",
+      "target": "#react-aria7071711420-_r_6_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-meter--all-variations",
+      "rule": "aria-allowed-attr",
+      "target": "#react-aria7071711420-_r_9_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-navigationmenu--all-variations",
+      "rule": "landmark-unique",
+      "target": "div:nth-child(1) > nav",
+      "impact": "moderate"
+    },
+    {
+      "storyId": "components-pininput--all-variations",
+      "rule": "label",
+      "target": "div:nth-child(1) > .tale-pin-input[data-input-otp-container=\"true\"] > div:nth-child(2) > input[maxlength=\"4\"]",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-pininput--all-variations",
+      "rule": "label",
+      "target": "div:nth-child(2) > input[maxlength=\"6\"]",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-pininput--all-variations",
+      "rule": "label",
+      "target": "div:nth-child(4) > .tale-pin-input[data-input-otp-container=\"true\"] > div:nth-child(2) > input[maxlength=\"4\"]",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-pininput--all-variations",
+      "rule": "label",
+      "target": "div:nth-child(4) > input[maxlength=\"6\"]",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_0_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_11_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_14_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_17_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_1a_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_1d_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_3_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_6_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_9_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_c_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_f_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_i_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_l_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_o_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_r_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria2726969662-_r_u_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_0_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_11_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_14_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_17_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_1a_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_1d_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_1g_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_1j_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_3_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_6_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_9_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_c_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_f_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_i_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_l_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_o_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_r_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria3329774307-_r_u_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-ratingstars--all-variations",
+      "rule": "color-contrast",
+      "target": ".tale-rating-badge--lg",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-ratingstars--all-variations",
+      "rule": "color-contrast",
+      "target": ".tale-rating-badge--md",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-ratingstars--all-variations",
+      "rule": "color-contrast",
+      "target": ".tale-rating-badge--sm",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-scrollarea--all-variations",
+      "rule": "scrollable-region-focusable",
+      "target": "div:nth-child(1) > .tale-scroll-area > .tale-scroll-area__viewport",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-scrollarea--all-variations",
+      "rule": "scrollable-region-focusable",
+      "target": "div:nth-child(2) > .tale-scroll-area > .tale-scroll-area__viewport",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-select--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria4058284266-_r_1f_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-select--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria4058284266-_r_7_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-select--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria4058284266-_r_h_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-select--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria4058284266-_r_r_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-selectnative--all-variations",
+      "rule": "select-name",
+      "target": ".tale-select-native--md:nth-child(6)",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-selectnative--all-variations",
+      "rule": "select-name",
+      "target": ".tale-select-native--md:nth-child(9)",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-selectnative--all-variations",
+      "rule": "select-name",
+      "target": ".tale-select-native--sm:nth-child(5)",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-selectnative--all-variations",
+      "rule": "select-name",
+      "target": ".tale-select-native--sm:nth-child(8)",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-sidebar--default",
+      "rule": "color-contrast",
+      "target": ".tale-sidebar__header > strong",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-slider--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria5663684381-_r_20_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-slider--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria5663684381-_r_25_ > .tale-slider__header > output",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-slider--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria5663684381-_r_26_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-slider--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria5663684381-_r_2u_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-slider--all-variations",
+      "rule": "color-contrast",
+      "target": "output[for=\"react-aria5663684381-_r_20_-0\"]",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-slider--all-variations",
+      "rule": "color-contrast",
+      "target": "output[for=\"react-aria5663684381-_r_2u_-0\"]",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-slider--all-variations",
+      "rule": "label",
+      "target": "#react-aria5663684381-_r_s_-0",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-switch--all-variations",
+      "rule": "label",
+      "target": "div:nth-child(1) > label > span:nth-child(1) > input",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-switch--all-variations",
+      "rule": "label",
+      "target": "div:nth-child(2) > label[data-selected=\"true\"] > span:nth-child(1) > input",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-switch--all-variations",
+      "rule": "label",
+      "target": "div:nth-child(3) > label[data-disabled=\"true\"] > span:nth-child(1) > input",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-switch--all-variations",
+      "rule": "label",
+      "target": "label[data-selected=\"true\"][data-disabled=\"true\"] > span:nth-child(1) > input",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "aria-valid-attr-value",
+      "target": "#react-aria4210859666-_r_1_-tab-t1",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "aria-valid-attr-value",
+      "target": "#react-aria4210859666-_r_4_-tab-t1",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "aria-valid-attr-value",
+      "target": "#react-aria4210859666-_r_7_-tab-t1",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "aria-valid-attr-value",
+      "target": "#react-aria4210859666-_r_a_-tab-t1",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "aria-valid-attr-value",
+      "target": "#react-aria4210859666-_r_d_-tab-t1",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "aria-valid-attr-value",
+      "target": "#react-aria4210859666-_r_g_-tab-t1",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria4210859666-_r_7_-tab-t2",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria4210859666-_r_7_-tab-t3",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria4210859666-_r_a_-tab-t2",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria4210859666-_r_a_-tab-t3",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria4210859666-_r_r_-tab-t2",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria4210859666-_r_r_-tab-t3",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria4210859666-_r_v_-tab-t2",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria4210859666-_r_v_-tab-t3",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-texteditor--default",
+      "rule": "aria-input-field-name",
+      "target": ".tiptap",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-texteditor--default",
+      "rule": "color-contrast",
+      "target": ".tale-text-editor__hint",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-timefield--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria1413013287-_r_h_",
+      "impact": "serious"
+    }
+  ]
+}

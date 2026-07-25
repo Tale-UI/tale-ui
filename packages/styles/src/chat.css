@@ -127,16 +127,16 @@
 }
 
 .tale-chat__tool-call-status {
-  color: var(--neutral-60);
+  color: var(--neutral-80);
   font-size: var(--label-xs-font-size);
 }
 
 .tale-chat__tool-call--success .tale-chat__tool-call-status {
-  color: var(--success-80);
+  color: var(--success-90);
 }
 
 .tale-chat__tool-call--error .tale-chat__tool-call-status {
-  color: var(--error-80);
+  color: var(--error-90);
 }
 
 .tale-chat__tool-call-details {
