@@ -1,6 +1,6 @@
 # Component Index
 
-Quick-reference table for all 117 `@tale-ui/react` components plus 6 `@tale-ui/charts` components.
+Quick-reference table for all 118 `@tale-ui/react` components plus 6 `@tale-ui/charts` components.
 For detailed usage, see the per-component docs in [docs/components/](components/index.md).
 
 ## Form Controls (27)
@@ -86,7 +86,7 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | Sidebar        | Sidebar navigation primitives for composing simple, dual-tier, slim, and section-divided sidebars | `@tale-ui/react/sidebar`         | Root, Header, Search, Divider, NavList, NavItem, NavButton, AccountCard, AccountMenu, MobileTrigger, FeatureCard                                                                                                                                                                               |
 | HeaderNav      | Horizontal header navigation primitives                                                           | `@tale-ui/react/header-nav`      | Root, Logo, NavButton, Actions, Secondary, MobileTrigger                                                                                                                                                                                                                                       |
 
-## Layout (11)
+## Layout (12)
 
 | Component  | Description                                                                  | Import                       | Parts                                                                    |
 | ---------- | ---------------------------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------ |
@@ -94,6 +94,7 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | AppShell   | Experimental structural application layout slots                             | `@tale-ui/react/app-shell`   | Root, Header, Sidebar, Main, MobileNavigation, SkipLink                   |
 | Card       | Presentational and interactive card surfaces                                 | `@tale-ui/react/card`        | Root, Button, Header, Body, Footer                                       |
 | Carousel   | Slide carousel with navigation                                               | `@tale-ui/react/carousel`    | Root, Content, Item, PreviousTrigger, NextTrigger, Indicators, Indicator |
+| Chat       | Experimental protocol-neutral conversation layout and semantics              | `@tale-ui/react/chat`        | Root, List, Message, Bubble, Metadata, Composer, ToolCall                 |
 | Column     | Vertical flex-column layout with gap, align, and justify props               | `@tale-ui/react/column`      | --                                                                       |
 | Disclosure | Single collapsible section                                                   | `@tale-ui/react/disclosure`  | Root, Trigger, Panel                                                     |
 | Row        | Horizontal flex-row layout with gap, align, and justify props                | `@tale-ui/react/row`         | --                                                                       |

@@ -50,6 +50,7 @@ import { ScrollArea } from '@tale-ui/react/scroll-area';
 import { Container } from '@tale-ui/react/container';
 import { Card } from '@tale-ui/react/card';
 import { AppShell } from '@tale-ui/react/app-shell';
+import { Chat } from '@tale-ui/react/chat';
 import { Column } from '@tale-ui/react/column';
 import { Row as LayoutRow } from '@tale-ui/react/row';
 
@@ -383,6 +384,7 @@ const TOC = [
       { id: 'separator', label: 'Separator' },
       { id: 'toolbar', label: 'Toolbar' },
       { id: 'card', label: 'Card' },
+      { id: 'chat', label: 'Chat' },
       { id: 'column', label: 'Column' },
       { id: 'row', label: 'Row' },
     ],
@@ -4196,6 +4198,54 @@ export default function ComponentAudit() {
             <AppShell.Main>Application-owned content</AppShell.Main>
             <AppShell.MobileNavigation>Mobile navigation slot</AppShell.MobileNavigation>
           </AppShell.Root>
+        </Section>
+
+        <Section
+          id="chat"
+          title="Chat"
+          classes={[
+            'tale-chat',
+            'tale-chat--with-artifact-panel',
+            'tale-chat__conversation',
+            'tale-chat__artifact-panel',
+            'tale-chat__message-list',
+            'tale-chat__message',
+            'tale-chat__bubble',
+            'tale-chat__metadata',
+            'tale-chat__composer',
+            'tale-chat__tool-call',
+          ]}
+        >
+          <Chat.Root
+            aria-label="Audit conversation"
+            artifactPanel={<Text>Artifact preview</Text>}
+            style={{ minHeight: '24rem' }}
+          >
+            <Chat.List aria-label="Messages">
+              <Chat.Message speaker="user" aria-label="User message">
+                <Chat.Bubble>Check the build status.</Chat.Bubble>
+              </Chat.Message>
+              <Chat.Message speaker="assistant" aria-label="Assistant message">
+                <Chat.Bubble>The build passed.</Chat.Bubble>
+                <Chat.Metadata>Just now</Chat.Metadata>
+                <Chat.ToolCall
+                  state="success"
+                  label="Read checks"
+                  statusLabel="Complete"
+                  open
+                >
+                  All checks passed.
+                </Chat.ToolCall>
+              </Chat.Message>
+            </Chat.List>
+            <Chat.Composer
+              aria-label="Message composer"
+              onSubmit={(event) => event.preventDefault()}
+            >
+              <TextArea.Root aria-label="Message" />
+              <Button type="submit">Send</Button>
+            </Chat.Composer>
+          </Chat.Root>
         </Section>
 
         <Section

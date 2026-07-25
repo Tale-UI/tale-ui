@@ -11,7 +11,7 @@ Ship an experimental `Chat` namespace for layout and semantics, plus a pure
 streaming-text state utility. Approve `ChatLayout`, `MessageList`, `Message`,
 `MessageBubble`, `MessageMetadata`, `Composer`, `ToolCall`, and the
 streaming-text utility. Reject a separate `SystemMessage`; use
-`Chat.Message role="system"`.
+`Chat.Message speaker="system"`.
 
 The public API accepts ordinary React content and serializable IDs, roles,
 states, sequence numbers, and text chunks. It does not accept an AI SDK or

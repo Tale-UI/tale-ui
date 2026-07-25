@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "tale:template:chat-mobile",
+  "version": "1.0.0",
+  "source": "source/App.tsx",
+  "skeleton": "skeleton/App.tsx",
+  "dependencies": {
+    "@tale-ui/react": "^2.0.0",
+    "react": ">=18.0.0"
+  },
+  "preview": {
+    "recipe": "docs/recipes/chat-mobile.md",
+    "accessibility": "keyboard, screen-reader, zoom, contrast, and reduced-motion review required",
+    "responsive": true
+  },
+  "golden": "tools/golden-prompts/chat-ordinary-data.json",
+  "compatibility": {
+    "react": ">=18.0.0",
+    "tale": ">=2.0.0 <3.0.0",
+    "frameworks": [
+      "next",
+      "vite"
+    ]
+  },
+  "appearance": [
+    "light",
+    "dark"
+  ],
+  "rtl": true,
+  "provenance": {
+    "source": "docs/recipes/chat-mobile.md",
+    "firstParty": true
+  },
+  "license": "MIT",
+  "digest": "sha256:c7751eefe5872fd9e3e2f7df17a8a5630bd42801c7fdb30e7546e18adf4fefb4"
+}

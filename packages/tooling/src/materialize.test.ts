@@ -15,13 +15,15 @@ async function fixture() {
   return root;
 }
 
-test('template inventory contains the exact ten canonical roadmap templates', async () => {
+test('template inventory contains the exact ten starters and two Chat templates', async () => {
   const templates = await listTemplates();
   assert.deepEqual(
     templates.map((template) => template.id),
     [
       'tale:template:app-header',
       'tale:template:chart-dashboard',
+      'tale:template:chat-artifact-panel',
+      'tale:template:chat-mobile',
       'tale:template:command-palette-dashboard',
       'tale:template:empty-state',
       'tale:template:loading-patterns',
@@ -109,4 +111,3 @@ test('template add materializes source, merges dependencies, and refuses overwri
     await rm(root, { recursive: true, force: true });
   }
 });
-

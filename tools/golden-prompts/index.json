@@ -61,6 +61,10 @@
       "difficulty": "complex"
     },
     {
+      "slug": "chat-ordinary-data",
+      "difficulty": "complex"
+    },
+    {
       "slug": "checkbox-group-form",
       "difficulty": "medium"
     },

@@ -1,0 +1,162 @@
+.tale-chat {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-block-size: 0;
+  background: var(--neutral-5);
+  color: var(--neutral-90);
+}
+
+.tale-chat--with-artifact-panel {
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 40%);
+}
+
+.tale-chat__conversation {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+  min-block-size: 0;
+}
+
+.tale-chat__artifact-panel {
+  min-inline-size: 0;
+  padding: var(--space-s);
+  overflow: auto;
+  border-inline-start: 1px solid var(--neutral-20);
+  background: var(--neutral-10);
+}
+
+.tale-chat__message-list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-s);
+  min-block-size: 0;
+  padding: var(--space-s);
+  overflow: auto;
+}
+
+.tale-chat__message {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+  inline-size: min(100%, 48rem);
+}
+
+.tale-chat__message--user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.tale-chat__message--assistant {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.tale-chat__message--system {
+  align-self: center;
+  align-items: center;
+}
+
+.tale-chat__bubble {
+  max-inline-size: 75ch;
+  padding: var(--space-xs) var(--space-s);
+  border-radius: var(--radius-l);
+  background: var(--neutral-12);
+  color: var(--neutral-90);
+  font-family: var(--text-font-family);
+  font-size: var(--text-m-font-size);
+  line-height: var(--text-line-height);
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.tale-chat__message--user .tale-chat__bubble {
+  background: var(--color-60);
+  color: var(--color-60-fg);
+}
+
+.tale-chat__message--system .tale-chat__bubble {
+  padding-block: var(--space-3xs);
+  background: var(--neutral-10);
+  color: var(--neutral-70);
+  font-size: var(--text-s-font-size);
+}
+
+.tale-chat__metadata {
+  color: var(--neutral-60);
+  font-family: var(--label-font-family);
+  font-size: var(--label-xs-font-size);
+}
+
+.tale-chat__composer {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-xs);
+  padding: var(--space-s);
+  border-block-start: 1px solid var(--neutral-20);
+  background: var(--neutral-5);
+}
+
+.tale-chat__composer[data-busy] {
+  opacity: 0.72;
+}
+
+.tale-chat__tool-call {
+  inline-size: min(100%, 42rem);
+  border: 1px solid var(--neutral-24);
+  border-radius: var(--radius-m);
+  background: var(--neutral-10);
+  color: var(--neutral-80);
+}
+
+.tale-chat__tool-call-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  padding: var(--space-xs);
+  font-family: var(--label-font-family);
+  font-size: var(--label-s-font-size);
+  font-weight: var(--label-font-weight);
+  cursor: pointer;
+}
+
+.tale-chat__tool-call-summary:focus-visible {
+  outline: 3px solid var(--focus-ring-glow);
+  outline-offset: 2px;
+}
+
+.tale-chat__tool-call-status {
+  color: var(--neutral-60);
+  font-size: var(--label-xs-font-size);
+}
+
+.tale-chat__tool-call--success .tale-chat__tool-call-status {
+  color: var(--success-80);
+}
+
+.tale-chat__tool-call--error .tale-chat__tool-call-status {
+  color: var(--error-80);
+}
+
+.tale-chat__tool-call-details {
+  padding: 0 var(--space-xs) var(--space-xs);
+  overflow-wrap: anywhere;
+}
+
+@media (width <= 48rem) {
+  .tale-chat--with-artifact-panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tale-chat__artifact-panel {
+    max-block-size: 40dvh;
+    border-block-start: 1px solid var(--neutral-20);
+    border-inline-start: 0;
+  }
+
+  .tale-chat__message-list,
+  .tale-chat__composer {
+    padding: var(--space-xs);
+  }
+}

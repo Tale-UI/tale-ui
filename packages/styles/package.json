@@ -29,6 +29,7 @@
     "./column": "./src/column.css",
     "./carousel": "./src/carousel.css",
     "./calendar": "./src/calendar.css",
+    "./chat": "./src/chat.css",
     "./checkbox": "./src/checkbox.css",
     "./checkbox-field": "./src/checkbox-field.css",
     "./color-area": "./src/color-area.css",

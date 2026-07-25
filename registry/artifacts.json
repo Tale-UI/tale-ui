@@ -23,6 +23,7 @@
     "docs/components/calendar.md",
     "docs/components/card.md",
     "docs/components/carousel.md",
+    "docs/components/chat.md",
     "docs/components/checkbox-field.md",
     "docs/components/checkbox-group.md",
     "docs/components/checkbox.md",
@@ -137,6 +138,8 @@
     "docs/react-aria-deviations.md",
     "docs/react-setup.md",
     "docs/recipes/app-header-navigation.md",
+    "docs/recipes/chat-artifact-panel.md",
+    "docs/recipes/chat-mobile.md",
     "docs/recipes/command-palette-async.md",
     "docs/recipes/command-palette-basic.md",
     "docs/recipes/command-palette-dashboard.md",
@@ -215,6 +218,12 @@
     "packages/tooling/templates/chart-dashboard/skeleton/App.tsx",
     "packages/tooling/templates/chart-dashboard/source/App.tsx",
     "packages/tooling/templates/chart-dashboard/template.json",
+    "packages/tooling/templates/chat-artifact-panel/skeleton/App.tsx",
+    "packages/tooling/templates/chat-artifact-panel/source/App.tsx",
+    "packages/tooling/templates/chat-artifact-panel/template.json",
+    "packages/tooling/templates/chat-mobile/skeleton/App.tsx",
+    "packages/tooling/templates/chat-mobile/source/App.tsx",
+    "packages/tooling/templates/chat-mobile/template.json",
     "packages/tooling/templates/command-palette-dashboard/skeleton/App.tsx",
     "packages/tooling/templates/command-palette-dashboard/source/App.tsx",
     "packages/tooling/templates/command-palette-dashboard/template.json",
@@ -257,7 +266,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:1dd2882a1e26dd6590f2175936b3f6f5a0590477beb2a54c5115b318ceb843ce",
+  "sourceRevision": "sha256:eb030914c50782526035c3e5daf491b3adf7d79dc286e782334ec61030caa0a4",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -9705,6 +9714,61 @@
       }
     },
     {
+      "id": "tale:component:chat",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "chat",
+      "name": "Chat",
+      "description": "Experimental protocol-neutral conversation layout and semantics",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "2.0.0",
+      "aliases": [
+        "Chat"
+      ],
+      "keywords": [
+        "and",
+        "chat",
+        "conversation",
+        "experimental",
+        "layout",
+        "neutral",
+        "protocol",
+        "semantics"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=chat]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/chat"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/chat/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Layout",
+        "componentKind": "compound"
+      }
+    },
+    {
       "id": "tale:component:checkbox",
       "namespace": "tale",
       "kind": "component",
@@ -16377,6 +16441,44 @@
       ],
       "provenance": {
         "source": "docs/components/carousel.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:doc:docs-components-chat",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-chat",
+      "name": "Chat",
+      "description": "Public Tale UI documentation: Chat",
+      "lifecycle": "stable",
+      "keywords": [
+        "chat",
+        "components",
+        "docs",
+        "md"
+      ],
+      "related": [
+        "tale:component:chat"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/chat.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/chat.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -25943,6 +26045,69 @@
         "ruleId": "carousel-no-slide-index-props",
         "category": "component",
         "component": "Carousel"
+      }
+    },
+    {
+      "id": "tale:pitfall:chat--chat-no-raw-html",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "chat--chat-no-raw-html",
+      "name": "Keep untrusted HTML out of Chat",
+      "description": "render plain text or an independently reviewed content component because Chat intentionally has no HTML or Markdown escape hatch.",
+      "lifecycle": "stable",
+      "keywords": [
+        "an",
+        "because",
+        "chat",
+        "component",
+        "content",
+        "escape",
+        "has",
+        "hatch",
+        "html",
+        "independently",
+        "intentionally",
+        "keep",
+        "markdown",
+        "no",
+        "of",
+        "or",
+        "out",
+        "plain",
+        "raw",
+        "render",
+        "reviewed",
+        "text",
+        "untrusted"
+      ],
+      "related": [
+        "tale:component:chat"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=chat].pitfalls[id=chat-no-raw-html]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/chat.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "chat-no-raw-html",
+        "category": "component",
+        "component": "Chat"
       }
     },
     {
@@ -47588,6 +47753,87 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:recipe:chat-artifact-panel",
+      "namespace": "tale",
+      "kind": "recipe",
+      "slug": "chat-artifact-panel",
+      "name": "Chat with Artifact Panel",
+      "description": "Canonical Tale UI recipe: Chat with Artifact Panel",
+      "lifecycle": "stable",
+      "keywords": [
+        "artifact",
+        "chat",
+        "panel",
+        "with"
+      ],
+      "related": [
+        "tale:component:button",
+        "tale:component:chat",
+        "tale:component:text",
+        "tale:component:text-area"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/recipes/chat-artifact-panel.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "recipe.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/recipes/chat-artifact-panel.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:recipe:chat-mobile",
+      "namespace": "tale",
+      "kind": "recipe",
+      "slug": "chat-mobile",
+      "name": "Mobile Chat",
+      "description": "Canonical Tale UI recipe: Mobile Chat",
+      "lifecycle": "stable",
+      "keywords": [
+        "chat",
+        "mobile"
+      ],
+      "related": [
+        "tale:component:button",
+        "tale:component:chat",
+        "tale:component:text-area"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/recipes/chat-mobile.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "recipe.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/recipes/chat-mobile.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:recipe:command-palette-async",
       "namespace": "tale",
       "kind": "recipe",
@@ -49448,6 +49694,131 @@
       }
     },
     {
+      "id": "tale:template:chat-artifact-panel",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "chat-artifact-panel",
+      "name": "Chat Artifact Panel",
+      "description": "Installable Tale UI chat artifact panel template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "keywords": [
+        "artifact",
+        "chat",
+        "docs",
+        "md",
+        "panel",
+        "recipes"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/chat-artifact-panel/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:chat-artifact-panel"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/chat-artifact-panel/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:f47a4de82563e9a8f338b47745e9c10d629d6d5df8d67391de9009993028b414"
+      }
+    },
+    {
+      "id": "tale:template:chat-mobile",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "chat-mobile",
+      "name": "Chat Mobile",
+      "description": "Installable Tale UI chat mobile template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.0.0-internal",
+      "keywords": [
+        "chat",
+        "docs",
+        "md",
+        "mobile",
+        "recipes"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/chat-mobile/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:chat-mobile"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/chat-mobile/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:c7751eefe5872fd9e3e2f7df17a8a5630bd42801c7fdb30e7546e18adf4fefb4"
+      }
+    },
+    {
       "id": "tale:template:command-palette-dashboard",
       "namespace": "tale",
       "kind": "template",
@@ -49953,5 +50324,5 @@
       }
     }
   ],
-  "digest": "sha256:45b928f3d9cdce8fe82b0df35be6a54278adf859a27ebc477306e0499c76a37b"
+  "digest": "sha256:6ea006ba0a3fd70693d21f6fed2fbcd0075830713c53773e3b19bad96a887ab8"
 }

@@ -44,6 +44,7 @@
 
 /* ─── Layout / containers ───────────────────────────────────────────────────── */
 @import './app-shell.css';
+@import './chat.css';
 @import './carousel.css';
 @import './accordion.css';
 @import './disclosure.css';

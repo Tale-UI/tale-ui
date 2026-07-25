@@ -1708,6 +1708,93 @@
       "crossPitfallRefs": null
     },
     {
+      "name": "Chat",
+      "slug": "chat",
+      "import": "@tale-ui/react/chat",
+      "category": "Layout",
+      "description": "Experimental protocol-neutral conversation layout and semantics",
+      "kind": "compound",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "artifactPanel",
+          "type": "React.ReactNode",
+          "required": false,
+          "description": "Optional application-owned artifact panel.",
+          "default": null
+        },
+        {
+          "name": "artifactPanelLabel",
+          "type": "string",
+          "required": false,
+          "description": "Accessible label for the artifact panel. @default 'Artifact panel'",
+          "default": null
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "isBusy",
+          "type": "boolean",
+          "required": false,
+          "description": null,
+          "default": null
+        }
+      ],
+      "parts": [
+        "Root",
+        "List",
+        "Message",
+        "Bubble",
+        "Metadata",
+        "Composer",
+        "ToolCall"
+      ],
+      "examples": [
+        "import { Chat } from '@tale-ui/react/chat';\nimport { Button } from '@tale-ui/react/button';\nimport { TextArea } from '@tale-ui/react/text-area';\n\nexport function Conversation() {\n  return (\n    <Chat.Root aria-label=\"Support conversation\">\n      <Chat.List aria-label=\"Messages\">\n        <Chat.Message speaker=\"assistant\" aria-label=\"Assistant message\">\n          <Chat.Bubble>Hello. How can I help?</Chat.Bubble>\n          <Chat.Metadata>Just now</Chat.Metadata>\n        </Chat.Message>\n      </Chat.List>\n      <Chat.Composer\n        aria-label=\"Message composer\"\n        onSubmit={(event) => event.preventDefault()}\n      >\n        <TextArea.Root aria-label=\"Message\" />\n        <Button type=\"submit\">Send</Button>\n      </Chat.Composer>\n    </Chat.Root>\n  );\n}",
+        "const scope = {\n  streamId: 'stream-7',\n  requestId: 'request-7',\n  messageId: 'message-7',\n};\n\nlet result = applyStreamingTextEvent(createStreamingTextState(scope), {\n  ...scope,\n  type: 'chunk',\n  sequence: 0,\n  text: 'Hello',\n});\n\nif (result.accepted) {\n  result = applyStreamingTextEvent(result.state, {\n    ...scope,\n    type: 'complete',\n    sequence: 1,\n  });\n}",
+        "<Chat.ToolCall state=\"success\" label=\"Search documentation\" statusLabel=\"Complete\">\n  Three results\n</Chat.ToolCall>"
+      ],
+      "cssClasses": [
+        "tale-chat",
+        "tale-chat--with-artifact-panel",
+        "tale-chat__artifact-panel",
+        "tale-chat__bubble",
+        "tale-chat__composer",
+        "tale-chat__conversation",
+        "tale-chat__message",
+        "tale-chat__message--assistant",
+        "tale-chat__message--system",
+        "tale-chat__message--user",
+        "tale-chat__message-list",
+        "tale-chat__metadata",
+        "tale-chat__tool-call",
+        "tale-chat__tool-call--error",
+        "tale-chat__tool-call--success",
+        "tale-chat__tool-call-details",
+        "tale-chat__tool-call-status",
+        "tale-chat__tool-call-summary"
+      ],
+      "pitfalls": [
+        {
+          "id": "chat-no-raw-html",
+          "summary": "Keep untrusted HTML out of Chat",
+          "detail": "render plain text or an independently reviewed content component because Chat intentionally has no HTML or Markdown escape hatch.",
+          "antiPatterns": [
+            "<Chat.Bubble dangerouslySetInnerHTML={{ __html: modelText }} />"
+          ],
+          "fixes": [
+            "<Chat.Bubble>{modelText}</Chat.Bubble>"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
       "name": "Checkbox",
       "slug": "checkbox",
       "import": "@tale-ui/react/checkbox",

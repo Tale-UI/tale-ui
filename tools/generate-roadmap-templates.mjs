@@ -63,6 +63,16 @@ const DEFINITIONS = [
     recipe: 'loading-patterns',
     golden: 'loading-spinner',
   },
+  {
+    slug: 'chat-mobile',
+    recipe: 'chat-mobile',
+    golden: 'chat-ordinary-data',
+  },
+  {
+    slug: 'chat-artifact-panel',
+    recipe: 'chat-artifact-panel',
+    golden: 'chat-ordinary-data',
+  },
 ];
 
 function canonical(value) {

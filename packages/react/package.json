@@ -42,6 +42,7 @@
     "./card": "./src/card/index.ts",
     "./carousel": "./src/carousel/index.ts",
     "./calendar": "./src/calendar/index.ts",
+    "./chat": "./src/chat/index.ts",
     "./checkbox": "./src/checkbox/index.ts",
     "./checkbox-field": "./src/checkbox-field/index.ts",
     "./checkbox-group": "./src/checkbox-group/index.ts",
