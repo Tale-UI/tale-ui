@@ -1,0 +1,281 @@
+{
+  "$schema": "../../schemas/metrics.schema.json",
+  "schemaVersion": "1.0.0",
+  "snapshotId": "tale:metrics:current",
+  "definitionVersion": "1.0.0",
+  "capturedAt": "2026-07-25T00:00:00.000Z",
+  "privacy": {
+    "projectTelemetry": false,
+    "userIdentifiers": false,
+    "consentClass": "public-aggregate"
+  },
+  "metrics": [
+    {
+      "metricId": "package-downloads",
+      "title": "Package downloads",
+      "category": "adoption",
+      "unit": "downloads-last-30-days",
+      "definitionVersion": "1.0.0",
+      "consentClass": "public-aggregate",
+      "coverage": "unavailable",
+      "freshness": {
+        "status": "unavailable",
+        "targetHours": 24
+      },
+      "value": null,
+      "provenance": [
+        "npm-public-api"
+      ],
+      "collectionError": "Initial repository snapshot does not fabricate a network observation.",
+      "decisionUse": false
+    },
+    {
+      "metricId": "active-version-distribution",
+      "title": "Active version distribution",
+      "category": "adoption",
+      "unit": "distribution",
+      "definitionVersion": "1.0.0",
+      "consentClass": "public-aggregate",
+      "coverage": "unavailable",
+      "freshness": {
+        "status": "unavailable",
+        "targetHours": 168
+      },
+      "value": null,
+      "provenance": [
+        "unavailable-no-project-telemetry"
+      ],
+      "collectionError": "Unavailable by the approved no-project-telemetry metrics boundary.",
+      "decisionUse": false
+    },
+    {
+      "metricId": "docs-traffic",
+      "title": "Documentation traffic",
+      "category": "docs",
+      "unit": "pageviews",
+      "definitionVersion": "1.0.0",
+      "consentClass": "public-aggregate",
+      "coverage": "unavailable",
+      "freshness": {
+        "status": "unavailable",
+        "targetHours": 24
+      },
+      "value": null,
+      "provenance": [
+        "unavailable-no-docs-analytics"
+      ],
+      "collectionError": "Unavailable by the approved no-project-telemetry metrics boundary.",
+      "decisionUse": false
+    },
+    {
+      "metricId": "zero-result-searches",
+      "title": "Zero-result documentation searches",
+      "category": "docs",
+      "unit": "searches",
+      "definitionVersion": "1.0.0",
+      "consentClass": "public-aggregate",
+      "coverage": "unavailable",
+      "freshness": {
+        "status": "unavailable",
+        "targetHours": 24
+      },
+      "value": null,
+      "provenance": [
+        "unavailable-no-docs-analytics"
+      ],
+      "collectionError": "Unavailable by the approved no-project-telemetry metrics boundary.",
+      "decisionUse": false
+    },
+    {
+      "metricId": "cli-mcp-errors",
+      "title": "CLI and MCP errors",
+      "category": "tooling",
+      "unit": "errors-by-code",
+      "definitionVersion": "1.0.0",
+      "consentClass": "public-aggregate",
+      "coverage": "unavailable",
+      "freshness": {
+        "status": "unavailable",
+        "targetHours": 24
+      },
+      "value": null,
+      "provenance": [
+        "unavailable-no-project-telemetry"
+      ],
+      "collectionError": "Unavailable by the approved no-project-telemetry metrics boundary.",
+      "decisionUse": false
+    },
+    {
+      "metricId": "template-adds",
+      "title": "Template additions",
+      "category": "tooling",
+      "unit": "operations",
+      "definitionVersion": "1.0.0",
+      "consentClass": "public-aggregate",
+      "coverage": "unavailable",
+      "freshness": {
+        "status": "unavailable",
+        "targetHours": 24
+      },
+      "value": null,
+      "provenance": [
+        "unavailable-no-project-telemetry"
+      ],
+      "collectionError": "Unavailable by the approved no-project-telemetry metrics boundary.",
+      "decisionUse": false
+    },
+    {
+      "metricId": "codemod-runs-failures",
+      "title": "Codemod runs and failures",
+      "category": "tooling",
+      "unit": "operations",
+      "definitionVersion": "1.0.0",
+      "consentClass": "public-aggregate",
+      "coverage": "unavailable",
+      "freshness": {
+        "status": "unavailable",
+        "targetHours": 24
+      },
+      "value": null,
+      "provenance": [
+        "unavailable-no-project-telemetry"
+      ],
+      "collectionError": "Unavailable by the approved no-project-telemetry metrics boundary.",
+      "decisionUse": false
+    },
+    {
+      "metricId": "issues-by-component-version",
+      "title": "Issues by component and version",
+      "category": "issues",
+      "unit": "open-issues",
+      "definitionVersion": "1.0.0",
+      "consentClass": "public-aggregate",
+      "coverage": "unavailable",
+      "freshness": {
+        "status": "unavailable",
+        "targetHours": 24
+      },
+      "value": null,
+      "provenance": [
+        "github-public-api"
+      ],
+      "collectionError": "Initial repository snapshot does not fabricate a network observation.",
+      "decisionUse": false
+    },
+    {
+      "metricId": "structural-docs-coverage",
+      "title": "Structural and documentation coverage",
+      "category": "health",
+      "unit": "counts",
+      "definitionVersion": "1.0.0",
+      "consentClass": "public-aggregate",
+      "coverage": "complete",
+      "freshness": {
+        "status": "current",
+        "targetHours": 168,
+        "asOf": "2026-07-25T00:00:00.000Z"
+      },
+      "value": {
+        "artifacts": 877,
+        "components": 120,
+        "componentDocs": 120,
+        "templates": 12,
+        "migrationGroups": 4
+      },
+      "provenance": [
+        "registry/artifacts.json",
+        "registry/components.json",
+        "tools/golden-prompts/index.json",
+        "test/accessibility/baseline.json",
+        "analysis/baselines/performance-budgets.json"
+      ],
+      "decisionUse": true
+    },
+    {
+      "metricId": "golden-a11y-health",
+      "title": "Golden and accessibility health",
+      "category": "health",
+      "unit": "counts",
+      "definitionVersion": "1.0.0",
+      "consentClass": "public-aggregate",
+      "coverage": "complete",
+      "freshness": {
+        "status": "current",
+        "targetHours": 168,
+        "asOf": "2026-07-25T00:00:00.000Z"
+      },
+      "value": {
+        "goldenPrompts": 147,
+        "knownLegacyAxeViolations": 213,
+        "changedComponentAxeGate": true,
+        "maintainedPerformanceBudgets": 8
+      },
+      "provenance": [
+        "registry/artifacts.json",
+        "registry/components.json",
+        "tools/golden-prompts/index.json",
+        "test/accessibility/baseline.json",
+        "analysis/baselines/performance-budgets.json"
+      ],
+      "decisionUse": true
+    },
+    {
+      "metricId": "release-cadence",
+      "title": "Release cadence",
+      "category": "release",
+      "unit": "releases",
+      "definitionVersion": "1.0.0",
+      "consentClass": "public-aggregate",
+      "coverage": "unavailable",
+      "freshness": {
+        "status": "unavailable",
+        "targetHours": 24
+      },
+      "value": null,
+      "provenance": [
+        "github-public-api"
+      ],
+      "collectionError": "Initial repository snapshot does not fabricate a network observation.",
+      "decisionUse": false
+    },
+    {
+      "metricId": "upgrade-lag",
+      "title": "Consumer upgrade lag",
+      "category": "release",
+      "unit": "days",
+      "definitionVersion": "1.0.0",
+      "consentClass": "public-aggregate",
+      "coverage": "unavailable",
+      "freshness": {
+        "status": "unavailable",
+        "targetHours": 168
+      },
+      "value": null,
+      "provenance": [
+        "unavailable-no-project-telemetry"
+      ],
+      "collectionError": "Unavailable by the approved no-project-telemetry metrics boundary.",
+      "decisionUse": false
+    },
+    {
+      "metricId": "agent-pass-rate-context-cost",
+      "title": "Agent pass rate and context cost",
+      "category": "agent",
+      "unit": "trend",
+      "definitionVersion": "1.0.0",
+      "consentClass": "public-aggregate",
+      "coverage": "unavailable",
+      "freshness": {
+        "status": "unavailable",
+        "targetHours": 168
+      },
+      "value": null,
+      "provenance": [
+        "unavailable-no-retained-eval-trend"
+      ],
+      "collectionError": "Unavailable by the approved no-project-telemetry metrics boundary.",
+      "decisionUse": false
+    }
+  ],
+  "digest": "sha256:905d55533eb6a666430476eb4ac28242552c9c79b49bddb7675aa1f5f712b043"
+}

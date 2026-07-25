@@ -162,6 +162,89 @@ export const WithSorting: Story = {
   },
 };
 
+export const WithControllerPlugins: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
+  render() {
+    const controller = useTableController({
+      tableId: 'storybook-plugin-people',
+      defaultSelectedKeys: new Set(['2']),
+      defaultFilter: { schemaVersion: '1.0.0', value: 'e' },
+      defaultPageSize: 2,
+      totalRows: rows.length,
+    });
+    const filtered = controller.filtering.filterRows(rows, (row, filter) =>
+      `${row.name} ${row.email} ${row.role}`.toLowerCase().includes(filter.value.toLowerCase()),
+    );
+    const visibleRows = controller.pagination.paginateRows(filtered);
+
+    return (
+      <Table.Root
+        {...controller.tableProps}
+        aria-label="Filtered and paginated people"
+        selectionMode="multiple"
+      >
+        <Table.Header>
+          <Table.Column isRowHeader>Name</Table.Column>
+          <Table.Column>Email</Table.Column>
+          <Table.Column>Role</Table.Column>
+        </Table.Header>
+        <Table.Body items={visibleRows}>
+          {(row) => (
+            <Table.Row id={row.id}>
+              <Table.Cell>{row.name}</Table.Cell>
+              <Table.Cell>{row.email}</Table.Cell>
+              <Table.Cell>{row.role}</Table.Cell>
+            </Table.Row>
+          )}
+        </Table.Body>
+      </Table.Root>
+    );
+  },
+};
+
+const virtualRows = Array.from({ length: 1_000 }, (_, index) => ({
+  id: `virtual-${index + 1}`,
+  name: `Person ${index + 1}`,
+  email: `person${index + 1}@example.com`,
+  role: index % 2 === 0 ? 'Editor' : 'Viewer',
+}));
+
+export const WithVirtualization: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
+  render() {
+    const controller = useTableController({
+      tableId: 'storybook-virtual-people',
+      virtualizationOptions: { rowHeight: 44 },
+    });
+    return (
+      <div style={{ height: 320, width: 720 }}>
+        <Table.Virtualizer {...controller.virtualization.virtualizerProps}>
+          <Table.Root aria-label="1,000 virtualized people">
+            <Table.Header>
+              <Table.Column isRowHeader>Name</Table.Column>
+              <Table.Column>Email</Table.Column>
+              <Table.Column>Role</Table.Column>
+            </Table.Header>
+            <Table.Body items={virtualRows}>
+              {(row) => (
+                <Table.Row id={row.id}>
+                  <Table.Cell>{row.name}</Table.Cell>
+                  <Table.Cell>{row.email}</Table.Cell>
+                  <Table.Cell>{row.role}</Table.Cell>
+                </Table.Row>
+              )}
+            </Table.Body>
+          </Table.Root>
+        </Table.Virtualizer>
+      </div>
+    );
+  },
+};
+
 export const AllVariations: Story = {
   parameters: { controls: { disable: true } },
   render() {

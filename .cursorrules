@@ -17,9 +17,9 @@ Use **only** components from `@tale-ui/react` for all UI. Never invent new impor
 
 ## Namespace vs simple
 
-**Namespace** (use `.Root`): Accordion, AlertDialog, Autocomplete, Avatar, BadgeGroup, Banner, Breadcrumbs, Calendar, Card, Carousel, CheckboxField, ColorArea, ColorField, ColorPicker, ColorSlider, ColorSwatchPicker, ColorWheel, Combobox, CommandPalette, ContextMenu, CreditCard, DateField, DatePicker, DateRangePicker, Dialog, Disclosure, Drawer, EmptyState, Field, Fieldset, FileUpload, GridList, HeaderNav, ImageCropper, Input, InputGroup, InputTags, KeyValuePairs, List, ListBox, Menu, Menubar, Meter, MultiSelect, NavigationMenu, NumberField, Pagination, PaymentInput, PinInput, Popover, PreviewCard, ProgressBar, ProgressCircle, QRCode, RadioField, RangeCalendar, ScrollArea, SearchField, Select, Sidebar, Slider, SwitchField, Table, Tabs, TagGroup, TagSelect, TextArea, TextEditor, TextField, TimeField, Toolbar, Tooltip, Tree, VideoPlayer.
+**Namespace** (use `.Root`): Accordion, AlertDialog, AppShell, Autocomplete, Avatar, BadgeGroup, Banner, Breadcrumbs, Calendar, Card, Carousel, Chat, CheckboxField, ColorArea, ColorField, ColorPicker, ColorSlider, ColorSwatchPicker, ColorWheel, Combobox, CommandPalette, ContextMenu, CreditCard, DateField, DatePicker, DateRangePicker, Dialog, Disclosure, Drawer, EmptyState, Field, Fieldset, FileUpload, GridList, HeaderNav, ImageCropper, Input, InputGroup, InputTags, KeyValuePairs, List, ListBox, Menu, Menubar, Meter, MultiSelect, NavigationMenu, NumberField, Pagination, PaymentInput, PinInput, Popover, PreviewCard, ProgressBar, ProgressCircle, QRCode, RadioField, RangeCalendar, ScrollArea, SearchField, Select, Sidebar, Slider, SwitchField, Table, Tabs, TagGroup, TagSelect, TextArea, TextEditor, TextField, TimeField, Toolbar, Tooltip, Tree, VideoPlayer.
 
-**Simple** (direct use): AppStoreButton, BackgroundPattern, Badge, Button, CSPProvider, CheckboxGroup, ColorModeToggle, ColorSwatch, Column, Container, DotIcon, DropZone, FeaturedIcon, FileTrigger, Form, I18nProvider, Icon, IconButton, Illustration, Image, IphoneMockup, Link, PaginationDot, PaginationLine, RadioGroup, RatingBadge, RatingStars, Row, SectionDivider, SelectNative, Separator, SocialButton, SocialButtonGroup, Spinner, Text, ToggleButton, ToggleButtonGroup, Virtualizer, mergeProps.
+**Simple** (direct use): AppStoreButton, BackgroundPattern, Badge, Button, CSPProvider, CheckboxGroup, CodeBlock, ColorModeToggle, ColorSwatch, Column, Container, DotIcon, DropZone, FeaturedIcon, FileTrigger, Form, I18nProvider, Icon, IconButton, Illustration, Image, IphoneMockup, Kbd, Link, PaginationDot, PaginationLine, RadioGroup, RatingBadge, RatingStars, Row, SectionDivider, SelectNative, Separator, SocialButton, SocialButtonGroup, Spinner, Text, ToggleButton, ToggleButtonGroup, Virtualizer, mergeProps.
 
 **Deprecated** (still functional; avoid in new code): Checkbox (use CheckboxField), Radio (use RadioField), Switch (use SwitchField).
 
@@ -46,6 +46,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [AlertDialog] No AlertDialog.Cancel or AlertDialog.Action sub-parts
 - [AlertDialog] AlertDialog.Content is required inside AlertDialog.Popup
 - [AlertDialog] AlertDialog.Trigger requires the base tale-button class
+- [AppShell] Keep application behavior outside AppShell
 - [AppStoreButton] store accepts 'apple' or 'google' only
 - [Autocomplete] No phantom sub-parts: no Autocomplete.Label, Autocomplete.Popover, Autocomplete.Trigger, or Autocomplete.Value
 - [Autocomplete] No selection or open-state props on Autocomplete.Root
@@ -96,10 +97,12 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [Carousel] Uses Carousel.PreviousTrigger and Carousel.NextTrigger
 - [Carousel] No selectedIndex, onSelectedIndexChange, currentSlide, or onSlideChange props
 - [Carousel] Never use document.querySelector in carousel code
+- [Chat] Keep untrusted HTML out of Chat
 - [CheckboxField] Always use the CheckboxField namespace via <CheckboxField.Root>, never bare <CheckboxField> directly
 - [CheckboxField] The label text goes inside CheckboxField.Button, not directly in CheckboxField.Root
 - [CheckboxField] CheckboxField.Indicator needs an <Icon> child — it does not render a checkmark automatically
 - [CheckboxGroup] CheckboxGroup controlled-state uses string[] (plain array), NOT Set<string>.
+- [CodeBlock] Pass plain text to CodeBlock
 - [ColorArea] Only Root and Thumb sub-parts — no ColorArea.Gradient
 - [ColorArea] yChannel value depends on color space
 - [ColorField] There is no HexColorField component
@@ -194,6 +197,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [GridList] Use GridList for any prompt that asks for a selectable grid list, image card grid, or multi-select card grid
 - [HeaderNav] HeaderNav.MobileTrigger requires children — omitting them causes a TypeScript error 'Property children is missing in type {} but required in type HeaderNavMobileTriggerProps'
 - [HeaderNav] Always import Text from @tale-ui/react/text when rendering text inside HeaderNav sub-parts such as HeaderNav.Logo
+- [I18nProvider] Do not put application copy in I18nProvider catalogs
 - [Icon] icon prop takes a component reference, not an instance
 - [Icon] Import lucide icons from lucide-react root, not deep subpaths
 - [Icon] Avoid Icon Image name collisions
@@ -220,6 +224,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [IphoneMockup] image is required
 - [IphoneMockup] Image size should ideally be 750 × 1624 px
 - [IphoneMockup] The exported name is IPhoneMockup (capital P), not IphoneMockup
+- [Kbd] Do not use Kbd to register shortcuts
 - [KeyValuePairs] Use KeyValuePairs.Root, not <KeyValuePairs> directly
 - [KeyValuePairs] Use standard React aria-label and aria-labelledby props
 - [KeyValuePairs] columns accepts only 1, 2, 3, or 4

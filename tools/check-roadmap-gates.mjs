@@ -7,6 +7,8 @@ import { fileURLToPath } from 'node:url';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const ADR_PATH = 'docs/architecture/adr-001-tooling-package.md';
 const VALIDATION_BASELINE_PATH = 'analysis/baselines/validation-runtime.json';
+const MUTATION_BASELINE_PATH = 'analysis/baselines/project-mutation-runtime.json';
+const RELEASE_BASELINE_PATH = 'analysis/baselines/tooling-package-release.json';
 const adr = readFileSync(join(ROOT, ADR_PATH), 'utf8');
 const accepted = /^- Status: Accepted$/m.test(adr);
 
@@ -68,11 +70,50 @@ if (!accepted && prematureIntegrations.length > 0) {
 
 if (accepted) {
   const toolingManifest = JSON.parse(readFileSync(packageManifest, 'utf8'));
-  if (artifactRegistry.releaseChannel === 'internal' && toolingManifest.private !== true) {
-    throw new Error('Internal tooling releases must remain private');
-  }
-  if (publishWorkflow.includes('@tale-ui/tooling')) {
-    throw new Error('Tooling publication is gated until packed validation parity passes');
+  if (artifactRegistry.releaseChannel === 'internal') {
+    if (toolingManifest.private !== true) {
+      throw new Error('Internal tooling releases must remain private');
+    }
+    if (publishWorkflow.includes('@tale-ui/tooling')) {
+      throw new Error('Internal tooling cannot enter the public publish workflow');
+    }
+  } else {
+    if (toolingManifest.private === true) {
+      throw new Error('Public tooling release channels cannot use a private package manifest');
+    }
+    if (!existsSync(join(ROOT, RELEASE_BASELINE_PATH))) {
+      throw new Error('Public tooling requires packed release-readiness evidence');
+    }
+    const releaseBaseline = JSON.parse(readFileSync(join(ROOT, RELEASE_BASELINE_PATH), 'utf8'));
+    if (
+      releaseBaseline.status !== 'passed' ||
+      releaseBaseline.package !== '@tale-ui/tooling' ||
+      releaseBaseline.version !== toolingManifest.version ||
+      releaseBaseline.releaseChannel !== artifactRegistry.releaseChannel ||
+      releaseBaseline.verification?.packedCommand !==
+        'pnpm --filter @tale-ui/tooling test:package' ||
+      JSON.stringify(releaseBaseline.verification?.fixtures) !== JSON.stringify(['vite', 'next']) ||
+      JSON.stringify(releaseBaseline.verification?.surfaces) !==
+        JSON.stringify(['api', 'cli', 'local-mcp']) ||
+      releaseBaseline.publication?.automaticOnMerge !== false ||
+      releaseBaseline.publication?.defaultDistTag !== 'next' ||
+      releaseBaseline.publication?.provenance !== true ||
+      releaseBaseline.publication?.duplicateSafe !== true
+    ) {
+      throw new Error('Public tooling release-readiness evidence is incomplete or stale');
+    }
+    for (const requiredWorkflowContract of [
+      "'tooling-v*.*.*'",
+      "scope == 'tooling'",
+      '@tale-ui/tooling',
+      '--provenance',
+      '--tag $',
+      'dist_tag=next',
+    ]) {
+      if (!publishWorkflow.includes(requiredWorkflowContract)) {
+        throw new Error(`Public tooling publish workflow is missing ${requiredWorkflowContract}`);
+      }
+    }
   }
   const validationCapability = capabilitySource.capabilities.find(
     (entry) => entry.id === 'code.validate',
@@ -116,14 +157,41 @@ if (accepted) {
   const mutationCapability = capabilitySource.capabilities.find(
     (entry) => entry.id === 'project.mutate',
   );
-  if (
-    !mutationCapability ||
+  if (!mutationCapability) {
+    throw new Error('project.mutate must be declared in the capability source');
+  }
+  if (mutationCapability.status === 'available') {
+    if (JSON.stringify(mutationCapability.availability) !== JSON.stringify(['api', 'cli'])) {
+      throw new Error('Available project.mutate must expose exact API and CLI parity');
+    }
+    const requiredEvidence = [
+      MUTATION_BASELINE_PATH,
+      'packages/tooling/src/operations.test.ts',
+      'packages/tooling/src/materialize.test.ts',
+      'packages/tooling/scripts/test-packed.mjs',
+      'packages/tooling/templates',
+    ];
+    for (const path of requiredEvidence) {
+      if (!existsSync(join(ROOT, path))) {
+        throw new Error(`project.mutate is available without required gate evidence: ${path}`);
+      }
+    }
+    const baseline = JSON.parse(readFileSync(join(ROOT, MUTATION_BASELINE_PATH), 'utf8'));
+    if (
+      baseline.status !== 'passed' ||
+      JSON.stringify(baseline.surfaces) !== JSON.stringify(['api', 'cli']) ||
+      !baseline.safetyEvidence?.includes('read-only-doctor') ||
+      !baseline.safetyEvidence?.includes('installed-package-materialization')
+    ) {
+      throw new Error('project.mutate gate evidence is incomplete or incompatible');
+    }
+  } else if (
     mutationCapability.status !== 'gated' ||
     mutationCapability.availability.length !== 0
   ) {
-    throw new Error('project.mutate must remain unavailable until its capability gate passes');
+    throw new Error('project.mutate must be available with evidence or remain fully gated');
   }
-  console.log('OK: P-01 is approved; validation evidence is enforced and mutation remains gated');
+  console.log('OK: P-01 is approved; validation and mutation evidence gates are enforced');
 } else {
   console.log(
     `OK: P-01 is enforced; ${ADR_PATH} remains Proposed and no public tooling integration exists`,

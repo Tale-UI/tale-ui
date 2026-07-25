@@ -14,6 +14,12 @@
     --shadow-m: 0 4px 4px -10px rgba(0, 0, 0, 0.04), 0 13px 13px -10px rgba(0, 0, 0, 0.06), 0 40px 60px -10px rgba(0, 0, 0, 0.08);
     --shadow-l: 0 2.7px 3.6px -5px rgba(0, 0, 0, 0.04), 0 7.5px 10px -5px rgba(0, 0, 0, 0.06), 0 18px 24.1px -5px rgba(0, 0, 0, 0.08), 0 60px 80px -5px rgba(0, 0, 0, 0.1);
     --shadow-xl: 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02), 0 6.7px 5.3px -5px rgba(0, 0, 0, 0.04), 0 12.5px 10px -5px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px -5px rgba(0, 0, 0, 0.08), 0 41.8px 33.4px -5px rgba(0, 0, 0, 0.1), 0 80px 80px -5px rgba(0, 0, 0, 0.105);
+    --elevation-flat: none;
+    --elevation-raised: var(--shadow-xs);
+    --elevation-floating: var(--shadow-s);
+    --elevation-overlay: var(--shadow-m);
+    --elevation-modal: var(--shadow-l);
+    --elevation-toast: var(--shadow-xl);
     --scrim-subtle: color-mix(in srgb, var(--neutral-default-100) 24%, transparent);
     --scrim: color-mix(in srgb, var(--neutral-default-100) 48%, transparent);
     --scrim-strong: color-mix(in srgb, var(--neutral-default-100) 72%, transparent);

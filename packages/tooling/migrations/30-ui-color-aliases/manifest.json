@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "ui-color-token-aliases",
+  "order": 30,
+  "group": "token-name",
+  "description": "Move component-facing palette usage from fixed brand tokens to color-mode-aware aliases.",
+  "from": "component CSS using --brand-{5..100}",
+  "to": "component CSS using --color-{5..100}",
+  "dependencies": [],
+  "affectedArtifacts": [
+    "tale:foundation:design-tokens"
+  ],
+  "deprecations": [],
+  "sourceEvidence": [
+    "docs/design-philosophy.md#color-system"
+  ],
+  "parsers": [
+    "css"
+  ],
+  "sensitiveFiles": "require-explicit",
+  "generatedFiles": "require-explicit",
+  "reversible": true,
+  "backupPolicy": "required",
+  "idempotent": true,
+  "transforms": [
+    {
+      "id": "color-aliases",
+      "kind": "css",
+      "path": "transform.json",
+      "files": [
+        "**/*.css"
+      ]
+    }
+  ],
+  "checksum": "sha256:c9a8011fd52b5b04c3a8406ca40452d3364386adf4a268854f5f966f71713e99"
+}

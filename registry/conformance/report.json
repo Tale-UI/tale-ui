@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.0.0",
+  "sourceDigest": "sha256:83b72fc79b34932ae1afa44d21f74460a23fa693407bc319fdfafb3a2bb64a86",
+  "platforms": [
+    "web",
+    "react-native"
+  ],
+  "appearances": [
+    "light",
+    "dark"
+  ],
+  "portableTokens": 641,
+  "platformExceptions": 4,
+  "unsupportedTokens": 30,
+  "highContrastGuidance": "docs/native-token-conformance.md",
+  "reactNativeExample": "examples/react-native/TokenCard.tsx",
+  "nativeComponentLibrary": false
+}

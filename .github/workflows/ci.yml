@@ -80,6 +80,44 @@ jobs:
       - name: Unit tests (jsdom)
         run: pnpm test:jsdom
 
+  # Changed-component accessibility and maintained performance budgets
+  check-accessibility-performance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - name: Install accessibility browser
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Smoke-test axe runner
+        run: pnpm a11y:smoke
+      - name: Build accessibility Storybook
+        run: pnpm -C playground/storybook build --output-dir ../../.artifacts/storybook-a11y
+      - name: Check changed components with axe
+        env:
+          A11Y_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: pnpm exec concurrently --success first --kill-others "pnpm exec serve .artifacts/storybook-a11y --listen 6007 --no-request-logging --no-clipboard" "pnpm a11y:changed -- --url http://127.0.0.1:6007 --base $A11Y_BASE"
+      - name: Check performance budgets
+        run: pnpm performance:check
+      - name: Retain accessibility and performance trends
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibility-performance-${{ github.run_id }}
+          path: |
+            .artifacts/accessibility-current.json
+            .artifacts/performance-current.json
+          if-no-files-found: warn
+          retention-days: 30
+
   # A2UI catalog drift prevention
   check-a2ui:
     runs-on: ubuntu-latest

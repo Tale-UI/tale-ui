@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "tale:template:sidebar-header",
+  "version": "1.0.0",
+  "source": "source/App.tsx",
+  "skeleton": "skeleton/App.tsx",
+  "dependencies": {
+    "@tale-ui/react": "^2.0.0",
+    "react": ">=18.0.0",
+    "lucide-react": "^0.468.0"
+  },
+  "preview": {
+    "recipe": "docs/recipes/sidebar-with-header.md",
+    "accessibility": "keyboard, screen-reader, zoom, contrast, and reduced-motion review required",
+    "responsive": true
+  },
+  "golden": "tools/golden-prompts/sidebar-basic.json",
+  "compatibility": {
+    "react": ">=18.0.0",
+    "tale": ">=2.0.0 <3.0.0",
+    "frameworks": [
+      "next",
+      "vite"
+    ]
+  },
+  "appearance": [
+    "light",
+    "dark"
+  ],
+  "rtl": true,
+  "provenance": {
+    "source": "docs/recipes/sidebar-with-header.md",
+    "firstParty": true
+  },
+  "license": "MIT",
+  "digest": "sha256:6382ccab900db5cef2df4217c5ce40205e70b5e48c865e03fecd76b95cb379d4"
+}

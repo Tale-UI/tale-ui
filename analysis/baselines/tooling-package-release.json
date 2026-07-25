@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "passed",
+  "package": "@tale-ui/tooling",
+  "version": "0.1.0",
+  "releaseChannel": "beta",
+  "node": ">=22",
+  "verification": {
+    "packedCommand": "pnpm --filter @tale-ui/tooling test:package",
+    "fixtures": ["vite", "next"],
+    "surfaces": ["api", "cli", "local-mcp"],
+    "publint": true,
+    "attw": true
+  },
+  "publication": {
+    "automaticOnMerge": false,
+    "explicitTag": "tooling-v0.1.0",
+    "defaultDistTag": "next",
+    "provenance": true,
+    "duplicateSafe": true
+  }
+}

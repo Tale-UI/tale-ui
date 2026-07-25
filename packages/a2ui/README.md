@@ -47,7 +47,7 @@ function AgentConnection() {
 
 ## Catalog
 
-The default catalog maps all 149 A2UI standard component types:
+The default catalog maps all 151 A2UI standard component types:
 
 For new surfaces, prefer `CheckboxField`, `RadioField` with `RadioFieldOption`
 children, and `SwitchField`. `Checkbox`, `Radio` with `RadioOption` children,
@@ -56,6 +56,8 @@ and `Switch` remain available for compatibility with existing payloads.
 | A2UI Type | Tale UI Component |
 |-----------|-------------------|
 | Text | Text |
+| Kbd | Kbd |
+| CodeBlock | CodeBlock |
 | Button | Button |
 | Row | Row |
 | Column | Column |
@@ -225,7 +227,7 @@ if (!result.valid) {
 ```
 packages/a2ui/src/
 ├── types.ts              # A2UI protocol types
-├── catalog.ts            # 149 standard + custom catalog entries
+├── catalog.ts            # 151 standard + custom catalog entries
 ├── icon-registry.ts      # Icon name → lucide-react component
 ├── index.ts              # Public API
 ├── renderer/

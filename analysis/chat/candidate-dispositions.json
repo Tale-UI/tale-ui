@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0.0",
+  "inventory": "chat",
+  "evidenceRevision": "sha256:16e71bd5a586a0364a6c7f56461b54a252388520d1fd85f70f2f1beae9bc918f",
+  "records": [
+    {
+      "candidate": "ChatLayout",
+      "disposition": "approve",
+      "rationale": "A protocol-neutral layout gives mobile and artifact-panel templates a shared responsive structure without owning conversation state.",
+      "evidence": {
+        "sources": [
+          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#p2-b--protocol-agnostic-chat",
+          "analysis/chat/inventory.json"
+        ],
+        "ordinaryDataApi": "Accepts React children and an optional artifact panel; no SDK message types.",
+        "accessibility": "Preserves document order, zoom reflow, landmarks, RTL, and reduced-motion behavior.",
+        "state": "The application owns messages, requests, routing, and panel visibility.",
+        "streaming": "Layout does not subscribe to or buffer streams.",
+        "localization": "All visible content is supplied by the consumer.",
+        "security": "No HTML parsing or remote-resource rendering.",
+        "ssr": "CSS controls responsive layout over deterministic markup.",
+        "performance": "Layout adds no observers and bounds the message scroll region.",
+        "ownership": "Presentation only; transport, persistence, and model state are excluded.",
+        "migration": "Existing flex/grid chat screens can adopt the slots incrementally."
+      },
+      "evidenceDigest": "sha256:0cb6bb3fc29065b5c269e113fbe188e9bd795b7a68fa7c59f05b18df6b9ff52c"
+    },
+    {
+      "candidate": "MessageList",
+      "disposition": "approve",
+      "rationale": "A labelled log with an explicit live-region policy is difficult to reproduce safely in each product.",
+      "evidence": {
+        "sources": [
+          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#async-and-state-contracts",
+          "docs/components/list.md"
+        ],
+        "ordinaryDataApi": "Renders caller-owned Message children and accepts standard landmark labels.",
+        "accessibility": "Uses log semantics with configurable polite/off announcements and no forced focus movement.",
+        "state": "The parent owns items and scroll-follow decisions.",
+        "streaming": "Only terminal or caller-batched updates should be announced; chunks are not individually spoken.",
+        "localization": "Labels and status text remain caller-provided.",
+        "security": "Children render through React; no string-to-HTML conversion.",
+        "ssr": "Initial ordered messages render identically on server and client.",
+        "performance": "Supports external windowing and does not clone the message collection.",
+        "ownership": "Semantics and styling only.",
+        "migration": "Existing message arrays remain unchanged and wrap incrementally."
+      },
+      "evidenceDigest": "sha256:8802339dd3ffb42f29a7c0d73f3f22a935a308ec9abbee04b445c6e7e7df06cc"
+    },
+    {
+      "candidate": "Message",
+      "disposition": "approve",
+      "rationale": "A role-aware message article centralizes stable message identity and speaker semantics while retaining ordinary app data.",
+      "evidence": {
+        "sources": [
+          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#chat-evaluation-contract",
+          "analysis/chat/inventory.json"
+        ],
+        "ordinaryDataApi": "Accepts a stable id, user/assistant/system role, and React children.",
+        "accessibility": "Uses an article with an accessible label supplied or derived from the role.",
+        "state": "Message status is descriptive input; the component owns no request lifecycle.",
+        "streaming": "The same stable message ID is retained while caller-owned text changes.",
+        "localization": "Default role labels use Tale operational messages only when available; custom labels override them.",
+        "security": "Plain React text/content only, with no raw HTML prop.",
+        "ssr": "Stable IDs and role attributes hydrate deterministically.",
+        "performance": "One wrapper per message and no subscriptions.",
+        "ownership": "Message semantics, not storage, ordering, or transport.",
+        "migration": "Existing message records map directly by id and role."
+      },
+      "evidenceDigest": "sha256:7f4d0ec1db28a5343215a69f111e94bb13a01685f1c3ed4cab6584b7dc3ab55d"
+    },
+    {
+      "candidate": "MessageBubble",
+      "disposition": "approve",
+      "rationale": "A role-inheriting visual bubble keeps alignment and long-content behavior consistent without duplicating message semantics.",
+      "evidence": {
+        "sources": [
+          "analysis/chat/inventory.json",
+          "packages/styles/src/text.css"
+        ],
+        "ordinaryDataApi": "Accepts React children and inherits role through Chat context.",
+        "accessibility": "Adds no landmark or live region; long text wraps and remains zoom-safe.",
+        "state": "Stateless.",
+        "streaming": "Text updates in place under the parent message identity.",
+        "localization": "Logical CSS properties support RTL.",
+        "security": "No HTML or Markdown parser.",
+        "ssr": "Pure deterministic markup.",
+        "performance": "One styled wrapper with no measurement.",
+        "ownership": "Visual grouping only.",
+        "migration": "Replaces ad hoc bubble wrappers without changing message data."
+      },
+      "evidenceDigest": "sha256:5cb5be94754af605c0e0d105b79b3f4454fe5e06fea3813cfc0338b0bec292d1"
+    },
+    {
+      "candidate": "MessageMetadata",
+      "disposition": "approve",
+      "rationale": "A metadata slot provides consistent low-emphasis placement for caller-formatted timestamps, status, and attribution.",
+      "evidence": {
+        "sources": [
+          "analysis/chat/inventory.json",
+          "docs/components/text.md"
+        ],
+        "ordinaryDataApi": "Accepts caller-rendered React content rather than a protocol timestamp or status shape.",
+        "accessibility": "Metadata remains perceivable and does not rely on color alone.",
+        "state": "Stateless descriptive output.",
+        "streaming": "Caller may update terminal status without changing structure.",
+        "localization": "Caller owns date/time formatting and translated labels.",
+        "security": "No parsing.",
+        "ssr": "Caller controls deterministic formatted content.",
+        "performance": "One inline wrapper.",
+        "ownership": "Placement and styling only.",
+        "migration": "Existing metadata nodes can move without data conversion."
+      },
+      "evidenceDigest": "sha256:068fe0a1030587fd1b24707b77fd243719c4a7c8bfced5e64192efd6936a3adb"
+    },
+    {
+      "candidate": "SystemMessage",
+      "disposition": "reject",
+      "rationale": "A separate component duplicates Message; system output is represented by Chat.Message role=\"system\".",
+      "evidence": {
+        "sources": [
+          "analysis/chat/inventory.json",
+          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#chat-evaluation-contract"
+        ],
+        "ordinaryDataApi": "The ordinary role field already expresses system messages.",
+        "accessibility": "One message semantic avoids divergent labels and announcement behavior.",
+        "state": "No separate state model is justified.",
+        "streaming": "System messages follow the same stable-ID and batching contract.",
+        "localization": "One role-label override path is sufficient.",
+        "security": "A separate component would not improve the plain-text boundary.",
+        "ssr": "The shared Message path is deterministic.",
+        "performance": "Avoids duplicate code and registry surface.",
+        "ownership": "Folded into Message.",
+        "migration": "Consumers use Chat.Message role=\"system\"."
+      },
+      "evidenceDigest": "sha256:081d6e1c661d86e087139d83eee448ca2d3ef0bdcc68a51c7ee48148101d0493"
+    },
+    {
+      "candidate": "Composer",
+      "disposition": "approve",
+      "rationale": "A form-based composer can standardize submit semantics and disabled/busy behavior while leaving draft and transport state controlled.",
+      "evidence": {
+        "sources": [
+          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#p2-b--protocol-agnostic-chat",
+          "docs/components/text-area.md",
+          "docs/components/form.md"
+        ],
+        "ordinaryDataApi": "Uses standard form props and caller-composed TextArea/Button controls.",
+        "accessibility": "Native form submit semantics preserve keyboard operation and labelling.",
+        "state": "Draft, busy, cancellation, and request state remain controlled by the parent.",
+        "streaming": "The composer does not start streams; submit callbacks may do so.",
+        "localization": "Placeholder, labels, and actions are caller-provided.",
+        "security": "Submits plain form data and never renders it as HTML.",
+        "ssr": "Form markup is deterministic.",
+        "performance": "No keystroke state is duplicated internally.",
+        "ownership": "Composition and layout only.",
+        "migration": "Existing controlled text areas and submit handlers compose directly."
+      },
+      "evidenceDigest": "sha256:b746e7dd06137e8e5cb75f57459fb6abb5dd8cf3d50fefbf5473cdd5777c2e44"
+    },
+    {
+      "candidate": "ToolCall",
+      "disposition": "approve",
+      "rationale": "A disclosure-based tool-call surface standardizes collapsed, running, success, and error states without executing tools.",
+      "evidence": {
+        "sources": [
+          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#p2-b--protocol-agnostic-chat",
+          "docs/components/disclosure.md"
+        ],
+        "ordinaryDataApi": "Accepts a string label, four-state enum, and React summary/details.",
+        "accessibility": "Disclosure interaction remains keyboard-operable and status is conveyed in text.",
+        "state": "Open state can be controlled/defaulted; tool execution remains external.",
+        "streaming": "Running-to-terminal updates retain stable tool-call identity.",
+        "localization": "Labels and state descriptions can be caller-provided.",
+        "security": "Displays plain React content and never executes payloads or raw HTML.",
+        "ssr": "Default expansion and state are deterministic.",
+        "performance": "Collapsed details can remain mounted only when requested by the caller.",
+        "ownership": "Display state only; execution, approval, and results belong to the application.",
+        "migration": "Existing tool records map to id, label, state, summary, and details."
+      },
+      "evidenceDigest": "sha256:35528f1650aa36ee40fba9565e1cad968c6bde6b1bb937e9ce84ae7e95fb7de2"
+    },
+    {
+      "candidate": "streaming-text utility",
+      "disposition": "approve",
+      "rationale": "A small reducer for ordered text chunks prevents duplicate, stale, and post-terminal updates without coupling to a transport.",
+      "evidence": {
+        "sources": [
+          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#async-and-state-contracts",
+          "analysis/chat/inventory.json"
+        ],
+        "ordinaryDataApi": "Consumes serializable stream/message IDs, integer sequence numbers, text chunks, and terminal states.",
+        "accessibility": "Returns batched text; callers choose deliberate live-region announcements.",
+        "state": "State is immutable and caller-owned; reducer results reject mismatched stream/message IDs.",
+        "streaming": "Accepts ordered chunks, rejects duplicates/stale chunks, supports cancellation and terminal states.",
+        "localization": "Operates on opaque text and does not translate or segment content.",
+        "security": "Never interprets text as HTML or Markdown.",
+        "ssr": "Initial state is serializable and deterministic.",
+        "performance": "Linear append with bounded caller-controlled chunk batching.",
+        "ownership": "Ordering utility only; network transport and persistence are excluded.",
+        "migration": "Transport adapters translate their events into the ordinary chunk contract."
+      },
+      "evidenceDigest": "sha256:99dc9273259e860d1aaf68797eb4faf38853e1d5eee0ab5812e465864a785e08"
+    }
+  ]
+}

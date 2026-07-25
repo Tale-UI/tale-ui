@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0.0",
+  "locale": "en",
+  "messages": {
+    "common.clear": "Clear",
+    "common.close": "Close",
+    "common.loading": "Loading",
+    "common.noResults": "No results",
+    "common.openMenu": "Open menu",
+    "common.remove": "Remove {item}",
+    "pagination.next": "Next page",
+    "pagination.previous": "Previous page",
+    "table.empty": "No rows",
+    "table.loading": "Loading rows",
+    "table.page": "Page {page} of {pageCount}"
+  }
+}

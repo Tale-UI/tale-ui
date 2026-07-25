@@ -26,6 +26,9 @@ await Promise.all(
     cp(join(REPOSITORY_ROOT, 'registry', file), join(BUILD_ROOT, 'registry', file)),
   ),
 );
+await cp(join(REPOSITORY_ROOT, 'registry/extensions'), join(BUILD_ROOT, 'registry/extensions'), {
+  recursive: true,
+});
 const reactPackage = JSON.parse(
   await readFile(join(REPOSITORY_ROOT, 'packages/react/package.json'), 'utf8'),
 );
@@ -38,6 +41,8 @@ await writeFile(
   )}\n`,
 );
 await cp(join(REPOSITORY_ROOT, 'schemas'), join(BUILD_ROOT, 'schemas'), { recursive: true });
+await cp(join(PACKAGE_ROOT, 'templates'), join(BUILD_ROOT, 'templates'), { recursive: true });
+await cp(join(PACKAGE_ROOT, 'migrations'), join(BUILD_ROOT, 'migrations'), { recursive: true });
 await cp(join(PACKAGE_ROOT, 'bin'), join(BUILD_ROOT, 'bin'), { recursive: true });
 await Promise.all(
   ['tale.mjs', 'tale-mcp.mjs'].map((file) => chmod(join(BUILD_ROOT, 'bin', file), 0o755)),
@@ -51,6 +56,18 @@ await cp(join(REPOSITORY_ROOT, 'LICENSE'), join(BUILD_ROOT, 'LICENSE'));
 const sourceManifest = JSON.parse(await readFile(join(PACKAGE_ROOT, 'package.json'), 'utf8'));
 const buildManifest = {
   ...sourceManifest,
+  files: [
+    '**/*.js',
+    '**/*.d.ts',
+    'bin',
+    'registry',
+    'schemas',
+    'templates',
+    'migrations',
+    'README.md',
+    'CLAUDE.md',
+    'LICENSE',
+  ],
   exports: {
     '.': { types: './index.d.ts', import: './index.js', default: './index.js' },
     './api': { types: './api.d.ts', import: './api.js', default: './api.js' },
@@ -59,12 +76,32 @@ const buildManifest = {
       import: './contracts/index.js',
       default: './contracts/index.js',
     },
+    './extensions': {
+      types: './extensions.d.ts',
+      import: './extensions.js',
+      default: './extensions.js',
+    },
     './registry': {
       types: './registry.d.ts',
       import: './registry.js',
       default: './registry.js',
     },
     './mcp': { types: './mcp.d.ts', import: './mcp.js', default: './mcp.js' },
+    './materialize': {
+      types: './materialize.d.ts',
+      import: './materialize.js',
+      default: './materialize.js',
+    },
+    './migrations': {
+      types: './migrations.d.ts',
+      import: './migrations.js',
+      default: './migrations.js',
+    },
+    './operations': {
+      types: './operations.d.ts',
+      import: './operations.js',
+      default: './operations.js',
+    },
     './validation': {
       types: './validation/index.d.ts',
       import: './validation/index.js',

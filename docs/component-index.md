@@ -1,6 +1,6 @@
 # Component Index
 
-Quick-reference table for all 116 `@tale-ui/react` components plus 6 `@tale-ui/charts` components.
+Quick-reference table for all 120 `@tale-ui/react` components plus 6 `@tale-ui/charts` components.
 For detailed usage, see the per-component docs in [docs/components/](components/index.md).
 
 ## Form Controls (27)
@@ -86,13 +86,15 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | Sidebar        | Sidebar navigation primitives for composing simple, dual-tier, slim, and section-divided sidebars | `@tale-ui/react/sidebar`         | Root, Header, Search, Divider, NavList, NavItem, NavButton, AccountCard, AccountMenu, MobileTrigger, FeatureCard                                                                                                                                                                               |
 | HeaderNav      | Horizontal header navigation primitives                                                           | `@tale-ui/react/header-nav`      | Root, Logo, NavButton, Actions, Secondary, MobileTrigger                                                                                                                                                                                                                                       |
 
-## Layout (10)
+## Layout (12)
 
 | Component  | Description                                                                  | Import                       | Parts                                                                    |
 | ---------- | ---------------------------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------ |
 | Accordion  | Collapsible content sections                                                 | `@tale-ui/react/accordion`   | Root, Item, Header, Trigger, Panel                                       |
+| AppShell   | Experimental structural application layout slots                             | `@tale-ui/react/app-shell`   | Root, Header, Sidebar, Main, MobileNavigation, SkipLink                   |
 | Card       | Presentational and interactive card surfaces                                 | `@tale-ui/react/card`        | Root, Button, Header, Body, Footer                                       |
 | Carousel   | Slide carousel with navigation                                               | `@tale-ui/react/carousel`    | Root, Content, Item, PreviousTrigger, NextTrigger, Indicators, Indicator |
+| Chat       | Experimental protocol-neutral conversation layout and semantics              | `@tale-ui/react/chat`        | Root, List, Message, Bubble, Metadata, Composer, ToolCall                 |
 | Column     | Vertical flex-column layout with gap, align, and justify props               | `@tale-ui/react/column`      | --                                                                       |
 | Disclosure | Single collapsible section                                                   | `@tale-ui/react/disclosure`  | Root, Trigger, Panel                                                     |
 | Row        | Horizontal flex-row layout with gap, align, and justify props                | `@tale-ui/react/row`         | --                                                                       |
@@ -151,11 +153,13 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | ImageCropper | Interactive image crop region with aspect ratio and circular crop support | `@tale-ui/react/image-cropper` | Root, Img                                                                                                                                                                                      |
 | TextEditor   | Rich-text editor built on Tiptap v3 with simple and advanced toolbars     | `@tale-ui/react/text-editor`   | Root, Label, HintText, Content, Toolbar, BubbleMenu, Bold, Italic, Underline, BulletList, AlignLeft, AlignCenter, AlignRight, AlignJustify, Link, Image, Color, FontFamily, FontSize, Generate |
 
-## Typography (1)
+## Typography (3)
 
-| Component | Description                                                         | Import                | Parts |
-| --------- | ------------------------------------------------------------------- | --------------------- | ----- |
-| Text      | Polymorphic typography wrapper with variant, size, and colour props | `@tale-ui/react/text` | --    |
+| Component | Description                                                         | Import                      | Parts |
+| --------- | ------------------------------------------------------------------- | --------------------------- | ----- |
+| CodeBlock | Plain-text code surface without parsing, highlighting, or execution | `@tale-ui/react/code-block` | --    |
+| Kbd       | Semantic keyboard input or shortcut hint                            | `@tale-ui/react/kbd`        | --    |
+| Text      | Polymorphic typography wrapper with variant, size, and colour props  | `@tale-ui/react/text`       | --    |
 
 ## Utility (8)
 

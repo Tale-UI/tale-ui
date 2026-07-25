@@ -189,6 +189,58 @@
       ]
     },
     {
+      "name": "AppShell",
+      "slug": "app-shell",
+      "import": "@tale-ui/react/app-shell",
+      "category": "Layout",
+      "description": "Experimental structural application layout slots",
+      "kind": "compound",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "hasSidebar",
+          "type": "boolean",
+          "required": false,
+          "description": "Reserve a desktop sidebar column. @default true",
+          "default": "true"
+        }
+      ],
+      "parts": [
+        "Root",
+        "Header",
+        "Sidebar",
+        "Main",
+        "MobileNavigation",
+        "SkipLink"
+      ],
+      "examples": [
+        "import { AppShell } from '@tale-ui/react/app-shell';\nimport { HeaderNav } from '@tale-ui/react/header-nav';\nimport { Sidebar } from '@tale-ui/react/sidebar';\n\nexport function ApplicationFrame({ children }: { children: React.ReactNode }) {\n  return (\n    <AppShell.Root>\n      <AppShell.SkipLink />\n      <AppShell.Header>\n        <HeaderNav.Root aria-label=\"Application header\">Workspace</HeaderNav.Root>\n      </AppShell.Header>\n      <AppShell.Sidebar>\n        <Sidebar.Root aria-label=\"Primary navigation\">Navigation</Sidebar.Root>\n      </AppShell.Sidebar>\n      <AppShell.Main>{children}</AppShell.Main>\n    </AppShell.Root>\n  );\n}"
+      ],
+      "cssClasses": [
+        "tale-app-shell",
+        "tale-app-shell--with-sidebar",
+        "tale-app-shell__header",
+        "tale-app-shell__main",
+        "tale-app-shell__mobile-navigation",
+        "tale-app-shell__sidebar",
+        "tale-app-shell__skip-link"
+      ],
+      "pitfalls": [
+        {
+          "id": "app-shell-no-application-state",
+          "summary": "Keep application behavior outside AppShell",
+          "detail": "the family owns structural layout, while the application owns routes, data, authentication, persistence, and responsive interaction state.",
+          "antiPatterns": [
+            "<AppShell.Root route={route} user={user} sidebarOpen={open}>"
+          ],
+          "fixes": [
+            "<AppShell.Root><AppShell.Main>{routeContent}</AppShell.Main></AppShell.Root>"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
       "name": "AppStoreButton",
       "slug": "app-store-button",
       "import": "@tale-ui/react/app-store-button",
@@ -1656,6 +1708,93 @@
       "crossPitfallRefs": null
     },
     {
+      "name": "Chat",
+      "slug": "chat",
+      "import": "@tale-ui/react/chat",
+      "category": "Layout",
+      "description": "Experimental protocol-neutral conversation layout and semantics",
+      "kind": "compound",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "artifactPanel",
+          "type": "React.ReactNode",
+          "required": false,
+          "description": "Optional application-owned artifact panel.",
+          "default": null
+        },
+        {
+          "name": "artifactPanelLabel",
+          "type": "string",
+          "required": false,
+          "description": "Accessible label for the artifact panel. @default 'Artifact panel'",
+          "default": null
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "isBusy",
+          "type": "boolean",
+          "required": false,
+          "description": null,
+          "default": null
+        }
+      ],
+      "parts": [
+        "Root",
+        "List",
+        "Message",
+        "Bubble",
+        "Metadata",
+        "Composer",
+        "ToolCall"
+      ],
+      "examples": [
+        "import { Chat } from '@tale-ui/react/chat';\nimport { Button } from '@tale-ui/react/button';\nimport { TextArea } from '@tale-ui/react/text-area';\n\nexport function Conversation() {\n  return (\n    <Chat.Root aria-label=\"Support conversation\">\n      <Chat.List aria-label=\"Messages\">\n        <Chat.Message speaker=\"assistant\" aria-label=\"Assistant message\">\n          <Chat.Bubble>Hello. How can I help?</Chat.Bubble>\n          <Chat.Metadata>Just now</Chat.Metadata>\n        </Chat.Message>\n      </Chat.List>\n      <Chat.Composer aria-label=\"Message composer\" onSubmit={(event) => event.preventDefault()}>\n        <TextArea.Root>\n          <TextArea.TextArea aria-label=\"Message\" />\n        </TextArea.Root>\n        <Button type=\"submit\">Send</Button>\n      </Chat.Composer>\n    </Chat.Root>\n  );\n}",
+        "const scope = {\n  streamId: 'stream-7',\n  requestId: 'request-7',\n  messageId: 'message-7',\n};\n\nlet result = applyStreamingTextEvent(createStreamingTextState(scope), {\n  ...scope,\n  type: 'chunk',\n  sequence: 0,\n  text: 'Hello',\n});\n\nif (result.accepted) {\n  result = applyStreamingTextEvent(result.state, {\n    ...scope,\n    type: 'complete',\n    sequence: 1,\n  });\n}",
+        "<Chat.ToolCall state=\"success\" label=\"Search documentation\" statusLabel=\"Complete\">\n  Three results\n</Chat.ToolCall>"
+      ],
+      "cssClasses": [
+        "tale-chat",
+        "tale-chat--with-artifact-panel",
+        "tale-chat__artifact-panel",
+        "tale-chat__bubble",
+        "tale-chat__composer",
+        "tale-chat__conversation",
+        "tale-chat__message",
+        "tale-chat__message--assistant",
+        "tale-chat__message--system",
+        "tale-chat__message--user",
+        "tale-chat__message-list",
+        "tale-chat__metadata",
+        "tale-chat__tool-call",
+        "tale-chat__tool-call--error",
+        "tale-chat__tool-call--success",
+        "tale-chat__tool-call-details",
+        "tale-chat__tool-call-status",
+        "tale-chat__tool-call-summary"
+      ],
+      "pitfalls": [
+        {
+          "id": "chat-no-raw-html",
+          "summary": "Keep untrusted HTML out of Chat",
+          "detail": "render plain text or an independently reviewed content component because Chat intentionally has no HTML or Markdown escape hatch.",
+          "antiPatterns": [
+            "<Chat.Bubble dangerouslySetInnerHTML={{ __html: modelText }} />"
+          ],
+          "fixes": [
+            "<Chat.Bubble>{modelText}</Chat.Bubble>"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
       "name": "Checkbox",
       "slug": "checkbox",
       "import": "@tale-ui/react/checkbox",
@@ -1942,6 +2081,53 @@
       "crossPitfallRefs": [
         "no-cross-import-checkbox-group"
       ]
+    },
+    {
+      "name": "CodeBlock",
+      "slug": "code-block",
+      "import": "@tale-ui/react/code-block",
+      "category": "Typography",
+      "description": "Plain-text code surface without parsing, highlighting, or execution",
+      "kind": "simple",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "language",
+          "type": "string",
+          "required": false,
+          "description": "Informational language identifier. No highlighting is performed.",
+          "default": null
+        },
+        {
+          "name": "wrap",
+          "type": "boolean",
+          "required": false,
+          "description": "Wrap long lines instead of horizontal scrolling. @default false",
+          "default": "false"
+        }
+      ],
+      "parts": null,
+      "examples": [
+        "import { CodeBlock } from '@tale-ui/react/code-block';\n\nexport function ExampleCode() {\n  return (\n    <CodeBlock language=\"tsx\">{`export function App() {\n  return <main>Hello</main>;\n}`}</CodeBlock>\n  );\n}"
+      ],
+      "cssClasses": [
+        "tale-code-block",
+        "tale-code-block--wrap"
+      ],
+      "pitfalls": [
+        {
+          "id": "code-block-plain-text",
+          "summary": "Pass plain text to CodeBlock",
+          "detail": "the component intentionally excludes raw HTML, Markdown, syntax highlighting, and executable renderers.",
+          "antiPatterns": [
+            "<CodeBlock dangerouslySetInnerHTML={{ __html: generatedCode }} />"
+          ],
+          "fixes": [
+            "<CodeBlock>{generatedCode}</CodeBlock>"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
     },
     {
       "name": "ColorArea",
@@ -4763,16 +4949,63 @@
           "required": false,
           "description": "The locale to apply to the children (e.g. `\"en-US\"`, `\"ar-AE\"`).",
           "default": null
+        },
+        {
+          "name": "catalogs",
+          "type": "TaleMessageCatalogs",
+          "required": false,
+          "description": "Locale catalogs containing Tale-owned operational strings only.",
+          "default": null
+        },
+        {
+          "name": "messages",
+          "type": "TaleMessageCatalog",
+          "required": false,
+          "description": "Per-provider overrides with higher precedence than locale catalogs.",
+          "default": null
+        },
+        {
+          "name": "fallbackLocale",
+          "type": "string",
+          "required": false,
+          "description": "Catalog to use before the built-in English fallback.",
+          "default": null
+        },
+        {
+          "name": "mode",
+          "type": "'default' | 'pseudo' | 'rtl'",
+          "required": false,
+          "description": "Pseudo-localization and forced-RTL QA modes.",
+          "default": null,
+          "allowedValues": [
+            "default",
+            "pseudo",
+            "rtl"
+          ]
         }
       ],
       "parts": null,
       "examples": [
-        "import { I18nProvider } from '@tale-ui/react/i18n-provider';\n\n<I18nProvider locale=\"en-US\">\n  <App />\n</I18nProvider>",
+        "import { I18nProvider } from '@tale-ui/react/i18n-provider';\n\n<I18nProvider locale=\"en-US\">\n  <App />\n</I18nProvider>;",
         "<I18nProvider locale=\"ar-AE\">\n  <App />\n</I18nProvider>",
-        "import { useLocale } from '@tale-ui/react/i18n-provider';\n\nfunction LocaleDisplay() {\n  const { locale, direction } = useLocale();\n  return <p>Locale: {locale}, Direction: {direction}</p>;\n}"
+        "import { useLocale } from '@tale-ui/react/i18n-provider';\n\nfunction LocaleDisplay() {\n  const { locale, direction } = useLocale();\n  return (\n    <p>\n      Locale: {locale}, Direction: {direction}\n    </p>\n  );\n}",
+        "import { useTaleI18n } from '@tale-ui/react/i18n-provider';\n\nfunction PageStatus() {\n  const { formatMessage } = useTaleI18n();\n  return <output>{formatMessage('table.page', { page: 2, pageCount: 8 })}</output>;\n}",
+        "<I18nProvider mode=\"pseudo\">\n  <App />\n</I18nProvider>\n\n<I18nProvider mode=\"rtl\">\n  <App />\n</I18nProvider>"
       ],
       "cssClasses": null,
-      "pitfalls": null,
+      "pitfalls": [
+        {
+          "id": "i18n-provider-no-application-copy",
+          "summary": "Do not put application copy in I18nProvider catalogs",
+          "detail": "catalogs are limited to Tale-owned operational labels and statuses.",
+          "antiPatterns": [
+            "<I18nProvider messages={{ 'product.welcome': 'Welcome back' }}>"
+          ],
+          "fixes": [
+            "<Text>{appMessages.welcome}</Text>"
+          ]
+        }
+      ],
       "crossPitfallRefs": null
     },
     {
@@ -5662,6 +5895,51 @@
           ],
           "fixes": [
             "import { IPhoneMockup } from '@tale-ui/react/iphone-mockup';"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
+      "name": "Kbd",
+      "slug": "kbd",
+      "import": "@tale-ui/react/kbd",
+      "category": "Typography",
+      "description": "Semantic keyboard input or shortcut hint",
+      "kind": "simple",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "size",
+          "type": "KbdSize",
+          "required": false,
+          "description": "Visual size. @default 'md'",
+          "default": "'md'",
+          "allowedValues": [
+            "sm",
+            "md"
+          ]
+        }
+      ],
+      "parts": null,
+      "examples": [
+        "import { Kbd } from '@tale-ui/react/kbd';\nimport { Text } from '@tale-ui/react/text';\n\nexport function SearchShortcut() {\n  return (\n    <Text>\n      Open search with <Kbd>⌘</Kbd> <Kbd>K</Kbd>\n    </Text>\n  );\n}"
+      ],
+      "cssClasses": [
+        "tale-kbd",
+        "tale-kbd--md",
+        "tale-kbd--sm"
+      ],
+      "pitfalls": [
+        {
+          "id": "kbd-no-shortcut-behavior",
+          "summary": "Do not use Kbd to register shortcuts",
+          "detail": "it is semantic display content, so application keyboard behavior remains separate.",
+          "antiPatterns": [
+            "<Kbd onKeyDown={openSearch}>⌘ K</Kbd>"
+          ],
+          "fixes": [
+            "<Text>Open search with <Kbd>⌘</Kbd> <Kbd>K</Kbd></Text>"
           ]
         }
       ],
@@ -9053,24 +9331,11 @@
           "required": false,
           "description": null,
           "default": null
-        },
-        {
-          "name": "sortDescriptor",
-          "type": "SortDescriptor",
-          "required": false,
-          "description": null,
-          "default": null
-        },
-        {
-          "name": "onSortChange",
-          "type": "function",
-          "required": false,
-          "description": null,
-          "default": null
         }
       ],
       "parts": [
         "Root",
+        "Virtualizer",
         "Header",
         "Column",
         "Body",
@@ -9082,7 +9347,9 @@
         "<Table.Root aria-label=\"People\">\n  <Table.Header>\n    <Table.Column isRowHeader>Name</Table.Column>\n    <Table.Column>Email</Table.Column>\n    <Table.Column>Role</Table.Column>\n  </Table.Header>\n  <Table.Body>\n    <Table.Row id=\"1\">\n      <Table.Cell>Alice</Table.Cell>\n      <Table.Cell>alice@example.com</Table.Cell>\n      <Table.Cell>Admin</Table.Cell>\n    </Table.Row>\n  </Table.Body>\n</Table.Root>",
         "<Table.Root aria-label=\"People\" selectionMode=\"multiple\">\n  <Table.Header>\n    <Table.Column isRowHeader>Name</Table.Column>\n    <Table.Column>Email</Table.Column>\n    <Table.Column>Role</Table.Column>\n  </Table.Header>\n  <Table.Body>\n    <Table.Row id=\"1\">\n      <Table.Cell>Alice</Table.Cell>\n      <Table.Cell>alice@example.com</Table.Cell>\n      <Table.Cell>Admin</Table.Cell>\n    </Table.Row>\n    <Table.Row id=\"2\">\n      <Table.Cell>Bob</Table.Cell>\n      <Table.Cell>bob@example.com</Table.Cell>\n      <Table.Cell>Editor</Table.Cell>\n    </Table.Row>\n  </Table.Body>\n</Table.Root>",
         "import { Table, useTableController, type Key } from '@tale-ui/react/table';\n\nfunction SortableTable() {\n  const controller = useTableController({\n    tableId: 'people',\n    defaultSortDescriptor: { column: 'name', direction: 'ascending' },\n  });\n\n  const rows = [\n    { id: '1', name: 'Alice', email: 'alice@example.com', role: 'Admin' },\n    { id: '2', name: 'Bob', email: 'bob@example.com', role: 'Editor' },\n  ];\n\n  const sorted = controller.sorting.sortRows(rows, (left, right, column: Key) => {\n    if (column === 'email') return left.email.localeCompare(right.email);\n    if (column === 'role') return left.role.localeCompare(right.role);\n    return left.name.localeCompare(right.name);\n  });\n\n  return (\n    <Table.Root {...controller.tableProps} aria-label=\"People\">\n      <Table.Header>\n        <Table.Column id=\"name\" isRowHeader allowsSorting>\n          Name\n        </Table.Column>\n        <Table.Column id=\"email\" allowsSorting>\n          Email\n        </Table.Column>\n        <Table.Column id=\"role\" allowsSorting>\n          Role\n        </Table.Column>\n      </Table.Header>\n      <Table.Body>\n        {sorted.map((row) => (\n          <Table.Row key={row.id} id={row.id}>\n            <Table.Cell>{row.name}</Table.Cell>\n            <Table.Cell>{row.email}</Table.Cell>\n            <Table.Cell>{row.role}</Table.Cell>\n          </Table.Row>\n        ))}\n      </Table.Body>\n    </Table.Root>\n  );\n}",
-        "import { useState } from 'react';\nimport { Table, useTableController, type SortDescriptor } from '@tale-ui/react/table';\n\ninterface Person {\n  id: string;\n  name: string;\n  role: string;\n}\n\nfunction ServerSortedTable() {\n  const [rows, setRows] = useState<Person[]>([]);\n  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({\n    column: 'name',\n    direction: 'ascending',\n  });\n  const controller = useTableController({\n    tableId: 'server-people',\n    sortDescriptor,\n    onSortChange: setSortDescriptor,\n    onQueryChange(query, request) {\n      const params = new URLSearchParams({\n        column: String(query.sortDescriptor.column),\n        direction: query.sortDescriptor.direction,\n      });\n      fetch(`/api/people?${params}`, { signal: request.signal })\n        .then((response) => response.json())\n        .then((nextRows) => request.accept(() => setRows(nextRows)));\n    },\n  });\n\n  return (\n    <Table.Root {...controller.tableProps} aria-label=\"People\">\n      <Table.Header>\n        <Table.Column id=\"name\" isRowHeader allowsSorting>\n          Name\n        </Table.Column>\n        <Table.Column id=\"role\" allowsSorting>\n          Role\n        </Table.Column>\n      </Table.Header>\n      <Table.Body>\n        {rows.map((row) => (\n          <Table.Row key={row.id} id={row.id}>\n            <Table.Cell>{row.name}</Table.Cell>\n            <Table.Cell>{row.role}</Table.Cell>\n          </Table.Row>\n        ))}\n      </Table.Body>\n    </Table.Root>\n  );\n}",
+        "const controller = useTableController({\n  tableId: 'people',\n  defaultSelectedKeys: new Set(),\n  defaultFilter: { schemaVersion: '1.0.0', value: '' },\n  defaultPage: 1,\n  defaultPageSize: 25,\n  totalRows: people.length,\n});\n\nconst filtered = controller.filtering.filterRows(people, (person, filter) =>\n  person.name.toLowerCase().includes(filter.value.toLowerCase()),\n);\nconst visibleRows = controller.pagination.paginateRows(filtered);\n\n<Table.Root {...controller.tableProps} selectionMode=\"multiple\" aria-label=\"People\">\n  <Table.Header>\n    <Table.Column isRowHeader>Name</Table.Column>\n  </Table.Header>\n  <Table.Body items={visibleRows}>\n    {(person) => (\n      <Table.Row id={person.id}>\n        <Table.Cell>{person.name}</Table.Cell>\n      </Table.Row>\n    )}\n  </Table.Body>\n</Table.Root>;",
+        "import { useState } from 'react';\nimport { Table, useTableController, type SortDescriptor } from '@tale-ui/react/table';\n\ninterface Person {\n  id: string;\n  name: string;\n  role: string;\n}\n\nfunction ServerSortedTable() {\n  const [rows, setRows] = useState<Person[]>([]);\n  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({\n    column: 'name',\n    direction: 'ascending',\n  });\n  const controller = useTableController({\n    tableId: 'server-people',\n    sortDescriptor,\n    onSortChange: setSortDescriptor,\n    onQueryChange(query, request) {\n      const params = new URLSearchParams({\n        column: String(query.sortDescriptor?.column ?? ''),\n        direction: query.sortDescriptor?.direction ?? '',\n        page: String(query.page),\n        pageSize: String(query.pageSize),\n        filter: query.filter.value,\n      });\n      fetch(`/api/people?${params}`, { signal: request.signal })\n        .then((response) => response.json())\n        .then((nextRows) => request.accept(() => setRows(nextRows)));\n    },\n  });\n\n  return (\n    <Table.Root {...controller.tableProps} aria-label=\"People\">\n      <Table.Header>\n        <Table.Column id=\"name\" isRowHeader allowsSorting>\n          Name\n        </Table.Column>\n        <Table.Column id=\"role\" allowsSorting>\n          Role\n        </Table.Column>\n      </Table.Header>\n      <Table.Body>\n        {rows.map((row) => (\n          <Table.Row key={row.id} id={row.id}>\n            <Table.Cell>{row.name}</Table.Cell>\n            <Table.Cell>{row.role}</Table.Cell>\n          </Table.Row>\n        ))}\n      </Table.Body>\n    </Table.Root>\n  );\n}",
+        "<Table.Virtualizer\n  {...controller.virtualization.virtualizerProps}\n  layoutOptions={{ rowHeight: 44 }}\n>\n  <Table.Root aria-label=\"10,000 people\">\n    <Table.Header>{/* stable columns */}</Table.Header>\n    <Table.Body items={people}>\n      {(person) => (\n        <Table.Row id={person.id}>\n          <Table.Cell>{person.name}</Table.Cell>\n        </Table.Row>\n      )}\n    </Table.Body>\n  </Table.Root>\n</Table.Virtualizer>",
         "<Table.Root aria-label=\"Invoice items\">\n  <Table.Header>\n    <Table.Column isRowHeader>Item</Table.Column>\n    <Table.Column>Quantity</Table.Column>\n    <Table.Column>Price</Table.Column>\n  </Table.Header>\n  <Table.Body>\n    <Table.Row id=\"1\">\n      <Table.Cell>Widget</Table.Cell>\n      <Table.Cell>2</Table.Cell>\n      <Table.Cell>$10.00</Table.Cell>\n    </Table.Row>\n    <Table.Row id=\"2\">\n      <Table.Cell>Gadget</Table.Cell>\n      <Table.Cell>1</Table.Cell>\n      <Table.Cell>$25.00</Table.Cell>\n    </Table.Row>\n  </Table.Body>\n  <Table.Footer>\n    <Table.Row id=\"totals\">\n      <Table.Cell>Total</Table.Cell>\n      <Table.Cell>3</Table.Cell>\n      <Table.Cell>$35.00</Table.Cell>\n    </Table.Row>\n  </Table.Footer>\n</Table.Root>",
         "<Table.Root aria-label=\"Files\" treeColumn=\"name\" defaultExpandedKeys={['docs']}>\n  <Table.Header>\n    <Table.Column id=\"name\" isRowHeader>\n      Name\n    </Table.Column>\n    <Table.Column id=\"size\">Size</Table.Column>\n  </Table.Header>\n  <Table.Body>\n    <Table.Row id=\"docs\">\n      <Table.Cell>Documents</Table.Cell>\n      <Table.Cell>--</Table.Cell>\n      <Table.Row id=\"docs-resume\">\n        <Table.Cell>resume.pdf</Table.Cell>\n        <Table.Cell>120 KB</Table.Cell>\n      </Table.Row>\n    </Table.Row>\n  </Table.Body>\n</Table.Root>",
         "import { Table } from '@tale-ui/react/table';\n\n    export function Example() {\n      return (\n        <Table.Root aria-label=\"People\">\n          <Table.Header>\n            <Table.Column isRowHeader>Name</Table.Column>\n            <Table.Column>Email</Table.Column>\n          </Table.Header>\n          <Table.Body>\n            <Table.Row id=\"1\">\n              <Table.Cell>Alice</Table.Cell>\n              <Table.Cell>alice@example.com</Table.Cell>\n            </Table.Row>\n          </Table.Body>\n        </Table.Root>\n      );\n    }"

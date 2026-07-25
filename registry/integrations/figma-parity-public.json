@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "sourceDigest": "sha256:12c33ebda506207bfd1e4a6af965fcba0592b9935352cc7351a2ec99cf8371df",
+  "generatedParity": {
+    "status": "complete",
+    "tokenVariables": 641,
+    "components": 120,
+    "variants": 276,
+    "codeConnections": 120
+  },
+  "liveParity": {
+    "status": "unavailable",
+    "reason": "No Figma file identifier is approved in the private allowlist."
+  },
+  "privacy": {
+    "classification": "public",
+    "containsFileKeys": false,
+    "containsNodeIds": false,
+    "containsUrls": false,
+    "containsScreenshots": false,
+    "containsFreeText": false
+  }
+}

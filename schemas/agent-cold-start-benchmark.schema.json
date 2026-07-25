@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/agent-cold-start-benchmark.schema.json",
+  "title": "Tale UI agent cold-start discovery benchmark",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "benchmarkId", "method", "history"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "benchmarkId": { "const": "tale:benchmark:agent-cold-start" },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runtime", "fixture", "measurement", "tasks"],
+      "properties": {
+        "runtime": { "const": "packages/tooling/src/materialize.ts#initializeProject" },
+        "fixture": { "const": "clean-project-with-empty-scripts" },
+        "measurement": {
+          "const": "deterministic instruction-discovery proxy; estimated tokens are ceil(UTF-8 bytes / 4)"
+        },
+        "tasks": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[a-z0-9-]+$" }
+        }
+      }
+    },
+    "history": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["revision", "beforeInit", "afterInit", "change"],
+        "properties": {
+          "revision": { "type": "string", "minLength": 1 },
+          "beforeInit": { "$ref": "#/$defs/result" },
+          "afterInit": { "$ref": "#/$defs/result" },
+          "change": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["passedTasks", "passRate", "contextBytes", "estimatedTokens"],
+            "properties": {
+              "passedTasks": { "type": "integer" },
+              "passRate": { "type": "number" },
+              "contextBytes": { "type": "integer" },
+              "estimatedTokens": { "type": "integer" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "passedTasks",
+        "totalTasks",
+        "passRate",
+        "contextBytes",
+        "estimatedTokens",
+        "evidence"
+      ],
+      "properties": {
+        "passedTasks": { "type": "integer", "minimum": 0 },
+        "totalTasks": { "type": "integer", "minimum": 1 },
+        "passRate": { "type": "number", "minimum": 0, "maximum": 1 },
+        "contextBytes": { "type": "integer", "minimum": 0 },
+        "estimatedTokens": { "type": "integer", "minimum": 0 },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["task", "passed", "path"],
+            "properties": {
+              "task": { "type": "string" },
+              "passed": { "type": "boolean" },
+              "path": { "type": ["string", "null"] }
+            }
+          }
+        }
+      }
+    }
+  }
+}

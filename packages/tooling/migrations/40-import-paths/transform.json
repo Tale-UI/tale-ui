@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "operation": "literal-replacements",
+  "replacements": [
+    {
+      "search": "@tale-ui/react/textarea",
+      "replacement": "@tale-ui/react/text-area"
+    },
+    {
+      "search": "@tale-ui/react/toggle-button-group",
+      "replacement": "@tale-ui/react/toggle-button"
+    },
+    {
+      "search": "react-aria-components/virtualizer",
+      "replacement": "@tale-ui/react/virtualizer"
+    }
+  ],
+  "extensions": [
+    ".js",
+    ".jsx",
+    ".mjs",
+    ".ts",
+    ".tsx"
+  ]
+}

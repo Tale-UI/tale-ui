@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0.0",
+  "reportType": "migrations",
+  "sourceRevision": "sha256:c7f4bd78281ec58e2d74b14b83e7682f3186cf487690954c9841f6a0c566636a",
+  "migrations": [
+    {
+      "id": "v1-to-v2-package-rename",
+      "order": 10,
+      "group": "package-rename",
+      "manifest": "packages/tooling/migrations/10-package-rename/manifest.json",
+      "affectedArtifacts": ["tale:foundation:css-architecture"],
+      "deprecations": [
+        {
+          "id": "@tale-ui/core",
+          "replacementId": "@tale-ui/css"
+        }
+      ]
+    },
+    {
+      "id": "deprecated-field-controls",
+      "order": 20,
+      "group": "deprecated-api",
+      "manifest": "packages/tooling/migrations/20-field-controls/manifest.json",
+      "affectedArtifacts": [
+        "tale:component:checkbox",
+        "tale:component:checkbox-field",
+        "tale:component:radio",
+        "tale:component:radio-field",
+        "tale:component:switch",
+        "tale:component:switch-field"
+      ],
+      "deprecations": [
+        {
+          "id": "tale:component:checkbox",
+          "replacementId": "tale:component:checkbox-field"
+        },
+        {
+          "id": "tale:component:radio",
+          "replacementId": "tale:component:radio-field"
+        },
+        {
+          "id": "tale:component:switch",
+          "replacementId": "tale:component:switch-field"
+        }
+      ]
+    },
+    {
+      "id": "ui-color-token-aliases",
+      "order": 30,
+      "group": "token-name",
+      "manifest": "packages/tooling/migrations/30-ui-color-aliases/manifest.json",
+      "affectedArtifacts": ["tale:foundation:design-tokens"],
+      "deprecations": []
+    },
+    {
+      "id": "known-import-path-corrections",
+      "order": 40,
+      "group": "import-path",
+      "manifest": "packages/tooling/migrations/40-import-paths/manifest.json",
+      "affectedArtifacts": [
+        "tale:component:table",
+        "tale:component:text-area",
+        "tale:component:toggle-button"
+      ],
+      "deprecations": []
+    }
+  ]
+}

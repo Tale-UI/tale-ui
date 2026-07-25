@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "tale:template:loading-patterns",
+  "version": "1.0.0",
+  "source": "source/App.tsx",
+  "skeleton": "skeleton/App.tsx",
+  "dependencies": {
+    "@tale-ui/react": "^2.0.0",
+    "react": ">=18.0.0"
+  },
+  "preview": {
+    "recipe": "docs/recipes/loading-patterns.md",
+    "accessibility": "keyboard, screen-reader, zoom, contrast, and reduced-motion review required",
+    "responsive": true
+  },
+  "golden": "tools/golden-prompts/loading-spinner.json",
+  "compatibility": {
+    "react": ">=18.0.0",
+    "tale": ">=2.0.0 <3.0.0",
+    "frameworks": [
+      "next",
+      "vite"
+    ]
+  },
+  "appearance": [
+    "light",
+    "dark"
+  ],
+  "rtl": true,
+  "provenance": {
+    "source": "docs/recipes/loading-patterns.md",
+    "firstParty": true
+  },
+  "license": "MIT",
+  "digest": "sha256:a3b48faa9ba15f49d2a6ec25333feb40e39a96e1177d4195573311e0247192c4"
+}

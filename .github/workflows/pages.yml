@@ -79,11 +79,16 @@ jobs:
         env:
           DOCS_BASE_PATH: ${{ steps.base.outputs.base }}/docs
 
-      - name: Copy docs output to pages
-        shell: bash
-        run: |
-          mkdir -p .pages/docs
-          cp -r docs/out/. .pages/docs/
+      - name: Verify versioned documentation provenance
+        run: pnpm docs:versions:check
+
+      - name: Build metrics dashboard
+        run: pnpm metrics:build
+
+      - name: Assemble docs, versions, metrics, and agent guidance
+        run: pnpm pages:assemble
+        env:
+          PAGES_BASE_PATH: ${{ steps.base.outputs.base }}
 
       - name: Create root index page
         shell: bash
@@ -139,6 +144,9 @@ jobs:
                 <p>Single GitHub Pages site with multiple apps by subpath.</p>
                 <ul>
                   <li><a href="${BASE}/docs/">Documentation</a></li>
+                  <li><a href="${BASE}/docs/v1/">Previous-major documentation</a></li>
+                  <li><a href="${BASE}/metrics/">Adoption and health metrics</a></li>
+                  <li><a href="${BASE}/llms.txt">Agent guidance</a></li>
                   <li><a href="${BASE}/playground/">Playground (Vite)</a></li>
                   <li><a href="${BASE}/scale/">Scale Playground</a></li>
                   <li><a href="${BASE}/storybook/">Storybook</a></li>

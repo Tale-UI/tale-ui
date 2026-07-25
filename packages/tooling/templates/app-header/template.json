@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "tale:template:app-header",
+  "version": "1.0.0",
+  "source": "source/App.tsx",
+  "skeleton": "skeleton/App.tsx",
+  "dependencies": {
+    "@tale-ui/react": "^2.0.0",
+    "react": ">=18.0.0",
+    "lucide-react": "^0.468.0"
+  },
+  "preview": {
+    "recipe": "docs/recipes/app-header-navigation.md",
+    "accessibility": "keyboard, screen-reader, zoom, contrast, and reduced-motion review required",
+    "responsive": true
+  },
+  "golden": "tools/golden-prompts/header-nav-basic.json",
+  "compatibility": {
+    "react": ">=18.0.0",
+    "tale": ">=2.0.0 <3.0.0",
+    "frameworks": [
+      "next",
+      "vite"
+    ]
+  },
+  "appearance": [
+    "light",
+    "dark"
+  ],
+  "rtl": true,
+  "provenance": {
+    "source": "docs/recipes/app-header-navigation.md",
+    "firstParty": true
+  },
+  "license": "MIT",
+  "digest": "sha256:a4e0ac86bad4e49786124aa186854334c1546410cd8157504e0f2368b9cabd06"
+}

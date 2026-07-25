@@ -8,6 +8,8 @@
 /** Human-readable description per catalog type. */
 const TYPE_DESCRIPTIONS = {
   Text: 'Typography wrapper with variant, size, and colour props',
+  Kbd: 'Semantic keyboard input or shortcut hint',
+  CodeBlock: 'Plain-text code surface without parsing or execution',
   Row: 'Horizontal flex-row layout with gap, align, and justify',
   Column: 'Vertical flex-column layout with gap, align, and justify',
   Card: 'Surface container with header, body, and footer sections',
@@ -169,6 +171,7 @@ const PROP_VALUES = {
   label: 'string',
   children: 'array of component IDs',
   content: 'string',
+  language: 'informational language identifier string',
   usageHint:
     '`display-l`, `display-m`, `display-s`, `heading-l`, `heading-m`, `heading-s`, `heading`, `title`, `label`, `body`, `body-s`, `caption`, `mono`',
   color: '`default`, `muted`, `accent`',
@@ -257,6 +260,7 @@ const PROP_VALUES = {
  * Key format: "TypeName.propName"
  */
 const PROP_VALUE_OVERRIDES = {
+  'Kbd.size': '`sm`, `md`',
   'Button.variant': '`primary`, `neutral`, `ghost`, `danger`',
   'Badge.type': '`pill`, `rounded`',
   'Banner.variant': '`info`, `success`, `warning`, `error`',

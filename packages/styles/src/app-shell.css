@@ -1,0 +1,110 @@
+.tale-app-shell {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-areas:
+    'header'
+    'main'
+    'mobile-navigation';
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-block-size: 100dvh;
+  background: var(--neutral-5);
+  color: var(--neutral-90);
+}
+
+.tale-app-shell--with-sidebar {
+  grid-template-areas:
+    'sidebar header'
+    'sidebar main'
+    'sidebar mobile-navigation';
+  grid-template-columns: minmax(14rem, 18rem) minmax(0, 1fr);
+}
+
+.tale-app-shell__header {
+  grid-area: header;
+  min-inline-size: 0;
+}
+
+.tale-app-shell__sidebar {
+  grid-area: sidebar;
+  min-block-size: 0;
+  border-inline-end: 1px solid var(--neutral-20);
+}
+
+.tale-app-shell__main {
+  grid-area: main;
+  min-inline-size: 0;
+  min-block-size: 0;
+  padding: var(--space-l);
+  overflow: auto;
+  outline: none;
+}
+
+.tale-app-shell__main:focus-visible {
+  box-shadow: inset 0 0 0 3px var(--focus-ring-glow);
+}
+
+.tale-app-shell__mobile-navigation {
+  display: none;
+  grid-area: mobile-navigation;
+}
+
+.tale-app-shell__skip-link {
+  position: fixed;
+  inset-block-start: var(--space-2xs);
+  inset-inline-start: var(--space-2xs);
+  z-index: 100;
+  padding: var(--space-2xs) var(--space-xs);
+  border-radius: var(--radius-s);
+  background: var(--neutral-90);
+  color: var(--neutral-90-fg);
+  font-family: var(--label-font-family);
+  font-size: var(--label-s-font-size);
+  font-weight: var(--label-font-weight);
+  transform: translateY(calc(-100% - var(--space-s)));
+}
+
+.tale-app-shell__skip-link:focus {
+  transform: translateY(0);
+}
+
+[dir='rtl'] .tale-app-shell--with-sidebar {
+  grid-template-areas:
+    'header sidebar'
+    'main sidebar'
+    'mobile-navigation sidebar';
+  grid-template-columns: minmax(0, 1fr) minmax(14rem, 18rem);
+}
+
+[dir='rtl'] .tale-app-shell__sidebar {
+  border-inline-end: 0;
+  border-inline-start: 1px solid var(--neutral-20);
+}
+
+@media (width <= 48rem) {
+  .tale-app-shell--with-sidebar,
+  [dir='rtl'] .tale-app-shell--with-sidebar {
+    grid-template-areas:
+      'header'
+      'main'
+      'mobile-navigation';
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tale-app-shell__sidebar {
+    display: none;
+  }
+
+  .tale-app-shell__main {
+    padding: var(--space-m);
+  }
+
+  .tale-app-shell__mobile-navigation {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tale-app-shell__skip-link {
+    transition: transform var(--motion-state-duration) var(--motion-easing-enter);
+  }
+}

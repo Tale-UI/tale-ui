@@ -1,0 +1,7 @@
+{
+  "slug": "app-shell-sidebar",
+  "difficulty": "medium",
+  "prompt": "Build an accessible application shell with a header, desktop sidebar, skip link, and main route content.",
+  "reference": "import { AppShell } from '@tale-ui/react/app-shell';\nimport { HeaderNav } from '@tale-ui/react/header-nav';\nimport { Sidebar } from '@tale-ui/react/sidebar';\nimport { Text } from '@tale-ui/react/text';\n\nexport function ApplicationFrame() {\n  return (\n    <AppShell.Root>\n      <AppShell.SkipLink />\n      <AppShell.Header>\n        <HeaderNav.Root aria-label=\"Application header\">\n          <HeaderNav.Logo href=\"/\">Tale</HeaderNav.Logo>\n        </HeaderNav.Root>\n      </AppShell.Header>\n      <AppShell.Sidebar>\n        <Sidebar.Root aria-label=\"Primary navigation\">\n          <Sidebar.NavList>\n            <Sidebar.NavItem href=\"/\" current>Overview</Sidebar.NavItem>\n            <Sidebar.NavItem href=\"/settings\">Settings</Sidebar.NavItem>\n          </Sidebar.NavList>\n        </Sidebar.Root>\n      </AppShell.Sidebar>\n      <AppShell.Main>\n        <Text as=\"h1\" variant=\"heading\" size=\"l\">Overview</Text>\n      </AppShell.Main>\n    </AppShell.Root>\n  );\n}",
+  "tags": ["AppShell", "HeaderNav", "Sidebar", "Text"]
+}

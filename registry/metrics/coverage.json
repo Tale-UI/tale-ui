@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "snapshotId": "tale:metrics:current",
+  "capturedAt": "2026-07-25T00:00:00.000Z",
+  "counts": {
+    "complete": 2,
+    "partial": 0,
+    "unavailable": 11
+  },
+  "decisionMetricIds": [
+    "structural-docs-coverage",
+    "golden-a11y-health"
+  ],
+  "unavailableMetricIds": [
+    "package-downloads",
+    "active-version-distribution",
+    "docs-traffic",
+    "zero-result-searches",
+    "cli-mcp-errors",
+    "template-adds",
+    "codemod-runs-failures",
+    "issues-by-component-version",
+    "release-cadence",
+    "upgrade-lag",
+    "agent-pass-rate-context-cost"
+  ]
+}

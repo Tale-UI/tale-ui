@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "tale:template:empty-state",
+  "version": "1.0.0",
+  "source": "source/App.tsx",
+  "skeleton": "skeleton/App.tsx",
+  "dependencies": {
+    "@tale-ui/react": "^2.0.0",
+    "react": ">=18.0.0",
+    "lucide-react": "^0.468.0"
+  },
+  "preview": {
+    "recipe": "docs/recipes/empty-data-state.md",
+    "accessibility": "keyboard, screen-reader, zoom, contrast, and reduced-motion review required",
+    "responsive": true
+  },
+  "golden": "tools/golden-prompts/empty-state-no-results.json",
+  "compatibility": {
+    "react": ">=18.0.0",
+    "tale": ">=2.0.0 <3.0.0",
+    "frameworks": [
+      "next",
+      "vite"
+    ]
+  },
+  "appearance": [
+    "light",
+    "dark"
+  ],
+  "rtl": true,
+  "provenance": {
+    "source": "docs/recipes/empty-data-state.md",
+    "firstParty": true
+  },
+  "license": "MIT",
+  "digest": "sha256:d9863231b9fd0444b27e24cb74cfe11db371c96320c60bc1d5e1ea162d56ae55"
+}

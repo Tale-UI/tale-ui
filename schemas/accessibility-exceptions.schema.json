@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/accessibility-exceptions.schema.json",
+  "title": "Accessibility check exceptions",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "exceptions"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": "1.0.0" },
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "storyId", "rule", "owner", "rationale", "expiresOn"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^A11Y-[0-9]{4}$" },
+          "storyId": { "type": "string", "minLength": 1 },
+          "rule": { "type": "string", "minLength": 1 },
+          "targetContains": { "type": "string", "minLength": 1 },
+          "owner": { "type": "string", "minLength": 1 },
+          "rationale": { "type": "string", "minLength": 20 },
+          "expiresOn": { "type": "string", "format": "date" },
+          "trackingIssue": { "type": "string", "format": "uri" }
+        }
+      }
+    }
+  }
+}

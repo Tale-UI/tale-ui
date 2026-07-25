@@ -8,6 +8,7 @@ export type {
   FooterProps as TableFooterProps,
   RowProps as TableRowProps,
   CellProps as TableCellProps,
+  VirtualizerProps as TableVirtualizerProps,
 } from './Table.styled';
 
 export {
@@ -17,7 +18,12 @@ export {
   type TableControllerOptions,
   type TableControllerQuery,
   type TableControllerRequestContext,
+  type TableFilterExpression,
+  type TableFilteringController,
+  type TablePaginationController,
+  type TableSelectionController,
   type TableSortingController,
+  type TableVirtualizationController,
 } from './TableController';
 
-export type { Selection, Key, SortDescriptor } from 'react-aria-components';
+export type { Selection, Key, SortDescriptor, TableLayoutProps } from 'react-aria-components';

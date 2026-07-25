@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "approved",
+  "owner": "@tale-ui/react",
+  "catalog": "packages/react/src/i18n-provider/catalogs/en.json",
+  "schema": "schemas/i18n-catalog.schema.json",
+  "scope": "Tale-owned operational labels and statuses only",
+  "applicationCopy": "excluded",
+  "messageIds": [
+    "common.clear",
+    "common.close",
+    "common.loading",
+    "common.noResults",
+    "common.openMenu",
+    "common.remove",
+    "pagination.next",
+    "pagination.previous",
+    "table.empty",
+    "table.loading",
+    "table.page"
+  ]
+}

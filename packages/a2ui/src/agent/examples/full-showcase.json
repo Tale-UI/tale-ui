@@ -1,5 +1,5 @@
 {
-  "description": "Full showcase — all 149 A2UI types, all prop variations (AllVariations pattern)",
+  "description": "Full showcase — all 151 A2UI types, all prop variations (AllVariations pattern)",
   "messages": [
     {
       "type": "beginRendering",
@@ -18,6 +18,8 @@
               "children": [
                 "heading",
                 "subtitle",
+                "kbd-example",
+                "code-example",
                 "sec-txt",
                 "sec-lay",
                 "sec-btn",
@@ -123,6 +125,25 @@
               "content": "All 149 catalog types — every meaningful prop variation shown side-by-side",
               "usageHint": "body",
               "color": "muted"
+            }
+          }
+        },
+        {
+          "id": "kbd-example",
+          "component": {
+            "Kbd": {
+              "content": "⌘ K",
+              "size": "md"
+            }
+          }
+        },
+        {
+          "id": "code-example",
+          "component": {
+            "CodeBlock": {
+              "content": "export const ready = true;",
+              "language": "ts",
+              "wrap": false
             }
           }
         },

@@ -9,6 +9,7 @@ import { IconButton } from '@tale-ui/react/icon-button';
 import { Input } from '@tale-ui/react/input';
 import { ToggleButton, ToggleButtonGroup } from '@tale-ui/react/toggle-button';
 import { Separator } from '@tale-ui/react/separator';
+import { I18nProvider, useTaleI18n } from '@tale-ui/react/i18n-provider';
 
 // Compound components
 import { Checkbox } from '@tale-ui/react/checkbox';
@@ -48,6 +49,8 @@ import { Tabs } from '@tale-ui/react/tabs';
 import { ScrollArea } from '@tale-ui/react/scroll-area';
 import { Container } from '@tale-ui/react/container';
 import { Card } from '@tale-ui/react/card';
+import { AppShell } from '@tale-ui/react/app-shell';
+import { Chat } from '@tale-ui/react/chat';
 import { Column } from '@tale-ui/react/column';
 import { Row as LayoutRow } from '@tale-ui/react/row';
 
@@ -157,6 +160,8 @@ import { PaginationDot } from '@tale-ui/react/pagination-dot';
 import { PaginationLine } from '@tale-ui/react/pagination-line';
 import { PaymentInput } from '@tale-ui/react/payment-input';
 import { Text } from '@tale-ui/react/text';
+import { Kbd } from '@tale-ui/react/kbd';
+import { CodeBlock } from '@tale-ui/react/code-block';
 import { QRCode } from '@tale-ui/react/qr-code';
 import { ImageCropper } from '@tale-ui/react/image-cropper';
 import { VideoPlayer } from '@tale-ui/react/video-player';
@@ -372,6 +377,7 @@ const TOC = [
   {
     category: 'Layout',
     items: [
+      { id: 'app-shell', label: 'AppShell' },
       { id: 'carousel', label: 'Carousel' },
       { id: 'accordion', label: 'Accordion' },
       { id: 'disclosure', label: 'Disclosure' },
@@ -380,6 +386,7 @@ const TOC = [
       { id: 'separator', label: 'Separator' },
       { id: 'toolbar', label: 'Toolbar' },
       { id: 'card', label: 'Card' },
+      { id: 'chat', label: 'Chat' },
       { id: 'column', label: 'Column' },
       { id: 'row', label: 'Row' },
     ],
@@ -434,7 +441,14 @@ const TOC = [
       { id: 'text-editor', label: 'TextEditor' },
     ],
   },
-  { category: 'Typography', items: [{ id: 'text', label: 'Text' }] },
+  {
+    category: 'Typography',
+    items: [
+      { id: 'code-block', label: 'CodeBlock' },
+      { id: 'kbd', label: 'Kbd' },
+      { id: 'text', label: 'Text' },
+    ],
+  },
   {
     category: 'Marketing',
     items: [
@@ -453,11 +467,21 @@ const TOC = [
     category: 'Utility',
     items: [
       { id: 'color-mode-toggle', label: 'ColorModeToggle' },
+      { id: 'i18n-provider', label: 'I18nProvider' },
       { id: 'icon', label: 'Icon' },
       { id: 'container', label: 'Container' },
     ],
   },
 ];
+
+function I18nAuditValue() {
+  const { formatMessage, mode } = useTaleI18n();
+  return (
+    <Text>
+      {mode}: {formatMessage('table.page', { page: 2, pageCount: 8 })}
+    </Text>
+  );
+}
 
 const TOC_ITEMS = TOC.flatMap(({ items }) => items).sort((a, b) => a.label.localeCompare(b.label));
 
@@ -1015,8 +1039,15 @@ function SortableTableDemo() {
   const controller = useTableController({
     tableId: 'audit-people',
     defaultSortDescriptor: { column: 'name', direction: 'ascending' },
+    defaultSelectedKeys: new Set(['2']),
+    defaultFilter: { schemaVersion: '1.0.0', value: 'a' },
+    defaultPageSize: 3,
+    totalRows: tableRows.length,
   });
-  const sorted = controller.sorting.sortRows(tableRows, (left, right, column) => {
+  const filtered = controller.filtering.filterRows(tableRows, (row, filter) =>
+    `${row.name} ${row.role} ${row.status}`.toLowerCase().includes(filter.value.toLowerCase()),
+  );
+  const sorted = controller.sorting.sortRows(filtered, (left, right, column) => {
     if (column === 'role') {
       return left.role.localeCompare(right.role);
     }
@@ -1025,11 +1056,13 @@ function SortableTableDemo() {
     }
     return left.name.localeCompare(right.name);
   });
+  const visibleRows = controller.pagination.paginateRows(sorted);
 
   return (
     <Table.Root
       {...controller.tableProps}
       aria-label="Sortable people"
+      selectionMode="multiple"
       className="audit__demo-extra-wide"
     >
       <Table.Header>
@@ -1044,7 +1077,7 @@ function SortableTableDemo() {
         </Table.Column>
       </Table.Header>
       <Table.Body>
-        {sorted.map((row) => (
+        {visibleRows.map((row) => (
           <Table.Row key={row.id} id={row.id}>
             <Table.Cell>{row.name}</Table.Cell>
             <Table.Cell>{row.role}</Table.Cell>
@@ -1349,6 +1382,17 @@ export default function ComponentAudit() {
           <Row>
             <InertColorModeToggle disabled />
           </Row>
+        </Section>
+
+        <Section id="i18n-provider" title="I18nProvider" classes={[]}>
+          <SubHeading>Pseudo-locale expansion</SubHeading>
+          <I18nProvider mode="pseudo">
+            <I18nAuditValue />
+          </I18nProvider>
+          <SubHeading>Forced RTL</SubHeading>
+          <I18nProvider mode="rtl">
+            <I18nAuditValue />
+          </I18nProvider>
         </Section>
 
         <Section
@@ -4132,6 +4176,85 @@ export default function ComponentAudit() {
         </Section>
 
         <Section
+          id="app-shell"
+          title="AppShell"
+          classes={[
+            'tale-app-shell',
+            'tale-app-shell--with-sidebar',
+            'tale-app-shell__header',
+            'tale-app-shell__sidebar',
+            'tale-app-shell__main',
+            'tale-app-shell__mobile-navigation',
+            'tale-app-shell__skip-link',
+          ]}
+        >
+          <AppShell.Root style={{ minHeight: '24rem' }}>
+            <AppShell.SkipLink />
+            <AppShell.Header>
+              <HeaderNav.Root aria-label="Audit header">
+                <HeaderNav.Logo href="#">Tale</HeaderNav.Logo>
+              </HeaderNav.Root>
+            </AppShell.Header>
+            <AppShell.Sidebar>
+              <Sidebar.Root aria-label="Audit navigation">
+                <Sidebar.NavList>
+                  <Sidebar.NavItem href="#" current>
+                    Overview
+                  </Sidebar.NavItem>
+                </Sidebar.NavList>
+              </Sidebar.Root>
+            </AppShell.Sidebar>
+            <AppShell.Main>Application-owned content</AppShell.Main>
+            <AppShell.MobileNavigation>Mobile navigation slot</AppShell.MobileNavigation>
+          </AppShell.Root>
+        </Section>
+
+        <Section
+          id="chat"
+          title="Chat"
+          classes={[
+            'tale-chat',
+            'tale-chat--with-artifact-panel',
+            'tale-chat__conversation',
+            'tale-chat__artifact-panel',
+            'tale-chat__message-list',
+            'tale-chat__message',
+            'tale-chat__bubble',
+            'tale-chat__metadata',
+            'tale-chat__composer',
+            'tale-chat__tool-call',
+          ]}
+        >
+          <Chat.Root
+            aria-label="Audit conversation"
+            artifactPanel={<Text>Artifact preview</Text>}
+            style={{ minHeight: '24rem' }}
+          >
+            <Chat.List aria-label="Messages">
+              <Chat.Message speaker="user" aria-label="User message">
+                <Chat.Bubble>Check the build status.</Chat.Bubble>
+              </Chat.Message>
+              <Chat.Message speaker="assistant" aria-label="Assistant message">
+                <Chat.Bubble>The build passed.</Chat.Bubble>
+                <Chat.Metadata>Just now</Chat.Metadata>
+                <Chat.ToolCall state="success" label="Read checks" statusLabel="Complete" open>
+                  All checks passed.
+                </Chat.ToolCall>
+              </Chat.Message>
+            </Chat.List>
+            <Chat.Composer
+              aria-label="Message composer"
+              onSubmit={(event) => event.preventDefault()}
+            >
+              <TextArea.Root>
+                <TextArea.TextArea aria-label="Message" />
+              </TextArea.Root>
+              <Button type="submit">Send</Button>
+            </Chat.Composer>
+          </Chat.Root>
+        </Section>
+
+        <Section
           id="card"
           title="Card"
           classes={[
@@ -6713,6 +6836,33 @@ export default function ComponentAudit() {
         {/* ============================================================= */}
         {/* TYPOGRAPHY                                                     */}
         {/* ============================================================= */}
+
+        <Section
+          id="code-block"
+          title="CodeBlock"
+          classes={['tale-code-block', 'tale-code-block--wrap']}
+        >
+          <SubHeading>Plain text</SubHeading>
+          <CodeBlock language="tsx">{`export function App() {
+  return <main>Hello</main>;
+}`}</CodeBlock>
+          <SubHeading>Wrapped</SubHeading>
+          <CodeBlock wrap>
+            This long plain-text line wraps without loading a parser or syntax highlighter.
+          </CodeBlock>
+        </Section>
+
+        <Section id="kbd" title="Kbd" classes={['tale-kbd', 'tale-kbd--sm', 'tale-kbd--md']}>
+          <SubHeading>Shortcut</SubHeading>
+          <Text>
+            Open search with <Kbd>⌘</Kbd> <Kbd>K</Kbd>
+          </Text>
+          <SubHeading>Sizes</SubHeading>
+          <div style={{ display: 'flex', gap: 'var(--space-xs)' }}>
+            <Kbd size="sm">Esc</Kbd>
+            <Kbd size="md">Enter</Kbd>
+          </div>
+        </Section>
 
         <Section
           id="text"

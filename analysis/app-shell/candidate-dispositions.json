@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0.0",
+  "inventory": "app-shell",
+  "evidenceRevision": "sha256:6eb311c219a6c7c9510089c612f92486f5039a21d0b479b34686e13697e5c83b",
+  "records": [
+    {
+      "candidate": "root",
+      "disposition": "approve",
+      "rationale": "A semantic, layout-only root removes repeated full-height shell CSS without absorbing application behavior.",
+      "evidence": {
+        "sources": [
+          "packages/tooling/templates/sidebar-header/source/App.tsx",
+          "docs/recipes/sidebar-simple.md",
+          "docs/recipes/sidebar-with-header.md"
+        ],
+        "repeatedTemplateEvidence": "The packed sidebar-header template and multiple approved sidebar recipes repeat a full-height flex shell root.",
+        "accessibility": "The root preserves document landmarks and must reflow at 400% zoom.",
+        "state": "Any responsive or persisted state remains controlled by the parent application.",
+        "ssr": "The root has deterministic markup and no viewport-derived server default.",
+        "ownership": "Layout only; routing, data loading, authentication, and application state are excluded."
+      },
+      "evidenceDigest": "sha256:efd8c030bb8302f72eb8ce3864183a7775acb912011bbf18cc63f4f41a558cc8"
+    },
+    {
+      "candidate": "header",
+      "disposition": "approve",
+      "rationale": "A shell header slot is repeatedly composed around HeaderNav and benefits from a consistent grid-area boundary.",
+      "evidence": {
+        "sources": [
+          "packages/tooling/templates/app-header/source/App.tsx",
+          "packages/tooling/templates/sidebar-header/source/App.tsx",
+          "docs/recipes/app-header-navigation.md"
+        ],
+        "repeatedTemplateEvidence": "Both packed application-header templates render a distinct top header region.",
+        "accessibility": "The slot renders a header landmark while navigation semantics remain with HeaderNav.",
+        "state": "The slot owns no open, navigation, or account state.",
+        "ssr": "The header landmark and grid placement are identical across server and client.",
+        "ownership": "Structural placement only; HeaderNav continues to own header interaction."
+      },
+      "evidenceDigest": "sha256:2e93c1743bc0ddf3d8e76082c260ee97cbbc607b3e89bb90fabdb15513f0d1f1"
+    },
+    {
+      "candidate": "sidebar",
+      "disposition": "approve",
+      "rationale": "A shell sidebar slot standardizes responsive placement while reusing the existing Sidebar or NavigationMenu components.",
+      "evidence": {
+        "sources": [
+          "packages/tooling/templates/sidebar-header/source/App.tsx",
+          "docs/recipes/sidebar-simple.md",
+          "docs/recipes/sidebar-dual-tier.md",
+          "docs/recipes/sidebar-with-header.md"
+        ],
+        "repeatedTemplateEvidence": "One packed template and three approved recipes repeat the same leading application-sidebar region.",
+        "accessibility": "The slot renders an aside; consumers provide one labelled navigation landmark within it.",
+        "state": "Visibility and persistence stay controlled by the application.",
+        "ssr": "Desktop markup remains present and CSS controls layout without viewport reads.",
+        "ownership": "Structural placement only; Sidebar and consumer navigation own interaction and route state."
+      },
+      "evidenceDigest": "sha256:09b363fe44c0c626577146882572d3e4271c0e2da32c0a6bbf510b23ed133413"
+    },
+    {
+      "candidate": "main",
+      "disposition": "approve",
+      "rationale": "A main slot centralizes the unique target ID, scroll containment, and shell grid placement repeated by application layouts.",
+      "evidence": {
+        "sources": [
+          "packages/tooling/templates/sidebar-header/source/App.tsx",
+          "docs/recipes/sidebar-navigation.md",
+          "docs/recipes/sidebar-with-header.md"
+        ],
+        "repeatedTemplateEvidence": "The packed shell and multiple recipes repeat a flexible, scrollable main content landmark.",
+        "accessibility": "The slot provides the main landmark and a stable skip-link target.",
+        "state": "The slot owns no route, loading, or view state.",
+        "ssr": "Its landmark, ID, and content order are deterministic.",
+        "ownership": "Content placement only; the application owns what route content renders."
+      },
+      "evidenceDigest": "sha256:ca2dd7b78aa66e03cc9443fa82539ddf6bcf44c9ee4a43deb7f66b5df0809fac"
+    },
+    {
+      "candidate": "secondary panel",
+      "disposition": "defer",
+      "rationale": "The first template set does not establish a repeated secondary-panel width, priority, collapse, or landmark contract.",
+      "evidence": {
+        "sources": [
+          "packages/tooling/templates/chart-dashboard/source/App.tsx",
+          "analysis/app-shell/inventory.json"
+        ],
+        "repeatedTemplateEvidence": "Dashboard cards show secondary content, but no packed template repeats a shell-level secondary panel.",
+        "accessibility": "Landmark naming and reading order need product evidence before standardization.",
+        "state": "Open and collapse behavior is unresolved and must remain application-owned.",
+        "ssr": "Responsive presence could alter the hydration tree without an approved CSS-only contract.",
+        "ownership": "Deferred until repeated layouts prove a structural boundary."
+      },
+      "evidenceDigest": "sha256:b6091e151c3a381f59531e28a57184b98c371ee2400d12a85dadc4baf13779ce"
+    },
+    {
+      "candidate": "mobile navigation",
+      "disposition": "approve",
+      "rationale": "Two packed header patterns and the sidebar recipes repeatedly require a distinct mobile navigation placement.",
+      "evidence": {
+        "sources": [
+          "packages/tooling/templates/app-header/source/App.tsx",
+          "packages/tooling/templates/sidebar-header/source/App.tsx",
+          "docs/recipes/sidebar-simple.md"
+        ],
+        "repeatedTemplateEvidence": "HeaderNav.MobileTrigger and Drawer-based navigation recur across both packed application-header templates.",
+        "accessibility": "The slot requires a labelled navigation region; Drawer/HeaderNav retain focus and escape behavior.",
+        "state": "Open state is parent- or interaction-component-owned, never inferred by AppShell.",
+        "ssr": "The slot is rendered deterministically and hidden or shown through responsive CSS.",
+        "ownership": "Placement only; Drawer or HeaderNav owns modal interaction and the app owns routes."
+      },
+      "evidenceDigest": "sha256:8bf798dcbd1db660b43d62e60e4627345af6b7db5bf79730ce90678bb63dad4f"
+    },
+    {
+      "candidate": "skip link",
+      "disposition": "approve",
+      "rationale": "A shell-level skip link is the missing accessibility counterpart to the repeatedly identified main region.",
+      "evidence": {
+        "sources": [
+          "packages/tooling/templates/sidebar-header/source/App.tsx",
+          "docs/recipes/sidebar-navigation.md",
+          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#p1-e--appshell-evidence-gate"
+        ],
+        "repeatedTemplateEvidence": "Every repeated header/sidebar shell has navigation before main content, creating the same keyboard bypass need.",
+        "accessibility": "The link becomes visible on focus and targets the AppShell main landmark.",
+        "state": "No state is owned.",
+        "ssr": "The href and target ID are deterministic.",
+        "ownership": "Keyboard bypass only; it does not coordinate application navigation."
+      },
+      "evidenceDigest": "sha256:b1213072e94f966255de751d3b0cead60855cbd7b14359bb9934af33d61ac710"
+    },
+    {
+      "candidate": "resizable-region adapter",
+      "disposition": "defer",
+      "rationale": "No packed template supplies repeated pointer, keyboard, persistence, RTL, or minimum-size evidence for shell resizing.",
+      "evidence": {
+        "sources": [
+          "analysis/app-shell/inventory.json",
+          "docs/recipes/sidebar-with-header.md"
+        ],
+        "repeatedTemplateEvidence": "The recipes use fixed sidebar widths; none demonstrates an accessible resizable shell boundary.",
+        "accessibility": "Keyboard resize semantics, announcements, zoom minimums, and touch targets remain unproven.",
+        "state": "Width persistence and revision ownership require a separate controlled-state design.",
+        "ssr": "Persisted sizes cannot safely affect initial layout until reconciliation is specified.",
+        "ownership": "Deferred as an adapter rather than embedding unproven state in AppShell."
+      },
+      "evidenceDigest": "sha256:2c5d588c60424cb47af4618946cfe09135eb825b6a458145b922f1bd3eccd475"
+    }
+  ]
+}

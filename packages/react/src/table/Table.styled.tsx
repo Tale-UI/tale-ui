@@ -7,6 +7,8 @@ import {
   TableFooter as AriaTableFooter,
   Row as AriaRow,
   Cell as AriaCell,
+  TableLayout,
+  Virtualizer as AriaVirtualizer,
   type TableProps as AriaTableProps,
   type TableHeaderProps as AriaTableHeaderProps,
   type ColumnProps as AriaColumnProps,
@@ -14,6 +16,8 @@ import {
   type TableFooterProps as AriaTableFooterProps,
   type RowProps as AriaRowProps,
   type CellProps as AriaCellProps,
+  type TableLayoutProps,
+  type VirtualizerProps as AriaVirtualizerProps,
 } from 'react-aria-components';
 import { cx } from '../_cx';
 
@@ -50,6 +54,22 @@ export const Root = React.forwardRef<HTMLTableElement, RootProps>(
   ),
 );
 Root.displayName = 'Table.Root';
+
+// ── Virtualizer ────────────────────────────────────────────────────────────
+
+export type VirtualizerProps = Omit<AriaVirtualizerProps<TableLayoutProps>, 'layout'>;
+
+/**
+ * Virtualizes a large `Table.Root` collection with React Aria's table-aware
+ * layout while retaining row, cell, focus, and selection semantics.
+ *
+ * Keep stable row IDs and provide either `rowHeight` or `estimatedRowHeight`.
+ */
+export function Virtualizer(props: VirtualizerProps) {
+  return <AriaVirtualizer {...props} layout={TableLayout} />;
+}
+
+Virtualizer.displayName = 'Table.Virtualizer';
 
 // ── Header ─────────────────────────────────────────────────────────────────
 

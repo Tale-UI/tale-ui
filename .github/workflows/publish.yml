@@ -8,6 +8,7 @@ on:
       - 'css-v*.*.*'
       - 'react-v*.*.*'
       - 'themes-v*.*.*'
+      - 'tooling-v*.*.*'
   workflow_dispatch:
     inputs:
       scope:
@@ -20,6 +21,7 @@ on:
           - css
           - react
           - themes
+          - tooling
       version:
         description: 'Version without prefix (e.g. 1.2.3)'
         required: true
@@ -69,16 +71,27 @@ jobs:
             elif [[ "$TAG" == themes-v* ]]; then
               echo "scope=themes" >> "$GITHUB_OUTPUT"
               echo "version=${TAG#themes-v}" >> "$GITHUB_OUTPUT"
+            elif [[ "$TAG" == tooling-v* ]]; then
+              echo "scope=tooling" >> "$GITHUB_OUTPUT"
+              echo "version=${TAG#tooling-v}" >> "$GITHUB_OUTPUT"
             else
               echo "Unknown tag prefix: $TAG"
               exit 1
             fi
-            echo "dist_tag=latest" >> "$GITHUB_OUTPUT"
+            if [[ "$TAG" == tooling-v* ]]; then
+              echo "dist_tag=next" >> "$GITHUB_OUTPUT"
+            else
+              echo "dist_tag=latest" >> "$GITHUB_OUTPUT"
+            fi
             echo "dry_run=false" >> "$GITHUB_OUTPUT"
           else
             echo "scope=${{ inputs.scope }}" >> "$GITHUB_OUTPUT"
             echo "version=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
-            echo "dist_tag=${{ inputs.dist-tag }}" >> "$GITHUB_OUTPUT"
+            if [ "${{ inputs.scope }}" = "tooling" ]; then
+              echo "dist_tag=next" >> "$GITHUB_OUTPUT"
+            else
+              echo "dist_tag=${{ inputs.dist-tag }}" >> "$GITHUB_OUTPUT"
+            fi
             echo "dry_run=${{ inputs.dry-run }}" >> "$GITHUB_OUTPUT"
           fi
 
@@ -429,3 +442,68 @@ jobs:
           name: 'themes-v${{ needs.resolve.outputs.version }}'
           body: |
             Published @tale-ui/themes v${{ needs.resolve.outputs.version }} to npm.
+
+  publish-tooling:
+    needs: resolve
+    if: needs.resolve.outputs.scope == 'tooling'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify version and public beta channel
+        shell: bash
+        run: |
+          EXPECTED="${{ needs.resolve.outputs.version }}"
+          ACTUAL=$(node -p "require('./packages/tooling/package.json').version")
+          CHANNEL=$(node -p "require('./registry/artifacts.json').releaseChannel")
+          if [ "$EXPECTED" != "$ACTUAL" ]; then
+            echo "Version mismatch: expected $EXPECTED, found $ACTUAL"
+            exit 1
+          fi
+          if [ "$CHANNEL" != "beta" ]; then
+            echo "Tooling publication requires the beta registry channel"
+            exit 1
+          fi
+
+      - name: Build and validate @tale-ui/tooling
+        run: pnpm --filter @tale-ui/tooling test:package
+
+      - name: Publish @tale-ui/tooling
+        if: needs.resolve.outputs.dry_run != 'true'
+        shell: bash
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          VERSION="${{ needs.resolve.outputs.version }}"
+          if npm view @tale-ui/tooling@"$VERSION" version >/dev/null 2>&1; then
+            echo "@tale-ui/tooling@$VERSION already published; skipping"
+          else
+            pnpm --filter @tale-ui/tooling publish --access public --no-git-checks --provenance --tag ${{ needs.resolve.outputs.dist_tag }}
+          fi
+
+      - name: Dry run notice
+        if: needs.resolve.outputs.dry_run == 'true'
+        run: echo "Dry run — skipped npm publish for @tale-ui/tooling@${{ needs.resolve.outputs.version }}"
+
+      - name: Create GitHub release
+        if: needs.resolve.outputs.dry_run != 'true' && github.event_name == 'push'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: 'tooling-v${{ needs.resolve.outputs.version }}'
+          body: |
+            Published @tale-ui/tooling v${{ needs.resolve.outputs.version }} under the ${{ needs.resolve.outputs.dist_tag }} npm tag.

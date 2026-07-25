@@ -1,9 +1,8 @@
 {
   "name": "@tale-ui/tooling",
-  "version": "0.0.0-internal",
+  "version": "0.1.0",
   "description": "Tale UI registry, validation, and safe project tooling.",
   "type": "module",
-  "private": true,
   "engines": {
     "node": ">=22"
   },
@@ -11,6 +10,10 @@
     ".": "./src/index.ts",
     "./api": "./src/api.ts",
     "./contracts": "./src/contracts/index.ts",
+    "./extensions": "./src/extensions.ts",
+    "./materialize": "./src/materialize.ts",
+    "./migrations": "./src/migrations.ts",
+    "./operations": "./src/operations.ts",
     "./registry": "./src/registry.ts",
     "./validation": "./src/validation/index.ts",
     "./package.json": "./package.json"
@@ -22,14 +25,18 @@
   "scripts": {
     "prebuild": "rimraf --glob build build-tests \"*.tsbuildinfo\"",
     "build": "node scripts/build.mjs",
-    "test": "tsx --test src/api.test.ts src/mcp.test.ts src/validation/validation.test.ts",
+    "test": "tsx --test src/api.test.ts src/extensions.test.ts src/materialize.test.ts src/mcp.test.ts src/migrations.test.ts src/operations.test.ts src/validation/validation.test.ts",
     "test:package": "pnpm build && publint run ./build && attw --profile esm-only --pack ./build && node scripts/test-packed.mjs",
     "typescript": "tsc -b tsconfig.json"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.28.0",
+    "semver": "^7.7.4",
     "typescript": "5.9.3",
     "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/semver": "^7.7.1"
   },
   "sideEffects": false,
   "repository": {

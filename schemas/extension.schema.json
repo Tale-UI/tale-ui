@@ -1,8 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tale-ui.dev/schemas/extension.schema.json",
-  "title": "Tale extension manifest",
+  "title": "Tale extension contribution manifest",
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "schemaVersion",
     "namespace",
@@ -10,27 +11,37 @@
     "version",
     "publisher",
     "provenance",
-    "integrity",
     "license",
     "contributionClasses",
+    "contributions",
     "contractRanges",
     "capabilities",
     "permissions",
     "trust",
-    "sourceLinks"
+    "sourceLinks",
+    "revocation"
   ],
   "properties": {
+    "$schema": { "type": "string" },
     "schemaVersion": { "const": "1.0.0" },
     "namespace": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]+$" },
-    "package": { "type": "string" },
-    "version": { "type": "string" },
-    "publisher": { "type": "string" },
-    "provenance": { "type": "object" },
-    "integrity": { "type": "string" },
-    "signaturePolicy": { "type": "string" },
-    "license": { "type": "string" },
+    "package": { "type": "string", "pattern": "^@?[a-z0-9][a-z0-9@/._-]+$" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[a-z0-9.-]+)?$" },
+    "publisher": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]+$" },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "npmProvenance"],
+      "properties": {
+        "repository": { "type": "string", "format": "uri" },
+        "npmProvenance": { "type": "boolean" }
+      }
+    },
+    "license": { "type": "string", "minLength": 1 },
     "contributionClasses": {
       "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
       "uniqueItems": true,
       "items": {
         "enum": [
@@ -42,11 +53,86 @@
         ]
       }
     },
-    "contractRanges": { "type": "object" },
-    "capabilities": { "type": "array", "items": { "type": "string" } },
-    "permissions": { "type": "array", "items": { "type": "string" } },
-    "trust": { "enum": ["untrusted", "trusted-local", "revoked"] },
-    "sourceLinks": { "type": "array", "items": { "type": "string", "format": "uri" } },
-    "revocation": { "type": ["object", "null"] }
+    "contributions": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["class", "artifacts"],
+        "properties": {
+          "class": {
+            "enum": [
+              "components-and-docs",
+              "recipes-and-templates",
+              "validations-and-pitfalls",
+              "codemods",
+              "a2ui-types"
+            ]
+          },
+          "artifacts": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "kind", "slug", "path", "executable", "capabilities"],
+              "properties": {
+                "id": { "type": "string" },
+                "kind": {
+                  "enum": [
+                    "component",
+                    "doc",
+                    "recipe",
+                    "template",
+                    "validation",
+                    "pitfall",
+                    "codemod",
+                    "a2ui-type"
+                  ]
+                },
+                "slug": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]+$" },
+                "path": { "type": "string", "pattern": "^\\./" },
+                "executable": { "type": "boolean" },
+                "entrypoint": { "type": "string", "pattern": "^\\./" },
+                "capabilities": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": { "type": "string" }
+                }
+              },
+              "allOf": [
+                {
+                  "if": { "properties": { "executable": { "const": true } } },
+                  "then": {
+                    "required": ["entrypoint"],
+                    "properties": { "capabilities": { "minItems": 1 } }
+                  },
+                  "else": { "not": { "required": ["entrypoint"] } }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "contractRanges": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tale", "extension"],
+      "properties": {
+        "tale": { "type": "string" },
+        "extension": { "type": "string" }
+      }
+    },
+    "capabilities": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+    "permissions": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+    "trust": { "const": "untrusted" },
+    "sourceLinks": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "format": "uri" }
+    },
+    "revocation": { "type": "null" }
   }
 }

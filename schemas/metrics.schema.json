@@ -1,38 +1,97 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tale-ui.dev/schemas/metrics.schema.json",
-  "title": "Tale metric definition or aggregate",
+  "title": "Tale UI adoption and health snapshot",
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "schemaVersion",
-    "metricId",
+    "snapshotId",
     "definitionVersion",
-    "consentClass",
-    "coverage",
-    "freshness",
-    "provenance"
+    "capturedAt",
+    "privacy",
+    "metrics"
   ],
   "properties": {
+    "$schema": { "type": "string" },
     "schemaVersion": { "const": "1.0.0" },
-    "metricId": { "type": "string" },
-    "definitionVersion": { "type": "string" },
-    "consentClass": { "enum": ["public-aggregate", "project-opt-in"] },
-    "coverage": { "enum": ["complete", "partial", "unavailable"] },
-    "freshness": {
+    "snapshotId": { "type": "string", "pattern": "^tale:metrics:[a-z0-9-]+$" },
+    "definitionVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "capturedAt": { "type": "string", "format": "date-time" },
+    "privacy": {
       "type": "object",
-      "required": ["status"],
+      "additionalProperties": false,
+      "required": ["projectTelemetry", "userIdentifiers", "consentClass"],
       "properties": {
-        "status": { "enum": ["current", "stale", "unavailable"] },
-        "asOf": { "type": "string", "format": "date-time" }
+        "projectTelemetry": { "const": false },
+        "userIdentifiers": { "const": false },
+        "consentClass": { "const": "public-aggregate" }
       }
     },
-    "provenance": { "type": "array", "items": { "type": "string" } },
-    "value": { "type": ["number", "string", "object", "array", "null"] }
-  },
-  "allOf": [
-    {
-      "if": { "properties": { "coverage": { "const": "unavailable" } } },
-      "then": { "properties": { "value": { "type": "null" } } }
-    }
-  ]
+    "metrics": {
+      "type": "array",
+      "minItems": 13,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "metricId",
+          "title",
+          "category",
+          "definitionVersion",
+          "consentClass",
+          "coverage",
+          "freshness",
+          "value",
+          "unit",
+          "provenance",
+          "decisionUse"
+        ],
+        "properties": {
+          "metricId": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" },
+          "title": { "type": "string", "minLength": 1 },
+          "category": {
+            "enum": ["adoption", "docs", "tooling", "issues", "health", "release", "agent"]
+          },
+          "definitionVersion": { "type": "string" },
+          "consentClass": { "const": "public-aggregate" },
+          "coverage": { "enum": ["complete", "partial", "unavailable"] },
+          "freshness": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["status", "targetHours"],
+            "properties": {
+              "status": { "enum": ["current", "stale", "unavailable"] },
+              "targetHours": { "type": "integer", "minimum": 1 },
+              "asOf": { "type": "string", "format": "date-time" }
+            }
+          },
+          "value": { "type": ["number", "string", "object", "array", "null"] },
+          "unit": { "type": "string" },
+          "provenance": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "collectionError": { "type": "string" },
+          "decisionUse": { "type": "boolean" }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "coverage": { "const": "unavailable" } } },
+            "then": {
+              "properties": {
+                "value": { "type": "null" },
+                "freshness": {
+                  "properties": { "status": { "const": "unavailable" } }
+                },
+                "decisionUse": { "const": false }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  }
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { execFileSync, spawnSync } from 'node:child_process';
-import { cp, mkdtemp, readFile, rm } from 'node:fs/promises';
+import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
@@ -30,10 +30,57 @@ const apiOutput = execFileSync(
 );
 const apiResult = JSON.parse(apiOutput);
 if (
-  apiResult.manifest.releaseChannel !== 'internal' ||
+  apiResult.manifest.releaseChannel !== 'beta' ||
   !apiResult.result.results.some((artifact) => artifact.id === 'tale:component:table')
 ) {
   throw new Error('Packed API failed to load its installed registry assets');
+}
+
+const materializeOutput = execFileSync(
+  process.execPath,
+  [
+    '--input-type=module',
+    '--eval',
+    "import { listTemplates } from '@tale-ui/tooling/materialize'; const templates = await listTemplates(); process.stdout.write(JSON.stringify(templates.map(({ id }) => id)));",
+  ],
+  { cwd: fixtureRoot, encoding: 'utf8' },
+);
+const materializeResult = JSON.parse(materializeOutput);
+if (
+  materializeResult.length !== 12 ||
+  !materializeResult.includes('tale:template:sortable-table') ||
+  !materializeResult.includes('tale:template:chat-mobile')
+) {
+  throw new Error('Packed materialization API failed to load its installed template assets');
+}
+const migrationOutput = execFileSync(
+  process.execPath,
+  [
+    '--input-type=module',
+    '--eval',
+    "import { listMigrations } from '@tale-ui/tooling/migrations'; const migrations = await listMigrations(); process.stdout.write(JSON.stringify(migrations.map(({ id }) => id)));",
+  ],
+  { cwd: fixtureRoot, encoding: 'utf8' },
+);
+if (JSON.parse(migrationOutput).length !== 4) {
+  throw new Error('Packed migration API failed to load its installed transform assets');
+}
+const extensionTrustOutput = execFileSync(
+  process.execPath,
+  [
+    '--input-type=module',
+    '--eval',
+    "import { EXTENSION_CONTRACT_VERSION, loadExtensionTrustRegistry } from '@tale-ui/tooling/extensions'; const trust = loadExtensionTrustRegistry(); process.stdout.write(JSON.stringify({ contract: EXTENSION_CONTRACT_VERSION, trust }));",
+  ],
+  { cwd: fixtureRoot, encoding: 'utf8' },
+);
+const extensionTrust = JSON.parse(extensionTrustOutput);
+if (
+  extensionTrust.contract !== '1.0.0' ||
+  extensionTrust.trust.freshness.failAfterDays !== 30 ||
+  extensionTrust.trust.publishers.length !== 0
+) {
+  throw new Error('Packed extension API failed to load deny-by-default trust assets');
 }
 
 const validationOutput = execFileSync(
@@ -102,6 +149,93 @@ if (
   cliResult.capabilities.includes('ui.plan')
 ) {
   throw new Error('Packed CLI reported capabilities outside the CLI surface');
+}
+const consumerRoot = join(fixtureRoot, 'materialize-app');
+await mkdir(consumerRoot);
+await writeFile(
+  join(consumerRoot, 'package.json'),
+  `${JSON.stringify({ name: 'materialize-app', private: true, scripts: {} }, null, 2)}\n`,
+);
+const initResult = JSON.parse(
+  execFileSync(cliPath, ['init', '--scripts', '--json'], {
+    cwd: consumerRoot,
+    encoding: 'utf8',
+  }),
+);
+const templateListResult = JSON.parse(
+  execFileSync(cliPath, ['template', '--list', '--json'], {
+    cwd: consumerRoot,
+    encoding: 'utf8',
+  }),
+);
+const templateSourceResult = JSON.parse(
+  execFileSync(cliPath, ['template', 'empty-state', '--skeleton', '--json'], {
+    cwd: consumerRoot,
+    encoding: 'utf8',
+  }),
+);
+const templateAddResult = JSON.parse(
+  execFileSync(cliPath, ['template', 'empty-state', '--skeleton', '--add', '--json'], {
+    cwd: consumerRoot,
+    encoding: 'utf8',
+  }),
+);
+const doctorResult = JSON.parse(
+  execFileSync(cliPath, ['doctor', '--json'], {
+    cwd: consumerRoot,
+    encoding: 'utf8',
+  }),
+);
+await writeFile(
+  join(consumerRoot, 'src/tale-templates/import-fixture.ts'),
+  "import { TextArea } from '@tale-ui/react/textarea';\nexport { TextArea };\n",
+);
+const migrationPlanResult = JSON.parse(
+  execFileSync(cliPath, ['upgrade', 'known-import-path-corrections', '--json'], {
+    cwd: consumerRoot,
+    encoding: 'utf8',
+  }),
+);
+const migrationApplyResult = JSON.parse(
+  execFileSync(
+    cliPath,
+    [
+      'upgrade',
+      'known-import-path-corrections',
+      '--apply',
+      '--plan-digest',
+      migrationPlanResult.data.planDigest,
+      '--json',
+    ],
+    {
+      cwd: consumerRoot,
+      encoding: 'utf8',
+    },
+  ),
+);
+if (
+  !initResult.ok ||
+  initResult.data.files.length !== 4 ||
+  !templateListResult.ok ||
+  templateListResult.data.length !== 12 ||
+  !templateSourceResult.ok ||
+  templateSourceResult.data.variant !== 'skeleton' ||
+  !templateAddResult.ok ||
+  templateAddResult.data.template.id !== 'tale:template:empty-state' ||
+  !doctorResult.ok ||
+  !doctorResult.data.healthy ||
+  !migrationPlanResult.ok ||
+  migrationPlanResult.data.state !== 'applicable' ||
+  !migrationApplyResult.ok ||
+  !migrationApplyResult.data.operationId ||
+  !(await readFile(join(consumerRoot, 'src/tale-templates/empty-state.tsx'), 'utf8')).includes(
+    'export function Example',
+  ) ||
+  !(await readFile(join(consumerRoot, 'src/tale-templates/import-fixture.ts'), 'utf8')).includes(
+    '@tale-ui/react/text-area',
+  )
+) {
+  throw new Error('Packed CLI init, template, migration, or doctor command failed');
 }
 const cliValidation = spawnSync(
   cliPath,

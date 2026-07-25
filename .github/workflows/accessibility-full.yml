@@ -1,0 +1,34 @@
+name: Full accessibility audit
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  full-axe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm -C playground/storybook build --output-dir ../../.artifacts/storybook-a11y
+      - name: Scan every component and foundation story
+        run: pnpm exec concurrently --success first --kill-others "pnpm exec serve .artifacts/storybook-a11y --listen 6007 --no-request-logging --no-clipboard" "pnpm a11y:changed -- --url http://127.0.0.1:6007 --full --scheduled"
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-accessibility-${{ github.run_id }}
+          path: .artifacts/accessibility-current.json
+          if-no-files-found: error
+          retention-days: 90

@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0.0",
+  "runner": "test/visual/roadmap.spec.ts",
+  "records": [
+    {
+      "id": "app-header-light",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/app-header/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/app-header-light.png",
+      "sourceDigest": "sha256:0e8d574a732d5e47c45218e4b2a3196e1ac173bc2e05abb58900495ea55bf8e7",
+      "snapshotDigest": "sha256:16d813a2ab2117ba1464d12179dfb3ee5eb4b13d95e8eecb0fbdeed1f761d7ae"
+    },
+    {
+      "id": "app-header-dark",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/app-header/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/app-header-dark.png",
+      "sourceDigest": "sha256:0e8d574a732d5e47c45218e4b2a3196e1ac173bc2e05abb58900495ea55bf8e7",
+      "snapshotDigest": "sha256:d9390fb2873ad535720cd3d088ac83faa79b94550ebb1c4f91338697f9804636"
+    },
+    {
+      "id": "chart-dashboard-light",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/chart-dashboard/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/chart-dashboard-light.png",
+      "sourceDigest": "sha256:4a279119ac945d028a12f36a35824d0957b400170b490951183c0e27052ab635",
+      "snapshotDigest": "sha256:e96b6d9685332b311245b9b6ffbced4cbb81f7c04a914e923852503fabcfa16d"
+    },
+    {
+      "id": "chart-dashboard-dark",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/chart-dashboard/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/chart-dashboard-dark.png",
+      "sourceDigest": "sha256:4a279119ac945d028a12f36a35824d0957b400170b490951183c0e27052ab635",
+      "snapshotDigest": "sha256:e1e9890a75e2d13e4526132927407ad24925965ad3a891baf419f39aee98e4be"
+    },
+    {
+      "id": "chat-artifact-panel-light",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/chat-artifact-panel/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/chat-artifact-panel-light.png",
+      "sourceDigest": "sha256:74907a0552c2c9c774b40bd53ca9d97082f1283cddd85dee05f2abd98aa4d65d",
+      "snapshotDigest": "sha256:fc5953099c5eac4f8b06d1fc42fa2cbface81aa13c8da64c3bb730032a14ed0f"
+    },
+    {
+      "id": "chat-artifact-panel-dark",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/chat-artifact-panel/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/chat-artifact-panel-dark.png",
+      "sourceDigest": "sha256:74907a0552c2c9c774b40bd53ca9d97082f1283cddd85dee05f2abd98aa4d65d",
+      "snapshotDigest": "sha256:894f9868ed0afa924f7292bb3c7d98e299f2728f314a41fb9e75d279759ec5e3"
+    },
+    {
+      "id": "chat-mobile-light",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/chat-mobile/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/chat-mobile-light.png",
+      "sourceDigest": "sha256:f849b538e2a1e685acf453dbee9347f23cb20590814aee66203257538a3df9fa",
+      "snapshotDigest": "sha256:76022b88a61a2d66ac1d024f2aa260e288dcd0190fe9c2b52c8fb9248299d646"
+    },
+    {
+      "id": "chat-mobile-dark",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/chat-mobile/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/chat-mobile-dark.png",
+      "sourceDigest": "sha256:f849b538e2a1e685acf453dbee9347f23cb20590814aee66203257538a3df9fa",
+      "snapshotDigest": "sha256:03fd0f25bd937e691086c3bf243dc2c06ac90b34e96579a1d63da8fef6cfd3f3"
+    },
+    {
+      "id": "command-palette-dashboard-light",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/command-palette-dashboard/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/command-palette-dashboard-light.png",
+      "sourceDigest": "sha256:89259d08d62e563fc0446640ed0617f0e4c55046a0666110df6a307cb506df5a",
+      "snapshotDigest": "sha256:57c999aef8ff73b90ea24a9b848838ace43883364ad29381149225bb9720e483"
+    },
+    {
+      "id": "command-palette-dashboard-dark",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/command-palette-dashboard/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/command-palette-dashboard-dark.png",
+      "sourceDigest": "sha256:89259d08d62e563fc0446640ed0617f0e4c55046a0666110df6a307cb506df5a",
+      "snapshotDigest": "sha256:3e85f5f576bed7fca5c4df41e17ada236a18e13a05291da6bac2097dfc0efc85"
+    },
+    {
+      "id": "empty-state-light",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/empty-state/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/empty-state-light.png",
+      "sourceDigest": "sha256:4a4048eedccd5724479cf24be921d66e404dbad4c97192a84930e74dbde7f6f6",
+      "snapshotDigest": "sha256:3d2140c54e266930f0f42828a8558c2299f970bd45b5789ec5029730c443d496"
+    },
+    {
+      "id": "empty-state-dark",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/empty-state/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/empty-state-dark.png",
+      "sourceDigest": "sha256:4a4048eedccd5724479cf24be921d66e404dbad4c97192a84930e74dbde7f6f6",
+      "snapshotDigest": "sha256:6073f9eae85c25babf978b69ae1063170ed1034a8ed38f9050cae172fbd11573"
+    },
+    {
+      "id": "loading-patterns-light",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/loading-patterns/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/loading-patterns-light.png",
+      "sourceDigest": "sha256:d9c77d78abeac3b7a45cad69d5b5fe53f417fb061361edf5a175c55a63f68d27",
+      "snapshotDigest": "sha256:d085e64640d1e5fb7db9533fddf332d2c84fecfcf87bf17086ebf337fe97a827"
+    },
+    {
+      "id": "loading-patterns-dark",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/loading-patterns/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/loading-patterns-dark.png",
+      "sourceDigest": "sha256:d9c77d78abeac3b7a45cad69d5b5fe53f417fb061361edf5a175c55a63f68d27",
+      "snapshotDigest": "sha256:5f730a071d169a0fde43f16c62561d9587ac6ab3644f655a4831046ceadd3be7"
+    },
+    {
+      "id": "react-hook-form-light",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/react-hook-form/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/react-hook-form-light.png",
+      "sourceDigest": "sha256:3f2be128fb39978eea21aabe34975c5944f5b7111294fcde234be8f545ac06aa",
+      "snapshotDigest": "sha256:c1e947cc2ec4629868a3a8cf742a1d051b65092d8cbdd3a8dfcd9fdcdb401f72"
+    },
+    {
+      "id": "react-hook-form-dark",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/react-hook-form/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/react-hook-form-dark.png",
+      "sourceDigest": "sha256:3f2be128fb39978eea21aabe34975c5944f5b7111294fcde234be8f545ac06aa",
+      "snapshotDigest": "sha256:bc4bc0eef02d3d919239e92d32de0b9e73ffcab913e57e2764c79ec25651d08b"
+    },
+    {
+      "id": "settings-page-light",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/settings-page/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/settings-page-light.png",
+      "sourceDigest": "sha256:3a21f3e7617028acbbce1af51f3394a3d5e3c4afe5626a8cff8a638c58df63f0",
+      "snapshotDigest": "sha256:d894a2672e341d762fad6cbb644efd543ed7e9e9a048568248e7f86abc5dbf73"
+    },
+    {
+      "id": "settings-page-dark",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/settings-page/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/settings-page-dark.png",
+      "sourceDigest": "sha256:3a21f3e7617028acbbce1af51f3394a3d5e3c4afe5626a8cff8a638c58df63f0",
+      "snapshotDigest": "sha256:e9d1c6b3932dda867a0dc456322c3160235bed1fa9e18dc2654ea4879ce5589f"
+    },
+    {
+      "id": "sidebar-header-light",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/sidebar-header/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/sidebar-header-light.png",
+      "sourceDigest": "sha256:8ca63f0159818f17cb0b077a39d3d50c52b23231b673c64c7642e8570cd16d78",
+      "snapshotDigest": "sha256:5964a34c273fa1ebd62c65c737b714a61a8b7790af3b64d4b1be209f7bf12cf7"
+    },
+    {
+      "id": "sidebar-header-dark",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/sidebar-header/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/sidebar-header-dark.png",
+      "sourceDigest": "sha256:8ca63f0159818f17cb0b077a39d3d50c52b23231b673c64c7642e8570cd16d78",
+      "snapshotDigest": "sha256:0be01a6d0a0af2de3e0a6a409e5a15487399d58827c5a7ea68eff06e3c62cc65"
+    },
+    {
+      "id": "sortable-table-light",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/sortable-table/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/sortable-table-light.png",
+      "sourceDigest": "sha256:2a0693d65f8430b1063d2a1cbe90abedcea78785f41876596fb51d77f8514cc5",
+      "snapshotDigest": "sha256:0dcce8c65e8cf385bb6624ae226726eb256de0e45779dd65430bd894f1543c6e"
+    },
+    {
+      "id": "sortable-table-dark",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/sortable-table/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/sortable-table-dark.png",
+      "sourceDigest": "sha256:2a0693d65f8430b1063d2a1cbe90abedcea78785f41876596fb51d77f8514cc5",
+      "snapshotDigest": "sha256:abedd5427bb11f7d6d43b0f9ab6a45a64f78c51bfb29d712929233a39645b919"
+    },
+    {
+      "id": "validated-form-light",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/validated-form/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/validated-form-light.png",
+      "sourceDigest": "sha256:d0374a55827588900e01a4537cc3fe9c9e7f2addf5f016776477e688e365c4da",
+      "snapshotDigest": "sha256:d1475189dcfb838e7f4de889ffb05db0ef9756289e9e6a83e593a379de990632"
+    },
+    {
+      "id": "validated-form-dark",
+      "criterion": "R03.5",
+      "source": "packages/tooling/templates/validated-form/source/App.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/validated-form-dark.png",
+      "sourceDigest": "sha256:d0374a55827588900e01a4537cc3fe9c9e7f2addf5f016776477e688e365c4da",
+      "snapshotDigest": "sha256:069782e3a8897c58b40ef402e69ffb8b8acb7c69d6a3a840c3bd6e2bcec931a0"
+    },
+    {
+      "id": "components-i18nprovider--pseudo-locale",
+      "criterion": "R07.2",
+      "source": "playground/storybook/src/stories/I18nProvider.stories.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/components-i18nprovider--pseudo-locale.png",
+      "sourceDigest": "sha256:cda1c98640cd873a75fbb36313d221a3d6b5b9fa2794d09116bef1f2097eb0c5",
+      "snapshotDigest": "sha256:18fdb097450a697afb255193655a50bfb7496e23fe30c983b27bd3ebada1b484"
+    },
+    {
+      "id": "components-i18nprovider--forced-rtl",
+      "criterion": "R07.2",
+      "source": "playground/storybook/src/stories/I18nProvider.stories.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/components-i18nprovider--forced-rtl.png",
+      "sourceDigest": "sha256:cda1c98640cd873a75fbb36313d221a3d6b5b9fa2794d09116bef1f2097eb0c5",
+      "snapshotDigest": "sha256:8a9f2fe0e3ec289bfebcbae527c33f3fdc36cc1c002d8a3a3dd788222c624aa3"
+    },
+    {
+      "id": "foundations-motion-and-elevation--transition-matrix",
+      "criterion": "R10.2",
+      "source": "playground/storybook/src/stories/MotionElevation.stories.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/foundations-motion-and-elevation--transition-matrix.png",
+      "sourceDigest": "sha256:193d182f32b0141c5ab1b287d4bc9a9b303a8aa1fbd526626e75b6539363264e",
+      "snapshotDigest": "sha256:155e415ae4014057aa95c61585a30f69a8e52297f0aee753635b5a4cc1a9d517"
+    },
+    {
+      "id": "foundations-motion-and-elevation--elevation-hierarchy",
+      "criterion": "R10.2",
+      "source": "playground/storybook/src/stories/MotionElevation.stories.tsx",
+      "snapshot": "test/visual/snapshots/roadmap.spec.ts/foundations-motion-and-elevation--elevation-hierarchy.png",
+      "sourceDigest": "sha256:193d182f32b0141c5ab1b287d4bc9a9b303a8aa1fbd526626e75b6539363264e",
+      "snapshotDigest": "sha256:12a09349c145074256ad5ced5c9a501ae6624292c4a4d12486c4af2a04b9a73b"
+    }
+  ]
+}

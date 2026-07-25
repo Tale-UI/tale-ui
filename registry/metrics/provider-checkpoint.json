@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0.0",
+  "capturedAt": "2026-07-25T00:00:00.000Z",
+  "sources": {
+    "npm-public-api": {
+      "status": "unavailable",
+      "value": null,
+      "collectionError": "Initial repository snapshot does not fabricate a network observation."
+    },
+    "github-public-api": {
+      "status": "unavailable",
+      "value": null,
+      "collectionError": "Initial repository snapshot does not fabricate a network observation."
+    }
+  }
+}

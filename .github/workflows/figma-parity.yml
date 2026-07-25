@@ -1,0 +1,48 @@
+name: Figma parity
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '41 3 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    environment: figma-read-only
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm figma:check
+      - name: Read-only live parity
+        run: pnpm figma:live
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+          FIGMA_FILE_1: ${{ secrets.FIGMA_FILE_1 }}
+          FIGMA_FILE_2: ${{ secrets.FIGMA_FILE_2 }}
+          FIGMA_FILE_3: ${{ secrets.FIGMA_FILE_3 }}
+          FIGMA_FILE_4: ${{ secrets.FIGMA_FILE_4 }}
+          FIGMA_FILE_5: ${{ secrets.FIGMA_FILE_5 }}
+      - name: Retain internal parity
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: figma-internal-${{ github.run_id }}
+          path: .artifacts/figma-internal.json
+          if-no-files-found: ignore
+          retention-days: 30
+      - name: Retain public-safe parity
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: figma-public-${{ github.run_id }}
+          path: .artifacts/figma-public.json
+          if-no-files-found: ignore
+          retention-days: 90

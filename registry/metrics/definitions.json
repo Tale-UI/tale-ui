@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0.0",
+  "definitionVersion": "1.0.0",
+  "capturedAt": "2026-07-25T00:00:00.000Z",
+  "metrics": [
+    {
+      "metricId": "package-downloads",
+      "title": "Package downloads",
+      "category": "adoption",
+      "unit": "downloads-last-30-days",
+      "targetHours": 24,
+      "source": "npm-public-api"
+    },
+    {
+      "metricId": "active-version-distribution",
+      "title": "Active version distribution",
+      "category": "adoption",
+      "unit": "distribution",
+      "targetHours": 168,
+      "source": "unavailable-no-project-telemetry"
+    },
+    {
+      "metricId": "docs-traffic",
+      "title": "Documentation traffic",
+      "category": "docs",
+      "unit": "pageviews",
+      "targetHours": 24,
+      "source": "unavailable-no-docs-analytics"
+    },
+    {
+      "metricId": "zero-result-searches",
+      "title": "Zero-result documentation searches",
+      "category": "docs",
+      "unit": "searches",
+      "targetHours": 24,
+      "source": "unavailable-no-docs-analytics"
+    },
+    {
+      "metricId": "cli-mcp-errors",
+      "title": "CLI and MCP errors",
+      "category": "tooling",
+      "unit": "errors-by-code",
+      "targetHours": 24,
+      "source": "unavailable-no-project-telemetry"
+    },
+    {
+      "metricId": "template-adds",
+      "title": "Template additions",
+      "category": "tooling",
+      "unit": "operations",
+      "targetHours": 24,
+      "source": "unavailable-no-project-telemetry"
+    },
+    {
+      "metricId": "codemod-runs-failures",
+      "title": "Codemod runs and failures",
+      "category": "tooling",
+      "unit": "operations",
+      "targetHours": 24,
+      "source": "unavailable-no-project-telemetry"
+    },
+    {
+      "metricId": "issues-by-component-version",
+      "title": "Issues by component and version",
+      "category": "issues",
+      "unit": "open-issues",
+      "targetHours": 24,
+      "source": "github-public-api"
+    },
+    {
+      "metricId": "structural-docs-coverage",
+      "title": "Structural and documentation coverage",
+      "category": "health",
+      "unit": "counts",
+      "targetHours": 168,
+      "source": "repository-generated"
+    },
+    {
+      "metricId": "golden-a11y-health",
+      "title": "Golden and accessibility health",
+      "category": "health",
+      "unit": "counts",
+      "targetHours": 168,
+      "source": "repository-generated"
+    },
+    {
+      "metricId": "release-cadence",
+      "title": "Release cadence",
+      "category": "release",
+      "unit": "releases",
+      "targetHours": 24,
+      "source": "github-public-api"
+    },
+    {
+      "metricId": "upgrade-lag",
+      "title": "Consumer upgrade lag",
+      "category": "release",
+      "unit": "days",
+      "targetHours": 168,
+      "source": "unavailable-no-project-telemetry"
+    },
+    {
+      "metricId": "agent-pass-rate-context-cost",
+      "title": "Agent pass rate and context cost",
+      "category": "agent",
+      "unit": "trend",
+      "targetHours": 168,
+      "source": "unavailable-no-retained-eval-trend"
+    }
+  ]
+}

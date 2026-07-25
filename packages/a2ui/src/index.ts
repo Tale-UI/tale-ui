@@ -34,6 +34,7 @@ export { isDataBinding } from './types.ts';
 
 // Catalog
 export { taleUICatalog, createCatalog } from './catalog.ts';
+export { taleChatA2UICatalog } from './chat.ts';
 
 // Icon registry
 export { resolveIcon, registerIcons, getIconNames } from './icon-registry.ts';

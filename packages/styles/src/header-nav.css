@@ -26,6 +26,7 @@
   height: 4rem;
   padding: 0 var(--space-m);
   background: var(--neutral-100);
+  color: var(--neutral-10);
   border-bottom: 1px solid var(--neutral-90);
 }
 

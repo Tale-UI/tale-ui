@@ -14,6 +14,54 @@
       "keywords": ["tokens", "color", "spacing", "typography"]
     },
     {
+      "slug": "motion-and-elevation",
+      "title": "Motion and elevation",
+      "path": "docs/foundations/motion-and-elevation.md",
+      "keywords": ["motion", "elevation", "reduced-motion", "transitions"]
+    },
+    {
+      "slug": "lifecycle-and-governance",
+      "title": "Lifecycle and governance",
+      "path": "docs/governance/lifecycle.md",
+      "keywords": ["lifecycle", "ownership", "governance", "exceptions"]
+    },
+    {
+      "slug": "accessibility-and-performance-gates",
+      "title": "Accessibility and performance gates",
+      "path": "docs/governance/accessibility-and-performance.md",
+      "keywords": ["accessibility", "axe", "performance", "budgets"]
+    },
+    {
+      "slug": "hosted-documentation-and-mcp",
+      "title": "Hosted documentation and MCP",
+      "path": "docs/hosted-services.md",
+      "keywords": ["docs", "hosting", "mcp", "llms", "versions"]
+    },
+    {
+      "slug": "adoption-and-health-metrics",
+      "title": "Adoption and health metrics",
+      "path": "apps/metrics-dashboard/README.md",
+      "keywords": ["adoption", "health", "metrics", "privacy", "dashboard"]
+    },
+    {
+      "slug": "figma-code-parity",
+      "title": "Figma and code parity",
+      "path": "docs/figma-integration.md",
+      "keywords": ["figma", "variables", "mapping", "parity", "privacy"]
+    },
+    {
+      "slug": "extension-trust",
+      "title": "Extension trust",
+      "path": "docs/extensions.md",
+      "keywords": ["extensions", "trust", "integrity", "revocation", "namespaces"]
+    },
+    {
+      "slug": "native-token-conformance",
+      "title": "Native token conformance",
+      "path": "docs/native-token-conformance.md",
+      "keywords": ["native", "tokens", "conformance", "high-contrast", "dark-mode"]
+    },
+    {
       "slug": "css-architecture",
       "title": "CSS architecture",
       "path": "packages/css/docs/architecture.md",

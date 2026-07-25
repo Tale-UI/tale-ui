@@ -1,13 +1,15 @@
 {
   "schemaVersion": "1.0.0",
   "registryVersion": "1.0.0",
-  "releaseChannel": "internal",
+  "releaseChannel": "beta",
   "generatedFrom": [
+    "apps/metrics-dashboard/README.md",
     "docs/a2ui-integration.md",
     "docs/authoring-components.md",
     "docs/component-index.md",
     "docs/components/accordion.md",
     "docs/components/alert-dialog.md",
+    "docs/components/app-shell.md",
     "docs/components/app-store-button.md",
     "docs/components/area-chart.md",
     "docs/components/autocomplete.md",
@@ -22,9 +24,11 @@
     "docs/components/calendar.md",
     "docs/components/card.md",
     "docs/components/carousel.md",
+    "docs/components/chat.md",
     "docs/components/checkbox-field.md",
     "docs/components/checkbox-group.md",
     "docs/components/checkbox.md",
+    "docs/components/code-block.md",
     "docs/components/color-area.md",
     "docs/components/color-field.md",
     "docs/components/color-mode-toggle.md",
@@ -67,6 +71,7 @@
     "docs/components/input-tags.md",
     "docs/components/input.md",
     "docs/components/iphone-mockup.md",
+    "docs/components/kbd.md",
     "docs/components/key-value-pairs.md",
     "docs/components/line-chart.md",
     "docs/components/link.md",
@@ -131,11 +136,20 @@
     "docs/components/visual-exports.md",
     "docs/consuming-design-system.md",
     "docs/design-philosophy.md",
+    "docs/extensions.md",
+    "docs/figma-integration.md",
+    "docs/foundations/motion-and-elevation.md",
+    "docs/governance/accessibility-and-performance.md",
+    "docs/governance/lifecycle.md",
+    "docs/hosted-services.md",
     "docs/managing-packages.md",
+    "docs/native-token-conformance.md",
     "docs/package-dependencies.md",
     "docs/react-aria-deviations.md",
     "docs/react-setup.md",
     "docs/recipes/app-header-navigation.md",
+    "docs/recipes/chat-artifact-panel.md",
+    "docs/recipes/chat-mobile.md",
     "docs/recipes/command-palette-async.md",
     "docs/recipes/command-palette-basic.md",
     "docs/recipes/command-palette-dashboard.md",
@@ -199,7 +213,51 @@
     "packages/styles/package.json",
     "packages/themes/package.json",
     "packages/tokens/package.json",
+    "packages/tooling/migrations/10-package-rename/manifest.json",
+    "packages/tooling/migrations/10-package-rename/transform.json",
+    "packages/tooling/migrations/20-field-controls/manifest.json",
+    "packages/tooling/migrations/20-field-controls/transform.json",
+    "packages/tooling/migrations/30-ui-color-aliases/manifest.json",
+    "packages/tooling/migrations/30-ui-color-aliases/transform.json",
+    "packages/tooling/migrations/40-import-paths/manifest.json",
+    "packages/tooling/migrations/40-import-paths/transform.json",
     "packages/tooling/package.json",
+    "packages/tooling/templates/app-header/skeleton/App.tsx",
+    "packages/tooling/templates/app-header/source/App.tsx",
+    "packages/tooling/templates/app-header/template.json",
+    "packages/tooling/templates/chart-dashboard/skeleton/App.tsx",
+    "packages/tooling/templates/chart-dashboard/source/App.tsx",
+    "packages/tooling/templates/chart-dashboard/template.json",
+    "packages/tooling/templates/chat-artifact-panel/skeleton/App.tsx",
+    "packages/tooling/templates/chat-artifact-panel/source/App.tsx",
+    "packages/tooling/templates/chat-artifact-panel/template.json",
+    "packages/tooling/templates/chat-mobile/skeleton/App.tsx",
+    "packages/tooling/templates/chat-mobile/source/App.tsx",
+    "packages/tooling/templates/chat-mobile/template.json",
+    "packages/tooling/templates/command-palette-dashboard/skeleton/App.tsx",
+    "packages/tooling/templates/command-palette-dashboard/source/App.tsx",
+    "packages/tooling/templates/command-palette-dashboard/template.json",
+    "packages/tooling/templates/empty-state/skeleton/App.tsx",
+    "packages/tooling/templates/empty-state/source/App.tsx",
+    "packages/tooling/templates/empty-state/template.json",
+    "packages/tooling/templates/loading-patterns/skeleton/App.tsx",
+    "packages/tooling/templates/loading-patterns/source/App.tsx",
+    "packages/tooling/templates/loading-patterns/template.json",
+    "packages/tooling/templates/react-hook-form/skeleton/App.tsx",
+    "packages/tooling/templates/react-hook-form/source/App.tsx",
+    "packages/tooling/templates/react-hook-form/template.json",
+    "packages/tooling/templates/settings-page/skeleton/App.tsx",
+    "packages/tooling/templates/settings-page/source/App.tsx",
+    "packages/tooling/templates/settings-page/template.json",
+    "packages/tooling/templates/sidebar-header/skeleton/App.tsx",
+    "packages/tooling/templates/sidebar-header/source/App.tsx",
+    "packages/tooling/templates/sidebar-header/template.json",
+    "packages/tooling/templates/sortable-table/skeleton/App.tsx",
+    "packages/tooling/templates/sortable-table/source/App.tsx",
+    "packages/tooling/templates/sortable-table/template.json",
+    "packages/tooling/templates/validated-form/skeleton/App.tsx",
+    "packages/tooling/templates/validated-form/source/App.tsx",
+    "packages/tooling/templates/validated-form/template.json",
     "packages/utils/package.json",
     "packages/utils/src/useAnimationFrame.ts",
     "packages/utils/src/useEnhancedClickHandler.ts",
@@ -213,12 +271,13 @@
     "packages/utils/src/useTimeout.ts",
     "registry/a2ui-catalog.json",
     "registry/components.json",
+    "registry/extensions/trust.json",
     "registry/pitfalls.json",
     "registry/sources/capabilities.json",
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:5e085c80a339fb43c68e4c71e55bc69e0c84c3291b22e2ca765da497d471a059",
+  "sourceRevision": "sha256:562cc1c5eb4e08fdde59ff4e11c6cc8d616bbb28003643a2be16160edcd31e9e",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -227,7 +286,7 @@
     "@tale-ui/react-styles": "2.0.0",
     "@tale-ui/themes": "2.0.0",
     "@tale-ui/tokens": "2.0.0",
-    "@tale-ui/tooling": "0.0.0-internal",
+    "@tale-ui/tooling": "0.1.0",
     "@tale-ui/utils": "2.0.0"
   },
   "capabilityManifestId": "tale:capability-manifest:core",
@@ -1836,6 +1895,61 @@
       "metadata": {
         "category": "Additional Form Controls",
         "component": "CheckboxGroup",
+        "isSubPart": false
+      }
+    },
+    {
+      "id": "tale:a2ui-type:code-block",
+      "namespace": "tale",
+      "kind": "a2ui-type",
+      "slug": "code-block",
+      "name": "CodeBlock",
+      "description": "Plain-text code surface without parsing or execution",
+      "lifecycle": "stable",
+      "package": "@tale-ui/a2ui",
+      "version": "0.1.5",
+      "aliases": [
+        "CodeBlock"
+      ],
+      "keywords": [
+        "code",
+        "codeblock",
+        "execution",
+        "or",
+        "parsing",
+        "plain",
+        "surface",
+        "text",
+        "typography",
+        "without"
+      ],
+      "related": [
+        "tale:component:code-block"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/a2ui-catalog.json",
+          "selector": "types[name=CodeBlock]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/a2ui/src/catalog.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Typography",
+        "component": "CodeBlock",
         "isSubPart": false
       }
     },
@@ -4149,6 +4263,59 @@
       "metadata": {
         "category": "Marketing",
         "component": "InputTags.Root",
+        "isSubPart": false
+      }
+    },
+    {
+      "id": "tale:a2ui-type:kbd",
+      "namespace": "tale",
+      "kind": "a2ui-type",
+      "slug": "kbd",
+      "name": "Kbd",
+      "description": "Semantic keyboard input or shortcut hint",
+      "lifecycle": "stable",
+      "package": "@tale-ui/a2ui",
+      "version": "0.1.5",
+      "aliases": [
+        "Kbd"
+      ],
+      "keywords": [
+        "hint",
+        "input",
+        "kbd",
+        "keyboard",
+        "or",
+        "semantic",
+        "shortcut",
+        "typography"
+      ],
+      "related": [
+        "tale:component:kbd"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/a2ui-catalog.json",
+          "selector": "types[name=Kbd]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/a2ui/src/catalog.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Typography",
+        "component": "Kbd",
         "isSubPart": false
       }
     },
@@ -8454,6 +8621,278 @@
       }
     },
     {
+      "id": "tale:codemod:deprecated-field-controls",
+      "namespace": "tale",
+      "kind": "codemod",
+      "slug": "deprecated-field-controls",
+      "name": "Migrate deprecated Checkbox, Radio, and Switch namespaces to field/button APIs.",
+      "description": "@tale-ui/react@>=1.3.53 <3.0.0 → @tale-ui/react field controls@>=1.3.53 <3.0.0",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "aliases": [
+        "deprecated-field-controls"
+      ],
+      "keywords": [
+        "and",
+        "api",
+        "apis",
+        "button",
+        "checkbox",
+        "controls",
+        "deprecated",
+        "field",
+        "migrate",
+        "namespaces",
+        "radio",
+        "switch",
+        "to"
+      ],
+      "related": [
+        "tale:component:checkbox",
+        "tale:component:checkbox-field",
+        "tale:component:radio",
+        "tale:component:radio-field",
+        "tale:component:switch",
+        "tale:component:switch-field"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/migrations/20-field-controls/manifest.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/migrations",
+          "selector": "deprecated-field-controls"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/migrations/20-field-controls/manifest.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "order": 20,
+        "group": "deprecated-api",
+        "from": "@tale-ui/react@>=1.3.53 <3.0.0",
+        "to": "@tale-ui/react field controls@>=1.3.53 <3.0.0",
+        "reversible": true,
+        "checksum": "sha256:a73484910a6ad2d350db1547f86b479f43ccbc394d017e2c9496bb2a5a8bf99c"
+      }
+    },
+    {
+      "id": "tale:codemod:known-import-path-corrections",
+      "namespace": "tale",
+      "kind": "codemod",
+      "slug": "known-import-path-corrections",
+      "name": "Correct known non-existent or non-canonical Tale UI import paths.",
+      "description": "@tale-ui/react@>=1.0.0 <3.0.0 → @tale-ui/react canonical exports@>=2.0.0 <3.0.0",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "aliases": [
+        "known-import-path-corrections"
+      ],
+      "keywords": [
+        "canonical",
+        "correct",
+        "corrections",
+        "existent",
+        "import",
+        "known",
+        "non",
+        "or",
+        "path",
+        "paths",
+        "tale",
+        "ui"
+      ],
+      "related": [
+        "tale:component:table",
+        "tale:component:text-area",
+        "tale:component:toggle-button"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/migrations/40-import-paths/manifest.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/migrations",
+          "selector": "known-import-path-corrections"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/migrations/40-import-paths/manifest.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "order": 40,
+        "group": "import-path",
+        "from": "@tale-ui/react@>=1.0.0 <3.0.0",
+        "to": "@tale-ui/react canonical exports@>=2.0.0 <3.0.0",
+        "reversible": true,
+        "checksum": "sha256:c18b7d5a003e94e4b53a88d4b8d4d6fecfe5ef47a6ac8f37186be3ce56ccd803"
+      }
+    },
+    {
+      "id": "tale:codemod:ui-color-token-aliases",
+      "namespace": "tale",
+      "kind": "codemod",
+      "slug": "ui-color-token-aliases",
+      "name": "Move component-facing palette usage from fixed brand tokens to color-mode-aware aliases.",
+      "description": "component CSS using --brand-{5..100} → component CSS using --color-{5..100}",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "aliases": [
+        "ui-color-token-aliases"
+      ],
+      "keywords": [
+        "aliases",
+        "aware",
+        "brand",
+        "color",
+        "component",
+        "facing",
+        "fixed",
+        "from",
+        "mode",
+        "move",
+        "name",
+        "palette",
+        "to",
+        "token",
+        "tokens",
+        "ui",
+        "usage"
+      ],
+      "related": [
+        "tale:foundation:design-tokens"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/migrations/30-ui-color-aliases/manifest.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/migrations",
+          "selector": "ui-color-token-aliases"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/migrations/30-ui-color-aliases/manifest.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "order": 30,
+        "group": "token-name",
+        "from": "component CSS using --brand-{5..100}",
+        "to": "component CSS using --color-{5..100}",
+        "reversible": true,
+        "checksum": "sha256:c9a8011fd52b5b04c3a8406ca40452d3364386adf4a268854f5f966f71713e99"
+      }
+    },
+    {
+      "id": "tale:codemod:v1-to-v2-package-rename",
+      "namespace": "tale",
+      "kind": "codemod",
+      "slug": "v1-to-v2-package-rename",
+      "name": "Rename the v1 @tale-ui/core CSS package to @tale-ui/css for v2.",
+      "description": "@tale-ui/core@>=1.0.0 <2.0.0 → @tale-ui/css@>=2.0.0 <3.0.0",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "aliases": [
+        "v1-to-v2-package-rename"
+      ],
+      "keywords": [
+        "core",
+        "css",
+        "for",
+        "package",
+        "rename",
+        "tale",
+        "the",
+        "to",
+        "ui",
+        "v1",
+        "v2"
+      ],
+      "related": [
+        "tale:foundation:css-architecture"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/migrations/10-package-rename/manifest.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/migrations",
+          "selector": "v1-to-v2-package-rename"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/migrations/10-package-rename/manifest.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "order": 10,
+        "group": "package-rename",
+        "from": "@tale-ui/core@>=1.0.0 <2.0.0",
+        "to": "@tale-ui/css@>=2.0.0 <3.0.0",
+        "reversible": true,
+        "checksum": "sha256:af764ccb93b9f0b0f2e9a28b77ab7e3aa761ceb386309918ae8d3a02069843ce"
+      }
+    },
+    {
       "id": "tale:component:accordion",
       "namespace": "tale",
       "kind": "component",
@@ -8562,6 +9001,59 @@
       "trust": "first-party",
       "metadata": {
         "category": "Overlay",
+        "componentKind": "compound"
+      }
+    },
+    {
+      "id": "tale:component:app-shell",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "app-shell",
+      "name": "AppShell",
+      "description": "Experimental structural application layout slots",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "2.0.0",
+      "aliases": [
+        "AppShell"
+      ],
+      "keywords": [
+        "application",
+        "appshell",
+        "experimental",
+        "layout",
+        "slots",
+        "structural"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=app-shell]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/app-shell"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/app-shell/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Layout",
         "componentKind": "compound"
       }
     },
@@ -9341,6 +9833,61 @@
       }
     },
     {
+      "id": "tale:component:chat",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "chat",
+      "name": "Chat",
+      "description": "Experimental protocol-neutral conversation layout and semantics",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "2.0.0",
+      "aliases": [
+        "Chat"
+      ],
+      "keywords": [
+        "and",
+        "chat",
+        "conversation",
+        "experimental",
+        "layout",
+        "neutral",
+        "protocol",
+        "semantics"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=chat]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/chat"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/chat/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Layout",
+        "componentKind": "compound"
+      }
+    },
+    {
       "id": "tale:component:checkbox",
       "namespace": "tale",
       "kind": "component",
@@ -9509,6 +10056,64 @@
       "trust": "first-party",
       "metadata": {
         "category": "Form Controls",
+        "componentKind": "simple"
+      }
+    },
+    {
+      "id": "tale:component:code-block",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "code-block",
+      "name": "CodeBlock",
+      "description": "Plain-text code surface without parsing, highlighting, or execution",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "2.0.0",
+      "aliases": [
+        "CodeBlock"
+      ],
+      "keywords": [
+        "code",
+        "codeblock",
+        "execution",
+        "highlighting",
+        "or",
+        "parsing",
+        "plain",
+        "surface",
+        "text",
+        "typography",
+        "without"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=code-block]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/code-block"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/code-block/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Typography",
         "componentKind": "simple"
       }
     },
@@ -11829,6 +12434,61 @@
       "trust": "first-party",
       "metadata": {
         "category": null,
+        "componentKind": "simple"
+      }
+    },
+    {
+      "id": "tale:component:kbd",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "kbd",
+      "name": "Kbd",
+      "description": "Semantic keyboard input or shortcut hint",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "2.0.0",
+      "aliases": [
+        "Kbd"
+      ],
+      "keywords": [
+        "hint",
+        "input",
+        "kbd",
+        "keyboard",
+        "or",
+        "semantic",
+        "shortcut",
+        "typography"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=kbd]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/kbd"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/kbd/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Typography",
         "componentKind": "simple"
       }
     },
@@ -15436,6 +16096,46 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:doc:docs-components-app-shell",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-app-shell",
+      "name": "AppShell",
+      "description": "Public Tale UI documentation: AppShell",
+      "lifecycle": "stable",
+      "keywords": [
+        "app",
+        "appshell",
+        "components",
+        "docs",
+        "md",
+        "shell"
+      ],
+      "related": [
+        "tale:component:app-shell"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/app-shell.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/app-shell.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:doc:docs-components-app-store-button",
       "namespace": "tale",
       "kind": "doc",
@@ -15979,6 +16679,44 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:doc:docs-components-chat",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-chat",
+      "name": "Chat",
+      "description": "Public Tale UI documentation: Chat",
+      "lifecycle": "stable",
+      "keywords": [
+        "chat",
+        "components",
+        "docs",
+        "md"
+      ],
+      "related": [
+        "tale:component:chat"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/chat.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/chat.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:doc:docs-components-checkbox",
       "namespace": "tale",
       "kind": "doc",
@@ -16091,6 +16829,46 @@
       ],
       "provenance": {
         "source": "docs/components/checkbox-group.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:doc:docs-components-code-block",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-code-block",
+      "name": "CodeBlock",
+      "description": "Public Tale UI documentation: CodeBlock",
+      "lifecycle": "stable",
+      "keywords": [
+        "block",
+        "code",
+        "codeblock",
+        "components",
+        "docs",
+        "md"
+      ],
+      "related": [
+        "tale:component:code-block"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/code-block.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/code-block.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -17748,6 +18526,44 @@
       ],
       "provenance": {
         "source": "docs/components/iphone-mockup.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:doc:docs-components-kbd",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-kbd",
+      "name": "Kbd",
+      "description": "Public Tale UI documentation: Kbd",
+      "lifecycle": "stable",
+      "keywords": [
+        "components",
+        "docs",
+        "kbd",
+        "md"
+      ],
+      "related": [
+        "tale:component:kbd"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/kbd.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/kbd.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -20719,6 +21535,79 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:foundation:accessibility-and-performance-gates",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "accessibility-and-performance-gates",
+      "name": "Accessibility and performance gates",
+      "description": "Tale UI foundation guidance for Accessibility and performance gates.",
+      "lifecycle": "stable",
+      "keywords": [
+        "accessibility",
+        "axe",
+        "budgets",
+        "performance"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/governance/accessibility-and-performance.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/governance/accessibility-and-performance.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:foundation:adoption-and-health-metrics",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "adoption-and-health-metrics",
+      "name": "Adoption and health metrics",
+      "description": "Tale UI foundation guidance for Adoption and health metrics.",
+      "lifecycle": "stable",
+      "keywords": [
+        "adoption",
+        "dashboard",
+        "health",
+        "metrics",
+        "privacy"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "apps/metrics-dashboard/README.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "apps/metrics-dashboard/README.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:foundation:component-styling",
       "namespace": "tale",
       "kind": "foundation",
@@ -20863,6 +21752,80 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:foundation:extension-trust",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "extension-trust",
+      "name": "Extension trust",
+      "description": "Tale UI foundation guidance for Extension trust.",
+      "lifecycle": "stable",
+      "keywords": [
+        "extensions",
+        "integrity",
+        "namespaces",
+        "revocation",
+        "trust"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/extensions.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/extensions.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:foundation:figma-code-parity",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "figma-code-parity",
+      "name": "Figma and code parity",
+      "description": "Tale UI foundation guidance for Figma and code parity.",
+      "lifecycle": "stable",
+      "keywords": [
+        "figma",
+        "mapping",
+        "parity",
+        "privacy",
+        "variables"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/figma-integration.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/figma-integration.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:foundation:framework-integration",
       "namespace": "tale",
       "kind": "foundation",
@@ -20899,6 +21862,115 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:foundation:hosted-documentation-and-mcp",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "hosted-documentation-and-mcp",
+      "name": "Hosted documentation and MCP",
+      "description": "Tale UI foundation guidance for Hosted documentation and MCP.",
+      "lifecycle": "stable",
+      "keywords": [
+        "docs",
+        "hosting",
+        "llms",
+        "mcp",
+        "versions"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/hosted-services.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/hosted-services.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:foundation:lifecycle-and-governance",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "lifecycle-and-governance",
+      "name": "Lifecycle and governance",
+      "description": "Tale UI foundation guidance for Lifecycle and governance.",
+      "lifecycle": "stable",
+      "keywords": [
+        "exceptions",
+        "governance",
+        "lifecycle",
+        "ownership"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/governance/lifecycle.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/governance/lifecycle.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:foundation:motion-and-elevation",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "motion-and-elevation",
+      "name": "Motion and elevation",
+      "description": "Tale UI foundation guidance for Motion and elevation.",
+      "lifecycle": "stable",
+      "keywords": [
+        "elevation",
+        "motion",
+        "reduced-motion",
+        "transitions"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/foundations/motion-and-elevation.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/foundations/motion-and-elevation.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:foundation:naming-conventions",
       "namespace": "tale",
       "kind": "foundation",
@@ -20928,6 +22000,43 @@
       ],
       "provenance": {
         "source": "packages/css/docs/naming-conventions.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:foundation:native-token-conformance",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "native-token-conformance",
+      "name": "Native token conformance",
+      "description": "Tale UI foundation guidance for Native token conformance.",
+      "lifecycle": "stable",
+      "keywords": [
+        "conformance",
+        "dark-mode",
+        "high-contrast",
+        "native",
+        "tokens"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/native-token-conformance.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/native-token-conformance.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -21946,6 +23055,68 @@
       "metadata": {
         "ruleId": "always-generate-code-directly-never",
         "category": "typescript"
+      }
+    },
+    {
+      "id": "tale:pitfall:app-shell--app-shell-no-application-state",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "app-shell--app-shell-no-application-state",
+      "name": "Keep application behavior outside AppShell",
+      "description": "the family owns structural layout, while the application owns routes, data, authentication, persistence, and responsive interaction state.",
+      "lifecycle": "stable",
+      "keywords": [
+        "and",
+        "app",
+        "application",
+        "appshell",
+        "authentication",
+        "behavior",
+        "data",
+        "family",
+        "interaction",
+        "keep",
+        "layout",
+        "no",
+        "outside",
+        "owns",
+        "persistence",
+        "responsive",
+        "routes",
+        "shell",
+        "state",
+        "structural",
+        "the",
+        "while"
+      ],
+      "related": [
+        "tale:component:app-shell"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=app-shell].pitfalls[id=app-shell-no-application-state]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/app-shell.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "app-shell-no-application-state",
+        "category": "component",
+        "component": "AppShell"
       }
     },
     {
@@ -25480,6 +26651,69 @@
       }
     },
     {
+      "id": "tale:pitfall:chat--chat-no-raw-html",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "chat--chat-no-raw-html",
+      "name": "Keep untrusted HTML out of Chat",
+      "description": "render plain text or an independently reviewed content component because Chat intentionally has no HTML or Markdown escape hatch.",
+      "lifecycle": "stable",
+      "keywords": [
+        "an",
+        "because",
+        "chat",
+        "component",
+        "content",
+        "escape",
+        "has",
+        "hatch",
+        "html",
+        "independently",
+        "intentionally",
+        "keep",
+        "markdown",
+        "no",
+        "of",
+        "or",
+        "out",
+        "plain",
+        "raw",
+        "render",
+        "reviewed",
+        "text",
+        "untrusted"
+      ],
+      "related": [
+        "tale:component:chat"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=chat].pitfalls[id=chat-no-raw-html]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/chat.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "chat-no-raw-html",
+        "category": "component",
+        "component": "Chat"
+      }
+    },
+    {
       "id": "tale:pitfall:checkbox--checkbox-always-use-namespace",
       "namespace": "tale",
       "kind": "pitfall",
@@ -25959,6 +27193,65 @@
         "ruleId": "checkbox-group-string-array-not-set",
         "category": "component",
         "component": "CheckboxGroup"
+      }
+    },
+    {
+      "id": "tale:pitfall:code-block--code-block-plain-text",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "code-block--code-block-plain-text",
+      "name": "Pass plain text to CodeBlock",
+      "description": "the component intentionally excludes raw HTML, Markdown, syntax highlighting, and executable renderers.",
+      "lifecycle": "stable",
+      "keywords": [
+        "and",
+        "block",
+        "code",
+        "codeblock",
+        "component",
+        "excludes",
+        "executable",
+        "highlighting",
+        "html",
+        "intentionally",
+        "markdown",
+        "pass",
+        "plain",
+        "raw",
+        "renderers",
+        "syntax",
+        "text",
+        "the",
+        "to"
+      ],
+      "related": [
+        "tale:component:code-block"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=code-block].pitfalls[id=code-block-plain-text]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/code-block.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "code-block-plain-text",
+        "category": "component",
+        "component": "CodeBlock"
       }
     },
     {
@@ -33816,6 +35109,66 @@
       }
     },
     {
+      "id": "tale:pitfall:i18n-provider--i18n-provider-no-application-copy",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "i18n-provider--i18n-provider-no-application-copy",
+      "name": "Do not put application copy in I18nProvider catalogs",
+      "description": "catalogs are limited to Tale-owned operational labels and statuses.",
+      "lifecycle": "stable",
+      "keywords": [
+        "and",
+        "application",
+        "are",
+        "catalogs",
+        "copy",
+        "do",
+        "i18n",
+        "i18nprovider",
+        "in",
+        "labels",
+        "limited",
+        "no",
+        "not",
+        "operational",
+        "owned",
+        "provider",
+        "put",
+        "statuses",
+        "tale",
+        "to"
+      ],
+      "related": [
+        "tale:component:i18n-provider"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=i18n-provider].pitfalls[id=i18n-provider-no-application-copy]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/i18n-provider.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "i18n-provider-no-application-copy",
+        "category": "component",
+        "component": "I18nProvider"
+      }
+    },
+    {
       "id": "tale:pitfall:icon--icon-image-name-collision",
       "namespace": "tale",
       "kind": "pitfall",
@@ -35791,6 +37144,66 @@
       "metadata": {
         "ruleId": "isopen-on-dialog-and-alert-dialog",
         "category": "overlay-state"
+      }
+    },
+    {
+      "id": "tale:pitfall:kbd--kbd-no-shortcut-behavior",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "kbd--kbd-no-shortcut-behavior",
+      "name": "Do not use Kbd to register shortcuts",
+      "description": "it is semantic display content, so application keyboard behavior remains separate.",
+      "lifecycle": "stable",
+      "keywords": [
+        "application",
+        "behavior",
+        "content",
+        "display",
+        "do",
+        "is",
+        "it",
+        "kbd",
+        "keyboard",
+        "no",
+        "not",
+        "register",
+        "remains",
+        "semantic",
+        "separate",
+        "shortcut",
+        "shortcuts",
+        "so",
+        "to",
+        "use"
+      ],
+      "related": [
+        "tale:component:kbd"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=kbd].pitfalls[id=kbd-no-shortcut-behavior]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/kbd.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "kbd-no-shortcut-behavior",
+        "category": "component",
+        "component": "Kbd"
       }
     },
     {
@@ -47062,6 +48475,88 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:recipe:chat-artifact-panel",
+      "namespace": "tale",
+      "kind": "recipe",
+      "slug": "chat-artifact-panel",
+      "name": "Chat with Artifact Panel",
+      "description": "Canonical Tale UI recipe: Chat with Artifact Panel",
+      "lifecycle": "stable",
+      "keywords": [
+        "artifact",
+        "chat",
+        "panel",
+        "with"
+      ],
+      "related": [
+        "tale:component:button",
+        "tale:component:chat",
+        "tale:component:code-block",
+        "tale:component:text",
+        "tale:component:text-area"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/recipes/chat-artifact-panel.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "recipe.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/recipes/chat-artifact-panel.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:recipe:chat-mobile",
+      "namespace": "tale",
+      "kind": "recipe",
+      "slug": "chat-mobile",
+      "name": "Mobile Chat",
+      "description": "Canonical Tale UI recipe: Mobile Chat",
+      "lifecycle": "stable",
+      "keywords": [
+        "chat",
+        "mobile"
+      ],
+      "related": [
+        "tale:component:button",
+        "tale:component:chat",
+        "tale:component:text-area"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/recipes/chat-mobile.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "recipe.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/recipes/chat-mobile.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:recipe:command-palette-async",
       "namespace": "tale",
       "kind": "recipe",
@@ -48793,7 +50288,764 @@
         "license": "MIT"
       },
       "trust": "first-party"
+    },
+    {
+      "id": "tale:template:app-header",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "app-header",
+      "name": "App Header",
+      "description": "Installable Tale UI app header template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "keywords": [
+        "app",
+        "docs",
+        "header",
+        "md",
+        "navigation",
+        "recipes"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/app-header/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:app-header"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/app-header/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:a4e0ac86bad4e49786124aa186854334c1546410cd8157504e0f2368b9cabd06"
+      }
+    },
+    {
+      "id": "tale:template:chart-dashboard",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "chart-dashboard",
+      "name": "Chart Dashboard",
+      "description": "Installable Tale UI chart dashboard template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "keywords": [
+        "chart",
+        "charts",
+        "dashboard",
+        "docs",
+        "md",
+        "recipes",
+        "with"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/chart-dashboard/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:chart-dashboard"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/chart-dashboard/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:fdd295b4fea446c7ad59efbd22fd3850822b45aed754741ce5aef7f1c7f0fcd7"
+      }
+    },
+    {
+      "id": "tale:template:chat-artifact-panel",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "chat-artifact-panel",
+      "name": "Chat Artifact Panel",
+      "description": "Installable Tale UI chat artifact panel template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "keywords": [
+        "artifact",
+        "chat",
+        "docs",
+        "md",
+        "panel",
+        "recipes"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/chat-artifact-panel/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:chat-artifact-panel"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/chat-artifact-panel/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:f47a4de82563e9a8f338b47745e9c10d629d6d5df8d67391de9009993028b414"
+      }
+    },
+    {
+      "id": "tale:template:chat-mobile",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "chat-mobile",
+      "name": "Chat Mobile",
+      "description": "Installable Tale UI chat mobile template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "keywords": [
+        "chat",
+        "docs",
+        "md",
+        "mobile",
+        "recipes"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/chat-mobile/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:chat-mobile"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/chat-mobile/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:c7751eefe5872fd9e3e2f7df17a8a5630bd42801c7fdb30e7546e18adf4fefb4"
+      }
+    },
+    {
+      "id": "tale:template:command-palette-dashboard",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "command-palette-dashboard",
+      "name": "Command Palette Dashboard",
+      "description": "Installable Tale UI command palette dashboard template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "keywords": [
+        "command",
+        "dashboard",
+        "docs",
+        "md",
+        "palette",
+        "recipes"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/command-palette-dashboard/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:command-palette-dashboard"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/command-palette-dashboard/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:6e5901011a4fd4df511523e077e36e7de85dfe3b31bc24d789e22c7328260773"
+      }
+    },
+    {
+      "id": "tale:template:empty-state",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "empty-state",
+      "name": "Empty State",
+      "description": "Installable Tale UI empty state template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "keywords": [
+        "data",
+        "docs",
+        "empty",
+        "md",
+        "recipes",
+        "state"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/empty-state/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:empty-state"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/empty-state/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:d9863231b9fd0444b27e24cb74cfe11db371c96320c60bc1d5e1ea162d56ae55"
+      }
+    },
+    {
+      "id": "tale:template:loading-patterns",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "loading-patterns",
+      "name": "Loading Patterns",
+      "description": "Installable Tale UI loading patterns template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "keywords": [
+        "docs",
+        "loading",
+        "md",
+        "patterns",
+        "recipes"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/loading-patterns/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:loading-patterns"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/loading-patterns/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:a3b48faa9ba15f49d2a6ec25333feb40e39a96e1177d4195573311e0247192c4"
+      }
+    },
+    {
+      "id": "tale:template:react-hook-form",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "react-hook-form",
+      "name": "React Hook Form",
+      "description": "Installable Tale UI react hook form template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "keywords": [
+        "docs",
+        "form",
+        "hook",
+        "md",
+        "react",
+        "recipes"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/react-hook-form/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:react-hook-form"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/react-hook-form/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:138d703e92b5146a819c7cb8e90e05326736c0eae05497685bc34c88e454b0d5"
+      }
+    },
+    {
+      "id": "tale:template:settings-page",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "settings-page",
+      "name": "Settings Page",
+      "description": "Installable Tale UI settings page template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "keywords": [
+        "docs",
+        "md",
+        "page",
+        "recipes",
+        "settings"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/settings-page/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:settings-page"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/settings-page/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:64b411ce6f167f1bbf4715de659303afd0892e08197896fc16eaf8bfc1c0f11b"
+      }
+    },
+    {
+      "id": "tale:template:sidebar-header",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "sidebar-header",
+      "name": "Sidebar Header",
+      "description": "Installable Tale UI sidebar header template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "keywords": [
+        "docs",
+        "header",
+        "md",
+        "recipes",
+        "sidebar",
+        "with"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/sidebar-header/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:sidebar-header"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/sidebar-header/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:6382ccab900db5cef2df4217c5ce40205e70b5e48c865e03fecd76b95cb379d4"
+      }
+    },
+    {
+      "id": "tale:template:sortable-table",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "sortable-table",
+      "name": "Sortable Table",
+      "description": "Installable Tale UI sortable table template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "keywords": [
+        "data",
+        "docs",
+        "md",
+        "recipes",
+        "sortable",
+        "sorting",
+        "table",
+        "with"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/sortable-table/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:sortable-table"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/sortable-table/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:8b7771297eafeab36a5bc5b06868ff20fe92dc6783dec761b716789ff350c625"
+      }
+    },
+    {
+      "id": "tale:template:validated-form",
+      "namespace": "tale",
+      "kind": "template",
+      "slug": "validated-form",
+      "name": "Validated Form",
+      "description": "Installable Tale UI validated form template.",
+      "lifecycle": "stable",
+      "package": "@tale-ui/tooling",
+      "version": "0.1.0",
+      "keywords": [
+        "docs",
+        "form",
+        "md",
+        "recipes",
+        "validated",
+        "validation",
+        "with"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "packages/tooling/templates/validated-form/template.json"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/tooling/materialize",
+          "selector": "tale:template:validated-form"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "project.mutate"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/tooling/templates/validated-form/template.json",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "templateVersion": "1.0.0",
+        "compatibility": {
+          "react": ">=18.0.0",
+          "tale": ">=2.0.0 <3.0.0",
+          "frameworks": [
+            "next",
+            "vite"
+          ]
+        },
+        "appearance": [
+          "light",
+          "dark"
+        ],
+        "rtl": true,
+        "digest": "sha256:72ea014ca23a68b054815c23609f82ce3910096b525553cf6950e1f6f317a680"
+      }
     }
   ],
-  "digest": "sha256:494db892687a98ec2e14fe7c89f7b66be338f72cf8fc2eb0bd1fd6f3aef34024"
+  "digest": "sha256:56ef6188e1e305ba9676a464deaec4e34f0d38c1dddc650e6bab934c3ccba173"
 }

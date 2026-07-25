@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/accessibility-baseline.schema.json",
+  "title": "Accessibility baseline",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "capturedOn", "runner", "knownViolations"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": "1.0.0" },
+    "capturedOn": { "type": "string", "format": "date" },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "storybook"],
+      "properties": {
+        "name": { "const": "axe-core" },
+        "version": { "type": "string" },
+        "storybook": { "type": "string" }
+      }
+    },
+    "knownViolations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/violation" }
+    }
+  },
+  "$defs": {
+    "violation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["storyId", "rule", "target", "impact"],
+      "properties": {
+        "storyId": { "type": "string", "minLength": 1 },
+        "rule": { "type": "string", "minLength": 1 },
+        "target": { "type": "string", "minLength": 1 },
+        "impact": { "enum": ["minor", "moderate", "serious", "critical"] }
+      }
+    }
+  }
+}

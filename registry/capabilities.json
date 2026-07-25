@@ -9,7 +9,8 @@
       "description": "Retrieve one artifact by stable ID or alias.",
       "availability": [
         "api",
-        "cli"
+        "cli",
+        "hosted-mcp"
       ],
       "status": "available"
     },
@@ -19,7 +20,8 @@
       "description": "Search mixed artifact kinds with stable identifiers.",
       "availability": [
         "api",
-        "cli"
+        "cli",
+        "hosted-mcp"
       ],
       "status": "available"
     },
@@ -40,7 +42,26 @@
       "description": "Retrieve the canonical component registry payload.",
       "availability": [
         "api",
+        "hosted-mcp",
         "local-mcp"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "extension.authorize",
+      "version": "1.0.0",
+      "description": "Authorize an exact project-local extension entrypoint after integrity, trust, revocation, and capability checks.",
+      "availability": [
+        "api"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "extension.discover",
+      "version": "1.0.0",
+      "description": "Discover and validate namespaced extension manifests without executing code.",
+      "availability": [
+        "api"
       ],
       "status": "available"
     },
@@ -56,11 +77,13 @@
     },
     {
       "id": "project.mutate",
-      "version": "0.0.0",
-      "description": "Perform root-confined, recoverable project mutations. Unavailable until the operation and recovery gates pass.",
-      "availability": [],
-      "status": "gated",
-      "gate": "P0-B"
+      "version": "1.0.0",
+      "description": "Perform root-confined, journaled, recoverable project mutations.",
+      "availability": [
+        "api",
+        "cli"
+      ],
+      "status": "available"
     },
     {
       "id": "recipe.get",
@@ -68,6 +91,7 @@
       "description": "Retrieve a canonical recipe document.",
       "availability": [
         "api",
+        "hosted-mcp",
         "local-mcp"
       ],
       "status": "available"
@@ -78,10 +102,11 @@
       "description": "Plan UI with bounded registry and recipe context.",
       "availability": [
         "api",
+        "hosted-mcp",
         "local-mcp"
       ],
       "status": "available"
     }
   ],
-  "digest": "sha256:5fd608f9d9363ce839ecf423e1b445946b19f4193818a987ec86498428a73632"
+  "digest": "sha256:468468fc4e1ca003872c5027c178fd5a9a83327857b30316c41721b76856337e"
 }

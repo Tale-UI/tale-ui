@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/roadmap-visual-evidence.schema.json",
+  "title": "Tale UI roadmap visual evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "runner", "records"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "runner": { "const": "test/visual/roadmap.spec.ts" },
+    "records": {
+      "type": "array",
+      "minItems": 28,
+      "maxItems": 28,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "criterion", "source", "sourceDigest", "snapshot", "snapshotDigest"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "criterion": { "enum": ["R03.5", "R07.2", "R10.2"] },
+          "source": { "type": "string", "minLength": 1 },
+          "sourceDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+          "snapshot": { "type": "string", "pattern": "\\.png$" },
+          "snapshotDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+        }
+      }
+    }
+  }
+}
