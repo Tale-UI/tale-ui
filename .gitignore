@@ -75,12 +75,15 @@ storybook-static/
 !/analysis/app-shell/
 /analysis/app-shell/*
 !/analysis/app-shell/inventory.json
+!/analysis/app-shell/candidate-dispositions.json
 !/analysis/chat/
 /analysis/chat/*
 !/analysis/chat/inventory.json
+!/analysis/chat/candidate-dispositions.json
 !/analysis/content/
 /analysis/content/*
 !/analysis/content/inventory.json
+!/analysis/content/candidate-dispositions.json
 !/analysis/extensions/
 /analysis/extensions/*
 !/analysis/extensions/inventory.json

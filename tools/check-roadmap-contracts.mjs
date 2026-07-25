@@ -702,6 +702,20 @@ for (const [inventory, candidates] of Object.entries(dispositionInventories)) {
       candidate,
       disposition: 'defer',
       rationale: 'Fixture evidence',
+      evidence: {
+        sources: ['fixture'],
+        repeatedTemplateEvidence: 'Fixture template evidence',
+        ordinaryDataApi: 'Fixture ordinary-data boundary',
+        accessibility: 'Fixture accessibility evidence',
+        state: 'Fixture state evidence',
+        streaming: 'Fixture streaming evidence',
+        localization: 'Fixture localization evidence',
+        security: 'Fixture security evidence',
+        ssr: 'Fixture SSR evidence',
+        performance: 'Fixture performance evidence',
+        ownership: 'Fixture ownership evidence',
+        migration: 'Fixture migration evidence',
+      },
       evidenceDigest: digestFixture,
     })),
   };
@@ -737,6 +751,21 @@ for (const [inventory, candidates] of Object.entries(dispositionInventories)) {
     }),
     false,
     `${inventory} dispositions must reject unknown candidates`,
+  );
+}
+
+for (const [inventory, path] of Object.entries({
+  'app-shell': 'analysis/app-shell/candidate-dispositions.json',
+  chat: 'analysis/chat/candidate-dispositions.json',
+  content: 'analysis/content/candidate-dispositions.json',
+})) {
+  const artifact = json(path);
+  validate('schemas/candidate-disposition.schema.json', artifact, path);
+  assert.equal(artifact.inventory, inventory, `${path} must name the matching inventory`);
+  assert.deepEqual(
+    artifact.records.map(({ candidate }) => candidate).toSorted(compareCanonicalStrings),
+    dispositionInventories[inventory].toSorted(compareCanonicalStrings),
+    `${path} must preserve exact candidate set equality`,
   );
 }
 

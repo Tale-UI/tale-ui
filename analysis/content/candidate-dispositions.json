@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0.0",
+  "inventory": "content",
+  "evidenceRevision": "sha256:32531846a9133755c1aa592755be118ef94a7834f929c685ffffab7bb1e81c5f",
+  "records": [
+    {
+      "candidate": "Kbd",
+      "disposition": "approve",
+      "rationale": "Keyboard input is repeated across command guidance and benefits from one semantic, tokenized primitive.",
+      "evidence": {
+        "sources": [
+          "docs/components/command-palette.md",
+          "docs/components/tooltip.md",
+          "tools/golden-prompts/command-palette-hook.json"
+        ],
+        "accessibility": "Uses the native kbd element and keeps key names as readable text.",
+        "state": "Stateless.",
+        "security": "Renders React children without parsing.",
+        "ssr": "Pure deterministic markup.",
+        "performance": "One inline element and token-only CSS.",
+        "ownership": "Represents user input, not shortcut detection.",
+        "migration": "Existing raw kbd markup can switch directly."
+      },
+      "evidenceDigest": "sha256:4afe31cf74d1101af223cdd3e0d1e2299462db662c6425f4fc5396a7a9f3fae5"
+    },
+    {
+      "candidate": "Timestamp",
+      "disposition": "defer",
+      "rationale": "Locale, relative-time refresh, timezone, hydration, and machine-readable formatting need a dedicated contract.",
+      "evidence": {
+        "sources": [
+          "analysis/content/inventory.json",
+          "docs/components/i18n-provider.md"
+        ],
+        "accessibility": "Visible relative text and an absolute accessible label need user testing.",
+        "state": "Periodic relative-time refresh ownership is unresolved.",
+        "security": "No special parser is needed.",
+        "ssr": "Server timezone and hydration drift require an approved deterministic policy.",
+        "performance": "Shared scheduling is needed before many timestamps can update efficiently.",
+        "ownership": "Deferred until I18nProvider and application timezone responsibilities are explicit.",
+        "migration": "Applications retain native time elements and their existing formatters."
+      },
+      "evidenceDigest": "sha256:4ce0c55b169cc4a51c559f62b022f9c32fffb3cf561ef60236a2931da1ccc478"
+    },
+    {
+      "candidate": "Blockquote",
+      "disposition": "defer",
+      "rationale": "Native blockquote plus Text already covers the semantics; repeated design-system demand is not yet demonstrated.",
+      "evidence": {
+        "sources": [
+          "analysis/content/inventory.json",
+          "docs/components/text.md"
+        ],
+        "accessibility": "Native semantics are sufficient when attribution is authored correctly.",
+        "state": "Stateless.",
+        "security": "No parser should be introduced.",
+        "ssr": "Native markup is deterministic.",
+        "performance": "No design-system abstraction is needed for performance.",
+        "ownership": "Consumers retain content and attribution semantics.",
+        "migration": "Continue native blockquote composition."
+      },
+      "evidenceDigest": "sha256:81b2092132146ad28ccf398406797c792e5242389f2eb7a00d2a30c6ea114701"
+    },
+    {
+      "candidate": "Citation",
+      "disposition": "defer",
+      "rationale": "Citation numbering, source identity, links, popovers, SSR, and unsafe URL policy require product evidence and security review.",
+      "evidence": {
+        "sources": [
+          "analysis/content/inventory.json",
+          "docs/components/link.md"
+        ],
+        "accessibility": "Reference relationships and repeated link names need a defined pattern.",
+        "state": "Popover and source-list ownership are unresolved.",
+        "security": "External URL and untrusted source metadata policy must precede a component.",
+        "ssr": "Stable citation numbering needs a deterministic document-level model.",
+        "performance": "Large source lists may require shared indexing.",
+        "ownership": "Deferred until an ordinary citation data contract is evidenced.",
+        "migration": "Consumers retain Link-based citations."
+      },
+      "evidenceDigest": "sha256:8ea873a8b69bf113fb4a128e39decbcbefa7e3abb652167b72b593ea5c6b281b"
+    },
+    {
+      "candidate": "CodeBlock",
+      "disposition": "approve",
+      "rationale": "A plain-text, overflow-safe code surface is broadly useful while explicitly excluding highlighting and raw HTML.",
+      "evidence": {
+        "sources": [
+          "docs/recipes/use-clipboard.md",
+          "docs/components/text-editor.md",
+          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#p2-c--selected-content-primitives"
+        ],
+        "accessibility": "Uses pre/code semantics, preserves text, and allows an accessible label.",
+        "state": "Stateless; copy actions compose externally.",
+        "security": "Accepts text children only; no raw HTML, Markdown, or syntax-highlighting execution.",
+        "ssr": "Pure deterministic markup.",
+        "performance": "No parser or highlighter is bundled.",
+        "ownership": "Presentation only; language tooling and execution are excluded.",
+        "migration": "Existing pre/code markup maps directly."
+      },
+      "evidenceDigest": "sha256:791dbad95631f8cdec1935146c675c3f22ad3ba6eb58eaf0283dcffc1e90ab2c"
+    },
+    {
+      "candidate": "MetadataList",
+      "disposition": "reject",
+      "rationale": "KeyValuePairs already provides the same structured metadata-list role, so a second primitive would duplicate API and guidance.",
+      "evidence": {
+        "sources": [
+          "docs/components/key-value-pairs.md",
+          "packages/react/src/key-value-pairs/index.ts"
+        ],
+        "accessibility": "The existing component already supplies description-list semantics.",
+        "state": "Stateless in the existing component.",
+        "security": "No new boundary is created.",
+        "ssr": "The existing component is deterministic.",
+        "performance": "Avoids duplicate implementation and CSS.",
+        "ownership": "Owned by KeyValuePairs.",
+        "migration": "Use @tale-ui/react/key-value-pairs."
+      },
+      "evidenceDigest": "sha256:120808cc5dae77f9197347a60ec7cb171a386850137c21bfc9255c5b0e0291ed"
+    }
+  ]
+}
