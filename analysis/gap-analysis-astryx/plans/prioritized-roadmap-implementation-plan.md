@@ -159,10 +159,10 @@ initial Bundle A milestones. The repository owner subsequently approved
 combining every remaining milestone into one Bundle BC with no manual review
 between the former B and C scopes.
 
-| Bundle | Scope | Cumulative exit |
-| ------ | ----- | --------------- |
-| A — Merged foundation | PR #8: Table RFC/ranking/prototypes, stable sorting, validation cleanup, architecture decisions, and consolidated-delivery authority | The merged evidence remains green; unimplemented prerequisites from the original Bundle A scope transfer to Bundle BC |
-| BC — Complete roadmap closure | P0-B safe operations and packed tooling; P0-C ten templates; P1-A migrations; remaining P1-F Table plugins; P1-B–P1-E; P2-A–P2-E; P3-A–P3-C; package baseline cleanup; cumulative reconciliation | R01–R17 and SM01–SM08 pass or carry an explicit delegated exception |
+| Bundle                        | Scope                                                                                                                                                                                            | Cumulative exit                                                                                                       |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| A — Merged foundation         | PR #8: Table RFC/ranking/prototypes, stable sorting, validation cleanup, architecture decisions, and consolidated-delivery authority                                                             | The merged evidence remains green; unimplemented prerequisites from the original Bundle A scope transfer to Bundle BC |
+| BC — Complete roadmap closure | P0-B safe operations and packed tooling; P0-C ten templates; P1-A migrations; remaining P1-F Table plugins; P1-B–P1-E; P2-A–P2-E; P3-A–P3-C; package baseline cleanup; cumulative reconciliation | R01–R17 and SM01–SM08 pass or carry an explicit delegated exception                                                   |
 
 Bundle BC uses one draft pull request and as many small, ordered milestone
 commits as necessary. It becomes ready only after its complete scope and
@@ -977,9 +977,28 @@ Cloudflare credentials/DNS and a future approved Figma file ID are operational
 inputs, not design blockers. Local builds, deploy artifacts, empty-allowlist
 behavior, fixtures, and honest `unavailable` states must pass without them.
 
+## Completion Record
+
+The repository owner merged the consolidated Bundle BC review in
+[PR #9](https://github.com/Tale-UI/tale-ui/pull/9) on 2026-07-25. The reviewed
+head was `f164d4ac8be806a2f8177d8f877c6d47965e2279`, and the merge commit was
+`5e539e19287b9f5469d8f13e0ebe44f43d4dda62`.
+
+All 58 canonical roadmap and success-measure criteria passed their automated
+evidence gates and the consolidated review. Post-merge CI and the Pages
+deployment completed successfully against the merge commit. The immutable
+review and workflow references are recorded in
+`registry/roadmap-evidence.json`.
+
+Cloudflare credentials and hosted MCP DNS, an approved Figma file ID and read
+token, and user-level product analytics remain explicitly unavailable,
+non-blocking operational inputs under ADR-003 and ADR-004. They are not
+unfinished implementation work and require separate authority if supplied
+later.
+
 ## Status
 
-READY_FOR_IMPLEMENTATION
+IMPLEMENTATION_COMPLETE
 
 ## Clarifying Questions
 

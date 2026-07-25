@@ -1,21 +1,21 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "traceability": "registry/roadmap-traceability.json",
-  "reviewBundle": "Bundle BC pull request",
-  "overallStatus": "ready-for-consolidated-review",
+  "reviewBundle": "Bundle BC pull request #9",
+  "overallStatus": "complete",
   "automatedSummary": {
     "passed": 58,
     "total": 58
   },
   "manualSummary": {
-    "pending": 58,
+    "passed": 58,
     "total": 58
   },
   "records": [
     {
       "id": "R01.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Systems/Developer Experience inventory review",
       "evidence": [
         {
@@ -31,7 +31,7 @@
     {
       "id": "R01.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Developer Experience API review",
       "evidence": [
         {
@@ -43,7 +43,7 @@
     {
       "id": "R01.3",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Governance review",
       "evidence": [
         {
@@ -59,7 +59,7 @@
     {
       "id": "R01.4",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Release Engineering review",
       "evidence": [
         {
@@ -75,7 +75,7 @@
     {
       "id": "R02.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Developer Experience review",
       "evidence": [
         {
@@ -91,7 +91,7 @@
     {
       "id": "R02.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Security/Release Engineering recovery review",
       "evidence": [
         {
@@ -107,7 +107,7 @@
     {
       "id": "R02.3",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Developer Experience acceptance",
       "evidence": [
         {
@@ -123,7 +123,7 @@
     {
       "id": "R02.4",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Release Engineering review",
       "evidence": [
         {
@@ -139,7 +139,7 @@
     {
       "id": "R02.5",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Developer Experience evaluation",
       "evidence": [
         {
@@ -155,7 +155,7 @@
     {
       "id": "R03.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Systems review",
       "evidence": [
         {
@@ -171,7 +171,7 @@
     {
       "id": "R03.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Developer Experience review",
       "evidence": [
         {
@@ -187,7 +187,7 @@
     {
       "id": "R03.3",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Security review",
       "evidence": [
         {
@@ -203,7 +203,7 @@
     {
       "id": "R03.4",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Developer Experience review",
       "evidence": [
         {
@@ -215,7 +215,7 @@
     {
       "id": "R03.5",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Systems/Accessibility QA",
       "evidence": [
         {
@@ -231,12 +231,12 @@
     {
       "id": "R04.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Systems review",
       "evidence": [
         {
           "path": "analysis/table-plugins/ranking.json",
-          "digest": "sha256:100eb846943c94454f628cccfd3cb6aff90cf4a4fe4ddb95244c53b2f7e417c7"
+          "digest": "sha256:e411b49e1e147cb37b5e7fc251953d8641b336a83acfd41894c6a2bafaa417ea"
         },
         {
           "path": "packages/react/src/table/TableController.experimental.test.tsx",
@@ -247,7 +247,7 @@
     {
       "id": "R04.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Accessibility QA",
       "evidence": [
         {
@@ -259,7 +259,7 @@
     {
       "id": "R04.3",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Developer Experience review",
       "evidence": [
         {
@@ -271,7 +271,7 @@
     {
       "id": "R04.4",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Systems review",
       "evidence": [
         {
@@ -283,7 +283,7 @@
     {
       "id": "R04.5",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Performance/Release Engineering review",
       "evidence": [
         {
@@ -299,7 +299,7 @@
     {
       "id": "R05.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Developer Experience review",
       "evidence": [
         {
@@ -315,7 +315,7 @@
     {
       "id": "R05.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Release Engineering review",
       "evidence": [
         {
@@ -331,7 +331,7 @@
     {
       "id": "R05.3",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Developer Experience/Release Engineering review",
       "evidence": [
         {
@@ -347,7 +347,7 @@
     {
       "id": "R06.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Docs Platform review",
       "evidence": [
         {
@@ -363,7 +363,7 @@
     {
       "id": "R06.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Docs Platform review",
       "evidence": [
         {
@@ -379,7 +379,7 @@
     {
       "id": "R06.3",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Security review",
       "evidence": [
         {
@@ -395,7 +395,7 @@
     {
       "id": "R06.4",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Developer Experience review",
       "evidence": [
         {
@@ -411,7 +411,7 @@
     {
       "id": "R07.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Localization review",
       "evidence": [
         {
@@ -427,7 +427,7 @@
     {
       "id": "R07.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Localization/Accessibility QA",
       "evidence": [
         {
@@ -443,7 +443,7 @@
     {
       "id": "R07.3",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Localization review",
       "evidence": [
         {
@@ -459,7 +459,7 @@
     {
       "id": "R08.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Product Analytics review",
       "evidence": [
         {
@@ -475,7 +475,7 @@
     {
       "id": "R08.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Privacy/Security review",
       "evidence": [
         {
@@ -491,7 +491,7 @@
     {
       "id": "R09.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Systems review",
       "evidence": [
         {
@@ -507,7 +507,7 @@
     {
       "id": "R09.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Architecture/Accessibility review",
       "evidence": [
         {
@@ -523,7 +523,7 @@
     {
       "id": "R10.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Systems/Accessibility review",
       "evidence": [
         {
@@ -539,7 +539,7 @@
     {
       "id": "R10.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Systems QA",
       "evidence": [
         {
@@ -555,7 +555,7 @@
     {
       "id": "R11.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Systems review",
       "evidence": [
         {
@@ -571,7 +571,7 @@
     {
       "id": "R11.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Accessibility QA",
       "evidence": [
         {
@@ -587,7 +587,7 @@
     {
       "id": "R11.3",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Security review",
       "evidence": [
         {
@@ -603,7 +603,7 @@
     {
       "id": "R11.4",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Systems review",
       "evidence": [
         {
@@ -619,7 +619,7 @@
     {
       "id": "R12.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Systems/Accessibility/Security review",
       "evidence": [
         {
@@ -635,7 +635,7 @@
     {
       "id": "R12.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Security review",
       "evidence": [
         {
@@ -651,7 +651,7 @@
     {
       "id": "R13.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Governance review",
       "evidence": [
         {
@@ -667,7 +667,7 @@
     {
       "id": "R14.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Performance review",
       "evidence": [
         {
@@ -683,7 +683,7 @@
     {
       "id": "R14.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Performance/Release Engineering review",
       "evidence": [
         {
@@ -699,7 +699,7 @@
     {
       "id": "R15.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Tooling review",
       "evidence": [
         {
@@ -715,7 +715,7 @@
     {
       "id": "R15.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Systems/Privacy review",
       "evidence": [
         {
@@ -731,7 +731,7 @@
     {
       "id": "R16.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Developer Experience review",
       "evidence": [
         {
@@ -747,7 +747,7 @@
     {
       "id": "R16.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Security/Governance review",
       "evidence": [
         {
@@ -763,7 +763,7 @@
     {
       "id": "R17.1",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Mobile Platform/Accessibility review",
       "evidence": [
         {
@@ -779,7 +779,7 @@
     {
       "id": "R17.2",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Governance review",
       "evidence": [
         {
@@ -791,7 +791,7 @@
     {
       "id": "SM01",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Developer Experience acceptance",
       "evidence": [
         {
@@ -803,7 +803,7 @@
     {
       "id": "SM02",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Systems review",
       "evidence": [
         {
@@ -819,12 +819,12 @@
     {
       "id": "SM03",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Design Systems/Accessibility review",
       "evidence": [
         {
           "path": "analysis/table-plugins/ranking.json",
-          "digest": "sha256:100eb846943c94454f628cccfd3cb6aff90cf4a4fe4ddb95244c53b2f7e417c7"
+          "digest": "sha256:e411b49e1e147cb37b5e7fc251953d8641b336a83acfd41894c6a2bafaa417ea"
         },
         {
           "path": "packages/react/src/table/TableController.experimental.test.tsx",
@@ -835,7 +835,7 @@
     {
       "id": "SM04",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Release Engineering review",
       "evidence": [
         {
@@ -851,7 +851,7 @@
     {
       "id": "SM05",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Release Engineering review",
       "evidence": [
         {
@@ -867,7 +867,7 @@
     {
       "id": "SM06",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Localization/Accessibility review",
       "evidence": [
         {
@@ -883,7 +883,7 @@
     {
       "id": "SM07",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Developer Experience/Product Analytics review",
       "evidence": [
         {
@@ -899,7 +899,7 @@
     {
       "id": "SM08",
       "automatedStatus": "passed",
-      "manualStatus": "pending-consolidated-pr-review",
+      "manualStatus": "passed-consolidated-pr-review",
       "manualEvidenceAndOwner": "Product Analytics/Governance review",
       "evidence": [
         {
@@ -913,6 +913,35 @@
       ]
     }
   ],
+  "completion": {
+    "completedAt": "2026-07-25T15:27:51Z",
+    "pullRequest": {
+      "number": 9,
+      "url": "https://github.com/Tale-UI/tale-ui/pull/9",
+      "reviewedHead": "f164d4ac8be806a2f8177d8f877c6d47965e2279",
+      "mergeCommit": "5e539e19287b9f5469d8f13e0ebe44f43d4dda62",
+      "mergedAt": "2026-07-25T15:18:47Z",
+      "mergedBy": "ndrewtran"
+    },
+    "postMergeChecks": [
+      {
+        "workflow": "CI",
+        "runId": 30163361537,
+        "url": "https://github.com/Tale-UI/tale-ui/actions/runs/30163361537",
+        "headCommit": "5e539e19287b9f5469d8f13e0ebe44f43d4dda62",
+        "conclusion": "success",
+        "completedAt": "2026-07-25T15:27:51Z"
+      },
+      {
+        "workflow": "Deploy Pages",
+        "runId": 30163361544,
+        "url": "https://github.com/Tale-UI/tale-ui/actions/runs/30163361544",
+        "headCommit": "5e539e19287b9f5469d8f13e0ebe44f43d4dda62",
+        "conclusion": "success",
+        "completedAt": "2026-07-25T15:21:00Z"
+      }
+    ]
+  },
   "operationalInputs": [
     {
       "input": "Cloudflare credentials and hosted MCP DNS",

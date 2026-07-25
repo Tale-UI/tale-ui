@@ -121,19 +121,48 @@ if (ids.length !== 58 || JSON.stringify(Object.keys(evidence)) !== JSON.stringif
 }
 
 const report = {
-  schemaVersion: '1.0.0',
+  schemaVersion: '1.1.0',
   traceability: TRACEABILITY,
-  reviewBundle: 'Bundle BC pull request',
-  overallStatus: 'ready-for-consolidated-review',
+  reviewBundle: 'Bundle BC pull request #9',
+  overallStatus: 'complete',
   automatedSummary: { passed: ids.length, total: ids.length },
-  manualSummary: { pending: ids.length, total: ids.length },
+  manualSummary: { passed: ids.length, total: ids.length },
   records: traceability.criteria.map(({ id, manualEvidenceAndOwner }) => ({
     id,
     automatedStatus: 'passed',
-    manualStatus: 'pending-consolidated-pr-review',
+    manualStatus: 'passed-consolidated-pr-review',
     manualEvidenceAndOwner,
     evidence: evidence[id].map((path) => ({ path, digest: digest(path) })),
   })),
+  completion: {
+    completedAt: '2026-07-25T15:27:51Z',
+    pullRequest: {
+      number: 9,
+      url: 'https://github.com/Tale-UI/tale-ui/pull/9',
+      reviewedHead: 'f164d4ac8be806a2f8177d8f877c6d47965e2279',
+      mergeCommit: '5e539e19287b9f5469d8f13e0ebe44f43d4dda62',
+      mergedAt: '2026-07-25T15:18:47Z',
+      mergedBy: 'ndrewtran',
+    },
+    postMergeChecks: [
+      {
+        workflow: 'CI',
+        runId: 30163361537,
+        url: 'https://github.com/Tale-UI/tale-ui/actions/runs/30163361537',
+        headCommit: '5e539e19287b9f5469d8f13e0ebe44f43d4dda62',
+        conclusion: 'success',
+        completedAt: '2026-07-25T15:27:51Z',
+      },
+      {
+        workflow: 'Deploy Pages',
+        runId: 30163361544,
+        url: 'https://github.com/Tale-UI/tale-ui/actions/runs/30163361544',
+        headCommit: '5e539e19287b9f5469d8f13e0ebe44f43d4dda62',
+        conclusion: 'success',
+        completedAt: '2026-07-25T15:21:00Z',
+      },
+    ],
+  },
   operationalInputs: [
     {
       input: 'Cloudflare credentials and hosted MCP DNS',
@@ -170,7 +199,7 @@ if (CHECK) {
   if (readFileSync(join(ROOT, OUTPUT), 'utf8') !== rendered) {
     throw new Error(`${OUTPUT} is stale; run pnpm roadmap:evidence:generate.`);
   }
-  console.log('OK: 58 automated criteria ready for one consolidated Bundle BC review');
+  console.log('OK: all 58 roadmap criteria and the consolidated Bundle BC review are complete');
 } else {
   writeFileSync(join(ROOT, OUTPUT), rendered);
   console.log('Generated evidence for all 58 roadmap criteria.');
