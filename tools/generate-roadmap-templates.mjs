@@ -146,7 +146,7 @@ function recipeSource(slug) {
   }
   code = coalesceImports(`${imports.join('\n')}\n\n${code.trimStart()}`)
     .replace("import { useState } from 'react';", "import * as React from 'react';")
-    .replaceAll('useState(', 'React.useState(')
+    .replaceAll(/(?<!\.)\buseState\(/g, 'React.useState(')
     .replaceAll('console.log(', 'console.warn(')
     .replace(
       /await new Promise\(\(resolve\) => setTimeout\(resolve, (\d+)\)\);/g,

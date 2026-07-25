@@ -76,6 +76,8 @@ storybook-static/
 !/analysis/baselines/project-mutation-runtime.json
 !/analysis/baselines/i18n-message-inventory.json
 !/analysis/baselines/performance-budgets.json
+!/analysis/baselines/agent-cold-start.json
+!/analysis/baselines/tooling-package-release.json
 !/analysis/app-shell/
 /analysis/app-shell/*
 !/analysis/app-shell/inventory.json

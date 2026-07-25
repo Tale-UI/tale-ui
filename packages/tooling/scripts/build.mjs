@@ -56,6 +56,18 @@ await cp(join(REPOSITORY_ROOT, 'LICENSE'), join(BUILD_ROOT, 'LICENSE'));
 const sourceManifest = JSON.parse(await readFile(join(PACKAGE_ROOT, 'package.json'), 'utf8'));
 const buildManifest = {
   ...sourceManifest,
+  files: [
+    '**/*.js',
+    '**/*.d.ts',
+    'bin',
+    'registry',
+    'schemas',
+    'templates',
+    'migrations',
+    'README.md',
+    'CLAUDE.md',
+    'LICENSE',
+  ],
   exports: {
     '.': { types: './index.d.ts', import: './index.js', default: './index.js' },
     './api': { types: './api.d.ts', import: './api.js', default: './api.js' },

@@ -33,7 +33,7 @@ const commands: CommandPaletteCommand[] = [
 ];
 
 export function Example() {
-  const [open, setOpen] = React.React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const palette = useCommandPalette({
     commands,
     close: () => setOpen(false),

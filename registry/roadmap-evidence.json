@@ -1,0 +1,936 @@
+{
+  "schemaVersion": "1.0.0",
+  "traceability": "registry/roadmap-traceability.json",
+  "reviewBundle": "Bundle BC pull request",
+  "overallStatus": "ready-for-consolidated-review",
+  "automatedSummary": {
+    "passed": 58,
+    "total": 58
+  },
+  "manualSummary": {
+    "pending": 58,
+    "total": 58
+  },
+  "records": [
+    {
+      "id": "R01.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Systems/Developer Experience inventory review",
+      "evidence": [
+        {
+          "path": "registry/artifacts.json",
+          "digest": "sha256:fcc79b2dc3ca509d0efe9e388a0853fae649565b98534ba9aa8bf39c58162340"
+        },
+        {
+          "path": "tools/check-roadmap-contracts.mjs",
+          "digest": "sha256:29bdfc1244bfe99fd4f8c54df8f460c583490fbc8c8947b9a4d564f4014fd676"
+        }
+      ]
+    },
+    {
+      "id": "R01.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Developer Experience API review",
+      "evidence": [
+        {
+          "path": "packages/tooling/src/api.test.ts",
+          "digest": "sha256:1edd911d0ad1540e04902d07912c9ef1a24654855a649beaa108e1538c23d3c3"
+        }
+      ]
+    },
+    {
+      "id": "R01.3",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Governance review",
+      "evidence": [
+        {
+          "path": "registry/reports/replacements.json",
+          "digest": "sha256:1b754442e6c629d9924aab106a20c4b8c039d42edfd50e849cba297f34325648"
+        },
+        {
+          "path": "tools/generate-governance-reports.mjs",
+          "digest": "sha256:429054976a65f16002f3b61880efca9f171eefeecb8351662465fbf782365f38"
+        }
+      ]
+    },
+    {
+      "id": "R01.4",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Release Engineering review",
+      "evidence": [
+        {
+          "path": "tools/generate-artifacts.mjs",
+          "digest": "sha256:94ae6ed03a368689151ea6f174386ffe942fa94885a936ea4a14fd8f599f7021"
+        },
+        {
+          "path": "tools/artifact-canonical.test.mjs",
+          "digest": "sha256:92e0b9e44ccab0ec330ff74d8c146d44f61752270a2373d4105a09afa7b6aebb"
+        }
+      ]
+    },
+    {
+      "id": "R02.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Developer Experience review",
+      "evidence": [
+        {
+          "path": "packages/tooling/src/api.test.ts",
+          "digest": "sha256:1edd911d0ad1540e04902d07912c9ef1a24654855a649beaa108e1538c23d3c3"
+        },
+        {
+          "path": "registry/capabilities.json",
+          "digest": "sha256:8ae14b6507ba041d508e50b6467fedca6f59d482b806867231f886eb36f36790"
+        }
+      ]
+    },
+    {
+      "id": "R02.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Security/Release Engineering recovery review",
+      "evidence": [
+        {
+          "path": "packages/tooling/src/materialize.test.ts",
+          "digest": "sha256:9600f08cc6de2adce4f0c290fc470411baaeccc8a563fdf4b7cd21af7b6b4619"
+        },
+        {
+          "path": "packages/tooling/src/operations.test.ts",
+          "digest": "sha256:057e9a0c07b7aa70f652cd878969bf2a958f6548d9496067e60e5c9d3ca0284a"
+        }
+      ]
+    },
+    {
+      "id": "R02.3",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Developer Experience acceptance",
+      "evidence": [
+        {
+          "path": "packages/tooling/scripts/test-packed.mjs",
+          "digest": "sha256:008184efbadd8e34a5896afac1cc51ed0702228ab52c877775be2d4672b8df97"
+        },
+        {
+          "path": "analysis/baselines/tooling-package-release.json",
+          "digest": "sha256:767293b19e3bd5ddac4fe1e19954f665d0beaa0622f3d3666e3d8f01a3f7b600"
+        }
+      ]
+    },
+    {
+      "id": "R02.4",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Release Engineering review",
+      "evidence": [
+        {
+          "path": ".github/workflows/ci.yml",
+          "digest": "sha256:91c4b16d61c2e145d3b1a278400f4ed8b51fe56b1ec23f7e9efa8c6eec364c17"
+        },
+        {
+          "path": "tools/check-roadmap-contracts.mjs",
+          "digest": "sha256:29bdfc1244bfe99fd4f8c54df8f460c583490fbc8c8947b9a4d564f4014fd676"
+        }
+      ]
+    },
+    {
+      "id": "R02.5",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Developer Experience evaluation",
+      "evidence": [
+        {
+          "path": "analysis/baselines/agent-cold-start.json",
+          "digest": "sha256:38fe3c17de3d65ff3c8f01d92ac25cc86ef5d6041feb7c84fb6e3b83e7499e8b"
+        },
+        {
+          "path": "tools/benchmark-agent-cold-start.ts",
+          "digest": "sha256:e35cf116405c7e97c60d67a4867194de270672e16b35d84e43d76b3e995d8cf3"
+        }
+      ]
+    },
+    {
+      "id": "R03.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Systems review",
+      "evidence": [
+        {
+          "path": "tools/generate-roadmap-templates.mjs",
+          "digest": "sha256:f19e92309e5f9502b8c029402b0439b91a59f584ea2ff7678fcace648f16abab"
+        },
+        {
+          "path": "packages/tooling/src/materialize.test.ts",
+          "digest": "sha256:9600f08cc6de2adce4f0c290fc470411baaeccc8a563fdf4b7cd21af7b6b4619"
+        }
+      ]
+    },
+    {
+      "id": "R03.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Developer Experience review",
+      "evidence": [
+        {
+          "path": "packages/tooling/src/cli.ts",
+          "digest": "sha256:21903f478df26cbf24ac67f531478376709bbd71f3575a15cbe275271095bf7e"
+        },
+        {
+          "path": "packages/tooling/src/materialize.test.ts",
+          "digest": "sha256:9600f08cc6de2adce4f0c290fc470411baaeccc8a563fdf4b7cd21af7b6b4619"
+        }
+      ]
+    },
+    {
+      "id": "R03.3",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Security review",
+      "evidence": [
+        {
+          "path": "packages/tooling/src/materialize.test.ts",
+          "digest": "sha256:9600f08cc6de2adce4f0c290fc470411baaeccc8a563fdf4b7cd21af7b6b4619"
+        },
+        {
+          "path": "packages/tooling/src/operations.test.ts",
+          "digest": "sha256:057e9a0c07b7aa70f652cd878969bf2a958f6548d9496067e60e5c9d3ca0284a"
+        }
+      ]
+    },
+    {
+      "id": "R03.4",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Developer Experience review",
+      "evidence": [
+        {
+          "path": "packages/tooling/scripts/test-packed.mjs",
+          "digest": "sha256:008184efbadd8e34a5896afac1cc51ed0702228ab52c877775be2d4672b8df97"
+        }
+      ]
+    },
+    {
+      "id": "R03.5",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Systems/Accessibility QA",
+      "evidence": [
+        {
+          "path": "registry/reports/roadmap-visuals.json",
+          "digest": "sha256:16a485f3ae38855032c0e871840da38243db87c77ed695e98e6af243605b1009"
+        },
+        {
+          "path": "test/visual/roadmap.spec.ts",
+          "digest": "sha256:4774481daeee8da7ddffb69e421b814e2c4e839eb8dbcf5732aad569e0776b31"
+        }
+      ]
+    },
+    {
+      "id": "R04.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Systems review",
+      "evidence": [
+        {
+          "path": "analysis/table-plugins/ranking.json",
+          "digest": "sha256:100eb846943c94454f628cccfd3cb6aff90cf4a4fe4ddb95244c53b2f7e417c7"
+        },
+        {
+          "path": "packages/react/src/table/TableController.experimental.test.tsx",
+          "digest": "sha256:b6cc0a5a32e70a0f7995f17787ed234b16812290261d7c127192c2256a8feb19"
+        }
+      ]
+    },
+    {
+      "id": "R04.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Accessibility QA",
+      "evidence": [
+        {
+          "path": "packages/react/src/table/TableController.experimental.test.tsx",
+          "digest": "sha256:b6cc0a5a32e70a0f7995f17787ed234b16812290261d7c127192c2256a8feb19"
+        }
+      ]
+    },
+    {
+      "id": "R04.3",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Developer Experience review",
+      "evidence": [
+        {
+          "path": "packages/react/src/table/TableController.experimental.test.tsx",
+          "digest": "sha256:b6cc0a5a32e70a0f7995f17787ed234b16812290261d7c127192c2256a8feb19"
+        }
+      ]
+    },
+    {
+      "id": "R04.4",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Systems review",
+      "evidence": [
+        {
+          "path": "packages/react/src/table/TableController.experimental.test.tsx",
+          "digest": "sha256:b6cc0a5a32e70a0f7995f17787ed234b16812290261d7c127192c2256a8feb19"
+        }
+      ]
+    },
+    {
+      "id": "R04.5",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Performance/Release Engineering review",
+      "evidence": [
+        {
+          "path": "analysis/baselines/table-controller.json",
+          "digest": "sha256:989f0fd4460ae327df663b247dd2d1e8c4e7eca0479c053e00e21d01440fb4ea"
+        },
+        {
+          "path": "analysis/baselines/table-sorting.json",
+          "digest": "sha256:d4ff712c86b168f1f5916f7cafbd711adb8e7edf08988ea901af10e20094ebc9"
+        }
+      ]
+    },
+    {
+      "id": "R05.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Developer Experience review",
+      "evidence": [
+        {
+          "path": "tools/generate-roadmap-migrations.mjs",
+          "digest": "sha256:26b0fefc8ea400a456b2eea0b76813dccc5272700e89c7e1241d5253943f5d0f"
+        },
+        {
+          "path": "packages/tooling/src/migrations.test.ts",
+          "digest": "sha256:0e65425514448e3f2253e8b7652e3dd1adcc5ab66866cf393636019a1c8c03cc"
+        }
+      ]
+    },
+    {
+      "id": "R05.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Release Engineering review",
+      "evidence": [
+        {
+          "path": "packages/tooling/src/migrations.test.ts",
+          "digest": "sha256:0e65425514448e3f2253e8b7652e3dd1adcc5ab66866cf393636019a1c8c03cc"
+        },
+        {
+          "path": "registry/reports/migrations.json",
+          "digest": "sha256:295a1f5bfb779ecd32d57203b6f10d05a6586f8ca8a92d50be424c8326361a0e"
+        }
+      ]
+    },
+    {
+      "id": "R05.3",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Developer Experience/Release Engineering review",
+      "evidence": [
+        {
+          "path": "packages/tooling/src/migrations.test.ts",
+          "digest": "sha256:0e65425514448e3f2253e8b7652e3dd1adcc5ab66866cf393636019a1c8c03cc"
+        },
+        {
+          "path": "packages/tooling/migrations/10-package-rename/manifest.json",
+          "digest": "sha256:5b2f480753940c9656feebfe218c98eb6b4ee3265895628f207fe8a4e17a40a7"
+        }
+      ]
+    },
+    {
+      "id": "R06.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Docs Platform review",
+      "evidence": [
+        {
+          "path": "docs/versioned/manifest.json",
+          "digest": "sha256:3862c15d68d374bb9ae2bdf339067c337a8f3b16e2c6b2599260c9b9652ba46c"
+        },
+        {
+          "path": "tools/generate-versioned-docs.mjs",
+          "digest": "sha256:163dad54844d53efff0a8ae751ff7debf9f26b63454be51b771f96fccea697c4"
+        }
+      ]
+    },
+    {
+      "id": "R06.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Docs Platform review",
+      "evidence": [
+        {
+          "path": "llms.txt",
+          "digest": "sha256:1e81e73fd52a0d4f3e510767d5c5ac2beb4a86dfe8b7bd08c3c3746a34880113"
+        },
+        {
+          "path": "tools/assemble-pages.mjs",
+          "digest": "sha256:6fda9782f173664cd9fa1145c895b649c33d893033616bf97a242f3d9995c80d"
+        }
+      ]
+    },
+    {
+      "id": "R06.3",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Security review",
+      "evidence": [
+        {
+          "path": "apps/hosted-mcp/src/worker.test.ts",
+          "digest": "sha256:666abb74e991eca53bf03b2aa46809f0a1f7682c0aed5440a3c71fedda576af3"
+        },
+        {
+          "path": "apps/hosted-mcp/src/worker.ts",
+          "digest": "sha256:bbc1d07f39949fc8ff5ea4d347c6277db8cb4154b988c8ae5bdce1f0a26ce892"
+        }
+      ]
+    },
+    {
+      "id": "R06.4",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Developer Experience review",
+      "evidence": [
+        {
+          "path": "apps/hosted-mcp/src/worker.test.ts",
+          "digest": "sha256:666abb74e991eca53bf03b2aa46809f0a1f7682c0aed5440a3c71fedda576af3"
+        },
+        {
+          "path": "apps/hosted-mcp/README.md",
+          "digest": "sha256:619bae8d51e6b9d5f57a0b1a3a89b03f740fffd3688a2d45c0440e9aef926b6b"
+        }
+      ]
+    },
+    {
+      "id": "R07.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Localization review",
+      "evidence": [
+        {
+          "path": "analysis/baselines/i18n-message-inventory.json",
+          "digest": "sha256:f67f9f92c644ca1f100a6f2ab1f8593fad22dfa4e7cd22c6db9ccb75317e9c08"
+        },
+        {
+          "path": "packages/react/src/i18n-provider/catalogs/en.json",
+          "digest": "sha256:d5454be6fd150d82f78f13df1c08e1353436b9997e4faa00665f0e8f65552b66"
+        }
+      ]
+    },
+    {
+      "id": "R07.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Localization/Accessibility QA",
+      "evidence": [
+        {
+          "path": "packages/react/src/i18n-provider/I18nProvider.test.tsx",
+          "digest": "sha256:dc37f13a73a0d098476c2f100ba08e6559baece3916d94f132c23dd4e8925ea4"
+        },
+        {
+          "path": "registry/reports/roadmap-visuals.json",
+          "digest": "sha256:16a485f3ae38855032c0e871840da38243db87c77ed695e98e6af243605b1009"
+        }
+      ]
+    },
+    {
+      "id": "R07.3",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Localization review",
+      "evidence": [
+        {
+          "path": "analysis/baselines/i18n-message-inventory.json",
+          "digest": "sha256:f67f9f92c644ca1f100a6f2ab1f8593fad22dfa4e7cd22c6db9ccb75317e9c08"
+        },
+        {
+          "path": "tools/check-roadmap-contracts.mjs",
+          "digest": "sha256:29bdfc1244bfe99fd4f8c54df8f460c583490fbc8c8947b9a4d564f4014fd676"
+        }
+      ]
+    },
+    {
+      "id": "R08.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Product Analytics review",
+      "evidence": [
+        {
+          "path": "registry/metrics/current.json",
+          "digest": "sha256:ac7a8e5664bf4a243aec4328c24114318b6068a98fb4602d509b6cf62da162d6"
+        },
+        {
+          "path": "apps/metrics-dashboard/README.md",
+          "digest": "sha256:92a23887b1d6267e0934c969d655cbbc1f38f1014ac5aca3deba8ed84ca37f0d"
+        }
+      ]
+    },
+    {
+      "id": "R08.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Privacy/Security review",
+      "evidence": [
+        {
+          "path": "docs/architecture/adr-003-hosting-and-metrics.md",
+          "digest": "sha256:a6a7ad5938c1721d02fb5d7fe8d5108870b7bd70d8538e2a439d32b43b20f7bb"
+        },
+        {
+          "path": "schemas/metrics.schema.json",
+          "digest": "sha256:c7d19f818589976e4202e0069f618f2c9012d07394eb304f43a7d34c58be1e55"
+        }
+      ]
+    },
+    {
+      "id": "R09.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Systems review",
+      "evidence": [
+        {
+          "path": "analysis/app-shell/candidate-dispositions.json",
+          "digest": "sha256:30aa56ea4d58d55a7f2d89e4a6960415f176532ce3f747b7ceb0c8e757eff004"
+        },
+        {
+          "path": "docs/architecture/rfc-app-shell.md",
+          "digest": "sha256:554e33380bd96074e4614374acedc34a4c03be429b761467c7f335c32eb6a6c0"
+        }
+      ]
+    },
+    {
+      "id": "R09.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Architecture/Accessibility review",
+      "evidence": [
+        {
+          "path": "packages/react/src/app-shell/AppShell.test.tsx",
+          "digest": "sha256:8b6be079aa81b3f43e07a0d67632dc178829d8b7c52c0707227e93cb12147acc"
+        },
+        {
+          "path": "docs/components/app-shell.md",
+          "digest": "sha256:4b32e829c72cfc80d6a2643914757b5d5d4d3de38c2312592f507ff783c49a7e"
+        }
+      ]
+    },
+    {
+      "id": "R10.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Systems/Accessibility review",
+      "evidence": [
+        {
+          "path": "analysis/baselines/motion-elevation.json",
+          "digest": "sha256:2dcdf94cadc22ba2bd2d242afcf6917a67a84478765433802062f71f3ffcd15a"
+        },
+        {
+          "path": "tools/audit-motion-elevation.mjs",
+          "digest": "sha256:5a0403553ff5c906ecf1ba96e3a1d52ab68d43195d90ac025a7cc567f9ed5d2e"
+        }
+      ]
+    },
+    {
+      "id": "R10.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Systems QA",
+      "evidence": [
+        {
+          "path": "playground/storybook/src/stories/MotionElevation.stories.tsx",
+          "digest": "sha256:193d182f32b0141c5ab1b287d4bc9a9b303a8aa1fbd526626e75b6539363264e"
+        },
+        {
+          "path": "registry/reports/roadmap-visuals.json",
+          "digest": "sha256:16a485f3ae38855032c0e871840da38243db87c77ed695e98e6af243605b1009"
+        }
+      ]
+    },
+    {
+      "id": "R11.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Systems review",
+      "evidence": [
+        {
+          "path": "analysis/chat/candidate-dispositions.json",
+          "digest": "sha256:fe73a5cc86eadbb96704169c267bf065986599b15a548715a1bba089a9b8e87d"
+        },
+        {
+          "path": "docs/architecture/rfc-chat.md",
+          "digest": "sha256:60e7a67bb15b9de01ed1cb3f565e905c95974a8bda611ee1b74c4b3758c87b38"
+        }
+      ]
+    },
+    {
+      "id": "R11.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Accessibility QA",
+      "evidence": [
+        {
+          "path": "packages/react/src/chat/Chat.test.tsx",
+          "digest": "sha256:6a87f7c2932db4ca93482da59d7c38d396ab9560c3042d2f212c123721f89dbd"
+        },
+        {
+          "path": "docs/components/chat.md",
+          "digest": "sha256:1a02ff11ff6ecafb1de17dbc58a0083d8a2b54544a8fa47fd3f6c03fa507b0f9"
+        }
+      ]
+    },
+    {
+      "id": "R11.3",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Security review",
+      "evidence": [
+        {
+          "path": "packages/react/src/chat/Chat.test.tsx",
+          "digest": "sha256:6a87f7c2932db4ca93482da59d7c38d396ab9560c3042d2f212c123721f89dbd"
+        },
+        {
+          "path": "docs/architecture/rfc-chat.md",
+          "digest": "sha256:60e7a67bb15b9de01ed1cb3f565e905c95974a8bda611ee1b74c4b3758c87b38"
+        }
+      ]
+    },
+    {
+      "id": "R11.4",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Systems review",
+      "evidence": [
+        {
+          "path": "packages/tooling/templates/chat-mobile/template.json",
+          "digest": "sha256:432411ea9132b9a7bc58024412b2721de0ded4c3f4def8c003c3651b6aa7a298"
+        },
+        {
+          "path": "packages/tooling/templates/chat-artifact-panel/template.json",
+          "digest": "sha256:166741b52f2d708bb9854ce53cda5cb5eaf4778c4f0d18f6aca3b10d50c6d5ba"
+        }
+      ]
+    },
+    {
+      "id": "R12.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Systems/Accessibility/Security review",
+      "evidence": [
+        {
+          "path": "analysis/content/candidate-dispositions.json",
+          "digest": "sha256:8a39fc4144f2ad6faba3609f9741f6003c498fd6a1b2dddb06fb4810e87a3ed7"
+        },
+        {
+          "path": "packages/react/src/code-block/CodeBlock.test.tsx",
+          "digest": "sha256:584abe398d235600b9cf790282cc0bf81894e7c7b74ed2d91073ac11337f4080"
+        }
+      ]
+    },
+    {
+      "id": "R12.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Security review",
+      "evidence": [
+        {
+          "path": "analysis/content/candidate-dispositions.json",
+          "digest": "sha256:8a39fc4144f2ad6faba3609f9741f6003c498fd6a1b2dddb06fb4810e87a3ed7"
+        },
+        {
+          "path": "docs/architecture/roadmap-decisions.md",
+          "digest": "sha256:d8191e01dd6224c83228cc7eaa9d08426f927fb864b97de29520e756a2244a7b"
+        }
+      ]
+    },
+    {
+      "id": "R13.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Governance review",
+      "evidence": [
+        {
+          "path": "docs/governance/lifecycle.md",
+          "digest": "sha256:3d0dad2922cdeba9fb5c5f6d911a57e05e0bd251d3ea0e7bf082884ba73f2684"
+        },
+        {
+          "path": "registry/reports/status.json",
+          "digest": "sha256:a3ced71124345b1a16c3ac5ae82472ab7aac05ddfa72e31b37c72e00aaca4d58"
+        }
+      ]
+    },
+    {
+      "id": "R14.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Performance review",
+      "evidence": [
+        {
+          "path": "analysis/baselines/performance-budgets.json",
+          "digest": "sha256:1d27baac7dd70e1a3f5955bd313e6b94171a1813e35cbddbcfb4dd56556e89d8"
+        },
+        {
+          "path": "tools/benchmark-roadmap-performance.tsx",
+          "digest": "sha256:b7976ca56916370e4c9498f0ac6015ed11ffa77d94f3d2bb47cd5ea92fe2234d"
+        }
+      ]
+    },
+    {
+      "id": "R14.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Performance/Release Engineering review",
+      "evidence": [
+        {
+          "path": ".github/workflows/ci.yml",
+          "digest": "sha256:91c4b16d61c2e145d3b1a278400f4ed8b51fe56b1ec23f7e9efa8c6eec364c17"
+        },
+        {
+          "path": "tools/benchmark-roadmap-performance.tsx",
+          "digest": "sha256:b7976ca56916370e4c9498f0ac6015ed11ffa77d94f3d2bb47cd5ea92fe2234d"
+        }
+      ]
+    },
+    {
+      "id": "R15.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Tooling review",
+      "evidence": [
+        {
+          "path": "registry/integrations/figma-public.json",
+          "digest": "sha256:a362292a3938aa181adcb7b3166f52d55ca90cb2be8533b1f1dba7a5f98d681d"
+        },
+        {
+          "path": "tools/figma-integration.test.mjs",
+          "digest": "sha256:6871087bb56a1cf5a431c366a5ca0dca9b5cd6e5ffda0a31fa7cecf4c922f5a4"
+        }
+      ]
+    },
+    {
+      "id": "R15.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Systems/Privacy review",
+      "evidence": [
+        {
+          "path": "registry/integrations/code-connect.json",
+          "digest": "sha256:c22e01a03d81ca2e8d3782e1ce12b60e65f2f506760d50c540835097bb167158"
+        },
+        {
+          "path": "registry/integrations/figma-parity-public.json",
+          "digest": "sha256:8c6dccba5bc5f921e8f55e6aef06df0d82724646f836ed4dc5e07b2a9c1143cc"
+        }
+      ]
+    },
+    {
+      "id": "R16.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Developer Experience review",
+      "evidence": [
+        {
+          "path": "packages/tooling/src/extensions.test.ts",
+          "digest": "sha256:afaf0165ccfb0847d20389d32ae322c0952469975126eb7bb38fcad47bff6e30"
+        },
+        {
+          "path": "analysis/extensions/inventory.json",
+          "digest": "sha256:f7511a7b550f74dbafe24b868d28e8713fe0975cc66b2cc05c649df0c0378573"
+        }
+      ]
+    },
+    {
+      "id": "R16.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Security/Governance review",
+      "evidence": [
+        {
+          "path": "packages/tooling/src/extensions.test.ts",
+          "digest": "sha256:afaf0165ccfb0847d20389d32ae322c0952469975126eb7bb38fcad47bff6e30"
+        },
+        {
+          "path": "registry/extensions/trust.json",
+          "digest": "sha256:2e74dd79177d4354942dd9b2493243223ec2c5e96aa18182c432deea1c3559b6"
+        }
+      ]
+    },
+    {
+      "id": "R17.1",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Mobile Platform/Accessibility review",
+      "evidence": [
+        {
+          "path": "registry/conformance/report.json",
+          "digest": "sha256:dc65d3ac56226cca17a3b49a2d66a106f54d3b07eaf08e3b7ca0f673a293f6c4"
+        },
+        {
+          "path": "examples/react-native/TokenCard.tsx",
+          "digest": "sha256:b0a0915cd49da0d9d3cfea863c9fdbb2693a49de1528aae8ad0484268e49ce36"
+        }
+      ]
+    },
+    {
+      "id": "R17.2",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Governance review",
+      "evidence": [
+        {
+          "path": "tools/generate-native-conformance.mjs",
+          "digest": "sha256:03aa2edbf82acd75ddedaf83037aaf1c4b6f3eb50fb0aa03404ae9310fa698df"
+        }
+      ]
+    },
+    {
+      "id": "SM01",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Developer Experience acceptance",
+      "evidence": [
+        {
+          "path": "packages/tooling/scripts/test-packed.mjs",
+          "digest": "sha256:008184efbadd8e34a5896afac1cc51ed0702228ab52c877775be2d4672b8df97"
+        }
+      ]
+    },
+    {
+      "id": "SM02",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Systems review",
+      "evidence": [
+        {
+          "path": "tools/generate-roadmap-templates.mjs",
+          "digest": "sha256:f19e92309e5f9502b8c029402b0439b91a59f584ea2ff7678fcace648f16abab"
+        },
+        {
+          "path": "packages/tooling/src/materialize.test.ts",
+          "digest": "sha256:9600f08cc6de2adce4f0c290fc470411baaeccc8a563fdf4b7cd21af7b6b4619"
+        }
+      ]
+    },
+    {
+      "id": "SM03",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Design Systems/Accessibility review",
+      "evidence": [
+        {
+          "path": "analysis/table-plugins/ranking.json",
+          "digest": "sha256:100eb846943c94454f628cccfd3cb6aff90cf4a4fe4ddb95244c53b2f7e417c7"
+        },
+        {
+          "path": "packages/react/src/table/TableController.experimental.test.tsx",
+          "digest": "sha256:b6cc0a5a32e70a0f7995f17787ed234b16812290261d7c127192c2256a8feb19"
+        }
+      ]
+    },
+    {
+      "id": "SM04",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Release Engineering review",
+      "evidence": [
+        {
+          "path": "packages/tooling/src/migrations.test.ts",
+          "digest": "sha256:0e65425514448e3f2253e8b7652e3dd1adcc5ab66866cf393636019a1c8c03cc"
+        },
+        {
+          "path": "registry/reports/migrations.json",
+          "digest": "sha256:295a1f5bfb779ecd32d57203b6f10d05a6586f8ca8a92d50be424c8326361a0e"
+        }
+      ]
+    },
+    {
+      "id": "SM05",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Release Engineering review",
+      "evidence": [
+        {
+          "path": "registry/artifacts.json",
+          "digest": "sha256:fcc79b2dc3ca509d0efe9e388a0853fae649565b98534ba9aa8bf39c58162340"
+        },
+        {
+          "path": "analysis/baselines/tooling-package-release.json",
+          "digest": "sha256:767293b19e3bd5ddac4fe1e19954f665d0beaa0622f3d3666e3d8f01a3f7b600"
+        }
+      ]
+    },
+    {
+      "id": "SM06",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Localization/Accessibility review",
+      "evidence": [
+        {
+          "path": ".github/workflows/ci.yml",
+          "digest": "sha256:91c4b16d61c2e145d3b1a278400f4ed8b51fe56b1ec23f7e9efa8c6eec364c17"
+        },
+        {
+          "path": ".github/workflows/accessibility-full.yml",
+          "digest": "sha256:67f9cb13ebe0f52531a6b22ee35eb8e5d3632e573bc7496f70df8c474b655212"
+        }
+      ]
+    },
+    {
+      "id": "SM07",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Developer Experience/Product Analytics review",
+      "evidence": [
+        {
+          "path": "analysis/baselines/agent-cold-start.json",
+          "digest": "sha256:38fe3c17de3d65ff3c8f01d92ac25cc86ef5d6041feb7c84fb6e3b83e7499e8b"
+        },
+        {
+          "path": "registry/metrics/current.json",
+          "digest": "sha256:ac7a8e5664bf4a243aec4328c24114318b6068a98fb4602d509b6cf62da162d6"
+        }
+      ]
+    },
+    {
+      "id": "SM08",
+      "automatedStatus": "passed",
+      "manualStatus": "pending-consolidated-pr-review",
+      "manualEvidenceAndOwner": "Product Analytics/Governance review",
+      "evidence": [
+        {
+          "path": "docs/architecture/adr-003-hosting-and-metrics.md",
+          "digest": "sha256:a6a7ad5938c1721d02fb5d7fe8d5108870b7bd70d8538e2a439d32b43b20f7bb"
+        },
+        {
+          "path": "registry/metrics/current.json",
+          "digest": "sha256:ac7a8e5664bf4a243aec4328c24114318b6068a98fb4602d509b6cf62da162d6"
+        }
+      ]
+    }
+  ],
+  "operationalInputs": [
+    {
+      "input": "Cloudflare credentials and hosted MCP DNS",
+      "status": "unavailable-not-blocking-local-acceptance",
+      "behavior": "Deploy artifact passes locally; no deployment or DNS write is performed.",
+      "authority": "docs/architecture/adr-003-hosting-and-metrics.md"
+    },
+    {
+      "input": "Approved Figma file ID and read token",
+      "status": "unavailable-not-blocking-local-acceptance",
+      "behavior": "Empty allowlist reports unavailable and performs no remote read or write.",
+      "authority": "docs/architecture/adr-004-integrations-and-trust.md"
+    },
+    {
+      "input": "User-level product analytics",
+      "status": "unavailable-not-blocking-local-acceptance",
+      "behavior": "Dashboard reports unavailable and does not fabricate project telemetry.",
+      "authority": "docs/architecture/adr-003-hosting-and-metrics.md"
+    }
+  ]
+}

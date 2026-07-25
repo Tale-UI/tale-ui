@@ -30,7 +30,7 @@ const apiOutput = execFileSync(
 );
 const apiResult = JSON.parse(apiOutput);
 if (
-  apiResult.manifest.releaseChannel !== 'internal' ||
+  apiResult.manifest.releaseChannel !== 'beta' ||
   !apiResult.result.results.some((artifact) => artifact.id === 'tale:component:table')
 ) {
   throw new Error('Packed API failed to load its installed registry assets');

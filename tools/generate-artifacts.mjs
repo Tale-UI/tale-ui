@@ -726,7 +726,7 @@ function build() {
   const artifactPreimage = {
     schemaVersion: '1.0.0',
     registryVersion: '1.0.0',
-    releaseChannel: 'internal',
+    releaseChannel: 'beta',
     generatedFrom: uniqueSources,
     sourceRevision: sourceRevision(uniqueSources),
     packageVersions: Object.fromEntries(

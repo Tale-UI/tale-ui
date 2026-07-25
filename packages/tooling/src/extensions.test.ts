@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { cp, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { test } from 'node:test';
 import {
@@ -12,6 +14,17 @@ import {
 const fixtureRoot = resolve('fixtures/extensions/full');
 const packageBytes = Buffer.from('fixture tarball bytes');
 const projectId = `sha256:${createHash('sha256').update('fixture-project').digest('hex')}`;
+
+async function mutatedFixture(
+  mutate: (manifest: Record<string, unknown>) => Record<string, unknown>,
+) {
+  const root = await mkdtemp(join(tmpdir(), 'tale-extension-'));
+  await cp(fixtureRoot, root, { recursive: true });
+  const path = join(root, 'extension.json');
+  const manifest = JSON.parse(await readFile(path, 'utf8')) as Record<string, unknown>;
+  await writeFile(path, `${JSON.stringify(mutate(manifest), null, 2)}\n`);
+  return root;
+}
 
 function trust(status: 'trusted' | 'revoked' = 'trusted') {
   return {
@@ -110,4 +123,89 @@ test('hosted, revoked, stale, unapproved, and corrupt execution fail closed', ()
       /TALE_EXTENSION_UNTRUSTED|Extension execution denied/,
     );
   }
+});
+
+test('discovery rejects corrupt schemas, missing integrity, and package identity drift', async () => {
+  await Promise.all(
+    [
+      (manifest: Record<string, unknown>) => ({ ...manifest, schemaVersion: '2.0.0' }),
+      ({ integrity: _, ...manifest }: Record<string, unknown>) => manifest,
+      (manifest: Record<string, unknown>) => ({ ...manifest, package: '@fixture/other' }),
+    ].map(async (mutate) => {
+      const root = await mutatedFixture(mutate);
+      try {
+        assert.throws(() => discoverExtension(root), /invalid or unsupported|identity differs/);
+      } finally {
+        await rm(root, { recursive: true, force: true });
+      }
+    }),
+  );
+});
+
+test('virtual registry refuses duplicate namespaced artifacts', () => {
+  const { manifest } = discoverExtension(fixtureRoot);
+  assert.throws(
+    () =>
+      createVirtualExtensionRegistry([
+        { manifest, packageBytes },
+        { manifest, packageBytes },
+      ]),
+    /Duplicate virtual extension artifact/,
+  );
+});
+
+test('contract, provenance, publisher, capability, and project approvals are exact', async () => {
+  const incompatibleRoot = await mutatedFixture((manifest) => ({
+    ...manifest,
+    contractRanges: { tale: '^2.0.0', extension: '^2.0.0' },
+  }));
+  const noProvenanceRoot = await mutatedFixture((manifest) => ({
+    ...manifest,
+    provenance: {
+      ...(manifest.provenance as Record<string, unknown>),
+      npmProvenance: false,
+    },
+  }));
+  try {
+    for (const override of [
+      { packageRoot: incompatibleRoot },
+      { packageRoot: noProvenanceRoot },
+      { trustRegistry: { ...trust(), publishers: [] } },
+      { approval: { ...approval(), capabilities: [] } },
+      { projectId: `sha256:${'0'.repeat(64)}` },
+    ]) {
+      assert.throws(
+        () =>
+          authorizeExtensionExecution({
+            packageRoot: fixtureRoot,
+            artifactId: 'fixture.tale-extension:validation:fixture-validation',
+            packageBytes,
+            trustRegistry: trust(),
+            approval: approval(),
+            projectId,
+            surface: 'local',
+            now: new Date('2026-07-30T00:00:00.000Z'),
+            ...override,
+          }),
+        /Extension execution denied/,
+      );
+    }
+  } finally {
+    await rm(incompatibleRoot, { recursive: true, force: true });
+    await rm(noProvenanceRoot, { recursive: true, force: true });
+  }
+});
+
+test('trust registry age warns before it fails', () => {
+  const decision = authorizeExtensionExecution({
+    packageRoot: fixtureRoot,
+    artifactId: 'fixture.tale-extension:validation:fixture-validation',
+    packageBytes,
+    trustRegistry: trust(),
+    approval: approval(),
+    projectId,
+    surface: 'local',
+    now: new Date('2026-08-02T00:00:00.000Z'),
+  });
+  assert.deepEqual(decision.warnings, ['Extension trust registry is older than seven days.']);
 });

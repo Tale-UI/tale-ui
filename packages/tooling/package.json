@@ -1,9 +1,8 @@
 {
   "name": "@tale-ui/tooling",
-  "version": "0.0.0-internal",
+  "version": "0.1.0",
   "description": "Tale UI registry, validation, and safe project tooling.",
   "type": "module",
-  "private": true,
   "engines": {
     "node": ">=22"
   },

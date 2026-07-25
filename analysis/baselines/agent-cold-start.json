@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0.0",
+  "benchmarkId": "tale:benchmark:agent-cold-start",
+  "method": {
+    "runtime": "packages/tooling/src/materialize.ts#initializeProject",
+    "fixture": "clean-project-with-empty-scripts",
+    "measurement": "deterministic instruction-discovery proxy; estimated tokens are ceil(UTF-8 bytes / 4)",
+    "tasks": [
+      "registry-first-guidance",
+      "local-cli-discovery",
+      "local-mcp-discovery",
+      "validation-command-discovery",
+      "recovery-command-discovery"
+    ]
+  },
+  "history": [
+    {
+      "revision": "bundle-bc-initial",
+      "beforeInit": {
+        "passedTasks": 0,
+        "totalTasks": 5,
+        "passRate": 0,
+        "contextBytes": 0,
+        "estimatedTokens": 0,
+        "evidence": [
+          {
+            "task": "registry-first-guidance",
+            "passed": false,
+            "path": null
+          },
+          {
+            "task": "local-cli-discovery",
+            "passed": false,
+            "path": null
+          },
+          {
+            "task": "local-mcp-discovery",
+            "passed": false,
+            "path": null
+          },
+          {
+            "task": "validation-command-discovery",
+            "passed": false,
+            "path": null
+          },
+          {
+            "task": "recovery-command-discovery",
+            "passed": false,
+            "path": null
+          }
+        ]
+      },
+      "afterInit": {
+        "passedTasks": 5,
+        "totalTasks": 5,
+        "passRate": 1,
+        "contextBytes": 500,
+        "estimatedTokens": 125,
+        "evidence": [
+          {
+            "task": "registry-first-guidance",
+            "passed": true,
+            "path": "AGENTS.md"
+          },
+          {
+            "task": "local-cli-discovery",
+            "passed": true,
+            "path": "AGENTS.md"
+          },
+          {
+            "task": "local-mcp-discovery",
+            "passed": true,
+            "path": ".mcp.json"
+          },
+          {
+            "task": "validation-command-discovery",
+            "passed": true,
+            "path": "package.json"
+          },
+          {
+            "task": "recovery-command-discovery",
+            "passed": true,
+            "path": "package.json"
+          }
+        ]
+      },
+      "change": {
+        "passedTasks": 5,
+        "passRate": 1,
+        "contextBytes": 500,
+        "estimatedTokens": 125
+      }
+    }
+  ]
+}
