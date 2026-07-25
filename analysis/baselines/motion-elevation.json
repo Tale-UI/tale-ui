@@ -1,0 +1,503 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-25",
+  "source": "packages/styles/src",
+  "policy": {
+    "mode": "ratchet",
+    "maxRawMotionDeclarations": 135,
+    "maxRawShadowDeclarations": 102
+  },
+  "rawMotion": {
+    "declarationCount": 135,
+    "files": [
+      {
+        "path": "packages/styles/src/_primitives.css",
+        "count": 11
+      },
+      {
+        "path": "packages/styles/src/accordion.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/alert-dialog.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/app-store-button.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/autocomplete.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/avatar.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/badge-group.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/breadcrumbs.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/button.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/calendar.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/card.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/carousel.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/checkbox-field.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/checkbox.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/color-field.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/color-mode-toggle.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/color-swatch-picker.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/combobox.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/command-palette.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/dialog.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/disclosure.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/drawer.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/drop-zone.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/file-upload.css",
+        "count": 10
+      },
+      {
+        "path": "packages/styles/src/grid-list.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/header-nav.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/image-cropper.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/input-tags.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/input.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/link.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/menu.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/multi-select.css",
+        "count": 5
+      },
+      {
+        "path": "packages/styles/src/navigation-menu.css",
+        "count": 3
+      },
+      {
+        "path": "packages/styles/src/number-field.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/pagination.css",
+        "count": 3
+      },
+      {
+        "path": "packages/styles/src/payment-input.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/pin-input.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/preview-card.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/progress-bar.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/progress-circle.css",
+        "count": 3
+      },
+      {
+        "path": "packages/styles/src/radio-field.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/radio.css",
+        "count": 3
+      },
+      {
+        "path": "packages/styles/src/scroll-area.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/search-field.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/select-native.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/select.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/sidebar.css",
+        "count": 4
+      },
+      {
+        "path": "packages/styles/src/slider.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/social-button.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/spinner.css",
+        "count": 6
+      },
+      {
+        "path": "packages/styles/src/switch-field.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/switch.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/table.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/tabs.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/tag-group.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/tag-select.css",
+        "count": 4
+      },
+      {
+        "path": "packages/styles/src/text-area.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/text-editor.css",
+        "count": 4
+      },
+      {
+        "path": "packages/styles/src/text-field.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/toggle-button.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/toolbar.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/tooltip.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/tree.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/video-player.css",
+        "count": 7
+      }
+    ]
+  },
+  "rawShadows": {
+    "declarationCount": 102,
+    "files": [
+      {
+        "path": "packages/styles/src/_primitives.css",
+        "count": 9
+      },
+      {
+        "path": "packages/styles/src/accordion.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/app-store-button.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/avatar.css",
+        "count": 4
+      },
+      {
+        "path": "packages/styles/src/badge-group.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/badge.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/breadcrumbs.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/button.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/calendar.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/carousel.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/checkbox-field.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/checkbox.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/color-field.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/color-mode-toggle.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/color-swatch-picker.css",
+        "count": 4
+      },
+      {
+        "path": "packages/styles/src/disclosure.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/drop-zone.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/featured-icon.css",
+        "count": 3
+      },
+      {
+        "path": "packages/styles/src/grid-list.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/header-nav.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/image-cropper.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/input-tags.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/input.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/link.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/list-box.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/menu.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/multi-select.css",
+        "count": 3
+      },
+      {
+        "path": "packages/styles/src/navigation-menu.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/number-field.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/pagination.css",
+        "count": 3
+      },
+      {
+        "path": "packages/styles/src/payment-input.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/pin-input.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/radio-field.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/radio.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/range-calendar.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/search-field.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/sidebar.css",
+        "count": 7
+      },
+      {
+        "path": "packages/styles/src/slider.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/switch-field.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/switch.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/table.css",
+        "count": 4
+      },
+      {
+        "path": "packages/styles/src/tabs.css",
+        "count": 3
+      },
+      {
+        "path": "packages/styles/src/tag-group.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/tag-select.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/text-area.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/text-editor.css",
+        "count": 8
+      },
+      {
+        "path": "packages/styles/src/text-field.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/toggle-button.css",
+        "count": 1
+      },
+      {
+        "path": "packages/styles/src/toolbar.css",
+        "count": 2
+      },
+      {
+        "path": "packages/styles/src/tree.css",
+        "count": 2
+      }
+    ]
+  },
+  "semanticTokens": [
+    "--elevation-flat",
+    "--elevation-floating",
+    "--elevation-modal",
+    "--elevation-overlay",
+    "--elevation-raised",
+    "--elevation-toast",
+    "--motion-content-duration",
+    "--motion-content-easing",
+    "--motion-enter-duration",
+    "--motion-enter-easing",
+    "--motion-exit-duration",
+    "--motion-exit-easing",
+    "--motion-feedback-duration",
+    "--motion-feedback-easing",
+    "--motion-state-duration",
+    "--motion-state-easing"
+  ],
+  "platformExceptions": [
+    {
+      "platform": "react-native",
+      "scope": "CSS box-shadow recipes and cubic-bezier strings",
+      "reason": "Native shadow and animation APIs use platform objects; P3-C owns deterministic mappings.",
+      "owner": "Design Systems",
+      "reviewBy": "2027-01-31"
+    }
+  ]
+}

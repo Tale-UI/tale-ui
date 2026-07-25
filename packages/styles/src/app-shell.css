@@ -104,6 +104,6 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .tale-app-shell__skip-link {
-    transition: transform 120ms ease-out;
+    transition: transform var(--motion-state-duration) var(--motion-easing-enter);
   }
 }

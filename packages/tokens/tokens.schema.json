@@ -33,6 +33,10 @@
               "type": "string",
               "minLength": 1
             },
+            "media": {
+              "type": "string",
+              "minLength": 1
+            },
             "declarations": {
               "type": "object",
               "minProperties": 1,

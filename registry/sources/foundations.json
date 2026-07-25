@@ -14,6 +14,12 @@
       "keywords": ["tokens", "color", "spacing", "typography"]
     },
     {
+      "slug": "motion-and-elevation",
+      "title": "Motion and elevation",
+      "path": "docs/foundations/motion-and-elevation.md",
+      "keywords": ["motion", "elevation", "reduced-motion", "transitions"]
+    },
+    {
       "slug": "css-architecture",
       "title": "CSS architecture",
       "path": "packages/css/docs/architecture.md",

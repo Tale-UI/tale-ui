@@ -135,6 +135,7 @@
     "docs/components/visual-exports.md",
     "docs/consuming-design-system.md",
     "docs/design-philosophy.md",
+    "docs/foundations/motion-and-elevation.md",
     "docs/managing-packages.md",
     "docs/package-dependencies.md",
     "docs/react-aria-deviations.md",
@@ -268,7 +269,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:49476952f53c61a9b1db4e2045ff44d5bd125ea687a4b894aba3fa164cd1858d",
+  "sourceRevision": "sha256:52b4920a990a7840077c973e02ccb830eee15d3adedfa5bec775689797feb8e3",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -21700,6 +21701,42 @@
       ],
       "provenance": {
         "source": "packages/css/docs/framework-integration.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:foundation:motion-and-elevation",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "motion-and-elevation",
+      "name": "Motion and elevation",
+      "description": "Tale UI foundation guidance for Motion and elevation.",
+      "lifecycle": "stable",
+      "keywords": [
+        "elevation",
+        "motion",
+        "reduced-motion",
+        "transitions"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/foundations/motion-and-elevation.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/foundations/motion-and-elevation.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -50745,5 +50782,5 @@
       }
     }
   ],
-  "digest": "sha256:2bbad4dac051e4693e404d0686fba24afb5283b206290799987c669df90f0816"
+  "digest": "sha256:b32b34a749736a804a82973c2bbed6669b15e0efde479fffa3123be71fe2fc7d"
 }

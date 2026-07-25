@@ -18,15 +18,24 @@ if (source.formatVersion !== 1) {
   throw new Error(`Unsupported token source format: ${source.formatVersion}`);
 }
 
+const renderRule = ({ selector, declarations, media }) => {
+  const body = Object.entries(declarations)
+    .map(([property, value]) => `    ${property}: ${value};`)
+    .join('\n');
+  const rule = `${selector} {\n${body}\n}`;
+
+  if (!media) {
+    return rule;
+  }
+
+  return `@media ${media} {\n${rule
+    .split('\n')
+    .map((line) => `  ${line}`)
+    .join('\n')}\n}`;
+};
+
 const renderCss = (filename, rules) => {
-  const renderedRules = rules
-    .map(({ selector, declarations }) => {
-      const body = Object.entries(declarations)
-        .map(([property, value]) => `    ${property}: ${value};`)
-        .join('\n');
-      return `${selector} {\n${body}\n}`;
-    })
-    .join('\n\n');
+  const renderedRules = rules.map(renderRule).join('\n\n');
 
   return `/* This file is generated from @tale-ui/tokens/tokens.json. Do not edit directly. */\n${renderedRules}\n`;
 };
@@ -109,6 +118,11 @@ const resolveNativeValue = (name, tokens, resolving = new Set()) => {
   const pixels = raw.match(/^(-?[0-9.]+)px$/);
   if (pixels) {
     return Number(pixels[1]);
+  }
+
+  const milliseconds = raw.match(/^(-?[0-9.]+)ms$/);
+  if (milliseconds) {
+    return Number(milliseconds[1]);
   }
 
   if (/^-?[0-9.]+$/.test(raw)) {
