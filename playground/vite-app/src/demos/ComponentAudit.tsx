@@ -49,6 +49,7 @@ import { Tabs } from '@tale-ui/react/tabs';
 import { ScrollArea } from '@tale-ui/react/scroll-area';
 import { Container } from '@tale-ui/react/container';
 import { Card } from '@tale-ui/react/card';
+import { AppShell } from '@tale-ui/react/app-shell';
 import { Column } from '@tale-ui/react/column';
 import { Row as LayoutRow } from '@tale-ui/react/row';
 
@@ -373,6 +374,7 @@ const TOC = [
   {
     category: 'Layout',
     items: [
+      { id: 'app-shell', label: 'AppShell' },
       { id: 'carousel', label: 'Carousel' },
       { id: 'accordion', label: 'Accordion' },
       { id: 'disclosure', label: 'Disclosure' },
@@ -4160,6 +4162,40 @@ export default function ComponentAudit() {
             <Toolbar.Separator />
             <Toolbar.Input placeholder="Search…" aria-label="Search" />
           </Toolbar.Root>
+        </Section>
+
+        <Section
+          id="app-shell"
+          title="AppShell"
+          classes={[
+            'tale-app-shell',
+            'tale-app-shell--with-sidebar',
+            'tale-app-shell__header',
+            'tale-app-shell__sidebar',
+            'tale-app-shell__main',
+            'tale-app-shell__mobile-navigation',
+            'tale-app-shell__skip-link',
+          ]}
+        >
+          <AppShell.Root style={{ minHeight: '24rem' }}>
+            <AppShell.SkipLink />
+            <AppShell.Header>
+              <HeaderNav.Root aria-label="Audit header">
+                <HeaderNav.Logo href="#">Tale</HeaderNav.Logo>
+              </HeaderNav.Root>
+            </AppShell.Header>
+            <AppShell.Sidebar>
+              <Sidebar.Root aria-label="Audit navigation">
+                <Sidebar.NavList>
+                  <Sidebar.NavItem href="#" current>
+                    Overview
+                  </Sidebar.NavItem>
+                </Sidebar.NavList>
+              </Sidebar.Root>
+            </AppShell.Sidebar>
+            <AppShell.Main>Application-owned content</AppShell.Main>
+            <AppShell.MobileNavigation>Mobile navigation slot</AppShell.MobileNavigation>
+          </AppShell.Root>
         </Section>
 
         <Section

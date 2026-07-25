@@ -108,7 +108,7 @@ Breadcrumbs · Command Palette · Context Menu · Header Nav · Link · Menu · 
 
 ### Layout
 
-Accordion · Card · Carousel · Column · Disclosure · Row · Scroll Area · Separator · Tabs · Toolbar
+Accordion · App Shell · Card · Carousel · Column · Disclosure · Row · Scroll Area · Separator · Tabs · Toolbar
 
 ### Feedback
 
@@ -206,7 +206,8 @@ Each component has a detailed usage guide with imports, sub-parts, props, and ex
 https://raw.githubusercontent.com/Tale-UI/tale-ui/main/docs/components/{name}.md
 ```
 
-For example: `button.md`, `dialog.md`, `select.md`, `checkbox.md`, `tabs.md`, `table.md`, `date-picker.md`.
+For example: `app-shell.md`, `button.md`, `dialog.md`, `select.md`,
+`checkbox.md`, `tabs.md`, `table.md`, `date-picker.md`.
 
 ## License
 

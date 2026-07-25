@@ -43,6 +43,7 @@
 @import './payment-input.css';
 
 /* ─── Layout / containers ───────────────────────────────────────────────────── */
+@import './app-shell.css';
 @import './carousel.css';
 @import './accordion.css';
 @import './disclosure.css';

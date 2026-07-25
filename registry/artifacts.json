@@ -8,6 +8,7 @@
     "docs/component-index.md",
     "docs/components/accordion.md",
     "docs/components/alert-dialog.md",
+    "docs/components/app-shell.md",
     "docs/components/app-store-button.md",
     "docs/components/area-chart.md",
     "docs/components/autocomplete.md",
@@ -256,7 +257,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:236a2412c618bb61e27723586f6c61392081b136407f3fbb78c2ee5d4ca212fe",
+  "sourceRevision": "sha256:1dd2882a1e26dd6590f2175936b3f6f5a0590477beb2a54c5115b318ceb843ce",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -8876,6 +8877,59 @@
       }
     },
     {
+      "id": "tale:component:app-shell",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "app-shell",
+      "name": "AppShell",
+      "description": "Experimental structural application layout slots",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "2.0.0",
+      "aliases": [
+        "AppShell"
+      ],
+      "keywords": [
+        "application",
+        "appshell",
+        "experimental",
+        "layout",
+        "slots",
+        "structural"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=app-shell]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/app-shell"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/app-shell/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Layout",
+        "componentKind": "compound"
+      }
+    },
+    {
       "id": "tale:component:app-store-button",
       "namespace": "tale",
       "kind": "component",
@@ -15746,6 +15800,46 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:doc:docs-components-app-shell",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-app-shell",
+      "name": "AppShell",
+      "description": "Public Tale UI documentation: AppShell",
+      "lifecycle": "stable",
+      "keywords": [
+        "app",
+        "appshell",
+        "components",
+        "docs",
+        "md",
+        "shell"
+      ],
+      "related": [
+        "tale:component:app-shell"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/app-shell.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/app-shell.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:doc:docs-components-app-store-button",
       "namespace": "tale",
       "kind": "doc",
@@ -22256,6 +22350,68 @@
       "metadata": {
         "ruleId": "always-generate-code-directly-never",
         "category": "typescript"
+      }
+    },
+    {
+      "id": "tale:pitfall:app-shell--app-shell-no-application-state",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "app-shell--app-shell-no-application-state",
+      "name": "Keep application behavior outside AppShell",
+      "description": "the family owns structural layout, while the application owns routes, data, authentication, persistence, and responsive interaction state.",
+      "lifecycle": "stable",
+      "keywords": [
+        "and",
+        "app",
+        "application",
+        "appshell",
+        "authentication",
+        "behavior",
+        "data",
+        "family",
+        "interaction",
+        "keep",
+        "layout",
+        "no",
+        "outside",
+        "owns",
+        "persistence",
+        "responsive",
+        "routes",
+        "shell",
+        "state",
+        "structural",
+        "the",
+        "while"
+      ],
+      "related": [
+        "tale:component:app-shell"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=app-shell].pitfalls[id=app-shell-no-application-state]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/app-shell.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "app-shell-no-application-state",
+        "category": "component",
+        "component": "AppShell"
       }
     },
     {
@@ -49797,5 +49953,5 @@
       }
     }
   ],
-  "digest": "sha256:c918aa9e1ceba9b7828d69251fa308ea38cd0cbe0a3ddd7eb2990a3730ddf774"
+  "digest": "sha256:45b928f3d9cdce8fe82b0df35be6a54278adf859a27ebc477306e0499c76a37b"
 }

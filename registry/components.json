@@ -189,6 +189,58 @@
       ]
     },
     {
+      "name": "AppShell",
+      "slug": "app-shell",
+      "import": "@tale-ui/react/app-shell",
+      "category": "Layout",
+      "description": "Experimental structural application layout slots",
+      "kind": "compound",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "hasSidebar",
+          "type": "boolean",
+          "required": false,
+          "description": "Reserve a desktop sidebar column. @default true",
+          "default": "true"
+        }
+      ],
+      "parts": [
+        "Root",
+        "Header",
+        "Sidebar",
+        "Main",
+        "MobileNavigation",
+        "SkipLink"
+      ],
+      "examples": [
+        "import { AppShell } from '@tale-ui/react/app-shell';\nimport { HeaderNav } from '@tale-ui/react/header-nav';\nimport { Sidebar } from '@tale-ui/react/sidebar';\n\nexport function ApplicationFrame({ children }: { children: React.ReactNode }) {\n  return (\n    <AppShell.Root>\n      <AppShell.SkipLink />\n      <AppShell.Header>\n        <HeaderNav.Root aria-label=\"Application header\">Workspace</HeaderNav.Root>\n      </AppShell.Header>\n      <AppShell.Sidebar>\n        <Sidebar.Root aria-label=\"Primary navigation\">Navigation</Sidebar.Root>\n      </AppShell.Sidebar>\n      <AppShell.Main>{children}</AppShell.Main>\n    </AppShell.Root>\n  );\n}"
+      ],
+      "cssClasses": [
+        "tale-app-shell",
+        "tale-app-shell--with-sidebar",
+        "tale-app-shell__header",
+        "tale-app-shell__main",
+        "tale-app-shell__mobile-navigation",
+        "tale-app-shell__sidebar",
+        "tale-app-shell__skip-link"
+      ],
+      "pitfalls": [
+        {
+          "id": "app-shell-no-application-state",
+          "summary": "Keep application behavior outside AppShell",
+          "detail": "the family owns structural layout, while the application owns routes, data, authentication, persistence, and responsive interaction state.",
+          "antiPatterns": [
+            "<AppShell.Root route={route} user={user} sidebarOpen={open}>"
+          ],
+          "fixes": [
+            "<AppShell.Root><AppShell.Main>{routeContent}</AppShell.Main></AppShell.Root>"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
       "name": "AppStoreButton",
       "slug": "app-store-button",
       "import": "@tale-ui/react/app-store-button",
