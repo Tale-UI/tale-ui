@@ -73,7 +73,7 @@
     "audit:rem-base": "node tools/audit-rem-base.mjs",
     "audit:motion:elevation": "node tools/audit-motion-elevation.mjs",
     "audit:motion:elevation:check": "node tools/audit-motion-elevation.mjs --check",
-    "a11y:smoke": "node tools/run-changed-a11y.mjs --smoke",
+    "a11y:smoke": "node --test tools/accessibility-baseline.test.mjs && node tools/run-changed-a11y.mjs --smoke",
     "a11y:changed": "node tools/run-changed-a11y.mjs",
     "governance:generate": "node tools/generate-governance-reports.mjs",
     "governance:check": "node tools/generate-governance-reports.mjs --check",

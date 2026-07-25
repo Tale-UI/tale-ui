@@ -9,6 +9,7 @@ import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import axe from 'axe-core';
 import { JSDOM } from 'jsdom';
+import { accessibilityViolationKey } from './accessibility-baseline.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -277,8 +278,7 @@ violations.sort(
     left.rule.localeCompare(right.rule) ||
     left.target.localeCompare(right.target),
 );
-const keyOf = ({ storyId, rule, target }) => `${storyId}\n${rule}\n${target}`;
-const known = new Set(baseline.knownViolations.map(keyOf));
+const known = new Set(baseline.knownViolations.map(accessibilityViolationKey));
 const isExcepted = (violation) =>
   exceptions.exceptions.some(
     (exception) =>
@@ -287,10 +287,12 @@ const isExcepted = (violation) =>
       (!exception.targetContains || violation.target.includes(exception.targetContains)),
   );
 const newViolations = violations.filter(
-  (violation) => !known.has(keyOf(violation)) && !isExcepted(violation),
+  (violation) => !known.has(accessibilityViolationKey(violation)) && !isExcepted(violation),
 );
-const currentKeys = new Set(violations.map(keyOf));
-const resolved = baseline.knownViolations.filter((violation) => !currentKeys.has(keyOf(violation)));
+const currentKeys = new Set(violations.map(accessibilityViolationKey));
+const resolved = baseline.knownViolations.filter(
+  (violation) => !currentKeys.has(accessibilityViolationKey(violation)),
+);
 
 const report = {
   schemaVersion: '1.0.0',
