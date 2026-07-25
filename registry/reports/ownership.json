@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "reportType": "ownership",
-  "sourceRevision": "sha256:5cff9441cd098e350add82ed23f60698a11ba839c6b72dfb120fc0b40c2d9ddb",
-  "artifactCount": 872,
+  "sourceRevision": "sha256:581068c4105f425ce5d6fe357a860cc4d06efcba392838cb6ea2fdbcf002077e",
+  "artifactCount": 874,
   "owners": [
     {
       "id": "design-systems",
       "name": "Design Systems",
       "contact": "@tale-ui/design-systems",
-      "artifactCount": 285,
+      "artifactCount": 287,
       "artifacts": [
         "tale:component:accordion",
         "tale:component:alert-dialog",
@@ -275,11 +275,13 @@
         "tale:doc:packages-css-docs-naming-conventions",
         "tale:foundation:a2ui-integration",
         "tale:foundation:accessibility-and-performance-gates",
+        "tale:foundation:adoption-and-health-metrics",
         "tale:foundation:component-styling",
         "tale:foundation:css-architecture",
         "tale:foundation:design-philosophy",
         "tale:foundation:design-tokens",
         "tale:foundation:framework-integration",
+        "tale:foundation:hosted-documentation-and-mcp",
         "tale:foundation:lifecycle-and-governance",
         "tale:foundation:motion-and-elevation",
         "tale:foundation:naming-conventions",

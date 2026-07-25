@@ -3,6 +3,7 @@
   "registryVersion": "1.0.0",
   "releaseChannel": "internal",
   "generatedFrom": [
+    "apps/metrics-dashboard/README.md",
     "docs/a2ui-integration.md",
     "docs/authoring-components.md",
     "docs/component-index.md",
@@ -138,6 +139,7 @@
     "docs/foundations/motion-and-elevation.md",
     "docs/governance/accessibility-and-performance.md",
     "docs/governance/lifecycle.md",
+    "docs/hosted-services.md",
     "docs/managing-packages.md",
     "docs/package-dependencies.md",
     "docs/react-aria-deviations.md",
@@ -271,7 +273,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:9c196496bfdb89f1478b07a4716433e7ddac8b7ad3b158055480a5ba0a66c997",
+  "sourceRevision": "sha256:60a8bd148c28dd4e2e4be196ee1d99b58ad1c1185620b90245101d660351bd1d",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -21565,6 +21567,43 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:foundation:adoption-and-health-metrics",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "adoption-and-health-metrics",
+      "name": "Adoption and health metrics",
+      "description": "Tale UI foundation guidance for Adoption and health metrics.",
+      "lifecycle": "stable",
+      "keywords": [
+        "adoption",
+        "dashboard",
+        "health",
+        "metrics",
+        "privacy"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "apps/metrics-dashboard/README.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "apps/metrics-dashboard/README.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:foundation:component-styling",
       "namespace": "tale",
       "kind": "foundation",
@@ -21739,6 +21778,43 @@
       ],
       "provenance": {
         "source": "packages/css/docs/framework-integration.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:foundation:hosted-documentation-and-mcp",
+      "namespace": "tale",
+      "kind": "foundation",
+      "slug": "hosted-documentation-and-mcp",
+      "name": "Hosted documentation and MCP",
+      "description": "Tale UI foundation guidance for Hosted documentation and MCP.",
+      "lifecycle": "stable",
+      "keywords": [
+        "docs",
+        "hosting",
+        "llms",
+        "mcp",
+        "versions"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/hosted-services.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/hosted-services.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -50856,5 +50932,5 @@
       }
     }
   ],
-  "digest": "sha256:1a88a19bb60f4d27b1334024eb1ef7f14f20f76506ebac1b90228233b0336fd7"
+  "digest": "sha256:c25b2a1bcd3a81e1e48d1a81084d82352be8787c65274968948dc6259587d7e4"
 }

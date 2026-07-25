@@ -6,13 +6,13 @@
       "id": "artifact.get",
       "version": "1.0.0",
       "description": "Retrieve one artifact by stable ID or alias.",
-      "availability": ["api", "cli"]
+      "availability": ["api", "cli", "hosted-mcp"]
     },
     {
       "id": "artifact.search",
       "version": "1.0.0",
       "description": "Search mixed artifact kinds with stable identifiers.",
-      "availability": ["api", "cli"]
+      "availability": ["api", "cli", "hosted-mcp"]
     },
     {
       "id": "manifest.get",
@@ -24,19 +24,19 @@
       "id": "component.get",
       "version": "1.0.0",
       "description": "Retrieve the canonical component registry payload.",
-      "availability": ["api", "local-mcp"]
+      "availability": ["api", "hosted-mcp", "local-mcp"]
     },
     {
       "id": "recipe.get",
       "version": "1.0.0",
       "description": "Retrieve a canonical recipe document.",
-      "availability": ["api", "local-mcp"]
+      "availability": ["api", "hosted-mcp", "local-mcp"]
     },
     {
       "id": "ui.plan",
       "version": "1.0.0",
       "description": "Plan UI with bounded registry and recipe context.",
-      "availability": ["api", "local-mcp"]
+      "availability": ["api", "hosted-mcp", "local-mcp"]
     },
     {
       "id": "code.validate",

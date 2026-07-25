@@ -31,6 +31,7 @@ export default {
     'docs/public/**',
     'docs/export/**',
     'docs/archive/research/**',
+    'docs/versioned/**',
     '.agentic-loop/**',
     'analysis/**',
     'plans/**',

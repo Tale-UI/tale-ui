@@ -58,6 +58,8 @@ playwright-report/
 /playground/vite-app/src/demos/EvalReview.tsx
 storybook-static/
 /.artifacts/
+/.pages/
+/docs/out/
 
 # Analysis (local research notes; canonical roadmap inventories are tracked)
 /analysis/*

@@ -32,6 +32,18 @@
       "keywords": ["accessibility", "axe", "performance", "budgets"]
     },
     {
+      "slug": "hosted-documentation-and-mcp",
+      "title": "Hosted documentation and MCP",
+      "path": "docs/hosted-services.md",
+      "keywords": ["docs", "hosting", "mcp", "llms", "versions"]
+    },
+    {
+      "slug": "adoption-and-health-metrics",
+      "title": "Adoption and health metrics",
+      "path": "apps/metrics-dashboard/README.md",
+      "keywords": ["adoption", "health", "metrics", "privacy", "dashboard"]
+    },
+    {
       "slug": "css-architecture",
       "title": "CSS architecture",
       "path": "packages/css/docs/architecture.md",

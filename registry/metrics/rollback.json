@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1.0.0",
+  "lastKnownGoodSnapshot": "registry/metrics/current.json",
+  "snapshotDigest": "sha256:b7e890c3699940ba5c71a654aec7f26bd8737bccad63dd8d13045ea3b309f7a1",
+  "rollbackCompatible": true
+}

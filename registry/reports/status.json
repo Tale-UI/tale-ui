@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "reportType": "status",
-  "sourceRevision": "sha256:5cff9441cd098e350add82ed23f60698a11ba839c6b72dfb120fc0b40c2d9ddb",
+  "sourceRevision": "sha256:581068c4105f425ce5d6fe357a860cc4d06efcba392838cb6ea2fdbcf002077e",
   "states": [
     {
       "state": "experimental",
@@ -16,7 +16,7 @@
     },
     {
       "state": "stable",
-      "artifactCount": 860,
+      "artifactCount": 862,
       "artifacts": [
         "tale:a2ui-type:accordion",
         "tale:a2ui-type:accordion-header",
@@ -432,11 +432,13 @@
         "tale:doc:packages-css-docs-naming-conventions",
         "tale:foundation:a2ui-integration",
         "tale:foundation:accessibility-and-performance-gates",
+        "tale:foundation:adoption-and-health-metrics",
         "tale:foundation:component-styling",
         "tale:foundation:css-architecture",
         "tale:foundation:design-philosophy",
         "tale:foundation:design-tokens",
         "tale:foundation:framework-integration",
+        "tale:foundation:hosted-documentation-and-mcp",
         "tale:foundation:lifecycle-and-governance",
         "tale:foundation:motion-and-elevation",
         "tale:foundation:naming-conventions",

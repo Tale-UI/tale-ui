@@ -9,7 +9,8 @@
       "description": "Retrieve one artifact by stable ID or alias.",
       "availability": [
         "api",
-        "cli"
+        "cli",
+        "hosted-mcp"
       ],
       "status": "available"
     },
@@ -19,7 +20,8 @@
       "description": "Search mixed artifact kinds with stable identifiers.",
       "availability": [
         "api",
-        "cli"
+        "cli",
+        "hosted-mcp"
       ],
       "status": "available"
     },
@@ -40,6 +42,7 @@
       "description": "Retrieve the canonical component registry payload.",
       "availability": [
         "api",
+        "hosted-mcp",
         "local-mcp"
       ],
       "status": "available"
@@ -70,6 +73,7 @@
       "description": "Retrieve a canonical recipe document.",
       "availability": [
         "api",
+        "hosted-mcp",
         "local-mcp"
       ],
       "status": "available"
@@ -80,10 +84,11 @@
       "description": "Plan UI with bounded registry and recipe context.",
       "availability": [
         "api",
+        "hosted-mcp",
         "local-mcp"
       ],
       "status": "available"
     }
   ],
-  "digest": "sha256:1c79ad64ffb3f61060cfa77ab37f344e2888b7151dcd7e26ae5e0fd031ff1362"
+  "digest": "sha256:a6d042d2247de3258a0b9e80b397796f0321207763e422ad6f23c363a69c4aa5"
 }

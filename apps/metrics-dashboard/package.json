@@ -1,0 +1,10 @@
+{
+  "name": "@tale-ui/metrics-dashboard",
+  "version": "0.0.0-internal",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node ../../tools/generate-metrics-dashboard.mjs",
+    "test": "node --test ../../tools/generate-metrics-dashboard.test.mjs"
+  }
+}

@@ -2,6 +2,28 @@
 
 A modular, token-based design system with an accessible React component library. CSS-first, zero-runtime styling built on React Aria Components.
 
+## Canonical Agent Entry Point
+
+Prefer the Tale tooling surfaces over crawling documentation pages:
+
+```bash
+pnpm dlx @tale-ui/tooling@latest init
+pnpm dlx @tale-ui/tooling@latest search --query "settings form"
+pnpm dlx @tale-ui/tooling@latest plan --prompt "Build an account settings form"
+```
+
+The public read-only MCP Streamable HTTP endpoint is
+`https://mcp.tale-ui.dev/mcp`. It exposes `search_artifacts`, `get_artifact`,
+and `plan_ui`. Run validation, templates, migrations, and all project writes
+locally with the CLI; the hosted service cannot execute them.
+
+Hosted limits: 16 KiB request bodies, 256-character searches, 20 search
+results, 4,000-character planning prompts, 12 plan recommendations, and
+64 KiB responses. Every tool result carries the registry version, source
+revision, and source link. Current docs are at
+`https://tale-ui.github.io/tale-ui/docs/`; the immutable previous major is at
+`https://tale-ui.github.io/tale-ui/docs/v1/`.
+
 ## System Overview
 
 ```
