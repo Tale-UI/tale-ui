@@ -103,10 +103,11 @@ Publishing is automated via [.github/workflows/publish.yml](.github/workflows/pu
   Themes, and Utils together
 - **Tokens:** Tag with `tokens-v*.*.*`
 - **CSS design system:** Tag with `css-v*.*.*` (e.g. `css-v2.0.1`) or use `pnpm release:css`
-- **React release set:** Tag with `react-v*.*.*` to publish `@tale-ui/utils`, `@tale-ui/react`, `@tale-ui/react-styles`, and `@tale-ui/themes` at the coordinated version
+- **React compatibility release scope:** Tag with `react-v*.*.*` to run the coordinated six-package release job; prefer `release-v*.*.*` for normal releases
 - **Themes-only exception:** Tag with `themes-v*.*.*` only for an explicitly requested package-only release
+- **Tooling beta:** Tag with `tooling-v*.*.*` to publish `@tale-ui/tooling` independently under npm dist-tag `next`
 - **Manual dispatch:** Run the workflow from GitHub Actions with scope (`all`, `tokens`, `css`,
-  `react`, or `themes`) and version
+  `react`, `themes`, or `tooling`) and version
 
 Requires repository secret `NPM_TOKEN` with publish permissions for the `@tale-ui` npm scope.
 

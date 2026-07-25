@@ -101,7 +101,7 @@ pnpm audit:components -- --verbose           # include warnings
 7. JSDoc `@example` on main export
 8. `@example` import path matches `package.json` exports
 9. Listed in `docs/component-index.md`
-10. Listed in `docs/consumer-claude-md-snippet.md`
+10. Present in generated `docs/consumer-claude-md-snippet.md` after registry/snippet generation
 11. Listed in `packages/react/README.md`
 12. Export in `packages/react/package.json`
 13. Export in `packages/styles/package.json`
@@ -198,7 +198,7 @@ pnpm registry:check      # compare generated vs committed; exit 1 if different
 Generates `.cursorrules` (Cursor/Windsurf rules file) by combining:
 
 - **Dynamic data** from `registry/components.json` — namespace vs simple component lists stay in sync automatically
-- **Static data** from `docs/consumer-claude-md-snippet.md` — pitfalls, CSS token rules, dark mode guidance
+- **Static data** from `docs/consumer-claude-md-snippet.md` — setup, workflow, CSS token, and dark mode guidance; the full pitfall corpus is retrieved just in time
 
 ```bash
 pnpm cursorrules:generate   # write .cursorrules
@@ -296,8 +296,8 @@ A stdio-based MCP server that exposes the component registry, recipe docs, and f
 | ---------------------------------- | ----------------------------- | --- | ------------------------------------------------------------------------------- |
 | `validate-generated.mjs`           | `pnpm validate:generated`     | No  | Validates any `.tsx` against registry + TypeScript                              |
 | `validate-golden-prompts.mjs`      | `pnpm golden:validate`        | Yes | Validates all golden prompt reference implementations                           |
-| `eval-golden-prompts.mjs`          | `pnpm golden:eval`            | No  | Runs golden prompts against Claude (via Claude Code CLI) and scores L1–L3       |
-| `eval-fix-review.mjs`              | `pnpm golden:fix-review`      | No  | Full pipeline: eval → auto-fix consumer snippet → visual review in playground   |
+| `eval-golden-prompts.mjs`          | `pnpm golden:eval`            | No  | Runs golden prompts against the selected provider and scores L1–L3              |
+| `eval-fix-review.mjs`              | `pnpm golden:fix-review`      | No  | Full pipeline: eval → propose/review docs and pitfall fixes → visual review     |
 | `eval-golden-harden.mjs`           | `pnpm golden:harden`          | No  | Re-runs prompts until each gets N fresh clean passes in a row                   |
 | `run-validator-tests.mjs`          | `pnpm validate:test`          | No  | Tests the validator itself against known-good and known-bad samples             |
 | `validate-a2ui-golden-prompts.mjs` | `pnpm a2ui:golden:validate`   | Yes | Validates all A2UI golden prompt reference implementations against live catalog |
@@ -468,7 +468,7 @@ pnpm golden:fix-review -- --provider codex --fix-provider claude --fix-model son
 | Call cache  | model + snippet hash + registry hash + prompt hash | generated code   | No — same inputs can produce different LLM output               | `--no-cache`, `--fresh` |
 | Check cache | code hash + registry hash                          | L1/L2/L3 results | Yes — same code + same registry always produces the same result | `--fresh` only          |
 
-The call cache is an **iteration shortcut**, not a benchmark. When patching `consumer-claude-md-snippet.md` and re-running to confirm a fix worked, prompts that were already passing don't need to call Claude again. But because LLMs are non-deterministic, a cached pass doesn't guarantee the prompt would pass on every run.
+The call cache is an **iteration shortcut**, not a benchmark. When patching canonical component docs or pitfalls and re-running to confirm a fix worked, prompts that were already passing do not need another provider call. Because LLMs are non-deterministic, a cached pass does not guarantee the prompt would pass on every run.
 
 The check cache is **always accurate** — L1 (TypeScript), L2 (component presence), and L3 (import cleanliness) are all deterministic given the same code and registry. It avoids re-running `tsc` on code the validator has already seen.
 

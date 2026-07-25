@@ -48,9 +48,9 @@ When auditing a component `{name}` (kebab-case) / `{Name}` (PascalCase):
 
 ### 4. Consumer Snippet
 
-- [ ] Component listed in `docs/consumer-claude-md-snippet.md`
-- [ ] Correctly categorized as namespace or simple component
-- [ ] Any critical gotchas mentioned
+- [ ] Generated `docs/consumer-claude-md-snippet.md` includes the component
+- [ ] Generated namespace/simple/deprecated categorization matches `registry/components.json`
+- [ ] Critical component-specific gotchas live in canonical component docs/pitfalls for just-in-time retrieval
 
 ### 5. Storybook Story
 
@@ -80,7 +80,7 @@ When auditing a component `{name}` (kebab-case) / `{Name}` (PascalCase):
 
 Add a JSDoc block above the main export (Root for namespace, component for simple):
 
-```tsx
+````tsx
 /**
  * Description of the component.
  *
@@ -93,7 +93,7 @@ Add a JSDoc block above the main export (Root for namespace, component for simpl
  * </ComponentName.Root>
  * ```
  */
-```
+````
 
 ### Missing CSS Classes in doc
 

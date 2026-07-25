@@ -30,7 +30,7 @@ Unified monorepo managed with **pnpm workspaces**. This repository is the single
 | [docs/authoring-components.md](docs/authoring-components.md)                     | Contributor guide: adding new `@tale-ui/react` components                                         |
 | [docs/react-aria-deviations.md](docs/react-aria-deviations.md)                   | Every difference between Tale UI and vanilla React Aria Components                                |
 | [docs/upstream/react-aria-components.md](docs/upstream/react-aria-components.md) | Maintainer log for how Tale UI adopts, defers, or rejects upstream React Aria Components releases |
-| [docs/component-index.md](docs/component-index.md)                               | All 112 React components plus 6 chart components at a glance: description, import path, sub-parts |
+| [docs/component-index.md](docs/component-index.md)                               | All 120 React components plus 6 chart components at a glance: description, import path, sub-parts |
 | [registry/components.json](registry/components.json)                             | Machine-readable component registry: props, parts, examples, CSS classes                          |
 | [docs/components/](docs/components/index.md)                                     | Per-component usage guide: imports, parts, examples, CSS classes                                  |
 | [docs/recipes/](docs/recipes/index.md)                                           | Copy-paste multi-component patterns (forms, tables, navigation, search, settings)                 |
@@ -137,10 +137,14 @@ pnpm audit:components       # 19-check component completeness audit
 pnpm audit:coverage         # check ComponentAudit, Storybook, and A2UI full-showcase coverage
 pnpm registry:generate      # regenerate registry/components.json from source
 pnpm registry:check         # verify registry is up-to-date (CI mode)
+pnpm artifacts:generate     # regenerate unified artifacts, capabilities, and roadmap traceability
+pnpm artifacts:check        # verify unified generated contracts and two-build identity
+pnpm governance:check       # verify lifecycle, ownership, replacements, migrations, and exceptions
+pnpm performance:check      # check maintained component/package performance budgets
 pnpm validate:generated     # validate generated .tsx against registry + tsc
 pnpm golden:validate        # validate all golden prompt references
-pnpm golden:eval            # run prompts against Claude and score L1–L3 (add --mcp for agentic MCP mode)
-pnpm golden:fix-review      # eval → auto-fix consumer snippet → open visual review in playground
+pnpm golden:eval            # run prompts against a selected model provider and score L1–L3
+pnpm golden:fix-review      # eval → review docs/pitfall fixes → open visual review in playground
 pnpm a2ui:generate-docs     # regenerate A2UI catalog tables in system-prompt.md + integration guide
 pnpm a2ui:generate-catalog  # regenerate registry/a2ui-catalog.json for MCP server
 pnpm a2ui:check-docs        # verify A2UI docs match source (CI mode)
@@ -190,7 +194,7 @@ packages/react/src/{component}/
 Every component has a usage guide at `docs/components/{name}.md` with imports, sub-parts, props, and examples. When adding a new component, you must also:
 
 - Create `docs/components/{name}.md`
-- Add the component name to `docs/consumer-claude-md-snippet.md` (the available components list)
+- Add the component to `docs/component-index.md`; `registry:generate` and `snippet:generate` derive `docs/consumer-claude-md-snippet.md` from canonical source and registry data, so do not hand-edit the generated snippet
 - Add the component to the catalogue and per-component docs sections in `packages/react/README.md`
 - **Create at least one golden prompt** in `tools/golden-prompts/{slug}.json` and add it to `tools/golden-prompts/index.json` (see below)
 
@@ -262,7 +266,7 @@ Format:
 
 ## Component Artifact Audit
 
-Status of required artifacts for all 116 components. When adding or updating a component, update the relevant row below.
+Status of required artifacts for all 120 components. When adding or updating a component, update the relevant row below.
 
 **Legend:** styled = `{Component}.styled.tsx` | index = `index.ts` | test = `{Component}.test.tsx` (non-trivial logic only) | css = `{component}.css` in styles/src | prim = `_primitives.css` entry (if shared declarations apply) | doc = `docs/components/{name}.md` | snip = consumer-claude-md-snippet.md | rdme = react/README.md | idx = `docs/component-index.md` entry | story = Storybook story | audit = ComponentAudit.tsx entry | a2ui = A2UI catalog adapter in `packages/a2ui/src/catalog.ts` | status = `@status` JSDoc tag in `{Component}.styled.tsx` (`stable` \| `experimental` \| `deprecated`)
 
@@ -358,20 +362,20 @@ Status of required artifacts for all 116 components. When adding or updating a c
 
 ### Layout
 
-| Component  | styled | index | test | css | prim | doc | snip | rdme | idx | story | audit | a2ui | status |
-| ---------- | ------ | ----- | ---- | --- | ---- | --- | ---- | ---- | --- | ----- | ----- | ---- | ------ |
-| Accordion  | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
+| Component  | styled | index | test | css | prim | doc | snip | rdme | idx | story | audit | a2ui | status       |
+| ---------- | ------ | ----- | ---- | --- | ---- | --- | ---- | ---- | --- | ----- | ----- | ---- | ------------ |
+| Accordion  | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
 | AppShell   | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
-| Card       | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| Carousel   | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
+| Card       | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Carousel   | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
 | Chat       | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
-| Column     | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| Disclosure | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| Row        | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| ScrollArea | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| Separator  | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| Tabs       | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| Toolbar    | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
+| Column     | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Disclosure | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Row        | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| ScrollArea | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Separator  | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Tabs       | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Toolbar    | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
 
 ### Feedback
 
@@ -438,11 +442,11 @@ Status of required artifacts for all 116 components. When adding or updating a c
 
 ### Typography
 
-| Component | styled | index | test | css | prim | doc | snip | rdme | idx | story | audit | a2ui | status |
-| --------- | ------ | ----- | ---- | --- | ---- | --- | ---- | ---- | --- | ----- | ----- | ---- | ------ |
+| Component | styled | index | test | css | prim | doc | snip | rdme | idx | story | audit | a2ui | status       |
+| --------- | ------ | ----- | ---- | --- | ---- | --- | ---- | ---- | --- | ----- | ----- | ---- | ------------ |
 | CodeBlock | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | experimental |
 | Kbd       | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | experimental |
-| Text      | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
+| Text      | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
 
 ### Utility
 

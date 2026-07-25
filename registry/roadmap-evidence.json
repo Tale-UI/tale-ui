@@ -20,7 +20,7 @@
       "evidence": [
         {
           "path": "registry/artifacts.json",
-          "digest": "sha256:e04cf0b8ef7519ace3e6e597511bac835e24c38450ee3a21e06eedcaa6d93a95"
+          "digest": "sha256:bf0ab2cf95fb563543502b76ea388b7b4bb166b157e69bc9fb9b46d6a353cec9"
         },
         {
           "path": "tools/check-roadmap-contracts.mjs",
@@ -48,7 +48,7 @@
       "evidence": [
         {
           "path": "registry/reports/replacements.json",
-          "digest": "sha256:2f78bcbd73166f1fd478636f6163731cf38ebe4e0d618727c73adefe08a77edc"
+          "digest": "sha256:7110d2b87d178cf542ee7acc21cb3c32a6c17628d36065201382c0d44d99af56"
         },
         {
           "path": "tools/generate-governance-reports.mjs",
@@ -324,7 +324,7 @@
         },
         {
           "path": "registry/reports/migrations.json",
-          "digest": "sha256:6ac34037002fae241da77cd044f4723dd64f935fd9b5bd208ece68f2d9d92ce8"
+          "digest": "sha256:5b8e59707701592989afbf805a388a98a673a5a85e42e036aa70d688fb492981"
         }
       ]
     },
@@ -352,7 +352,7 @@
       "evidence": [
         {
           "path": "docs/versioned/manifest.json",
-          "digest": "sha256:cd85b7d472e767a1c18e72e5ae6fb8328061bfbad8260df4419084358a194756"
+          "digest": "sha256:2efa8a85e5fa048d14b6c4aedceed42c096e1cad728d4b90e6b75caee4888660"
         },
         {
           "path": "tools/generate-versioned-docs.mjs",
@@ -660,7 +660,7 @@
         },
         {
           "path": "registry/reports/status.json",
-          "digest": "sha256:72e5305781536aa62f3625ba4faa6e8eb2aff98bc8f0055cf1dfd31a8025efe5"
+          "digest": "sha256:27c8f43b34a1401f2c16416ef9fa31c57ffaf004575fdb71d3c07de4df064b69"
         }
       ]
     },
@@ -844,7 +844,7 @@
         },
         {
           "path": "registry/reports/migrations.json",
-          "digest": "sha256:6ac34037002fae241da77cd044f4723dd64f935fd9b5bd208ece68f2d9d92ce8"
+          "digest": "sha256:5b8e59707701592989afbf805a388a98a673a5a85e42e036aa70d688fb492981"
         }
       ]
     },
@@ -856,7 +856,7 @@
       "evidence": [
         {
           "path": "registry/artifacts.json",
-          "digest": "sha256:e04cf0b8ef7519ace3e6e597511bac835e24c38450ee3a21e06eedcaa6d93a95"
+          "digest": "sha256:bf0ab2cf95fb563543502b76ea388b7b4bb166b157e69bc9fb9b46d6a353cec9"
         },
         {
           "path": "analysis/baselines/tooling-package-release.json",
