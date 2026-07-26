@@ -197,6 +197,49 @@ describe('Timestamp', () => {
     },
   );
 
+  it.each([
+    [30_000, 'in 30 seconds'],
+    [2 * 60_000, 'in 2 minutes'],
+    [2 * 3_600_000, 'in 2 hours'],
+    [2 * 86_400_000, 'in 2 days'],
+    [2 * 604_800_000, 'in 2 weeks'],
+    [2 * 2_592_000_000, 'in 2 months'],
+    [2 * 31_536_000_000, 'in 2 years'],
+  ])('uses the frozen relative unit for a %s millisecond delta', async (delta, expected) => {
+    const now = Date.parse('2026-07-27T04:30:00Z');
+    const { container } = await render(
+      <Timestamp
+        value={now + delta}
+        locale="en-US"
+        timeZone="UTC"
+        format="relative"
+        now={now}
+        refreshInterval={0}
+      />,
+    );
+    expect(container.querySelector('time')?.textContent).toBe(expected);
+  });
+
+  it('falls back when formatter option access throws', async () => {
+    const formatOptions = {
+      get year(): Intl.DateTimeFormatOptions['year'] {
+        throw new Error('formatter option failure');
+      },
+    };
+    await render(
+      <Timestamp
+        value="2026-07-27T04:30:00Z"
+        locale="en-US"
+        timeZone="UTC"
+        formatOptions={formatOptions}
+        data-testid="timestamp"
+      />,
+    );
+    const timestamp = screen.getByTestId('timestamp');
+    expect(timestamp.textContent).toBe('—');
+    expect(timestamp.getAttribute('datetime')).toBe('2026-07-27T04:30:00.000Z');
+  });
+
   it.each([Number.NaN, -1, 999, Number.POSITIVE_INFINITY])(
     'rejects invalid refresh interval %s while preserving target dateTime',
     async (refreshInterval) => {
