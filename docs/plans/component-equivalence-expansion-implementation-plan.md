@@ -953,7 +953,7 @@ Trigger proposes selection before open. Root is the sole open authority. Backdro
 
 Navigation stops at boundaries unless looping. One item is a no-op. Only the topmost focused open Lightbox handles arrows/swipes. Duplicate native/RAC/Tale dispatch is correlated per user action.
 
-Swipe uses current `useSwipeDismiss`, its 40 CSS-pixel threshold, interactive-target exclusion, scroll-conflict protection, RTL reversal, and reduced-motion behavior. RAC retains focus containment, Escape/backdrop dismissal, and stacking.
+Swipe uses current `useSwipeDismiss`, its 40 CSS-pixel threshold, interactive-target exclusion, scroll-conflict protection, and reduced-motion behavior. Lightbox derives writing direction from the Popup owner document and reverses the previous/next mapping in RTL; `useSwipeDismiss` continues to report physical left/right directions. RAC retains focus containment, Escape/backdrop dismissal, and stacking.
 
 Popup owns the current item label. Caption defaults to the item label only when `children === undefined`; explicit `null` remains empty. Close owns `slot="close"`.
 
@@ -1030,7 +1030,8 @@ Export `createToastQueue`, `ToastRegion`, and every named public type from `@tal
 
 Runtime domains and errors are frozen:
 
-- Queue/add/message options must be `undefined` or non-null, non-array objects; otherwise throw `TypeError` prefixed `Tale Toast:`.
+- Queue/add/message options must be `undefined` or non-null, non-array objects; otherwise throw `TypeError` prefixed `Tale UI: ` and identify Toast as the failing subsystem.
+- Every Toast validation and recovery error follows the public-error convention: state what happened, why the queue cannot continue, and the corrective action without exposing message values.
 - `maxVisibleToasts` must be a number; wrong type throws `TypeError`; non-finite, non-integer, or `<= 0` throws `RangeError`.
 - Default/per-toast timeout must be a number; wrong type throws `TypeError`; non-finite or negative throws `RangeError`; zero is persistent.
 - Message title must be a string; wrong type throws `TypeError`; empty/whitespace-only throws `RangeError`.
@@ -1161,7 +1162,7 @@ Poison-reset is the last-resort recovery when a damaged raw generation and its p
 4. Discard every damaged raw generation.
 5. Publish one consistent empty stable-adapter snapshot, invoking all subscribers despite errors.
 6. Invoke callbacks for records discarded by the reset exactly once, oldest first.
-7. Reject later public mutations with deterministic `Tale Toast: queue poisoned` errors; consumers must create a new public queue.
+7. Reject later public mutations with deterministic `Tale UI: Toast queue poisoned` errors; consumers must create a new public queue.
 8. Throw an ordered aggregate containing the original raw error, rebuild error, publication errors, and callback errors.
 9. Never leave a visible Toast whose reverse mapping has been removed.
 
@@ -1226,6 +1227,8 @@ Compatibility guidance must state:
 - Maintained 2.x guidance is limited to Node 18+.
 
 Prepare synchronized `3.0.0`, Tooling `0.2.0`, lockfile, changelogs, release notes, compatibility/migration docs, and the security support table.
+
+Before claiming React 17 support, replace every direct `React.useId` call in the existing React package with the repository's React-17-compatible `@tale-ui/utils/useId` fallback and correct the fallback utility's inaccurate availability comment. Cover TextEditor, IPhoneMockup, FileUpload, InputTags, MultiSelect, and TagSelect in the React 17 packed-consumer matrix so importing, client rendering, SSR, and hydration prove that no React-18-only hook remains on a supported path. Exercise multiple IPhoneMockup instances and assert collision-free SVG IDs.
 
 Pin v2 history to `release-v2.0.0` at `be1b3be433ddf244f57e252260afda448249169d`. Generate current v3, immutable v2, retained v1, rollback-to-v2, and provenance manifests. Do not create tags.
 
@@ -1732,14 +1735,14 @@ Explicit cumulative report additionally requires:
 
 Reports:
 
-| Bundle | Current candidates                                   | Cumulative candidates | Shared report                                   | Cumulative report                                   |
-| ------ | ---------------------------------------------------- | --------------------- | ----------------------------------------------- | --------------------------------------------------- |
-| 1      | AspectRatio, Blockquote, ButtonGroup, Code, Skeleton | Same five             | `.artifacts/accessibility-bundle-1-shared.json` | `.artifacts/accessibility-bundle-1-cumulative.json` |
-| 2      | Citation, Markdown, Timestamp, Outline               | Bundles 1–2           | `.artifacts/accessibility-bundle-2-shared.json` | `.artifacts/accessibility-bundle-2-cumulative.json` |
-| 3      | OverflowList, Resizable, Lightbox                    | Bundles 1–3           | `.artifacts/accessibility-bundle-3-shared.json` | `.artifacts/accessibility-bundle-3-cumulative.json` |
-| 4      | Toast                                                | All 13                | `.artifacts/accessibility-bundle-4-shared.json` | `.artifacts/accessibility-bundle-4-cumulative.json` |
+| Bundle | Current candidates                                   | Cumulative candidates | Shared report                                                           | Cumulative report                                                           |
+| ------ | ---------------------------------------------------- | --------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| 1      | AspectRatio, Blockquote, ButtonGroup, Code, Skeleton | Same five             | `test/accessibility/reports/component-equivalence/bundle-1-shared.json` | `test/accessibility/reports/component-equivalence/bundle-1-cumulative.json` |
+| 2      | Citation, Markdown, Timestamp, Outline               | Bundles 1–2           | `test/accessibility/reports/component-equivalence/bundle-2-shared.json` | `test/accessibility/reports/component-equivalence/bundle-2-cumulative.json` |
+| 3      | OverflowList, Resizable, Lightbox                    | Bundles 1–3           | `test/accessibility/reports/component-equivalence/bundle-3-shared.json` | `test/accessibility/reports/component-equivalence/bundle-3-cumulative.json` |
+| 4      | Toast                                                | All 13                | `test/accessibility/reports/component-equivalence/bundle-4-shared.json` | `test/accessibility/reports/component-equivalence/bundle-4-cumulative.json` |
 
-Retain all eight reports as bundle evidence. The final shared report is authoritative for broad shared-foundation coverage; the final cumulative report is authoritative for all 13 candidates.
+Retain all eight reports as tracked bundle evidence, and add a deterministic check requiring the exact eight paths. The final shared report is authoritative for broad shared-foundation coverage; the final cumulative report is authoritative for all 13 candidates.
 
 ### Complete component workflow
 
@@ -1751,6 +1754,7 @@ Each candidate receives:
 - React root and subpath exports
 - JSDoc and reference docs
 - README/component-index entries
+- Root `CLAUDE.md` Component Artifact Audit rows and cumulative totals
 - Storybook and ComponentAudit
 - Unit/browser/SSR/hydration tests as applicable
 - Registry and Figma metadata
@@ -1762,6 +1766,8 @@ Each candidate receives:
 - Generated artifacts
 
 Add 13 default visual stories plus open Lightbox, visible Toast, measured OverflowList, and representative Resizable. Use deterministic clocks/content/dimensions, disable animations, await fonts, and mark readiness only after state settles.
+
+The root Component Artifact Audit totals progress with the atomic bundles: 125 after Bundle 1, 129 after Bundle 2, 132 after Bundle 3, and 133 after Bundle 4. Every new row records `experimental` lifecycle and A2UI `n/a`.
 
 ### Rollback
 
@@ -1886,12 +1892,14 @@ Outline, OverflowList, Resizable, Lightbox, and Toast also run in Firefox and We
 Focused fixtures cover:
 
 - Every public export, ref, callback, union, owned DOM field, default, invalid value, error type, diagnostic, and recovery path.
+- Exact `Tale UI: ` Toast validation/recovery prefixes, error types, problem statements, and corrective actions.
 - Compile-time omission of every owned action/capture prop.
 - Citation ordinal/list-attribute ownership.
 - Outline controlled/uncontrolled removal/reorder and observer cleanup.
 - OverflowList invalid props, exact callback counts, and one control tree.
 - Resizable projection/rejection, cancellation, ARIA/flex values, and exact benchmark mode.
 - Complete Lightbox public declarations and state/event routing.
+- Lightbox LTR/RTL swipe navigation, loop/boundary behavior, and direction derived from a non-global Popup owner document.
 - Toast malformed input before mutation.
 - Raw Toast add with one argument and no raw timer/callback.
 - Stable adapter identity and subscriber retention across raw-generation rebuild.
@@ -1957,7 +1965,7 @@ shasum -a 256 \
   tools/benchmark-roadmap-performance.tsx
 
 git diff --exit-code \
-  5e539e19287b9f5469d8f13e0ebe44f43d4dda62 \
+  761c2ddbfe44e05a8b203fc856a5456b31b0d3ef \
   -- \
   schemas/performance-budget.schema.json \
   test/baselines/roadmap/performance-budgets.json \
@@ -1988,22 +1996,22 @@ For each bundle:
 pnpm a11y:changed -- \
   --url http://127.0.0.1:6007 \
   --base <bundle-merge-base-sha> \
-  --output .artifacts/accessibility-bundle-<n>-shared.json
+  --output test/accessibility/reports/component-equivalence/bundle-<n>-shared.json
 
 pnpm a11y:changed -- \
   --url http://127.0.0.1:6007 \
   --components <cumulative-component-list> \
-  --output .artifacts/accessibility-bundle-<n>-cumulative.json
+  --output test/accessibility/reports/component-equivalence/bundle-<n>-cumulative.json
 
 node tools/assert-accessibility-report.mjs \
-  --report .artifacts/accessibility-bundle-<n>-shared.json \
+  --report test/accessibility/reports/component-equivalence/bundle-<n>-shared.json \
   --mode shared-foundation-change \
   --components <current-bundle-components> \
   --stories <current-bundle-default-story-ids> \
   --storybook-index .artifacts/storybook-a11y/index.json
 
 node tools/assert-accessibility-report.mjs \
-  --report .artifacts/accessibility-bundle-<n>-cumulative.json \
+  --report test/accessibility/reports/component-equivalence/bundle-<n>-cumulative.json \
   --mode explicit-components \
   --components <cumulative-component-list> \
   --stories <cumulative-default-story-ids> \
@@ -2052,6 +2060,7 @@ Assert:
 - Historical manifests do not produce a Node 14/16 support recommendation.
 - Every React component subpath and every Styles CSS subpath resolves from packed tarballs.
 - Exactly 12 templates remain with correct schema/content/compatibility fields.
+- The root Component Artifact Audit contains all 13 experimental, A2UI-`n/a` rows and final totals of 133/133 with zero missing artifacts.
 - No publish or tag occurs.
 
 ### Dispositions and A2UI no-change proof

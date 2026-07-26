@@ -110,6 +110,19 @@ function isValid(schemaPath, value) {
   return localAjv.compile(json(schemaPath))(value);
 }
 
+const performanceBudgetPath = 'test/baselines/roadmap/performance-budgets.json';
+const performanceBudget = json(performanceBudgetPath);
+assert.equal(
+  performanceBudget.$schema,
+  '../../../schemas/performance-budget.schema.json',
+  `${performanceBudgetPath} must reference the root schema from its canonical location`,
+);
+assert.ok(
+  existsSync(resolve(dirname(join(ROOT, performanceBudgetPath)), performanceBudget.$schema)),
+  `${performanceBudgetPath} references a missing relative JSON Schema`,
+);
+validate('schemas/performance-budget.schema.json', performanceBudget, performanceBudgetPath);
+
 validate(
   'schemas/artifact.schema.json',
   json('registry/artifacts.json'),

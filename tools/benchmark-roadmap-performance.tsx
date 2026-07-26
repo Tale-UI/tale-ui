@@ -281,7 +281,7 @@ async function main() {
 
   if (CAPTURE) {
     const budget = {
-      $schema: '../../schemas/performance-budget.schema.json',
+      $schema: '../../../schemas/performance-budget.schema.json',
       schemaVersion: '1.0.0',
       capturedOn: TODAY,
       runner: {
