@@ -29,9 +29,9 @@ const expectedFileDigests = {
   'tools/performance-fixtures/component-expansion/overflow-list-100-recompute.html':
     '0b58e5f4fcb628e99d5cba8ef04cf4eecdd46b9b2c2107572c1a5667fe34b01f',
   'tools/performance-fixtures/component-expansion/overflow-list-100-recompute.browser.tsx':
-    '17ea55bb997941dc5045c9a1b2846c4c89b00597cea8a364de350ea315ca26f6',
+    '446966d93056ace9a28447c9f7ec8ca26a1f1c7a6f15802af1cbf8624a574d25',
   'tools/performance-fixtures/component-expansion/overflow-list-100-recompute.tsx':
-    'adfc5b963abd67351a1f2a9e0554679dc24b0e34ced5458a53f137a50e53d375',
+    'c249c99cd1e05a35e776dbc384364db16bd8b3a501b6ef1aa262b34b7391a4d8',
 } as const;
 
 after(async () => {
@@ -69,12 +69,32 @@ test('freezes the exact OverflowList benchmark vectors, files, and semantic dige
   );
   assert.equal(
     overflowListExpectedPostconditionDigest,
-    'd3d34b8d86b7252f142ad5ca92f8e88a7f71f18062a7c5d6fc4ca4240c6e51d3',
+    'b939a938e7965e29718c8ec8e2b3e3b47348255b95994de5fa52d8927f751ccf',
   );
 
   for (const [path, expectedDigest] of Object.entries(expectedFileDigests)) {
     assert.equal(sha256(readFileSync(resolve(REPOSITORY_ROOT, path))), expectedDigest, path);
   }
+
+  const browserSource = readFileSync(
+    resolve(
+      REPOSITORY_ROOT,
+      'tools/performance-fixtures/component-expansion/overflow-list-100-recompute.browser.tsx',
+    ),
+    'utf8',
+  );
+  const runWidthIndex = browserSource.indexOf('const runWidth = (width: number)');
+  const startedIndex = browserSource.indexOf('const started = window.performance.now()');
+  const loopIndex = browserSource.indexOf('for (const width of overflowListWidths)', startedIndex);
+  const durationIndex = browserSource.indexOf(
+    'const duration = window.performance.now() - started',
+    loopIndex,
+  );
+  assert.ok(runWidthIndex !== -1 && runWidthIndex < startedIndex);
+  assert.ok(startedIndex < loopIndex && loopIndex < durationIndex);
+  const timedBoundary = browserSource.slice(startedIndex, durationIndex);
+  assert.match(timedBoundary, /runWidth\(width\)/);
+  assert.doesNotMatch(timedBoundary, /assertPartition|JSON\.stringify|querySelector/);
 });
 
 test('reuses Vite and Chromium while retaining fresh deterministic sample state', async () => {

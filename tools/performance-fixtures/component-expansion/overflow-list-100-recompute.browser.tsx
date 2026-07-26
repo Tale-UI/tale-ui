@@ -8,7 +8,6 @@ import {
   OVERFLOW_LIST_ITEM_COUNT,
   OVERFLOW_LIST_ITEM_WIDTH,
   OVERFLOW_LIST_MEASUREMENT_KEY,
-  expectedOverflowListVisibleCount,
   overflowListExpectedCallbackCounts,
   overflowListKeys,
   overflowListWidths,
@@ -20,6 +19,7 @@ interface BenchmarkResult {
   duration: number;
   postcondition: {
     acts: number;
+    callbacksAfterSettlement: number[];
     callbackVisibleCounts: number[];
     controlInvocations: number;
     finalHiddenCount: number;
@@ -27,6 +27,7 @@ interface BenchmarkResult {
     frameCallbacksPerSettlement: number[];
     itemRenderCalls: number;
     maxFrameCallbacksPerSettlement: number;
+    maxItemsRenderedPerFrame: number;
     markup: string;
     resizeObserverDeliveries: number;
     settlingFrames: number;
@@ -185,6 +186,7 @@ function assertPartition(visibleCount: number) {
 function flushSettlingFrame() {
   let callbackCount = 0;
   let batches = 0;
+  let maxItemsRenderedInBatch = 0;
   while (frameCallbacks.size > 0) {
     batches += 1;
     if (batches > 4) {
@@ -198,17 +200,15 @@ function flushSettlingFrame() {
       ReactDOM.flushSync(() => callback(window.performance.now()));
     }
     const renderedItemsInBatch = itemRenderKeys.length - itemRenderCountBeforeBatch;
-    if (renderedItemsInBatch > OVERFLOW_LIST_ITEM_COUNT) {
-      throw new Error('OverflowList committed more than one partition update in one frame');
-    }
+    maxItemsRenderedInBatch = Math.max(maxItemsRenderedInBatch, renderedItemsInBatch);
   }
-  return callbackCount;
+  return { callbackCount, maxItemsRenderedInBatch };
 }
 
 async function initialize() {
   // The controlled browser facilities must exist before this import initializes
   // the shared animation-frame scheduler.
-  const { OverflowList } = await import('../../../packages/react/src/overflow-list/index.ts');
+  const { OverflowList } = await import('@tale-ui/react/overflow-list');
 
   function BenchmarkApp() {
     const [width, setWidth] = React.useState(OVERFLOW_LIST_INITIAL_WIDTH);
@@ -262,9 +262,10 @@ async function initialize() {
       let resizeObserverDeliveries = 0;
       let settlingFrames = 0;
       let maxFrameCallbacksPerSettlement = 0;
+      let maxItemsRenderedPerFrame = 0;
+      const callbacksAfterSettlement: number[] = [];
       const frameCallbacksPerSettlement: number[] = [];
       const visibleCounts: number[] = [];
-      const started = window.performance.now();
 
       const runWidth = (width: number) => {
         React.act(() => {
@@ -272,24 +273,26 @@ async function initialize() {
           ReactDOM.flushSync(() => setFixtureWidth!(width));
           ControlledResizeObserver.deliver();
           resizeObserverDeliveries += 1;
-          const frameCallbackCount = flushSettlingFrame();
+          const { callbackCount: frameCallbackCount, maxItemsRenderedInBatch } =
+            flushSettlingFrame();
           frameCallbacksPerSettlement.push(frameCallbackCount);
           maxFrameCallbacksPerSettlement = Math.max(
             maxFrameCallbacksPerSettlement,
             frameCallbackCount,
           );
+          maxItemsRenderedPerFrame = Math.max(maxItemsRenderedPerFrame, maxItemsRenderedInBatch);
           settlingFrames += 1;
         });
       };
 
+      const started = window.performance.now();
       for (const width of overflowListWidths) {
         runWidth(width);
-        const visibleCount = expectedOverflowListVisibleCount(width);
-        visibleCounts.push(visibleCount);
-        assertPartition(visibleCount);
+        callbacksAfterSettlement.push(visibilityCallbacks.length);
+        visibleCounts.push(visibilityCallbacks.at(-1)?.visible.length ?? 0);
       }
-
       const duration = window.performance.now() - started;
+
       if (frameCallbacks.size !== 0) {
         throw new Error('OverflowList left animation-frame work pending');
       }
@@ -304,6 +307,9 @@ async function initialize() {
       }
       if (itemRenderKeys.length % OVERFLOW_LIST_ITEM_COUNT !== 0) {
         throw new Error('OverflowList rendered only a partial item vector');
+      }
+      if (maxItemsRenderedPerFrame > OVERFLOW_LIST_ITEM_COUNT) {
+        throw new Error('OverflowList committed more than one partition update in one frame');
       }
       for (let offset = 0; offset < itemRenderKeys.length; offset += OVERFLOW_LIST_ITEM_COUNT) {
         const renderKeys = itemRenderKeys.slice(offset, offset + OVERFLOW_LIST_ITEM_COUNT);
@@ -347,12 +353,29 @@ async function initialize() {
       if (JSON.stringify(frameCallbacksPerSettlement) !== JSON.stringify(expectedFrameCallbacks)) {
         throw new Error('OverflowList settling callback sequence drifted');
       }
+      const expectedCallbacksAfterSettlement = [
+        ...Array.from({ length: 99 }, (_, index) => index + 1),
+        99,
+      ];
+      if (
+        JSON.stringify(callbacksAfterSettlement) !==
+        JSON.stringify(expectedCallbacksAfterSettlement)
+      ) {
+        throw new Error('OverflowList callback settlement boundary drifted');
+      }
+      if (
+        JSON.stringify(visibleCounts) !==
+        JSON.stringify([...Array.from({ length: 98 }, (_, index) => index + 1), 100, 100])
+      ) {
+        throw new Error('OverflowList per-width visible vector drifted');
+      }
 
       assertPartition(OVERFLOW_LIST_ITEM_COUNT);
       return {
         duration,
         postcondition: {
           acts,
+          callbacksAfterSettlement,
           callbackVisibleCounts,
           controlInvocations: controlInvocations.length,
           finalHiddenCount: 0,
@@ -360,6 +383,7 @@ async function initialize() {
           frameCallbacksPerSettlement,
           itemRenderCalls: itemRenderKeys.length,
           maxFrameCallbacksPerSettlement,
+          maxItemsRenderedPerFrame,
           markup: container.innerHTML,
           resizeObserverDeliveries,
           settlingFrames,

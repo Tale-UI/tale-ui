@@ -29,6 +29,14 @@ class BrowserPerformanceHarness {
         root: REPOSITORY_ROOT,
         appType: 'mpa',
         logLevel: 'silent',
+        // The private workspace root is not installed into its own node_modules.
+        // Mirror the package's source export target so browser fixtures can use
+        // the public @tale-ui/react/* spelling that package tests also verify.
+        resolve: {
+          alias: {
+            '@tale-ui/react': resolve(REPOSITORY_ROOT, 'packages/react/src'),
+          },
+        },
         server: {
           host: '127.0.0.1',
           hmr: false,

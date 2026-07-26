@@ -36,6 +36,7 @@ export const overflowListMarkupDigest =
 
 export const overflowListExpectedPostcondition = {
   acts: 100,
+  callbacksAfterSettlement: [...Array.from({ length: 99 }, (_, index) => index + 1), 99],
   callbackVisibleCounts: overflowListExpectedCallbackCounts,
   controlInvocations: 197,
   finalHiddenCount: 0,
@@ -44,6 +45,7 @@ export const overflowListExpectedPostcondition = {
   itemRenderCalls: 19_900,
   markupDigest: overflowListMarkupDigest,
   maxFrameCallbacksPerSettlement: 2,
+  maxItemsRenderedPerFrame: 100,
   resizeObserverDeliveries: 100,
   settlingFrames: 100,
   visibleCounts: overflowListExpectedVisibleCounts,
