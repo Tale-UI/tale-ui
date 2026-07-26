@@ -1,0 +1,1501 @@
+{
+  "schemaVersion": "1.0.0",
+  "runner": {
+    "name": "axe-core",
+    "version": "4.11.1"
+  },
+  "selection": {
+    "base": "458015d4dfc3414890082e9319c78858fc927aea",
+    "mode": "shared-foundation-change",
+    "changedPaths": [
+      ".cursorrules",
+      "CHANGELOG.md",
+      "CLAUDE.md",
+      "docs/component-index.md",
+      "docs/components/aspect-ratio.md",
+      "docs/components/blockquote.md",
+      "docs/components/button-group.md",
+      "docs/components/code.md",
+      "docs/components/skeleton.md",
+      "docs/consumer-claude-md-snippet-full.md",
+      "docs/consumer-claude-md-snippet.md",
+      "docs/versioned/manifest.json",
+      "docs/versioned/rollback.json",
+      "packages/react/CHANGELOG.md",
+      "packages/react/README.md",
+      "packages/react/package.json",
+      "packages/react/src/aspect-ratio/AspectRatio.styled.tsx",
+      "packages/react/src/aspect-ratio/AspectRatio.test.tsx",
+      "packages/react/src/aspect-ratio/index.ts",
+      "packages/react/src/blockquote/Blockquote.styled.tsx",
+      "packages/react/src/blockquote/Blockquote.test.tsx",
+      "packages/react/src/blockquote/index.ts",
+      "packages/react/src/button-group/ButtonGroup.styled.tsx",
+      "packages/react/src/button-group/ButtonGroup.test.tsx",
+      "packages/react/src/button-group/index.ts",
+      "packages/react/src/code/Code.styled.tsx",
+      "packages/react/src/code/Code.test.tsx",
+      "packages/react/src/code/index.ts",
+      "packages/react/src/index.ts",
+      "packages/react/src/skeleton/Skeleton.styled.tsx",
+      "packages/react/src/skeleton/Skeleton.test.tsx",
+      "packages/react/src/skeleton/index.ts",
+      "packages/react/test/public-types/contracts.tsx",
+      "packages/react/test/public-types/expansion-subpaths.json",
+      "packages/styles/CHANGELOG.md",
+      "packages/styles/package.json",
+      "packages/styles/scripts/component-equivalence-css.test.mjs",
+      "packages/styles/src/aspect-ratio.css",
+      "packages/styles/src/blockquote.css",
+      "packages/styles/src/button-group.css",
+      "packages/styles/src/code.css",
+      "packages/styles/src/index.css",
+      "packages/styles/src/skeleton.css",
+      "packages/styles/test/validation/expansion-subpaths.json",
+      "playground/storybook/src/stories/AspectRatio.stories.tsx",
+      "playground/storybook/src/stories/Blockquote.stories.tsx",
+      "playground/storybook/src/stories/ButtonGroup.stories.tsx",
+      "playground/storybook/src/stories/Code.stories.tsx",
+      "playground/storybook/src/stories/Skeleton.stories.tsx",
+      "playground/vite-app/src/demos/ComponentAudit.tsx",
+      "registry/artifacts.json",
+      "registry/components.json",
+      "registry/integrations/code-connect.json",
+      "registry/integrations/figma-parity-public.json",
+      "registry/integrations/figma-public.json",
+      "registry/metrics/current.json",
+      "registry/metrics/rollback.json",
+      "registry/reports/exceptions.json",
+      "registry/reports/migrations.json",
+      "registry/reports/ownership.json",
+      "registry/reports/replacements.json",
+      "registry/reports/status.json",
+      "test/visual/snapshots/storybook.spec.ts/components-aspectratio--default.png",
+      "test/visual/snapshots/storybook.spec.ts/components-blockquote--default.png",
+      "test/visual/snapshots/storybook.spec.ts/components-buttongroup--default.png",
+      "test/visual/snapshots/storybook.spec.ts/components-code--default.png",
+      "test/visual/snapshots/storybook.spec.ts/components-skeleton--default.png",
+      "test/visual/storybook.spec.ts",
+      "tools/accessibility-baseline.test.mjs",
+      "tools/generate-registry-local-declarations.test.cjs",
+      "tools/generate-registry.js",
+      "tools/golden-prompts/aspect-ratio-media.json",
+      "tools/golden-prompts/blockquote-attribution.json",
+      "tools/golden-prompts/button-group-actions.json",
+      "tools/golden-prompts/code-inline.json",
+      "tools/golden-prompts/index.json",
+      "tools/golden-prompts/skeleton-loading.json",
+      "tools/run-changed-a11y.mjs"
+    ],
+    "changedSlugs": [
+      "aspect-ratio",
+      "blockquote",
+      "button-group",
+      "code",
+      "skeleton"
+    ],
+    "storyCount": 111,
+    "stories": [
+      "components-accordion--all-variations",
+      "components-alertdialog--all-variations",
+      "components-appshell--sidebar-layout",
+      "components-appstorebutton--all-variations",
+      "components-aspectratio--default",
+      "components-autocomplete--all-variations",
+      "components-avatar--all-variations",
+      "components-backgroundpattern--default",
+      "components-badge--all-variations",
+      "components-badgegroup--default",
+      "components-banner--all-variations",
+      "components-blockquote--default",
+      "components-breadcrumbs--all-variations",
+      "components-button--all-variations",
+      "components-buttongroup--default",
+      "components-calendar--all-variations",
+      "components-card--default",
+      "components-carousel--all-variations",
+      "components-chat--tool-states",
+      "components-checkbox--all-variations",
+      "components-checkboxfield--default",
+      "components-checkboxgroup--all-variations",
+      "components-code--default",
+      "components-codeblock--default",
+      "components-color-components--all-variations",
+      "components-color-picker--all-variations",
+      "components-colormodetoggle--all-variations",
+      "components-column--default",
+      "components-combobox--all-variations",
+      "components-commandpalette--default",
+      "components-container--all-variations",
+      "components-contextmenu--all-variations",
+      "components-creditcard--default",
+      "components-datefield--all-variations",
+      "components-datepicker--all-variations",
+      "components-daterangepicker--all-variations",
+      "components-dialog--all-variations",
+      "components-disclosure--all-variations",
+      "components-doticon--all-variations",
+      "components-drawer--all-variations",
+      "components-emptystate--all-variations",
+      "components-featuredicon--all-variations",
+      "components-field--all-variations",
+      "components-fieldset--all-variations",
+      "components-file-components--all-variations",
+      "components-fileupload--default",
+      "components-form--all-variations",
+      "components-gridlist--all-variations",
+      "components-headernav--all-variations",
+      "components-i18nprovider--english",
+      "components-icon--all-variations",
+      "components-iconbutton--all-variations",
+      "components-illustration--default",
+      "components-image--default",
+      "components-imagecropper--default",
+      "components-input--all-variations",
+      "components-inputgroup--default",
+      "components-iphonemockup--default",
+      "components-kbd--default",
+      "components-keyvaluepairs--default",
+      "components-link--all-variations",
+      "components-list--all-variations",
+      "components-listbox--default",
+      "components-menu--all-variations",
+      "components-menubar--all-variations",
+      "components-meter--all-variations",
+      "components-navigationmenu--all-variations",
+      "components-numberfield--all-variations",
+      "components-pagination--all-variations",
+      "components-paginationdot--default",
+      "components-paginationline--default",
+      "components-paymentinput--all-variations",
+      "components-pininput--all-variations",
+      "components-popover--all-variations",
+      "components-previewcard--all-variations",
+      "components-progressbar--all-variations",
+      "components-progresscircle--all-variations",
+      "components-qrcode--default",
+      "components-radio--all-variations",
+      "components-radiofield--default",
+      "components-radiogroup--all-variations",
+      "components-rangecalendar--all-variations",
+      "components-ratingstars--all-variations",
+      "components-row--default",
+      "components-scrollarea--all-variations",
+      "components-searchfield--all-variations",
+      "components-sectiondivider--default",
+      "components-select--all-variations",
+      "components-selectnative--all-variations",
+      "components-separator--all-variations",
+      "components-sidebar--default",
+      "components-skeleton--default",
+      "components-slider--all-variations",
+      "components-socialbutton--all-variations",
+      "components-spinner--all-variations",
+      "components-switch--all-variations",
+      "components-switchfield--default",
+      "components-table--all-variations",
+      "components-tabs--all-variations",
+      "components-taggroup--all-variations",
+      "components-text--all-variations",
+      "components-textarea--all-variations",
+      "components-texteditor--default",
+      "components-textfield--all-variations",
+      "components-timefield--all-variations",
+      "components-togglebutton--all-variations",
+      "components-toolbar--all-variations",
+      "components-tooltip--all-variations",
+      "components-tree--all-variations",
+      "components-videoplayer--default",
+      "foundations-motion-and-elevation--elevation-hierarchy"
+    ]
+  },
+  "totals": {
+    "violations": 203,
+    "newViolations": 0,
+    "resolvedBaselineViolations": 10,
+    "activeExceptions": 0
+  },
+  "violations": [
+    {
+      "storyId": "components-autocomplete--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria1335649732-_r_28_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-autocomplete--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria1335649732-_r_2f_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-autocomplete--all-variations",
+      "rule": "scrollable-region-focusable",
+      "target": "#storybook-root > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-amber.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-amber.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-amber.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-cyan.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-cyan.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-cyan.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-emerald.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-emerald.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-emerald.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-green.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-green.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-green.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-lime.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-lime.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-lime.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-orange.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-orange.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-orange.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-red.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-red.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-red.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-sky.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-sky.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-sky.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-success.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-success.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-success.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-teal.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-teal.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-teal.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-warning.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-warning.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-warning.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-yellow.tale-badge--lg.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-yellow.tale-badge--md.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-yellow.tale-badge--sm.tale-badge--rounded",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-amber.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-amber.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-amber.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-cyan.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-cyan.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-cyan.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-emerald.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-emerald.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-emerald.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-green.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-green.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-green.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-lime.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-lime.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-lime.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-orange.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-orange.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-orange.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-red.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-red.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-red.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-sky.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-sky.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-sky.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-success.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-success.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-success.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-teal.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-teal.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-teal.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-warning.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-warning.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-warning.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-yellow.tale-badge--lg.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-yellow.tale-badge--md.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-badge--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > div:nth-child(2) > .color-yellow.tale-badge--sm.tale-badge--color",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-success.tale-banner--sm.tale-banner > .tale-banner__description",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-success.tale-banner--sm.tale-banner > .tale-banner__title",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-warning.tale-banner--sm.tale-banner > .tale-banner__description",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": ".color-warning.tale-banner--sm.tale-banner > .tale-banner__title",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(2) > .color-success.tale-banner[role=\"status\"] > .tale-banner__description",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(2) > .color-success.tale-banner[role=\"status\"] > .tale-banner__title",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(2) > .color-warning.tale-banner[role=\"status\"] > .tale-banner__description",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-banner--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(2) > .color-warning.tale-banner[role=\"status\"] > .tale-banner__title",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-button--all-variations",
+      "rule": "button-name",
+      "target": "#react-aria1615814929-_r_1o_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-button--all-variations",
+      "rule": "button-name",
+      "target": "#react-aria1615814929-_r_1q_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-button--all-variations",
+      "rule": "button-name",
+      "target": "#react-aria1615814929-_r_1s_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-button--all-variations",
+      "rule": "button-name",
+      "target": "#react-aria1615814929-_r_1u_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-button--all-variations",
+      "rule": "button-name",
+      "target": "#react-aria1615814929-_r_20_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-button--all-variations",
+      "rule": "button-name",
+      "target": "#react-aria1615814929-_r_22_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-button--all-variations",
+      "rule": "button-name",
+      "target": "#react-aria1615814929-_r_24_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-carousel--all-variations",
+      "rule": "landmark-unique",
+      "target": "div:nth-child(1) > .tale-carousel[data-orientation=\"horizontal\"][role=\"region\"]",
+      "impact": "moderate"
+    },
+    {
+      "storyId": "components-datefield--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7295617136-_r_13_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datefield--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7295617136-_r_17_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datefield--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7295617136-_r_1b_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datefield--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7295617136-_r_5_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datefield--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7295617136-_r_9_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datefield--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria7295617136-_r_d_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria6690811458-_r_d_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria6690811458-_r_h_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-datepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria6690811458-_r_l_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-daterangepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria5769843777-_r_13_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-daterangepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria5769843777-_r_c_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-daterangepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria5769843777-_r_g_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-daterangepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria5769843777-_r_k_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-daterangepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria5769843777-_r_r_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-daterangepicker--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria5769843777-_r_v_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-fieldset--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria6102368121-_r_c_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-fieldset--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria6102368121-_r_d_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-fieldset--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria6102368121-_r_h_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-fieldset--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria6102368121-_r_i_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-fieldset--all-variations",
+      "rule": "color-contrast",
+      "target": "#tale-ui-_r_b_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-file-components--all-variations",
+      "rule": "color-contrast",
+      "target": ".story-dropzone-basic > p",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-headernav--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > header > .tale-header-nav__actions > .tale-button--neutral.tale-button[href$=\"login\"]",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-headernav--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(2) > header > .tale-header-nav__actions > .tale-button--neutral.tale-button[href$=\"login\"]",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-headernav--all-variations",
+      "rule": "landmark-no-duplicate-banner",
+      "target": "div:nth-child(1) > header",
+      "impact": "moderate"
+    },
+    {
+      "storyId": "components-headernav--all-variations",
+      "rule": "landmark-unique",
+      "target": "div:nth-child(1) > header",
+      "impact": "moderate"
+    },
+    {
+      "storyId": "components-inputgroup--default",
+      "rule": "color-contrast",
+      "target": ".tale-input-group__addon",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-keyvaluepairs--default",
+      "rule": "color-contrast",
+      "target": ".tale-badge",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-menubar--all-variations",
+      "rule": "aria-required-children",
+      "target": ".tale-menubar",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-meter--all-variations",
+      "rule": "aria-allowed-attr",
+      "target": "#react-aria3288497014-_r_0_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-meter--all-variations",
+      "rule": "aria-allowed-attr",
+      "target": "#react-aria3288497014-_r_3_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-meter--all-variations",
+      "rule": "aria-allowed-attr",
+      "target": "#react-aria3288497014-_r_6_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-meter--all-variations",
+      "rule": "aria-allowed-attr",
+      "target": "#react-aria3288497014-_r_9_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-navigationmenu--all-variations",
+      "rule": "landmark-unique",
+      "target": "div:nth-child(1) > nav",
+      "impact": "moderate"
+    },
+    {
+      "storyId": "components-pininput--all-variations",
+      "rule": "label",
+      "target": "div:nth-child(1) > .tale-pin-input[data-input-otp-container=\"true\"] > div:nth-child(2) > input[maxlength=\"4\"]",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-pininput--all-variations",
+      "rule": "label",
+      "target": "div:nth-child(2) > input[maxlength=\"6\"]",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-pininput--all-variations",
+      "rule": "label",
+      "target": "div:nth-child(4) > .tale-pin-input[data-input-otp-container=\"true\"] > div:nth-child(2) > input[maxlength=\"4\"]",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-pininput--all-variations",
+      "rule": "label",
+      "target": "div:nth-child(4) > input[maxlength=\"6\"]",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_0_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_11_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_14_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_17_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_1a_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_1d_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_3_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_6_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_9_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_c_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_f_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_i_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_l_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_o_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_r_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progressbar--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria6546461377-_r_u_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_0_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_11_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_14_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_17_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_1a_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_1d_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_1g_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_1j_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_3_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_6_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_9_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_c_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_f_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_i_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_l_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_o_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_r_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-progresscircle--all-variations",
+      "rule": "aria-progressbar-name",
+      "target": "#react-aria5669836207-_r_u_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-ratingstars--all-variations",
+      "rule": "color-contrast",
+      "target": ".tale-rating-badge--lg",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-ratingstars--all-variations",
+      "rule": "color-contrast",
+      "target": ".tale-rating-badge--md",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-ratingstars--all-variations",
+      "rule": "color-contrast",
+      "target": ".tale-rating-badge--sm",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-scrollarea--all-variations",
+      "rule": "scrollable-region-focusable",
+      "target": "div:nth-child(1) > .tale-scroll-area > .tale-scroll-area__viewport",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-scrollarea--all-variations",
+      "rule": "scrollable-region-focusable",
+      "target": "div:nth-child(2) > .tale-scroll-area > .tale-scroll-area__viewport",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-select--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria1375574732-_r_1f_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-select--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria1375574732-_r_7_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-select--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria1375574732-_r_h_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-select--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria1375574732-_r_r_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-selectnative--all-variations",
+      "rule": "select-name",
+      "target": ".tale-select-native--md:nth-child(6)",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-selectnative--all-variations",
+      "rule": "select-name",
+      "target": ".tale-select-native--md:nth-child(9)",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-selectnative--all-variations",
+      "rule": "select-name",
+      "target": ".tale-select-native--sm:nth-child(5)",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-selectnative--all-variations",
+      "rule": "select-name",
+      "target": ".tale-select-native--sm:nth-child(8)",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-slider--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria8183880507-_r_20_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-slider--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria8183880507-_r_25_ > .tale-slider__header > output",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-slider--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria8183880507-_r_26_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-slider--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria8183880507-_r_2u_",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-slider--all-variations",
+      "rule": "color-contrast",
+      "target": "output[for=\"react-aria8183880507-_r_20_-0\"]",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-slider--all-variations",
+      "rule": "color-contrast",
+      "target": "output[for=\"react-aria8183880507-_r_2u_-0\"]",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-slider--all-variations",
+      "rule": "label",
+      "target": "#react-aria8183880507-_r_s_-0",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-switch--all-variations",
+      "rule": "label",
+      "target": "div:nth-child(1) > label > span:nth-child(1) > input",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-switch--all-variations",
+      "rule": "label",
+      "target": "div:nth-child(2) > label[data-selected=\"true\"] > span:nth-child(1) > input",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-switch--all-variations",
+      "rule": "label",
+      "target": "div:nth-child(3) > label[data-disabled=\"true\"] > span:nth-child(1) > input",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-switch--all-variations",
+      "rule": "label",
+      "target": "label[data-selected=\"true\"][data-disabled=\"true\"] > span:nth-child(1) > input",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "aria-valid-attr-value",
+      "target": "#react-aria802683475-_r_1_-tab-t1",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "aria-valid-attr-value",
+      "target": "#react-aria802683475-_r_4_-tab-t1",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "aria-valid-attr-value",
+      "target": "#react-aria802683475-_r_7_-tab-t1",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "aria-valid-attr-value",
+      "target": "#react-aria802683475-_r_a_-tab-t1",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "aria-valid-attr-value",
+      "target": "#react-aria802683475-_r_d_-tab-t1",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "aria-valid-attr-value",
+      "target": "#react-aria802683475-_r_g_-tab-t1",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria802683475-_r_7_-tab-t2",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria802683475-_r_7_-tab-t3",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria802683475-_r_a_-tab-t2",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria802683475-_r_a_-tab-t3",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria802683475-_r_r_-tab-t2",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria802683475-_r_r_-tab-t3",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria802683475-_r_v_-tab-t2",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-tabs--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria802683475-_r_v_-tab-t3",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-texteditor--default",
+      "rule": "aria-input-field-name",
+      "target": ".tiptap",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-texteditor--default",
+      "rule": "color-contrast",
+      "target": ".tale-text-editor__hint",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-timefield--all-variations",
+      "rule": "color-contrast",
+      "target": "#react-aria1782883256-_r_h_",
+      "impact": "serious"
+    }
+  ],
+  "newViolations": [],
+  "resolvedBaselineViolations": [
+    {
+      "storyId": "components-container--all-variations",
+      "rule": "color-contrast",
+      "target": ".story-container-demo:nth-child(13) > .story-container-label",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-container--all-variations",
+      "rule": "color-contrast",
+      "target": ".story-container-demo:nth-child(15) > .story-container-label",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-container--all-variations",
+      "rule": "color-contrast",
+      "target": ".story-container-demo:nth-child(16) > .story-container-label",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-container--all-variations",
+      "rule": "color-contrast",
+      "target": ".story-container-demo:nth-child(17) > .story-container-label",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-container--all-variations",
+      "rule": "color-contrast",
+      "target": ".story-container-demo:nth-child(18) > .story-container-label",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-container--all-variations",
+      "rule": "color-contrast",
+      "target": ".story-container-demo:nth-child(3) > .story-container-label",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-fileupload--default",
+      "rule": "label",
+      "target": "#_r_0_",
+      "impact": "critical"
+    },
+    {
+      "storyId": "components-headernav--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(1) > header > .tale-header-nav__logo > .tale-header-nav__logo-link[href=\"/\"]",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-headernav--all-variations",
+      "rule": "color-contrast",
+      "target": "div:nth-child(2) > header > .tale-header-nav__logo > .tale-header-nav__logo-link[href=\"/\"]",
+      "impact": "serious"
+    },
+    {
+      "storyId": "components-sidebar--default",
+      "rule": "color-contrast",
+      "target": ".tale-sidebar__header > strong",
+      "impact": "serious"
+    }
+  ]
+}
