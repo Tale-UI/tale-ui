@@ -189,7 +189,7 @@ const violations = [];
 try {
   const page = await browser.newPage();
   for (const story of selected) {
-    const storyUrl = new globalThis.URL('iframe', `${URL.replace(/\/$/, '')}/`);
+    const storyUrl = new globalThis.URL('iframe.html', `${URL.replace(/\/$/, '')}/`);
     storyUrl.searchParams.set('id', story.id);
     storyUrl.searchParams.set('viewMode', 'story');
     await page.goto(storyUrl.toString(), { waitUntil: 'networkidle' });

@@ -282,7 +282,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:4f7f316d969a4356a7892748201e9c96d1c395a4535fec28e9dd7aca093e8873",
+  "sourceRevision": "sha256:856c9b0850485aa0fabc9e1eec86f591c086ac789d649e85c8ed187c8acf2374",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -52080,5 +52080,5 @@
       }
     }
   ],
-  "digest": "sha256:8afd395eb8dd404aa65224124a354aab5e204f84ed4aea84525196b8f3380944"
+  "digest": "sha256:40d01d912a50108954a0f89af0a43147c2091c8b7ea3ef8e144b64f223f126c3"
 }

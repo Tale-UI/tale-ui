@@ -26,7 +26,8 @@
   isolation: isolate;
 }
 
-.tale-button-group--attached > :where(.tale-button, .tale-icon-button, .tale-toggle-button) {
+.tale-button-group.tale-button-group--attached
+  > :where(.tale-button, .tale-icon-button, .tale-toggle-button) {
   position: relative;
   border-radius: 0;
 }

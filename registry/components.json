@@ -323,6 +323,13 @@
             "cover",
             "contain"
           ]
+        },
+        {
+          "name": "ratio",
+          "type": "number | `${number}/${number}` | `${number} / ${number}`",
+          "required": false,
+          "description": "Width-to-height ratio. Invalid runtime values fall back to `1`. @default 1",
+          "default": "1"
         }
       ],
       "parts": null,

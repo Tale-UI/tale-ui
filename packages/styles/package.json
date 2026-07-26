@@ -15,7 +15,7 @@
   "style": "src/index.css",
   "scripts": {
     "test:exports": "node ./scripts/validate-package-exports.mjs",
-    "test:package": "node ./scripts/validate-package-exports.mjs && publint",
+    "test:package": "node --test ./scripts/component-equivalence-css.test.mjs && node ./scripts/validate-package-exports.mjs && publint",
     "test:packed-consumers": "node ./scripts/test-packed-consumers.mjs"
   },
   "exports": {
