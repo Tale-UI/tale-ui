@@ -1965,7 +1965,7 @@ shasum -a 256 \
   tools/benchmark-roadmap-performance.tsx
 
 git diff --exit-code \
-  761c2ddbfe44e05a8b203fc856a5456b31b0d3ef \
+  ca836c6ba3727b0180f04c830ad57464061fa5a6 \
   -- \
   schemas/performance-budget.schema.json \
   test/baselines/roadmap/performance-budgets.json \
