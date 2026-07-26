@@ -623,6 +623,18 @@
     {
       "slug": "timestamp-relative",
       "difficulty": "simple"
+    },
+    {
+      "slug": "overflow-list-responsive-actions",
+      "difficulty": "complex"
+    },
+    {
+      "slug": "resizable-workspace",
+      "difficulty": "complex"
+    },
+    {
+      "slug": "lightbox-media-viewer",
+      "difficulty": "complex"
     }
   ]
 }

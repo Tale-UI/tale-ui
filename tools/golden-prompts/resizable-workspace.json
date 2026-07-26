@@ -1,0 +1,7 @@
+{
+  "slug": "resizable-workspace",
+  "difficulty": "complex",
+  "prompt": "Create a Tale UI workspace with a resizable navigation panel and editor panel.",
+  "reference": "import { Resizable } from '@tale-ui/react/resizable';\n\nexport function ResizableWorkspace() {\n  return (\n    <Resizable.Root defaultSizes={{ navigation: 30, editor: 70 }}>\n      <Resizable.Panel id=\"navigation\" minSize={20} maxSize={45}>\n        Navigation\n      </Resizable.Panel>\n      <Resizable.Handle\n        id=\"navigation-editor\"\n        before=\"navigation\"\n        after=\"editor\"\n        aria-label=\"Resize navigation and editor\"\n      />\n      <Resizable.Panel id=\"editor\" minSize={55} maxSize={80}>\n        Editor\n      </Resizable.Panel>\n    </Resizable.Root>\n  );\n}",
+  "tags": ["Resizable"]
+}
