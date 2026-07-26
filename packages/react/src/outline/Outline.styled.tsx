@@ -81,6 +81,13 @@ interface ValidatedItems {
   signature: string;
 }
 
+interface OutlineItemSnapshot {
+  id: unknown;
+  targetId: unknown;
+  label: unknown;
+  level: unknown;
+}
+
 interface LatestState {
   activeId: string | null;
   canAct: boolean;
@@ -114,8 +121,40 @@ function isValidId(value: unknown): value is string {
   );
 }
 
-function validateItems(value: unknown): ValidatedItems | null {
-  if (!Array.isArray(value)) {
+function snapshotItems(value: unknown): Array<OutlineItemSnapshot | null> | null {
+  let candidates: unknown[];
+  try {
+    if (!Array.isArray(value)) {
+      return null;
+    }
+    candidates = Array.from(value);
+  } catch {
+    return null;
+  }
+
+  return candidates.map((candidate) => {
+    try {
+      if (candidate === null || typeof candidate !== 'object' || Array.isArray(candidate)) {
+        return null;
+      }
+
+      const item = candidate as Partial<OutlineItem>;
+      return {
+        id: item.id,
+        targetId: item.targetId,
+        label: item.label,
+        level: item.level,
+      };
+    } catch {
+      return null;
+    }
+  });
+}
+
+function validateItems(
+  value: readonly (OutlineItemSnapshot | null)[] | null,
+): ValidatedItems | null {
+  if (value === null) {
     return null;
   }
 
@@ -126,18 +165,18 @@ function validateItems(value: unknown): ValidatedItems | null {
   const tree: OutlineNode[] = [];
 
   for (let index = 0; index < value.length; index += 1) {
-    const candidate = value[index];
-    if (candidate === null || typeof candidate !== 'object' || Array.isArray(candidate)) {
+    const item = value[index];
+    if (item === null) {
       return null;
     }
 
-    const item = candidate as Partial<OutlineItem>;
     if (
       !isValidId(item.id) ||
       !isValidId(item.targetId) ||
       !isNonWhitespaceString(item.label) ||
+      typeof item.level !== 'number' ||
       !Number.isInteger(item.level) ||
-      (item.level ?? 0) < 1 ||
+      item.level < 1 ||
       itemIds.has(item.id) ||
       targetIds.has(item.targetId)
     ) {
@@ -146,8 +185,8 @@ function validateItems(value: unknown): ValidatedItems | null {
 
     if (
       (index === 0 && item.level !== 1) ||
-      (index > 0 && item.level! > items[index - 1]!.level + 1) ||
-      item.level! > stack.length + 1
+      (index > 0 && item.level > items[index - 1]!.level + 1) ||
+      item.level > stack.length + 1
     ) {
       return null;
     }
@@ -156,7 +195,7 @@ function validateItems(value: unknown): ValidatedItems | null {
       id: item.id,
       targetId: item.targetId,
       label: item.label,
-      level: item.level!,
+      level: item.level,
     };
     const node: OutlineNode = { item: normalizedItem, children: [] };
 
@@ -186,20 +225,21 @@ function validateItems(value: unknown): ValidatedItems | null {
   };
 }
 
-function getSafeFallbackItems(value: unknown): OutlineItem[] {
-  if (!Array.isArray(value)) {
+function getSafeFallbackItems(
+  value: readonly (OutlineItemSnapshot | null)[] | null,
+): OutlineItem[] {
+  if (value === null) {
     return [];
   }
 
   const result: OutlineItem[] = [];
   const itemIds = new Set<string>();
   const targetIds = new Set<string>();
-  for (const candidate of value) {
-    if (candidate === null || typeof candidate !== 'object' || Array.isArray(candidate)) {
+  for (const item of value) {
+    if (item === null) {
       continue;
     }
 
-    const item = candidate as Partial<OutlineItem>;
     if (
       isValidId(item.id) &&
       isValidId(item.targetId) &&
@@ -216,38 +256,52 @@ function getSafeFallbackItems(value: unknown): OutlineItem[] {
 }
 
 function normalizeThresholds(value: unknown): number[] | null {
-  const candidates =
-    value === undefined ? DEFAULT_THRESHOLDS : Array.isArray(value) ? value : [value];
-  if (
-    candidates.length === 0 ||
-    candidates.some(
-      (threshold) =>
-        typeof threshold !== 'number' ||
-        !Number.isFinite(threshold) ||
-        threshold < 0 ||
-        threshold > 1,
-    )
-  ) {
+  let candidates: readonly unknown[];
+  try {
+    candidates =
+      value === undefined ? DEFAULT_THRESHOLDS : Array.isArray(value) ? Array.from(value) : [value];
+  } catch {
     return null;
   }
 
-  return [...new Set(candidates)].sort((left, right) => left - right);
+  if (candidates.length === 0) {
+    return null;
+  }
+
+  const normalized: number[] = [];
+  for (const threshold of candidates) {
+    if (
+      typeof threshold !== 'number' ||
+      !Number.isFinite(threshold) ||
+      threshold < 0 ||
+      threshold > 1
+    ) {
+      return null;
+    }
+    normalized.push(threshold);
+  }
+
+  return [...new Set(normalized)].sort((left, right) => left - right);
 }
 
 function isValidObserverRoot(root: unknown, nav: HTMLElement): root is Element | Document | null {
-  if (root === null) {
-    return true;
-  }
+  try {
+    if (root === null) {
+      return true;
+    }
 
-  if (typeof root !== 'object') {
+    if (typeof root !== 'object') {
+      return false;
+    }
+
+    if (root === nav.ownerDocument) {
+      return true;
+    }
+
+    return (root as Node).nodeType === 1 && (root as Element).ownerDocument === nav.ownerDocument;
+  } catch {
     return false;
   }
-
-  if (root === nav.ownerDocument) {
-    return true;
-  }
-
-  return (root as Node).nodeType === 1 && (root as Element).ownerDocument === nav.ownerDocument;
 }
 
 function isPrimaryUnmodifiedActivation(event: React.MouseEvent<HTMLAnchorElement>): boolean {
@@ -396,13 +450,14 @@ export const Outline = React.forwardRef<HTMLElement, OutlineProps>((props, forwa
   }
   void blockedRole;
 
-  const parsedItems = validateItems(itemsProp);
+  const itemSnapshots = snapshotItems(itemsProp);
+  const parsedItems = validateItems(itemSnapshots);
   const validatedItemsCacheRef = React.useRef<ValidatedItems | null>(null);
   if (parsedItems && validatedItemsCacheRef.current?.signature !== parsedItems.signature) {
     validatedItemsCacheRef.current = parsedItems;
   }
   const validatedItems = parsedItems ? validatedItemsCacheRef.current : null;
-  const safeFallbackItems = validatedItems ? [] : getSafeFallbackItems(itemsProp);
+  const safeFallbackItems = validatedItems ? [] : getSafeFallbackItems(itemSnapshots);
   const hasValidName =
     (isNonWhitespaceString(ariaLabel) && ariaLabelledby === undefined) ||
     (ariaLabel === undefined && isNonWhitespaceString(ariaLabelledby));

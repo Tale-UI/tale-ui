@@ -194,6 +194,56 @@ describe('Outline', () => {
     warning.mockRestore();
   });
 
+  it('contains throwing item getters and derives an inert fallback from snapshots', async () => {
+    const warning = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const throwingItem = {
+      get id(): string {
+        throw new Error('private item detail');
+      },
+      targetId: 'outline-hostile',
+      label: 'Hostile',
+      level: 1,
+    };
+    const onActiveChange = vi.fn();
+    const { container } = await render(
+      <Outline
+        aria-label="On this page"
+        items={
+          [defaultItems[0], throwingItem, defaultItems[3]] as unknown as readonly OutlineItem[]
+        }
+        observeTargets={false}
+        onActiveChange={onActiveChange}
+      />,
+    );
+
+    expect(container.querySelector('.tale-outline')?.hasAttribute('data-invalid')).toBe(true);
+    expect(screen.getByRole('link', { name: 'Overview' })).toBeTruthy();
+    expect(screen.queryByRole('link', { name: 'Hostile' })).toBeNull();
+    expect(screen.getByRole('link', { name: 'API' })).toBeTruthy();
+    fireEvent.click(screen.getByRole('link', { name: 'API' }));
+    expect(onActiveChange).not.toHaveBeenCalled();
+    warning.mockRestore();
+  });
+
+  it('fails hostile item-array proxies closed without rendering partial data', async () => {
+    const warning = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const hostileItems = new Proxy([...defaultItems], {
+      get(target, property, receiver) {
+        if (property === Symbol.iterator) {
+          throw new Error('private array detail');
+        }
+        return Reflect.get(target, property, receiver);
+      },
+    });
+    const { container } = await render(
+      <Outline aria-label="On this page" items={hostileItems} observeTargets={false} />,
+    );
+
+    expect(container.querySelector('.tale-outline')?.hasAttribute('data-invalid')).toBe(true);
+    expect(screen.queryAllByRole('link')).toHaveLength(0);
+    warning.mockRestore();
+  });
+
   it('runs onAction first and lets preventDefault suppress an uncontrolled proposal', async () => {
     const calls: string[] = [];
     const onActiveChange = vi.fn((id: string | null) => calls.push(`change:${id}`));
@@ -452,6 +502,54 @@ describe('Outline', () => {
     warning.mockRestore();
   });
 
+  it('contains hostile observer-root node getters while preserving click behavior', async () => {
+    const warning = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    addTargets();
+    const onActiveChange = vi.fn();
+    const nodeTypeFailure = new Proxy(
+      {},
+      {
+        get(_target, property) {
+          if (property === 'nodeType') {
+            throw new Error('private node detail');
+          }
+          return undefined;
+        },
+      },
+    );
+    const ownerDocumentFailure = new Proxy(
+      { nodeType: 1 },
+      {
+        get(target, property, receiver) {
+          if (property === 'ownerDocument') {
+            throw new Error('private owner-document detail');
+          }
+          return Reflect.get(target, property, receiver);
+        },
+      },
+    );
+    const view = await render(
+      <Outline
+        aria-label="On this page"
+        items={defaultItems}
+        getObserverRoot={() => nodeTypeFailure as unknown as Element}
+        onActiveChange={onActiveChange}
+      />,
+    );
+
+    expect(observerInstances.filter((observer) => observer.disconnectCalls === 0)).toHaveLength(0);
+    fireEvent.click(screen.getByRole('link', { name: 'API' }));
+    expect(onActiveChange).toHaveBeenLastCalledWith('api');
+
+    await view.setProps({
+      getObserverRoot: () => ownerDocumentFailure as unknown as Element,
+    });
+    expect(observerInstances.filter((observer) => observer.disconnectCalls === 0)).toHaveLength(0);
+    fireEvent.click(screen.getByRole('link', { name: 'Overview' }));
+    expect(onActiveChange).toHaveBeenLastCalledWith('overview');
+    warning.mockRestore();
+  });
+
   it('disables only observation for invalid observer settings', async () => {
     const warning = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const onActiveChange = vi.fn();
@@ -460,6 +558,32 @@ describe('Outline', () => {
         aria-label="On this page"
         items={defaultItems}
         observerThreshold={2}
+        onActiveChange={onActiveChange}
+      />,
+    );
+
+    expect(observerInstances).toHaveLength(0);
+    fireEvent.click(screen.getByRole('link', { name: 'API' }));
+    expect(onActiveChange).toHaveBeenCalledWith('api');
+    warning.mockRestore();
+  });
+
+  it('contains throwing threshold iterators and disables only observation', async () => {
+    const warning = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const hostileThresholds = new Proxy([0, 0.5, 1], {
+      get(target, property, receiver) {
+        if (property === Symbol.iterator) {
+          throw new Error('private threshold detail');
+        }
+        return Reflect.get(target, property, receiver);
+      },
+    });
+    const onActiveChange = vi.fn();
+    await render(
+      <Outline
+        aria-label="On this page"
+        items={defaultItems}
+        observerThreshold={hostileThresholds}
         onActiveChange={onActiveChange}
       />,
     );
