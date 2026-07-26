@@ -410,6 +410,9 @@ function canReceiveFocus(element: HTMLElement): boolean {
  *
  * @example
  * ```tsx
+ * import { Image } from '@tale-ui/react/image';
+ * import { Lightbox } from '@tale-ui/react/lightbox';
+ *
  * <Lightbox.Root
  *   items={photos}
  *   getKey={(photo) => photo.id}
