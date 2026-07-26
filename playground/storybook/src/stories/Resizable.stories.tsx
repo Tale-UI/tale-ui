@@ -1,7 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Resizable } from '@tale-ui/react/resizable';
-import '@tale-ui/react-styles/resizable';
 
 const meta = {
   title: 'Components/Resizable',

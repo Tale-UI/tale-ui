@@ -8,21 +8,26 @@ interface GalleryItem {
   src: string;
 }
 
+function imageDataUrl(color: string, label: string) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800"><rect width="1200" height="800" fill="${color}"/><text x="600" y="410" fill="white" font-family="sans-serif" font-size="64" text-anchor="middle">${label}</text></svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}
+
 const gallery: readonly GalleryItem[] = [
   {
     id: 'coast',
     label: 'Rocky coast at golden hour',
-    src: 'https://picsum.photos/seed/tale-lightbox-coast/1200/800',
+    src: imageDataUrl('#315f78', 'Rocky coast'),
   },
   {
     id: 'forest',
     label: 'Sunlight through a green forest',
-    src: 'https://picsum.photos/seed/tale-lightbox-forest/1200/800',
+    src: imageDataUrl('#315f48', 'Forest trail'),
   },
   {
     id: 'city',
     label: 'City lights reflected after rain',
-    src: 'https://picsum.photos/seed/tale-lightbox-city/1200/800',
+    src: imageDataUrl('#513f70', 'City lights'),
   },
 ];
 
