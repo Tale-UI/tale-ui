@@ -31,6 +31,7 @@
     "docs/components/checkbox-field.md",
     "docs/components/checkbox-group.md",
     "docs/components/checkbox.md",
+    "docs/components/citation.md",
     "docs/components/code-block.md",
     "docs/components/code.md",
     "docs/components/color-area.md",
@@ -81,6 +82,7 @@
     "docs/components/link.md",
     "docs/components/list-box.md",
     "docs/components/list.md",
+    "docs/components/markdown.md",
     "docs/components/menu.md",
     "docs/components/menubar.md",
     "docs/components/merge-props.md",
@@ -88,6 +90,7 @@
     "docs/components/multi-select.md",
     "docs/components/navigation-menu.md",
     "docs/components/number-field.md",
+    "docs/components/outline.md",
     "docs/components/pagination-dot.md",
     "docs/components/pagination-line.md",
     "docs/components/pagination.md",
@@ -131,6 +134,7 @@
     "docs/components/text-field.md",
     "docs/components/text.md",
     "docs/components/time-field.md",
+    "docs/components/timestamp.md",
     "docs/components/toggle-button.md",
     "docs/components/toggle-group.md",
     "docs/components/toolbar.md",
@@ -164,6 +168,7 @@
     "docs/recipes/command-palette-visual-discovery.md",
     "docs/recipes/dashboard-with-charts.md",
     "docs/recipes/data-table-with-sorting.md",
+    "docs/recipes/document-sources.md",
     "docs/recipes/dropdown-account-breadcrumb.md",
     "docs/recipes/dropdown-account-button.md",
     "docs/recipes/dropdown-account-card-md.md",
@@ -282,7 +287,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:856c9b0850485aa0fabc9e1eec86f591c086ac789d649e85c8ed187c8acf2374",
+  "sourceRevision": "sha256:21a9825f7b9d0ab18da5125c7bfef8ba130011ee53eb4be4d7b049e9a09e7ab1",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -10234,6 +10239,54 @@
       }
     },
     {
+      "id": "tale:component:citation",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "citation",
+      "name": "Citation",
+      "description": "",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "3.0.0",
+      "aliases": [
+        "Citation"
+      ],
+      "keywords": [
+        "citation"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=citation]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/citation"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/citation/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": null,
+        "componentKind": "compound"
+      }
+    },
+    {
       "id": "tale:component:code",
       "namespace": "tale",
       "kind": "component",
@@ -12998,6 +13051,54 @@
       }
     },
     {
+      "id": "tale:component:markdown",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "markdown",
+      "name": "Markdown",
+      "description": "",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "3.0.0",
+      "aliases": [
+        "Markdown"
+      ],
+      "keywords": [
+        "markdown"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=markdown]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/markdown"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/markdown/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": null,
+        "componentKind": "simple"
+      }
+    },
+    {
       "id": "tale:component:menu",
       "namespace": "tale",
       "kind": "component",
@@ -13383,6 +13484,54 @@
       "metadata": {
         "category": "Form Controls",
         "componentKind": "compound"
+      }
+    },
+    {
+      "id": "tale:component:outline",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "outline",
+      "name": "Outline",
+      "description": "",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "3.0.0",
+      "aliases": [
+        "Outline"
+      ],
+      "keywords": [
+        "outline"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=outline]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/outline"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/outline/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": null,
+        "componentKind": "simple"
       }
     },
     {
@@ -15815,6 +15964,54 @@
       }
     },
     {
+      "id": "tale:component:timestamp",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "timestamp",
+      "name": "Timestamp",
+      "description": "",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "3.0.0",
+      "aliases": [
+        "Timestamp"
+      ],
+      "keywords": [
+        "timestamp"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=timestamp]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/timestamp"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/timestamp/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": null,
+        "componentKind": "simple"
+      }
+    },
+    {
       "id": "tale:component:toggle-button",
       "namespace": "tale",
       "kind": "component",
@@ -17235,6 +17432,44 @@
       ],
       "provenance": {
         "source": "docs/components/checkbox-group.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:doc:docs-components-citation",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-citation",
+      "name": "Citation",
+      "description": "Public Tale UI documentation: Citation",
+      "lifecycle": "stable",
+      "keywords": [
+        "citation",
+        "components",
+        "docs",
+        "md"
+      ],
+      "related": [
+        "tale:component:citation"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/citation.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/citation.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -19211,6 +19446,44 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:doc:docs-components-markdown",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-markdown",
+      "name": "Markdown",
+      "description": "Public Tale UI documentation: Markdown",
+      "lifecycle": "stable",
+      "keywords": [
+        "components",
+        "docs",
+        "markdown",
+        "md"
+      ],
+      "related": [
+        "tale:component:markdown"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/markdown.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/markdown.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:doc:docs-components-menu",
       "namespace": "tale",
       "kind": "doc",
@@ -19479,6 +19752,44 @@
       ],
       "provenance": {
         "source": "docs/components/number-field.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:doc:docs-components-outline",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-outline",
+      "name": "Outline",
+      "description": "Public Tale UI documentation: Outline",
+      "lifecycle": "stable",
+      "keywords": [
+        "components",
+        "docs",
+        "md",
+        "outline"
+      ],
+      "related": [
+        "tale:component:outline"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/outline.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/outline.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -21173,6 +21484,44 @@
       ],
       "provenance": {
         "source": "docs/components/time-field.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:doc:docs-components-timestamp",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-timestamp",
+      "name": "Timestamp",
+      "description": "Public Tale UI documentation: Timestamp",
+      "lifecycle": "stable",
+      "keywords": [
+        "components",
+        "docs",
+        "md",
+        "timestamp"
+      ],
+      "related": [
+        "tale:component:timestamp"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/timestamp.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/timestamp.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -23488,7 +23837,7 @@
       "kind": "pitfall",
       "slug": "always-generate-code-directly-never",
       "name": "Always generate complete, working code directly — never ask for clarification, return an empty function body, or output a blank code block",
-      "description": "when given a UI prompt, immediately output a full import block and component with a non-empty return; never reply with questions, option lists, an empty function, or a completely blank file with no code at all. This applies equally to simple single-component prompts and to complex multi-component compositions such as an FAQ section combining Accordion, Banner, Link, Column, and Text — complexity is never a reason to return empty code. - fix (for 'Create a primary button that says Save'): `import { Button } from '@tale-ui/react/button'; export function SaveButton() { return <Button variant=\"primary\">Save</Button>; }` - fix (for 'Create a success badge that displays Active'): `import { Badge } from '@tale-ui/react/badge'; export function ActiveBadge() { return <Badge variant=\"success\">Active</Badge>; }` import { Accordion } from '@tale-ui/react/accordion'; import { Banner } from '@tale-ui/react/banner'; import { Link } from '@tale-ui/react/link'; import { Column } from '@tale-ui/react/column'; import { Text } from '@tale-ui/react/text';  export function FaqSection() { return ( <Column gap=\"l\"> <Text variant=\"heading\" as=\"h2\">Frequently Asked Questions</Text> <Accordion.Root> <Accordion.Item id=\"what-is\"> <Accordion.Header> <Accordion.Trigger>What is Tale UI?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text>Tale UI is a design system providing accessible, themeable components.</Text> </Accordion.Panel> </Accordion.Item> <Accordion.Item id=\"install\"> <Accordion.Header> <Accordion.Trigger>How do I install it?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text>Run <Text variant=\"mono\">pnpm install @tale-ui/react</Text> to add Tale UI to your project.</Text> </Accordion.Panel> </Accordion.Item> <Accordion.Item id=\"accessible\"> <Accordion.Header> <Accordion.Trigger>Is it accessible?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text>Yes. Tale UI is built on a React Aria foundation, ensuring full keyboard and screen reader support.</Text> </Accordion.Panel> </Accordion.Item> <Accordion.Item id=\"theme\"> <Accordion.Header> <Accordion.Trigger>Can I customize the theme?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text>Yes. Theming is done via CSS custom properties, making it easy to adapt to any brand.</Text> </Accordion.Panel> </Accordion.Item> </Accordion.Root> <Banner.Root variant=\"info\"> <Banner.Description> Still have questions? <Link href=\"/contact\">Contact us</Link> </Banner.Description> </Banner.Root> </Column> ); }",
+      "description": "when given a UI prompt, immediately output a full import block and component with a non-empty return; never reply with questions, option lists, an empty function, or a completely blank file with no code at all. This applies equally to simple single-component prompts and to complex multi-component compositions such as an FAQ section combining Accordion, Banner, Link, Column, and Text — complexity is never a reason to return empty code. - fix (for 'Create a primary button that says Save'): `import { Button } from '@tale-ui/react/button'; export function SaveButton() { return <Button variant=\"primary\">Save</Button>; }` - fix (for 'Create a success badge that displays Active'): `import { Badge } from '@tale-ui/react/badge'; export function ActiveBadge() { return <Badge variant=\"success\">Active</Badge>; }` import { Accordion } from '@tale-ui/react/accordion'; import { Banner } from '@tale-ui/react/banner'; import { Link } from '@tale-ui/react/link'; import { Column } from '@tale-ui/react/column'; import { Text } from '@tale-ui/react/text'; export function FaqSection() { return ( <Column gap=\"l\"> <Text variant=\"heading\" as=\"h2\"> Frequently Asked Questions </Text> <Accordion.Root> <Accordion.Item id=\"what-is\"> <Accordion.Header> <Accordion.Trigger>What is Tale UI?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text>Tale UI is a design system providing accessible, themeable components.</Text> </Accordion.Panel> </Accordion.Item> <Accordion.Item id=\"install\"> <Accordion.Header> <Accordion.Trigger>How do I install it?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text> Run <Text variant=\"mono\">pnpm install @tale-ui/react</Text> to add Tale UI to your project. </Text> </Accordion.Panel> </Accordion.Item> <Accordion.Item id=\"accessible\"> <Accordion.Header> <Accordion.Trigger>Is it accessible?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text> Yes. Tale UI is built on a React Aria foundation, ensuring full keyboard and screen reader support. </Text> </Accordion.Panel> </Accordion.Item> <Accordion.Item id=\"theme\"> <Accordion.Header> <Accordion.Trigger>Can I customize the theme?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text> Yes. Theming is done via CSS custom properties, making it easy to adapt to any brand. </Text> </Accordion.Panel> </Accordion.Item> </Accordion.Root> <Banner.Root variant=\"info\"> <Banner.Description> Still have questions? <Link href=\"/contact\">Contact us</Link> </Banner.Description> </Banner.Root> </Column> ); }",
       "lifecycle": "stable",
       "keywords": [
         "always",
@@ -23730,6 +24079,56 @@
         "ruleId": "aspect-ratio-direct-media",
         "category": "component",
         "component": "AspectRatio"
+      }
+    },
+    {
+      "id": "tale:pitfall:aspect-ratio-direct-fitted-media",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "aspect-ratio-direct-fitted-media",
+      "name": "Keep fitted media directly inside AspectRatio",
+      "description": "The `objectFit` selector intentionally reaches only immediate `img` or `video` children.",
+      "lifecycle": "stable",
+      "keywords": [
+        "aspect",
+        "aspectratio",
+        "component",
+        "contract",
+        "direct",
+        "directly",
+        "fitted",
+        "inside",
+        "keep",
+        "media",
+        "ratio"
+      ],
+      "related": [
+        "tale:component:aspect-ratio"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/pitfalls.json",
+          "selector": "id=aspect-ratio-direct-fitted-media"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/pitfalls.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "aspect-ratio-direct-fitted-media",
+        "category": "component-contract"
       }
     },
     {
@@ -25495,6 +25894,52 @@
       }
     },
     {
+      "id": "tale:pitfall:blockquote-visible-attribution",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "blockquote-visible-attribution",
+      "name": "Render visible attribution with Blockquote.Attribution",
+      "description": "The Root `cite` attribute is machine-readable metadata and never supplies visible source text.",
+      "lifecycle": "stable",
+      "keywords": [
+        "attribution",
+        "blockquote",
+        "component",
+        "contract",
+        "render",
+        "visible",
+        "with"
+      ],
+      "related": [
+        "tale:component:blockquote"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/pitfalls.json",
+          "selector": "id=blockquote-visible-attribution"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/pitfalls.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "blockquote-visible-attribution",
+        "category": "component-contract"
+      }
+    },
+    {
       "id": "tale:pitfall:breadcrumbs--breadcrumbs-use-breadcrumbs-link",
       "namespace": "tale",
       "kind": "pitfall",
@@ -26090,6 +26535,56 @@
         "ruleId": "button-group-static-rendering",
         "category": "component",
         "component": "ButtonGroup"
+      }
+    },
+    {
+      "id": "tale:pitfall:button-group-one-accessible-name",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "button-group-one-accessible-name",
+      "name": "Give semantic ButtonGroup exactly one accessible name",
+      "description": "Roles `group` and `region` require one non-whitespace `aria-label` or `aria-labelledby` value.",
+      "lifecycle": "stable",
+      "keywords": [
+        "accessible",
+        "button",
+        "buttongroup",
+        "component",
+        "contract",
+        "exactly",
+        "give",
+        "group",
+        "name",
+        "one",
+        "semantic"
+      ],
+      "related": [
+        "tale:component:button-group"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/pitfalls.json",
+          "selector": "id=button-group-one-accessible-name"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/pitfalls.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "button-group-one-accessible-name",
+        "category": "component-contract"
       }
     },
     {
@@ -27993,6 +28488,117 @@
       }
     },
     {
+      "id": "tale:pitfall:citation--citation-numbering-is-owned",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "citation--citation-numbering-is-owned",
+      "name": "Let Citation own source numbering",
+      "description": "ordinals come from normalized source order, repeated references share the same target, and `Citation.List` always uses decimal numbering from one.",
+      "lifecycle": "stable",
+      "keywords": [
+        "always",
+        "and",
+        "citation",
+        "come",
+        "decimal",
+        "from",
+        "is",
+        "let",
+        "list",
+        "normalized",
+        "numbering",
+        "one",
+        "order",
+        "ordinals",
+        "own",
+        "owned",
+        "references",
+        "repeated",
+        "same",
+        "share",
+        "source",
+        "target",
+        "the",
+        "uses"
+      ],
+      "related": [
+        "tale:component:citation"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=citation].pitfalls[id=citation-numbering-is-owned]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/citation.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "citation-numbering-is-owned",
+        "category": "component",
+        "component": "Citation"
+      }
+    },
+    {
+      "id": "tale:pitfall:citation-owned-source-numbering",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "citation-owned-source-numbering",
+      "name": "Let Citation own source numbering",
+      "description": "Ordinals follow normalized source order and repeated references share the same generated target.",
+      "lifecycle": "stable",
+      "keywords": [
+        "citation",
+        "component",
+        "contract",
+        "let",
+        "numbering",
+        "own",
+        "owned",
+        "source"
+      ],
+      "related": [
+        "tale:component:citation"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/pitfalls.json",
+          "selector": "id=citation-owned-source-numbering"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/pitfalls.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "citation-owned-source-numbering",
+        "category": "component-contract"
+      }
+    },
+    {
       "id": "tale:pitfall:code--code-inline-plain-text",
       "namespace": "tale",
       "kind": "pitfall",
@@ -28103,6 +28709,53 @@
         "ruleId": "code-block-plain-text",
         "category": "component",
         "component": "CodeBlock"
+      }
+    },
+    {
+      "id": "tale:pitfall:code-inline-plain-text",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "code-inline-plain-text",
+      "name": "Pass plain text to inline Code",
+      "description": "Code escapes its string child and has no raw HTML or executable renderer API.",
+      "lifecycle": "stable",
+      "keywords": [
+        "code",
+        "component",
+        "contract",
+        "inline",
+        "pass",
+        "plain",
+        "text",
+        "to"
+      ],
+      "related": [
+        "tale:component:code"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/pitfalls.json",
+          "selector": "id=code-inline-plain-text"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/pitfalls.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "code-inline-plain-text",
+        "category": "component-contract"
       }
     },
     {
@@ -29973,7 +30626,7 @@
       "kind": "pitfall",
       "slug": "columnrow-gap-uses-spacingtoken-values",
       "name": "Column/Row gap uses spacing-token values, not component-size names",
-      "description": "`'sm'`, `'md'`, and `'lg'` are not valid `Gap` values and cause `Type '\"sm\"' is not assignable to type 'Gap | undefined'`; use `'xs'`, `'s'`, `'m'`, `'l'`, `'xl'`, or `'2xl'` instead. import { Button } from '@tale-ui/react/button'; import { Row } from '@tale-ui/react/row';  export function AccountActions() { return ( <Row gap=\"s\"> <Button variant=\"neutral\">Cancel</Button> <Button variant=\"danger\">Delete account</Button> </Row> ); }",
+      "description": "`'sm'`, `'md'`, and `'lg'` are not valid `Gap` values and cause `Type '\"sm\"' is not assignable to type 'Gap | undefined'`; use `'xs'`, `'s'`, `'m'`, `'l'`, `'xl'`, or `'2xl'` instead. import { Button } from '@tale-ui/react/button'; import { Row } from '@tale-ui/react/row'; export function AccountActions() { return ( <Row gap=\"s\"> <Button variant=\"neutral\">Cancel</Button> <Button variant=\"danger\">Delete account</Button> </Row> ); }",
       "lifecycle": "stable",
       "keywords": [
         "column",
@@ -30627,7 +31280,7 @@
       "kind": "pitfall",
       "slug": "container-is-not-layout",
       "name": "Container is a colour palette wrapper, not a layout component — use the color prop for theming, not theme",
-      "description": "Container applies a colour palette to its subtree via the color prop (e.g. color=\"indigo\"). Passing theme instead causes a TypeScript assignability error because theme does not exist on ContainerProps. Additionally, do not use Container as a div replacement for layout; use Column for vertical stacks and Row for horizontal layouts. import { Container } from '@tale-ui/react/container'; import { Card } from '@tale-ui/react/card'; import { Column } from '@tale-ui/react/column'; import { Text } from '@tale-ui/react/text'; import { Button } from '@tale-ui/react/button';  export function PremiumPlanSection() { return ( <Container color=\"indigo\"> <Card.Root> <Card.Body> <Column gap=\"m\"> <Text variant=\"heading\" as=\"h2\">Premium Plan</Text> <Button variant=\"primary\">Get started</Button> </Column> </Card.Body> </Card.Root> </Container> ); }",
+      "description": "Container applies a colour palette to its subtree via the color prop (e.g. color=\"indigo\"). Passing theme instead causes a TypeScript assignability error because theme does not exist on ContainerProps. Additionally, do not use Container as a div replacement for layout; use Column for vertical stacks and Row for horizontal layouts. import { Container } from '@tale-ui/react/container'; import { Card } from '@tale-ui/react/card'; import { Column } from '@tale-ui/react/column'; import { Text } from '@tale-ui/react/text'; import { Button } from '@tale-ui/react/button'; export function PremiumPlanSection() { return ( <Container color=\"indigo\"> <Card.Root> <Card.Body> <Column gap=\"m\"> <Text variant=\"heading\" as=\"h2\"> Premium Plan </Text> <Button variant=\"primary\">Get started</Button> </Column> </Card.Body> </Card.Root> </Container> ); }",
       "lifecycle": "stable",
       "keywords": [
         "color",
@@ -38752,6 +39405,115 @@
       }
     },
     {
+      "id": "tale:pitfall:markdown--markdown-fixed-trust-boundary",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "markdown--markdown-fixed-trust-boundary",
+      "name": "Keep Markdown inside its fixed trust boundary",
+      "description": "Markdown exposes no plugin, raw HTML, AST, renderer, URL transformer, highlighter, or executable extension API.",
+      "lifecycle": "stable",
+      "keywords": [
+        "api",
+        "ast",
+        "boundary",
+        "executable",
+        "exposes",
+        "extension",
+        "fixed",
+        "highlighter",
+        "html",
+        "inside",
+        "its",
+        "keep",
+        "markdown",
+        "no",
+        "or",
+        "plugin",
+        "raw",
+        "renderer",
+        "transformer",
+        "trust",
+        "url"
+      ],
+      "related": [
+        "tale:component:markdown"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=markdown].pitfalls[id=markdown-fixed-trust-boundary]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/markdown.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "markdown-fixed-trust-boundary",
+        "category": "component",
+        "component": "Markdown"
+      }
+    },
+    {
+      "id": "tale:pitfall:markdown-fixed-trust-boundary",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "markdown-fixed-trust-boundary",
+      "name": "Keep Markdown inside its fixed trust boundary",
+      "description": "Markdown exposes no plugin, raw HTML, AST, renderer, URL transformer, highlighter, or executable extension API.",
+      "lifecycle": "stable",
+      "keywords": [
+        "boundary",
+        "component",
+        "contract",
+        "fixed",
+        "inside",
+        "its",
+        "keep",
+        "markdown",
+        "trust"
+      ],
+      "related": [
+        "tale:component:markdown"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/pitfalls.json",
+          "selector": "id=markdown-fixed-trust-boundary"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/pitfalls.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "markdown-fixed-trust-boundary",
+        "category": "component-contract"
+      }
+    },
+    {
       "id": "tale:pitfall:menu--menu-menulist-required",
       "namespace": "tale",
       "kind": "pitfall",
@@ -39784,7 +40546,7 @@
       "kind": "pitfall",
       "slug": "never-import-key-from-reactariacomponents",
       "name": "Never import Key or any type from react-aria-components for selection state — derive the type from the component's props",
-      "description": "`react-aria-components` is an internal peer dependency not available in consumer projects. Importing `Key` (or any type) from it causes \"Cannot find module 'react-aria-components'\" TypeScript errors. Derive the selection key type from the component's own `onSelectionChange` prop using `React.ComponentProps` instead. Initialize `useState` with that derived type so the setter is compatible. import * as React from 'react'; import { TagSelect } from '@tale-ui/react/tag-select';  type SelectionValue = Parameters< NonNullable<React.ComponentProps<typeof TagSelect.Root>['onSelectionChange']> >[0];  const members = [ { id: 'alice', name: 'Alice Chen' }, { id: 'bob', name: 'Bob Martínez' }, { id: 'carol', name: 'Carol Lee' }, ];  export function TeamMemberPicker() { const [selected, setSelected] = React.useState<SelectionValue>( new Set(['alice', 'bob']), );  return ( <TagSelect.Root label=\"Team members\" placeholder=\"Search members…\" description=\"Select who should be included in this project.\" items={members} selectedKeys={selected} onSelectionChange={setSelected} > {(member) => ( <TagSelect.Item id={member.id} textValue={member.name}> {member.name} </TagSelect.Item> )} </TagSelect.Root> ); }",
+      "description": "`react-aria-components` is an internal peer dependency not available in consumer projects. Importing `Key` (or any type) from it causes \"Cannot find module 'react-aria-components'\" TypeScript errors. Derive the selection key type from the component's own `onSelectionChange` prop using `React.ComponentProps` instead. Initialize `useState` with that derived type so the setter is compatible. import * as React from 'react'; import { TagSelect } from '@tale-ui/react/tag-select'; type SelectionValue = Parameters< NonNullable<React.ComponentProps<typeof TagSelect.Root>['onSelectionChange']> >[0]; const members = [ { id: 'alice', name: 'Alice Chen' }, { id: 'bob', name: 'Bob Martínez' }, { id: 'carol', name: 'Carol Lee' }, ]; export function TeamMemberPicker() { const [selected, setSelected] = React.useState<SelectionValue>(new Set(['alice', 'bob'])); return ( <TagSelect.Root label=\"Team members\" placeholder=\"Search members…\" description=\"Select who should be included in this project.\" items={members} selectedKeys={selected} onSelectionChange={setSelected} > {(member) => ( <TagSelect.Item id={member.id} textValue={member.name}> {member.name} </TagSelect.Item> )} </TagSelect.Root> ); }",
       "lifecycle": "stable",
       "keywords": [
         "any",
@@ -40962,6 +41724,54 @@
       }
     },
     {
+      "id": "tale:pitfall:outline-stable-logical-ids",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "outline-stable-logical-ids",
+      "name": "Use stable logical IDs for Outline state",
+      "description": "Outline preserves active state across reorders by item `id` while `targetId` remains the document heading identity.",
+      "lifecycle": "stable",
+      "keywords": [
+        "component",
+        "contract",
+        "for",
+        "ids",
+        "logical",
+        "outline",
+        "stable",
+        "state",
+        "use"
+      ],
+      "related": [
+        "tale:component:outline"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/pitfalls.json",
+          "selector": "id=outline-stable-logical-ids"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/pitfalls.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "outline-stable-logical-ids",
+        "category": "component-contract"
+      }
+    },
+    {
       "id": "tale:pitfall:pagination--pagination-no-page-control-props-on-root",
       "namespace": "tale",
       "kind": "pitfall",
@@ -41050,7 +41860,7 @@
       "kind": "pitfall",
       "slug": "parse-date-import-from-internationalized-date",
       "name": "Import parseDate from @internationalized/date, not from @tale-ui/react/calendar — 'Cannot find module @internationalized/date' is NEVER an L1 validation error",
-      "description": "The @internationalized/ namespace is an explicitly allowed import prefix. Raw TypeScript diagnostics include a 'Line N: ' prefix (e.g. 'Line 4: Cannot find module @internationalized/date or its corresponding type declarations.'). A validator that checks rawDiagnostic.startsWith('@internationalized/') on the unstripped string will never match because the string begins with 'Line 4: ', not '@internationalized/'. The validator MUST strip the 'Line N: ' prefix before testing the module path. Use: stripped = rawDiagnostic.replace(/^Line \\d+: /, ''); then check if stripped includes 'Cannot find module' and the module path starts with '@internationalized/' — if so, suppress unconditionally. The real fix for end users is to run: npm install @internationalized/date. Never alter, remove, or substitute the import — the import is correct; only the package installation is missing. import * as React from 'react'; import { DatePicker } from '@tale-ui/react/date-picker'; import { Calendar } from '@tale-ui/react/calendar'; import { parseDate } from '@internationalized/date';  type DateVal = Parameters<NonNullable<React.ComponentProps<typeof DatePicker.Root>['onChange']>>[0];  export function DatePickerField() { const [value, setValue] = React.useState<DateVal | null>(null);  return ( <DatePicker.Root value={value} onChange={setValue} defaultValue={parseDate('2026-05-31')} > <DatePicker.Label>Date</DatePicker.Label> <DatePicker.Group> <DatePicker.DateInput> {(segment) => <DatePicker.Segment segment={segment} />} </DatePicker.DateInput> <DatePicker.Trigger /> </DatePicker.Group> <DatePicker.Popover> <DatePicker.Dialog> <Calendar.Root> <Calendar.Header> <Calendar.PreviousButton /> <Calendar.Heading /> <Calendar.NextButton /> </Calendar.Header> <Calendar.Grid> <Calendar.GridHeader> {(day) => <Calendar.GridHeaderCell>{day}</Calendar.GridHeaderCell>} </Calendar.GridHeader> <Calendar.GridBody> {(date) => <Calendar.Cell date={date} />} </Calendar.GridBody> </Calendar.Grid> </Calendar.Root> </DatePicker.Dialog> </DatePicker.Popover> </DatePicker.Root> ); }",
+      "description": "The @internationalized/ namespace is an explicitly allowed import prefix. Raw TypeScript diagnostics include a 'Line N: ' prefix (e.g. 'Line 4: Cannot find module @internationalized/date or its corresponding type declarations.'). A validator that checks rawDiagnostic.startsWith('@internationalized/') on the unstripped string will never match because the string begins with 'Line 4: ', not '@internationalized/'. The validator MUST strip the 'Line N: ' prefix before testing the module path. Use: stripped = rawDiagnostic.replace(/^Line \\d+: /, ''); then check if stripped includes 'Cannot find module' and the module path starts with '@internationalized/' — if so, suppress unconditionally. The real fix for end users is to run: npm install @internationalized/date. Never alter, remove, or substitute the import — the import is correct; only the package installation is missing. import * as React from 'react'; import { DatePicker } from '@tale-ui/react/date-picker'; import { Calendar } from '@tale-ui/react/calendar'; import { parseDate } from '@internationalized/date'; type DateVal = Parameters< NonNullable<React.ComponentProps<typeof DatePicker.Root>['onChange']> >[0]; export function DatePickerField() { const [value, setValue] = React.useState<DateVal | null>(null); return ( <DatePicker.Root value={value} onChange={setValue} defaultValue={parseDate('2026-05-31')}> <DatePicker.Label>Date</DatePicker.Label> <DatePicker.Group> <DatePicker.DateInput> {(segment) => <DatePicker.Segment segment={segment} />} </DatePicker.DateInput> <DatePicker.Trigger /> </DatePicker.Group> <DatePicker.Popover> <DatePicker.Dialog> <Calendar.Root> <Calendar.Header> <Calendar.PreviousButton /> <Calendar.Heading /> <Calendar.NextButton /> </Calendar.Header> <Calendar.Grid> <Calendar.GridHeader> {(day) => <Calendar.GridHeaderCell>{day}</Calendar.GridHeaderCell>} </Calendar.GridHeader> <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody> </Calendar.Grid> </Calendar.Root> </DatePicker.Dialog> </DatePicker.Popover> </DatePicker.Root> ); }",
       "lifecycle": "stable",
       "keywords": [
         "an",
@@ -43022,7 +43832,7 @@
       "kind": "pitfall",
       "slug": "row-column-gap-uses-token-scale",
       "name": "Row/Column gap uses spacing token values ('xs', 's', 'm', 'l', 'xl', '2xl'), not component size names — this is the most common layout error",
-      "description": "'sm', 'md', 'lg' are component size prop values and are not valid Gap type values; passing them causes a TypeScript error Type '\"sm\"' is not assignable to type 'Gap | undefined' (or \"md\", \"lg\" — any component-size name). 'none' is also not a valid Gap value — omit the gap prop entirely to produce no gap. Always map: sm->s, md->m, lg->l. This applies to every Column or Row anywhere in the file without exception, including the outermost page-level wrapper, layout wrappers inside compound-component children such as GridList.Item or Carousel.Item, calendar wrappers, color picker wrappers around ColorArea and ColorSlider, or any other slot. This is the single most common error in generated code — it occurs in nearly every component composition. When a prompt mentions a gap size or you need spacing between elements, ALWAYS use the spacing-token scale, never the component-size scale. CRITICAL: Even when the prompt explicitly says \"md\" gap or uses component-size terminology, you MUST translate to spacing tokens. The word \"md\" in a prompt does NOT mean gap=\"md\" — it means gap=\"m\". import { ColorArea, parseColor } from '@tale-ui/react/color-area'; import { ColorSlider } from '@tale-ui/react/color-slider'; import { Column } from '@tale-ui/react/column';  export function ColorPickerExample() { return ( <Column gap=\"m\"> <ColorArea.Root defaultValue={parseColor('hsl(0, 100%, 50%)')}> <ColorArea.Thumb /> </ColorArea.Root>  <ColorSlider.Root channel=\"hue\" defaultValue={parseColor('hsl(0, 100%, 50%)')}> <ColorSlider.Label>Hue</ColorSlider.Label> <ColorSlider.Output /> <ColorSlider.Track> <ColorSlider.Thumb /> </ColorSlider.Track> </ColorSlider.Root> </Column> ); }",
+      "description": "'sm', 'md', 'lg' are component size prop values and are not valid Gap type values; passing them causes a TypeScript error Type '\"sm\"' is not assignable to type 'Gap | undefined' (or \"md\", \"lg\" — any component-size name). 'none' is also not a valid Gap value — omit the gap prop entirely to produce no gap. Always map: sm->s, md->m, lg->l. This applies to every Column or Row anywhere in the file without exception, including the outermost page-level wrapper, layout wrappers inside compound-component children such as GridList.Item or Carousel.Item, calendar wrappers, color picker wrappers around ColorArea and ColorSlider, or any other slot. This is the single most common error in generated code — it occurs in nearly every component composition. When a prompt mentions a gap size or you need spacing between elements, ALWAYS use the spacing-token scale, never the component-size scale. CRITICAL: Even when the prompt explicitly says \"md\" gap or uses component-size terminology, you MUST translate to spacing tokens. The word \"md\" in a prompt does NOT mean gap=\"md\" — it means gap=\"m\". import { ColorArea, parseColor } from '@tale-ui/react/color-area'; import { ColorSlider } from '@tale-ui/react/color-slider'; import { Column } from '@tale-ui/react/column'; export function ColorPickerExample() { return ( <Column gap=\"m\"> <ColorArea.Root defaultValue={parseColor('hsl(0, 100%, 50%)')}> <ColorArea.Thumb /> </ColorArea.Root> <ColorSlider.Root channel=\"hue\" defaultValue={parseColor('hsl(0, 100%, 50%)')}> <ColorSlider.Label>Hue</ColorSlider.Label> <ColorSlider.Output /> <ColorSlider.Track> <ColorSlider.Thumb /> </ColorSlider.Track> </ColorSlider.Root> </Column> ); }",
       "lifecycle": "stable",
       "keywords": [
         "2xl",
@@ -44457,6 +45267,53 @@
         "ruleId": "skeleton-is-decorative",
         "category": "component",
         "component": "Skeleton"
+      }
+    },
+    {
+      "id": "tale:pitfall:skeleton-external-loading-announcement",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "skeleton-external-loading-announcement",
+      "name": "Announce loading outside Skeleton",
+      "description": "Skeleton is permanently decorative and cannot accept a role or accessible name.",
+      "lifecycle": "stable",
+      "keywords": [
+        "announce",
+        "announcement",
+        "component",
+        "contract",
+        "external",
+        "loading",
+        "outside",
+        "skeleton"
+      ],
+      "related": [
+        "tale:component:skeleton"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/pitfalls.json",
+          "selector": "id=skeleton-external-loading-announcement"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/pitfalls.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "skeleton-external-loading-announcement",
+        "category": "component-contract"
       }
     },
     {
@@ -47864,6 +48721,54 @@
       }
     },
     {
+      "id": "tale:pitfall:timestamp-offset-bearing-instant",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "timestamp-offset-bearing-instant",
+      "name": "Provide an offset-bearing instant to Timestamp",
+      "description": "Locale-dependent date strings are ambiguous and fail Timestamp validation.",
+      "lifecycle": "stable",
+      "keywords": [
+        "an",
+        "bearing",
+        "component",
+        "contract",
+        "instant",
+        "offset",
+        "provide",
+        "timestamp",
+        "to"
+      ],
+      "related": [
+        "tale:component:timestamp"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/pitfalls.json",
+          "selector": "id=timestamp-offset-bearing-instant"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/pitfalls.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "timestamp-offset-bearing-instant",
+        "category": "component-contract"
+      }
+    },
+    {
       "id": "tale:pitfall:toggle-button--toggle-button-isselected-not-pressed",
       "namespace": "tale",
       "kind": "pitfall",
@@ -49960,6 +50865,48 @@
       ],
       "provenance": {
         "source": "docs/recipes/data-table-with-sorting.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:recipe:document-sources",
+      "namespace": "tale",
+      "kind": "recipe",
+      "slug": "document-sources",
+      "name": "Document Sources",
+      "description": "Canonical Tale UI recipe: Document Sources",
+      "lifecycle": "stable",
+      "keywords": [
+        "document",
+        "sources"
+      ],
+      "related": [
+        "tale:component:citation",
+        "tale:component:column",
+        "tale:component:markdown",
+        "tale:component:outline",
+        "tale:component:text",
+        "tale:component:timestamp"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/recipes/document-sources.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "recipe.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/recipes/document-sources.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -52080,5 +53027,5 @@
       }
     }
   ],
-  "digest": "sha256:40d01d912a50108954a0f89af0a43147c2091c8b7ea3ef8e144b64f223f126c3"
+  "digest": "sha256:30a96cd10551a8f4aabe9914d9900a9e602d33769f11434d91272678248e4141"
 }

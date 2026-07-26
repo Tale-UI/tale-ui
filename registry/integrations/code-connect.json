@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "sourceDigest": "sha256:5150be2fe98d506ea26c012bd74d5c7448a531fabd013be97f524ffe87f86e51",
+  "sourceDigest": "sha256:7df382ce5ba6f746b700db8ae82fabdd20a8a13d53e245babf6dc4597b820de0",
   "mappingKind": "code-connect-equivalent",
   "mappings": [
     {
@@ -289,6 +289,17 @@
         "orientation": ["horizontal", "vertical"],
         "size": ["sm", "md"]
       },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:citation",
+      "componentName": "Citation",
+      "package": "@tale-ui/react/citation",
+      "source": "packages/react/src/citation/index.ts",
+      "properties": {},
       "ownership": {
         "design": "design-systems",
         "code": "design-systems"
@@ -886,6 +897,17 @@
       }
     },
     {
+      "registryId": "tale:component:markdown",
+      "componentName": "Markdown",
+      "package": "@tale-ui/react/markdown",
+      "source": "packages/react/src/markdown/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
       "registryId": "tale:component:menu",
       "componentName": "Menu",
       "package": "@tale-ui/react/menu",
@@ -958,6 +980,17 @@
       "componentName": "NumberField",
       "package": "@tale-ui/react/number-field",
       "source": "packages/react/src/number-field/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:outline",
+      "componentName": "Outline",
+      "package": "@tale-ui/react/outline",
+      "source": "packages/react/src/outline/index.ts",
       "properties": {},
       "ownership": {
         "design": "design-systems",
@@ -1443,6 +1476,19 @@
       "package": "@tale-ui/react/time-field",
       "source": "packages/react/src/time-field/index.ts",
       "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:timestamp",
+      "componentName": "Timestamp",
+      "package": "@tale-ui/react/timestamp",
+      "source": "packages/react/src/timestamp/index.ts",
+      "properties": {
+        "format": ["date", "time", "datetime", "relative"]
+      },
       "ownership": {
         "design": "design-systems",
         "code": "design-systems"

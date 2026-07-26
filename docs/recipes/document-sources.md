@@ -51,7 +51,7 @@ export function DocumentSources() {
 
           <Markdown baseUrl="https://docs.example.com/">
             {
-              'Use the **document model** to keep [trusted navigation](./navigation) separate from authored prose.'
+              'Use the **document model** to keep [trusted navigation](/navigation) separate from authored prose.'
             }
           </Markdown>
 

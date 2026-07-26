@@ -14,7 +14,7 @@ import '@tale-ui/react-styles/markdown';
 
 ```tsx
 <Markdown baseUrl="https://docs.example.com/">
-  {'## Security\n\nRead the [trust guide](./trust-guide).'}
+  {'## Security\n\nRead the [trust guide](/trust-guide).'}
 </Markdown>
 ```
 

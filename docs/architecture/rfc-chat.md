@@ -23,9 +23,8 @@ Separately, approve a standalone, bounded `Markdown` component under the
 component-equivalence expansion plan. Gate A selected exact `marked@13.0.3`
 behind a Tale-owned token adapter and proved the frozen source, line, depth,
 node, raw-HTML, URL, resource-fetching, packaging, and performance boundaries
-in [ADR 005](adr-005-bounded-markdown-parser.md). This decision does not change
-`Chat`: Chat continues to accept React children and plain text and does not
-parse Markdown.
+in [ADR 005](adr-005-bounded-markdown-parser.md). This decision does not change `Chat`: Chat continues to accept React children
+and plain text and does not parse Markdown.
 
 ## Streaming contract
 
