@@ -2,6 +2,13 @@
 
 All notable changes to the CSS design system are documented in this file.
 
+## v3.0.0 — 2026-07-27
+
+### Changed
+
+- Prepared the CSS design system for the coordinated Tale UI 3 release.
+- Retained the existing token, utility, theme, and dark-mode contracts at the Gate B boundary.
+
 ## v2.0.0 - 2026-07-24
 
 ### Changed

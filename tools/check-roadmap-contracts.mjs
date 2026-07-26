@@ -60,7 +60,51 @@ const INVENTORIES = {
     'codemods',
     'a2ui-types',
   ],
+  'registry/sources/roadmap/component-equivalence/inventory.json': [
+    'AspectRatio',
+    'Blockquote',
+    'ButtonGroup',
+    'Citation',
+    'Code',
+    'Lightbox',
+    'Markdown',
+    'Outline',
+    'OverflowList',
+    'Resizable',
+    'Skeleton',
+    'Timestamp',
+    'Toast',
+  ],
 };
+
+const COMPONENT_EQUIVALENCE_SOURCE =
+  'docs/plans/component-equivalence-expansion-implementation-plan.md';
+const COMPONENT_EQUIVALENCE_INVENTORY_PATH =
+  'registry/sources/roadmap/component-equivalence/inventory.json';
+const COMPONENT_EQUIVALENCE_DISPOSITIONS_PATH =
+  'registry/sources/roadmap/component-equivalence/candidate-dispositions.json';
+const COMPONENT_EQUIVALENCE_CANDIDATES = INVENTORIES[COMPONENT_EQUIVALENCE_INVENTORY_PATH];
+const COMPONENT_EQUIVALENCE_A2UI_RATIONALES = {
+  AspectRatio: 'No A2UI publication is authorized.',
+  Blockquote: 'No A2UI publication is authorized.',
+  ButtonGroup: 'No A2UI publication is authorized.',
+  Citation: 'Trust and document identity are outside the current catalog.',
+  Code: 'No A2UI publication is authorized.',
+  Lightbox: 'Overlay, focus, and selection state are outside the current catalog.',
+  Markdown: 'Untrusted parsing is outside the current catalog.',
+  Outline: 'Document identity and observers are outside the current catalog.',
+  OverflowList: 'Layout measurement and focus routing are outside the current catalog.',
+  Resizable: 'Gesture and state callbacks are outside the current catalog.',
+  Skeleton: 'No A2UI publication is authorized.',
+  Timestamp: 'Locale, timezone, and clock ownership are outside the current catalog.',
+  Toast: 'Queues, timers, announcements, and leases are outside the current catalog.',
+};
+const SUPPORTED_PACKAGE_DECLARATION_REFERENCES = new Set([
+  'package:react-aria-components@1.19.0#Group',
+  'package:react-aria-components@1.19.0#UNSTABLE_Toast',
+  'package:react-aria-components@1.19.0#UNSTABLE_ToastRegion',
+  'package:react-aria@3.50.0#useMove',
+]);
 
 function text(path) {
   return readFileSync(join(ROOT, path), 'utf8');
@@ -74,6 +118,87 @@ function digest(value) {
   return `sha256:${createHash('sha256')
     .update(`${JSON.stringify(value, null, 2)}\n`)
     .digest('hex')}`;
+}
+
+function assertEvidenceDigests(records, label) {
+  for (const record of records) {
+    const { evidenceDigest, ...evidencePreimage } = record;
+    assert.equal(
+      evidenceDigest,
+      digest(evidencePreimage),
+      `${label} evidence digest is stale for ${record.candidate}`,
+    );
+  }
+}
+
+function assertComponentEquivalenceContracts(inventory, dispositions, label) {
+  assert.equal(
+    inventory.source,
+    COMPONENT_EQUIVALENCE_SOURCE,
+    `${label} inventory must name the approved implementation plan`,
+  );
+  assert.equal(
+    dispositions.source,
+    COMPONENT_EQUIVALENCE_SOURCE,
+    `${label} dispositions must name the approved implementation plan`,
+  );
+  assert.equal(
+    dispositions.source,
+    inventory.source,
+    `${label} inventory and dispositions must name the same source`,
+  );
+  assert.deepEqual(
+    inventory.candidates,
+    COMPONENT_EQUIVALENCE_CANDIDATES,
+    `${label} inventory must preserve the exact frozen candidate order`,
+  );
+  assert.equal(
+    new Set(inventory.candidates).size,
+    COMPONENT_EQUIVALENCE_CANDIDATES.length,
+    `${label} inventory candidates must be unique`,
+  );
+  assert.deepEqual(
+    dispositions.records.map(({ candidate }) => candidate),
+    inventory.candidates,
+    `${label} disposition candidates must exactly match inventory order`,
+  );
+  assert.equal(
+    new Set(dispositions.records.map(({ candidate }) => candidate)).size,
+    COMPONENT_EQUIVALENCE_CANDIDATES.length,
+    `${label} disposition candidates must be unique`,
+  );
+  for (const record of dispositions.records) {
+    assert.equal(
+      record.disposition,
+      'approve',
+      `${label} implementation disposition must approve ${record.candidate}`,
+    );
+    assert.equal(
+      record.a2uiDisposition,
+      'n/a',
+      `${label} A2UI disposition must be n/a for ${record.candidate}`,
+    );
+    assert.equal(
+      record.rationale,
+      COMPONENT_EQUIVALENCE_A2UI_RATIONALES[record.candidate],
+      `${label} A2UI rationale changed for ${record.candidate}`,
+    );
+    for (const source of record.evidence.sources) {
+      if (SUPPORTED_PACKAGE_DECLARATION_REFERENCES.has(source)) {
+        continue;
+      }
+      assert.ok(
+        existsSync(join(ROOT, source.split('#')[0])),
+        `${label} evidence source is missing or unsupported for ${record.candidate}: ${source}`,
+      );
+    }
+  }
+  assertEvidenceDigests(dispositions.records, label);
+  assert.equal(
+    dispositions.evidenceRevision,
+    digest(dispositions.records),
+    `${label} evidence revision must match the complete record set`,
+  );
 }
 
 const ajv = new Ajv2020({ allErrors: true, strict: false });
@@ -767,6 +892,318 @@ for (const [inventory, candidates] of Object.entries(dispositionInventories)) {
   );
 }
 
+const componentEquivalenceInventoryFixture = {
+  schemaVersion: '1.0.0',
+  inventory: 'component-equivalence-expansion',
+  source: COMPONENT_EQUIVALENCE_SOURCE,
+  status: 'frozen',
+  candidates: [...COMPONENT_EQUIVALENCE_CANDIDATES],
+};
+const componentEquivalenceDispositionFixture = {
+  schemaVersion: '1.0.0',
+  inventory: 'component-equivalence-expansion',
+  source: COMPONENT_EQUIVALENCE_SOURCE,
+  evidenceRevision: '',
+  records: COMPONENT_EQUIVALENCE_CANDIDATES.map((candidate) => {
+    const record = {
+      candidate,
+      disposition: 'approve',
+      a2uiDisposition: 'n/a',
+      rationale: COMPONENT_EQUIVALENCE_A2UI_RATIONALES[candidate],
+      evidence: {
+        sources: [COMPONENT_EQUIVALENCE_SOURCE],
+        accessibility: 'Fixture accessibility evidence',
+        state: 'Fixture state evidence',
+        localization: 'Fixture localization evidence',
+        security: 'Fixture security evidence',
+        ssr: 'Fixture SSR evidence',
+        performance: 'Fixture performance evidence',
+        ownership: 'Fixture ownership evidence',
+        migration: 'Fixture migration evidence',
+      },
+    };
+    return { ...record, evidenceDigest: digest(record) };
+  }),
+};
+componentEquivalenceDispositionFixture.evidenceRevision = digest(
+  componentEquivalenceDispositionFixture.records,
+);
+assert.equal(
+  isValid('schemas/candidate-inventory.schema.json', componentEquivalenceInventoryFixture),
+  true,
+  'The complete component-equivalence inventory fixture must be valid',
+);
+assert.equal(
+  isValid('schemas/candidate-disposition.schema.json', componentEquivalenceDispositionFixture),
+  true,
+  'The complete component-equivalence disposition fixture must be valid',
+);
+assert.doesNotThrow(() =>
+  assertComponentEquivalenceContracts(
+    componentEquivalenceInventoryFixture,
+    componentEquivalenceDispositionFixture,
+    'component-equivalence positive fixture',
+  ),
+);
+
+for (const [label, fixture] of [
+  [
+    'missing source',
+    (({ source: omittedSource, ...rest }) => {
+      assert.equal(omittedSource, COMPONENT_EQUIVALENCE_SOURCE);
+      return rest;
+    })(componentEquivalenceInventoryFixture),
+  ],
+  ['wrong source', { ...componentEquivalenceInventoryFixture, source: 'docs/wrong-plan.md' }],
+  [
+    'missing candidate',
+    {
+      ...componentEquivalenceInventoryFixture,
+      candidates: componentEquivalenceInventoryFixture.candidates.slice(0, -1),
+    },
+  ],
+  [
+    'additional candidate',
+    {
+      ...componentEquivalenceInventoryFixture,
+      candidates: [...componentEquivalenceInventoryFixture.candidates, 'Additional'],
+    },
+  ],
+  [
+    'duplicate candidate',
+    {
+      ...componentEquivalenceInventoryFixture,
+      candidates: componentEquivalenceInventoryFixture.candidates.map((candidate, index) =>
+        index === 1 ? componentEquivalenceInventoryFixture.candidates[0] : candidate,
+      ),
+    },
+  ],
+  [
+    'reordered candidates',
+    {
+      ...componentEquivalenceInventoryFixture,
+      candidates: [
+        componentEquivalenceInventoryFixture.candidates[1],
+        componentEquivalenceInventoryFixture.candidates[0],
+        ...componentEquivalenceInventoryFixture.candidates.slice(2),
+      ],
+    },
+  ],
+  [
+    'unknown candidate',
+    {
+      ...componentEquivalenceInventoryFixture,
+      candidates: componentEquivalenceInventoryFixture.candidates.map((candidate, index) =>
+        index === 0 ? 'Unknown' : candidate,
+      ),
+    },
+  ],
+  ['undeclared top-level field', { ...componentEquivalenceInventoryFixture, unreviewed: true }],
+]) {
+  assert.equal(
+    isValid('schemas/candidate-inventory.schema.json', fixture),
+    false,
+    `The component-equivalence inventory must reject ${label}`,
+  );
+}
+
+const withoutDispositionSource = (({ source: omittedSource, ...rest }) => {
+  assert.equal(omittedSource, COMPONENT_EQUIVALENCE_SOURCE);
+  return rest;
+})(componentEquivalenceDispositionFixture);
+const dispositionSchemaNegativeFixtures = [
+  ['missing source', withoutDispositionSource],
+  ['wrong source', { ...componentEquivalenceDispositionFixture, source: 'docs/wrong-plan.md' }],
+  [
+    'missing candidate',
+    {
+      ...componentEquivalenceDispositionFixture,
+      records: componentEquivalenceDispositionFixture.records.slice(0, -1),
+    },
+  ],
+  [
+    'additional candidate',
+    {
+      ...componentEquivalenceDispositionFixture,
+      records: [
+        ...componentEquivalenceDispositionFixture.records,
+        componentEquivalenceDispositionFixture.records.at(-1),
+      ],
+    },
+  ],
+  [
+    'duplicate candidate',
+    {
+      ...componentEquivalenceDispositionFixture,
+      records: componentEquivalenceDispositionFixture.records.map((record, index) =>
+        index === 1
+          ? { ...record, candidate: componentEquivalenceDispositionFixture.records[0].candidate }
+          : record,
+      ),
+    },
+  ],
+  [
+    'reordered candidates',
+    {
+      ...componentEquivalenceDispositionFixture,
+      records: [
+        componentEquivalenceDispositionFixture.records[1],
+        componentEquivalenceDispositionFixture.records[0],
+        ...componentEquivalenceDispositionFixture.records.slice(2),
+      ],
+    },
+  ],
+  [
+    'unknown candidate',
+    {
+      ...componentEquivalenceDispositionFixture,
+      records: componentEquivalenceDispositionFixture.records.map((record, index) =>
+        index === 0 ? { ...record, candidate: 'Unknown' } : record,
+      ),
+    },
+  ],
+  [
+    'missing A2UI disposition',
+    {
+      ...componentEquivalenceDispositionFixture,
+      records: componentEquivalenceDispositionFixture.records.map((record, index) => {
+        if (index !== 0) {
+          return record;
+        }
+        const { a2uiDisposition: omittedDisposition, ...rest } = record;
+        assert.equal(omittedDisposition, 'n/a');
+        return rest;
+      }),
+    },
+  ],
+  [
+    'non-n/a A2UI disposition',
+    {
+      ...componentEquivalenceDispositionFixture,
+      records: componentEquivalenceDispositionFixture.records.map((record, index) =>
+        index === 0 ? { ...record, a2uiDisposition: 'available' } : record,
+      ),
+    },
+  ],
+  [
+    'non-approve implementation disposition',
+    {
+      ...componentEquivalenceDispositionFixture,
+      records: componentEquivalenceDispositionFixture.records.map((record, index) =>
+        index === 0 ? { ...record, disposition: 'defer' } : record,
+      ),
+    },
+  ],
+  [
+    'missing evidence digest',
+    {
+      ...componentEquivalenceDispositionFixture,
+      records: componentEquivalenceDispositionFixture.records.map((record, index) => {
+        if (index !== 0) {
+          return record;
+        }
+        const { evidenceDigest: omittedDigest, ...rest } = record;
+        assert.match(omittedDigest, /^sha256:/);
+        return rest;
+      }),
+    },
+  ],
+  [
+    'malformed evidence digest',
+    {
+      ...componentEquivalenceDispositionFixture,
+      records: componentEquivalenceDispositionFixture.records.map((record, index) =>
+        index === 0 ? { ...record, evidenceDigest: 'sha256:not-a-digest' } : record,
+      ),
+    },
+  ],
+  ['undeclared top-level field', { ...componentEquivalenceDispositionFixture, unreviewed: true }],
+  [
+    'undeclared record field',
+    {
+      ...componentEquivalenceDispositionFixture,
+      records: componentEquivalenceDispositionFixture.records.map((record, index) =>
+        index === 0 ? { ...record, unreviewed: true } : record,
+      ),
+    },
+  ],
+  [
+    'undeclared evidence field',
+    {
+      ...componentEquivalenceDispositionFixture,
+      records: componentEquivalenceDispositionFixture.records.map((record, index) =>
+        index === 0 ? { ...record, evidence: { ...record.evidence, unreviewed: true } } : record,
+      ),
+    },
+  ],
+];
+for (const [label, fixture] of dispositionSchemaNegativeFixtures) {
+  assert.equal(
+    isValid('schemas/candidate-disposition.schema.json', fixture),
+    false,
+    `The component-equivalence dispositions must reject ${label}`,
+  );
+}
+
+const mismatchedSourceFixture = {
+  ...componentEquivalenceDispositionFixture,
+  source: 'docs/plans/prioritized-roadmap-implementation-plan.md',
+};
+assert.throws(
+  () =>
+    assertComponentEquivalenceContracts(
+      componentEquivalenceInventoryFixture,
+      mismatchedSourceFixture,
+      'component-equivalence source-mismatch fixture',
+    ),
+  /must name the approved implementation plan|must name the same source/,
+  'The checker must reject an inventory/disposition source mismatch',
+);
+const wrongA2uiRationaleFixture = {
+  ...componentEquivalenceDispositionFixture,
+  records: componentEquivalenceDispositionFixture.records.map((record, index) =>
+    index === 0 ? { ...record, rationale: 'Changed rationale.' } : record,
+  ),
+};
+assert.equal(
+  isValid('schemas/candidate-disposition.schema.json', wrongA2uiRationaleFixture),
+  true,
+  'A changed non-empty A2UI rationale remains schema-valid for checker coverage',
+);
+assert.throws(
+  () =>
+    assertComponentEquivalenceContracts(
+      componentEquivalenceInventoryFixture,
+      wrongA2uiRationaleFixture,
+      'component-equivalence rationale fixture',
+    ),
+  /A2UI rationale changed/,
+  'The checker must reject a changed candidate-specific A2UI rationale',
+);
+for (const [label, mutate] of [
+  [
+    'evidence',
+    (record) => ({
+      ...record,
+      evidence: { ...record.evidence, security: 'Changed security evidence' },
+    }),
+  ],
+  ['implementation disposition', (record) => ({ ...record, disposition: 'defer' })],
+  ['A2UI disposition', (record) => ({ ...record, a2uiDisposition: 'available' })],
+]) {
+  const staleDigestFixture = {
+    ...componentEquivalenceDispositionFixture,
+    records: componentEquivalenceDispositionFixture.records.map((record, index) =>
+      index === 0 ? mutate(record) : record,
+    ),
+  };
+  assert.throws(
+    () => assertEvidenceDigests(staleDigestFixture.records, `${label} stale-digest fixture`),
+    /evidence digest is stale/,
+    `The checker must reject a stale digest after changing ${label}`,
+  );
+}
+
 for (const [inventory, path] of Object.entries({
   'app-shell': 'registry/sources/roadmap/app-shell/candidate-dispositions.json',
   chat: 'registry/sources/roadmap/chat/candidate-dispositions.json',
@@ -781,6 +1218,60 @@ for (const [inventory, path] of Object.entries({
     `${path} must preserve exact candidate set equality`,
   );
 }
+
+const componentEquivalenceInventory = json(COMPONENT_EQUIVALENCE_INVENTORY_PATH);
+const componentEquivalenceDispositions = json(COMPONENT_EQUIVALENCE_DISPOSITIONS_PATH);
+validate(
+  'schemas/candidate-inventory.schema.json',
+  componentEquivalenceInventory,
+  COMPONENT_EQUIVALENCE_INVENTORY_PATH,
+);
+validate(
+  'schemas/candidate-disposition.schema.json',
+  componentEquivalenceDispositions,
+  COMPONENT_EQUIVALENCE_DISPOSITIONS_PATH,
+);
+assertComponentEquivalenceContracts(
+  componentEquivalenceInventory,
+  componentEquivalenceDispositions,
+  'canonical component-equivalence expansion',
+);
+
+const contentDispositions = json('registry/sources/roadmap/content/candidate-dispositions.json');
+assert.equal(
+  contentDispositions.evidenceRevision,
+  digest(contentDispositions.records),
+  'Content evidence revision must match the complete record set',
+);
+for (const candidate of ['Timestamp', 'Blockquote', 'Citation']) {
+  const record = contentDispositions.records.find((entry) => entry.candidate === candidate);
+  assert.equal(
+    record?.disposition,
+    'approve',
+    `Content must approve ${candidate} under the component-equivalence plan`,
+  );
+  assertEvidenceDigests([record], `Content ${candidate}`);
+  assert.ok(
+    record.evidence.sources.includes(COMPONENT_EQUIVALENCE_SOURCE),
+    `Content ${candidate} must cite the approved component-equivalence plan`,
+  );
+}
+const chatRfc = text('docs/architecture/rfc-chat.md');
+assert.match(
+  chatRfc,
+  /standalone, bounded `Markdown` component/,
+  'The Chat RFC must approve standalone bounded Markdown',
+);
+assert.match(
+  chatRfc,
+  /This decision does not change `Chat`: Chat continues to accept React children\s+and plain text and does not parse Markdown\./,
+  'The standalone Markdown decision must not change Chat behavior',
+);
+assert.doesNotMatch(
+  chatRfc,
+  /Generic Markdown remains deferred/,
+  'The superseded standalone Markdown deferral must be removed',
+);
 
 const operationFixture = {
   schemaVersion: '1.0.0',

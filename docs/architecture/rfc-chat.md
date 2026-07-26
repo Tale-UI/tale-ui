@@ -19,6 +19,13 @@ transport type. The application owns requests, models, tools, approval,
 messages, persistence, retries, draft state, scroll-follow policy, and
 artifact-panel visibility.
 
+Separately, approve a standalone, bounded `Markdown` component under the
+component-equivalence expansion plan. Its export remains gated on Gate A
+selecting and proving a parser that satisfies the frozen source, line, depth,
+node, raw-HTML, URL, resource-fetching, packaging, and performance boundaries.
+This decision does not change `Chat`: Chat continues to accept React children
+and plain text and does not parse Markdown.
+
 ## Streaming contract
 
 Streaming state is scoped by `streamId`, `requestId`, and `messageId`.
@@ -49,10 +56,12 @@ logical properties, wraps long content, and has no required animation.
 ## Security
 
 Chat renders React children and plain text. It has no raw-HTML escape hatch,
-Markdown parser, syntax highlighter, tool executor, URL fetcher, or A2UI
-renderer. Generic Markdown remains deferred pending sanitization, URL,
-highlighting, and Content Security Policy approval. A2UI mapping is a
-separate adapter and cannot broaden this boundary.
+Markdown parser or parser dependency, syntax highlighter, tool executor, URL
+fetcher, executable-content extension, or A2UI renderer. The separately
+approved standalone Markdown component omits raw HTML, prevents resource
+fetching, filters executable and credential-bearing URLs, and fails atomically
+within fixed limits; Gate A must prove those boundaries before it is exported.
+A2UI mapping is a separate adapter and cannot broaden either boundary.
 
 ## Templates and promotion
 

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { cx } from '../_cx';
+import { useTaleUiId } from '../utils/useTaleUiId';
 
 export interface IPhoneMockupProps extends React.SVGProps<SVGSVGElement> {
   /**
@@ -41,7 +42,11 @@ export interface IPhoneMockupProps extends React.SVGProps<SVGSVGElement> {
 export const IPhoneMockup = React.forwardRef<SVGSVGElement, IPhoneMockupProps>(
   ({ image, imageDark, theme, className, ...svgProps }, ref) => {
     // Unique IDs so multiple instances on the same page don't share gradient/pattern IDs.
-    const id = React.useId();
+    const id = useTaleUiId();
+    const screenPatternId = id ? `screen-${id}` : undefined;
+    const screenImageId = id ? `screen-image-${id}` : undefined;
+    const screenImageDarkId = id ? `screen-image-dark-${id}` : undefined;
+    const statusBarClipId = id ? `status-bar-box-${id}` : undefined;
 
     return (
       <svg
@@ -54,27 +59,37 @@ export const IPhoneMockup = React.forwardRef<SVGSVGElement, IPhoneMockupProps>(
         className={cx('tale-iphone-mockup', className)}
       >
         <defs>
-          <pattern id={`screen-${id}`} patternContentUnits="objectBoundingBox" width="1" height="1">
+          <pattern
+            id={screenPatternId}
+            patternContentUnits="objectBoundingBox"
+            width="1"
+            height="1"
+          >
             <use
-              xlinkHref={`#screen-image-${id}`}
+              xlinkHref={screenImageId ? `#${screenImageId}` : undefined}
               className={imageDark ? 'tale-iphone-mockup__image' : undefined}
               transform="scale(0.00133333 0.000615764)"
             />
             {imageDark && (
               <use
-                xlinkHref={`#screen-image-dark-${id}`}
+                xlinkHref={screenImageDarkId ? `#${screenImageDarkId}` : undefined}
                 className="tale-iphone-mockup__image--dark"
                 transform="scale(0.00133333 0.000615764)"
               />
             )}
           </pattern>
-          <clipPath id={`status-bar-box-${id}`}>
-            <rect width="281.69" height="609.953" fill="white" transform="translate(15.7744 14.2725)" />
+          <clipPath id={statusBarClipId}>
+            <rect
+              width="281.69"
+              height="609.953"
+              fill="white"
+              transform="translate(15.7744 14.2725)"
+            />
           </clipPath>
 
           {/* Light mode image (hidden in dark mode when imageDark is provided) */}
           <image
-            id={`screen-image-${id}`}
+            id={screenImageId}
             width="750"
             height="1624"
             xlinkHref={image}
@@ -83,7 +98,7 @@ export const IPhoneMockup = React.forwardRef<SVGSVGElement, IPhoneMockupProps>(
           {/* Dark mode image (hidden in light mode) */}
           {imageDark && (
             <image
-              id={`screen-image-dark-${id}`}
+              id={screenImageDarkId}
               width="750"
               height="1624"
               xlinkHref={imageDark}
@@ -93,7 +108,7 @@ export const IPhoneMockup = React.forwardRef<SVGSVGElement, IPhoneMockupProps>(
         </defs>
 
         {/* Status bar + screen */}
-        <g clipPath={`url(#status-bar-box-${id})`}>
+        <g clipPath={statusBarClipId ? `url(#${statusBarClipId})` : undefined}>
           <rect
             width="281.69"
             height="609.953"
@@ -101,7 +116,12 @@ export const IPhoneMockup = React.forwardRef<SVGSVGElement, IPhoneMockupProps>(
             style={{ fill: theme === 'dark' ? 'var(--neutral-100)' : 'var(--neutral-5)' }}
           />
           {/* The screen */}
-          <rect width="281.69" height="609.953" transform="translate(15.7744 38.3096)" fill={`url(#screen-${id})`} />
+          <rect
+            width="281.69"
+            height="609.953"
+            transform="translate(15.7744 38.3096)"
+            fill={screenPatternId ? `url(#${screenPatternId})` : undefined}
+          />
           <path
             opacity="0.35"
             d="M268.545 29.2961C268.545 28.3972 269.273 27.6686 270.172 27.6686H282.692C283.591 27.6686 284.319 28.3972 284.319 29.2961V33.8031C284.319 34.702 283.591 35.4307 282.692 35.4307H270.172C269.273 35.4307 268.545 34.702 268.545 33.8031V29.2961Z"
@@ -141,8 +161,18 @@ export const IPhoneMockup = React.forwardRef<SVGSVGElement, IPhoneMockupProps>(
             d="M55.3794 35.306H56.7383V33.8261H57.8112V32.6267H56.7383V27.367H54.7357C53.3327 29.4797 52.2159 31.2457 51.5006 32.5607V33.8261H55.3794V35.306ZM52.8156 32.5772C53.7399 30.9487 54.5651 29.6447 55.3244 28.5224H55.4014V32.6597H52.8156V32.5772Z"
             fill="currentColor"
           />
-          <path d="M60.8373 35.306H62.2568V27.367H60.8428L58.7687 28.8195V30.1839L60.7438 28.7975H60.8373V35.306Z" fill="currentColor" />
-          <rect x="106.667" y="614.46" width="100.657" height="3.75587" rx="1.87793" fill="currentColor" />
+          <path
+            d="M60.8373 35.306H62.2568V27.367H60.8428L58.7687 28.8195V30.1839L60.7438 28.7975H60.8373V35.306Z"
+            fill="currentColor"
+          />
+          <rect
+            x="106.667"
+            y="614.46"
+            width="100.657"
+            height="3.75587"
+            rx="1.87793"
+            fill="currentColor"
+          />
         </g>
         <path
           d="M311.294 163.718H312.406C313.02 163.718 313.517 164.218 313.517 164.834V237.763C313.517 238.379 313.02 238.879 312.406 238.879H311.294V163.718Z"

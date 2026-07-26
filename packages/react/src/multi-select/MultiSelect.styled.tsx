@@ -10,13 +10,12 @@ import {
   ListBoxItem as AriaListBoxItem,
   Popover as AriaPopover,
   SearchField as AriaSearchField,
- useFilter } from 'react-aria-components';
-import type {
-  ListBoxItemProps as AriaListBoxItemProps,
-  Selection,
+  useFilter,
 } from 'react-aria-components';
+import type { ListBoxItemProps as AriaListBoxItemProps, Selection } from 'react-aria-components';
 import { Icon } from '../icon';
 import { cx } from '../_cx';
+import { useTaleUiId } from '../utils/useTaleUiId';
 
 // ── Context ────────────────────────────────────────────────────────────────
 
@@ -28,8 +27,10 @@ const MultiSelectContext = React.createContext<MultiSelectContextValue>({ size: 
 
 // ── Root ───────────────────────────────────────────────────────────────────
 
-export interface RootProps<T extends object = object>
-  extends Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange' | 'children'> {
+export interface RootProps<T extends object = object> extends Omit<
+  React.ComponentPropsWithoutRef<'div'>,
+  'onChange' | 'children'
+> {
   /**
    * Size variant.
    * @default 'md'
@@ -137,7 +138,9 @@ export function Root<T extends object>({
   const [popoverWidth, setPopoverWidth] = React.useState('');
 
   const handleTriggerClick = React.useCallback(() => {
-    if (!triggerRef.current) {return;}
+    if (!triggerRef.current) {
+      return;
+    }
     setPopoverWidth(`${triggerRef.current.getBoundingClientRect().width}px`);
   }, []);
 
@@ -145,13 +148,15 @@ export function Root<T extends object>({
     selectedKeys instanceof Set
       ? selectedKeys.size
       : selectedKeys === 'all'
-        ? (Array.isArray(items) ? items.length : 0)
+        ? Array.isArray(items)
+          ? items.length
+          : 0
         : 0;
   const hasSelection = selectedCount > 0;
 
   const handleClearSearch = React.useCallback(() => setSearchValue(''), []);
 
-  const labelId = React.useId();
+  const labelId = useTaleUiId();
 
   return (
     <MultiSelectContext.Provider value={{ size }}>
@@ -178,7 +183,9 @@ export function Root<T extends object>({
             onClick={handleTriggerClick}
             className={`tale-multi-select__trigger${isInvalid ? ' tale-multi-select__trigger--invalid' : ''}`}
           >
-            <span className={`tale-multi-select__trigger-inner tale-multi-select__trigger-inner--${size}`}>
+            <span
+              className={`tale-multi-select__trigger-inner tale-multi-select__trigger-inner--${size}`}
+            >
               {hasSelection ? (
                 <span className="tale-multi-select__value tale-multi-select__value--selected">
                   {selectedCountFormatter
@@ -207,7 +214,11 @@ export function Root<T extends object>({
             className={`tale-multi-select__popup${size !== 'md' ? ` tale-multi-select__popup--${size}` : ''}`}
           >
             <AriaDialog className="tale-multi-select__dialog">
-              <AriaAutocomplete filter={contains} inputValue={searchValue} onInputChange={setSearchValue}>
+              <AriaAutocomplete
+                filter={contains}
+                inputValue={searchValue}
+                onInputChange={setSearchValue}
+              >
                 {showSearch && (
                   <div className="tale-multi-select__search-wrapper">
                     <AriaSearchField
@@ -220,10 +231,7 @@ export function Root<T extends object>({
                       <span className="tale-multi-select__search-icon" aria-hidden="true">
                         <Icon icon={Search} size="sm" />
                       </span>
-                      <AriaInput
-                        placeholder="Search"
-                        className="tale-multi-select__search-input"
-                      />
+                      <AriaInput placeholder="Search" className="tale-multi-select__search-input" />
                     </AriaSearchField>
                   </div>
                 )}
@@ -248,9 +256,7 @@ export function Root<T extends object>({
                 </AriaListBox>
               </AriaAutocomplete>
 
-              {showFooter && (
-                <Footer size={size} onReset={onReset} onSelectAll={onSelectAll} />
-              )}
+              {showFooter && <Footer size={size} onReset={onReset} onSelectAll={onSelectAll} />}
             </AriaDialog>
           </AriaPopover>
         </AriaDialogTrigger>
@@ -282,17 +288,10 @@ export interface ItemProps extends Omit<AriaListBoxItemProps, 'className'> {
  */
 export const Item = React.forwardRef<HTMLDivElement, ItemProps>(
   ({ className, children, ...props }, ref) => (
-    <AriaListBoxItem
-      ref={ref}
-      className={cx('tale-multi-select__item', className)}
-      {...props}
-    >
+    <AriaListBoxItem ref={ref} className={cx('tale-multi-select__item', className)} {...props}>
       {(renderProps) => (
         <React.Fragment>
-          <span
-            className="tale-multi-select__item-check"
-            aria-hidden="true"
-          >
+          <span className="tale-multi-select__item-check" aria-hidden="true">
             {renderProps.isSelected && (
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path
@@ -340,18 +339,10 @@ export interface FooterProps extends React.ComponentPropsWithoutRef<'div'> {
 export const Footer = React.forwardRef<HTMLDivElement, FooterProps>(
   ({ size = 'md', onReset, onSelectAll, className, ...rest }, ref) => (
     <div ref={ref} className={cx('tale-multi-select__footer', className)} {...rest}>
-      <button
-        type="button"
-        className="tale-multi-select__footer-btn"
-        onClick={onReset}
-      >
+      <button type="button" className="tale-multi-select__footer-btn" onClick={onReset}>
         Reset
       </button>
-      <button
-        type="button"
-        className="tale-multi-select__footer-btn"
-        onClick={onSelectAll}
-      >
+      <button type="button" className="tale-multi-select__footer-btn" onClick={onSelectAll}>
         Select all
       </button>
     </div>
@@ -403,11 +394,7 @@ export const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
       <p className="tale-multi-select__empty-title">{title}</p>
       <p className="tale-multi-select__empty-description">{description}</p>
       {onClearSearch && (
-        <button
-          type="button"
-          className="tale-multi-select__empty-clear"
-          onClick={onClearSearch}
-        >
+        <button type="button" className="tale-multi-select__empty-clear" onClick={onClearSearch}>
           Clear search
         </button>
       )}

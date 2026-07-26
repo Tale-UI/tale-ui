@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1.0",
-  "taleUiVersion": "2.0.0",
+  "taleUiVersion": "3.0.0",
   "components": [
     {
       "name": "Accordion",
@@ -3435,7 +3435,9 @@
         "<DateField.Root>\n  <DateField.Label>Date</DateField.Label>\n  <DateField.DateInput style={{ display: 'flex' }}>\n    {(segment) => <DateField.Segment segment={segment} />}\n  </DateField.DateInput>\n</DateField.Root>",
         "import { DateField } from '@tale-ui/react/date-field';\n    \n    export function Example() {\n      return (\n        <DateField.Root>\n          <DateField.Label>Date</DateField.Label>\n          <DateField.DateInput>\n            {(segment) => <DateField.Segment segment={segment} />}\n          </DateField.DateInput>\n        </DateField.Root>\n      );\n    }"
       ],
-      "cssClasses": null,
+      "cssClasses": [
+        "tale-date-field"
+      ],
       "pitfalls": [
         {
           "id": "date-field-dateinput-not-input",
@@ -3482,7 +3484,9 @@
         "<DatePicker.Root>\n  <DatePicker.Label>Date</DatePicker.Label>\n  <DatePicker.Group>\n    <DatePicker.DateInput>\n      {(segment) => <DatePicker.Segment segment={segment} />}\n    </DatePicker.DateInput>\n    <DatePicker.Trigger />\n  </DatePicker.Group>\n  <DatePicker.Popover>\n    <DatePicker.Dialog>\n      {/* Calendar content same as above */}\n    </DatePicker.Dialog>\n  </DatePicker.Popover>\n</DatePicker.Root>",
         "import { DatePicker } from '@tale-ui/react/date-picker';\n    import { Calendar } from '@tale-ui/react/calendar';\n    \n    export function Example() {\n      return (\n        <DatePicker.Root>\n          <DatePicker.Label>Date</DatePicker.Label>\n          <DatePicker.Group>\n            <DatePicker.DateInput>\n              {(segment) => <DatePicker.Segment segment={segment} />}\n            </DatePicker.DateInput>\n            <DatePicker.Trigger />\n          </DatePicker.Group>\n          <DatePicker.Popover>\n            <DatePicker.Dialog>\n              <Calendar.Root>\n                <Calendar.Header>\n                  <Calendar.PreviousButton />\n                  <Calendar.Heading />\n                  <Calendar.NextButton />\n                </Calendar.Header>\n                <Calendar.Grid>\n                  <Calendar.GridHeader>\n                    {(day) => <Calendar.GridHeaderCell>{day}</Calendar.GridHeaderCell>}\n                  </Calendar.GridHeader>\n                  <Calendar.GridBody>\n                    {(date) => <Calendar.Cell date={date} />}\n                  </Calendar.GridBody>\n                </Calendar.Grid>\n              </Calendar.Root>\n            </DatePicker.Dialog>\n          </DatePicker.Popover>\n        </DatePicker.Root>\n      );\n    }"
       ],
-      "cssClasses": null,
+      "cssClasses": [
+        "tale-date-picker"
+      ],
       "pitfalls": [
         {
           "id": "date-picker-no-calendar-sub-parts",
@@ -3541,7 +3545,9 @@
         "import { DateRangePicker } from '@tale-ui/react/date-range-picker';\nimport { RangeCalendar } from '@tale-ui/react/range-calendar';\n\n<DateRangePicker.Root>\n  <DateRangePicker.Label>Date range</DateRangePicker.Label>\n  <DateRangePicker.Group>\n    <DateRangePicker.StartDate>\n      {(segment) => <DateRangePicker.Segment segment={segment} />}\n    </DateRangePicker.StartDate>\n    <span aria-hidden=\"true\">&ndash;</span>\n    <DateRangePicker.EndDate>\n      {(segment) => <DateRangePicker.Segment segment={segment} />}\n    </DateRangePicker.EndDate>\n    <DateRangePicker.Trigger />\n  </DateRangePicker.Group>\n  <DateRangePicker.Popover>\n    <DateRangePicker.Dialog>\n      <RangeCalendar.Root>\n        <RangeCalendar.Header>\n          <RangeCalendar.PreviousButton />\n          <RangeCalendar.Heading />\n          <RangeCalendar.NextButton />\n        </RangeCalendar.Header>\n        <RangeCalendar.Grid>\n          <RangeCalendar.GridHeader>\n            {(day) => <RangeCalendar.GridHeaderCell>{day}</RangeCalendar.GridHeaderCell>}\n          </RangeCalendar.GridHeader>\n          <RangeCalendar.GridBody>\n            {(date) => <RangeCalendar.Cell date={date} />}\n          </RangeCalendar.GridBody>\n        </RangeCalendar.Grid>\n      </RangeCalendar.Root>\n    </DateRangePicker.Dialog>\n  </DateRangePicker.Popover>\n</DateRangePicker.Root>",
         "import { DateRangePicker } from '@tale-ui/react/date-range-picker';\n    import { RangeCalendar } from '@tale-ui/react/range-calendar';\n    \n    export function Example() {\n      return (\n        <DateRangePicker.Root>\n          <DateRangePicker.Label>Date range</DateRangePicker.Label>\n          <DateRangePicker.Group>\n            <DateRangePicker.StartDate>\n              {(segment) => <DateRangePicker.Segment segment={segment} />}\n            </DateRangePicker.StartDate>\n            <span aria-hidden=\"true\">–</span>\n            <DateRangePicker.EndDate>\n              {(segment) => <DateRangePicker.Segment segment={segment} />}\n            </DateRangePicker.EndDate>\n            <DateRangePicker.Trigger />\n          </DateRangePicker.Group>\n          <DateRangePicker.Popover>\n            <DateRangePicker.Dialog>\n              <RangeCalendar.Root>\n                <RangeCalendar.Header>\n                  <RangeCalendar.PreviousButton />\n                  <RangeCalendar.Heading />\n                  <RangeCalendar.NextButton />\n                </RangeCalendar.Header>\n                <RangeCalendar.Grid>\n                  <RangeCalendar.GridHeader>\n                    {(day) => <RangeCalendar.GridHeaderCell>{day}</RangeCalendar.GridHeaderCell>}\n                  </RangeCalendar.GridHeader>\n                  <RangeCalendar.GridBody>\n                    {(date) => <RangeCalendar.Cell date={date} />}\n                  </RangeCalendar.GridBody>\n                </RangeCalendar.Grid>\n              </RangeCalendar.Root>\n            </DateRangePicker.Dialog>\n          </DateRangePicker.Popover>\n        </DateRangePicker.Root>\n      );\n    }"
       ],
-      "cssClasses": null,
+      "cssClasses": [
+        "tale-date-range-picker"
+      ],
       "pitfalls": [
         {
           "id": "date-range-picker-start-end-sub-parts",
@@ -4539,11 +4545,11 @@
       "examples": [
         "import { FileUpload } from '@tale-ui/react/file-upload';\nimport { useState } from 'react';\n\nfunction Example() {\n  const [files, setFiles] = useState<File[]>([]);\n\n  return (\n    <FileUpload.Root>\n      <FileUpload.DropZone\n        hint=\"PNG, JPG or PDF (max 5 MB)\"\n        accept=\"image/*,.pdf\"\n        maxSize={5 * 1024 * 1024}\n        onDropFiles={(fl) => setFiles((p) => [...p, ...Array.from(fl)])}\n      />\n      <FileUpload.List>\n        {files.map((f, i) => (\n          <FileUpload.ListItemProgressBar\n            key={`${f.name}-${i}`}\n            name={f.name}\n            size={f.size}\n            progress={100}\n            onDelete={() => setFiles((p) => p.filter((_, j) => j !== i))}\n          />\n        ))}\n      </FileUpload.List>\n    </FileUpload.Root>\n  );\n}",
         "<FileUpload.List>\n  <FileUpload.ListItemProgressFill\n    name=\"design.fig\"\n    size={2_400_000}\n    progress={65}\n    onDelete={() => {}}\n  />\n  <FileUpload.ListItemProgressFill\n    name=\"assets.zip\"\n    size={8_100_000}\n    progress={100}\n    onDelete={() => {}}\n  />\n</FileUpload.List>",
-        "{/* Using @untitledui/file-icons */}\nimport { FileIcon } from '@untitledui/file-icons';\n\n<FileUpload.ListItemProgressBar\n  name=\"report.pdf\"\n  size={1_200_000}\n  progress={45}\n  icon={<FileIcon type=\"pdf\" theme=\"light\" className=\"tale-file-upload-item__icon\" />}\n  onDelete={() => {}}\n/>",
+        "{\n  /* Using @untitledui/file-icons */\n}\nimport { FileIcon } from '@untitledui/file-icons';\n\n<FileUpload.ListItemProgressBar\n  name=\"report.pdf\"\n  size={1_200_000}\n  progress={45}\n  icon={<FileIcon type=\"pdf\" theme=\"light\" className=\"tale-file-upload-item__icon\" />}\n  onDelete={() => {}}\n/>;",
         "<FileUpload.ListItemProgressBar\n  name=\"large-video.mp4\"\n  size={500_000_000}\n  progress={0}\n  failed\n  onDelete={() => {}}\n  onRetry={() => restartUpload()}\n/>",
         "import { FileUpload } from '@tale-ui/react/file-upload';\n    import { Column } from '@tale-ui/react/column';\n    \n    export function ImagePdfUploader() {\n      return (\n        <Column gap=\"m\" style={{ maxWidth: 560 }}>\n          <FileUpload.Root>\n            <FileUpload.DropZone />\n            <FileUpload.List />\n          </FileUpload.Root>\n        </Column>\n      );\n    }",
         "import * as React from 'react';\n    import { FileUpload } from '@tale-ui/react/file-upload';\n    import { Column } from '@tale-ui/react/column';\n    \n    export function ImagePdfUploader() {\n      return (\n        <Column gap=\"m\" style={{ maxWidth: 560 }}>\n          <FileUpload.Root>\n            <FileUpload.DropZone />\n            <FileUpload.List />\n          </FileUpload.Root>\n        </Column>\n      );\n    }",
-        "import * as React from 'react';\n    import { FileUpload } from '@tale-ui/react/file-upload';\n    import { Column } from '@tale-ui/react/column';\n    \n    export function ImagePdfUploader() {\n      return (\n        <Column gap=\"m\" style={{ maxWidth: 560 }}>\n          <FileUpload.Root>\n            <FileUpload.DropZone />\n            <FileUpload.List />\n          </FileUpload.Root>\n        </Column>\n      );\n    }"
+        "import * as React from 'react';\n    import { FileUpload } from '@tale-ui/react/file-upload';\n    import { Column } from '@tale-ui/react/column';\n\n    export function ImagePdfUploader() {\n      return (\n        <Column gap=\"m\" style={{ maxWidth: 560 }}>\n          <FileUpload.Root>\n            <FileUpload.DropZone />\n            <FileUpload.List />\n          </FileUpload.Root>\n        </Column>\n      );\n    }"
       ],
       "cssClasses": [
         "tale-file-upload",
@@ -4649,7 +4655,7 @@
         {
           "id": "fileuploaddropzone-ondropfiles-receives-filelist",
           "summary": "FileUpload.DropZone does not accept an onDropFiles prop — never add a callback to manually capture dropped files",
-          "detail": "FileUpload.DropZone is typed as DropZoneProps (the standard React Aria DropZone interface), which has no onDropFiles callback. Adding onDropFiles causes 'is not assignable to type IntrinsicAttributes & DropZoneProps' TypeScript errors. FileUpload manages its own internal file state; always use FileUpload.DropZone as a self-closing element with no children and use FileUpload.List to display uploaded files — do not wire custom state via onDropFiles.\n    ```tsx\n    import * as React from 'react';\n    import { FileUpload } from '@tale-ui/react/file-upload';\n    import { Column } from '@tale-ui/react/column';\n    \n    export function ImagePdfUploader() {\n      return (\n        <Column gap=\"m\" style={{ maxWidth: 560 }}>\n          <FileUpload.Root>\n            <FileUpload.DropZone />\n            <FileUpload.List />\n          </FileUpload.Root>\n        </Column>\n      );\n    }\n    ```",
+          "detail": "FileUpload.DropZone is typed as DropZoneProps (the standard React Aria DropZone interface), which has no onDropFiles callback. Adding onDropFiles causes 'is not assignable to type IntrinsicAttributes & DropZoneProps' TypeScript errors. FileUpload manages its own internal file state; always use FileUpload.DropZone as a self-closing element with no children and use FileUpload.List to display uploaded files — do not wire custom state via onDropFiles.\n    ```tsx\n    import * as React from 'react';\n    import { FileUpload } from '@tale-ui/react/file-upload';\n    import { Column } from '@tale-ui/react/column';\n\n    export function ImagePdfUploader() {\n      return (\n        <Column gap=\"m\" style={{ maxWidth: 560 }}>\n          <FileUpload.Root>\n            <FileUpload.DropZone />\n            <FileUpload.List />\n          </FileUpload.Root>\n        </Column>\n      );\n    }\n    ```",
           "antiPatterns": [
             "<FileUpload.DropZone accept=\"image/*,application/pdf\" maxSize={5 * 1024 * 1024} allowsMultiple onDropFiles={(rawFiles: FileList) => handleFiles(rawFiles)}>",
             "<FileUpload.DropZone onDropFiles={(rawFiles: File[]) => handleFiles(rawFiles)} />"
@@ -6521,7 +6527,9 @@
         "<Meter.Root value={60} minValue={0} maxValue={100}>\n  <Meter.Header>\n    <Meter.Label>Storage</Meter.Label>\n    <Meter.Value>60%</Meter.Value>\n  </Meter.Header>\n  <Meter.Track>\n    <Meter.Indicator value={60} />\n  </Meter.Track>\n</Meter.Root>",
         "<div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-m)' }}>\n  {[10, 40, 70, 90].map((value) => (\n    <Meter.Root key={value} value={value} minValue={0} maxValue={100}>\n      <Meter.Header>\n        <Meter.Label>Usage</Meter.Label>\n        <Meter.Value>{value}%</Meter.Value>\n      </Meter.Header>\n      <Meter.Track>\n        <Meter.Indicator value={value} />\n      </Meter.Track>\n    </Meter.Root>\n  ))}\n</div>"
       ],
-      "cssClasses": null,
+      "cssClasses": [
+        "tale-meter"
+      ],
       "pitfalls": null,
       "crossPitfallRefs": [
         "minvalue-maxvalue-not-min-max",
@@ -9732,7 +9740,7 @@
         "import * as React from 'react';\nimport { TagSelect } from '@tale-ui/react/tag-select';\n\nconst people = [\n  { id: 'alice', name: 'Alice' },\n  { id: 'bob', name: 'Bob' },\n  { id: 'carol', name: 'Carol' },\n  { id: 'dave', name: 'Dave' },\n];\n\nexport function TeamPicker() {\n  type SelectionValue = Parameters<\n    NonNullable<React.ComponentProps<typeof TagSelect.Root>['onSelectionChange']>\n  >[0];\n  const [selected, setSelected] = React.useState<SelectionValue>(new Set());\n\n  return (\n    <TagSelect.Root\n      label=\"Team members\"\n      placeholder=\"Search members…\"\n      description=\"Select everyone who should have access.\"\n      items={people}\n      selectedKeys={selected}\n      onSelectionChange={setSelected}\n    >\n      {(person) => (\n        <TagSelect.Item id={person.id} textValue={person.name}>\n          {person.name}\n        </TagSelect.Item>\n      )}\n    </TagSelect.Root>\n  );\n}",
         "<TagSelect.Root size=\"sm\" label=\"Small\" items={people} onSelectionChange={...}>\n  {(p) => <TagSelect.Item id={p.id} textValue={p.name}>{p.name}</TagSelect.Item>}\n</TagSelect.Root>\n\n<TagSelect.Root size=\"md\" label=\"Medium\" items={people} onSelectionChange={...}>\n  {(p) => <TagSelect.Item id={p.id} textValue={p.name}>{p.name}</TagSelect.Item>}\n</TagSelect.Root>\n\n<TagSelect.Root size=\"lg\" label=\"Large\" items={people} onSelectionChange={...}>\n  {(p) => <TagSelect.Item id={p.id} textValue={p.name}>{p.name}</TagSelect.Item>}\n</TagSelect.Root>",
         "<TagSelect.Root\n  label=\"Reviewers\"\n  isRequired\n  isInvalid\n  errorMessage=\"Please select at least one reviewer.\"\n  items={people}\n  onSelectionChange={...}\n>\n  {(p) => <TagSelect.Item id={p.id} textValue={p.name}>{p.name}</TagSelect.Item>}\n</TagSelect.Root>",
-        "<TagSelect.Root\n  label=\"Collaborators\"\n  isDisabled\n  defaultSelectedKeys={new Set(['alice'])}\n  items={people}\n>\n  {(p) => <TagSelect.Item id={p.id} textValue={p.name}>{p.name}</TagSelect.Item>}\n</TagSelect.Root>",
+        "<TagSelect.Root\n  label=\"Collaborators\"\n  isDisabled\n  defaultSelectedKeys={new Set(['alice'])}\n  items={people}\n>\n  {(p) => (\n    <TagSelect.Item id={p.id} textValue={p.name}>\n      {p.name}\n    </TagSelect.Item>\n  )}\n</TagSelect.Root>",
         "const users = [\n  { id: 'u1', firstName: 'Alice', lastName: 'Smith' },\n  { id: 'u2', firstName: 'Bob',   lastName: 'Jones' },\n];\n\n<TagSelect.Root\n  label=\"Users\"\n  items={users}\n  getItemLabel={(u) => `${u.firstName} ${u.lastName}`}\n  onSelectionChange={...}\n>\n  {(u) => (\n    <TagSelect.Item id={u.id} textValue={`${u.firstName} ${u.lastName}`}>\n      {u.firstName} {u.lastName}\n    </TagSelect.Item>\n  )}\n</TagSelect.Root>"
       ],
       "cssClasses": [
@@ -10338,7 +10346,9 @@
         "<TimeField.Root>\n  <TimeField.Label>Time</TimeField.Label>\n  <TimeField.DateInput style={{ display: 'flex' }}>\n    {(segment) => <TimeField.Segment segment={segment} />}\n  </TimeField.DateInput>\n</TimeField.Root>",
         "import { TimeField } from '@tale-ui/react/time-field';\n    \n    export function Example() {\n      return (\n        <TimeField.Root>\n          <TimeField.Label>Time</TimeField.Label>\n          <TimeField.DateInput>\n            {(segment) => <TimeField.Segment segment={segment} />}\n          </TimeField.DateInput>\n        </TimeField.Root>\n      );\n    }"
       ],
-      "cssClasses": null,
+      "cssClasses": [
+        "tale-time-field"
+      ],
       "pitfalls": [
         {
           "id": "time-field-no-extra-sub-parts",

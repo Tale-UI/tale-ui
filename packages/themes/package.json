@@ -1,6 +1,6 @@
 {
   "name": "@tale-ui/themes",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Optional standard and monochrome themes for Tale UI.",
   "keywords": [
     "tale-ui",
@@ -29,7 +29,7 @@
     "generate": "tsx scripts/generate-themes-css.ts",
     "generate:check": "tsx scripts/generate-themes-css.ts --check",
     "prebuild": "pnpm generate:check && rimraf --glob build build-tests \"*.tsbuildinfo\"",
-    "build": "node ../../tools/build-package.mjs && node scripts/finalize-build.mjs",
+    "build": "node ../../tools/build-package.mjs --minimal && node scripts/finalize-build.mjs",
     "test": "cross-env VITEST_ENV=jsdom vitest run --config vitest.config.mts",
     "test:package": "pnpm build && publint run ./build --pack pnpm && attw --pack ./build --exclude-entrypoints themes.css --exclude-entrypoints css",
     "typescript": "tsc -b tsconfig.json"

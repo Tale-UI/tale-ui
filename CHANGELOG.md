@@ -2,6 +2,24 @@
 
 All notable changes to the Tale UI monorepo are documented in this file.
 
+## v3.0.0 — 2026-07-27
+
+### Changed
+
+- **Runtime contract**: Set the React consumer runtime floor to Node 18 while retaining React
+  17/18/19 support; repository development and Tooling continue to require Node 22.
+- **React Aria ownership**: Pinned React Aria Components to 1.19.0 and added an exact direct
+  `react-aria` 3.50.0 dependency with executable adoption/deviation contracts.
+- **Release preparation**: Prepared the six public design-system packages at 3.0.0 and Tooling at
+  0.2.0 without publishing or creating tags.
+- **Historical documentation**: Added current v3, immutable v2, retained v1, provenance, and
+  rollback-to-v2 documentation contracts.
+
+### Migration
+
+- Upgrade Node 14/16 applications to Node 18 or newer before adopting React 3.
+- Upgrade all six coordinated Tale UI packages together.
+
 ## v2.0.0 — 2026-07-24
 
 ### Added

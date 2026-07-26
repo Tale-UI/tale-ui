@@ -13,6 +13,7 @@
       "properties": {
         "candidate": { "type": "string" },
         "disposition": { "enum": ["approve", "defer", "reject"] },
+        "a2uiDisposition": { "const": "n/a" },
         "rationale": { "type": "string", "minLength": 1 },
         "evidence": { "$ref": "#/$defs/evidence" },
         "evidenceDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
@@ -229,11 +230,126 @@
         { "contains": { "properties": { "candidate": { "const": "CodeBlock" } } } },
         { "contains": { "properties": { "candidate": { "const": "MetadataList" } } } }
       ]
+    },
+    "componentEquivalenceExpansionRecord": {
+      "allOf": [
+        { "$ref": "#/$defs/record" },
+        {
+          "required": ["a2uiDisposition"],
+          "properties": {
+            "disposition": { "const": "approve" },
+            "a2uiDisposition": { "const": "n/a" },
+            "evidence": {
+              "required": [
+                "sources",
+                "accessibility",
+                "state",
+                "localization",
+                "security",
+                "ssr",
+                "performance",
+                "ownership",
+                "migration"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "componentEquivalenceExpansionRecords": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "allOf": [
+            { "$ref": "#/$defs/componentEquivalenceExpansionRecord" },
+            { "properties": { "candidate": { "const": "AspectRatio" } } }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/componentEquivalenceExpansionRecord" },
+            { "properties": { "candidate": { "const": "Blockquote" } } }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/componentEquivalenceExpansionRecord" },
+            { "properties": { "candidate": { "const": "ButtonGroup" } } }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/componentEquivalenceExpansionRecord" },
+            { "properties": { "candidate": { "const": "Citation" } } }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/componentEquivalenceExpansionRecord" },
+            { "properties": { "candidate": { "const": "Code" } } }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/componentEquivalenceExpansionRecord" },
+            { "properties": { "candidate": { "const": "Lightbox" } } }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/componentEquivalenceExpansionRecord" },
+            { "properties": { "candidate": { "const": "Markdown" } } }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/componentEquivalenceExpansionRecord" },
+            { "properties": { "candidate": { "const": "Outline" } } }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/componentEquivalenceExpansionRecord" },
+            { "properties": { "candidate": { "const": "OverflowList" } } }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/componentEquivalenceExpansionRecord" },
+            { "properties": { "candidate": { "const": "Resizable" } } }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/componentEquivalenceExpansionRecord" },
+            { "properties": { "candidate": { "const": "Skeleton" } } }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/componentEquivalenceExpansionRecord" },
+            { "properties": { "candidate": { "const": "Timestamp" } } }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/componentEquivalenceExpansionRecord" },
+            { "properties": { "candidate": { "const": "Toast" } } }
+          ]
+        }
+      ],
+      "items": false,
+      "minItems": 13,
+      "maxItems": 13,
+      "uniqueItems": true
     }
   },
   "properties": {
     "schemaVersion": { "const": "1.0.0" },
-    "inventory": { "enum": ["table", "app-shell", "chat", "content"] },
+    "inventory": {
+      "enum": ["table", "app-shell", "chat", "content", "component-equivalence-expansion"]
+    },
+    "source": { "type": "string", "minLength": 1 },
     "evidenceRevision": { "type": "string" },
     "records": { "type": "array" }
   },
@@ -260,6 +376,16 @@
       "properties": {
         "inventory": { "const": "content" },
         "records": { "$ref": "#/$defs/contentRecords" }
+      }
+    },
+    {
+      "required": ["source"],
+      "properties": {
+        "inventory": { "const": "component-equivalence-expansion" },
+        "source": {
+          "const": "docs/plans/component-equivalence-expansion-implementation-plan.md"
+        },
+        "records": { "$ref": "#/$defs/componentEquivalenceExpansionRecords" }
       }
     }
   ]

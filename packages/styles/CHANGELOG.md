@@ -2,6 +2,13 @@
 
 All notable changes to the component styles package are documented in this file.
 
+## v3.0.0 — 2026-07-27
+
+### Changed
+
+- Prepared the component stylesheet package for the coordinated Tale UI 3 release.
+- Added package/export parity and clean packed-consumer validation infrastructure.
+
 ## v2.0.0 — 2026-07-24
 
 ### Changed

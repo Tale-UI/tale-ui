@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { AnimatePresence, motion } from 'motion/react';
 import { CheckCircle, Trash2, UploadCloud, XCircle } from 'lucide-react';
 import { cx } from '../_cx';
+import { useTaleUiId } from '../utils/useTaleUiId';
 
 /* ─── Utility ───────────────────────────────────────────────────────────────── */
 
@@ -9,7 +9,9 @@ import { cx } from '../_cx';
  * Returns a human-readable file size string (e.g. "2 MB", "430 KB").
  */
 export const getReadableFileSize = (bytes: number): string => {
-  if (bytes === 0) { return '0 KB'; }
+  if (bytes === 0) {
+    return '0 KB';
+  }
   const suffixes = ['B', 'KB', 'MB', 'GB', 'TB'];
   const i = Math.floor(Math.log(bytes) / Math.log(1024));
   return `${Math.floor(bytes / Math.pow(1024, i))} ${suffixes[i] ?? 'B'}`;
@@ -53,11 +55,9 @@ export interface RootProps extends React.HTMLAttributes<HTMLDivElement> {}
  * }
  * ```
  */
-export const Root = React.forwardRef<HTMLDivElement, RootProps>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cx('tale-file-upload', className)} {...props} />
-  ),
-);
+export const Root = React.forwardRef<HTMLDivElement, RootProps>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cx('tale-file-upload', className)} {...props} />
+));
 Root.displayName = 'FileUpload.Root';
 
 /* ─── DropZone ──────────────────────────────────────────────────────────────── */
@@ -111,7 +111,7 @@ export const DropZone = React.forwardRef<HTMLDivElement, DropZoneProps>(
     },
     ref,
   ) => {
-    const id = React.useId();
+    const id = useTaleUiId();
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [isInvalid, setIsInvalid] = React.useState(false);
     const [isDraggingOver, setIsDraggingOver] = React.useState(false);
@@ -153,25 +153,33 @@ export const DropZone = React.forwardRef<HTMLDivElement, DropZoneProps>(
         onDropUnacceptedFiles?.(toFileList(unaccepted));
       }
 
-      if (inputRef.current) { inputRef.current.value = ''; }
+      if (inputRef.current) {
+        inputRef.current.value = '';
+      }
     };
 
     const handleDragIn = (event: React.DragEvent<HTMLDivElement>) => {
-      if (isDisabled) { return; }
+      if (isDisabled) {
+        return;
+      }
       event.preventDefault();
       event.stopPropagation();
       setIsDraggingOver(true);
     };
 
     const handleDragOut = (event: React.DragEvent<HTMLDivElement>) => {
-      if (isDisabled) { return; }
+      if (isDisabled) {
+        return;
+      }
       event.preventDefault();
       event.stopPropagation();
       setIsDraggingOver(false);
     };
 
     const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-      if (isDisabled) { return; }
+      if (isDisabled) {
+        return;
+      }
       handleDragOut(event);
       processFiles(Array.from(event.dataTransfer.files));
     };
@@ -206,6 +214,7 @@ export const DropZone = React.forwardRef<HTMLDivElement, DropZoneProps>(
               ref={inputRef}
               id={id}
               type="file"
+              aria-label="Upload files"
               className="tale-file-upload-drop-zone__input"
               disabled={isDisabled}
               accept={accept}
@@ -244,7 +253,7 @@ export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {}
 export const List = React.forwardRef<HTMLUListElement, ListProps>(
   ({ className, children, ...props }, ref) => (
     <ul ref={ref} className={cx('tale-file-upload-list', className)} {...props}>
-      <AnimatePresence initial={false}>{children}</AnimatePresence>
+      {children}
     </ul>
   ),
 );
@@ -297,8 +306,7 @@ export function ListItemProgressBar({
   const isComplete = progress === 100;
 
   return (
-    <motion.li
-      layout="position"
+    <li
       className={cx(
         `tale-file-upload-item tale-file-upload-item--bar${failed ? ' tale-file-upload-item--failed' : ''}`,
         className,
@@ -380,16 +388,12 @@ export function ListItemProgressBar({
         )}
 
         {failed && (
-          <button
-            type="button"
-            onClick={onRetry}
-            className="tale-file-upload-item__retry-btn"
-          >
+          <button type="button" onClick={onRetry} className="tale-file-upload-item__retry-btn">
             Try again
           </button>
         )}
       </div>
-    </motion.li>
+    </li>
   );
 }
 
@@ -408,8 +412,7 @@ export function ListItemProgressFill({
   const isComplete = progress === 100;
 
   return (
-    <motion.li
-      layout="position"
+    <li
       className={cx(
         `tale-file-upload-item tale-file-upload-item--fill${failed ? ' tale-file-upload-item--failed' : ''}`,
         className,
@@ -464,11 +467,7 @@ export function ListItemProgressFill({
             )}
           </div>
           {failed && (
-            <button
-              type="button"
-              onClick={onRetry}
-              className="tale-file-upload-item__retry-btn"
-            >
+            <button type="button" onClick={onRetry} className="tale-file-upload-item__retry-btn">
               Try again
             </button>
           )}
@@ -483,6 +482,6 @@ export function ListItemProgressFill({
           <Trash2 className="tale-file-upload-item__delete-icon" aria-hidden="true" />
         </button>
       </div>
-    </motion.li>
+    </li>
   );
 }

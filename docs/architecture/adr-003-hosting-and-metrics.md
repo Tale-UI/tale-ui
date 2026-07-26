@@ -15,10 +15,13 @@ an explicit public-path allowlist and stored as a content-addressed generated
 snapshot. `docs/archive/` is not a source.
 
 GitHub Pages remains the static documentation host at
-`https://tale-ui.github.io/tale-ui/`. Versioned documentation is published at
-`/docs/v2/` and `/docs/v1/`; `/docs/` and `/docs/current/` resolve to the
-current major. Root `llms.txt`, version manifests, and rollback metadata are
-assembled into the same Pages artifact.
+`https://tale-ui.github.io/tale-ui/`. At the time of this decision, versioned
+documentation was published at `/docs/v2/` and `/docs/v1/`, with `/docs/` and
+`/docs/current/` resolving to the current major. The v3 release preparation
+extends that contract with `/docs/v3/`, retains v2 as the previous supported
+major and rollback target, and retains v1 as archived history. Root `llms.txt`,
+version manifests, and rollback metadata are assembled into the same Pages
+artifact.
 
 Hosted MCP is an independent Cloudflare Worker at
 `https://mcp.tale-ui.dev/mcp` using MCP Streamable HTTP. It exposes bounded

@@ -1,5 +1,12 @@
 # Changelog — @tale-ui/themes
 
+## v3.0.0 — 2026-07-27
+
+### Changed
+
+- Prepared the theme package for the coordinated Tale UI 3 release.
+- No theme identifiers, palettes, selectors, or application APIs changed at the Gate B boundary.
+
 ## v2.0.0 — 2026-07-24
 
 ### Changed

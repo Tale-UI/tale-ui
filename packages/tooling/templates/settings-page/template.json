@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0.0",
   "id": "tale:template:settings-page",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "source": "source/App.tsx",
   "skeleton": "skeleton/App.tsx",
   "dependencies": {
-    "@tale-ui/react": "^2.0.0",
+    "@tale-ui/react": "^3.0.0",
     "react": ">=18.0.0"
   },
   "preview": {
@@ -16,7 +16,7 @@
   "golden": "tools/golden-prompts/settings-page.json",
   "compatibility": {
     "react": ">=18.0.0",
-    "tale": ">=2.0.0 <3.0.0",
+    "tale": ">=3.0.0 <4.0.0",
     "frameworks": [
       "next",
       "vite"
@@ -32,5 +32,5 @@
     "firstParty": true
   },
   "license": "MIT",
-  "digest": "sha256:64b411ce6f167f1bbf4715de659303afd0892e08197896fc16eaf8bfc1c0f11b"
+  "digest": "sha256:e43ce6ec89295a11695f07fc21bcfed3834e088d285f440a64538f156de85c99"
 }

@@ -79,10 +79,120 @@ jobs:
         run: pnpm typescript
       - name: Verify packed React package
         run: pnpm react:test:package
+      - name: Verify packed Styles package
+        run: pnpm --filter @tale-ui/react-styles test:package
       - name: Verify packed tooling API and CLI
         run: pnpm tooling:test:package
       - name: Unit tests (jsdom)
         run: pnpm test:jsdom
+
+  # Build consumer tarballs once on the release build runtime.
+  build-packed-consumer-tarballs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - name: Build packed runtime packages
+        run: |
+          pnpm --filter @tale-ui/utils build
+          pnpm --filter @tale-ui/react build
+      - name: Pack consumer artifacts
+        shell: bash
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/.artifacts/packed-consumers"
+          pnpm --dir packages/css pack --pack-destination "$GITHUB_WORKSPACE/.artifacts/packed-consumers" --silent
+          pnpm --dir packages/styles pack --pack-destination "$GITHUB_WORKSPACE/.artifacts/packed-consumers" --silent
+          pnpm --dir packages/utils pack --pack-destination "$GITHUB_WORKSPACE/.artifacts/packed-consumers" --silent
+          pnpm --dir packages/react pack --pack-destination "$GITHUB_WORKSPACE/.artifacts/packed-consumers" --silent
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gate-b-packed-consumers
+          path: .artifacts/packed-consumers/*.tgz
+          if-no-files-found: error
+
+  # Exercise the Node/React consumer cross-product against Node-22-built tarballs.
+  test-react-packed-consumer-matrix:
+    needs: build-packed-consumer-tarballs
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18, 20, 22, 24]
+        react: [17, 18, 19]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+      - name: Use Node.js ${{ matrix.node }}.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: gate-b-packed-consumers
+          path: .artifacts/packed-consumers
+      - name: Verify packed React consumer
+        env:
+          TALE_PACKED_BUILD_NODE_MAJOR: 22
+          TALE_PACKED_NODE_MAJOR: ${{ matrix.node }}
+          TALE_PACKED_REACT_MAJOR: ${{ matrix.react }}
+          TALE_PACKED_TARBALL_DIR: ${{ github.workspace }}/.artifacts/packed-consumers
+        run: node packages/react/scripts/test-packed-consumers.mjs
+
+  test-styles-packed-consumer-matrix:
+    needs: build-packed-consumer-tarballs
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18, 20, 22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+      - name: Use Node.js ${{ matrix.node }}.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: gate-b-packed-consumers
+          path: .artifacts/packed-consumers
+      - name: Verify packed Styles consumer
+        env:
+          TALE_PACKED_BUILD_NODE_MAJOR: 22
+          TALE_PACKED_NODE_MAJOR: ${{ matrix.node }}
+          TALE_PACKED_TARBALL_DIR: ${{ github.workspace }}/.artifacts/packed-consumers
+        run: node packages/styles/scripts/test-packed-consumers.mjs
+
+  test-react-node16-rejection:
+    needs: build-packed-consumer-tarballs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
+      - uses: actions/download-artifact@v4
+        with:
+          name: gate-b-packed-consumers
+          path: .artifacts/packed-consumers
+      - name: Locate React tarball
+        shell: bash
+        run: |
+          REACT_TARBALL="$(find "$GITHUB_WORKSPACE/.artifacts/packed-consumers" -name 'tale-ui-react-[0-9]*.tgz' -print -quit)"
+          test -n "$REACT_TARBALL"
+          echo "TALE_REACT_TARBALL=$REACT_TARBALL" >> "$GITHUB_ENV"
+      - name: Verify Node 16 engine-strict rejection
+        run: node packages/react/scripts/test-engine-compatibility.mjs --expect-node-16-rejection
 
   # Changed-component accessibility and maintained performance budgets
   check-accessibility-performance:

@@ -12,6 +12,11 @@ This single install pulls in `@tale-ui/react-styles` (component CSS) and `@tale-
 
 Peer dependencies: `react` and `react-dom` (^17, ^18, or ^19).
 
+Runtime requirement: Node 18 or newer. Repository development and the
+independently versioned `@tale-ui/tooling` package require Node 22 or newer.
+See the repository's [compatibility policy](../../docs/compatibility.md) and
+[React 3 migration guide](../../docs/migrating-to-v3.md).
+
 ### AI agent setup (optional)
 
 If you use Claude Code or other AI coding agents, run this once to add component documentation instructions to your project:

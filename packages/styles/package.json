@@ -1,6 +1,6 @@
 {
   "name": "@tale-ui/react-styles",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "CSS styles for @tale-ui/react components, built on @tale-ui/css design tokens.",
   "repository": {
     "type": "git",
@@ -8,8 +8,16 @@
     "directory": "packages/styles"
   },
   "license": "MIT",
+  "files": [
+    "src"
+  ],
   "main": "src/index.css",
   "style": "src/index.css",
+  "scripts": {
+    "test:exports": "node ./scripts/validate-package-exports.mjs",
+    "test:package": "node ./scripts/validate-package-exports.mjs && publint",
+    "test:packed-consumers": "node ./scripts/test-packed-consumers.mjs"
+  },
   "exports": {
     ".": "./src/index.css",
     "./_primitives": "./src/_primitives.css",

@@ -29,6 +29,7 @@ const { values } = parseArgs({
     ignore: { type: 'string', multiple: true, default: [] },
     copy: { type: 'string', multiple: true, default: [] },
     minimal: { type: 'boolean', default: false },
+    'runtime-assets': { type: 'boolean', default: false },
   },
   strict: false,
   allowPositionals: true,
@@ -37,6 +38,11 @@ const { values } = parseArgs({
 const extraIgnores = /** @type {string[]} */ (values.ignore ?? []);
 const extraCopy = /** @type {string[]} */ (values.copy ?? []);
 const minimalBuild = values.minimal ?? false;
+const runtimeAssets = values['runtime-assets'] ?? false;
+
+if (minimalBuild && runtimeAssets) {
+  throw new Error('--minimal and --runtime-assets are mutually exclusive.');
+}
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 const BASE_IGNORES = [
@@ -270,28 +276,46 @@ if (await fileExists(binDir)) {
   copied++;
 }
 
-// Copy current docs into build/docs/ (component guides, recipes, pitfalls, etc.).
-// Historical material under docs/archive is intentionally excluded from package
-// artifacts and the consumer-facing MCP documentation index.
-if (!minimalBuild) {
+// React's packaged setup/MCP binaries require a deliberately bounded runtime
+// data set. Only Markdown source guidance and the three JSON files read by
+// mcp-core are copied; build caches, site output, application sources,
+// versioned snapshots, canonical roadmap sources, and reports never enter a
+// package tarball.
+if (runtimeAssets) {
   const docsDir = path.join(repoRoot, 'docs');
   if (await fileExists(docsDir)) {
-    const archiveDir = path.join(docsDir, 'archive');
+    const excludedDocsDirectories = new Set([
+      '.next',
+      'archive',
+      'node_modules',
+      'out',
+      'src',
+      'versioned',
+    ]);
     await fs.cp(docsDir, path.join(buildDir, 'docs'), {
       recursive: true,
-      filter(source) {
-        const relative = path.relative(archiveDir, source);
-        return relative.startsWith('..') || path.isAbsolute(relative);
+      async filter(source) {
+        if (source === docsDir) {
+          return true;
+        }
+        const relative = path.relative(docsDir, source);
+        if (excludedDocsDirectories.has(relative.split(path.sep)[0])) {
+          return false;
+        }
+        return (await fs.stat(source)).isDirectory() || path.extname(source) === '.md';
       },
     });
     copied++;
   }
 
-  // Copy registry data files (components.json, pitfalls.json, a2ui-catalog.json)
-  // The MCP server reads these at runtime from __dirname/registry/ in consumer mode.
+  // mcp-core reads exactly these public runtime registry files in consumer mode.
   const registryDir = path.join(repoRoot, 'registry');
   if (await fileExists(registryDir)) {
-    await fs.cp(registryDir, path.join(buildDir, 'registry'), { recursive: true });
+    const registryTarget = path.join(buildDir, 'registry');
+    await fs.mkdir(registryTarget, { recursive: true });
+    for (const file of ['components.json', 'a2ui-catalog.json', 'pitfalls.json']) {
+      await fs.cp(path.join(registryDir, file), path.join(registryTarget, file));
+    }
     copied++;
   }
 

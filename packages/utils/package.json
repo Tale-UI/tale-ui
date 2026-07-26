@@ -1,6 +1,6 @@
 {
   "name": "@tale-ui/utils",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "A collection of React utility functions for Tale UI.",
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
   "type": "commonjs",
   "scripts": {
     "prebuild": "rimraf --glob build build-tests \"*.tsbuildinfo\"",
-    "build": "node ../../tools/build-package.mjs --copy .npmignore",
+    "build": "node ../../tools/build-package.mjs --minimal --copy .npmignore",
     "test:package": "publint --pack pnpm run ./build && attw --pack ./build --exclude-entrypoints package.json --exclude-entrypoints esm --exclude-entrypoints cjs",
     "release": "pnpm build && pnpm publish",
     "test": "cross-env VITEST_ENV=jsdom vitest",

@@ -177,7 +177,7 @@ function outputs(definition) {
     `  return <Text>Implement the ${definition.slug.replaceAll('-', ' ')} template here.</Text>;\n` +
     '}\n';
   const dependencies = {
-    '@tale-ui/react': '^2.0.0',
+    '@tale-ui/react': '^3.0.0',
     react: '>=18.0.0',
     ...(source.includes("from 'lucide-react'") ? { 'lucide-react': '^0.468.0' } : {}),
     ...(definition.dependencies || {}),
@@ -185,7 +185,7 @@ function outputs(definition) {
   const preimage = {
     schemaVersion: '1.0.0',
     id: `tale:template:${definition.slug}`,
-    version: '1.0.0',
+    version: '2.0.0',
     source: 'source/App.tsx',
     skeleton: 'skeleton/App.tsx',
     dependencies,
@@ -197,7 +197,7 @@ function outputs(definition) {
     golden: `tools/golden-prompts/${definition.golden}.json`,
     compatibility: {
       react: '>=18.0.0',
-      tale: '>=2.0.0 <3.0.0',
+      tale: '>=3.0.0 <4.0.0',
       frameworks: ['next', 'vite'],
     },
     appearance: ['light', 'dark'],

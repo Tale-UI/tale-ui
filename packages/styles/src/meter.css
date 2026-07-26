@@ -14,3 +14,10 @@
  */
 
 /* ─── Root ─────────────────────────────────────────────────────────────────── */
+
+.tale-meter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4xs);
+  width: 100%;
+}

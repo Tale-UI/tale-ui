@@ -15,7 +15,7 @@ test('manifest correlates registry, capability, and package versions', () => {
   assert.equal(manifest.contractVersion, '1.0.0');
   assert.equal(manifest.registryVersion, '1.0.0');
   assert.equal(manifest.releaseChannel, 'beta');
-  assert.equal(manifest.packageVersions['@tale-ui/tooling'], '0.1.0');
+  assert.equal(manifest.packageVersions['@tale-ui/tooling'], '0.2.0');
   assert.ok(manifest.capabilities.some((capability) => capability.id === 'artifact.search'));
   assert.ok(manifest.capabilities.some((capability) => capability.id === 'manifest.get'));
   assert.equal(

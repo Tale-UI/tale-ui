@@ -378,7 +378,10 @@
 }
 
 .story-container-label {
-  color: var(--color-60-fg);
+  border-radius: var(--radius-xs);
+  background: var(--neutral-5);
+  padding: var(--space-3xs) var(--space-2xs);
+  color: var(--neutral-90);
   font-family: var(--label-font-family);
   font-size: var(--label-s-font-size);
 }

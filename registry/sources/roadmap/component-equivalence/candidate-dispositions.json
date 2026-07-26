@@ -1,0 +1,278 @@
+{
+  "schemaVersion": "1.0.0",
+  "inventory": "component-equivalence-expansion",
+  "source": "docs/plans/component-equivalence-expansion-implementation-plan.md",
+  "evidenceRevision": "sha256:79976586c25e313bc8d4e87fc209f3e372db80548aa8538653bcda6e87cfffba",
+  "records": [
+    {
+      "candidate": "AspectRatio",
+      "disposition": "approve",
+      "a2uiDisposition": "n/a",
+      "rationale": "No A2UI publication is authorized.",
+      "evidence": {
+        "sources": [
+          "docs/plans/component-equivalence-expansion-implementation-plan.md",
+          "packages/styles/src/icon-button.css"
+        ],
+        "accessibility": "Preserves consumer-authored child semantics and does not introduce an interactive role.",
+        "state": "Stateless; invalid ratios recover to the deterministic 1:1 default.",
+        "localization": "Owns no visible copy or direction-sensitive behavior.",
+        "security": "Accepts React children and runtime-strips the raw HTML escape hatch.",
+        "ssr": "Native aspect-ratio styling produces deterministic server markup.",
+        "performance": "Uses one wrapper and native CSS without measurement or observers.",
+        "ownership": "Tale owns a CSS/native primitive rather than an upstream React Aria wrapper.",
+        "migration": "Consumers can replace ad hoc aspect-ratio wrappers while retaining their child content."
+      },
+      "evidenceDigest": "sha256:e1f1572c8d494a3ba37964959dad96f604529a31a00060f38767cd7d8b984568"
+    },
+    {
+      "candidate": "Blockquote",
+      "disposition": "approve",
+      "a2uiDisposition": "n/a",
+      "rationale": "No A2UI publication is authorized.",
+      "evidence": {
+        "sources": [
+          "docs/plans/component-equivalence-expansion-implementation-plan.md",
+          "packages/react/src/text-editor/TextEditor.styled.tsx"
+        ],
+        "accessibility": "Uses native blockquote, paragraph, and footer semantics with consumer-authored attribution.",
+        "state": "Stateless.",
+        "localization": "All quoted content and attribution remain consumer-provided.",
+        "security": "The cite attribute accepts credential-free absolute HTTP(S) URLs only and raw HTML is excluded.",
+        "ssr": "Native semantic markup is deterministic.",
+        "performance": "Adds no parser, observer, timer, or client-side state.",
+        "ownership": "Tale owns the semantic composition; editor-only blockquote styling remains separate.",
+        "migration": "Existing semantic blockquote markup maps directly to the Root, Content, and Attribution parts."
+      },
+      "evidenceDigest": "sha256:1dfba546054e17cc847335e43ae48345469e01ee8d36ed72ae12f486de442b31"
+    },
+    {
+      "candidate": "ButtonGroup",
+      "disposition": "approve",
+      "a2uiDisposition": "n/a",
+      "rationale": "No A2UI publication is authorized.",
+      "evidence": {
+        "sources": [
+          "docs/plans/component-equivalence-expansion-implementation-plan.md",
+          "packages/react/package.json",
+          "packages/react/src/toggle-group/index.ts"
+        ],
+        "accessibility": "Requires an accessible group or region name and fails invalid naming combinations closed to presentation.",
+        "state": "Preserves React Aria Group interaction state without introducing selection semantics.",
+        "localization": "Accessible names remain consumer-provided and logical orientation styling supports direction changes.",
+        "security": "Excludes render-function content and the raw HTML escape hatch.",
+        "ssr": "Role, orientation, and attached styling are deterministic across server and client.",
+        "performance": "Wraps the pinned React Aria Group without measurement or additional subscriptions.",
+        "ownership": "Tale restricts Group and owns naming, orientation, and attached styling.",
+        "migration": "Action groups can migrate without adopting ToggleButtonGroup selection or SocialButtonGroup provider semantics."
+      },
+      "evidenceDigest": "sha256:f29e21515b01b26ba8ae2b67fd4e3e0d85abe12d2d1894f769141407fa012b25"
+    },
+    {
+      "candidate": "Citation",
+      "disposition": "approve",
+      "a2uiDisposition": "n/a",
+      "rationale": "Trust and document identity are outside the current catalog.",
+      "evidence": {
+        "sources": [
+          "docs/components/link.md",
+          "docs/plans/component-equivalence-expansion-implementation-plan.md"
+        ],
+        "accessibility": "Owns stable reference targets, ordinal labels, unavailable-source labels, and semantic ordered lists.",
+        "state": "Normalizes one immutable document-local registry atomically and shares ordinals across repeated references.",
+        "localization": "Source metadata is consumer content; UTC machine timestamps remain distinct from visible authored values.",
+        "security": "Rejects malformed, credential-bearing, unsupported, and unbased relative URLs while escaping metadata.",
+        "ssr": "Source order deterministically produces ordinals and document-local IDs.",
+        "performance": "Builds one indexed normalized registry and reuses ordinal lookups.",
+        "ownership": "Tale owns document identity, normalization, numbering, and URL policy.",
+        "migration": "Link-based citations can move to explicit sources, references, and one source list without renumbering by hand."
+      },
+      "evidenceDigest": "sha256:9883d203f131a39935ebc6d006d3ac60f3406e71416df4782e3193862339d01d"
+    },
+    {
+      "candidate": "Code",
+      "disposition": "approve",
+      "a2uiDisposition": "n/a",
+      "rationale": "No A2UI publication is authorized.",
+      "evidence": {
+        "sources": [
+          "docs/components/code-block.md",
+          "docs/plans/component-equivalence-expansion-implementation-plan.md"
+        ],
+        "accessibility": "Uses the native inline code element and preserves text content.",
+        "state": "Stateless.",
+        "localization": "Treats code as opaque consumer text.",
+        "security": "Escapes string children and never parses, highlights, fetches, or executes them.",
+        "ssr": "Pure deterministic text markup.",
+        "performance": "One inline element with no parser or highlighter.",
+        "ownership": "Tale owns the inline semantic primitive while CodeBlock remains block-oriented.",
+        "migration": "Existing inline code elements can adopt the component without changing their string data."
+      },
+      "evidenceDigest": "sha256:0bddeb76171ca178804d83dbd88133407eb7fba7b9bd2caede6ff7d0f95893b7"
+    },
+    {
+      "candidate": "Lightbox",
+      "disposition": "approve",
+      "a2uiDisposition": "n/a",
+      "rationale": "Overlay, focus, and selection state are outside the current catalog.",
+      "evidence": {
+        "sources": [
+          "docs/components/dialog.md",
+          "docs/plans/component-equivalence-expansion-implementation-plan.md",
+          "packages/react/src/carousel/Carousel.styled.tsx"
+        ],
+        "accessibility": "Reuses Dialog focus containment and dismissal while owning item labels, control names, and focus restoration.",
+        "state": "Provides mount-stable open and selection domains with atomic collection validation and fail-closed recovery.",
+        "localization": "Default control names come from Tale localization and navigation follows the popup document direction.",
+        "security": "Renders caller-owned React content without fetching media or exposing owned action handlers.",
+        "ssr": "The first hydration remains closed or follows explicit deterministic state without browser-global identity.",
+        "performance": "Indexes keys once per collection generation and limits swipe and focus work to the active instance.",
+        "ownership": "Tale composes Dialog, Button, and swipe utilities into an item-keyed lightbox model.",
+        "migration": "Existing modal galleries can retain their item data and move triggers, content, navigation, and captions incrementally."
+      },
+      "evidenceDigest": "sha256:03580cabfc4b672026a8e692ce78b1661f72a93c43550332c0af2b03cad1e331"
+    },
+    {
+      "candidate": "Markdown",
+      "disposition": "approve",
+      "a2uiDisposition": "n/a",
+      "rationale": "Untrusted parsing is outside the current catalog.",
+      "evidence": {
+        "sources": [
+          "docs/architecture/rfc-chat.md",
+          "docs/plans/component-equivalence-expansion-implementation-plan.md"
+        ],
+        "accessibility": "Maps the bounded document subset to semantic Tale and native elements without changing Chat announcements.",
+        "state": "Parsing is synchronous and atomic; any validation, parser, or filtering failure renders only the fallback.",
+        "localization": "Document text is consumer content and the invalid fallback can be localized by the consumer.",
+        "security": "Gate A must prove limits, raw-HTML omission, non-fetching resource fallbacks, and strict URL filtering before export.",
+        "ssr": "The selected parser must produce deterministic filtered output in Node 18 and browsers.",
+        "performance": "Hard source, line, depth, and node limits bound work; the exact adversarial vector is benchmarked.",
+        "ownership": "Tale owns the bounded renderer and adapter; Chat remains plain React content and text.",
+        "migration": "Consumers opt into standalone Markdown explicitly without changing Chat runtime behavior or public API."
+      },
+      "evidenceDigest": "sha256:21fc5a9468b2f5c7bee8c598c92532232436d3681408b74fe0329a9b652a2a1a"
+    },
+    {
+      "candidate": "Outline",
+      "disposition": "approve",
+      "a2uiDisposition": "n/a",
+      "rationale": "Document identity and observers are outside the current catalog.",
+      "evidence": {
+        "sources": [
+          "docs/components/link.md",
+          "docs/plans/component-equivalence-expansion-implementation-plan.md"
+        ],
+        "accessibility": "Renders a named navigation landmark with nested list and anchor semantics.",
+        "state": "Owns mount-stable active state, per-instance observer generations, stale-work rejection, and deterministic reconciliation.",
+        "localization": "Labels and landmark names remain consumer-provided; logical document order is preserved.",
+        "security": "Resolves fragment targets only through the owning navigation document and does not accept arbitrary URLs.",
+        "ssr": "The item tree and initial active marker are deterministic; observation begins only on the client.",
+        "performance": "Uses one observer and at most one pending frame per instance.",
+        "ownership": "Tale owns document navigation identity and observer behavior rather than extending Link alone.",
+        "migration": "Existing in-page navigation can provide stable logical and target IDs while retaining authored labels."
+      },
+      "evidenceDigest": "sha256:0b8b8652b772ba90fb3b49ba9a4cd992cfb79aa2e62167d2b740110d2b9338a0"
+    },
+    {
+      "candidate": "OverflowList",
+      "disposition": "approve",
+      "a2uiDisposition": "n/a",
+      "rationale": "Layout measurement and focus routing are outside the current catalog.",
+      "evidence": {
+        "sources": ["docs/plans/component-equivalence-expansion-implementation-plan.md"],
+        "accessibility": "Preserves item semantics and hands focus to the control, nearest visible item, or root before hiding focused content.",
+        "state": "Owns deterministic measured partitions, convergence guards, generation cancellation, and ordered visibility callbacks.",
+        "localization": "Item and overflow content remain consumer-rendered; start/end collapse uses logical ordering.",
+        "security": "Accepts React render callbacks but no raw HTML or remote-resource capability.",
+        "ssr": "Server and first hydration render all items before client-only measurement.",
+        "performance": "Bounds settling passes, permits one partition update per frame, and measures fixed box vectors.",
+        "ownership": "Tale owns the layout measurement and focus state machine.",
+        "migration": "Existing action or breadcrumb rows can keep their item model and supply keyed item and overflow renderers."
+      },
+      "evidenceDigest": "sha256:49ff03115510b4a6defa6ad1c9fb1422795caa133fc89fa570085660dae609dd"
+    },
+    {
+      "candidate": "Resizable",
+      "disposition": "approve",
+      "a2uiDisposition": "n/a",
+      "rationale": "Gesture and state callbacks are outside the current catalog.",
+      "evidence": {
+        "sources": [
+          "docs/plans/component-equivalence-expansion-implementation-plan.md",
+          "packages/react/package.json",
+          "packages/react/src/table/Table.styled.tsx"
+        ],
+        "accessibility": "Owns separator naming, value ARIA, keyboard resizing, disabled/read-only behavior, and touch-capable movement.",
+        "state": "Validates panel/handle topology and mount-stable size state with deterministic projection, acknowledgement, and cancellation.",
+        "localization": "Horizontal movement follows writing direction while labels and value text remain consumer-configurable.",
+        "security": "Runtime-strips owned action handlers and accepts no HTML or executable data.",
+        "ssr": "Validated sizes produce deterministic flex bases; gestures and measurement begin only on the client.",
+        "performance": "Uses direct react-aria useMove with bounded precision and no table-resize substitution.",
+        "ownership": "Tale owns general panel topology, state, keyboard behavior, ARIA, and cancellation.",
+        "migration": "General panels adopt the namespace directly; table-only ResizableTableContainer remains unrelated."
+      },
+      "evidenceDigest": "sha256:791bd239e55698e8e06acb1fd6f55f40695cd3dba14dca4d3191d8510046f288"
+    },
+    {
+      "candidate": "Skeleton",
+      "disposition": "approve",
+      "a2uiDisposition": "n/a",
+      "rationale": "No A2UI publication is authorized.",
+      "evidence": {
+        "sources": ["docs/plans/component-equivalence-expansion-implementation-plan.md"],
+        "accessibility": "Is always decorative and hidden from assistive technology; consumers own loading announcements.",
+        "state": "Stateless apart from validated visual props.",
+        "localization": "Owns no visible or assistive copy.",
+        "security": "Renders an empty span and excludes children, raw HTML, roles, focus, and editable content.",
+        "ssr": "Variant, dimensions, and animation classes render deterministically.",
+        "performance": "One empty element with reduced-motion-aware CSS and no JavaScript animation loop.",
+        "ownership": "Tale owns the decorative primitive; React Spectrum Skeleton is not a React Aria Components equivalent.",
+        "migration": "Ad hoc decorative placeholders can move to explicit variants while retaining consumer-owned status text."
+      },
+      "evidenceDigest": "sha256:48e3b4131fc49b56addf6606e8208c3d441b41923387fa49ffcdeace57f45b1a"
+    },
+    {
+      "candidate": "Timestamp",
+      "disposition": "approve",
+      "a2uiDisposition": "n/a",
+      "rationale": "Locale, timezone, and clock ownership are outside the current catalog.",
+      "evidence": {
+        "sources": [
+          "docs/components/i18n-provider.md",
+          "docs/plans/component-equivalence-expansion-implementation-plan.md"
+        ],
+        "accessibility": "Uses native time semantics with normalized machine-readable dateTime and visible localized output.",
+        "state": "Owns immutable date normalization and a shared interval scheduler anchored to the supplied hydration clock.",
+        "localization": "Requires explicit locale and timezone, freezes absolute presets, and uses Intl.RelativeTimeFormat for relative output.",
+        "security": "Accepts only Date copies, finite epoch milliseconds, or complete offset-bearing timestamp strings.",
+        "ssr": "Supplied now controls server and first hydration output before elapsed client time is applied.",
+        "performance": "Groups relative subscribers by interval through Tale timer utilities and benchmarks 1,000 shared ticks.",
+        "ownership": "Tale owns formatting, validation, hydration anchoring, and scheduling; applications choose locale, timezone, and now.",
+        "migration": "Native time elements and app formatters can move to explicit absolute or relative Timestamp contracts."
+      },
+      "evidenceDigest": "sha256:6427c10243bebed4fd054147dffa1d7be41c2b89be1ee4a214cb1e077a5c2a39"
+    },
+    {
+      "candidate": "Toast",
+      "disposition": "approve",
+      "a2uiDisposition": "n/a",
+      "rationale": "Queues, timers, announcements, and leases are outside the current catalog.",
+      "evidence": {
+        "sources": [
+          "docs/plans/component-equivalence-expansion-implementation-plan.md",
+          "packages/react/package.json"
+        ],
+        "accessibility": "Owns polite/assertive announcements, localized region and dismiss labels, focus-safe dismissal, and one rendering lease.",
+        "state": "Uses a stable Tale queue facade, replaceable raw generations, atomic publication, timers, pause reasons, and deterministic recovery.",
+        "localization": "Region and dismiss defaults come from Tale localization; explicit valid labels override them.",
+        "security": "Validates all queue/message inputs before mutation and exposes no unstable upstream record or queue type.",
+        "ssr": "Region output is empty on the server and first hydration; lease ownership begins after mount.",
+        "performance": "Bounds visible records, times only visible entries, and benchmarks the frozen 100-operation vector.",
+        "ownership": "Tale isolates pinned unstable React Aria Toast primitives behind a stable public queue and Region API.",
+        "migration": "Applications adopt the Tale queue factory and Region without depending on raw React Stately keys or timers."
+      },
+      "evidenceDigest": "sha256:2e6b1be99c6ce4d968bd108f8e5d80424cfbb93727b50dca5e1fb51409dc6050"
+    }
+  ]
+}

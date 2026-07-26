@@ -1,0 +1,5 @@
+{
+  "schemaVersion": "1.0.0",
+  "packNodeMajor": 22,
+  "nodeMajors": [18, 20, 22, 24]
+}

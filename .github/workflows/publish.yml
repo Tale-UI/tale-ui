@@ -273,6 +273,12 @@ jobs:
       - name: Synchronize package versions
         run: node scripts/release/sync-package-versions.mjs ${{ needs.resolve.outputs.version }}
 
+      - name: Verify adapters, templates, and immutable documentation
+        run: |
+          pnpm react-aria:contracts:check
+          pnpm templates:check
+          pnpm docs:versions:check
+
       - name: Build and validate @tale-ui/tokens and @tale-ui/css
         run: |
           pnpm --filter @tale-ui/tokens test:package
@@ -282,7 +288,10 @@ jobs:
         run: |
           pnpm --filter @tale-ui/utils build
           pnpm --filter @tale-ui/utils test:package
-          pnpm --filter @tale-ui/react test:package
+          pnpm react:test:package
+          pnpm --filter @tale-ui/react-styles test:package
+          pnpm --filter @tale-ui/react-styles test:packed-consumers
+          pnpm --filter @tale-ui/react test:packed-consumers
 
       - name: Build and validate @tale-ui/themes
         run: pnpm --filter @tale-ui/themes test:package

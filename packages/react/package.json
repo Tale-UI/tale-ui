@@ -1,6 +1,6 @@
 {
   "name": "@tale-ui/react",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "author": "Tale UI",
   "description": "Styled React component library built on React Aria Components, themed with @tale-ui/css design tokens.",
   "keywords": [
@@ -166,8 +166,13 @@
   "scripts": {
     "postinstall": "node ./bin/setup.mjs || true",
     "prebuild": "rimraf --glob build build-tests \"*.tsbuildinfo\"",
-    "build": "node ../../tools/build-package.mjs --ignore \"**/*.template.js\" --copy .npmignore",
-    "test:package": "pnpm build && publint --pack pnpm && attw --pack ./build --exclude-entrypoints package.json esm cjs styles",
+    "build": "node ../../tools/build-package.mjs --runtime-assets --ignore \"**/*.template.js\" --copy .npmignore",
+    "test:public-types": "node ./scripts/test-public-types.mjs",
+    "test:dependency-coupling": "node ./scripts/test-dependency-coupling.mjs",
+    "test:exports": "pnpm build && node ./scripts/validate-package-exports.mjs",
+    "test:engine-compatibility": "node ./scripts/test-engine-compatibility.mjs",
+    "test:packed-consumers": "node ./scripts/test-packed-consumers.mjs",
+    "test:package": "pnpm build && node ./scripts/validate-package-exports.mjs && publint --pack pnpm && attw --pack ./build --exclude-entrypoints package.json esm cjs styles",
     "release": "pnpm build && pnpm publish",
     "test": "cross-env VITEST_ENV=jsdom vitest",
     "typescript": "tsc -b tsconfig.json"
@@ -179,7 +184,8 @@
     "@tale-ui/css": "workspace:*",
     "@tale-ui/react-styles": "workspace:*",
     "@tale-ui/utils": "workspace:*",
-    "react-aria-components": "^1.19.0",
+    "react-aria": "3.50.0",
+    "react-aria-components": "1.19.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {
@@ -210,7 +216,6 @@
     "input-otp": "^1.4.2",
     "lucide-react": "^1.6.0",
     "luxon": "^3.7.2",
-    "motion": "^12.37.0",
     "qr-code-styling": "^1.9.2",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -235,7 +240,6 @@
     "embla-carousel-react": ">=8.0.0",
     "input-otp": ">=1.0.0",
     "lucide-react": ">=0.400.0",
-    "motion": ">=11.0.0",
     "qr-code-styling": ">=1.0.0",
     "react": "^17 || ^18 || ^19",
     "react-dom": "^17 || ^18 || ^19",
@@ -258,9 +262,6 @@
       "optional": true
     },
     "embla-carousel-react": {
-      "optional": true
-    },
-    "motion": {
       "optional": true
     },
     "qr-code-styling": {
@@ -302,6 +303,6 @@
     "directory": "build"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   }
 }

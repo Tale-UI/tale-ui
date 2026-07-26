@@ -12,6 +12,12 @@ function getAverageChannelValue(color: string) {
 describe('<FileUpload />', () => {
   const { render } = createRenderer();
 
+  it('provides an accessible name for the file input', async () => {
+    await render(<FileUpload.DropZone />);
+
+    expect(screen.getByLabelText('Upload files')).to.have.attribute('type', 'file');
+  });
+
   it.skipIf(isJSDOM)('keeps the default light-surface layout readable', async () => {
     await render(
       <div style={{ width: '18.75rem' }}>
