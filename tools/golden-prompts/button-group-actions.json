@@ -1,0 +1,7 @@
+{
+  "slug": "button-group-actions",
+  "difficulty": "simple",
+  "prompt": "Create an attached horizontal group of Save, Share, and Export buttons with an accessible name of \"Document actions\".",
+  "reference": "import { Button } from '@tale-ui/react/button';\nimport { ButtonGroup } from '@tale-ui/react/button-group';\n\nexport function DocumentActions() {\n  return (\n    <ButtonGroup aria-label=\"Document actions\" isAttached>\n      <Button>Save</Button>\n      <Button variant=\"neutral\">Share</Button>\n      <Button variant=\"neutral\">Export</Button>\n    </ButtonGroup>\n  );\n}\n",
+  "tags": ["ButtonGroup", "Button"]
+}

@@ -12,6 +12,7 @@
     "docs/components/app-shell.md",
     "docs/components/app-store-button.md",
     "docs/components/area-chart.md",
+    "docs/components/aspect-ratio.md",
     "docs/components/autocomplete.md",
     "docs/components/avatar.md",
     "docs/components/background-pattern.md",
@@ -19,7 +20,9 @@
     "docs/components/badge.md",
     "docs/components/banner.md",
     "docs/components/bar-chart.md",
+    "docs/components/blockquote.md",
     "docs/components/breadcrumbs.md",
+    "docs/components/button-group.md",
     "docs/components/button.md",
     "docs/components/calendar.md",
     "docs/components/card.md",
@@ -29,6 +32,7 @@
     "docs/components/checkbox-group.md",
     "docs/components/checkbox.md",
     "docs/components/code-block.md",
+    "docs/components/code.md",
     "docs/components/color-area.md",
     "docs/components/color-field.md",
     "docs/components/color-mode-toggle.md",
@@ -111,6 +115,7 @@
     "docs/components/select.md",
     "docs/components/separator.md",
     "docs/components/sidebar.md",
+    "docs/components/skeleton.md",
     "docs/components/slider.md",
     "docs/components/social-button-group.md",
     "docs/components/social-button.md",
@@ -277,7 +282,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:4b2edb0e91adcb359c5bee245a26b70458af3c94648a74ec6a21f453768b35bd",
+  "sourceRevision": "sha256:4f7f316d969a4356a7892748201e9c96d1c395a4535fec28e9dd7aca093e8873",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -9173,6 +9178,64 @@
       }
     },
     {
+      "id": "tale:component:aspect-ratio",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "aspect-ratio",
+      "name": "AspectRatio",
+      "description": "Media container that preserves a positive width-to-height ratio",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "3.0.0",
+      "aliases": [
+        "AspectRatio"
+      ],
+      "keywords": [
+        "aspectratio",
+        "container",
+        "height",
+        "layout",
+        "media",
+        "positive",
+        "preserves",
+        "ratio",
+        "that",
+        "to",
+        "width"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=aspect-ratio]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/aspect-ratio"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/aspect-ratio/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Layout",
+        "componentKind": "simple"
+      }
+    },
+    {
       "id": "tale:component:autocomplete",
       "namespace": "tale",
       "kind": "component",
@@ -9566,6 +9629,61 @@
       }
     },
     {
+      "id": "tale:component:blockquote",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "blockquote",
+      "name": "Blockquote",
+      "description": "Semantic quotation with content and attribution",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "3.0.0",
+      "aliases": [
+        "Blockquote"
+      ],
+      "keywords": [
+        "and",
+        "attribution",
+        "blockquote",
+        "content",
+        "quotation",
+        "semantic",
+        "typography",
+        "with"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=blockquote]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/blockquote"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/blockquote/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Typography",
+        "componentKind": "compound"
+      }
+    },
+    {
       "id": "tale:component:breadcrumbs",
       "namespace": "tale",
       "kind": "component",
@@ -9662,6 +9780,62 @@
       ],
       "provenance": {
         "source": "packages/react/src/button/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Form Controls",
+        "componentKind": "simple"
+      }
+    },
+    {
+      "id": "tale:component:button-group",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "button-group",
+      "name": "ButtonGroup",
+      "description": "Accessible group for related independent actions",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "3.0.0",
+      "aliases": [
+        "ButtonGroup"
+      ],
+      "keywords": [
+        "accessible",
+        "actions",
+        "buttongroup",
+        "controls",
+        "for",
+        "form",
+        "group",
+        "independent",
+        "related"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=button-group]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/button-group"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/button-group/index.ts",
         "firstParty": true,
         "license": "MIT"
       },
@@ -10056,6 +10230,63 @@
       "trust": "first-party",
       "metadata": {
         "category": "Form Controls",
+        "componentKind": "simple"
+      }
+    },
+    {
+      "id": "tale:component:code",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "code",
+      "name": "Code",
+      "description": "Inline plain-text code without parsing, highlighting, or execution",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "3.0.0",
+      "aliases": [
+        "Code"
+      ],
+      "keywords": [
+        "code",
+        "execution",
+        "highlighting",
+        "inline",
+        "or",
+        "parsing",
+        "plain",
+        "text",
+        "typography",
+        "without"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=code]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/code"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/code/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Typography",
         "componentKind": "simple"
       }
     },
@@ -14680,6 +14911,63 @@
       }
     },
     {
+      "id": "tale:component:skeleton",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "skeleton",
+      "name": "Skeleton",
+      "description": "Decorative placeholder for content that is still loading",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "3.0.0",
+      "aliases": [
+        "Skeleton"
+      ],
+      "keywords": [
+        "content",
+        "decorative",
+        "feedback",
+        "for",
+        "is",
+        "loading",
+        "placeholder",
+        "skeleton",
+        "still",
+        "that"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=skeleton]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/skeleton"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/skeleton/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Feedback",
+        "componentKind": "simple"
+      }
+    },
+    {
       "id": "tale:component:slider",
       "namespace": "tale",
       "kind": "component",
@@ -16217,6 +16505,46 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:doc:docs-components-aspect-ratio",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-aspect-ratio",
+      "name": "AspectRatio",
+      "description": "Public Tale UI documentation: AspectRatio",
+      "lifecycle": "stable",
+      "keywords": [
+        "aspect",
+        "aspectratio",
+        "components",
+        "docs",
+        "md",
+        "ratio"
+      ],
+      "related": [
+        "tale:component:aspect-ratio"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/aspect-ratio.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/aspect-ratio.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:doc:docs-components-autocomplete",
       "namespace": "tale",
       "kind": "doc",
@@ -16489,6 +16817,44 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:doc:docs-components-blockquote",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-blockquote",
+      "name": "Blockquote",
+      "description": "Public Tale UI documentation: Blockquote",
+      "lifecycle": "stable",
+      "keywords": [
+        "blockquote",
+        "components",
+        "docs",
+        "md"
+      ],
+      "related": [
+        "tale:component:blockquote"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/blockquote.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/blockquote.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:doc:docs-components-breadcrumbs",
       "namespace": "tale",
       "kind": "doc",
@@ -16559,6 +16925,46 @@
       ],
       "provenance": {
         "source": "docs/components/button.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:doc:docs-components-button-group",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-button-group",
+      "name": "ButtonGroup",
+      "description": "Public Tale UI documentation: ButtonGroup",
+      "lifecycle": "stable",
+      "keywords": [
+        "button",
+        "buttongroup",
+        "components",
+        "docs",
+        "group",
+        "md"
+      ],
+      "related": [
+        "tale:component:button-group"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/button-group.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/button-group.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -16829,6 +17235,44 @@
       ],
       "provenance": {
         "source": "docs/components/checkbox-group.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:doc:docs-components-code",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-code",
+      "name": "Code",
+      "description": "Public Tale UI documentation: Code",
+      "lifecycle": "stable",
+      "keywords": [
+        "code",
+        "components",
+        "docs",
+        "md"
+      ],
+      "related": [
+        "tale:component:code"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/code.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/code.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -20108,6 +20552,44 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:doc:docs-components-skeleton",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-skeleton",
+      "name": "Skeleton",
+      "description": "Public Tale UI documentation: Skeleton",
+      "lifecycle": "stable",
+      "keywords": [
+        "components",
+        "docs",
+        "md",
+        "skeleton"
+      ],
+      "related": [
+        "tale:component:skeleton"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/skeleton.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/skeleton.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:doc:docs-components-slider",
       "namespace": "tale",
       "kind": "doc",
@@ -23194,6 +23676,63 @@
       }
     },
     {
+      "id": "tale:pitfall:aspect-ratio--aspect-ratio-direct-media",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "aspect-ratio--aspect-ratio-direct-media",
+      "name": "Keep fitted media direct children of AspectRatio",
+      "description": "`objectFit` intentionally targets only immediate `img` and `video` children.",
+      "lifecycle": "stable",
+      "keywords": [
+        "and",
+        "aspect",
+        "aspectratio",
+        "children",
+        "direct",
+        "fitted",
+        "img",
+        "immediate",
+        "intentionally",
+        "keep",
+        "media",
+        "objectfit",
+        "of",
+        "only",
+        "ratio",
+        "targets",
+        "video"
+      ],
+      "related": [
+        "tale:component:aspect-ratio"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=aspect-ratio].pitfalls[id=aspect-ratio-direct-media]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/aspect-ratio.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "aspect-ratio-direct-media",
+        "category": "component",
+        "component": "AspectRatio"
+      }
+    },
+    {
       "id": "tale:pitfall:autocomplete--autocomplete-no-phantom-sub-parts",
       "namespace": "tale",
       "kind": "pitfall",
@@ -24891,6 +25430,71 @@
       }
     },
     {
+      "id": "tale:pitfall:blockquote--blockquote-cite-is-not-attribution",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "blockquote--blockquote-cite-is-not-attribution",
+      "name": "Render a visible attribution as well as source metadata",
+      "description": "the root `cite` attribute is not shown to readers and only accepts credential-free absolute HTTP(S) URLs.",
+      "lifecycle": "stable",
+      "keywords": [
+        "absolute",
+        "accepts",
+        "and",
+        "as",
+        "attribute",
+        "attribution",
+        "blockquote",
+        "cite",
+        "credential",
+        "free",
+        "http",
+        "is",
+        "metadata",
+        "not",
+        "only",
+        "readers",
+        "render",
+        "root",
+        "shown",
+        "source",
+        "the",
+        "to",
+        "urls",
+        "visible",
+        "well"
+      ],
+      "related": [
+        "tale:component:blockquote"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=blockquote].pitfalls[id=blockquote-cite-is-not-attribution]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/blockquote.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "blockquote-cite-is-not-attribution",
+        "category": "component",
+        "component": "Blockquote"
+      }
+    },
+    {
       "id": "tale:pitfall:breadcrumbs--breadcrumbs-use-breadcrumbs-link",
       "namespace": "tale",
       "kind": "pitfall",
@@ -25293,6 +25897,199 @@
         "ruleId": "button-no-xs-size",
         "category": "component",
         "component": "Button"
+      }
+    },
+    {
+      "id": "tale:pitfall:button-group--button-group-is-not-selection",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "button-group--button-group-is-not-selection",
+      "name": "Do not use ButtonGroup for selectable choices",
+      "description": "it groups independent actions and does not provide roving focus, selected state, or single/multiple selection.",
+      "lifecycle": "stable",
+      "keywords": [
+        "actions",
+        "and",
+        "button",
+        "buttongroup",
+        "choices",
+        "do",
+        "does",
+        "focus",
+        "for",
+        "group",
+        "groups",
+        "independent",
+        "is",
+        "it",
+        "multiple",
+        "not",
+        "or",
+        "provide",
+        "roving",
+        "selectable",
+        "selected",
+        "selection",
+        "single",
+        "state",
+        "use"
+      ],
+      "related": [
+        "tale:component:button-group"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=button-group].pitfalls[id=button-group-is-not-selection]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/button-group.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "button-group-is-not-selection",
+        "category": "component",
+        "component": "ButtonGroup"
+      }
+    },
+    {
+      "id": "tale:pitfall:button-group--button-group-requires-one-accessible-name",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "button-group--button-group-requires-one-accessible-name",
+      "name": "Give semantic button groups exactly one accessible name",
+      "description": "`group` and `region` require one non-whitespace `aria-label` or `aria-labelledby`; use `role=\"presentation\"` only for intentionally semantic-free layout.",
+      "lifecycle": "stable",
+      "keywords": [
+        "accessible",
+        "and",
+        "aria",
+        "button",
+        "buttongroup",
+        "exactly",
+        "for",
+        "free",
+        "give",
+        "group",
+        "groups",
+        "intentionally",
+        "label",
+        "labelledby",
+        "layout",
+        "name",
+        "non",
+        "one",
+        "only",
+        "or",
+        "presentation",
+        "region",
+        "require",
+        "requires",
+        "role",
+        "semantic",
+        "use",
+        "whitespace"
+      ],
+      "related": [
+        "tale:component:button-group"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=button-group].pitfalls[id=button-group-requires-one-accessible-name]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/button-group.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "button-group-requires-one-accessible-name",
+        "category": "component",
+        "component": "ButtonGroup"
+      }
+    },
+    {
+      "id": "tale:pitfall:button-group--button-group-static-rendering",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "button-group--button-group-static-rendering",
+      "name": "Use static ButtonGroup rendering inputs",
+      "description": "render-function children, class names, and styles are intentionally excluded and blocked at runtime.",
+      "lifecycle": "stable",
+      "keywords": [
+        "and",
+        "are",
+        "at",
+        "blocked",
+        "button",
+        "buttongroup",
+        "children",
+        "class",
+        "excluded",
+        "function",
+        "group",
+        "inputs",
+        "intentionally",
+        "names",
+        "render",
+        "rendering",
+        "runtime",
+        "static",
+        "styles",
+        "use"
+      ],
+      "related": [
+        "tale:component:button-group"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=button-group].pitfalls[id=button-group-static-rendering]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/button-group.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "button-group-static-rendering",
+        "category": "component",
+        "component": "ButtonGroup"
       }
     },
     {
@@ -27193,6 +27990,60 @@
         "ruleId": "checkbox-group-string-array-not-set",
         "category": "component",
         "component": "CheckboxGroup"
+      }
+    },
+    {
+      "id": "tale:pitfall:code--code-inline-plain-text",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "code--code-inline-plain-text",
+      "name": "Pass plain text to inline Code",
+      "description": "raw HTML and executable renderers are intentionally unsupported.",
+      "lifecycle": "stable",
+      "keywords": [
+        "and",
+        "are",
+        "code",
+        "executable",
+        "html",
+        "inline",
+        "intentionally",
+        "pass",
+        "plain",
+        "raw",
+        "renderers",
+        "text",
+        "to",
+        "unsupported"
+      ],
+      "related": [
+        "tale:component:code"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=code].pitfalls[id=code-inline-plain-text]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/code.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "code-inline-plain-text",
+        "category": "component",
+        "component": "Code"
       }
     },
     {
@@ -43427,6 +44278,188 @@
       }
     },
     {
+      "id": "tale:pitfall:skeleton--skeleton-circular-dimensions",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "skeleton--skeleton-circular-dimensions",
+      "name": "Give custom circular skeletons equal finite dimensions",
+      "description": "matching width and height preserve the intended circle when overriding its default size.",
+      "lifecycle": "stable",
+      "keywords": [
+        "and",
+        "circle",
+        "circular",
+        "custom",
+        "default",
+        "dimensions",
+        "equal",
+        "finite",
+        "give",
+        "height",
+        "intended",
+        "its",
+        "matching",
+        "overriding",
+        "preserve",
+        "size",
+        "skeleton",
+        "skeletons",
+        "the",
+        "when",
+        "width"
+      ],
+      "related": [
+        "tale:component:skeleton"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=skeleton].pitfalls[id=skeleton-circular-dimensions]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/skeleton.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "skeleton-circular-dimensions",
+        "category": "component",
+        "component": "Skeleton"
+      }
+    },
+    {
+      "id": "tale:pitfall:skeleton--skeleton-has-no-content",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "skeleton--skeleton-has-no-content",
+      "name": "Do not put content inside Skeleton",
+      "description": "it is an empty placeholder, and runtime children and raw HTML are discarded.",
+      "lifecycle": "stable",
+      "keywords": [
+        "an",
+        "and",
+        "are",
+        "children",
+        "content",
+        "discarded",
+        "do",
+        "empty",
+        "has",
+        "html",
+        "inside",
+        "is",
+        "it",
+        "no",
+        "not",
+        "placeholder",
+        "put",
+        "raw",
+        "runtime",
+        "skeleton"
+      ],
+      "related": [
+        "tale:component:skeleton"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=skeleton].pitfalls[id=skeleton-has-no-content]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/skeleton.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "skeleton-has-no-content",
+        "category": "component",
+        "component": "Skeleton"
+      }
+    },
+    {
+      "id": "tale:pitfall:skeleton--skeleton-is-decorative",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "skeleton--skeleton-is-decorative",
+      "name": "Keep Skeleton decorative",
+      "description": "the component is permanently `aria-hidden`; put loading announcements outside it because it cannot accept a role or accessible name.",
+      "lifecycle": "stable",
+      "keywords": [
+        "accept",
+        "accessible",
+        "announcements",
+        "aria",
+        "because",
+        "cannot",
+        "component",
+        "decorative",
+        "hidden",
+        "is",
+        "it",
+        "keep",
+        "loading",
+        "name",
+        "or",
+        "outside",
+        "permanently",
+        "put",
+        "role",
+        "skeleton",
+        "the"
+      ],
+      "related": [
+        "tale:component:skeleton"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=skeleton].pitfalls[id=skeleton-is-decorative]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/skeleton.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "skeleton-is-decorative",
+        "category": "component",
+        "component": "Skeleton"
+      }
+    },
+    {
       "id": "tale:pitfall:slider--slider-nested-structure",
       "namespace": "tale",
       "kind": "pitfall",
@@ -51047,5 +52080,5 @@
       }
     }
   ],
-  "digest": "sha256:d00bc1ea9ace5dbe14e7b7983d858adf5b47aea946e25984e970c87635add872"
+  "digest": "sha256:8afd395eb8dd404aa65224124a354aab5e204f84ed4aea84525196b8f3380944"
 }

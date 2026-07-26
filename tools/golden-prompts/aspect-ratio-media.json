@@ -1,0 +1,7 @@
+{
+  "slug": "aspect-ratio-media",
+  "difficulty": "medium",
+  "prompt": "Show a responsive 16:9 Tale UI image that covers its available media frame.",
+  "reference": "import { AspectRatio } from '@tale-ui/react/aspect-ratio';\nimport { Image } from '@tale-ui/react/image';\n\nexport function ResponsiveLandscape() {\n  return (\n    <AspectRatio ratio=\"16 / 9\" objectFit=\"cover\">\n      <Image src=\"/landscape.jpg\" alt=\"A mountain landscape\" />\n    </AspectRatio>\n  );\n}",
+  "tags": ["AspectRatio", "Image"]
+}

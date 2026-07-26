@@ -4,6 +4,12 @@ All notable changes to the React component library are documented in this file.
 
 ## v3.0.0 — 2026-07-27
 
+### Added
+
+- Added experimental `AspectRatio`, `Blockquote`, `ButtonGroup`, `Code`, and `Skeleton` public
+  subpaths with runtime validation, safe DOM ownership, SSR/hydration coverage, and public type
+  contracts.
+
 ### Changed
 
 - Set the consumer runtime requirement to Node 18+ while retaining React 17, 18, and 19 peers.

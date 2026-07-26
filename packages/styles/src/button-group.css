@@ -1,0 +1,71 @@
+/*
+ * ButtonGroup — @tale-ui/react
+ *
+ * Layout-only wrapper for related action controls.
+ * Orientations: horizontal (default), vertical
+ * Treatment: detached (default), attached
+ */
+
+.tale-button-group {
+  display: inline-flex;
+  width: fit-content;
+  align-items: stretch;
+  gap: var(--space-2xs);
+}
+
+.tale-button-group--horizontal {
+  flex-direction: row;
+}
+
+.tale-button-group--vertical {
+  flex-direction: column;
+}
+
+.tale-button-group--attached {
+  gap: 0;
+  isolation: isolate;
+}
+
+.tale-button-group--attached > :where(.tale-button, .tale-icon-button, .tale-toggle-button) {
+  position: relative;
+  border-radius: 0;
+}
+
+.tale-button-group--horizontal.tale-button-group--attached
+  > :where(.tale-button, .tale-icon-button, .tale-toggle-button):not(:first-child) {
+  margin-inline-start: -1px;
+}
+
+.tale-button-group--horizontal.tale-button-group--attached
+  > :where(.tale-button, .tale-icon-button, .tale-toggle-button):first-child {
+  border-start-start-radius: var(--radius-m);
+  border-end-start-radius: var(--radius-m);
+}
+
+.tale-button-group--horizontal.tale-button-group--attached
+  > :where(.tale-button, .tale-icon-button, .tale-toggle-button):last-child {
+  border-start-end-radius: var(--radius-m);
+  border-end-end-radius: var(--radius-m);
+}
+
+.tale-button-group--vertical.tale-button-group--attached
+  > :where(.tale-button, .tale-icon-button, .tale-toggle-button):not(:first-child) {
+  margin-block-start: -1px;
+}
+
+.tale-button-group--vertical.tale-button-group--attached
+  > :where(.tale-button, .tale-icon-button, .tale-toggle-button):first-child {
+  border-start-start-radius: var(--radius-m);
+  border-start-end-radius: var(--radius-m);
+}
+
+.tale-button-group--vertical.tale-button-group--attached
+  > :where(.tale-button, .tale-icon-button, .tale-toggle-button):last-child {
+  border-end-start-radius: var(--radius-m);
+  border-end-end-radius: var(--radius-m);
+}
+
+.tale-button-group--attached
+  > :where(.tale-button, .tale-icon-button, .tale-toggle-button):focus-visible {
+  z-index: 1;
+}

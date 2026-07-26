@@ -5,6 +5,7 @@ import './ComponentAudit.css';
 
 // Simple components
 import { Button } from '@tale-ui/react/button';
+import { ButtonGroup } from '@tale-ui/react/button-group';
 import { IconButton } from '@tale-ui/react/icon-button';
 import { Input } from '@tale-ui/react/input';
 import { ToggleButton, ToggleButtonGroup } from '@tale-ui/react/toggle-button';
@@ -49,6 +50,7 @@ import { Tabs } from '@tale-ui/react/tabs';
 import { ScrollArea } from '@tale-ui/react/scroll-area';
 import { Container } from '@tale-ui/react/container';
 import { Card } from '@tale-ui/react/card';
+import { AspectRatio } from '@tale-ui/react/aspect-ratio';
 import { AppShell } from '@tale-ui/react/app-shell';
 import { Chat } from '@tale-ui/react/chat';
 import { Column } from '@tale-ui/react/column';
@@ -60,6 +62,7 @@ import { ProgressBar } from '@tale-ui/react/progress-bar';
 import { ProgressCircle } from '@tale-ui/react/progress-circle';
 import { Meter } from '@tale-ui/react/meter';
 import { Spinner } from '@tale-ui/react/spinner';
+import { Skeleton } from '@tale-ui/react/skeleton';
 // Display
 import { Avatar } from '@tale-ui/react/avatar';
 import { EmptyState } from '@tale-ui/react/empty-state';
@@ -161,6 +164,8 @@ import { PaginationLine } from '@tale-ui/react/pagination-line';
 import { PaymentInput } from '@tale-ui/react/payment-input';
 import { Text } from '@tale-ui/react/text';
 import { Kbd } from '@tale-ui/react/kbd';
+import { Blockquote } from '@tale-ui/react/blockquote';
+import { Code } from '@tale-ui/react/code';
 import { CodeBlock } from '@tale-ui/react/code-block';
 import { QRCode } from '@tale-ui/react/qr-code';
 import { ImageCropper } from '@tale-ui/react/image-cropper';
@@ -294,6 +299,7 @@ const TOC = [
     category: 'Form Controls',
     items: [
       { id: 'button', label: 'Button' },
+      { id: 'button-group', label: 'ButtonGroup' },
       { id: 'icon-button', label: 'IconButton' },
       { id: 'input', label: 'Input' },
       { id: 'input-group', label: 'InputGroup' },
@@ -386,6 +392,7 @@ const TOC = [
       { id: 'separator', label: 'Separator' },
       { id: 'toolbar', label: 'Toolbar' },
       { id: 'card', label: 'Card' },
+      { id: 'aspect-ratio', label: 'AspectRatio' },
       { id: 'chat', label: 'Chat' },
       { id: 'column', label: 'Column' },
       { id: 'row', label: 'Row' },
@@ -398,6 +405,7 @@ const TOC = [
       { id: 'progress-bar', label: 'ProgressBar' },
       { id: 'progress-circle', label: 'ProgressCircle' },
       { id: 'meter', label: 'Meter' },
+      { id: 'skeleton', label: 'Skeleton' },
       { id: 'spinner', label: 'Spinner' },
     ],
   },
@@ -444,6 +452,8 @@ const TOC = [
   {
     category: 'Typography',
     items: [
+      { id: 'blockquote', label: 'Blockquote' },
+      { id: 'code', label: 'Code' },
       { id: 'code-block', label: 'CodeBlock' },
       { id: 'kbd', label: 'Kbd' },
       { id: 'text', label: 'Text' },
@@ -1583,6 +1593,30 @@ export default function ComponentAudit() {
               Deleting…
             </Button>
           </Row>
+        </Section>
+
+        <Section
+          id="button-group"
+          title="ButtonGroup"
+          classes={[
+            'tale-button-group',
+            'tale-button-group--horizontal',
+            'tale-button-group--vertical',
+            'tale-button-group--attached',
+          ]}
+        >
+          <SubHeading>Related actions</SubHeading>
+          <ButtonGroup aria-label="Editing actions">
+            <Button variant="neutral">Cut</Button>
+            <Button variant="neutral">Copy</Button>
+            <Button variant="neutral">Paste</Button>
+          </ButtonGroup>
+          <SubHeading>Attached vertical group</SubHeading>
+          <ButtonGroup aria-label="Alignment actions" orientation="vertical" isAttached>
+            <Button variant="neutral">Start</Button>
+            <Button variant="neutral">Center</Button>
+            <Button variant="neutral">End</Button>
+          </ButtonGroup>
         </Section>
 
         <Section
@@ -4255,6 +4289,17 @@ export default function ComponentAudit() {
         </Section>
 
         <Section
+          id="aspect-ratio"
+          title="AspectRatio"
+          classes={['tale-aspect-ratio', 'tale-aspect-ratio--cover', 'tale-aspect-ratio--contain']}
+        >
+          <SubHeading>16:9 media frame</SubHeading>
+          <AspectRatio ratio="16 / 9" style={{ width: '20rem', background: 'var(--neutral-12)' }}>
+            <div className="display--flex align--center justify--center">16:9 content</div>
+          </AspectRatio>
+        </Section>
+
+        <Section
           id="card"
           title="Card"
           classes={[
@@ -4614,6 +4659,26 @@ export default function ComponentAudit() {
                 <Meter.Indicator value={90} />
               </Meter.Track>
             </Meter.Root>
+          </div>
+        </Section>
+
+        <Section
+          id="skeleton"
+          title="Skeleton"
+          classes={[
+            'tale-skeleton',
+            'tale-skeleton--text',
+            'tale-skeleton--rectangular',
+            'tale-skeleton--circular',
+            'tale-skeleton--pulse',
+            'tale-skeleton--none',
+          ]}
+        >
+          <SubHeading>Variants</SubHeading>
+          <div className="audit__demo-wide display--flex flex--col gap--s">
+            <Skeleton width="100%" />
+            <Skeleton variant="rectangular" width="100%" height={80} />
+            <Skeleton variant="circular" width={48} height={48} animation="none" />
           </div>
         </Section>
 
@@ -6836,6 +6901,26 @@ export default function ComponentAudit() {
         {/* ============================================================= */}
         {/* TYPOGRAPHY                                                     */}
         {/* ============================================================= */}
+
+        <Section
+          id="blockquote"
+          title="Blockquote"
+          classes={['tale-blockquote', 'tale-blockquote__content', 'tale-blockquote__attribution']}
+        >
+          <Blockquote.Root cite="https://example.com/design-systems">
+            <Blockquote.Content>
+              A design system is a shared language, not merely a component catalogue.
+            </Blockquote.Content>
+            <Blockquote.Attribution>Tale UI</Blockquote.Attribution>
+          </Blockquote.Root>
+        </Section>
+
+        <Section id="code" title="Code" classes={['tale-code']}>
+          <SubHeading>Inline code</SubHeading>
+          <Text>
+            Import the component from <Code>@tale-ui/react/code</Code>.
+          </Text>
+        </Section>
 
         <Section
           id="code-block"

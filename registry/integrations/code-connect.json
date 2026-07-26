@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "sourceDigest": "sha256:f78f5a0ccd81939ea5ba99da56c47b42aea6e1f3e5157245fc9122c9717f6044",
+  "sourceDigest": "sha256:1118324ece6743f459ae43ecc9c2b75ad4c2ee36c9645fc83572ef012b7b0ae4",
   "mappingKind": "code-connect-equivalent",
   "mappings": [
     {
@@ -44,6 +44,19 @@
       "properties": {
         "store": ["apple", "google"],
         "size": ["sm", "md", "lg"]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:aspect-ratio",
+      "componentName": "AspectRatio",
+      "package": "@tale-ui/react/aspect-ratio",
+      "source": "packages/react/src/aspect-ratio/index.ts",
+      "properties": {
+        "objectFit": ["cover", "contain"]
       },
       "ownership": {
         "design": "design-systems",
@@ -135,6 +148,17 @@
       }
     },
     {
+      "registryId": "tale:component:blockquote",
+      "componentName": "Blockquote",
+      "package": "@tale-ui/react/blockquote",
+      "source": "packages/react/src/blockquote/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
       "registryId": "tale:component:breadcrumbs",
       "componentName": "Breadcrumbs",
       "package": "@tale-ui/react/breadcrumbs",
@@ -161,6 +185,20 @@
           "inverse"
         ],
         "size": ["sm", "md", "lg"]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:button-group",
+      "componentName": "ButtonGroup",
+      "package": "@tale-ui/react/button-group",
+      "source": "packages/react/src/button-group/index.ts",
+      "properties": {
+        "orientation": ["horizontal", "vertical"],
+        "role": ["group", "region", "presentation"]
       },
       "ownership": {
         "design": "design-systems",
@@ -251,6 +289,17 @@
         "orientation": ["horizontal", "vertical"],
         "size": ["sm", "md"]
       },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:code",
+      "componentName": "Code",
+      "package": "@tale-ui/react/code",
+      "source": "packages/react/src/code/index.ts",
+      "properties": {},
       "ownership": {
         "design": "design-systems",
         "code": "design-systems"
@@ -1204,6 +1253,20 @@
       "package": "@tale-ui/react/sidebar",
       "source": "packages/react/src/sidebar/index.ts",
       "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:skeleton",
+      "componentName": "Skeleton",
+      "package": "@tale-ui/react/skeleton",
+      "source": "packages/react/src/skeleton/index.ts",
+      "properties": {
+        "variant": ["text", "rectangular", "circular"],
+        "animation": ["pulse", "none"]
+      },
       "ownership": {
         "design": "design-systems",
         "code": "design-systems"

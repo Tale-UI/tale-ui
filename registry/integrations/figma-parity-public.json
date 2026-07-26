@@ -1,12 +1,12 @@
 {
   "schemaVersion": "1.0.0",
-  "sourceDigest": "sha256:f78f5a0ccd81939ea5ba99da56c47b42aea6e1f3e5157245fc9122c9717f6044",
+  "sourceDigest": "sha256:1118324ece6743f459ae43ecc9c2b75ad4c2ee36c9645fc83572ef012b7b0ae4",
   "generatedParity": {
     "status": "complete",
     "tokenVariables": 641,
-    "components": 120,
-    "variants": 276,
-    "codeConnections": 120
+    "components": 125,
+    "variants": 288,
+    "codeConnections": 125
   },
   "liveParity": {
     "status": "unavailable",

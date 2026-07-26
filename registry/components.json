@@ -305,6 +305,51 @@
       "crossPitfallRefs": null
     },
     {
+      "name": "AspectRatio",
+      "slug": "aspect-ratio",
+      "import": "@tale-ui/react/aspect-ratio",
+      "category": "Layout",
+      "description": "Media container that preserves a positive width-to-height ratio",
+      "kind": "simple",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "objectFit",
+          "type": "'cover' | 'contain'",
+          "required": false,
+          "description": "Sizing behavior for direct-child `img` and `video` elements.",
+          "default": null,
+          "allowedValues": [
+            "cover",
+            "contain"
+          ]
+        }
+      ],
+      "parts": null,
+      "examples": [
+        "import { AspectRatio } from '@tale-ui/react/aspect-ratio';\nimport { Image } from '@tale-ui/react/image';\n\nexport function ResponsiveLandscape() {\n  return (\n    <AspectRatio ratio=\"16 / 9\" objectFit=\"cover\">\n      <Image src=\"/landscape.jpg\" alt=\"A mountain landscape\" />\n    </AspectRatio>\n  );\n}"
+      ],
+      "cssClasses": [
+        "tale-aspect-ratio",
+        "tale-aspect-ratio--contain",
+        "tale-aspect-ratio--cover"
+      ],
+      "pitfalls": [
+        {
+          "id": "aspect-ratio-direct-media",
+          "summary": "Keep fitted media direct children of AspectRatio",
+          "detail": "`objectFit` intentionally targets only immediate `img` and `video` children.",
+          "antiPatterns": [
+            "<AspectRatio objectFit=\"cover\"><div><Image src=\"/photo.jpg\" alt=\"Landscape\" /></div></AspectRatio>"
+          ],
+          "fixes": [
+            "<AspectRatio objectFit=\"cover\"><Image src=\"/photo.jpg\" alt=\"Landscape\" /></AspectRatio>"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
       "name": "Autocomplete",
       "slug": "autocomplete",
       "import": "@tale-ui/react/autocomplete",
@@ -1049,6 +1094,51 @@
       "crossPitfallRefs": null
     },
     {
+      "name": "Blockquote",
+      "slug": "blockquote",
+      "import": "@tale-ui/react/blockquote",
+      "category": "Typography",
+      "description": "Semantic quotation with content and attribution",
+      "kind": "compound",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "cite",
+          "type": "string",
+          "required": false,
+          "description": null,
+          "default": null
+        }
+      ],
+      "parts": [
+        "Root",
+        "Content",
+        "Attribution"
+      ],
+      "examples": [
+        "import { Blockquote } from '@tale-ui/react/blockquote';\n\nexport function ProductPrinciple() {\n  return (\n    <Blockquote.Root cite=\"https://example.com/interview\">\n      <Blockquote.Content>\n        The details are not the details. They make the design.\n      </Blockquote.Content>\n      <Blockquote.Attribution>Charles Eames</Blockquote.Attribution>\n    </Blockquote.Root>\n  );\n}"
+      ],
+      "cssClasses": [
+        "tale-blockquote",
+        "tale-blockquote__attribution",
+        "tale-blockquote__content"
+      ],
+      "pitfalls": [
+        {
+          "id": "blockquote-cite-is-not-attribution",
+          "summary": "Render a visible attribution as well as source metadata",
+          "detail": "the root `cite` attribute is not shown to readers and only accepts credential-free absolute HTTP(S) URLs.",
+          "antiPatterns": [
+            "<Blockquote.Root cite={sourceUrl}><Blockquote.Content>{quote}</Blockquote.Content></Blockquote.Root>"
+          ],
+          "fixes": [
+            "<Blockquote.Root cite={sourceUrl}><Blockquote.Content>{quote}</Blockquote.Content><Blockquote.Attribution>{sourceName}</Blockquote.Attribution></Blockquote.Root>"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
       "name": "Breadcrumbs",
       "slug": "breadcrumbs",
       "import": "@tale-ui/react/breadcrumbs",
@@ -1230,6 +1320,106 @@
           ],
           "fixes": [
             "<Link href=\"/signup\" className=\"tale-button tale-button--primary tale-button--md\">Sign up</Link>"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
+      "name": "ButtonGroup",
+      "slug": "button-group",
+      "import": "@tale-ui/react/button-group",
+      "category": "Form Controls",
+      "description": "Accessible group for related independent actions",
+      "kind": "simple",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "orientation",
+          "type": "'horizontal' | 'vertical'",
+          "required": false,
+          "description": "Layout axis. Invalid runtime values fall back to horizontal.",
+          "default": null,
+          "allowedValues": [
+            "horizontal",
+            "vertical"
+          ]
+        },
+        {
+          "name": "isAttached",
+          "type": "boolean",
+          "required": false,
+          "description": "Removes gaps and joins compatible action-control borders.",
+          "default": null
+        },
+        {
+          "name": "style",
+          "type": "React.CSSProperties",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "role",
+          "type": "'group' | 'region' | 'presentation'",
+          "required": false,
+          "description": null,
+          "default": null,
+          "allowedValues": [
+            "group",
+            "region",
+            "presentation"
+          ]
+        }
+      ],
+      "parts": null,
+      "examples": [
+        "import { Button } from '@tale-ui/react/button';\nimport { ButtonGroup } from '@tale-ui/react/button-group';\n\nexport function DocumentActions() {\n  return (\n    <ButtonGroup aria-label=\"Document actions\">\n      <Button>Save</Button>\n      <Button variant=\"neutral\">Share</Button>\n    </ButtonGroup>\n  );\n}",
+        "<ButtonGroup aria-label=\"Text actions\" isAttached>\n  <Button>Cut</Button>\n  <Button>Copy</Button>\n  <Button>Paste</Button>\n</ButtonGroup>\n\n<ButtonGroup aria-label=\"Move item\" orientation=\"vertical\" isAttached>\n  <Button>Move up</Button>\n  <Button>Move down</Button>\n</ButtonGroup>",
+        "<ButtonGroup role=\"presentation\">\n  <Button>Previous</Button>\n  <Button>Next</Button>\n</ButtonGroup>"
+      ],
+      "cssClasses": [
+        "tale-button",
+        "tale-button-group",
+        "tale-button-group--attached",
+        "tale-button-group--horizontal",
+        "tale-button-group--vertical",
+        "tale-icon-button",
+        "tale-toggle-button"
+      ],
+      "pitfalls": [
+        {
+          "id": "button-group-requires-one-accessible-name",
+          "summary": "Give semantic button groups exactly one accessible name",
+          "detail": "`group` and `region` require one non-whitespace `aria-label` or `aria-labelledby`; use `role=\"presentation\"` only for intentionally semantic-free layout.",
+          "antiPatterns": [
+            "<ButtonGroup><Button>Save</Button></ButtonGroup>",
+            "<ButtonGroup aria-label=\"Actions\" aria-labelledby=\"actions-heading\"><Button>Save</Button></ButtonGroup>"
+          ],
+          "fixes": [
+            "<ButtonGroup aria-label=\"Document actions\"><Button>Save</Button></ButtonGroup>"
+          ]
+        },
+        {
+          "id": "button-group-is-not-selection",
+          "summary": "Do not use ButtonGroup for selectable choices",
+          "detail": "it groups independent actions and does not provide roving focus, selected state, or single/multiple selection.",
+          "antiPatterns": [
+            "<ButtonGroup aria-label=\"Alignment\"><ToggleButton id=\"left\">Left</ToggleButton><ToggleButton id=\"right\">Right</ToggleButton></ButtonGroup>"
+          ],
+          "fixes": [
+            "<ToggleButtonGroup aria-label=\"Alignment\"><ToggleButton id=\"left\">Left</ToggleButton><ToggleButton id=\"right\">Right</ToggleButton></ToggleButtonGroup>"
+          ]
+        },
+        {
+          "id": "button-group-static-rendering",
+          "summary": "Use static ButtonGroup rendering inputs",
+          "detail": "render-function children, class names, and styles are intentionally excluded and blocked at runtime.",
+          "antiPatterns": [
+            "<ButtonGroup aria-label=\"Actions\" className={({ isDisabled }) => isDisabled ? 'muted' : ''}>{({ isDisabled }) => <Button isDisabled={isDisabled}>Save</Button>}</ButtonGroup>"
+          ],
+          "fixes": [
+            "<ButtonGroup aria-label=\"Actions\" className=\"document-actions\"><Button>Save</Button></ButtonGroup>"
           ]
         }
       ],
@@ -2081,6 +2271,37 @@
       "crossPitfallRefs": [
         "no-cross-import-checkbox-group"
       ]
+    },
+    {
+      "name": "Code",
+      "slug": "code",
+      "import": "@tale-ui/react/code",
+      "category": "Typography",
+      "description": "Inline plain-text code without parsing, highlighting, or execution",
+      "kind": "simple",
+      "status": "experimental",
+      "props": [],
+      "parts": null,
+      "examples": [
+        "import { Code } from '@tale-ui/react/code';\nimport { Text } from '@tale-ui/react/text';\n\nexport function TestCommand() {\n  return (\n    <Text>\n      Run <Code>pnpm test</Code> before opening a pull request.\n    </Text>\n  );\n}"
+      ],
+      "cssClasses": [
+        "tale-code"
+      ],
+      "pitfalls": [
+        {
+          "id": "code-inline-plain-text",
+          "summary": "Pass plain text to inline Code",
+          "detail": "raw HTML and executable renderers are intentionally unsupported.",
+          "antiPatterns": [
+            "<Code dangerouslySetInnerHTML={{ __html: generatedCode }} />"
+          ],
+          "fixes": [
+            "<Code>{generatedCode}</Code>"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
     },
     {
       "name": "CodeBlock",
@@ -8803,6 +9024,104 @@
         "tale-sidebar__search-input"
       ],
       "pitfalls": null,
+      "crossPitfallRefs": null
+    },
+    {
+      "name": "Skeleton",
+      "slug": "skeleton",
+      "import": "@tale-ui/react/skeleton",
+      "category": "Feedback",
+      "description": "Decorative placeholder for content that is still loading",
+      "kind": "simple",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "variant",
+          "type": "'text' | 'rectangular' | 'circular'",
+          "required": false,
+          "description": "Shape of the placeholder.",
+          "default": null,
+          "allowedValues": [
+            "text",
+            "rectangular",
+            "circular"
+          ]
+        },
+        {
+          "name": "width",
+          "type": "React.CSSProperties['width']",
+          "required": false,
+          "description": "Width applied after the matching field in style.",
+          "default": null
+        },
+        {
+          "name": "height",
+          "type": "React.CSSProperties['height']",
+          "required": false,
+          "description": "Height applied after the matching field in style.",
+          "default": null
+        },
+        {
+          "name": "animation",
+          "type": "'pulse' | 'none'",
+          "required": false,
+          "description": "Animation treatment.",
+          "default": null,
+          "allowedValues": [
+            "pulse",
+            "none"
+          ]
+        }
+      ],
+      "parts": null,
+      "examples": [
+        "import { Skeleton } from '@tale-ui/react/skeleton';\n\nexport function ArticlePlaceholder() {\n  return (\n    <div>\n      <Skeleton width=\"45%\" />\n      <Skeleton variant=\"rectangular\" height=\"10rem\" />\n    </div>\n  );\n}",
+        "<Skeleton width=\"12rem\" />\n<Skeleton variant=\"rectangular\" width=\"20rem\" height=\"10rem\" />\n<Skeleton variant=\"circular\" width={40} height={40} />\n<Skeleton animation=\"none\" width=\"8rem\" />",
+        "<section aria-busy=\"true\" aria-live=\"polite\">\n  <span className=\"visually-hidden\">Loading account details</span>\n  <Skeleton width=\"8rem\" />\n  <Skeleton variant=\"rectangular\" height=\"6rem\" />\n</section>"
+      ],
+      "cssClasses": [
+        "tale-skeleton",
+        "tale-skeleton--circular",
+        "tale-skeleton--none",
+        "tale-skeleton--pulse",
+        "tale-skeleton--rectangular",
+        "tale-skeleton--text"
+      ],
+      "pitfalls": [
+        {
+          "id": "skeleton-is-decorative",
+          "summary": "Keep Skeleton decorative",
+          "detail": "the component is permanently `aria-hidden`; put loading announcements outside it because it cannot accept a role or accessible name.",
+          "antiPatterns": [
+            "<Skeleton role=\"status\" aria-label=\"Loading account details\" />"
+          ],
+          "fixes": [
+            "<section aria-busy=\"true\" aria-live=\"polite\"><span className=\"visually-hidden\">Loading account details</span><Skeleton /></section>"
+          ]
+        },
+        {
+          "id": "skeleton-has-no-content",
+          "summary": "Do not put content inside Skeleton",
+          "detail": "it is an empty placeholder, and runtime children and raw HTML are discarded.",
+          "antiPatterns": [
+            "<Skeleton>Loading…</Skeleton>"
+          ],
+          "fixes": [
+            "<><span className=\"visually-hidden\">Loading…</span><Skeleton /></>"
+          ]
+        },
+        {
+          "id": "skeleton-circular-dimensions",
+          "summary": "Give custom circular skeletons equal finite dimensions",
+          "detail": "matching width and height preserve the intended circle when overriding its default size.",
+          "antiPatterns": [
+            "<Skeleton variant=\"circular\" width={80} height={32} />"
+          ],
+          "fixes": [
+            "<Skeleton variant=\"circular\" width={40} height={40} />"
+          ]
+        }
+      ],
       "crossPitfallRefs": null
     },
     {

@@ -1,0 +1,30 @@
+/*
+ * Blockquote — @tale-ui/react
+ *
+ * Tale-owned semantic quotation composition.
+ */
+
+.tale-blockquote {
+  margin: 0;
+  padding-block: var(--space-xs);
+  padding-inline: var(--space-s);
+  border-inline-start: 0.25rem solid var(--color-40);
+  background: var(--neutral-10);
+  color: var(--neutral-90);
+  font-family: var(--text-font-family);
+}
+
+.tale-blockquote__content {
+  margin: 0;
+  font-size: var(--text-l-font-size);
+  font-style: italic;
+  line-height: var(--text-line-height);
+}
+
+.tale-blockquote__attribution {
+  margin-block-start: var(--space-xs);
+  color: var(--neutral-60);
+  font-size: var(--label-s-font-size);
+  font-weight: var(--label-font-weight);
+  line-height: var(--label-line-height);
+}

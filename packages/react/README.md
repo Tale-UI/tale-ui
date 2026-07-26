@@ -91,7 +91,7 @@ import { CheckboxField } from '@tale-ui/react/checkbox-field';
 
 ### Form Controls
 
-Autocomplete · Button · Checkbox Field · Checkbox Group · Combobox · Input · Input Group · Input Tags · Multi Select · Number Field · Payment Input · Pin Input · Radio Field · Radio Group · Search Field · Select · Select Native · Slider · Switch Field · Tag Select · Text Area · Text Field · Toggle Button · Toggle Button Group
+Autocomplete · Button · Button Group · Checkbox Field · Checkbox Group · Combobox · Input · Input Group · Input Tags · Multi Select · Number Field · Payment Input · Pin Input · Radio Field · Radio Group · Search Field · Select · Select Native · Slider · Switch Field · Tag Select · Text Area · Text Field · Toggle Button · Toggle Button Group
 
 `Checkbox`, `Radio`, and `Switch` remain available for backwards compatibility, but new code should use `CheckboxField`, `RadioField`, and `SwitchField`.
 
@@ -113,11 +113,11 @@ Breadcrumbs · Command Palette · Context Menu · Header Nav · Link · Menu · 
 
 ### Layout
 
-Accordion · App Shell · Card · Carousel · Chat · Column · Disclosure · Row · Scroll Area · Separator · Tabs · Toolbar
+Accordion · App Shell · Aspect Ratio · Card · Carousel · Chat · Column · Disclosure · Row · Scroll Area · Separator · Tabs · Toolbar
 
 ### Feedback
 
-Banner · Meter · Progress Bar · Progress Circle · Spinner
+Banner · Meter · Progress Bar · Progress Circle · Skeleton · Spinner
 
 ### Display
 
@@ -137,7 +137,7 @@ App Store Button · Social Button · Social Button Group · Badge Group · Secti
 
 ### Typography
 
-Code Block · Kbd · Text
+Blockquote · Code · Code Block · Kbd · Text
 
 ### Utilities
 
@@ -213,8 +213,8 @@ Each component has a detailed usage guide with imports, sub-parts, props, and ex
 https://raw.githubusercontent.com/Tale-UI/tale-ui/main/docs/components/{name}.md
 ```
 
-For example: `app-shell.md`, `chat.md`, `code-block.md`, `kbd.md`, `button.md`,
-`dialog.md`, `select.md`,
+For example: `app-shell.md`, `aspect-ratio.md`, `blockquote.md`, `button-group.md`,
+`chat.md`, `code.md`, `code-block.md`, `kbd.md`, `skeleton.md`, `button.md`, `dialog.md`, `select.md`,
 `checkbox.md`, `tabs.md`, `table.md`, `date-picker.md`.
 
 ## License

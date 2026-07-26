@@ -17,9 +17,9 @@ Use **only** components from `@tale-ui/react` for all UI. Never invent new impor
 
 ## Namespace vs simple
 
-**Namespace** (use `.Root`): Accordion, AlertDialog, AppShell, Autocomplete, Avatar, BadgeGroup, Banner, Breadcrumbs, Calendar, Card, Carousel, Chat, CheckboxField, ColorArea, ColorField, ColorPicker, ColorSlider, ColorSwatchPicker, ColorWheel, Combobox, CommandPalette, ContextMenu, CreditCard, DateField, DatePicker, DateRangePicker, Dialog, Disclosure, Drawer, EmptyState, Field, Fieldset, FileUpload, GridList, HeaderNav, ImageCropper, Input, InputGroup, InputTags, KeyValuePairs, List, ListBox, Menu, Menubar, Meter, MultiSelect, NavigationMenu, NumberField, Pagination, PaymentInput, PinInput, Popover, PreviewCard, ProgressBar, ProgressCircle, QRCode, RadioField, RangeCalendar, ScrollArea, SearchField, Select, Sidebar, Slider, SwitchField, Table, Tabs, TagGroup, TagSelect, TextArea, TextEditor, TextField, TimeField, Toolbar, Tooltip, Tree, VideoPlayer.
+**Namespace** (use `.Root`): Accordion, AlertDialog, AppShell, Autocomplete, Avatar, BadgeGroup, Banner, Blockquote, Breadcrumbs, Calendar, Card, Carousel, Chat, CheckboxField, ColorArea, ColorField, ColorPicker, ColorSlider, ColorSwatchPicker, ColorWheel, Combobox, CommandPalette, ContextMenu, CreditCard, DateField, DatePicker, DateRangePicker, Dialog, Disclosure, Drawer, EmptyState, Field, Fieldset, FileUpload, GridList, HeaderNav, ImageCropper, Input, InputGroup, InputTags, KeyValuePairs, List, ListBox, Menu, Menubar, Meter, MultiSelect, NavigationMenu, NumberField, Pagination, PaymentInput, PinInput, Popover, PreviewCard, ProgressBar, ProgressCircle, QRCode, RadioField, RangeCalendar, ScrollArea, SearchField, Select, Sidebar, Slider, SwitchField, Table, Tabs, TagGroup, TagSelect, TextArea, TextEditor, TextField, TimeField, Toolbar, Tooltip, Tree, VideoPlayer.
 
-**Simple** (direct use): AppStoreButton, BackgroundPattern, Badge, Button, CSPProvider, CheckboxGroup, CodeBlock, ColorModeToggle, ColorSwatch, Column, Container, DotIcon, DropZone, FeaturedIcon, FileTrigger, Form, I18nProvider, Icon, IconButton, Illustration, Image, IphoneMockup, Kbd, Link, PaginationDot, PaginationLine, RadioGroup, RatingBadge, RatingStars, Row, SectionDivider, SelectNative, Separator, SocialButton, SocialButtonGroup, Spinner, Text, ToggleButton, ToggleButtonGroup, Virtualizer, mergeProps.
+**Simple** (direct use): AppStoreButton, AspectRatio, BackgroundPattern, Badge, Button, ButtonGroup, CSPProvider, CheckboxGroup, Code, CodeBlock, ColorModeToggle, ColorSwatch, Column, Container, DotIcon, DropZone, FeaturedIcon, FileTrigger, Form, I18nProvider, Icon, IconButton, Illustration, Image, IphoneMockup, Kbd, Link, PaginationDot, PaginationLine, RadioGroup, RatingBadge, RatingStars, Row, SectionDivider, SelectNative, Separator, Skeleton, SocialButton, SocialButtonGroup, Spinner, Text, ToggleButton, ToggleButtonGroup, Virtualizer, mergeProps.
 
 **Deprecated** (still functional; avoid in new code): Checkbox (use CheckboxField), Radio (use RadioField), Switch (use SwitchField).
 
@@ -48,6 +48,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [AlertDialog] AlertDialog.Trigger requires the base tale-button class
 - [AppShell] Keep application behavior outside AppShell
 - [AppStoreButton] store accepts 'apple' or 'google' only
+- [AspectRatio] Keep fitted media direct children of AspectRatio
 - [Autocomplete] No phantom sub-parts: no Autocomplete.Label, Autocomplete.Popover, Autocomplete.Trigger, or Autocomplete.Value
 - [Autocomplete] No selection or open-state props on Autocomplete.Root
 - [Autocomplete] Use <Autocomplete> for any prompt that asks for an autocomplete, inline search, or a filtered list of options
@@ -72,12 +73,16 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [Banner] No 'brand' or 'neutral' variant
 - [Banner] Pass content via Banner.Title and Banner.Description
 - [Banner] Use Banner.Actions to add action buttons inside a Banner — never place Button children directly inside Banner.Root
+- [Blockquote] Render a visible attribution as well as source metadata
 - [Breadcrumbs] Use Breadcrumbs.Link inside Breadcrumbs.Item, not a standalone <Link>
 - [Button] No 'link' or 'secondary' variant — for Cancel or secondary-action buttons always use variant="neutral"
 - [Button] size accepts 'sm', 'md', 'lg' only — no 'xs'
 - [Button] No asChild prop
 - [Button] No icon, leftIcon, rightIcon, or startIcon prop
 - [Button] Button has no href prop — it renders a <button>, not a link
+- [ButtonGroup] Give semantic button groups exactly one accessible name
+- [ButtonGroup] Do not use ButtonGroup for selectable choices
+- [ButtonGroup] Use static ButtonGroup rendering inputs
 - [Calendar] Navigation buttons and heading must be inside Calendar.Header
 - [Calendar] Use Calendar.GridHeaderCell in GridHeader, not Calendar.Cell
 - [Calendar] Do not add vertical margin or padding to Calendar.Heading
@@ -102,6 +107,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [CheckboxField] The label text goes inside CheckboxField.Button, not directly in CheckboxField.Root
 - [CheckboxField] CheckboxField.Indicator needs an <Icon> child — it does not render a checkmark automatically
 - [CheckboxGroup] CheckboxGroup controlled-state uses string[] (plain array), NOT Set<string>.
+- [Code] Pass plain text to inline Code
 - [CodeBlock] Pass plain text to CodeBlock
 - [ColorArea] Only Root and Thumb sub-parts — no ColorArea.Gradient
 - [ColorArea] yChannel value depends on color space
@@ -285,6 +291,9 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [SelectNative] SelectNative has NO sub-parts
 - [Separator] Does NOT accept margin, padding, or other CSS shorthand as direct props
 - [Separator] Only accepts orientation and standard HTML attributes
+- [Skeleton] Keep Skeleton decorative
+- [Skeleton] Do not put content inside Skeleton
+- [Skeleton] Give custom circular skeletons equal finite dimensions
 - [Slider] Requires nested structure: Root > Control > Track > Indicator + Thumb
 - [SocialButton] provider prop is required
 - [SocialButton] Use SocialButton for any social sign-in, sign-up, or OAuth button prompt

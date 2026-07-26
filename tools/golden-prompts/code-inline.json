@@ -1,0 +1,7 @@
+{
+  "slug": "code-inline",
+  "difficulty": "simple",
+  "prompt": "Render the command pnpm test as semantic inline code with Tale UI.",
+  "reference": "import { Code } from '@tale-ui/react/code';\n\nexport function TestCommand() {\n  return <Code>pnpm test</Code>;\n}",
+  "tags": ["Code"]
+}

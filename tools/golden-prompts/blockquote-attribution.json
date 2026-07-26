@@ -1,0 +1,7 @@
+{
+  "slug": "blockquote-attribution",
+  "difficulty": "simple",
+  "prompt": "Show a Tale UI quotation with visible attribution and machine-readable source metadata.",
+  "reference": "import { Blockquote } from '@tale-ui/react/blockquote';\n\nexport function DesignQuotation() {\n  return (\n    <Blockquote.Root cite=\"https://example.com/interview\">\n      <Blockquote.Content>The details are not the details. They make the design.</Blockquote.Content>\n      <Blockquote.Attribution>Charles Eames</Blockquote.Attribution>\n    </Blockquote.Root>\n  );\n}",
+  "tags": ["Blockquote"]
+}

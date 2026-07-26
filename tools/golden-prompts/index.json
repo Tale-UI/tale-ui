@@ -587,6 +587,26 @@
     {
       "slug": "text-heading-hierarchy",
       "difficulty": "simple"
+    },
+    {
+      "slug": "aspect-ratio-media",
+      "difficulty": "medium"
+    },
+    {
+      "slug": "blockquote-attribution",
+      "difficulty": "simple"
+    },
+    {
+      "slug": "button-group-actions",
+      "difficulty": "simple"
+    },
+    {
+      "slug": "code-inline",
+      "difficulty": "simple"
+    },
+    {
+      "slug": "skeleton-loading",
+      "difficulty": "simple"
     }
   ]
 }

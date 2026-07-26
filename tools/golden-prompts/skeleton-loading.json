@@ -1,0 +1,7 @@
+{
+  "slug": "skeleton-loading",
+  "difficulty": "simple",
+  "prompt": "Create an accessible loading placeholder for an account card with a circular avatar skeleton and two text skeletons. Announce \"Loading account details\" outside the decorative skeletons.",
+  "reference": "import { Skeleton } from '@tale-ui/react/skeleton';\n\nexport function AccountCardSkeleton() {\n  return (\n    <section aria-busy=\"true\" aria-live=\"polite\">\n      <span className=\"visually-hidden\">Loading account details</span>\n      <Skeleton variant=\"circular\" width={40} height={40} />\n      <Skeleton width=\"10rem\" />\n      <Skeleton width=\"7rem\" />\n    </section>\n  );\n}\n",
+  "tags": ["Skeleton"]
+}

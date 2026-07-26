@@ -4,6 +4,12 @@ All notable changes to the Tale UI monorepo are documented in this file.
 
 ## v3.0.0 — 2026-07-27
 
+### Added
+
+- **Component-equivalence Bundle 1**: Added experimental AspectRatio, Blockquote, ButtonGroup,
+  Code, and Skeleton components with complete package, documentation, accessibility, visual,
+  registry, Figma, and golden-guidance coverage.
+
 ### Changed
 
 - **Runtime contract**: Set the React consumer runtime floor to Node 18 while retaining React
