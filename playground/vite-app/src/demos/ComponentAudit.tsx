@@ -4892,11 +4892,13 @@ export default function ComponentAudit() {
           title="Toast"
           classes={[
             'tale-toast-region',
+            'tale-toast-list',
             'tale-toast',
             'tale-toast__content',
             'tale-toast__title',
             'tale-toast__description',
             'tale-toast__dismiss',
+            'tale-toast__announcer',
           ]}
         >
           <SubHeading>Persistent queued feedback</SubHeading>

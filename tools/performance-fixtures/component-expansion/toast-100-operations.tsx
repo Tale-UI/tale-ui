@@ -290,11 +290,14 @@ function runSample(): ComponentPerformanceSample {
     eventOrder.push(`subscriber:${currentOperation}`);
     if (currentOperation.startsWith('add:')) {
       assert.equal(snapshot.announcementCount, previousAnnouncementCount + 1);
-      announcements.push(rawAdds.at(-1)!);
+      assert.deepEqual(snapshot.announcementKeys, [rawAdds.at(-1)!]);
+      announcements.push(...snapshot.announcementKeys);
     } else if (currentOperation.startsWith('close:')) {
       assert.equal(snapshot.announcementCount, previousAnnouncementCount - 1);
+      assert.deepEqual(snapshot.announcementKeys, []);
     } else if (currentOperation === 'clear') {
       assert.equal(snapshot.announcementCount, 0);
+      assert.deepEqual(snapshot.announcementKeys, []);
     }
     previousAnnouncementCount = snapshot.announcementCount;
     for (const raw of snapshot.generation.visibleToasts) {

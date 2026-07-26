@@ -11246,7 +11246,7 @@
       "name": "Toast",
       "slug": "toast",
       "import": "@tale-ui/react/toast",
-      "category": "Display",
+      "category": "Feedback",
       "description": "Queued viewport feedback with Tale-owned timers, announcements, and recovery",
       "kind": "simple",
       "status": "experimental",
@@ -11293,7 +11293,19 @@
         "tale-toast__dismiss",
         "tale-toast__title"
       ],
-      "pitfalls": null,
+      "pitfalls": [
+        {
+          "id": "toast-stable-queue-identity",
+          "summary": "Keep the Toast queue identity stable",
+          "detail": "Recreating the queue during render discards its Tale-owned records, timers, announcements, and active Region lease.\n- Treat returned keys as opaque and queue-local.\n- Use `timeout: 0` only when the user has another clear way to dismiss or act\n  on the feedback.\n- Balance every explicit `pauseAll()` call with one `resumeAll()` call.",
+          "antiPatterns": [
+            "<ToastRegion queue={createToastQueue()} />"
+          ],
+          "fixes": [
+            "const [queue] = useState(() => createToastQueue()); return <ToastRegion queue={queue} />;"
+          ]
+        }
+      ],
       "crossPitfallRefs": null
     },
     {

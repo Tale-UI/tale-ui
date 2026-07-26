@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { act, screen, waitFor } from '@tale-ui/monorepo-tests/test-utils';
+import { act, fireEvent, screen, waitFor } from '@tale-ui/monorepo-tests/test-utils';
 import { createRenderer } from '#test-utils';
 import { I18nProvider } from '../i18n-provider';
 import {
@@ -107,6 +107,88 @@ describe('Toast', () => {
     expect(after.reverseMap.size).toBe(0);
   });
 
+  it('captures queue, message, and add-option accessors exactly once', () => {
+    const reads = new Map<string, number>();
+    const once = (name: string, value: unknown) => ({
+      enumerable: true,
+      get() {
+        const count = (reads.get(name) ?? 0) + 1;
+        reads.set(name, count);
+        if (count > 1) {
+          throw new Error(`${name} was read more than once`);
+        }
+        return value;
+      },
+    });
+    const callback = vi.fn();
+    const queue = createToastQueue(
+      asQueueOptions(
+        Object.defineProperties(
+          {},
+          {
+            maxVisibleToasts: once('maxVisibleToasts', 2),
+            defaultTimeout: once('defaultTimeout', 0),
+          },
+        ),
+      ),
+    );
+    const key = queue.add(
+      asMessage(
+        Object.defineProperties(
+          {},
+          {
+            title: once('title', 'Captured'),
+            description: once('description', 'Once'),
+            variant: once('variant', 'success'),
+          },
+        ),
+      ),
+      asAddOptions(
+        Object.defineProperties(
+          {},
+          {
+            timeout: once('timeout', 0),
+            onClose: once('onClose', callback),
+          },
+        ),
+      ),
+    );
+
+    expect(__toastTestHooks.get(queue)!.records[0]!.message).toEqual({
+      title: 'Captured',
+      description: 'Once',
+      variant: 'success',
+    });
+    queue.close(key);
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(Object.fromEntries(reads)).toEqual({
+      maxVisibleToasts: 1,
+      defaultTimeout: 1,
+      title: 1,
+      description: 1,
+      variant: 1,
+      timeout: 1,
+      onClose: 1,
+    });
+  });
+
+  it('wraps a throwing input accessor in the Tale recovery contract', () => {
+    const queue = createToastQueue({ defaultTimeout: 0 });
+    const hostileMessage = new Proxy(
+      {},
+      {
+        get() {
+          throw new Error('hostile accessor detail');
+        },
+      },
+    );
+
+    expect(() => queue.add(asMessage(hostileMessage))).toThrow(
+      'Tale UI: Toast add could not read title; replace the throwing accessor before retrying.',
+    );
+    expect(__toastTestHooks.get(queue)!.records).toHaveLength(0);
+  });
+
   it('renders localized defaults, placement, variants, descriptions, and a forwarded Region ref', async () => {
     const queue = createToastQueue({ maxVisibleToasts: 2, defaultTimeout: 0 });
     queue.add({ title: 'Saved', description: 'Complete', variant: 'success' });
@@ -202,6 +284,64 @@ describe('Toast', () => {
     );
   });
 
+  it('retains every unconsumed announcement in add order before the Region mounts', async () => {
+    const queue = createToastQueue({ maxVisibleToasts: 2, defaultTimeout: 0 });
+    const keys = [
+      queue.add({ title: 'First' }),
+      queue.add({ title: 'Second' }),
+      queue.add({ title: 'Third' }),
+    ];
+    expect(__toastTestHooks.get(queue)!.announcementKeys).toEqual(keys);
+
+    await render(<ToastRegion queue={queue} />);
+    await screen.findByRole('region', { name: 'Notifications' });
+    expect(document.querySelector('[data-toast-announcer="polite"]')?.textContent).toContain(
+      'First',
+    );
+    expect(document.querySelector('[data-toast-announcer="polite"]')?.textContent).toContain(
+      'Second',
+    );
+    expect(document.querySelector('[data-toast-announcer="polite"]')?.textContent).toContain(
+      'Third',
+    );
+  });
+
+  it('mounts an empty live node before presenting the first queued announcement', async () => {
+    const queue = createToastQueue({ defaultTimeout: 0 });
+    await render(<ToastRegion queue={queue} />);
+    const mutations: MutationRecord[] = [];
+    const observer = new MutationObserver((records) => mutations.push(...records));
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    act(() => {
+      queue.add({ title: 'First after empty' });
+    });
+    await screen.findByRole('region', { name: 'Notifications' });
+    await waitFor(() =>
+      expect(document.querySelector('[data-toast-announcer="polite"]')?.textContent).toContain(
+        'First after empty',
+      ),
+    );
+    observer.disconnect();
+    const liveNodeMount = mutations.findIndex((mutation) =>
+      Array.from(mutation.addedNodes).some(
+        (node) =>
+          node instanceof Element &&
+          (node.matches('[data-toast-announcer]') ||
+            node.querySelector('[data-toast-announcer]') !== null),
+      ),
+    );
+    const textPresentation = mutations.findIndex(
+      (mutation, index) =>
+        index > liveNodeMount &&
+        Array.from(mutation.addedNodes).some((node) =>
+          node.textContent?.includes('First after empty'),
+        ),
+    );
+    expect(liveNodeMount).toBeGreaterThanOrEqual(0);
+    expect(textPresentation).toBeGreaterThan(liveNodeMount);
+  });
+
   it('routes RAC dismiss through Tale cleanup and invokes the callback exactly once', async () => {
     const onClose = vi.fn();
     const queue = createToastQueue({ defaultTimeout: 0 });
@@ -253,7 +393,19 @@ describe('Toast', () => {
         throw new Error(`raw close ${timing}`);
       });
 
-      expect(() => queue.close(key)).toThrow(`raw close ${timing}`);
+      let thrown: unknown;
+      try {
+        queue.close(key);
+      } catch (error) {
+        thrown = error;
+      }
+      expect(thrown).toBeInstanceOf(AggregateError);
+      expect((thrown as AggregateError).message).toBe(
+        'Tale UI: Toast operation failed and the previous queue state was restored; correct the upstream queue failure before retrying.',
+      );
+      expect((thrown as AggregateError).errors).toEqual([
+        expect.objectContaining({ message: `raw close ${timing}` }),
+      ]);
       const after = __toastTestHooks.get(queue)!;
       expect(after.adapter).toBe(stableAdapter);
       expect(after.generation).not.toBe(before.generation);
@@ -263,26 +415,69 @@ describe('Toast', () => {
     },
   );
 
-  it('rebuilds a failed clear without consuming callbacks or records', () => {
-    const calls: string[] = [];
-    const queue = createToastQueue({ maxVisibleToasts: 2, defaultTimeout: 0 });
-    queue.add({ title: 'First' }, { onClose: () => calls.push('first') });
-    queue.add({ title: 'Second' }, { onClose: () => calls.push('second') });
-    const before = __toastTestHooks.get(queue)!;
-    vi.spyOn(before.generation, 'clear').mockImplementationOnce(() => {
-      throw new Error('raw clear');
-    });
+  it.each(['before', 'after'] as const)(
+    'rebuilds a failed clear without consuming callbacks or records when raw clear fails %s mutation',
+    (timing) => {
+      const calls: string[] = [];
+      const queue = createToastQueue({ maxVisibleToasts: 2, defaultTimeout: 0 });
+      queue.add({ title: 'First' }, { onClose: () => calls.push('first') });
+      queue.add({ title: 'Second' }, { onClose: () => calls.push('second') });
+      const before = __toastTestHooks.get(queue)!;
+      const originalClear = before.generation.clear.bind(before.generation);
+      vi.spyOn(before.generation, 'clear').mockImplementationOnce(() => {
+        if (timing === 'after') {
+          originalClear();
+        }
+        throw new Error(`raw clear ${timing}`);
+      });
 
-    expect(() => queue.clear()).toThrow('raw clear');
-    const after = __toastTestHooks.get(queue)!;
-    expect(after.records.map((record) => record.message.title)).toEqual(['Second', 'First']);
-    expect(calls).toEqual([]);
-  });
+      expect(() => queue.clear()).toThrow(
+        'Tale UI: Toast operation failed and the previous queue state was restored; correct the upstream queue failure before retrying.',
+      );
+      const after = __toastTestHooks.get(queue)!;
+      expect(after.records.map((record) => record.message.title)).toEqual(['Second', 'First']);
+      expect(calls).toEqual([]);
+    },
+  );
+
+  it.each(['before', 'after'] as const)(
+    'rebuilds an empty snapshot when raw add fails %s key acquisition',
+    (timing) => {
+      const queue = createToastQueue({ defaultTimeout: 0 });
+      const before = __toastTestHooks.get(queue)!;
+      const originalAdd = before.generation.add.bind(before.generation);
+      vi.spyOn(before.generation, 'add').mockImplementationOnce((content, options) => {
+        if (timing === 'after') {
+          originalAdd(content, options);
+        }
+        throw new Error(`raw add ${timing}`);
+      });
+
+      expect(() => queue.add({ title: 'Rejected upstream' })).toThrow(
+        'Tale UI: Toast operation failed and the previous queue state was restored; correct the upstream queue failure before retrying.',
+      );
+      const after = __toastTestHooks.get(queue)!;
+      expect(after.adapter).toBe(before.adapter);
+      expect(after.generation).not.toBe(before.generation);
+      expect(after.records).toHaveLength(0);
+      expect(after.generation.visibleToasts).toHaveLength(0);
+    },
+  );
 
   it('poison-resets consistently when raw recovery also fails and rejects later mutations', () => {
     const calls: string[] = [];
     const queue = createToastQueue({ defaultTimeout: 0 });
-    const key = queue.add({ title: 'Discarded' }, { onClose: () => calls.push('closed') });
+    const key = queue.add(
+      {
+        title: 'Discarded',
+      },
+      {
+        onClose: () => {
+          calls.push('closed');
+          throw new Error('poison callback failed');
+        },
+      },
+    );
     const debug = __toastTestHooks.get(queue)!;
     vi.spyOn(debug.generation, 'close').mockImplementationOnce(() => {
       throw new Error('raw close failed');
@@ -291,7 +486,18 @@ describe('Toast', () => {
       throw new Error('rebuild failed');
     });
 
-    expect(() => queue.close(key)).toThrow(AggregateError);
+    let thrown: unknown;
+    try {
+      queue.close(key);
+    } catch (error) {
+      thrown = error;
+    }
+    expect(thrown).toBeInstanceOf(AggregateError);
+    expect(
+      (thrown as AggregateError).errors.map((error) =>
+        error instanceof Error ? error.message : String(error),
+      ),
+    ).toEqual(['raw close failed', 'rebuild failed', 'poison callback failed']);
     const after = __toastTestHooks.get(queue)!;
     expect(after.poisoned).toBe(true);
     expect(after.records).toHaveLength(0);
@@ -328,26 +534,302 @@ describe('Toast', () => {
     expect(events).toContain('callback:first');
   });
 
+  it('rolls back a failed add publication once without replacing the raw generation', () => {
+    const queue = createToastQueue({ defaultTimeout: 0 });
+    const before = __toastTestHooks.get(queue)!;
+    let publications = 0;
+    before.adapter.subscribe(() => {
+      publications += 1;
+      throw new Error('subscriber failed');
+    });
+
+    expect(() => queue.add({ title: 'Rolled back' })).toThrow(
+      'Tale UI: Toast add publication failed and rollback publication also failed; the previous queue state was restored. Correct the subscriber before retrying.',
+    );
+    const after = __toastTestHooks.get(queue)!;
+    expect(publications).toBe(2);
+    expect(after.generation).toBe(before.generation);
+    expect(after.records).toHaveLength(0);
+    expect(after.generation.visibleToasts).toHaveLength(0);
+    expect(after.adapter.visibleToasts).toHaveLength(0);
+  });
+
+  it('restores pending announcements when add publication and raw cleanup both fail', () => {
+    const queue = createToastQueue({ defaultTimeout: 0 });
+    const before = __toastTestHooks.get(queue)!;
+    vi.spyOn(before.generation, 'close').mockImplementationOnce(() => {
+      throw new Error('rollback close failed');
+    });
+    before.adapter.subscribe(() => {
+      throw new Error('subscriber failed');
+    });
+
+    expect(() => queue.add({ title: 'Never announce' })).toThrow(AggregateError);
+    const after = __toastTestHooks.get(queue)!;
+    expect(after.records).toHaveLength(0);
+    expect(after.announcementCount).toBe(0);
+    expect(after.announcementKeys).toEqual([]);
+  });
+
+  it('drains reentrant add work FIFO while rolling each failed publication back once', () => {
+    const queue = createToastQueue({ defaultTimeout: 0 });
+    const before = __toastTestHooks.get(queue)!;
+    let publications = 0;
+    let staged = false;
+    before.adapter.subscribe(() => {
+      publications += 1;
+      if (!staged) {
+        staged = true;
+        queue.add({ title: 'Staged second' });
+      }
+      throw new Error(`subscriber failure ${publications}`);
+    });
+
+    expect(() => queue.add({ title: 'First' })).toThrow(
+      'Tale UI: Toast transaction and staged operations failed; correct the reported operation failures before retrying.',
+    );
+    const after = __toastTestHooks.get(queue)!;
+    expect(publications).toBe(4);
+    expect(after.generation).toBe(before.generation);
+    expect(after.records).toHaveLength(0);
+  });
+
+  it('commits clear callbacks before draining a reentrant subscriber add', () => {
+    const events: string[] = [];
+    const queue = createToastQueue({ defaultTimeout: 0 });
+    queue.add({ title: 'First' }, { onClose: () => events.push('callback:first') });
+    queue.add({ title: 'Second' }, { onClose: () => events.push('callback:second') });
+    const adapter = __toastTestHooks.get(queue)!.adapter;
+    let staged = false;
+    adapter.subscribe(() => {
+      events.push(staged ? 'subscriber:staged-add' : 'subscriber:clear');
+      if (!staged) {
+        staged = true;
+        queue.add({ title: 'After clear' });
+        throw new Error('clear subscriber failed');
+      }
+    });
+
+    expect(() => queue.clear()).toThrow('clear subscriber failed');
+    expect(events).toEqual([
+      'subscriber:clear',
+      'callback:first',
+      'callback:second',
+      'subscriber:staged-add',
+    ]);
+    expect(__toastTestHooks.get(queue)!.records.map((record) => record.message.title)).toEqual([
+      'After clear',
+    ]);
+  });
+
+  it('preserves subscriber then callback error order for close and clear', () => {
+    const closeQueue = createToastQueue({ defaultTimeout: 0 });
+    const closeKey = closeQueue.add(
+      { title: 'Close' },
+      {
+        onClose() {
+          throw new Error('close callback');
+        },
+      },
+    );
+    __toastTestHooks.get(closeQueue)!.adapter.subscribe(() => {
+      throw new Error('close subscriber');
+    });
+    let closeError: unknown;
+    try {
+      closeQueue.close(closeKey);
+    } catch (error) {
+      closeError = error;
+    }
+    expect((closeError as AggregateError).errors.map((error) => (error as Error).message)).toEqual([
+      'close subscriber',
+      'close callback',
+    ]);
+
+    const clearQueue = createToastQueue({ defaultTimeout: 0 });
+    clearQueue.add(
+      { title: 'First' },
+      {
+        onClose() {
+          throw new Error('first callback');
+        },
+      },
+    );
+    clearQueue.add(
+      { title: 'Second' },
+      {
+        onClose() {
+          throw new Error('second callback');
+        },
+      },
+    );
+    __toastTestHooks.get(clearQueue)!.adapter.subscribe(() => {
+      throw new Error('clear subscriber');
+    });
+    let clearError: unknown;
+    try {
+      clearQueue.clear();
+    } catch (error) {
+      clearError = error;
+    }
+    expect((clearError as AggregateError).errors.map((error) => (error as Error).message)).toEqual([
+      'clear subscriber',
+      'first callback',
+      'second callback',
+    ]);
+  });
+
+  it('throws a single committed callback or subscriber error unchanged', () => {
+    const callbackError = new Error('single callback');
+    const callbackQueue = createToastQueue({ defaultTimeout: 0 });
+    const callbackKey = callbackQueue.add(
+      { title: 'Callback' },
+      {
+        onClose() {
+          throw callbackError;
+        },
+      },
+    );
+    let observedCallbackError: unknown;
+    try {
+      callbackQueue.close(callbackKey);
+    } catch (error) {
+      observedCallbackError = error;
+    }
+    expect(observedCallbackError).toBe(callbackError);
+
+    const subscriberError = new Error('single subscriber');
+    const subscriberQueue = createToastQueue({ defaultTimeout: 0 });
+    subscriberQueue.add({ title: 'Subscriber' });
+    __toastTestHooks.get(subscriberQueue)!.adapter.subscribe(() => {
+      throw subscriberError;
+    });
+    let observedSubscriberError: unknown;
+    try {
+      subscriberQueue.clear();
+    } catch (error) {
+      observedSubscriberError = error;
+    }
+    expect(observedSubscriberError).toBe(subscriberError);
+  });
+
   it('keeps manual, interaction, and owner-loss timer pauses independent', async () => {
     vi.useFakeTimers();
     try {
-      const callback = vi.fn();
-      const queue = createToastQueue({ defaultTimeout: 100 });
-      queue.add({ title: 'Timed' }, { onClose: callback });
-      const view = await render(<ToastRegion queue={queue} />);
+      const manualCallback = vi.fn();
+      const manualQueue = createToastQueue({ defaultTimeout: 100 });
+      manualQueue.add({ title: 'Manual pause' }, { onClose: manualCallback });
+      const manualView = await render(<ToastRegion queue={manualQueue} />);
       await act(async () => {
         await vi.advanceTimersByTimeAsync(0);
       });
 
-      act(() => queue.pauseAll());
+      act(() => manualQueue.pauseAll());
       await act(async () => {
         await vi.advanceTimersByTimeAsync(200);
       });
-      expect(callback).not.toHaveBeenCalled();
+      expect(manualCallback).not.toHaveBeenCalled();
 
-      act(() => queue.resumeAll());
+      act(() => manualQueue.resumeAll());
       await act(async () => {
         await vi.advanceTimersByTimeAsync(99);
+      });
+      expect(manualCallback).not.toHaveBeenCalled();
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(1);
+      });
+      expect(manualCallback).toHaveBeenCalledTimes(1);
+      manualView.unmount();
+
+      const hoverCallback = vi.fn();
+      const hoverQueue = createToastQueue({ defaultTimeout: 100 });
+      hoverQueue.add({ title: 'Hover pause' }, { onClose: hoverCallback });
+      const hoverView = await render(
+        <ToastRegion queue={hoverQueue} aria-label="Hover notifications" />,
+      );
+      const hoverRegion = screen.getByRole('region', { name: 'Hover notifications' });
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(40);
+      });
+      fireEvent.pointerEnter(hoverRegion);
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(200);
+      });
+      expect(hoverCallback).not.toHaveBeenCalled();
+      fireEvent.pointerLeave(hoverRegion);
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(59);
+      });
+      expect(hoverCallback).not.toHaveBeenCalled();
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(1);
+      });
+      expect(hoverCallback).toHaveBeenCalledTimes(1);
+      hoverView.unmount();
+
+      const focusCallback = vi.fn();
+      const focusQueue = createToastQueue({ defaultTimeout: 100 });
+      focusQueue.add({ title: 'Focus pause' }, { onClose: focusCallback });
+      const focusView = await render(
+        <ToastRegion queue={focusQueue} aria-label="Focus notifications" />,
+      );
+      const dismiss = screen.getByRole('button', { name: 'Dismiss notification' });
+      act(() => dismiss.focus());
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(200);
+      });
+      expect(focusCallback).not.toHaveBeenCalled();
+      act(() => dismiss.blur());
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(100);
+      });
+      expect(focusCallback).toHaveBeenCalledTimes(1);
+      focusView.unmount();
+
+      const ownerCallback = vi.fn();
+      const ownerQueue = createToastQueue({ defaultTimeout: 100 });
+      ownerQueue.add({ title: 'Owner pause' }, { onClose: ownerCallback });
+      const firstOwner = await render(
+        <ToastRegion queue={ownerQueue} aria-label="Owner notifications" />,
+      );
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(40);
+      });
+      firstOwner.unmount();
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(200);
+      });
+      expect(ownerCallback).not.toHaveBeenCalled();
+      const secondOwner = await render(
+        <ToastRegion queue={ownerQueue} aria-label="Owner notifications" />,
+      );
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(59);
+      });
+      expect(ownerCallback).not.toHaveBeenCalled();
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(1);
+      });
+      expect(ownerCallback).toHaveBeenCalledTimes(1);
+      secondOwner.unmount();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it('chunks timeouts above the platform delay limit without expiring early', async () => {
+    vi.useFakeTimers();
+    try {
+      const callback = vi.fn();
+      const queue = createToastQueue({ defaultTimeout: 2_147_484_647 });
+      queue.add({ title: 'Long lived' }, { onClose: callback });
+      const view = await render(<ToastRegion queue={queue} />);
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(2_147_483_647);
+      });
+      expect(callback).not.toHaveBeenCalled();
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(999);
       });
       expect(callback).not.toHaveBeenCalled();
       await act(async () => {

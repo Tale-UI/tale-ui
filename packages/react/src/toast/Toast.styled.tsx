@@ -119,6 +119,7 @@ interface Lease {
 
 interface AnnouncementSnapshot {
   readonly version: number;
+  readonly ordered: readonly TaleToastRecord[];
   readonly polite: readonly TaleToastRecord[];
   readonly assertive: readonly TaleToastRecord[];
 }
@@ -134,10 +135,12 @@ interface ToastDebugSnapshot {
   readonly timerCount: number;
   readonly callbackCount: number;
   readonly announcementCount: number;
+  readonly announcementKeys: readonly string[];
   readonly poisoned: boolean;
 }
 
 const queueInternals = new WeakMap<object, ToastController>();
+const MAX_TIMER_DELAY = 2_147_483_647;
 const POISONED_ERROR =
   'Tale UI: Toast queue is poisoned after unrecoverable state corruption; create a new queue.';
 
@@ -185,6 +188,21 @@ function validateTimeout(value: unknown, operation: string): number {
   return value;
 }
 
+function readPropertyOnce(
+  value: Record<string, unknown>,
+  property: string,
+  operation: string,
+): unknown {
+  try {
+    return value[property];
+  } catch (error) {
+    throw recoveryError(
+      [error],
+      `Tale UI: Toast ${operation} could not read ${property}; replace the throwing accessor before retrying.`,
+    );
+  }
+}
+
 function normalizeQueueOptions(options: unknown): NormalizedQueueOptions {
   const value = validateOptionalObject(
     options,
@@ -193,27 +211,29 @@ function normalizeQueueOptions(options: unknown): NormalizedQueueOptions {
   );
   let maxVisibleToasts = 1;
   let defaultTimeout = 5000;
+  const candidateMaxVisibleToasts = readPropertyOnce(value, 'maxVisibleToasts', 'queue creation');
+  const candidateDefaultTimeout = readPropertyOnce(value, 'defaultTimeout', 'queue creation');
 
-  if (value.maxVisibleToasts !== undefined) {
-    if (typeof value.maxVisibleToasts !== 'number') {
+  if (candidateMaxVisibleToasts !== undefined) {
+    if (typeof candidateMaxVisibleToasts !== 'number') {
       throw toastTypeError('queue creation', 'the positive finite integer maxVisibleToasts domain');
     }
 
     if (
-      !Number.isFinite(value.maxVisibleToasts) ||
-      !Number.isInteger(value.maxVisibleToasts) ||
-      value.maxVisibleToasts <= 0
+      !Number.isFinite(candidateMaxVisibleToasts) ||
+      !Number.isInteger(candidateMaxVisibleToasts) ||
+      candidateMaxVisibleToasts <= 0
     ) {
       throw toastRangeError(
         'queue creation',
         'the positive finite integer maxVisibleToasts domain',
       );
     }
-    maxVisibleToasts = value.maxVisibleToasts;
+    maxVisibleToasts = candidateMaxVisibleToasts;
   }
 
-  if (value.defaultTimeout !== undefined) {
-    defaultTimeout = validateTimeout(value.defaultTimeout, 'queue creation');
+  if (candidateDefaultTimeout !== undefined) {
+    defaultTimeout = validateTimeout(candidateDefaultTimeout, 'queue creation');
   }
 
   return { maxVisibleToasts, defaultTimeout };
@@ -224,19 +244,23 @@ function normalizeMessage(message: unknown): NormalizedToastMessage {
     throw toastTypeError('add', 'the non-null, non-array ToastMessage object domain');
   }
 
-  if (typeof message.title !== 'string') {
+  const title = readPropertyOnce(message, 'title', 'add');
+  const description = readPropertyOnce(message, 'description', 'add');
+  const candidateVariant = readPropertyOnce(message, 'variant', 'add');
+
+  if (typeof title !== 'string') {
     throw toastTypeError('add', 'the string title domain');
   }
 
-  if (message.title.trim().length === 0) {
+  if (title.trim().length === 0) {
     throw toastRangeError('add', 'the non-empty title domain');
   }
 
-  if (message.description !== undefined && typeof message.description !== 'string') {
+  if (description !== undefined && typeof description !== 'string') {
     throw toastTypeError('add', 'the optional string description domain');
   }
 
-  const variant = message.variant ?? 'neutral';
+  const variant = candidateVariant ?? 'neutral';
   if (
     variant !== 'neutral' &&
     variant !== 'success' &&
@@ -247,8 +271,8 @@ function normalizeMessage(message: unknown): NormalizedToastMessage {
   }
 
   return Object.freeze({
-    title: message.title,
-    ...(message.description === undefined ? {} : { description: message.description }),
+    title,
+    ...(description === undefined ? {} : { description }),
     variant,
   });
 }
@@ -259,16 +283,18 @@ function normalizeAddOptions(options: unknown, defaultTimeout: number): Normaliz
     'add',
     'the undefined-or-non-null-object ToastAddOptions domain',
   );
+  const candidateTimeout = readPropertyOnce(value, 'timeout', 'add');
+  const candidateOnClose = readPropertyOnce(value, 'onClose', 'add');
   const timeout =
-    value.timeout === undefined ? defaultTimeout : validateTimeout(value.timeout, 'add');
+    candidateTimeout === undefined ? defaultTimeout : validateTimeout(candidateTimeout, 'add');
 
-  if (value.onClose !== undefined && typeof value.onClose !== 'function') {
+  if (candidateOnClose !== undefined && typeof candidateOnClose !== 'function') {
     throw toastTypeError('add', 'the optional callable onClose domain');
   }
 
   return {
     timeout,
-    ...(value.onClose === undefined ? {} : { callback: value.onClose as () => void }),
+    ...(candidateOnClose === undefined ? {} : { callback: candidateOnClose as () => void }),
   };
 }
 
@@ -282,6 +308,10 @@ function orderedError(errors: readonly unknown[], message: string): unknown {
   if (errors.length === 1) {
     return errors[0];
   }
+  return new AggregateError(errors, message);
+}
+
+function recoveryError(errors: readonly unknown[], message: string): AggregateError {
   return new AggregateError(errors, message);
 }
 
@@ -361,6 +391,7 @@ class ToastController {
   #announcementVersion = 0;
   #announcementSnapshot: AnnouncementSnapshot = {
     version: 0,
+    ordered: [],
     polite: [],
     assertive: [],
   };
@@ -532,6 +563,7 @@ class ToastController {
     }
     this.#announcementSnapshot = {
       version,
+      ordered: [],
       polite: [],
       assertive: [],
     };
@@ -549,6 +581,7 @@ class ToastController {
       timerCount: this.#timers.size,
       callbackCount: this.#callbacks.size,
       announcementCount: this.#announced.size,
+      announcementKeys: this.#announcementSnapshot.ordered.map((record) => record.key),
       poisoned: this.#poisoned,
     };
   }
@@ -599,7 +632,18 @@ class ToastController {
     }
 
     if (errors.length > 0) {
-      throw orderedError(errors, 'Tale UI: Toast transaction and staged operations failed.');
+      const [onlyError] = errors;
+      if (
+        errors.length === 1 &&
+        onlyError instanceof Error &&
+        onlyError.message.startsWith('Tale UI: Toast ')
+      ) {
+        throw onlyError;
+      }
+      throw orderedError(
+        errors,
+        'Tale UI: Toast transaction and staged operations failed; correct the reported operation failures before retrying.',
+      );
     }
   }
 
@@ -631,6 +675,7 @@ class ToastController {
   private performAdd(operation: Extract<StagedOperation, { type: 'add' }>): void {
     const previousRecords = [...this.#records];
     const previousAnnouncements = this.#announcementSnapshot;
+    let publicationRollbackAttempted = false;
     const record: TaleToastRecord = Object.freeze({
       key: operation.key,
       message: operation.message,
@@ -674,15 +719,26 @@ class ToastController {
       const subscriberErrors = this.publish();
 
       if (subscriberErrors.length > 0) {
-        this.rollbackAddedRecord(record, rawKey, previousRecords, previousAnnouncements);
+        publicationRollbackAttempted = true;
+        try {
+          this.rollbackAddedRecord(record, rawKey, previousRecords, previousAnnouncements);
+        } catch (rollbackError) {
+          throw orderedError(
+            [...subscriberErrors, rollbackError],
+            'Tale UI: Toast add publication failed and rollback publication also failed; the previous queue state was restored. Correct the subscriber before retrying.',
+          );
+        }
         throw orderedError(
           subscriberErrors,
-          'Tale UI: Toast add publication failed and the previous queue state was restored.',
+          'Tale UI: Toast add publication failed and the previous queue state was restored; correct the subscriber before retrying.',
         );
       }
 
       this.syncTimers();
     } catch (error) {
+      if (publicationRollbackAttempted) {
+        throw error;
+      }
       if (this.#records.includes(record)) {
         try {
           this.rollbackAddedRecord(record, rawKey, previousRecords, previousAnnouncements);
@@ -719,12 +775,12 @@ class ToastController {
     this.#records = previousRecords;
     this.#opaqueToRaw.delete(record.key);
     this.#rawToOpaque.delete(rawKey);
+    this.#announcementSnapshot = previousAnnouncements;
     if (cleanupError !== undefined) {
       throw this.recoverOrPoison(cleanupError, previousRecords);
     }
     this.alignAdapterSnapshot();
     this.verifyInvariants();
-    this.#announcementSnapshot = previousAnnouncements;
     const recoveryPublicationErrors = this.publish();
     this.syncTimers();
     if (recoveryPublicationErrors.length > 0) {
@@ -763,7 +819,7 @@ class ToastController {
     this.#announced.delete(record.key);
     this.alignAdapterSnapshot();
     this.verifyInvariants();
-    this.clearAnnouncementBatch();
+    this.removePendingAnnouncement(record.key);
     const errors = this.publish();
     this.syncTimers();
     if (callback) {
@@ -825,9 +881,9 @@ class ToastController {
     try {
       const recoveryPublicationErrors = this.rebuild(records);
       const errors = [rawError, ...recoveryPublicationErrors];
-      return orderedError(
+      return recoveryError(
         errors,
-        'Tale UI: Toast operation failed and the previous queue state was restored.',
+        'Tale UI: Toast operation failed and the previous queue state was restored; correct the upstream queue failure before retrying.',
       );
     } catch (rebuildError) {
       return this.poisonReset(rawError, rebuildError, records);
@@ -980,13 +1036,30 @@ class ToastController {
       this.#announced.add(record.key);
     }
 
+    const ordered = [...this.#announcementSnapshot.ordered, ...newlyVisible];
     this.#announcementVersion += 1;
     this.#announcementSnapshot = {
       version: this.#announcementVersion,
-      polite: newlyVisible.filter(
+      ordered,
+      polite: ordered.filter(
         (record) => record.message.variant === 'neutral' || record.message.variant === 'success',
       ),
-      assertive: newlyVisible.filter(
+      assertive: ordered.filter(
+        (record) => record.message.variant === 'warning' || record.message.variant === 'danger',
+      ),
+    };
+  }
+
+  private removePendingAnnouncement(key: string): void {
+    const ordered = this.#announcementSnapshot.ordered.filter((record) => record.key !== key);
+    this.#announcementVersion += 1;
+    this.#announcementSnapshot = {
+      version: this.#announcementVersion,
+      ordered,
+      polite: ordered.filter(
+        (record) => record.message.variant === 'neutral' || record.message.variant === 'success',
+      ),
+      assertive: ordered.filter(
         (record) => record.message.variant === 'warning' || record.message.variant === 'danger',
       ),
     };
@@ -996,6 +1069,7 @@ class ToastController {
     this.#announcementVersion += 1;
     this.#announcementSnapshot = {
       version: this.#announcementVersion,
+      ordered: [],
       polite: [],
       assertive: [],
     };
@@ -1049,23 +1123,26 @@ class ToastController {
     const generation = timer.timerGeneration + 1;
     timer.timerGeneration = generation;
     timer.timerStartedAt = monotonicNow();
-    timer.timerId = setTimeout(
-      () => {
-        if (timer.timerGeneration !== generation || !this.#records.includes(record)) {
-          return;
-        }
-        timer.timerId = null;
-        timer.timerStartedAt = null;
-        timer.remaining = 0;
-        try {
-          this.close(record.key, 'timer');
-        } catch {
-          // Code-only diagnostics avoid disclosing consumer message data.
-          console.error('Tale UI: Toast timer close failed.');
-        }
-      },
-      Math.max(0, timer.remaining),
-    );
+    const delay = Math.min(MAX_TIMER_DELAY, Math.max(0, timer.remaining));
+    timer.timerId = setTimeout(() => {
+      if (timer.timerGeneration !== generation || !this.#records.includes(record)) {
+        return;
+      }
+      const elapsed = timer.timerStartedAt === null ? delay : monotonicNow() - timer.timerStartedAt;
+      timer.timerId = null;
+      timer.timerStartedAt = null;
+        timer.remaining = Math.max(0, timer.remaining - Math.max(delay, elapsed));
+      if (timer.remaining > 0) {
+        this.resumeTimer(record);
+        return;
+      }
+      try {
+        this.close(record.key, 'timer');
+      } catch {
+        // Code-only diagnostics avoid disclosing consumer message data.
+        console.error('Tale UI: Toast timer close failed.');
+      }
+    }, delay);
   }
 
   private cancelTimer(record: TaleToastRecord): void {
@@ -1185,10 +1262,21 @@ function OwnedToastRegion({
   forwardedRef: React.ForwardedRef<HTMLDivElement>;
 }) {
   const announcements = controller.announcements;
+  const [presentedAnnouncementVersion, setPresentedAnnouncementVersion] = React.useState<
+    number | null
+  >(null);
+  const presentAnnouncements = presentedAnnouncementVersion === announcements.version;
 
   React.useEffect(() => {
+    setPresentedAnnouncementVersion(announcements.version);
+  }, [announcements.version]);
+
+  React.useEffect(() => {
+    if (!presentAnnouncements) {
+      return;
+    }
     controller.consumeAnnouncements(announcements.version);
-  }, [announcements.version, controller]);
+  }, [announcements.version, controller, presentAnnouncements]);
 
   if (!controller.isOwner(leaseId)) {
     return null;
@@ -1202,8 +1290,14 @@ function OwnedToastRegion({
       data-placement={placement}
       className={cx('tale-toast-region', className)}
     >
-      <ToastAnnouncement records={announcements.polite} politeness="polite" />
-      <ToastAnnouncement records={announcements.assertive} politeness="assertive" />
+      <ToastAnnouncement
+        records={presentAnnouncements ? announcements.polite : []}
+        politeness="polite"
+      />
+      <ToastAnnouncement
+        records={presentAnnouncements ? announcements.assertive : []}
+        politeness="assertive"
+      />
       <AriaToastList className="tale-toast-list">
         {({ toast }) => (
           <RawToastView toast={toast as RawQueuedToast} dismissLabel={dismissLabel} />
@@ -1233,9 +1327,15 @@ function OwnedToastRegion({
 export const ToastRegion = React.forwardRef<HTMLDivElement, ToastRegionProps>(
   (runtimeProps, ref) => {
     const { formatMessage } = useTaleI18n();
-    const controller = queueInternals.get(runtimeProps?.queue as object);
     const leaseId = React.useRef(Symbol('ToastRegion')).current;
     const [, forceRender] = React.useReducer((value: number) => value + 1, 0);
+    const propRecord = runtimeProps as unknown as Record<string, unknown>;
+    const runtimeQueue = readPropertyOnce(propRecord, 'queue', 'Region render');
+    const runtimeRegionLabel = readPropertyOnce(propRecord, 'aria-label', 'Region render');
+    const runtimeDismissLabel = readPropertyOnce(propRecord, 'dismissLabel', 'Region render');
+    const runtimeClassName = readPropertyOnce(propRecord, 'className', 'Region render');
+    const runtimePlacement = readPropertyOnce(propRecord, 'placement', 'Region render');
+    const controller = queueInternals.get(runtimeQueue as object);
 
     React.useEffect(() => {
       if (!controller) {
@@ -1253,14 +1353,13 @@ export const ToastRegion = React.forwardRef<HTMLDivElement, ToastRegionProps>(
       return null;
     }
 
-    const regionLabel = isValidLabel(runtimeProps['aria-label'])
-      ? runtimeProps['aria-label']
+    const regionLabel = isValidLabel(runtimeRegionLabel)
+      ? runtimeRegionLabel
       : formatMessage('toast.region');
-    const dismissLabel = isValidLabel(runtimeProps.dismissLabel)
-      ? runtimeProps.dismissLabel
+    const dismissLabel = isValidLabel(runtimeDismissLabel)
+      ? runtimeDismissLabel
       : formatMessage('toast.dismiss');
-    const className =
-      typeof runtimeProps.className === 'string' ? runtimeProps.className : undefined;
+    const className = typeof runtimeClassName === 'string' ? runtimeClassName : undefined;
 
     return (
       <OwnedToastRegion
@@ -1268,7 +1367,7 @@ export const ToastRegion = React.forwardRef<HTMLDivElement, ToastRegionProps>(
         leaseId={leaseId}
         regionLabel={regionLabel}
         dismissLabel={dismissLabel}
-        placement={normalizePlacement(runtimeProps.placement)}
+        placement={normalizePlacement(runtimePlacement)}
         className={className}
         forwardedRef={ref}
       />

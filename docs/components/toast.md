@@ -33,7 +33,7 @@ Keys are opaque, monotonic only within their queue, and must not be parsed or
 shared between queues. The public queue is intentionally not structurally
 compatible with React Aria's unstable queue.
 
-## Region Props
+## Props
 
 | Prop           | Type                                                         | Default        | Description                                 |
 | -------------- | ------------------------------------------------------------ | -------------- | ------------------------------------------- |
@@ -121,18 +121,30 @@ each Toast's `onClose` once.
 - Do not use Toasts for content that must remain available. Put durable status
   and recovery instructions in the page as well.
 
+## Parts
+
+`ToastRegion` owns the list, individual Toast surface, content, title,
+description, dismiss button, and visually hidden announcement node. Style
+these parts through the maintained package classes:
+
 ## CSS Classes
 
 - `.tale-toast-region`
+- `.tale-toast-list`
 - `.tale-toast`
 - `.tale-toast__content`
 - `.tale-toast__title`
 - `.tale-toast__description`
 - `.tale-toast__dismiss`
+- `.tale-toast__announcer`
 
 ## Pitfalls
 
-- Keep the queue identity stable for the lifetime of its mounted Region.
+<!-- pitfall: toast-stable-queue-identity -->
+
+- **Keep the Toast queue identity stable** — Recreating the queue during render discards its Tale-owned records, timers, announcements, and active Region lease.
+  - anti-pattern: `<ToastRegion queue={createToastQueue()} />`
+  - fix: `const [queue] = useState(() => createToastQueue()); return <ToastRegion queue={queue} />;`
 - Treat returned keys as opaque and queue-local.
 - Use `timeout: 0` only when the user has another clear way to dismiss or act
   on the feedback.

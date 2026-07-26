@@ -295,7 +295,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:6bb89734f1b344c59ed9e953295794470a19a107ac7be13e3f9c3248cbdd8569",
+  "sourceRevision": "sha256:54cd21b443a0773814cd4b11e35a5bdb079989f1427080abe8a0e36ef05903f0",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -16243,7 +16243,6 @@
       "keywords": [
         "and",
         "announcements",
-        "display",
         "feedback",
         "owned",
         "queued",
@@ -16282,7 +16281,7 @@
       },
       "trust": "first-party",
       "metadata": {
-        "category": "Display",
+        "category": "Feedback",
         "componentKind": "simple"
       }
     },
@@ -49374,6 +49373,95 @@
       }
     },
     {
+      "id": "tale:pitfall:toast--toast-stable-queue-identity",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "toast--toast-stable-queue-identity",
+      "name": "Keep the Toast queue identity stable",
+      "description": "Recreating the queue during render discards its Tale-owned records, timers, announcements, and active Region lease.\n- Treat returned keys as opaque and queue-local.\n- Use `timeout: 0` only when the user has another clear way to dismiss or act\n  on the feedback.\n- Balance every explicit `pauseAll()` call with one `resumeAll()` call.",
+      "lifecycle": "stable",
+      "keywords": [
+        "act",
+        "active",
+        "and",
+        "announcements",
+        "another",
+        "as",
+        "balance",
+        "call",
+        "clear",
+        "discards",
+        "dismiss",
+        "during",
+        "every",
+        "explicit",
+        "feedback",
+        "has",
+        "identity",
+        "its",
+        "keep",
+        "keys",
+        "lease",
+        "local",
+        "on",
+        "one",
+        "only",
+        "opaque",
+        "or",
+        "owned",
+        "pauseall",
+        "queue",
+        "records",
+        "recreating",
+        "region",
+        "render",
+        "resumeall",
+        "returned",
+        "stable",
+        "tale",
+        "the",
+        "timeout",
+        "timers",
+        "to",
+        "toast",
+        "treat",
+        "use",
+        "user",
+        "way",
+        "when",
+        "with"
+      ],
+      "related": [
+        "tale:component:toast"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=toast].pitfalls[id=toast-stable-queue-identity]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/toast.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "toast-stable-queue-identity",
+        "category": "component",
+        "component": "Toast"
+      }
+    },
+    {
       "id": "tale:pitfall:toggle-button--toggle-button-isselected-not-pressed",
       "namespace": "tale",
       "kind": "pitfall",
@@ -53783,5 +53871,5 @@
       }
     }
   ],
-  "digest": "sha256:daa6084b1deb201bbdd3899e253d43f6ec9732d0a56d6985e05e8cde7e034f22"
+  "digest": "sha256:2b73d0e251740a590a2921cfed005564cfdad2dca9b60b890b1124750c7c03a4"
 }

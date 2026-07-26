@@ -30,7 +30,7 @@ Unified monorepo managed with **pnpm workspaces**. This repository is the single
 | [docs/authoring-components.md](docs/authoring-components.md)                     | Contributor guide: adding new `@tale-ui/react` components                                         |
 | [docs/react-aria-deviations.md](docs/react-aria-deviations.md)                   | Every difference between Tale UI and vanilla React Aria Components                                |
 | [docs/upstream/react-aria-components.md](docs/upstream/react-aria-components.md) | Maintainer log for how Tale UI adopts, defers, or rejects upstream React Aria Components releases |
-| [docs/component-index.md](docs/component-index.md)                               | All 129 React components plus 6 chart components at a glance: description, import path, sub-parts |
+| [docs/component-index.md](docs/component-index.md)                               | All 133 React components plus 6 chart components at a glance: description, import path, sub-parts |
 | [registry/components.json](registry/components.json)                             | Machine-readable component registry: props, parts, examples, CSS classes                          |
 | [docs/components/](docs/components/index.md)                                     | Per-component usage guide: imports, parts, examples, CSS classes                                  |
 | [docs/recipes/](docs/recipes/index.md)                                           | Copy-paste multi-component patterns (forms, tables, navigation, search, settings)                 |

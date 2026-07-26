@@ -347,6 +347,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [TimeField] No extra sub-parts: TimeField.Group, TimeField.Trigger, TimeField.Input, TimeField.Popover, TimeField.Dialog do not exist
 - [TimeField] The input sub-part is TimeField.DateInput, not TimeField.Input
 - [TimeField] Property is hour (singular), not hours
+- [Toast] Keep the Toast queue identity stable
 - [ToggleButton] Uses isSelected/defaultSelected for toggle state, not pressed
 - [ToggleButton] Does NOT accept a value prop.
 - [ToggleButton] Use <ToggleButton> for any prompt that asks for a toggle button or formatting toggle

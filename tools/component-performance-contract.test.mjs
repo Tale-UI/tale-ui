@@ -74,7 +74,7 @@ const EXPECTED_FIXTURES = Object.freeze([
     id: 'toast-100-operations',
     path: TOAST_FIXTURE_PATH,
     operationCount: 100,
-    fixtureSha256: '9eae318ea45ef201b90238fd5da8f563776fde1ef68ae32c301d68a6293abcfd',
+    fixtureSha256: '6a8ca34dfc4e597b08c99247c22d3ded5bf14609bdfae8f2b18f93f94952a7bc',
     sourceDigest: 'cbaef274f85cb613137189ff1bbb15d81c3ab2d8cd3ab4f2e0641e2629b9f6a9',
     vectorDigest: '0d14fc9703bc916b77415258c181e310c61d27e27461031d7bb57a92bd4a28b1',
     markupDigest: 'd53f84ce9de36fabcb469c9a36616c38ca0f5f5c410dd2fd85118a8145f22e34',
@@ -225,8 +225,11 @@ test('schema and runner preserve only the ten ordered plan states', () => {
 
   assert.equal(validate(baseline), true);
   assert.doesNotThrow(() =>
+    assertComponentPerformanceFixtureIds(baseline.budgets.map(({ id }) => id)),
+  );
+  assert.doesNotThrow(() =>
     assertComponentPerformanceBaselineContract(baseline, {
-      expectedFixtureIds: baseline.budgets.map(({ id }) => id),
+      expectedFixtureIds: COMPONENT_PERFORMANCE_FIXTURE_IDS,
     }),
   );
   assert.deepEqual(COMPONENT_PERFORMANCE_FIXTURE_IDS, [
@@ -251,7 +254,7 @@ test('schema and runner preserve only the ten ordered plan states', () => {
   assert.equal(validate(invalidPolicy), false);
 
   const arbitrarySubset = structuredClone(baseline);
-  arbitrarySubset.budgets.pop();
+  arbitrarySubset.budgets.splice(2, 1);
   assert.equal(validate(arbitrarySubset), false);
 
   for (const ids of COMPONENT_PERFORMANCE_NORMAL_STATES) {
