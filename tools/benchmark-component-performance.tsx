@@ -119,12 +119,20 @@ async function measureFixture(fixture: ComponentPerformanceFixture) {
 
 async function measureFixtures(fixtures: ComponentPerformanceFixture[]) {
   const measurements = [];
-  for (const fixture of fixtures) {
-    // Fixtures are intentionally measured serially to avoid shared CPU/DOM interference.
-    // eslint-disable-next-line no-await-in-loop
-    measurements.push({ fixture, ...(await measureFixture(fixture)) });
+  try {
+    for (const fixture of fixtures) {
+      // Fixtures are intentionally measured serially to avoid shared CPU/DOM interference.
+      // eslint-disable-next-line no-await-in-loop
+      measurements.push({ fixture, ...(await measureFixture(fixture)) });
+    }
+    return measurements;
+  } finally {
+    for (const fixture of [...fixtures].reverse()) {
+      // Browser fixtures may share reusable processes and therefore dispose after all samples.
+      // eslint-disable-next-line no-await-in-loop
+      await fixture.teardown?.();
+    }
   }
-  return measurements;
 }
 
 function runEnvironment() {
