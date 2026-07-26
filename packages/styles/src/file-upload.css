@@ -123,6 +123,11 @@
   color: var(--error-60, var(--red-60));
 }
 
+.tale-file-upload-drop-zone--disabled .tale-file-upload-drop-zone__or,
+.tale-file-upload-drop-zone--disabled .tale-file-upload-drop-zone__hint {
+  color: var(--neutral-70);
+}
+
 /* ─── List ──────────────────────────────────────────────────────────────────── */
 
 .tale-file-upload-list {
