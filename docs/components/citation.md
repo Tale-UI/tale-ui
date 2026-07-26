@@ -111,6 +111,6 @@ rendered as escaped React text and are never parsed as markup.
 
 <!-- pitfall: citation-numbering-is-owned -->
 
-- **Let Citation own reference and list numbering** — ordinals come from normalized source order, repeated references share the same target, and `Citation.List` always uses decimal numbering from one.
+- **Let Citation own source numbering** — ordinals come from normalized source order, repeated references share the same target, and `Citation.List` always uses decimal numbering from one.
   - anti-pattern: `<Citation.List start={0} type="a" />`
   - fix: `<Citation.List />`

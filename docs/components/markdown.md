@@ -53,3 +53,11 @@ result and renders `invalidFallback`, which defaults to `Content unavailable`.
 The ref targets the root `HTMLDivElement`. DOM props are forwarded except
 `dangerouslySetInnerHTML`, which is omitted from the public type and
 runtime-stripped.
+
+## Pitfalls
+
+<!-- pitfall: markdown-fixed-trust-boundary -->
+
+- **Keep Markdown inside its fixed trust boundary** — Markdown exposes no plugin, raw HTML, AST, renderer, URL transformer, highlighter, or executable extension API.
+  - anti-pattern: `<Markdown plugins={[unsafeHtmlPlugin]}>{source}</Markdown>`
+  - fix: `<Markdown baseUrl="https://docs.example.com/" invalidFallback="Document unavailable">{source}</Markdown>`

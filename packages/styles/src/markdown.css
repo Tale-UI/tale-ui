@@ -29,18 +29,14 @@
 }
 
 .tale-markdown h1 {
-  font-size: var(--heading-xl-font-size);
-}
-
-.tale-markdown h2 {
   font-size: var(--heading-l-font-size);
 }
 
-.tale-markdown h3 {
+.tale-markdown h2 {
   font-size: var(--heading-m-font-size);
 }
 
-.tale-markdown :where(h4, h5, h6) {
+.tale-markdown :where(h3, h4, h5, h6) {
   font-size: var(--heading-s-font-size);
 }
 

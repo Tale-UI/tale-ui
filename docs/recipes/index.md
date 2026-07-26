@@ -20,6 +20,12 @@ Copy-paste multi-component patterns for common real-world scenarios. Each recipe
 | [Dashboard with Charts](dashboard-with-charts.md)       | BarChart, LineChart, PieChart, ChartContainer | Multi-chart dashboard layout                        |
 | [Search with Autocomplete](search-with-autocomplete.md) | Combobox, Icon                                | Search input with filtered suggestions              |
 
+## Document Content
+
+| Recipe                                  | Components Used                              | Description                                                    |
+| --------------------------------------- | -------------------------------------------- | -------------------------------------------------------------- |
+| [Document Sources](document-sources.md) | Citation, Markdown, Outline, Timestamp, Text | Bounded prose with navigation, publication time, and citations |
+
 ## Navigation — Sidebar
 
 | Recipe                                                                 | Components Used                                                  | Description                                            |

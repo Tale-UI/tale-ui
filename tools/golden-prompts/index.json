@@ -607,6 +607,22 @@
     {
       "slug": "skeleton-loading",
       "difficulty": "simple"
+    },
+    {
+      "slug": "citation-research-note",
+      "difficulty": "medium"
+    },
+    {
+      "slug": "markdown-secure-document",
+      "difficulty": "simple"
+    },
+    {
+      "slug": "outline-document-navigation",
+      "difficulty": "medium"
+    },
+    {
+      "slug": "timestamp-relative",
+      "difficulty": "simple"
     }
   ]
 }

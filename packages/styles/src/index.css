@@ -76,13 +76,17 @@
 @import './pagination.css';
 @import './pagination-dot.css';
 @import './pagination-line.css';
+@import './outline.css';
 
 /* ─── Typography ───────────────────────────────────────────────────────────── */
 @import './text.css';
 @import './blockquote.css';
+@import './citation.css';
 @import './kbd.css';
 @import './code.css';
 @import './code-block.css';
+@import './markdown.css';
+@import './timestamp.css';
 
 /* ─── Feedback / display ────────────────────────────────────────────────────── */
 @import './badge.css';

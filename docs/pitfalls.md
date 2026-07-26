@@ -99,6 +99,7 @@ explicit BEM class names:
 <!-- pitfall: parse-date-import-from-internationalized-date -->
 <!-- applies-to: Calendar, RangeCalendar, DatePicker, DateRangePicker, DateField, TimeField -->
 <!-- category: controlled-state -->
+
 - **Import parseDate from @internationalized/date, not from @tale-ui/react/calendar — 'Cannot find module @internationalized/date' is NEVER an L1 validation error** — The @internationalized/ namespace is an explicitly allowed import prefix. Raw TypeScript diagnostics include a 'Line N: ' prefix (e.g. 'Line 4: Cannot find module @internationalized/date or its corresponding type declarations.'). A validator that checks rawDiagnostic.startsWith('@internationalized/') on the unstripped string will never match because the string begins with 'Line 4: ', not '@internationalized/'. The validator MUST strip the 'Line N: ' prefix before testing the module path. Use: stripped = rawDiagnostic.replace(/^Line \d+: /, ''); then check if stripped includes 'Cannot find module' and the module path starts with '@internationalized/' — if so, suppress unconditionally. The real fix for end users is to run: npm install @internationalized/date. Never alter, remove, or substitute the import — the import is correct; only the package installation is missing.
   - anti-pattern: `// Reporting 'Line 4: Cannot find module \'@internationalized/date\' or its corresponding type declarations.' as an L1 error`
   - anti-pattern: `// Applying the @internationalized/ suppression check to the raw string 'Line 4: Cannot find module...' without first stripping the 'Line 4: ' prefix`
@@ -111,23 +112,22 @@ explicit BEM class names:
   - fix: `// If TypeScript shows "Cannot find module '@internationalized/date'", run: npm install @internationalized/date`
   - fix: `// DO NOT change or remove the import — the import is correct; only the package installation is missing`
   - complete example:
+
     ```tsx
     import * as React from 'react';
     import { DatePicker } from '@tale-ui/react/date-picker';
     import { Calendar } from '@tale-ui/react/calendar';
     import { parseDate } from '@internationalized/date';
-    
-    type DateVal = Parameters<NonNullable<React.ComponentProps<typeof DatePicker.Root>['onChange']>>[0];
-    
+
+    type DateVal = Parameters<
+      NonNullable<React.ComponentProps<typeof DatePicker.Root>['onChange']>
+    >[0];
+
     export function DatePickerField() {
       const [value, setValue] = React.useState<DateVal | null>(null);
-    
+
       return (
-        <DatePicker.Root
-          value={value}
-          onChange={setValue}
-          defaultValue={parseDate('2026-05-31')}
-        >
+        <DatePicker.Root value={value} onChange={setValue} defaultValue={parseDate('2026-05-31')}>
           <DatePicker.Label>Date</DatePicker.Label>
           <DatePicker.Group>
             <DatePicker.DateInput>
@@ -147,9 +147,7 @@ explicit BEM class names:
                   <Calendar.GridHeader>
                     {(day) => <Calendar.GridHeaderCell>{day}</Calendar.GridHeaderCell>}
                   </Calendar.GridHeader>
-                  <Calendar.GridBody>
-                    {(date) => <Calendar.Cell date={date} />}
-                  </Calendar.GridBody>
+                  <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
                 </Calendar.Grid>
               </Calendar.Root>
             </DatePicker.Dialog>
@@ -343,31 +341,31 @@ explicit BEM class names:
 <!-- pitfall: never-import-key-from-reactariacomponents -->
 <!-- applies-to: * -->
 <!-- category: imports -->
+
 - **Never import Key or any type from react-aria-components for selection state — derive the type from the component's props** — `react-aria-components` is an internal peer dependency not available in consumer projects. Importing `Key` (or any type) from it causes "Cannot find module 'react-aria-components'" TypeScript errors. Derive the selection key type from the component's own `onSelectionChange` prop using `React.ComponentProps` instead. Initialize `useState` with that derived type so the setter is compatible.
   - anti-pattern: `import type { Key } from 'react-aria-components';`
   - anti-pattern: `const [selected, setSelected] = React.useState<Set<Key>>(new Set(['alice', 'bob']));`
   - fix: `type SelectionValue = Parameters<NonNullable<React.ComponentProps<typeof TagSelect.Root>['onSelectionChange']>>[0];`
   - fix: `const [selected, setSelected] = React.useState<SelectionValue>(new Set(['alice', 'bob']));`
   - complete example:
+
     ```tsx
     import * as React from 'react';
     import { TagSelect } from '@tale-ui/react/tag-select';
-    
+
     type SelectionValue = Parameters<
       NonNullable<React.ComponentProps<typeof TagSelect.Root>['onSelectionChange']>
     >[0];
-    
+
     const members = [
       { id: 'alice', name: 'Alice Chen' },
       { id: 'bob', name: 'Bob Martínez' },
       { id: 'carol', name: 'Carol Lee' },
     ];
-    
+
     export function TeamMemberPicker() {
-      const [selected, setSelected] = React.useState<SelectionValue>(
-        new Set(['alice', 'bob']),
-      );
-    
+      const [selected, setSelected] = React.useState<SelectionValue>(new Set(['alice', 'bob']));
+
       return (
         <TagSelect.Root
           label="Team members"
@@ -454,6 +452,7 @@ explicit BEM class names:
 <!-- pitfall: row-column-gap-uses-token-scale -->
 <!-- applies-to: Row, Column -->
 <!-- category: layout -->
+
 - **Row/Column gap uses spacing token values ('xs', 's', 'm', 'l', 'xl', '2xl'), not component size names — this is the most common layout error** — 'sm', 'md', 'lg' are component size prop values and are not valid Gap type values; passing them causes a TypeScript error Type '"sm"' is not assignable to type 'Gap | undefined' (or "md", "lg" — any component-size name). 'none' is also not a valid Gap value — omit the gap prop entirely to produce no gap. Always map: sm->s, md->m, lg->l. This applies to every Column or Row anywhere in the file without exception, including the outermost page-level wrapper, layout wrappers inside compound-component children such as GridList.Item or Carousel.Item, calendar wrappers, color picker wrappers around ColorArea and ColorSlider, or any other slot. This is the single most common error in generated code — it occurs in nearly every component composition. When a prompt mentions a gap size or you need spacing between elements, ALWAYS use the spacing-token scale, never the component-size scale. CRITICAL: Even when the prompt explicitly says "md" gap or uses component-size terminology, you MUST translate to spacing tokens. The word "md" in a prompt does NOT mean gap="md" — it means gap="m".
   - anti-pattern: `<Row gap="sm">`
   - anti-pattern: `<Column gap="md">`
@@ -468,18 +467,19 @@ explicit BEM class names:
   - fix: `<Carousel.Item><Column gap="s">...</Column></Carousel.Item>`
   - fix: `<Column gap="m"><ColorArea.Root .../><ColorSlider.Root .../></Column>`
   - complete example:
+
     ```tsx
     import { ColorArea, parseColor } from '@tale-ui/react/color-area';
     import { ColorSlider } from '@tale-ui/react/color-slider';
     import { Column } from '@tale-ui/react/column';
-    
+
     export function ColorPickerExample() {
       return (
         <Column gap="m">
           <ColorArea.Root defaultValue={parseColor('hsl(0, 100%, 50%)')}>
             <ColorArea.Thumb />
           </ColorArea.Root>
-    
+
           <ColorSlider.Root channel="hue" defaultValue={parseColor('hsl(0, 100%, 50%)')}>
             <ColorSlider.Label>Hue</ColorSlider.Label>
             <ColorSlider.Output />
@@ -505,6 +505,7 @@ explicit BEM class names:
 <!-- pitfall: row-no-css-flex-props -->
 <!-- applies-to: Row -->
 <!-- category: layout -->
+
 - **Row does not accept raw CSS flex properties like alignItems, flexDirection, or flexWrap** — passing these causes TypeScript errors. Use `style` for one-off overrides.
   - anti-pattern: `<Row alignItems="center">`
   - fix: `<Row style={{ alignItems: 'center' }}>`
@@ -513,26 +514,30 @@ explicit BEM class names:
 <!-- applies-to: Container -->
 <!-- category: layout -->
 <!-- prose-only -->
+
 - **Container is a colour palette wrapper, not a layout component — use the color prop for theming, not theme** — Container applies a colour palette to its subtree via the color prop (e.g. color="indigo"). Passing theme instead causes a TypeScript assignability error because theme does not exist on ContainerProps. Additionally, do not use Container as a div replacement for layout; use Column for vertical stacks and Row for horizontal layouts.
   - anti-pattern: `<Container theme="indigo">`
   - anti-pattern: `<Container style={{ display: 'flex', gap: '8px' }}>`
   - fix: `<Container color="indigo">`
   - fix: `<Column gap="m">`
   - complete example:
+
     ```tsx
     import { Container } from '@tale-ui/react/container';
     import { Card } from '@tale-ui/react/card';
     import { Column } from '@tale-ui/react/column';
     import { Text } from '@tale-ui/react/text';
     import { Button } from '@tale-ui/react/button';
-    
+
     export function PremiumPlanSection() {
       return (
         <Container color="indigo">
           <Card.Root>
             <Card.Body>
               <Column gap="m">
-                <Text variant="heading" as="h2">Premium Plan</Text>
+                <Text variant="heading" as="h2">
+                  Premium Plan
+                </Text>
                 <Button variant="primary">Get started</Button>
               </Column>
             </Card.Body>
@@ -562,6 +567,7 @@ explicit BEM class names:
 <!-- pitfall: row-column-no-as-prop -->
 <!-- applies-to: * -->
 <!-- category: layout -->
+
 - **Row/Column do not accept an `as` prop — they always render as `<div>` elements** — passing `as="section"` or any other element name is not in `ColumnProps`/`RowProps` and causes `Type '{ as: string; ... }' is not assignable to type 'ColumnProps'`. To use a semantic wrapper element, place the native HTML element outside `Column` or `Row`.
   - anti-pattern: `<Column gap="s" as="section">`
   - fix: `<section><Column gap="s">`
@@ -569,6 +575,7 @@ explicit BEM class names:
 <!-- pitfall: column-and-row-align-prop -->
 <!-- applies-to: * -->
 <!-- category: layout -->
+
 - **Column/Row align uses shorthand tokens, not CSS flex values** — `'flex-start'` and `'flex-end'` are not valid `align` values; use `'start'`, `'end'`, `'center'`, `'stretch'`, or `'baseline'` instead. Omit the prop entirely to use the default alignment.
   - anti-pattern: `<Column align="flex-start">`
   - anti-pattern: `<Row align="flex-end">`
@@ -578,6 +585,7 @@ explicit BEM class names:
 <!-- pitfall: columnrow-gap-uses-spacingtoken-values -->
 <!-- applies-to: * -->
 <!-- category: layout -->
+
 - **Column/Row gap uses spacing-token values, not component-size names** — `'sm'`, `'md'`, and `'lg'` are not valid `Gap` values and cause `Type '"sm"' is not assignable to type 'Gap | undefined'`; use `'xs'`, `'s'`, `'m'`, `'l'`, `'xl'`, or `'2xl'` instead.
   - anti-pattern: `<Column gap="sm">`
   - anti-pattern: `<Column gap="md">`
@@ -596,7 +604,7 @@ explicit BEM class names:
     ```tsx
     import { Button } from '@tale-ui/react/button';
     import { Row } from '@tale-ui/react/row';
-    
+
     export function AccountActions() {
       return (
         <Row gap="s">
@@ -606,15 +614,18 @@ explicit BEM class names:
       );
     }
     ```
+
 <!-- pitfall: column-row-no-visual-inline-styles -->
 <!-- applies-to: * -->
 <!-- category: layout -->
+
 - **Never apply non-layout inline styles (border, borderRadius, background) to Column or Row — use a wrapper element for visual styles** — Column and Row are pure layout primitives. Their style prop must only contain layout-related CSS properties (width, height, maxWidth, flex, alignItems, justifyContent, etc.). Visual or decorative properties such as border, borderRadius, background, and boxShadow must be placed on a wrapping native HTML element such as a div.
   - anti-pattern: `<Column align="center" style={{ padding: 'var(--space-2xl)', border: '2px dashed var(--neutral-20)', borderRadius: 'var(--radius-m)' }}>`
   - anti-pattern: `<Row style={{ background: 'var(--color-surface)', borderRadius: 'var(--radius-m)' }}>`
   - fix: `<div style={{ padding: 'var(--space-2xl)', border: '2px dashed var(--neutral-20)', borderRadius: 'var(--radius-m)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Text color="muted">...</Text></div>`
   - fix: `<div style={{ background: 'var(--color-surface)', borderRadius: 'var(--radius-m)' }}><Row>...</Row></div>`
   - complete example:
+
     ```tsx
     import { Text } from '@tale-ui/react/text';
 
@@ -700,6 +711,7 @@ explicit BEM class names:
 <!-- pitfall: always-generate-code-directly-never -->
 <!-- applies-to: * -->
 <!-- category: typescript -->
+
 - **Always generate complete, working code directly — never ask for clarification, return an empty function body, or output a blank code block** — when given a UI prompt, immediately output a full import block and component with a non-empty return; never reply with questions, option lists, an empty function, or a completely blank file with no code at all. This applies equally to simple single-component prompts and to complex multi-component compositions such as an FAQ section combining Accordion, Banner, Link, Column, and Text — complexity is never a reason to return empty code.
   - anti-pattern: `// empty file`
   - anti-pattern: `export function MyComponent() {}`
@@ -711,17 +723,20 @@ explicit BEM class names:
   - fix (for 'Create a primary button that says Save'): `import { Button } from '@tale-ui/react/button'; export function SaveButton() { return <Button variant="primary">Save</Button>; }`
   - fix (for 'Create a success badge that displays Active'): `import { Badge } from '@tale-ui/react/badge'; export function ActiveBadge() { return <Badge variant="success">Active</Badge>; }`
   - complete example:
+
     ```tsx
     import { Accordion } from '@tale-ui/react/accordion';
     import { Banner } from '@tale-ui/react/banner';
     import { Link } from '@tale-ui/react/link';
     import { Column } from '@tale-ui/react/column';
     import { Text } from '@tale-ui/react/text';
-    
+
     export function FaqSection() {
       return (
         <Column gap="l">
-          <Text variant="heading" as="h2">Frequently Asked Questions</Text>
+          <Text variant="heading" as="h2">
+            Frequently Asked Questions
+          </Text>
           <Accordion.Root>
             <Accordion.Item id="what-is">
               <Accordion.Header>
@@ -736,7 +751,10 @@ explicit BEM class names:
                 <Accordion.Trigger>How do I install it?</Accordion.Trigger>
               </Accordion.Header>
               <Accordion.Panel>
-                <Text>Run <Text variant="mono">pnpm install @tale-ui/react</Text> to add Tale UI to your project.</Text>
+                <Text>
+                  Run <Text variant="mono">pnpm install @tale-ui/react</Text> to add Tale UI to your
+                  project.
+                </Text>
               </Accordion.Panel>
             </Accordion.Item>
             <Accordion.Item id="accessible">
@@ -744,7 +762,10 @@ explicit BEM class names:
                 <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
               </Accordion.Header>
               <Accordion.Panel>
-                <Text>Yes. Tale UI is built on a React Aria foundation, ensuring full keyboard and screen reader support.</Text>
+                <Text>
+                  Yes. Tale UI is built on a React Aria foundation, ensuring full keyboard and
+                  screen reader support.
+                </Text>
               </Accordion.Panel>
             </Accordion.Item>
             <Accordion.Item id="theme">
@@ -752,7 +773,10 @@ explicit BEM class names:
                 <Accordion.Trigger>Can I customize the theme?</Accordion.Trigger>
               </Accordion.Header>
               <Accordion.Panel>
-                <Text>Yes. Theming is done via CSS custom properties, making it easy to adapt to any brand.</Text>
+                <Text>
+                  Yes. Theming is done via CSS custom properties, making it easy to adapt to any
+                  brand.
+                </Text>
               </Accordion.Panel>
             </Accordion.Item>
           </Accordion.Root>
@@ -819,6 +843,79 @@ explicit BEM class names:
 <!-- pitfall: component-names-must-be-valid -->
 <!-- applies-to: * -->
 <!-- category: typescript -->
+
 - **Component names must be valid PascalCase identifiers with no spaces** — exported React component names must be a single valid JavaScript/TypeScript identifier; spaces, hyphens, or other invalid characters in the function name cause parser errors before JSX is checked.
   - anti-pattern: `export function Notification bell() {}`
   - fix: `export function NotificationBell() {}`
+
+<!-- pitfall: aspect-ratio-direct-fitted-media -->
+<!-- applies-to: AspectRatio -->
+<!-- category: component-contract -->
+
+- **Keep fitted media directly inside AspectRatio** — The `objectFit` selector intentionally reaches only immediate `img` or `video` children.
+  - anti-pattern: `<AspectRatio objectFit="cover"><div><Image src="/photo.jpg" alt="Landscape" /></div></AspectRatio>`
+  - fix: `<AspectRatio objectFit="cover"><Image src="/photo.jpg" alt="Landscape" /></AspectRatio>`
+
+<!-- pitfall: blockquote-visible-attribution -->
+<!-- applies-to: Blockquote -->
+<!-- category: component-contract -->
+
+- **Render visible attribution with Blockquote.Attribution** — The Root `cite` attribute is machine-readable metadata and never supplies visible source text.
+  - anti-pattern: `<Blockquote.Root cite={sourceUrl}><Blockquote.Content>{quote}</Blockquote.Content></Blockquote.Root>`
+  - fix: `<Blockquote.Root cite={sourceUrl}><Blockquote.Content>{quote}</Blockquote.Content><Blockquote.Attribution>{sourceName}</Blockquote.Attribution></Blockquote.Root>`
+
+<!-- pitfall: button-group-one-accessible-name -->
+<!-- applies-to: ButtonGroup -->
+<!-- category: component-contract -->
+
+- **Give semantic ButtonGroup exactly one accessible name** — Roles `group` and `region` require one non-whitespace `aria-label` or `aria-labelledby` value.
+  - anti-pattern: `<ButtonGroup><Button>Save</Button></ButtonGroup>`
+  - fix: `<ButtonGroup aria-label="Document actions"><Button>Save</Button></ButtonGroup>`
+
+<!-- pitfall: citation-owned-source-numbering -->
+<!-- applies-to: Citation -->
+<!-- category: component-contract -->
+
+- **Let Citation own source numbering** — Ordinals follow normalized source order and repeated references share the same generated target.
+  - anti-pattern: `<Citation.List start={0} type="a" />`
+  - fix: `<Citation.List />`
+
+<!-- pitfall: code-inline-plain-text -->
+<!-- applies-to: Code -->
+<!-- category: component-contract -->
+
+- **Pass plain text to inline Code** — Code escapes its string child and has no raw HTML or executable renderer API.
+  - anti-pattern: `<Code><strong>{generatedCode}</strong></Code>`
+  - fix: `<Code>{generatedCode}</Code>`
+
+<!-- pitfall: markdown-fixed-trust-boundary -->
+<!-- applies-to: Markdown -->
+<!-- category: component-contract -->
+
+- **Keep Markdown inside its fixed trust boundary** — Markdown exposes no plugin, raw HTML, AST, renderer, URL transformer, highlighter, or executable extension API.
+  - anti-pattern: `<Markdown plugins={[unsafeHtmlPlugin]}>{source}</Markdown>`
+  - fix: `<Markdown baseUrl="https://docs.example.com/" invalidFallback="Document unavailable">{source}</Markdown>`
+
+<!-- pitfall: outline-stable-logical-ids -->
+<!-- applies-to: Outline -->
+<!-- category: component-contract -->
+
+- **Use stable logical IDs for Outline state** — Outline preserves active state across reorders by item `id` while `targetId` remains the document heading identity.
+  - anti-pattern: `headings.map((heading, index) => ({ id: String(index), targetId: heading.id, label: heading.label, level: heading.level }))`
+  - fix: `headings.map((heading) => ({ id: heading.key, targetId: heading.id, label: heading.label, level: heading.level }))`
+
+<!-- pitfall: skeleton-external-loading-announcement -->
+<!-- applies-to: Skeleton -->
+<!-- category: component-contract -->
+
+- **Announce loading outside Skeleton** — Skeleton is permanently decorative and cannot accept a role or accessible name.
+  - anti-pattern: `<Skeleton role="status" aria-label="Loading account details" />`
+  - fix: `<section aria-busy="true" aria-live="polite"><span className="visually-hidden">Loading account details</span><Skeleton /></section>`
+
+<!-- pitfall: timestamp-offset-bearing-instant -->
+<!-- applies-to: Timestamp -->
+<!-- category: component-contract -->
+
+- **Provide an offset-bearing instant to Timestamp** — Locale-dependent date strings are ambiguous and fail Timestamp validation.
+  - anti-pattern: `<Timestamp value="07/27/2026" locale="en-AU" timeZone="Australia/Melbourne" />`
+  - fix: `<Timestamp value="2026-07-27T04:30:00Z" locale="en-AU" timeZone="Australia/Melbourne" />`

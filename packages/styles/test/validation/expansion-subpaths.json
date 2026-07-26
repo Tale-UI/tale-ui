@@ -4,15 +4,15 @@
     { "subpath": "./aspect-ratio", "enabled": true },
     { "subpath": "./blockquote", "enabled": true },
     { "subpath": "./button-group", "enabled": true },
-    { "subpath": "./citation", "enabled": false },
+    { "subpath": "./citation", "enabled": true },
     { "subpath": "./code", "enabled": true },
     { "subpath": "./lightbox", "enabled": false },
-    { "subpath": "./markdown", "enabled": false },
-    { "subpath": "./outline", "enabled": false },
+    { "subpath": "./markdown", "enabled": true },
+    { "subpath": "./outline", "enabled": true },
     { "subpath": "./overflow-list", "enabled": false },
     { "subpath": "./resizable", "enabled": false },
     { "subpath": "./skeleton", "enabled": true },
-    { "subpath": "./timestamp", "enabled": false },
+    { "subpath": "./timestamp", "enabled": true },
     { "subpath": "./toast", "enabled": false }
   ]
 }

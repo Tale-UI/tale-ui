@@ -141,7 +141,7 @@
     {
       "id": "parse-date-import-from-internationalized-date",
       "summary": "Import parseDate from @internationalized/date, not from @tale-ui/react/calendar — 'Cannot find module @internationalized/date' is NEVER an L1 validation error",
-      "detail": "The @internationalized/ namespace is an explicitly allowed import prefix. Raw TypeScript diagnostics include a 'Line N: ' prefix (e.g. 'Line 4: Cannot find module @internationalized/date or its corresponding type declarations.'). A validator that checks rawDiagnostic.startsWith('@internationalized/') on the unstripped string will never match because the string begins with 'Line 4: ', not '@internationalized/'. The validator MUST strip the 'Line N: ' prefix before testing the module path. Use: stripped = rawDiagnostic.replace(/^Line \\d+: /, ''); then check if stripped includes 'Cannot find module' and the module path starts with '@internationalized/' — if so, suppress unconditionally. The real fix for end users is to run: npm install @internationalized/date. Never alter, remove, or substitute the import — the import is correct; only the package installation is missing. import * as React from 'react'; import { DatePicker } from '@tale-ui/react/date-picker'; import { Calendar } from '@tale-ui/react/calendar'; import { parseDate } from '@internationalized/date';  type DateVal = Parameters<NonNullable<React.ComponentProps<typeof DatePicker.Root>['onChange']>>[0];  export function DatePickerField() { const [value, setValue] = React.useState<DateVal | null>(null);  return ( <DatePicker.Root value={value} onChange={setValue} defaultValue={parseDate('2026-05-31')} > <DatePicker.Label>Date</DatePicker.Label> <DatePicker.Group> <DatePicker.DateInput> {(segment) => <DatePicker.Segment segment={segment} />} </DatePicker.DateInput> <DatePicker.Trigger /> </DatePicker.Group> <DatePicker.Popover> <DatePicker.Dialog> <Calendar.Root> <Calendar.Header> <Calendar.PreviousButton /> <Calendar.Heading /> <Calendar.NextButton /> </Calendar.Header> <Calendar.Grid> <Calendar.GridHeader> {(day) => <Calendar.GridHeaderCell>{day}</Calendar.GridHeaderCell>} </Calendar.GridHeader> <Calendar.GridBody> {(date) => <Calendar.Cell date={date} />} </Calendar.GridBody> </Calendar.Grid> </Calendar.Root> </DatePicker.Dialog> </DatePicker.Popover> </DatePicker.Root> ); }",
+      "detail": "The @internationalized/ namespace is an explicitly allowed import prefix. Raw TypeScript diagnostics include a 'Line N: ' prefix (e.g. 'Line 4: Cannot find module @internationalized/date or its corresponding type declarations.'). A validator that checks rawDiagnostic.startsWith('@internationalized/') on the unstripped string will never match because the string begins with 'Line 4: ', not '@internationalized/'. The validator MUST strip the 'Line N: ' prefix before testing the module path. Use: stripped = rawDiagnostic.replace(/^Line \\d+: /, ''); then check if stripped includes 'Cannot find module' and the module path starts with '@internationalized/' — if so, suppress unconditionally. The real fix for end users is to run: npm install @internationalized/date. Never alter, remove, or substitute the import — the import is correct; only the package installation is missing. import * as React from 'react'; import { DatePicker } from '@tale-ui/react/date-picker'; import { Calendar } from '@tale-ui/react/calendar'; import { parseDate } from '@internationalized/date'; type DateVal = Parameters< NonNullable<React.ComponentProps<typeof DatePicker.Root>['onChange']> >[0]; export function DatePickerField() { const [value, setValue] = React.useState<DateVal | null>(null); return ( <DatePicker.Root value={value} onChange={setValue} defaultValue={parseDate('2026-05-31')}> <DatePicker.Label>Date</DatePicker.Label> <DatePicker.Group> <DatePicker.DateInput> {(segment) => <DatePicker.Segment segment={segment} />} </DatePicker.DateInput> <DatePicker.Trigger /> </DatePicker.Group> <DatePicker.Popover> <DatePicker.Dialog> <Calendar.Root> <Calendar.Header> <Calendar.PreviousButton /> <Calendar.Heading /> <Calendar.NextButton /> </Calendar.Header> <Calendar.Grid> <Calendar.GridHeader> {(day) => <Calendar.GridHeaderCell>{day}</Calendar.GridHeaderCell>} </Calendar.GridHeader> <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody> </Calendar.Grid> </Calendar.Root> </DatePicker.Dialog> </DatePicker.Popover> </DatePicker.Root> ); }",
       "appliesTo": [
         "Calendar",
         "RangeCalendar",
@@ -165,7 +165,7 @@
         "// If TypeScript shows \"Cannot find module '@internationalized/date'\", run: npm install @internationalized/date",
         "// DO NOT change or remove the import — the import is correct; only the package installation is missing"
       ],
-      "completeExample": "import * as React from 'react';\nimport { DatePicker } from '@tale-ui/react/date-picker';\nimport { Calendar } from '@tale-ui/react/calendar';\nimport { parseDate } from '@internationalized/date';\n\ntype DateVal = Parameters<NonNullable<React.ComponentProps<typeof DatePicker.Root>['onChange']>>[0];\n\nexport function DatePickerField() {\n  const [value, setValue] = React.useState<DateVal | null>(null);\n\n  return (\n    <DatePicker.Root\n      value={value}\n      onChange={setValue}\n      defaultValue={parseDate('2026-05-31')}\n    >\n      <DatePicker.Label>Date</DatePicker.Label>\n      <DatePicker.Group>\n        <DatePicker.DateInput>\n          {(segment) => <DatePicker.Segment segment={segment} />}\n        </DatePicker.DateInput>\n        <DatePicker.Trigger />\n      </DatePicker.Group>\n      <DatePicker.Popover>\n        <DatePicker.Dialog>\n          <Calendar.Root>\n            <Calendar.Header>\n              <Calendar.PreviousButton />\n              <Calendar.Heading />\n              <Calendar.NextButton />\n            </Calendar.Header>\n            <Calendar.Grid>\n              <Calendar.GridHeader>\n                {(day) => <Calendar.GridHeaderCell>{day}</Calendar.GridHeaderCell>}\n              </Calendar.GridHeader>\n              <Calendar.GridBody>\n                {(date) => <Calendar.Cell date={date} />}\n              </Calendar.GridBody>\n            </Calendar.Grid>\n          </Calendar.Root>\n        </DatePicker.Dialog>\n      </DatePicker.Popover>\n    </DatePicker.Root>\n  );\n}"
+      "completeExample": "import * as React from 'react';\nimport { DatePicker } from '@tale-ui/react/date-picker';\nimport { Calendar } from '@tale-ui/react/calendar';\nimport { parseDate } from '@internationalized/date';\n\ntype DateVal = Parameters<\n  NonNullable<React.ComponentProps<typeof DatePicker.Root>['onChange']>\n>[0];\n\nexport function DatePickerField() {\n  const [value, setValue] = React.useState<DateVal | null>(null);\n\n  return (\n    <DatePicker.Root value={value} onChange={setValue} defaultValue={parseDate('2026-05-31')}>\n      <DatePicker.Label>Date</DatePicker.Label>\n      <DatePicker.Group>\n        <DatePicker.DateInput>\n          {(segment) => <DatePicker.Segment segment={segment} />}\n        </DatePicker.DateInput>\n        <DatePicker.Trigger />\n      </DatePicker.Group>\n      <DatePicker.Popover>\n        <DatePicker.Dialog>\n          <Calendar.Root>\n            <Calendar.Header>\n              <Calendar.PreviousButton />\n              <Calendar.Heading />\n              <Calendar.NextButton />\n            </Calendar.Header>\n            <Calendar.Grid>\n              <Calendar.GridHeader>\n                {(day) => <Calendar.GridHeaderCell>{day}</Calendar.GridHeaderCell>}\n              </Calendar.GridHeader>\n              <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>\n            </Calendar.Grid>\n          </Calendar.Root>\n        </DatePicker.Dialog>\n      </DatePicker.Popover>\n    </DatePicker.Root>\n  );\n}"
     },
     {
       "id": "no-locale-prop-on-calendar",
@@ -495,7 +495,7 @@
     {
       "id": "never-import-key-from-reactariacomponents",
       "summary": "Never import Key or any type from react-aria-components for selection state — derive the type from the component's props",
-      "detail": "`react-aria-components` is an internal peer dependency not available in consumer projects. Importing `Key` (or any type) from it causes \"Cannot find module 'react-aria-components'\" TypeScript errors. Derive the selection key type from the component's own `onSelectionChange` prop using `React.ComponentProps` instead. Initialize `useState` with that derived type so the setter is compatible. import * as React from 'react'; import { TagSelect } from '@tale-ui/react/tag-select';  type SelectionValue = Parameters< NonNullable<React.ComponentProps<typeof TagSelect.Root>['onSelectionChange']> >[0];  const members = [ { id: 'alice', name: 'Alice Chen' }, { id: 'bob', name: 'Bob Martínez' }, { id: 'carol', name: 'Carol Lee' }, ];  export function TeamMemberPicker() { const [selected, setSelected] = React.useState<SelectionValue>( new Set(['alice', 'bob']), );  return ( <TagSelect.Root label=\"Team members\" placeholder=\"Search members…\" description=\"Select who should be included in this project.\" items={members} selectedKeys={selected} onSelectionChange={setSelected} > {(member) => ( <TagSelect.Item id={member.id} textValue={member.name}> {member.name} </TagSelect.Item> )} </TagSelect.Root> ); }",
+      "detail": "`react-aria-components` is an internal peer dependency not available in consumer projects. Importing `Key` (or any type) from it causes \"Cannot find module 'react-aria-components'\" TypeScript errors. Derive the selection key type from the component's own `onSelectionChange` prop using `React.ComponentProps` instead. Initialize `useState` with that derived type so the setter is compatible. import * as React from 'react'; import { TagSelect } from '@tale-ui/react/tag-select'; type SelectionValue = Parameters< NonNullable<React.ComponentProps<typeof TagSelect.Root>['onSelectionChange']> >[0]; const members = [ { id: 'alice', name: 'Alice Chen' }, { id: 'bob', name: 'Bob Martínez' }, { id: 'carol', name: 'Carol Lee' }, ]; export function TeamMemberPicker() { const [selected, setSelected] = React.useState<SelectionValue>(new Set(['alice', 'bob'])); return ( <TagSelect.Root label=\"Team members\" placeholder=\"Search members…\" description=\"Select who should be included in this project.\" items={members} selectedKeys={selected} onSelectionChange={setSelected} > {(member) => ( <TagSelect.Item id={member.id} textValue={member.name}> {member.name} </TagSelect.Item> )} </TagSelect.Root> ); }",
       "appliesTo": [
         "*"
       ],
@@ -508,7 +508,7 @@
         "type SelectionValue = Parameters<NonNullable<React.ComponentProps<typeof TagSelect.Root>['onSelectionChange']>>[0];",
         "const [selected, setSelected] = React.useState<SelectionValue>(new Set(['alice', 'bob']));"
       ],
-      "completeExample": "import * as React from 'react';\nimport { TagSelect } from '@tale-ui/react/tag-select';\n\ntype SelectionValue = Parameters<\n  NonNullable<React.ComponentProps<typeof TagSelect.Root>['onSelectionChange']>\n>[0];\n\nconst members = [\n  { id: 'alice', name: 'Alice Chen' },\n  { id: 'bob', name: 'Bob Martínez' },\n  { id: 'carol', name: 'Carol Lee' },\n];\n\nexport function TeamMemberPicker() {\n  const [selected, setSelected] = React.useState<SelectionValue>(\n    new Set(['alice', 'bob']),\n  );\n\n  return (\n    <TagSelect.Root\n      label=\"Team members\"\n      placeholder=\"Search members…\"\n      description=\"Select who should be included in this project.\"\n      items={members}\n      selectedKeys={selected}\n      onSelectionChange={setSelected}\n    >\n      {(member) => (\n        <TagSelect.Item id={member.id} textValue={member.name}>\n          {member.name}\n        </TagSelect.Item>\n      )}\n    </TagSelect.Root>\n  );\n}"
+      "completeExample": "import * as React from 'react';\nimport { TagSelect } from '@tale-ui/react/tag-select';\n\ntype SelectionValue = Parameters<\n  NonNullable<React.ComponentProps<typeof TagSelect.Root>['onSelectionChange']>\n>[0];\n\nconst members = [\n  { id: 'alice', name: 'Alice Chen' },\n  { id: 'bob', name: 'Bob Martínez' },\n  { id: 'carol', name: 'Carol Lee' },\n];\n\nexport function TeamMemberPicker() {\n  const [selected, setSelected] = React.useState<SelectionValue>(new Set(['alice', 'bob']));\n\n  return (\n    <TagSelect.Root\n      label=\"Team members\"\n      placeholder=\"Search members…\"\n      description=\"Select who should be included in this project.\"\n      items={members}\n      selectedKeys={selected}\n      onSelectionChange={setSelected}\n    >\n      {(member) => (\n        <TagSelect.Item id={member.id} textValue={member.name}>\n          {member.name}\n        </TagSelect.Item>\n      )}\n    </TagSelect.Root>\n  );\n}"
     },
     {
       "id": "never-import-key-or-any",
@@ -562,7 +562,7 @@
     {
       "id": "row-column-gap-uses-token-scale",
       "summary": "Row/Column gap uses spacing token values ('xs', 's', 'm', 'l', 'xl', '2xl'), not component size names — this is the most common layout error",
-      "detail": "'sm', 'md', 'lg' are component size prop values and are not valid Gap type values; passing them causes a TypeScript error Type '\"sm\"' is not assignable to type 'Gap | undefined' (or \"md\", \"lg\" — any component-size name). 'none' is also not a valid Gap value — omit the gap prop entirely to produce no gap. Always map: sm->s, md->m, lg->l. This applies to every Column or Row anywhere in the file without exception, including the outermost page-level wrapper, layout wrappers inside compound-component children such as GridList.Item or Carousel.Item, calendar wrappers, color picker wrappers around ColorArea and ColorSlider, or any other slot. This is the single most common error in generated code — it occurs in nearly every component composition. When a prompt mentions a gap size or you need spacing between elements, ALWAYS use the spacing-token scale, never the component-size scale. CRITICAL: Even when the prompt explicitly says \"md\" gap or uses component-size terminology, you MUST translate to spacing tokens. The word \"md\" in a prompt does NOT mean gap=\"md\" — it means gap=\"m\". import { ColorArea, parseColor } from '@tale-ui/react/color-area'; import { ColorSlider } from '@tale-ui/react/color-slider'; import { Column } from '@tale-ui/react/column';  export function ColorPickerExample() { return ( <Column gap=\"m\"> <ColorArea.Root defaultValue={parseColor('hsl(0, 100%, 50%)')}> <ColorArea.Thumb /> </ColorArea.Root>  <ColorSlider.Root channel=\"hue\" defaultValue={parseColor('hsl(0, 100%, 50%)')}> <ColorSlider.Label>Hue</ColorSlider.Label> <ColorSlider.Output /> <ColorSlider.Track> <ColorSlider.Thumb /> </ColorSlider.Track> </ColorSlider.Root> </Column> ); }",
+      "detail": "'sm', 'md', 'lg' are component size prop values and are not valid Gap type values; passing them causes a TypeScript error Type '\"sm\"' is not assignable to type 'Gap | undefined' (or \"md\", \"lg\" — any component-size name). 'none' is also not a valid Gap value — omit the gap prop entirely to produce no gap. Always map: sm->s, md->m, lg->l. This applies to every Column or Row anywhere in the file without exception, including the outermost page-level wrapper, layout wrappers inside compound-component children such as GridList.Item or Carousel.Item, calendar wrappers, color picker wrappers around ColorArea and ColorSlider, or any other slot. This is the single most common error in generated code — it occurs in nearly every component composition. When a prompt mentions a gap size or you need spacing between elements, ALWAYS use the spacing-token scale, never the component-size scale. CRITICAL: Even when the prompt explicitly says \"md\" gap or uses component-size terminology, you MUST translate to spacing tokens. The word \"md\" in a prompt does NOT mean gap=\"md\" — it means gap=\"m\". import { ColorArea, parseColor } from '@tale-ui/react/color-area'; import { ColorSlider } from '@tale-ui/react/color-slider'; import { Column } from '@tale-ui/react/column'; export function ColorPickerExample() { return ( <Column gap=\"m\"> <ColorArea.Root defaultValue={parseColor('hsl(0, 100%, 50%)')}> <ColorArea.Thumb /> </ColorArea.Root> <ColorSlider.Root channel=\"hue\" defaultValue={parseColor('hsl(0, 100%, 50%)')}> <ColorSlider.Label>Hue</ColorSlider.Label> <ColorSlider.Output /> <ColorSlider.Track> <ColorSlider.Thumb /> </ColorSlider.Track> </ColorSlider.Root> </Column> ); }",
       "appliesTo": [
         "Row",
         "Column"
@@ -621,7 +621,7 @@
     {
       "id": "container-is-not-layout",
       "summary": "Container is a colour palette wrapper, not a layout component — use the color prop for theming, not theme",
-      "detail": "Container applies a colour palette to its subtree via the color prop (e.g. color=\"indigo\"). Passing theme instead causes a TypeScript assignability error because theme does not exist on ContainerProps. Additionally, do not use Container as a div replacement for layout; use Column for vertical stacks and Row for horizontal layouts. import { Container } from '@tale-ui/react/container'; import { Card } from '@tale-ui/react/card'; import { Column } from '@tale-ui/react/column'; import { Text } from '@tale-ui/react/text'; import { Button } from '@tale-ui/react/button';  export function PremiumPlanSection() { return ( <Container color=\"indigo\"> <Card.Root> <Card.Body> <Column gap=\"m\"> <Text variant=\"heading\" as=\"h2\">Premium Plan</Text> <Button variant=\"primary\">Get started</Button> </Column> </Card.Body> </Card.Root> </Container> ); }",
+      "detail": "Container applies a colour palette to its subtree via the color prop (e.g. color=\"indigo\"). Passing theme instead causes a TypeScript assignability error because theme does not exist on ContainerProps. Additionally, do not use Container as a div replacement for layout; use Column for vertical stacks and Row for horizontal layouts. import { Container } from '@tale-ui/react/container'; import { Card } from '@tale-ui/react/card'; import { Column } from '@tale-ui/react/column'; import { Text } from '@tale-ui/react/text'; import { Button } from '@tale-ui/react/button'; export function PremiumPlanSection() { return ( <Container color=\"indigo\"> <Card.Root> <Card.Body> <Column gap=\"m\"> <Text variant=\"heading\" as=\"h2\"> Premium Plan </Text> <Button variant=\"primary\">Get started</Button> </Column> </Card.Body> </Card.Root> </Container> ); }",
       "appliesTo": [
         "Container"
       ],
@@ -634,7 +634,7 @@
         "<Container color=\"indigo\">",
         "<Column gap=\"m\">"
       ],
-      "completeExample": "import { Container } from '@tale-ui/react/container';\nimport { Card } from '@tale-ui/react/card';\nimport { Column } from '@tale-ui/react/column';\nimport { Text } from '@tale-ui/react/text';\nimport { Button } from '@tale-ui/react/button';\n\nexport function PremiumPlanSection() {\n  return (\n    <Container color=\"indigo\">\n      <Card.Root>\n        <Card.Body>\n          <Column gap=\"m\">\n            <Text variant=\"heading\" as=\"h2\">Premium Plan</Text>\n            <Button variant=\"primary\">Get started</Button>\n          </Column>\n        </Card.Body>\n      </Card.Root>\n    </Container>\n  );\n}"
+      "completeExample": "import { Container } from '@tale-ui/react/container';\nimport { Card } from '@tale-ui/react/card';\nimport { Column } from '@tale-ui/react/column';\nimport { Text } from '@tale-ui/react/text';\nimport { Button } from '@tale-ui/react/button';\n\nexport function PremiumPlanSection() {\n  return (\n    <Container color=\"indigo\">\n      <Card.Root>\n        <Card.Body>\n          <Column gap=\"m\">\n            <Text variant=\"heading\" as=\"h2\">\n              Premium Plan\n            </Text>\n            <Button variant=\"primary\">Get started</Button>\n          </Column>\n        </Card.Body>\n      </Card.Root>\n    </Container>\n  );\n}"
     },
     {
       "id": "no-global-styles-on-semantic-html",
@@ -695,7 +695,7 @@
     {
       "id": "columnrow-gap-uses-spacingtoken-values",
       "summary": "Column/Row gap uses spacing-token values, not component-size names",
-      "detail": "`'sm'`, `'md'`, and `'lg'` are not valid `Gap` values and cause `Type '\"sm\"' is not assignable to type 'Gap | undefined'`; use `'xs'`, `'s'`, `'m'`, `'l'`, `'xl'`, or `'2xl'` instead. import { Button } from '@tale-ui/react/button'; import { Row } from '@tale-ui/react/row';  export function AccountActions() { return ( <Row gap=\"s\"> <Button variant=\"neutral\">Cancel</Button> <Button variant=\"danger\">Delete account</Button> </Row> ); }",
+      "detail": "`'sm'`, `'md'`, and `'lg'` are not valid `Gap` values and cause `Type '\"sm\"' is not assignable to type 'Gap | undefined'`; use `'xs'`, `'s'`, `'m'`, `'l'`, `'xl'`, or `'2xl'` instead. import { Button } from '@tale-ui/react/button'; import { Row } from '@tale-ui/react/row'; export function AccountActions() { return ( <Row gap=\"s\"> <Button variant=\"neutral\">Cancel</Button> <Button variant=\"danger\">Delete account</Button> </Row> ); }",
       "appliesTo": [
         "*"
       ],
@@ -814,7 +814,7 @@
     {
       "id": "always-generate-code-directly-never",
       "summary": "Always generate complete, working code directly — never ask for clarification, return an empty function body, or output a blank code block",
-      "detail": "when given a UI prompt, immediately output a full import block and component with a non-empty return; never reply with questions, option lists, an empty function, or a completely blank file with no code at all. This applies equally to simple single-component prompts and to complex multi-component compositions such as an FAQ section combining Accordion, Banner, Link, Column, and Text — complexity is never a reason to return empty code. - fix (for 'Create a primary button that says Save'): `import { Button } from '@tale-ui/react/button'; export function SaveButton() { return <Button variant=\"primary\">Save</Button>; }` - fix (for 'Create a success badge that displays Active'): `import { Badge } from '@tale-ui/react/badge'; export function ActiveBadge() { return <Badge variant=\"success\">Active</Badge>; }` import { Accordion } from '@tale-ui/react/accordion'; import { Banner } from '@tale-ui/react/banner'; import { Link } from '@tale-ui/react/link'; import { Column } from '@tale-ui/react/column'; import { Text } from '@tale-ui/react/text';  export function FaqSection() { return ( <Column gap=\"l\"> <Text variant=\"heading\" as=\"h2\">Frequently Asked Questions</Text> <Accordion.Root> <Accordion.Item id=\"what-is\"> <Accordion.Header> <Accordion.Trigger>What is Tale UI?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text>Tale UI is a design system providing accessible, themeable components.</Text> </Accordion.Panel> </Accordion.Item> <Accordion.Item id=\"install\"> <Accordion.Header> <Accordion.Trigger>How do I install it?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text>Run <Text variant=\"mono\">pnpm install @tale-ui/react</Text> to add Tale UI to your project.</Text> </Accordion.Panel> </Accordion.Item> <Accordion.Item id=\"accessible\"> <Accordion.Header> <Accordion.Trigger>Is it accessible?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text>Yes. Tale UI is built on a React Aria foundation, ensuring full keyboard and screen reader support.</Text> </Accordion.Panel> </Accordion.Item> <Accordion.Item id=\"theme\"> <Accordion.Header> <Accordion.Trigger>Can I customize the theme?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text>Yes. Theming is done via CSS custom properties, making it easy to adapt to any brand.</Text> </Accordion.Panel> </Accordion.Item> </Accordion.Root> <Banner.Root variant=\"info\"> <Banner.Description> Still have questions? <Link href=\"/contact\">Contact us</Link> </Banner.Description> </Banner.Root> </Column> ); }",
+      "detail": "when given a UI prompt, immediately output a full import block and component with a non-empty return; never reply with questions, option lists, an empty function, or a completely blank file with no code at all. This applies equally to simple single-component prompts and to complex multi-component compositions such as an FAQ section combining Accordion, Banner, Link, Column, and Text — complexity is never a reason to return empty code. - fix (for 'Create a primary button that says Save'): `import { Button } from '@tale-ui/react/button'; export function SaveButton() { return <Button variant=\"primary\">Save</Button>; }` - fix (for 'Create a success badge that displays Active'): `import { Badge } from '@tale-ui/react/badge'; export function ActiveBadge() { return <Badge variant=\"success\">Active</Badge>; }` import { Accordion } from '@tale-ui/react/accordion'; import { Banner } from '@tale-ui/react/banner'; import { Link } from '@tale-ui/react/link'; import { Column } from '@tale-ui/react/column'; import { Text } from '@tale-ui/react/text'; export function FaqSection() { return ( <Column gap=\"l\"> <Text variant=\"heading\" as=\"h2\"> Frequently Asked Questions </Text> <Accordion.Root> <Accordion.Item id=\"what-is\"> <Accordion.Header> <Accordion.Trigger>What is Tale UI?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text>Tale UI is a design system providing accessible, themeable components.</Text> </Accordion.Panel> </Accordion.Item> <Accordion.Item id=\"install\"> <Accordion.Header> <Accordion.Trigger>How do I install it?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text> Run <Text variant=\"mono\">pnpm install @tale-ui/react</Text> to add Tale UI to your project. </Text> </Accordion.Panel> </Accordion.Item> <Accordion.Item id=\"accessible\"> <Accordion.Header> <Accordion.Trigger>Is it accessible?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text> Yes. Tale UI is built on a React Aria foundation, ensuring full keyboard and screen reader support. </Text> </Accordion.Panel> </Accordion.Item> <Accordion.Item id=\"theme\"> <Accordion.Header> <Accordion.Trigger>Can I customize the theme?</Accordion.Trigger> </Accordion.Header> <Accordion.Panel> <Text> Yes. Theming is done via CSS custom properties, making it easy to adapt to any brand. </Text> </Accordion.Panel> </Accordion.Item> </Accordion.Root> <Banner.Root variant=\"info\"> <Banner.Description> Still have questions? <Link href=\"/contact\">Contact us</Link> </Banner.Description> </Banner.Root> </Column> ); }",
       "appliesTo": [
         "*"
       ],
@@ -830,7 +830,7 @@
         "import { Badge } from '@tale-ui/react/badge'; export function ActiveBadge() { return <Badge variant=\"success\">Active</Badge>; }",
         "import { Accordion } from '@tale-ui/react/accordion'; import { Banner } from '@tale-ui/react/banner'; import { Link } from '@tale-ui/react/link'; import { Column } from '@tale-ui/react/column'; import { Text } from '@tale-ui/react/text'; export function FaqSection() { return <Column gap=\"l\">...</Column>; }"
       ],
-      "completeExample": "import { Accordion } from '@tale-ui/react/accordion';\nimport { Banner } from '@tale-ui/react/banner';\nimport { Link } from '@tale-ui/react/link';\nimport { Column } from '@tale-ui/react/column';\nimport { Text } from '@tale-ui/react/text';\n\nexport function FaqSection() {\n  return (\n    <Column gap=\"l\">\n      <Text variant=\"heading\" as=\"h2\">Frequently Asked Questions</Text>\n      <Accordion.Root>\n        <Accordion.Item id=\"what-is\">\n          <Accordion.Header>\n            <Accordion.Trigger>What is Tale UI?</Accordion.Trigger>\n          </Accordion.Header>\n          <Accordion.Panel>\n            <Text>Tale UI is a design system providing accessible, themeable components.</Text>\n          </Accordion.Panel>\n        </Accordion.Item>\n        <Accordion.Item id=\"install\">\n          <Accordion.Header>\n            <Accordion.Trigger>How do I install it?</Accordion.Trigger>\n          </Accordion.Header>\n          <Accordion.Panel>\n            <Text>Run <Text variant=\"mono\">pnpm install @tale-ui/react</Text> to add Tale UI to your project.</Text>\n          </Accordion.Panel>\n        </Accordion.Item>\n        <Accordion.Item id=\"accessible\">\n          <Accordion.Header>\n            <Accordion.Trigger>Is it accessible?</Accordion.Trigger>\n          </Accordion.Header>\n          <Accordion.Panel>\n            <Text>Yes. Tale UI is built on a React Aria foundation, ensuring full keyboard and screen reader support.</Text>\n          </Accordion.Panel>\n        </Accordion.Item>\n        <Accordion.Item id=\"theme\">\n          <Accordion.Header>\n            <Accordion.Trigger>Can I customize the theme?</Accordion.Trigger>\n          </Accordion.Header>\n          <Accordion.Panel>\n            <Text>Yes. Theming is done via CSS custom properties, making it easy to adapt to any brand.</Text>\n          </Accordion.Panel>\n        </Accordion.Item>\n      </Accordion.Root>\n      <Banner.Root variant=\"info\">\n        <Banner.Description>\n          Still have questions? <Link href=\"/contact\">Contact us</Link>\n        </Banner.Description>\n      </Banner.Root>\n    </Column>\n  );\n}"
+      "completeExample": "import { Accordion } from '@tale-ui/react/accordion';\nimport { Banner } from '@tale-ui/react/banner';\nimport { Link } from '@tale-ui/react/link';\nimport { Column } from '@tale-ui/react/column';\nimport { Text } from '@tale-ui/react/text';\n\nexport function FaqSection() {\n  return (\n    <Column gap=\"l\">\n      <Text variant=\"heading\" as=\"h2\">\n        Frequently Asked Questions\n      </Text>\n      <Accordion.Root>\n        <Accordion.Item id=\"what-is\">\n          <Accordion.Header>\n            <Accordion.Trigger>What is Tale UI?</Accordion.Trigger>\n          </Accordion.Header>\n          <Accordion.Panel>\n            <Text>Tale UI is a design system providing accessible, themeable components.</Text>\n          </Accordion.Panel>\n        </Accordion.Item>\n        <Accordion.Item id=\"install\">\n          <Accordion.Header>\n            <Accordion.Trigger>How do I install it?</Accordion.Trigger>\n          </Accordion.Header>\n          <Accordion.Panel>\n            <Text>\n              Run <Text variant=\"mono\">pnpm install @tale-ui/react</Text> to add Tale UI to your\n              project.\n            </Text>\n          </Accordion.Panel>\n        </Accordion.Item>\n        <Accordion.Item id=\"accessible\">\n          <Accordion.Header>\n            <Accordion.Trigger>Is it accessible?</Accordion.Trigger>\n          </Accordion.Header>\n          <Accordion.Panel>\n            <Text>\n              Yes. Tale UI is built on a React Aria foundation, ensuring full keyboard and\n              screen reader support.\n            </Text>\n          </Accordion.Panel>\n        </Accordion.Item>\n        <Accordion.Item id=\"theme\">\n          <Accordion.Header>\n            <Accordion.Trigger>Can I customize the theme?</Accordion.Trigger>\n          </Accordion.Header>\n          <Accordion.Panel>\n            <Text>\n              Yes. Theming is done via CSS custom properties, making it easy to adapt to any\n              brand.\n            </Text>\n          </Accordion.Panel>\n        </Accordion.Item>\n      </Accordion.Root>\n      <Banner.Root variant=\"info\">\n        <Banner.Description>\n          Still have questions? <Link href=\"/contact\">Contact us</Link>\n        </Banner.Description>\n      </Banner.Root>\n    </Column>\n  );\n}"
     },
     {
       "id": "token-size-suffixes",
@@ -933,6 +933,141 @@
       ],
       "fixes": [
         "export function NotificationBell() {}"
+      ]
+    },
+    {
+      "id": "aspect-ratio-direct-fitted-media",
+      "summary": "Keep fitted media directly inside AspectRatio",
+      "detail": "The `objectFit` selector intentionally reaches only immediate `img` or `video` children.",
+      "appliesTo": [
+        "AspectRatio"
+      ],
+      "category": "component-contract",
+      "antiPatterns": [
+        "<AspectRatio objectFit=\"cover\"><div><Image src=\"/photo.jpg\" alt=\"Landscape\" /></div></AspectRatio>"
+      ],
+      "fixes": [
+        "<AspectRatio objectFit=\"cover\"><Image src=\"/photo.jpg\" alt=\"Landscape\" /></AspectRatio>"
+      ]
+    },
+    {
+      "id": "blockquote-visible-attribution",
+      "summary": "Render visible attribution with Blockquote.Attribution",
+      "detail": "The Root `cite` attribute is machine-readable metadata and never supplies visible source text.",
+      "appliesTo": [
+        "Blockquote"
+      ],
+      "category": "component-contract",
+      "antiPatterns": [
+        "<Blockquote.Root cite={sourceUrl}><Blockquote.Content>{quote}</Blockquote.Content></Blockquote.Root>"
+      ],
+      "fixes": [
+        "<Blockquote.Root cite={sourceUrl}><Blockquote.Content>{quote}</Blockquote.Content><Blockquote.Attribution>{sourceName}</Blockquote.Attribution></Blockquote.Root>"
+      ]
+    },
+    {
+      "id": "button-group-one-accessible-name",
+      "summary": "Give semantic ButtonGroup exactly one accessible name",
+      "detail": "Roles `group` and `region` require one non-whitespace `aria-label` or `aria-labelledby` value.",
+      "appliesTo": [
+        "ButtonGroup"
+      ],
+      "category": "component-contract",
+      "antiPatterns": [
+        "<ButtonGroup><Button>Save</Button></ButtonGroup>"
+      ],
+      "fixes": [
+        "<ButtonGroup aria-label=\"Document actions\"><Button>Save</Button></ButtonGroup>"
+      ]
+    },
+    {
+      "id": "citation-owned-source-numbering",
+      "summary": "Let Citation own source numbering",
+      "detail": "Ordinals follow normalized source order and repeated references share the same generated target.",
+      "appliesTo": [
+        "Citation"
+      ],
+      "category": "component-contract",
+      "antiPatterns": [
+        "<Citation.List start={0} type=\"a\" />"
+      ],
+      "fixes": [
+        "<Citation.List />"
+      ]
+    },
+    {
+      "id": "code-inline-plain-text",
+      "summary": "Pass plain text to inline Code",
+      "detail": "Code escapes its string child and has no raw HTML or executable renderer API.",
+      "appliesTo": [
+        "Code"
+      ],
+      "category": "component-contract",
+      "antiPatterns": [
+        "<Code><strong>{generatedCode}</strong></Code>"
+      ],
+      "fixes": [
+        "<Code>{generatedCode}</Code>"
+      ]
+    },
+    {
+      "id": "markdown-fixed-trust-boundary",
+      "summary": "Keep Markdown inside its fixed trust boundary",
+      "detail": "Markdown exposes no plugin, raw HTML, AST, renderer, URL transformer, highlighter, or executable extension API.",
+      "appliesTo": [
+        "Markdown"
+      ],
+      "category": "component-contract",
+      "antiPatterns": [
+        "<Markdown plugins={[unsafeHtmlPlugin]}>{source}</Markdown>"
+      ],
+      "fixes": [
+        "<Markdown baseUrl=\"https://docs.example.com/\" invalidFallback=\"Document unavailable\">{source}</Markdown>"
+      ]
+    },
+    {
+      "id": "outline-stable-logical-ids",
+      "summary": "Use stable logical IDs for Outline state",
+      "detail": "Outline preserves active state across reorders by item `id` while `targetId` remains the document heading identity.",
+      "appliesTo": [
+        "Outline"
+      ],
+      "category": "component-contract",
+      "antiPatterns": [
+        "headings.map((heading, index) => ({ id: String(index), targetId: heading.id, label: heading.label, level: heading.level }))"
+      ],
+      "fixes": [
+        "headings.map((heading) => ({ id: heading.key, targetId: heading.id, label: heading.label, level: heading.level }))"
+      ]
+    },
+    {
+      "id": "skeleton-external-loading-announcement",
+      "summary": "Announce loading outside Skeleton",
+      "detail": "Skeleton is permanently decorative and cannot accept a role or accessible name.",
+      "appliesTo": [
+        "Skeleton"
+      ],
+      "category": "component-contract",
+      "antiPatterns": [
+        "<Skeleton role=\"status\" aria-label=\"Loading account details\" />"
+      ],
+      "fixes": [
+        "<section aria-busy=\"true\" aria-live=\"polite\"><span className=\"visually-hidden\">Loading account details</span><Skeleton /></section>"
+      ]
+    },
+    {
+      "id": "timestamp-offset-bearing-instant",
+      "summary": "Provide an offset-bearing instant to Timestamp",
+      "detail": "Locale-dependent date strings are ambiguous and fail Timestamp validation.",
+      "appliesTo": [
+        "Timestamp"
+      ],
+      "category": "component-contract",
+      "antiPatterns": [
+        "<Timestamp value=\"07/27/2026\" locale=\"en-AU\" timeZone=\"Australia/Melbourne\" />"
+      ],
+      "fixes": [
+        "<Timestamp value=\"2026-07-27T04:30:00Z\" locale=\"en-AU\" timeZone=\"Australia/Melbourne\" />"
       ]
     }
   ],
