@@ -17,6 +17,20 @@ import {
 } from '@tale-ui/react/citation';
 import { Code, type CodeProps } from '@tale-ui/react/code';
 import type { DialogRootProps } from '@tale-ui/react/dialog';
+import {
+  Lightbox,
+  type LightboxBackdropProps,
+  type LightboxCaptionProps,
+  type LightboxCloseProps,
+  type LightboxContentProps,
+  type LightboxNextProps,
+  type LightboxPopupModalProps,
+  type LightboxPopupProps,
+  type LightboxPreviousProps,
+  type LightboxRenderContext,
+  type LightboxRootProps,
+  type LightboxTriggerProps,
+} from '@tale-ui/react/lightbox';
 import { Markdown, type MarkdownProps } from '@tale-ui/react/markdown';
 import { Outline, type OutlineItem, type OutlineProps } from '@tale-ui/react/outline';
 import {
@@ -160,6 +174,80 @@ export const markdownPropsContract = {
 } satisfies MarkdownProps;
 
 export const markdownContract = <Markdown {...markdownPropsContract} />;
+
+const lightboxItems = [
+  { id: 'coast', label: 'Rocky coast' },
+  { id: 'forest', label: 'Forest trail' },
+] as const;
+
+export const lightboxRenderContextContract: LightboxRenderContext = {
+  key: 'coast',
+  index: 0,
+  count: 2,
+};
+
+export const lightboxRootPropsContract = {
+  items: lightboxItems,
+  getKey: (item) => item.id,
+  getLabel: (item) => item.label,
+  renderContent: (item) => item.label,
+  defaultSelectedKey: 'coast',
+  children: null,
+} satisfies LightboxRootProps<(typeof lightboxItems)[number]>;
+
+export const lightboxTriggerPropsContract = {
+  itemKey: 'coast',
+  children: 'Open coast',
+} satisfies LightboxTriggerProps;
+
+export const lightboxBackdropPropsContract = {
+  isDismissable: true,
+  children: null,
+} satisfies LightboxBackdropProps;
+
+export const lightboxPopupModalPropsContract = {
+  isDismissable: true,
+} satisfies LightboxPopupModalProps;
+
+export const lightboxPopupPropsContract = {
+  modalProps: lightboxPopupModalPropsContract,
+  children: null,
+} satisfies LightboxPopupProps;
+
+export const lightboxContentPropsContract = {
+  id: 'lightbox-content',
+} satisfies LightboxContentProps;
+
+export const lightboxCaptionPropsContract = {
+  children: null,
+} satisfies LightboxCaptionProps;
+
+export const lightboxPreviousPropsContract = {
+  'aria-label': 'Previous photograph',
+} satisfies LightboxPreviousProps;
+
+export const lightboxNextPropsContract = {
+  'aria-labelledby': 'next-photograph-label',
+} satisfies LightboxNextProps;
+
+export const lightboxClosePropsContract = {
+  'aria-label': 'Close gallery',
+} satisfies LightboxCloseProps;
+
+export const lightboxContract = (
+  <Lightbox.Root {...lightboxRootPropsContract}>
+    <Lightbox.Trigger {...lightboxTriggerPropsContract} />
+    <Lightbox.Backdrop {...lightboxBackdropPropsContract}>
+      <Lightbox.Popup {...lightboxPopupPropsContract}>
+        <Lightbox.Content {...lightboxContentPropsContract} />
+        <Lightbox.Caption {...lightboxCaptionPropsContract} />
+        <Lightbox.Previous {...lightboxPreviousPropsContract} />
+        <Lightbox.Next {...lightboxNextPropsContract} />
+        <Lightbox.Close {...lightboxClosePropsContract} />
+      </Lightbox.Popup>
+    </Lightbox.Backdrop>
+  </Lightbox.Root>
+);
 
 const outlineItems = [
   { id: 'overview', targetId: 'overview', label: 'Overview', level: 1 },
@@ -441,6 +529,29 @@ export const unnamedResizableHandleContract = (
   // @ts-expect-error Resizable Handle requires exactly one accessible-name branch.
   <Resizable.Handle id="navigation-editor" before="navigation" after="editor" />
 );
+
+export const conflictingLightboxOpenStateContract = (
+  // @ts-expect-error Lightbox cannot be controlled and uncontrolled simultaneously.
+  <Lightbox.Root
+    {...lightboxRootPropsContract}
+    isOpen
+    defaultOpen
+  />
+);
+
+export const conflictingLightboxSelectionStateContract = (
+  // @ts-expect-error Lightbox selection cannot be controlled and uncontrolled simultaneously.
+  <Lightbox.Root
+    {...lightboxRootPropsContract}
+    selectedKey="coast"
+    defaultSelectedKey="forest"
+  />
+);
+
+export const unsafeLightboxContentHtmlContract = {
+  // @ts-expect-error Lightbox Content does not expose raw HTML injection.
+  dangerouslySetInnerHTML: { __html: '<img src=x>' },
+} satisfies LightboxContentProps;
 
 // @ts-expect-error Absolute Timestamp does not accept a relative clock.
 export const absoluteTimestampNowContract: TimestampProps = {

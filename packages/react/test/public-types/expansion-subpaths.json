@@ -6,7 +6,7 @@
     { "subpath": "./button-group", "enabled": true },
     { "subpath": "./citation", "enabled": true },
     { "subpath": "./code", "enabled": true },
-    { "subpath": "./lightbox", "enabled": false },
+    { "subpath": "./lightbox", "enabled": true },
     { "subpath": "./markdown", "enabled": true },
     { "subpath": "./outline", "enabled": true },
     { "subpath": "./overflow-list", "enabled": true },

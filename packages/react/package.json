@@ -97,6 +97,7 @@
     "./key-value-pairs": "./src/key-value-pairs/index.ts",
     "./kbd": "./src/kbd/index.ts",
     "./link": "./src/link/index.ts",
+    "./lightbox": "./src/lightbox/index.ts",
     "./list": "./src/list/index.ts",
     "./list-box": "./src/list-box/index.ts",
     "./markdown": "./src/markdown/index.ts",

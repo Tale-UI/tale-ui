@@ -85,6 +85,7 @@
     "./key-value-pairs": "./src/key-value-pairs.css",
     "./kbd": "./src/kbd.css",
     "./link": "./src/link.css",
+    "./lightbox": "./src/lightbox.css",
     "./list": "./src/list.css",
     "./list-box": "./src/list-box.css",
     "./markdown": "./src/markdown.css",

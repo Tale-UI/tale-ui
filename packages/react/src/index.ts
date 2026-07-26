@@ -71,6 +71,7 @@ export * from './iphone-mockup';
 export * from './key-value-pairs';
 export * from './kbd';
 export * from './link';
+export * from './lightbox';
 export * from './list';
 export * from './list-box';
 export * from './menu';
