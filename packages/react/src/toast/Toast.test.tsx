@@ -719,7 +719,7 @@ describe('Toast', () => {
       const manualCallback = vi.fn();
       const manualQueue = createToastQueue({ defaultTimeout: 100 });
       manualQueue.add({ title: 'Manual pause' }, { onClose: manualCallback });
-      const manualView = await render(<ToastRegion queue={manualQueue} />);
+      const { unmount: unmountManual } = await render(<ToastRegion queue={manualQueue} />);
       await act(async () => {
         await vi.advanceTimersByTimeAsync(0);
       });
@@ -739,12 +739,12 @@ describe('Toast', () => {
         await vi.advanceTimersByTimeAsync(1);
       });
       expect(manualCallback).toHaveBeenCalledTimes(1);
-      manualView.unmount();
+      unmountManual();
 
       const hoverCallback = vi.fn();
       const hoverQueue = createToastQueue({ defaultTimeout: 100 });
       hoverQueue.add({ title: 'Hover pause' }, { onClose: hoverCallback });
-      const hoverView = await render(
+      const { unmount: unmountHover } = await render(
         <ToastRegion queue={hoverQueue} aria-label="Hover notifications" />,
       );
       const hoverRegion = screen.getByRole('region', { name: 'Hover notifications' });
@@ -765,12 +765,12 @@ describe('Toast', () => {
         await vi.advanceTimersByTimeAsync(1);
       });
       expect(hoverCallback).toHaveBeenCalledTimes(1);
-      hoverView.unmount();
+      unmountHover();
 
       const focusCallback = vi.fn();
       const focusQueue = createToastQueue({ defaultTimeout: 100 });
       focusQueue.add({ title: 'Focus pause' }, { onClose: focusCallback });
-      const focusView = await render(
+      const { unmount: unmountFocus } = await render(
         <ToastRegion queue={focusQueue} aria-label="Focus notifications" />,
       );
       const dismiss = screen.getByRole('button', { name: 'Dismiss notification' });
@@ -784,23 +784,23 @@ describe('Toast', () => {
         await vi.advanceTimersByTimeAsync(100);
       });
       expect(focusCallback).toHaveBeenCalledTimes(1);
-      focusView.unmount();
+      unmountFocus();
 
       const ownerCallback = vi.fn();
       const ownerQueue = createToastQueue({ defaultTimeout: 100 });
       ownerQueue.add({ title: 'Owner pause' }, { onClose: ownerCallback });
-      const firstOwner = await render(
+      const { unmount: unmountFirstOwner } = await render(
         <ToastRegion queue={ownerQueue} aria-label="Owner notifications" />,
       );
       await act(async () => {
         await vi.advanceTimersByTimeAsync(40);
       });
-      firstOwner.unmount();
+      unmountFirstOwner();
       await act(async () => {
         await vi.advanceTimersByTimeAsync(200);
       });
       expect(ownerCallback).not.toHaveBeenCalled();
-      const secondOwner = await render(
+      const { unmount: unmountSecondOwner } = await render(
         <ToastRegion queue={ownerQueue} aria-label="Owner notifications" />,
       );
       await act(async () => {
@@ -811,7 +811,7 @@ describe('Toast', () => {
         await vi.advanceTimersByTimeAsync(1);
       });
       expect(ownerCallback).toHaveBeenCalledTimes(1);
-      secondOwner.unmount();
+      unmountSecondOwner();
     } finally {
       vi.useRealTimers();
     }
