@@ -41,6 +41,14 @@ class BrowserPerformanceHarness {
           },
           dedupe: ['react', 'react-dom'],
         },
+        // Discover both browser fixtures' React graph before serving the first
+        // page so adding Resizable cannot trigger a second optimized React.
+        optimizeDeps: {
+          entries: [
+            'tools/performance-fixtures/component-expansion/overflow-list-100-recompute.browser.tsx',
+            'tools/performance-fixtures/component-expansion/resizable-1000-updates.browser.tsx',
+          ],
+        },
         server: {
           host: '127.0.0.1',
           hmr: false,
