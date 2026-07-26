@@ -24,6 +24,14 @@ import {
   type OverflowListProps,
   type OverflowRenderContext,
 } from '@tale-ui/react/overflow-list';
+import {
+  Resizable,
+  type ResizableChangeMeta,
+  type ResizableHandleProps,
+  type ResizablePanelProps,
+  type ResizableRootProps,
+  type ResizableSizes,
+} from '@tale-ui/react/resizable';
 import { Skeleton, type SkeletonProps } from '@tale-ui/react/skeleton';
 import type { TableControllerQuery } from '@tale-ui/react/table';
 import {
@@ -188,6 +196,45 @@ export const overflowListPropsContract = {
 } satisfies OverflowListProps<(typeof overflowActions)[number]>;
 
 export const overflowListContract = <OverflowList {...overflowListPropsContract} />;
+
+export const resizableSizesContract: ResizableSizes = {
+  navigation: 30,
+  editor: 70,
+};
+
+export const resizableChangeMetaContract: ResizableChangeMeta = {
+  handleId: 'navigation-editor',
+  source: 'keyboard',
+};
+
+export const resizableRootPropsContract = {
+  defaultSizes: resizableSizesContract,
+  children: null,
+} satisfies ResizableRootProps;
+
+export const resizablePanelPropsContract = {
+  id: 'navigation',
+  minSize: 20,
+  maxSize: 45,
+  children: 'Navigation',
+} satisfies ResizablePanelProps;
+
+export const resizableHandlePropsContract = {
+  id: 'navigation-editor',
+  before: 'navigation',
+  after: 'editor',
+  'aria-label': 'Resize navigation and editor',
+} satisfies ResizableHandleProps;
+
+export const resizableContract = (
+  <Resizable.Root defaultSizes={resizableSizesContract}>
+    <Resizable.Panel {...resizablePanelPropsContract} />
+    <Resizable.Handle {...resizableHandlePropsContract} />
+    <Resizable.Panel id="editor" minSize={55} maxSize={80}>
+      Editor
+    </Resizable.Panel>
+  </Resizable.Root>
+);
 
 export const timestampValueContract: TimestampValue = '2026-07-27T12:05:00Z';
 
@@ -370,9 +417,29 @@ export const unsafeOverflowListHtmlContract = {
   dangerouslySetInnerHTML: { __html: '<img src=x>' },
 } satisfies OverflowListProps<(typeof overflowActions)[number]>;
 
-export const overflowListChildrenContract = (
+export const overflowListChildrenContract = {
+  ...overflowListPropsContract,
   // @ts-expect-error OverflowList owns item rendering through renderItem.
-  <OverflowList {...overflowListPropsContract}>Child</OverflowList>
+  children: 'Child',
+} satisfies OverflowListProps<(typeof overflowActions)[number]>;
+
+export const conflictingResizableStateContract = (
+  // @ts-expect-error Resizable cannot be controlled and uncontrolled simultaneously.
+  <Resizable.Root sizes={resizableSizesContract} defaultSizes={resizableSizesContract}>
+    <Resizable.Panel id="navigation" />
+    <Resizable.Handle
+      id="navigation-editor"
+      before="navigation"
+      after="editor"
+      aria-label="Resize panels"
+    />
+    <Resizable.Panel id="editor" />
+  </Resizable.Root>
+);
+
+export const unnamedResizableHandleContract = (
+  // @ts-expect-error Resizable Handle requires exactly one accessible-name branch.
+  <Resizable.Handle id="navigation-editor" before="navigation" after="editor" />
 );
 
 // @ts-expect-error Absolute Timestamp does not accept a relative clock.

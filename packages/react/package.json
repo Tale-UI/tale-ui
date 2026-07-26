@@ -122,6 +122,7 @@
     "./radio-field": "./src/radio-field/index.ts",
     "./row": "./src/row/index.ts",
     "./radio-group": "./src/radio-group/index.ts",
+    "./resizable": "./src/resizable/index.ts",
     "./rating-badge": "./src/rating-badge/index.ts",
     "./rating-stars": "./src/rating-stars/index.ts",
     "./range-calendar": "./src/range-calendar/index.ts",

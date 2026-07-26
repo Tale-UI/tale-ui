@@ -10,7 +10,7 @@
     { "subpath": "./markdown", "enabled": true },
     { "subpath": "./outline", "enabled": true },
     { "subpath": "./overflow-list", "enabled": true },
-    { "subpath": "./resizable", "enabled": false },
+    { "subpath": "./resizable", "enabled": true },
     { "subpath": "./skeleton", "enabled": true },
     { "subpath": "./timestamp", "enabled": true },
     { "subpath": "./toast", "enabled": false }

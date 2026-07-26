@@ -98,6 +98,7 @@ export * from './rating-stars';
 export * from './radio';
 export * from './radio-field';
 export * from './radio-group';
+export * from './resizable';
 export * from './row';
 export * from './scroll-area';
 export * from './search-field';

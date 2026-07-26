@@ -57,6 +57,7 @@
 @import './card.css';
 @import './aspect-ratio.css';
 @import './overflow-list.css';
+@import './resizable.css';
 
 /* ─── Overlay ───────────────────────────────────────────────────────────────── */
 @import './dialog.css';
