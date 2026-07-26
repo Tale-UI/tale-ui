@@ -236,7 +236,7 @@
       "evidence": [
         {
           "path": "analysis/table-plugins/ranking.json",
-          "digest": "sha256:e411b49e1e147cb37b5e7fc251953d8641b336a83acfd41894c6a2bafaa417ea"
+          "digest": "sha256:100eb846943c94454f628cccfd3cb6aff90cf4a4fe4ddb95244c53b2f7e417c7"
         },
         {
           "path": "packages/react/src/table/TableController.experimental.test.tsx",
@@ -824,7 +824,7 @@
       "evidence": [
         {
           "path": "analysis/table-plugins/ranking.json",
-          "digest": "sha256:e411b49e1e147cb37b5e7fc251953d8641b336a83acfd41894c6a2bafaa417ea"
+          "digest": "sha256:100eb846943c94454f628cccfd3cb6aff90cf4a4fe4ddb95244c53b2f7e417c7"
         },
         {
           "path": "packages/react/src/table/TableController.experimental.test.tsx",

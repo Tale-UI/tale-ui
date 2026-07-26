@@ -167,7 +167,7 @@
     "postinstall": "node ./bin/setup.mjs || true",
     "prebuild": "rimraf --glob build build-tests \"*.tsbuildinfo\"",
     "build": "node ../../tools/build-package.mjs --ignore \"**/*.template.js\" --copy .npmignore",
-    "test:package": "publint --pack pnpm && attw --pack ./build --exclude-entrypoints package.json --exclude-entrypoints esm --exclude-entrypoints cjs",
+    "test:package": "pnpm build && publint --pack pnpm && attw --pack ./build --exclude-entrypoints package.json esm cjs styles",
     "release": "pnpm build && pnpm publish",
     "test": "cross-env VITEST_ENV=jsdom vitest",
     "typescript": "tsc -b tsconfig.json"

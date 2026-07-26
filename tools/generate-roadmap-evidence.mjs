@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -10,6 +11,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const CHECK = process.argv.includes('--check');
 const OUTPUT = 'registry/roadmap-evidence.json';
 const TRACEABILITY = 'registry/roadmap-traceability.json';
+const REVIEWED_HEAD = 'f164d4ac8be806a2f8177d8f877c6d47965e2279';
 
 const evidence = {
   'R01.1': ['registry/artifacts.json', 'tools/check-roadmap-contracts.mjs'],
@@ -109,9 +111,19 @@ const evidence = {
 };
 
 function digest(path) {
-  return `sha256:${createHash('sha256')
-    .update(readFileSync(join(ROOT, path)))
-    .digest('hex')}`;
+  let reviewedContent;
+  try {
+    reviewedContent = execFileSync('git', ['show', `${REVIEWED_HEAD}:${path}`], {
+      cwd: ROOT,
+      maxBuffer: 10 * 1024 * 1024,
+    });
+  } catch {
+    throw new Error(
+      `Cannot read roadmap evidence from reviewed commit ${REVIEWED_HEAD}. ` +
+        'Fetch the repository history (for CI, use actions/checkout with fetch-depth: 0).',
+    );
+  }
+  return `sha256:${createHash('sha256').update(reviewedContent).digest('hex')}`;
 }
 
 const traceability = JSON.parse(readFileSync(join(ROOT, TRACEABILITY), 'utf8'));
@@ -139,7 +151,7 @@ const report = {
     pullRequest: {
       number: 9,
       url: 'https://github.com/Tale-UI/tale-ui/pull/9',
-      reviewedHead: 'f164d4ac8be806a2f8177d8f877c6d47965e2279',
+      reviewedHead: REVIEWED_HEAD,
       mergeCommit: '5e539e19287b9f5469d8f13e0ebe44f43d4dda62',
       mergedAt: '2026-07-25T15:18:47Z',
       mergedBy: 'ndrewtran',

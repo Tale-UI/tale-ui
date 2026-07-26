@@ -50,7 +50,7 @@ To remove: `pnpm unlink --global @tale-ui/css`
 ## Method 3: Direct path reference (for HTML-only projects, no npm)
 
 ```html
-<link rel="stylesheet" href="../core/packages/css/src/index.css" />
+<link rel="stylesheet" href="../tale-ui/packages/css/src/index.css" />
 ```
 
 Adjust the relative path to match the actual directory relationship.

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Consumer Snippet Generator (slim version)
+ * Consumer Snippet Generator
  *
  * Generates docs/consumer-claude-md-snippet.md from:
  *   - registry/components.json  (namespace/simple component lists)
@@ -11,8 +11,8 @@
  * just-in-time via the MCP server's get_component and plan_ui tools,
  * or by reading docs/components/{name}.md ## Pitfalls.
  *
- * The full snapshot is preserved at docs/consumer-claude-md-snippet-full.md
- * for projects that cannot use the MCP server.
+ * The offline fallback is generated from the same source at
+ * docs/consumer-claude-md-snippet-full.md for projects that cannot use MCP.
  *
  * Run:   node tools/generate-consumer-snippet.js          # generate and write
  *        node tools/generate-consumer-snippet.js --check   # compare; exit 1 if different
@@ -24,6 +24,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const REGISTRY_PATH = path.join(ROOT, 'registry/components.json');
 const OUTPUT_PATH = path.join(ROOT, 'docs/consumer-claude-md-snippet.md');
+const FULL_OUTPUT_PATH = path.join(ROOT, 'docs/consumer-claude-md-snippet-full.md');
 
 const args = process.argv.slice(2);
 const checkMode = args.includes('--check');
@@ -90,7 +91,7 @@ Before generating or modifying component code, you MUST:
 3. **For deeper details** (all props, all variants, advanced patterns), read the local component doc:
 
    \`\`\`text
-   node_modules/@tale-ui/react/docs/{name}.md
+   node_modules/@tale-ui/react/docs/components/{name}.md
    \`\`\`
 
 4. **Do not guess component APIs.** Always check the \`@example\` block first. Incorrect usage (wrong sub-part names, missing wrapper components, wrong import paths) causes build failures.
@@ -197,20 +198,33 @@ ${deprecatedSection}
 }
 
 const output = generate();
+const fullOutput = output
+  .replace(
+    "# Tale UI — CLAUDE.md snippet for consuming projects\n\nCopy the section below into your project's `CLAUDE.md` file.",
+    "# Tale UI — offline CLAUDE.md snippet for consuming projects\n\nUse this generated fallback when Tale UI MCP is unavailable. Copy the section below into your project's `CLAUDE.md` file.",
+  )
+  .replace(
+    /0\. \*\*Plan before generating JSX\.\*\*.+?Skip this step only if you are making a trivial single-component change\./,
+    '0. **Plan before generating JSX.** Search the bundled component docs and recipes before choosing components. Identify the required imports, composition pattern, and relevant pitfalls before writing JSX. Skip this step only for a trivial single-component change.',
+  )
+  .replace(
+    /5\. \*\*Component pitfalls:\*\*.+?automatically\./,
+    '5. **Component pitfalls:** Read the `## Pitfalls` section in `node_modules/@tale-ui/react/docs/components/{name}.md` for every component you intend to use, plus `node_modules/@tale-ui/react/docs/pitfalls.md` for cross-component rules.',
+  );
 
 if (checkMode) {
   const existing = readFile(OUTPUT_PATH);
-  if (existing === output) {
-    console.log('✅ docs/consumer-claude-md-snippet.md is up-to-date.');
+  const existingFull = readFile(FULL_OUTPUT_PATH);
+  if (existing === output && existingFull === fullOutput) {
+    console.log('✅ Consumer snippets are up-to-date.');
     process.exit(0);
   } else {
-    console.error(
-      '❌ docs/consumer-claude-md-snippet.md is out of date. Run: pnpm snippet:generate',
-    );
+    console.error('❌ Consumer snippets are out of date. Run: pnpm snippet:generate');
     process.exit(1);
   }
 } else {
   fs.writeFileSync(OUTPUT_PATH, output);
+  fs.writeFileSync(FULL_OUTPUT_PATH, fullOutput);
   const tokens = Math.round(output.length / 4); // rough estimate
-  console.log(`✅ Generated docs/consumer-claude-md-snippet.md (~${tokens} tokens estimated)`);
+  console.log(`✅ Generated consumer snippets (slim ~${tokens} tokens estimated)`);
 }

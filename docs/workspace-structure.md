@@ -4,16 +4,16 @@ This monorepo is managed with **pnpm workspaces**.
 
 ## Directory Conventions
 
-| Directory        | Purpose                                                     | Published to npm? |
-| ---------------- | ----------------------------------------------------------- | ----------------- |
-| `packages/`      | Shared, reusable libraries (CSS, component libs, utilities) | Yes               |
-| `docs/`          | Next.js static documentation site                           | No                |
-| `docs/upstream/` | Maintainer adoption logs for upstream dependency releases   | No                |
-| `playground/`    | Development sandboxes (Storybook, Vite app, scale tool)     | No                |
-
-| `apps/` | End-user applications | No |
-| `scripts/` | Release, changelog, and API docs scripts | No |
-| `tools/` | Audit, build, and release scripts ([README](../tools/README.md)) | No |
+| Directory        | Purpose                                                                         | Published to npm?                     |
+| ---------------- | ------------------------------------------------------------------------------- | ------------------------------------- |
+| `packages/`      | Reusable public packages                                                        | Package-specific                      |
+| `apps/`          | Private hosted services and maintainer applications                             | No                                    |
+| `docs/`          | Current documentation, public Next.js site, versioned snapshots, and governance | No                                    |
+| `docs/upstream/` | Maintainer adoption logs for upstream dependency releases                       | No                                    |
+| `playground/`    | Storybook, Vite component playground, and colour-scale playground               | No                                    |
+| `scripts/`       | Release and repository automation                                               | No                                    |
+| `tools/`         | Audit, generation, evaluation, build, and release scripts                       | No                                    |
+| `test/`          | Shared unit helpers, browser projects, visual tests, and fixtures               | Workspace packages only; not released |
 
 ## Directory Layout
 
@@ -27,16 +27,24 @@ tale-ui/
 │   ├── react/             # @tale-ui/react — styled React components
 │   ├── styles/            # @tale-ui/react-styles — per-component CSS
 │   ├── themes/            # @tale-ui/themes — optional standard and monochrome themes
+│   ├── charts/            # @tale-ui/charts — Recharts-based chart components
+│   ├── a2ui/              # @tale-ui/a2ui — protocol renderer and catalog
 │   ├── tooling/           # @tale-ui/tooling — registry API, CLI, validation, operations
 │   └── utils/             # @tale-ui/utils — shared hooks & helpers
-├── docs/                  # Next.js documentation site
+├── apps/
+│   ├── hosted-mcp/        # restricted Cloudflare Worker MCP surface
+│   ├── metrics-dashboard/ # generated adoption and health dashboard
+│   ├── mcp-studio/        # prompt/plan/render/pitfall maintainer studio
+│   ├── recipe-studio/     # recipe authoring and preview app
+│   └── tooling-dashboard/ # local tooling and roadmap dashboard
+├── docs/                  # source docs, Next.js site, and versioned public snapshots
 ├── playground/
 │   ├── storybook/         # Component Storybook (stories, visual reference)
 │   ├── vite-app/          # Minimal Vite + React sandbox
 │   └── scale/             # Tonal palette generator tool
-
 ├── scripts/               # Release, changelog, API docs scripts
-└── tools/                 # Audit, build, and release scripts (see tools/README.md)
+├── test/                  # Shared unit, browser, visual, and end-to-end testing
+└── tools/                 # Audit, generation, eval, build, and release scripts
 ```
 
 ## Packages
@@ -48,6 +56,8 @@ tale-ui/
 | `@tale-ui/react`        | `packages/react/`   | Styled React components (BEM class names auto-applied) |
 | `@tale-ui/react-styles` | `packages/styles/`  | Per-component CSS rules built on `@tale-ui/css` tokens |
 | `@tale-ui/themes`       | `packages/themes/`  | Optional standard and monochrome theme presets         |
+| `@tale-ui/charts`       | `packages/charts/`  | Recharts-based chart components                        |
+| `@tale-ui/a2ui`         | `packages/a2ui/`    | A2UI protocol renderer and Tale UI catalog             |
 | `@tale-ui/tooling`      | `packages/tooling/` | Registry API, CLI, validation, and project operations  |
 | `@tale-ui/utils`        | `packages/utils/`   | Shared hooks, colour utilities, DOM helpers            |
 
@@ -61,3 +71,7 @@ pnpm --filter @tale-ui/react <cmd>                  # Run command in another pac
 pnpm -r <cmd>                                        # Run command in all packages
 pnpm --filter @tale-ui/my-app add pkg               # Add a dep to a specific package
 ```
+
+The workspace globs in `pnpm-workspace.yaml` are authoritative. Run
+`pnpm --filter <package-name> <command>` rather than relying on the current
+directory when documenting repository-level workflows.

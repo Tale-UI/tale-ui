@@ -30,7 +30,12 @@ import '@tale-ui/react-styles/dialog';
 
 ### Available per-component exports
 
-`accordion` · `alert-dialog` · `autocomplete` · `avatar` · `button` · `checkbox` · `combobox` · `dialog` · `disclosure` · `drawer` · `field` · `fieldset` · `form` · `input` · `menu` · `meter` · `navigation-menu` · `number-field` · `popover` · `preview-card` · `progress` · `radio` · `scroll-area` · `select` · `separator` · `slider` · `switch` · `tabs` · `toast` · `toggle` · `toolbar` · `tooltip`
+Every styled component export is declared in
+[`package.json`](package.json). Use the same kebab-case path as its
+`@tale-ui/react` component, for example `app-shell`, `checkbox-field`,
+`progress-bar`, or `text-editor`. Components without package CSS—such as
+providers, utilities, and structural re-exports—do not have a corresponding
+style entry.
 
 ## Architecture
 

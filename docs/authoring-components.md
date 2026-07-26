@@ -383,8 +383,7 @@ Tests use **Vitest + Testing Library** with jsdom. Located at `{Component}.test.
 ### Test boilerplate
 
 ```tsx
-import { expect } from 'chai';
-import { spy } from 'sinon';
+import { expect, vi } from 'vitest';
 import { MyComponent } from '@tale-ui/react/my-component';
 import { screen } from '@tale-ui/monorepo-tests/test-utils';
 import { createRenderer } from '#test-utils';
@@ -395,9 +394,9 @@ describe('<MyComponent />', () => {
   it('renders with default BEM classes', async () => {
     await render(<MyComponent>Label</MyComponent>);
     const el = screen.getByRole('button');
-    expect(el).to.have.class('tale-my-component');
-    expect(el).to.have.class('tale-my-component--primary');
-    expect(el).to.have.class('tale-my-component--md');
+    expect(el).toHaveClass('tale-my-component');
+    expect(el).toHaveClass('tale-my-component--primary');
+    expect(el).toHaveClass('tale-my-component--md');
   });
 
   it('applies variant and size BEM modifiers', async () => {
@@ -407,32 +406,32 @@ describe('<MyComponent />', () => {
       </MyComponent>,
     );
     const el = screen.getByRole('button');
-    expect(el).to.have.class('tale-my-component--neutral');
-    expect(el).to.have.class('tale-my-component--sm');
+    expect(el).toHaveClass('tale-my-component--neutral');
+    expect(el).toHaveClass('tale-my-component--sm');
   });
 
   it('merges additional className', async () => {
     await render(<MyComponent className="custom">Label</MyComponent>);
     const el = screen.getByRole('button');
-    expect(el).to.have.class('tale-my-component');
-    expect(el).to.have.class('custom');
+    expect(el).toHaveClass('tale-my-component');
+    expect(el).toHaveClass('custom');
   });
 
   it('sets data-disabled when isDisabled', async () => {
     await render(<MyComponent isDisabled>Label</MyComponent>);
     const el = screen.getByRole('button', { hidden: true });
-    expect(el).to.have.attribute('data-disabled');
+    expect(el).toHaveAttribute('data-disabled');
   });
 
   it('does not fire onPress when disabled', async () => {
-    const handlePress = spy();
+    const handlePress = vi.fn();
     const { user } = await render(
       <MyComponent isDisabled onPress={handlePress}>
         Label
       </MyComponent>,
     );
     await user.click(screen.getByRole('button', { hidden: true }));
-    expect(handlePress.callCount).to.equal(0);
+    expect(handlePress).not.toHaveBeenCalled();
   });
 });
 ```
@@ -453,12 +452,16 @@ When adding a new component, complete every step:
 8. [ ] Add `"./{component}": "./src/{component}.css"` to `packages/styles/package.json` exports
 9. [ ] Add `"./{component}": "./src/{component}/index.ts"` to `packages/react/package.json` exports
 10. [ ] Create `docs/components/{component}.md` — usage guide with imports, sub-parts, props, and examples (see existing docs for format)
-11. [ ] Add the component name to the list in `docs/consumer-claude-md-snippet.md`
+11. [ ] Add the component to `docs/component-index.md`; do not hand-edit generated `docs/consumer-claude-md-snippet.md`
 12. [ ] Add the component name to the list in `packages/react/README.md` (Component Catalogue and per-component docs sections)
-13. [ ] Run `pnpm test:jsdom` — verify tests pass
-14. [ ] Run `pnpm typescript` — verify types compile
-15. [ ] Run `pnpm build` — verify build succeeds
-16. [ ] Update the component's row in the **Component Artifact Audit** section of `CLAUDE.md`
-17. [ ] Run `pnpm audit:components -- --component={component}` — verify all checks pass
-18. [ ] Run `pnpm registry:generate` — regenerate `registry/components.json`
-19. [ ] **If the component should be available in A2UI:** register it in `packages/a2ui/src/catalog.ts` (add adapter), `tools/a2ui-catalog-metadata.js` (add description/props), then run `pnpm a2ui:generate-docs && pnpm a2ui:generate-catalog && pnpm a2ui:audit-docs`
+13. [ ] Add routed public docs under `docs/src/app/(docs)/react/` when the component should appear on the docs site
+14. [ ] Record the approved lifecycle, accountable owner, proposal/RFC, and review evidence required by `docs/governance/`
+15. [ ] Run `pnpm test:jsdom` — verify tests pass
+16. [ ] Run `pnpm typescript` — verify types compile
+17. [ ] Run `pnpm build` — verify build succeeds
+18. [ ] Update the component's row in the **Component Artifact Audit** section of `CLAUDE.md`
+19. [ ] Run `pnpm audit:components -- --component={component}` — verify all checks pass
+20. [ ] **If the component should be available in A2UI:** register it in `packages/a2ui/src/catalog.ts` (add adapter) and `tools/a2ui-catalog-metadata.js` (add description/props)
+21. [ ] Run `pnpm generate-docs` — regenerate component and consumer guidance, A2UI and unified artifacts, governance reports, versioned docs, and roadmap evidence in dependency order
+22. [ ] Run `pnpm generate-docs:check && pnpm performance:check`
+23. [ ] Run changed-component accessibility and retain applicable manual evidence as described in `docs/governance/accessibility-and-performance.md`

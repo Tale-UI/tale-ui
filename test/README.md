@@ -1,208 +1,126 @@
 # Testing
 
-Thanks for writing tests! Here's a quick run-down on our current setup.
+Tale UI uses Vitest for unit and browser projects, Testing Library and the
+shared `createRenderer` helper for component tests, Playwright for browser
+automation, and dedicated projects for end-to-end, visual, accessibility, and
+regression coverage.
 
-## Getting started
+## Where tests live
 
-1. Add a unit test to `packages/*/src/TheUnitInQuestion/TheUnitInQuestion.test.js` or an integration test `packages/*/test/`.
-2. Run `pnpm test:jsdom TheUnitInQuestion`.
-3. Implement the tested behavior
-4. Open a PR once the test passes or if you want somebody to review your work
+- Component unit tests live beside source as
+  `packages/react/src/{component}/{Component}.test.tsx`.
+- Shared utility tests live beside their source under `packages/utils/src/`.
+- Package-specific Vitest configuration lives in
+  `packages/*/vitest.config.mts`.
+- End-to-end fixtures and tests live under [`test/e2e/`](e2e/README.md).
+- Visual regression fixtures live under
+  [`test/regressions/`](regressions/README.md).
+- Playwright component snapshots live under `test/visual/`.
+- Changed-component axe coverage and retained evidence are described in
+  [`docs/governance/accessibility-and-performance.md`](../docs/governance/accessibility-and-performance.md).
 
-## Tools we use
+## Writing component tests
 
-- [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/)
-- [Chai](https://www.chaijs.com/)
-- [Sinon](https://sinonjs.org/)
-- [Vitest](https://vitest.dev/)
-- [Playwright](https://playwright.dev/)
-- [jsdom](https://github.com/jsdom/jsdom)
+Use `createRenderer` from the package test utilities. It provides an async
+Testing Library render, configured user events, cleanup, and the repository
+test environment.
 
-## Writing tests
+```tsx
+import { expect, fn } from 'vitest';
+import { Button } from '@tale-ui/react/button';
+import { screen } from '@tale-ui/monorepo-tests/test-utils';
+import { createRenderer } from '#test-utils';
 
-For all unit tests, please use the return value of `createRenderer` from `#test-utils`.
-It prepares the test suite and returns a function with the same interface as
-[`render` from `@testing-library/react`](https://testing-library.com/docs/react-testing-library/api#render).
-
-```js
-describe('test suite', () => {
+describe('<Button />', () => {
   const { render } = createRenderer();
 
-  test('first', async () => {
-    await render(<input />);
+  it('handles a press', async () => {
+    const onPress = fn();
+    const { user } = await render(<Button onPress={onPress}>Save</Button>);
+
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+
+    expect(onPress).toHaveBeenCalledOnce();
   });
 });
 ```
 
-For new tests please use `expect` from the BDD testing approach. Prefer to use as expressive [matchers](https://www.chaijs.com/api/bdd/) as possible. This keeps
-the tests readable, and, more importantly, the message if they fail as descriptive as possible.
+For new tests:
 
-In addition to the core matchers from `chai` we also use matchers from [`chai-dom`](https://github.com/nathanboktae/chai-dom#readme).
+- use Vitest's native `expect` and `fn` APIs;
+- prefer accessible queries such as `getByRole`;
+- await `render` and user interactions;
+- do not call `flushMicrotasks()` immediately after an awaited render when no
+  state change occurred;
+- use `it.skipIf(isJSDOM)` or `describe.skipIf(isJSDOM)` for
+  browser-layout-sensitive cases; and
+- add a docs demo or visual fixture when appearance is the behaviour under
+  test.
 
-Deciding where to put a test is (like naming things) a hard problem:
+The repository still provides `toErrorDev` for tests that intentionally assert
+development warnings. Unexpected `console.error` and `console.warn` calls fail
+the suite through `vitest-fail-on-console`.
 
-- When in doubt, put the new test case directly in the unit test file for that component, for example `packages/react/src/accordion/root/AccordionRoot.test.tsx`.
-- If your test requires multiple components from the library create a new integration test.
-- If you find yourself using a lot of `data-testid` attributes or you're accessing
-  a lot of styles consider adding a component (that doesn't require any interaction)
-  to `test/regressions/tests/`, for example `test/regressions/tests/List/ListWithSomeStyleProp`
-- If you have to dispatch and compose many different DOM events prefer end-to-end tests (Checkout the [end-to-end testing readme](./e2e/README.md) for more information.)
-
-### Unexpected calls to `console.error` or `console.warn`
-
-By default, our test suite fails if any test recorded `console.error` or `console.warn` calls that are unexpected.
-
-The failure message includes the full test name (suite names + test name).
-This should help locating the test in case the top of the stack can't be read due to excessive error messages.
-The error includes the logged message as well as the stacktrace of that message.
-
-You can explicitly [expect no console calls](#writing-a-test-for-consoleerror-or-consolewarn) for when you're adding a regression test.
-This makes the test more readable and properly fails the test in watchmode if the test had unexpected `console` calls.
-
-### Writing a test for `console.error` or `console.warn`
-
-If you add a new warning via `console.error` or `console.warn` you should add tests that expect this message.
-For tests that expect a call you can use our custom `toWarnDev` or `toErrorDev` matchers.
-The expected messages must be a subset of the actual messages and match the casing.
-The order of these messages must match as well.
-
-Example:
-
-```jsx
-function SomeComponent({ variant }) {
-  if (process.env.NODE_ENV !== 'production') {
-    if (variant === 'unexpected') {
-      console.error("That variant doesn't make sense.");
-    }
-    if (variant !== undefined) {
-      console.error('`variant` is deprecated.');
-    }
-  }
-
-  return <div />;
-}
+```tsx
 expect(() => {
-  render(<SomeComponent variant="unexpected" />);
-}).toErrorDev(["That variant doesn't make sense.", '`variant` is deprecated.']);
+  renderDeprecatedUsage();
+}).toErrorDev('Tale UI: the deprecated usage is not supported.');
 ```
 
-```js
-function SomeComponent({ variant }) {
-  if (process.env.NODE_ENV !== 'production') {
-    if (variant === 'unexpected') {
-      console.error("That variant doesn't make sense.");
-    }
-    if (variant !== undefined) {
-      console.error('`variant` is deprecated.');
-    }
-  }
+## Unit and browser commands
 
-  return <div />;
-}
-expect(() => {
-  render(<SomeComponent />);
-}).not.toErrorDev();
-```
-
-## Commands
-
-We uses a wide range of tests approach as each of them comes with a different
-trade-off, mainly completeness vs. speed.
-
-### React API level
-
-#### Debugging tests
-
-If you want to debug tests with the, for example Chrome inspector (chrome://inspect) you can run `pnpm test:jsdom <testFilePattern> --debug`.
-Note that the test will not get executed until you start code execution in the inspector.
-
-Running a browser test (`pnpm test:chromium`) locally opens a browser window that lets you set breakpoints.
-
-#### Run the core unit test suite
-
-To run all of the unit tests run `pnpm test:jsdom`.
-It runs a Vitest CLI that lets you filter tests and watches for changes.
-
-If you want to run only tests from a particular file, append its name to the commandline: `pnpm test:jsdom TheUnitInQuestion`
-
-### DOM API level
-
-#### Run the test suite in the browser
-
-`pnpm test:chromium`
-`pnpm test:firefox`
-
-Testing the components with JSDOM sometimes isn't enough, as it doesn't support all the APIs.
-We need to make sure they will behave as expected with a **real DOM**.
-To solve that problem we use Vitest in [browser mode](https://vitest.dev/guide/browser/).
-
-Our tests run on different browsers to increase the coverage:
-
-- [Headless Chromium](https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md)
-- Headless Firefox
-- Chrome, Safari, and Edge thanks to [BrowserStack](https://www.browserstack.com)
-
-In development mode, if `pnpm test:chromium` or `pnpm test:firefox` fails with this error "Cannot start ChromeHeadless. Can not find the binary", you can solve it by installing the missing headless browsers: `pnpm playwright install --with-deps`.
-
-##### BrowserStack
-
-We only use BrowserStack for non-PR commits to save resources.
-BrowserStack rarely reports actual issues so we only use it as a stop-gap for releases not merges.
-
-To force a run of BrowserStack on a PR you have to run the pipeline with `browserstack-force` set to `true`.
-For example, you've opened a PR with the number 64209 and now after everything is green you want to make sure the change passes all browsers:
+Run these from the repository root:
 
 ```bash
-curl --request POST \
-  --url https://circleci.com/api/v2/project/gh/Tale-UI/tale-ui/pipeline \
-  --header 'content-type: application/json' \
-  --header 'Circle-Token: $CIRCLE_TOKEN' \
-  --data-raw '{"branch":"pull/64209/head","parameters":{"browserstack-force":true}}'
+pnpm test:jsdom --no-watch              # core unit projects in jsdom
+pnpm test:jsdom Button --no-watch       # focused jsdom run
+pnpm test:chromium --no-watch           # core unit projects in Chromium
+pnpm test:chromium Button --no-watch    # focused Chromium run
+pnpm test:firefox --no-watch            # core unit projects in Firefox
+pnpm test:webkit --no-watch             # core unit projects in WebKit
+pnpm test:browsers --no-watch           # all configured browser projects
+pnpm test:jsdom:coverage --no-watch     # Istanbul coverage
+pnpm test:tokens                        # token generation tests
 ```
 
-### Browser API level
-
-In the end, components are going to be used in a real browser.
-The DOM is just one dimension of that environment,
-so we also need to take into account the rendering engine.
-
-#### Visual regression tests
-
-Check out the [visual regression testing readme](./regressions/README.md) for more information.
-
-#### end-to-end tests
-
-Checkout the [end-to-end testing readme](./e2e/README.md) for more information.
-
-##### Development
-
-When working on the visual regression tests you can run `pnpm test:regressions:dev` in the background to constantly rebuild the views used for visual regression testing.
-To actually take the screenshots you can then run `pnpm test:regressions:run`.
-You can view the screenshots in `test/regressions/screenshots/chrome`.
-
-Alternatively, you might want to open `http://localhost:5173` (while `pnpm test:regressions:dev` is running) to view individual views separately.
-
-### Testing multiple versions of React
-
-You can check integration of different versions of React (for example different [release channels](https://react.dev/community/versioning-policy) or PRs to React) by setting version overrides in the root `package.json` resolutions field.
-
-Possible values for `version`:
-
-- default: `stable` (minimum supported React version)
-- a tag on npm, for example `next`, `experimental` or `latest`
-- an older version, for example `^17.0.0`
-
-#### CI
-
-You can pass the same `version` to our CircleCI pipeline as well:
-
-With the following API request we're triggering a run of the default workflow in
-PR #24289 for `react@next`
+Install missing Playwright browsers with:
 
 ```bash
-curl --request POST \
-  --url https://circleci.com/api/v2/project/gh/Tale-UI/tale-ui/pipeline \
-  --header 'content-type: application/json' \
-  --header 'Circle-Token: $CIRCLE_TOKEN' \
-  --data-raw '{"branch":"pull/24289/head","parameters":{"react-version":"next"}}'
+pnpm exec playwright install --with-deps chromium firefox webkit
 ```
+
+GitHub Actions runs the required CI matrix. There is no CircleCI or
+BrowserStack trigger in the current repository workflow.
+
+## End-to-end, visual, and regression commands
+
+```bash
+pnpm test:e2e
+pnpm test:visual
+pnpm test:visual:update
+pnpm test:regressions
+```
+
+For interactive fixture development, use the paired development server and
+runner documented in the [end-to-end guide](e2e/README.md) or
+[regression guide](regressions/README.md).
+
+## Accessibility and performance
+
+```bash
+pnpm a11y:smoke
+pnpm a11y:changed
+pnpm performance:check
+```
+
+Changed-component accessibility runs against a built Storybook in CI. Manual
+assistive-technology evidence, exceptions, and performance baselines are
+governed by
+[`docs/governance/accessibility-and-performance.md`](../docs/governance/accessibility-and-performance.md).
+
+## Test configuration
+
+The root [`vitest.config.mts`](../vitest.config.mts) discovers package, docs,
+end-to-end, and regression projects. The `VITEST_ENV` selected by root scripts
+controls jsdom or browser execution. Do not document or add a new environment
+without adding the corresponding root command and CI coverage.

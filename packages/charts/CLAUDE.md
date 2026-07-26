@@ -21,6 +21,19 @@ Recharts-based chart components themed with `@tale-ui/css` design tokens.
 
 - Grid lines: `--neutral-16`
 - Axis text: `--neutral-60`, `--text-font-family`, `--text-xs-font-size`
-- Tooltip: `--neutral-5` bg, `--neutral-22` border, `--radius-m`, `--shadow-md`
+- Tooltip: `--neutral-5` bg, `--neutral-16` border, `--radius-m`, `--shadow-m`
 - Primary series: `--color-60` stroke, `--color-20` fill
 - Multi-series palette: `--color-60`, `--color-40`, `--color-80`, `--neutral-50`, `--success-60`, `--warning-60`, `--error-60`
+
+## Verification
+
+```bash
+pnpm vitest run --project @tale-ui/charts
+pnpm --filter @tale-ui/charts typescript
+pnpm --filter @tale-ui/charts build
+pnpm audit:components
+pnpm generate-docs:check
+```
+
+Chart API or guidance changes must keep chart source, styles, component docs,
+golden prompts, registries, and unified artifacts aligned.

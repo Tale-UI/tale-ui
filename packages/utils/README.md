@@ -1,6 +1,8 @@
 # @tale-ui/utils
 
-Shared utilities for the Tale UI component library. This is an internal package — most consumers will not need to import it directly (it is pulled in automatically by `@tale-ui/react`).
+Public shared utilities for Tale UI packages and advanced consumers. Most React
+consumers receive it transitively through `@tale-ui/react`; import it directly
+only when using its documented hooks, colour utilities, or DOM helpers.
 
 ## Colour Utilities
 
@@ -8,57 +10,58 @@ Shared utilities for the Tale UI component library. This is an internal package 
 import { generatePalette, randomBaseColor, NAMED_SHADES } from '@tale-ui/utils/color';
 ```
 
-| Export | Description |
-|--------|------------|
+| Export                           | Description                                                                       |
+| -------------------------------- | --------------------------------------------------------------------------------- |
 | `generatePalette(baseHex, mode)` | Generate an 11-shade tonal palette from a base hex colour (OKLCH math via culori) |
-| `randomBaseColor(mode)` | Generate a random base hex that passes WCAG contrast validation |
-| `NAMED_SHADES` | `[5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]` |
-| `NEUTRAL_SHADES` | Full 27-shade neutral scale |
-| `getContrastRatio(hex1, hex2)` | WCAG contrast ratio between two hex colours |
-| `getRelativeLuminance(hex)` | WCAG relative luminance of a hex colour |
+| `randomBaseColor(mode)`          | Generate a random base hex that passes WCAG contrast validation                   |
+| `NAMED_SHADES`                   | `[5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]`                                    |
+| `NEUTRAL_SHADES`                 | Full 27-shade neutral scale                                                       |
+| `getContrastRatio(hex1, hex2)`   | WCAG contrast ratio between two hex colours                                       |
+| `getRelativeLuminance(hex)`      | WCAG relative luminance of a hex colour                                           |
 
 ## React Hooks
 
-| Hook | Purpose |
-|------|---------|
-| `useControlled` | Manage controlled/uncontrolled component state |
-| `useId` | Generate stable unique IDs |
-| `useMergedRefs` | Merge multiple refs into one |
-| `usePreviousValue` | Track the previous value of a variable |
-| `useScrollLock` | Lock body scroll (for modals/drawers) |
-| `useStableCallback` | Stable reference for callbacks |
-| `useAnimationFrame` | `requestAnimationFrame` wrapper |
-| `useInterval` | `setInterval` wrapper |
-| `useTimeout` | `setTimeout` wrapper |
-| `useOnMount` | Run effect only on mount |
-| `useOnFirstRender` | Run callback on first render |
-| `useIsoLayoutEffect` | SSR-safe `useLayoutEffect` |
-| `useRefWithInit` | Ref with lazy initialiser |
-| `useValueAsRef` | Keep a ref synchronised with a value |
-| `useForcedRerendering` | Force a component re-render |
-| `useEnhancedClickHandler` | Click handler with additional event logic |
+Import each utility from its file-based subpath, for example:
+
+```ts
+import { useMergedRefs } from '@tale-ui/utils/useMergedRefs';
+```
+
+| Hook                      | Purpose                                              |
+| ------------------------- | ---------------------------------------------------- |
+| `useId`                   | Generate a stable ID with an optional override       |
+| `useMergedRefs`           | Merge React callback and object refs                 |
+| `useMergedRefsN`          | Merge a dynamic ref collection                       |
+| `useStableCallback`       | Keep callback identity stable while reading new code |
+| `useAnimationFrame`       | Manage an animation-frame loop                       |
+| `useInterval`             | Manage an interval lifecycle                         |
+| `useTimeout`              | Manage a timeout lifecycle                           |
+| `useOnMount`              | Run an effect on mount                               |
+| `useIsoLayoutEffect`      | Use an SSR-safe layout effect                        |
+| `useRefWithInit`          | Lazily initialise a ref                              |
+| `useEnhancedClickHandler` | Distinguish pointer and keyboard click interactions  |
 
 ## DOM Helpers
 
-| Export | Purpose |
-|--------|---------|
-| `owner` | Get the owner document of a node |
-| `isElementDisabled` | Check if an element is disabled |
-| `isMouseWithinBounds` | Check if a mouse event is within an element's bounds |
-| `getReactElementRef` | Extract ref from a React element |
-| `visuallyHidden` | CSS-in-JS styles for visually hidden content |
-| `detectBrowser` | Detect browser environment |
-| `inertValue` | Inert value helper for SSR |
+| Subpath              | Exports                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------ |
+| `owner`              | `ownerWindow`, `ownerDocument`, `activeElement`, `contains`, and `getTarget`         |
+| `getReactElementRef` | `getReactElementRef` for reading a React element's ref                               |
+| `visuallyHidden`     | `visuallyHidden` and `visuallyHiddenInput` CSS-in-JS objects                         |
+| `detectBrowser`      | Browser and platform flags such as `isWebKit`, `isIOS`, `isFirefox`, and `isAndroid` |
 
 ## General
 
-| Export | Purpose |
-|--------|---------|
-| `mergeObjects` | Deep merge objects |
-| `fastObjectShallowCompare` | Fast shallow equality check |
-| `formatErrorMessage` | Format error messages with codes |
-| `generateId` | Generate unique string IDs |
-| `warn` | Development-only console warning |
+| Subpath        | Exports                                                               |
+| -------------- | --------------------------------------------------------------------- |
+| `mergeObjects` | `mergeObjects` for recursively combining compatible object properties |
+| `empty`        | Frozen `EMPTY_ARRAY`, `EMPTY_OBJECT`, and `NOOP` shared constants     |
+| `warn`         | Development-oriented `warn` helper                                    |
+| `error`        | Public error formatting and test reset helpers                        |
+
+The file-based exports declared in [`package.json`](package.json) and the files
+present in the published build are authoritative. Import only named subpaths;
+there is no root barrel export.
 
 ## License
 

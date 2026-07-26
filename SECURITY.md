@@ -4,9 +4,13 @@
 
 The versions of the project that are currently supported with security updates.
 
-| Tale UI version | Release    | Supported          |
-| --------------: | :--------- | :----------------- |
-|           1.x.x | 2025-12-11 | :white_check_mark: |
+| Tale UI version | Release line   | Supported          |
+| --------------: | :------------- | :----------------- |
+|           2.x.x | Current major  | :white_check_mark: |
+|           1.x.x | Previous major | :white_check_mark: |
+
+The versioned v1 documentation is retained for supported previous-major
+consumers. New features and normal maintenance target v2.
 
 ## Reporting a vulnerability
 

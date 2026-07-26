@@ -278,8 +278,11 @@ jobs:
           pnpm --filter @tale-ui/tokens test:package
           pnpm --filter @tale-ui/css test:package
 
-      - name: Build publishable packages
-        run: pnpm -r --filter @tale-ui/utils --filter @tale-ui/react build
+      - name: Build and validate publishable packages
+        run: |
+          pnpm --filter @tale-ui/utils build
+          pnpm --filter @tale-ui/utils test:package
+          pnpm --filter @tale-ui/react test:package
 
       - name: Build and validate @tale-ui/themes
         run: pnpm --filter @tale-ui/themes test:package

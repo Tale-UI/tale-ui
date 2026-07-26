@@ -40,6 +40,8 @@ Reference: https://react.dev/reference/dev-tools/react-performance-tracks
 
 ## Deployment
 
-The playground is deployed alongside the main docs.
-`pnpm docs:build` in the repo root builds the playground and copies the output to the Next.js export directory.
-The playground is then available under `/vite-playground`.
+The Pages workflow builds this app with `pnpm -C playground/vite-app build`
+and assembles it beside the docs, metrics dashboard, scale playground, and
+Storybook. In the repository Pages deployment it is available under
+`/tale-ui/playground/`; local/custom Pages base paths are supplied through
+`PLAYGROUND_BASE`.

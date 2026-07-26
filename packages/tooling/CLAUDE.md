@@ -15,8 +15,8 @@ safe project operations.
   pass.
 - Validation is read-only and compiler-API based. It must not invoke package
   managers, `npx`, or arbitrary subprocesses.
-- Mutation work remains blocked by ADR-002 and must be root-confined,
-  journaled, idempotent, and recoverable.
+- Mutation and recovery must follow accepted ADR-002: remain root-confined,
+  journaled, idempotent, atomic, and recoverable. Never add a force bypass.
 
 ## Commands
 

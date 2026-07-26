@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
       - name: Use Node.js 22.x
@@ -75,6 +77,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: TypeScript
         run: pnpm typescript
+      - name: Verify packed React package
+        run: pnpm react:test:package
       - name: Verify packed tooling API and CLI
         run: pnpm tooling:test:package
       - name: Unit tests (jsdom)
@@ -153,6 +157,8 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
+      - name: Audit documentation semantics
+        run: pnpm audit:docs:semantics
       - name: Markdown lint
         run: pnpm markdownlint
       - name: Prettier

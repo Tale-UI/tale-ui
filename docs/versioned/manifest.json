@@ -6,8 +6,8 @@
     {
       "major": 2,
       "source": "working-tree-public-docs",
-      "sourceRevision": "sha256:562cc1c5eb4e08fdde59ff4e11c6cc8d616bbb28003643a2be16160edcd31e9e",
-      "contentDigest": "sha256:6c2430c9711c58aaf3138714dc9f274abf6879eb8de5986d2b97dec081faabec",
+      "sourceRevision": "sha256:792cdaef1d743eeb9aafc0746feb890c6418f14102057f19427d00f9d1d30f5e",
+      "contentDigest": "sha256:4a7773b36d4996f38270ea14329ce1baf9566da841bf17bba06e63311fc31bcb",
       "packageVersions": {
         "@tale-ui/a2ui": "0.1.5",
         "@tale-ui/charts": "0.1.5",
@@ -158,6 +158,7 @@
         "docs/consumer-claude-md-snippet.md",
         "docs/consuming-design-system.md",
         "docs/design-philosophy.md",
+        "docs/documentation-governance.md",
         "docs/extensions.md",
         "docs/figma-integration.md",
         "docs/hosted-services.md",
