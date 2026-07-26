@@ -20,7 +20,7 @@
       "evidence": [
         {
           "path": "registry/artifacts.json",
-          "digest": "sha256:bf0ab2cf95fb563543502b76ea388b7b4bb166b157e69bc9fb9b46d6a353cec9"
+          "digest": "sha256:c20e36fe4e4e6f76e338199b265efbdde0e8b900af73fc8f1a9f413117bfcea2"
         },
         {
           "path": "tools/check-roadmap-contracts.mjs",
@@ -48,7 +48,7 @@
       "evidence": [
         {
           "path": "registry/reports/replacements.json",
-          "digest": "sha256:7110d2b87d178cf542ee7acc21cb3c32a6c17628d36065201382c0d44d99af56"
+          "digest": "sha256:3bedd910efca1be39eb9f06e7f4e8f1ce2fd3b54a710e4e147bdbf36ee4aea95"
         },
         {
           "path": "tools/generate-governance-reports.mjs",
@@ -128,7 +128,7 @@
       "evidence": [
         {
           "path": ".github/workflows/ci.yml",
-          "digest": "sha256:91c4b16d61c2e145d3b1a278400f4ed8b51fe56b1ec23f7e9efa8c6eec364c17"
+          "digest": "sha256:f646736200a0e56a2a2f3c92cb02e52838ed557f3c3f945220cc46708c40da75"
         },
         {
           "path": "tools/check-roadmap-contracts.mjs",
@@ -324,7 +324,7 @@
         },
         {
           "path": "registry/reports/migrations.json",
-          "digest": "sha256:5b8e59707701592989afbf805a388a98a673a5a85e42e036aa70d688fb492981"
+          "digest": "sha256:abe6fda860dabc9a6855025740a89769e7abb18939b40474f8db23fad61aca05"
         }
       ]
     },
@@ -352,7 +352,7 @@
       "evidence": [
         {
           "path": "docs/versioned/manifest.json",
-          "digest": "sha256:2efa8a85e5fa048d14b6c4aedceed42c096e1cad728d4b90e6b75caee4888660"
+          "digest": "sha256:de987c4055c5d1b7bc3235034ed263536a3fe08e37ff2541eb58188b9c74a4e4"
         },
         {
           "path": "tools/generate-versioned-docs.mjs",
@@ -660,7 +660,7 @@
         },
         {
           "path": "registry/reports/status.json",
-          "digest": "sha256:27c8f43b34a1401f2c16416ef9fa31c57ffaf004575fdb71d3c07de4df064b69"
+          "digest": "sha256:c8b5cb8e33d54220001911ccca3b93b3fcfbd9d46b89d6fa8c2e39bd45f8dbbe"
         }
       ]
     },
@@ -688,7 +688,7 @@
       "evidence": [
         {
           "path": ".github/workflows/ci.yml",
-          "digest": "sha256:91c4b16d61c2e145d3b1a278400f4ed8b51fe56b1ec23f7e9efa8c6eec364c17"
+          "digest": "sha256:f646736200a0e56a2a2f3c92cb02e52838ed557f3c3f945220cc46708c40da75"
         },
         {
           "path": "tools/benchmark-roadmap-performance.tsx",
@@ -844,7 +844,7 @@
         },
         {
           "path": "registry/reports/migrations.json",
-          "digest": "sha256:5b8e59707701592989afbf805a388a98a673a5a85e42e036aa70d688fb492981"
+          "digest": "sha256:abe6fda860dabc9a6855025740a89769e7abb18939b40474f8db23fad61aca05"
         }
       ]
     },
@@ -856,7 +856,7 @@
       "evidence": [
         {
           "path": "registry/artifacts.json",
-          "digest": "sha256:bf0ab2cf95fb563543502b76ea388b7b4bb166b157e69bc9fb9b46d6a353cec9"
+          "digest": "sha256:c20e36fe4e4e6f76e338199b265efbdde0e8b900af73fc8f1a9f413117bfcea2"
         },
         {
           "path": "analysis/baselines/tooling-package-release.json",
@@ -872,7 +872,7 @@
       "evidence": [
         {
           "path": ".github/workflows/ci.yml",
-          "digest": "sha256:91c4b16d61c2e145d3b1a278400f4ed8b51fe56b1ec23f7e9efa8c6eec364c17"
+          "digest": "sha256:f646736200a0e56a2a2f3c92cb02e52838ed557f3c3f945220cc46708c40da75"
         },
         {
           "path": ".github/workflows/accessibility-full.yml",

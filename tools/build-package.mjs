@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Build script for @tale-ui/react and @tale-ui/utils.
+ * Build script for Tale UI packages that publish dual CJS + ESM output.
  * Produces CJS + ESM bundles, type declarations,
  * a publish-ready package.json, and copies static files.
  *
@@ -13,6 +13,7 @@ import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import { parseArgs } from 'node:util';
 import { createRequire } from 'node:module';
+import { rewriteEsmSpecifiers } from './rewrite-esm-specifiers.mjs';
 
 const require = createRequire(import.meta.url);
 
@@ -168,6 +169,11 @@ if (await fileExists(tsconfigBuild)) {
   console.log(`Copied ${dtsFiles.length} type declaration files.`);
 }
 
+const rewritten = await rewriteEsmSpecifiers(esmDir);
+console.log(
+  `Rewrote ${rewritten.rewrittenSpecifiers} relative ESM specifiers in ${rewritten.rewrittenFiles} files.`,
+);
+
 // ── Generate build/package.json ────────────────────────────────────────────
 const buildPkg = { ...pkg };
 // Preserve postinstall hook for consumers, remove everything else
@@ -181,7 +187,8 @@ delete buildPkg.imports;
 if (buildPkg.publishConfig) {
   delete buildPkg.publishConfig.directory;
 }
-buildPkg.type = buildPkg.type || 'commonjs';
+// The build root contains CJS; build/esm/package.json marks the ESM subtree.
+buildPkg.type = 'commonjs';
 
 // Remap exports: ./src/foo/index.ts → CJS ./foo/index.js + ESM ./esm/foo/index.js
 if (buildPkg.exports) {

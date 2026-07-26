@@ -320,7 +320,9 @@ Apply with a class: `<body class="neutral-cool">`.
 
 `@tale-ui/css` uses `html { font-size: 100% }`, matching the browser-standard root size. In a default browser this means `1rem = 16px`, so Tale UI can coexist with Tailwind, shadcn/ui, Bootstrap, and other rem-based frameworks without a root-size workaround.
 
-If an application changes the root font size for accessibility or product reasons, Tale UI scales with the rest of the page. See [framework-integration.md](packages/css/docs/framework-integration.md).
+If an application changes the root font size for accessibility or product
+reasons, Tale UI scales with the rest of the page. See the
+[framework integration guide](../packages/css/docs/framework-integration.md).
 
 ---
 

@@ -22,7 +22,7 @@
   background: var(--neutral-5);
   border: 1px solid var(--neutral-16);
   border-radius: var(--radius-m);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-m);
   padding: var(--space-xs) var(--space-s);
   font-family: var(--text-font-family);
   font-size: var(--text-xs-font-size);

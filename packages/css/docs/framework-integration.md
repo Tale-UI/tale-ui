@@ -6,13 +6,14 @@ Guide for using `@tale-ui/css` alongside popular CSS frameworks and build tools.
 
 ## Which CSS file to import
 
-| Environment | Import |
-|-------------|--------|
-| Plain HTML (browser native `@import`) | `src/index.css` |
-| Next.js, Vite, webpack, Turbopack | `dist/style.css` ← **recommended** |
-| PostCSS with `postcss-import` | `src/index.css` |
+| Environment                           | Import                             |
+| ------------------------------------- | ---------------------------------- |
+| Plain HTML (browser native `@import`) | `src/index.css`                    |
+| Next.js, Vite, webpack, Turbopack     | `dist/style.css` ← **recommended** |
+| PostCSS with `postcss-import`         | `src/index.css`                    |
 
 **Build `dist/style.css`:**
+
 ```bash
 pnpm build         # from monorepo root
 # or:
@@ -26,7 +27,9 @@ pnpm --filter @tale-ui/css build
 `@tale-ui/css` uses the browser-standard root size:
 
 ```css
-html { font-size: 100%; }
+html {
+  font-size: 100%;
+}
 ```
 
 In a default browser this means `1rem = 16px`. Tale UI token values are calibrated for that root, so spacing, typography, component sizing, Tailwind CSS, shadcn/ui, Bootstrap, and other rem-based frameworks can share one root contract.
@@ -41,7 +44,7 @@ Do not add a Tale-specific `html` font-size override after importing the design 
 
 ```css
 /* globals.css */
-@import '@tale-ui/css';   /* resolves to dist/style.css */
+@import '@tale-ui/css'; /* resolves to dist/style.css */
 @import 'tailwindcss';
 ```
 
@@ -73,25 +76,25 @@ shadcn/ui uses its own CSS custom property naming. Map design system tokens to s
 /* After importing the design system, before shadcn: */
 :root {
   /* shadcn → design system token mapping */
-  --background:   var(--neutral-12);
-  --foreground:   var(--neutral-90);
-  --primary:      var(--brand-50);
+  --background: var(--neutral-12);
+  --foreground: var(--neutral-90);
+  --primary: var(--brand-50);
   --primary-foreground: var(--neutral-5);
-  --secondary:    var(--neutral-20);
+  --secondary: var(--neutral-20);
   --secondary-foreground: var(--neutral-80);
-  --muted:        var(--neutral-16);
+  --muted: var(--neutral-16);
   --muted-foreground: var(--neutral-60);
-  --border:       var(--neutral-30);
-  --ring:         var(--brand-50);
-  --card:         var(--neutral-14);
+  --border: var(--neutral-30);
+  --ring: var(--brand-50);
+  --card: var(--neutral-14);
   --card-foreground: var(--neutral-90);
-  --destructive:  var(--error-50);
+  --destructive: var(--error-50);
   --destructive-foreground: var(--neutral-5);
-  --popover:      var(--neutral-14);
+  --popover: var(--neutral-14);
   --popover-foreground: var(--neutral-90);
-  --accent:       var(--neutral-18);
+  --accent: var(--neutral-18);
   --accent-foreground: var(--neutral-80);
-  --input:        var(--neutral-30);
+  --input: var(--neutral-30);
 }
 ```
 
@@ -102,23 +105,28 @@ These are approximate mappings — adjust shade values to match your design inte
 ## Next.js (App Router)
 
 **`app/globals.css`:**
+
 ```css
 @import '@tale-ui/css';
 ```
 
 **`app/layout.tsx`:**
+
 ```tsx
-import './globals.css'
+import './globals.css';
 ```
 
 > **Turbopack note:** The `file:` dependency path and pnpm symlinks (`pnpm link --global`) may fail with Turbopack on Windows. If `@tale-ui/css` fails to resolve, copy `dist/style.css` directly into your project and import from the local path.
 
 **Workaround for Turbopack on Windows:**
+
 ```bash
 # Copy the built file into your project
-cp node_modules/@tale-ui/css/dist/style.css src/styles/core.css
+cp node_modules/@tale-ui/css/dist/style.css src/styles/tale-ui.css
 ```
-Then import: `@import './core.css'` — and re-copy whenever the design system updates.
+
+Then import: `@import './tale-ui.css'`—and re-copy whenever the design system
+updates.
 
 ---
 
@@ -128,9 +136,9 @@ Works out of the box with either `src/index.css` or `dist/style.css`:
 
 ```js
 // main.js / main.ts
-import '@tale-ui/css'           // → dist/style.css via exports field
+import '@tale-ui/css'; // → dist/style.css via exports field
 // or:
-import '@tale-ui/css/src'       // → src/index.css (Vite resolves @import natively)
+import '@tale-ui/css/src'; // → src/index.css (Vite resolves @import natively)
 ```
 
 ---
@@ -143,13 +151,14 @@ If your pipeline uses PostCSS with `postcss-import`, `src/index.css` works direc
 // postcss.config.js
 module.exports = {
   plugins: [
-    require('postcss-import'),   // resolves @import statements
+    require('postcss-import'), // resolves @import statements
     require('autoprefixer'),
-  ]
-}
+  ],
+};
 ```
 
 Import in your CSS entry point:
+
 ```css
 @import '@tale-ui/css/src';
 ```

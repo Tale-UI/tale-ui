@@ -1,0 +1,3 @@
+[mcp_servers.tale-ui]
+command = "node"
+args = ["tools/mcp-server.mjs"]

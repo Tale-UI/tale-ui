@@ -14,7 +14,7 @@ Unified monorepo managed with **pnpm workspaces**. This repository is the single
 | [packages/utils](packages/utils/)              | `@tale-ui/utils`        | Shared utilities                                                                                 |
 | [packages/charts](packages/charts/CLAUDE.md)   | `@tale-ui/charts`       | Recharts-based chart components themed with design tokens                                        |
 | [packages/a2ui](packages/a2ui/)                | `@tale-ui/a2ui`         | A2UI protocol renderer — maps agent messages to Tale UI components                               |
-| [packages/tooling](packages/tooling/CLAUDE.md) | `@tale-ui/tooling`      | Internal-first registry API, CLI, validation, and safe project tooling                           |
+| [packages/tooling](packages/tooling/CLAUDE.md) | `@tale-ui/tooling`      | Public-beta registry API, CLI, validation, and safe project tooling                              |
 | [apps/mcp-studio](apps/mcp-studio/)            | `@tale-ui/mcp-studio`   | Visual maintainer tool: prompt → plan_ui → rendered preview → pitfall authoring                  |
 
 ## Documentation
@@ -35,14 +35,22 @@ Unified monorepo managed with **pnpm workspaces**. This repository is the single
 | [docs/components/](docs/components/index.md)                                     | Per-component usage guide: imports, parts, examples, CSS classes                                  |
 | [docs/recipes/](docs/recipes/index.md)                                           | Copy-paste multi-component patterns (forms, tables, navigation, search, settings)                 |
 | [docs/a2ui-integration.md](docs/a2ui-integration.md)                             | A2UI protocol integration: setup, catalog, renderer, validation                                   |
+| [docs/documentation-governance.md](docs/documentation-governance.md)             | Documentation authority, generated boundaries, historical scopes, and semantic checks             |
 | [tools/README.md](tools/README.md)                                               | Monorepo tooling: audit scripts, build scripts, release process                                   |
 | [tools/prompts/self-critique.md](tools/prompts/self-critique.md)                 | Second-pass validation prompt for AI-generated Tale UI code                                       |
 
 ## MCP Server
 
-An MCP server at `tools/mcp-server.mjs` exposes Tale UI's component registry and recipes as tools. Configured in `.mcp.json`.
+The repository MCP compatibility server at `tools/mcp-server.mjs` is configured
+in `.mcp.json`. It exposes component, recipe, documentation, A2UI, and planning
+tools: `list_components`, `get_component`, `search_components`, `list_recipes`,
+`get_recipe`, `search_docs`, `list_a2ui_types`, `get_a2ui_type`,
+`get_a2ui_example`, and `plan_ui`. Repository checkouts additionally expose
+`validate_code` and `get_component_stories`.
 
-**Tools:** `list_components`, `get_component`, `search_components`, `list_recipes`, `get_recipe`, `search_docs`
+The public-beta `@tale-ui/tooling` package provides the supported `tale` CLI and
+the capability-gated `tale-mcp` local server. The hosted MCP surface remains
+restricted to `search_artifacts`, `get_artifact`, and `plan_ui`.
 
 ## CSS Design System (@tale-ui/css)
 
@@ -489,5 +497,3 @@ Status of required artifacts for all 6 chart components and 3 shared utilities. 
 | ChartContainer | ✓    | n/a  | ✓ (in chart docs) |
 | ChartTooltip   | ✓    | ✓    | ✓ (in chart docs) |
 | ChartLegend    | ✓    | ✓    | ✓ (in chart docs) |
-
-<!-- Last generated: 2026-03-27 -->

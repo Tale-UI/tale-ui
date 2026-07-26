@@ -4,15 +4,17 @@ Unified monorepo for the Tale UI design system and React component library.
 
 ## Packages
 
-| Package                                     | Description                                                                                            | npm                                                                                                               |
+| Package                                     | Description                                                                                            | Release channel                                                                                                   |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
 | [`@tale-ui/tokens`](packages/tokens/)       | Canonical design tokens and native token objects                                                       | [![npm](https://img.shields.io/npm/v/@tale-ui/tokens)](https://www.npmjs.com/package/@tale-ui/tokens)             |
 | [`@tale-ui/css`](packages/css/)             | CSS foundations and utilities generated from the shared tokens                                         | [![npm](https://img.shields.io/npm/v/@tale-ui/css)](https://www.npmjs.com/package/@tale-ui/css)                   |
 | [`@tale-ui/react`](packages/react/)         | Styled React components built on [React Aria Components](https://react-spectrum.adobe.com/react-aria/) | [![npm](https://img.shields.io/npm/v/@tale-ui/react)](https://www.npmjs.com/package/@tale-ui/react)               |
-| [`@tale-ui/react-styles`](packages/styles/) | Component CSS using @tale-ui/css design tokens                                                         | [![npm](https://img.shields.io/npm/v/@tale-ui/react-styles)](https://www.npmjs.com/package/@tale-ui/react-styles) |
+| [`@tale-ui/react-styles`](packages/styles/) | Component CSS using `@tale-ui/css` design tokens                                                       | [![npm](https://img.shields.io/npm/v/@tale-ui/react-styles)](https://www.npmjs.com/package/@tale-ui/react-styles) |
 | [`@tale-ui/themes`](packages/themes/)       | Optional standard and monochrome theme suites                                                          | [![npm](https://img.shields.io/npm/v/@tale-ui/themes)](https://www.npmjs.com/package/@tale-ui/themes)             |
-| [`@tale-ui/utils`](packages/utils/)         | Shared utilities                                                                                       | [![npm](https://img.shields.io/npm/v/@tale-ui/utils)](https://www.npmjs.com/package/@tale-ui/utils)               |
-| [`@tale-ui/tooling`](packages/tooling/)     | Internal-first registry API, CLI, validation, and safe project tooling                                 | Internal                                                                                                          |
+| [`@tale-ui/utils`](packages/utils/)         | Public shared hooks, colour utilities, and DOM helpers                                                 | [![npm](https://img.shields.io/npm/v/@tale-ui/utils)](https://www.npmjs.com/package/@tale-ui/utils)               |
+| [`@tale-ui/charts`](packages/charts/)       | Recharts-based chart components themed with Tale UI tokens                                             | [![npm](https://img.shields.io/npm/v/@tale-ui/charts)](https://www.npmjs.com/package/@tale-ui/charts)             |
+| [`@tale-ui/a2ui`](packages/a2ui/)           | A2UI protocol renderer and Tale UI catalog                                                             | [![npm](https://img.shields.io/npm/v/@tale-ui/a2ui)](https://www.npmjs.com/package/@tale-ui/a2ui)                 |
+| [`@tale-ui/tooling`](packages/tooling/)     | Public-beta registry API, CLI, local validation, and safe project tooling                              | Public beta (`next`)                                                                                              |
 
 ## Installation
 
@@ -47,7 +49,7 @@ import { Button } from '@tale-ui/react/button';
 import '@tale-ui/react-styles/button';
 
 export function MyButton() {
-  return <Button className="tale-button tale-button--primary">Click me</Button>;
+  return <Button variant="primary">Click me</Button>;
 }
 ```
 
@@ -76,7 +78,17 @@ applyMonochromeTheme('mountain-meadow');
 
 ## Components
 
-Accordion, Alert Dialog, Autocomplete, Avatar, Breadcrumbs, Button, Calendar, Checkbox, Checkbox Group, Color Area, Color Field, Color Picker, Color Slider, Color Swatch, Color Swatch Picker, Color Wheel, Combobox, Context Menu, Date Field, Date Picker, Date Range Picker, Dialog, Disclosure, Drawer, Drop Zone, Field, Fieldset, File Trigger, Form, Grid List, Input, Link, Menu, Menubar, Meter, Navigation Menu, Number Field, Popover, Preview Card, ProgressBar, Radio, Radio Group, Range Calendar, Scroll Area, Search Field, Select, Separator, Slider, Switch, Table, Tabs, Tag Group, Text Area, Text Field, Time Field, Toggle Button, Toggle Button Group, Toolbar, Tooltip, Tree
+See the registry-derived [component index](docs/component-index.md) for every
+React and chart component, import path, lifecycle status, and public sub-part.
+The index is checked against source in CI.
+
+## Documentation
+
+- [Consume Tale UI](docs/consuming-design-system.md)
+- [Author components](docs/authoring-components.md)
+- [Test the repository](test/README.md)
+- [Maintain documentation and generated artifacts](docs/documentation-governance.md)
+- [Understand workspace boundaries](docs/workspace-structure.md)
 
 ## Development
 

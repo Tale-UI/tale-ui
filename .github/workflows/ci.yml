@@ -75,6 +75,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: TypeScript
         run: pnpm typescript
+      - name: Verify packed React package
+        run: pnpm react:test:package
       - name: Verify packed tooling API and CLI
         run: pnpm tooling:test:package
       - name: Unit tests (jsdom)
@@ -153,6 +155,8 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
+      - name: Audit documentation semantics
+        run: pnpm audit:docs:semantics
       - name: Markdown lint
         run: pnpm markdownlint
       - name: Prettier

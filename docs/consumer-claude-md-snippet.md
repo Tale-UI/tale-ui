@@ -27,7 +27,7 @@ Before generating or modifying component code, you MUST:
 3. **For deeper details** (all props, all variants, advanced patterns), read the local component doc:
 
    ```text
-   node_modules/@tale-ui/react/docs/{name}.md
+   node_modules/@tale-ui/react/docs/components/{name}.md
    ```
 
 4. **Do not guess component APIs.** Always check the `@example` block first. Incorrect usage (wrong sub-part names, missing wrapper components, wrong import paths) causes build failures.

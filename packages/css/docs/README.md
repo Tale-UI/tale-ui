@@ -1,14 +1,16 @@
-# Custom Style Design System
+# @tale-ui/css reference
 
-This directory contains `style.css`, a comprehensive CSS design system with fluid typography, spacing tokens, color palettes, layout utilities, and dark/light mode support.
+This guide describes the CSS foundations published by `@tale-ui/css`:
+fluid typography, spacing tokens, colour palettes, layout utilities, and
+light/dark colour modes. The package entry point is generated from the modular
+source under `packages/css/src/`.
 
 ## Setup
 
 Import `style.css` **before** your application styles:
 
 ```html
-<link rel="stylesheet" href="style.css" />
-<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="style.css" /> <link rel="stylesheet" href="app.css" />
 ```
 
 Or in a bundler (Vite, Webpack, etc.):
@@ -25,7 +27,10 @@ The design system uses **Inter** (body/display), **Playfair Display** (expressiv
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+  rel="stylesheet"
+/>
 ```
 
 ### Form element resets
@@ -46,11 +51,11 @@ The design system uses **Inter** (body/display), **Playfair Display** (expressiv
 
 The design system uses a three-way logic that matches the behaviour of Bootstrap 5.3, Radix, and other modern systems:
 
-| State | Result |
-|---|---|
+| State                          | Result                            |
+| ------------------------------ | --------------------------------- |
 | No `data-color-mode` attribute | Follows OS `prefers-color-scheme` |
-| `data-color-mode="light"` | Forced light, regardless of OS |
-| `data-color-mode="dark"` | Forced dark, regardless of OS |
+| `data-color-mode="light"`      | Forced light, regardless of OS    |
+| `data-color-mode="dark"`       | Forced dark, regardless of OS     |
 
 If your app manages mode programmatically, set `data-color-mode` on `<html>`. If you omit it, the page automatically follows the user's OS preference.
 
@@ -95,9 +100,9 @@ useEffect(() => {
 }, [darkMode]);
 
 // In JSX:
-<button onClick={() => setDarkMode(prev => !prev)}>
+<button onClick={() => setDarkMode((prev) => !prev)}>
   {darkMode ? 'Light mode' : 'Dark mode'}
-</button>
+</button>;
 ```
 
 ### Scoped theming with `.dark` and `.light`
@@ -119,7 +124,7 @@ When dark mode is active (via OS preference, `data-color-mode`, or `.dark`), the
 ```css
 body {
   background: var(--neutral-10); /* light bg in light mode, dark bg in dark mode */
-  color: var(--text-color);      /* dark text in light mode, light text in dark mode */
+  color: var(--text-color); /* dark text in light mode, light text in dark mode */
 }
 
 .card {
@@ -136,14 +141,14 @@ The brand/accent colors also invert their scale in dark mode (`--color-60` swaps
 
 Apply a neutral tone class to a container to set the gray palette for everything inside it:
 
-| Class | Character |
-|---|---|
-| `neutral-onyx` | Slightly warm-neutral, minimal color cast |
-| `neutral-cool` | Blue-tinted grays |
-| `neutral-slate` | Subtle blue-gray undertone |
-| `neutral-gray` | Balanced neutral |
-| `neutral-mono` | Pure grays, no color cast |
-| `neutral-warm` | Warm-toned grays (default) |
+| Class           | Character                                 |
+| --------------- | ----------------------------------------- |
+| `neutral-onyx`  | Slightly warm-neutral, minimal color cast |
+| `neutral-cool`  | Blue-tinted grays                         |
+| `neutral-slate` | Subtle blue-gray undertone                |
+| `neutral-gray`  | Balanced neutral                          |
+| `neutral-mono`  | Pure grays, no color cast                 |
+| `neutral-warm`  | Warm-toned grays (default)                |
 
 ```html
 <div class="neutral-onyx">
@@ -159,51 +164,51 @@ Apply a neutral tone class to a container to set the gray palette for everything
 
 Fluid values using `clamp()` that scale between `--min-screen-width` (480px) and `--max-screen-width` (1600px):
 
-| Token | Approximate range |
-|---|---|
-| `--space-4xs` | ~5px |
-| `--space-3xs` | ~7px |
-| `--space-2xs` | ~8-10px |
-| `--space-xs` | ~10-14px |
-| `--space-s` | ~13-20px |
-| `--space-m` | ~16-28px |
-| `--space-l` | ~20-40px |
-| `--space-xl` | ~25-56px |
-| `--space-2xl` | ~31-79px |
-| `--space-3xl` | ~39-112px |
-| `--space-4xl` | ~49-158px |
+| Token         | Approximate range |
+| ------------- | ----------------- |
+| `--space-4xs` | ~5px              |
+| `--space-3xs` | ~7px              |
+| `--space-2xs` | ~8-10px           |
+| `--space-xs`  | ~10-14px          |
+| `--space-s`   | ~13-20px          |
+| `--space-m`   | ~16-28px          |
+| `--space-l`   | ~20-40px          |
+| `--space-xl`  | ~25-56px          |
+| `--space-2xl` | ~31-79px          |
+| `--space-3xl` | ~39-112px         |
+| `--space-4xl` | ~49-158px         |
 
 ### Typography (`--text-*`)
 
 Fluid font sizes:
 
-| Token | Approximate range |
-|---|---|
-| `--text-xs` | ~12-11px |
-| `--text-s` | ~13px |
-| `--text-m` | ~14-16px |
-| `--text-l` | ~15-19px |
-| `--text-xl` | ~16-23px |
-| `--text-2xl` | ~17-28px |
-| `--text-3xl` | ~18-33px |
-| `--text-4xl` | ~19-40px |
-| `--text-5xl` | ~21-48px |
-| `--text-6xl` | ~22-57px |
-| `--text-7xl` | ~24-69px |
-| `--text-8xl` | ~25-83px |
+| Token        | Approximate range |
+| ------------ | ----------------- |
+| `--text-xs`  | ~12-11px          |
+| `--text-s`   | ~13px             |
+| `--text-m`   | ~14-16px          |
+| `--text-l`   | ~15-19px          |
+| `--text-xl`  | ~16-23px          |
+| `--text-2xl` | ~17-28px          |
+| `--text-3xl` | ~18-33px          |
+| `--text-4xl` | ~19-40px          |
+| `--text-5xl` | ~21-48px          |
+| `--text-6xl` | ~22-57px          |
+| `--text-7xl` | ~24-69px          |
+| `--text-8xl` | ~25-83px          |
 
 ### Border Radius (`--radius-*`)
 
-| Token | Value |
-|---|---|
-| `--radius-none` | 0 |
-| `--radius-xs` | 0.3125rem |
-| `--radius-s` | 0.46875rem |
-| `--radius-m` | 0.625rem |
-| `--radius-l` | 0.9375rem |
-| `--radius-xl` | 1.25rem |
-| `--radius-2xl` | 1.875rem |
-| `--radius-full` | 9999px |
+| Token           | Value      |
+| --------------- | ---------- |
+| `--radius-none` | 0          |
+| `--radius-xs`   | 0.3125rem  |
+| `--radius-s`    | 0.46875rem |
+| `--radius-m`    | 0.625rem   |
+| `--radius-l`    | 0.9375rem  |
+| `--radius-xl`   | 1.25rem    |
+| `--radius-2xl`  | 1.875rem   |
+| `--radius-full` | 9999px     |
 
 ### Shadows (`--shadow-*`)
 
@@ -215,8 +220,8 @@ Fluid font sizes:
 
 ```css
 :root {
-  --brand-5:   #fef2f2;
-  --brand-60:  #dc2626; /* replaces the default teal primary */
+  --brand-5: #fef2f2;
+  --brand-60: #dc2626; /* replaces the default teal primary */
   --brand-100: #450a0a;
 }
 ```
@@ -238,16 +243,16 @@ Set `--brand-*` at `:root`. All 11 shades can be set; dark-mode inversion uses t
 ```css
 /* app.css */
 :root {
-  --brand-5  : #fbf5f9;
-  --brand-10 : #f0e4ec;
-  --brand-20 : #d9c2d3;
-  --brand-30 : #c3a1ba;
-  --brand-40 : #ac81a1;
-  --brand-50 : #956189;
-  --brand-60 : #7e4271;
-  --brand-70 : #6b3660;
-  --brand-80 : #592b4f;
-  --brand-90 : #47203f;
+  --brand-5: #fbf5f9;
+  --brand-10: #f0e4ec;
+  --brand-20: #d9c2d3;
+  --brand-30: #c3a1ba;
+  --brand-40: #ac81a1;
+  --brand-50: #956189;
+  --brand-60: #7e4271;
+  --brand-70: #6b3660;
+  --brand-80: #592b4f;
+  --brand-90: #47203f;
   --brand-100: #36162f;
 }
 ```
@@ -258,16 +263,16 @@ Create a `.color-{name}` class that remaps `--brand-5` through `--brand-100`. Ap
 
 ```css
 .color-mauve {
-  --brand-5  : #fbf5f9;
-  --brand-10 : #f0e4ec;
-  --brand-20 : #d9c2d3;
-  --brand-30 : #c3a1ba;
-  --brand-40 : #ac81a1;
-  --brand-50 : #956189;
-  --brand-60 : #7e4271;
-  --brand-70 : #6b3660;
-  --brand-80 : #592b4f;
-  --brand-90 : #47203f;
+  --brand-5: #fbf5f9;
+  --brand-10: #f0e4ec;
+  --brand-20: #d9c2d3;
+  --brand-30: #c3a1ba;
+  --brand-40: #ac81a1;
+  --brand-50: #956189;
+  --brand-60: #7e4271;
+  --brand-70: #6b3660;
+  --brand-80: #592b4f;
+  --brand-90: #47203f;
   --brand-100: #36162f;
 }
 ```
@@ -284,37 +289,37 @@ Create a `.neutral-{name}` class that remaps all 25 `--neutral-default-*` shades
 
 ```css
 .neutral-sand {
-  --neutral-default    : var(--neutral-default-60);
-  --neutral-default-5  : #f8f7f4;
-  --neutral-default-10 : #eceae7;
-  --neutral-default-12 : #e7e5e2;
-  --neutral-default-14 : #e2e0dc;
-  --neutral-default-16 : #dcdbd7;
-  --neutral-default-18 : #d7d6d2;
-  --neutral-default-20 : #d2d1cc;
-  --neutral-default-22 : #ceccc7;
-  --neutral-default-24 : #c9c7c2;
-  --neutral-default-26 : #c4c2bd;
-  --neutral-default-28 : #bfbdb8;
-  --neutral-default-30 : #bab8b2;
-  --neutral-default-40 : #a2a099;
-  --neutral-default-50 : #8b8881;
-  --neutral-default-60 : #747169;
-  --neutral-default-70 : #5e5c55;
-  --neutral-default-80 : #494741;
-  --neutral-default-82 : #45433e;
-  --neutral-default-84 : #413f3a;
-  --neutral-default-86 : #3d3b36;
-  --neutral-default-88 : #393733;
-  --neutral-default-90 : #35332f;
-  --neutral-default-92 : #31302b;
-  --neutral-default-94 : #2d2c28;
-  --neutral-default-96 : #292824;
-  --neutral-default-98 : #262421;
+  --neutral-default: var(--neutral-default-60);
+  --neutral-default-5: #f8f7f4;
+  --neutral-default-10: #eceae7;
+  --neutral-default-12: #e7e5e2;
+  --neutral-default-14: #e2e0dc;
+  --neutral-default-16: #dcdbd7;
+  --neutral-default-18: #d7d6d2;
+  --neutral-default-20: #d2d1cc;
+  --neutral-default-22: #ceccc7;
+  --neutral-default-24: #c9c7c2;
+  --neutral-default-26: #c4c2bd;
+  --neutral-default-28: #bfbdb8;
+  --neutral-default-30: #bab8b2;
+  --neutral-default-40: #a2a099;
+  --neutral-default-50: #8b8881;
+  --neutral-default-60: #747169;
+  --neutral-default-70: #5e5c55;
+  --neutral-default-80: #494741;
+  --neutral-default-82: #45433e;
+  --neutral-default-84: #413f3a;
+  --neutral-default-86: #3d3b36;
+  --neutral-default-88: #393733;
+  --neutral-default-90: #35332f;
+  --neutral-default-92: #31302b;
+  --neutral-default-94: #2d2c28;
+  --neutral-default-96: #292824;
+  --neutral-default-98: #262421;
   --neutral-default-100: #22211e;
   --display-color: var(--neutral-default-90);
-  --text-color   : var(--neutral-default-90);
-  --mono-color   : var(--neutral-default-90);
+  --text-color: var(--neutral-default-90);
+  --mono-color: var(--neutral-default-90);
 }
 ```
 
@@ -330,42 +335,42 @@ Create a `.neutral-{name}` class that remaps all 25 `--neutral-default-*` shades
 
 ### Typography
 
-| Class | Purpose |
-|---|---|
-| `text--display-l/m/s` | Large display headings |
-| `text--heading-l/m/s` | Section headings |
-| `text--title-l/m/s` | Titles |
-| `text--label-l/m/s/xs` | Labels and UI text |
-| `text--body-l/m/s/xs` | Body text |
-| `text--mono-l/m/s/xs` | Monospace text |
+| Class                  | Purpose                |
+| ---------------------- | ---------------------- |
+| `text--display-l/m/s`  | Large display headings |
+| `text--heading-l/m/s`  | Section headings       |
+| `text--title-l/m/s`    | Titles                 |
+| `text--label-l/m/s/xs` | Labels and UI text     |
+| `text--body-l/m/s/xs`  | Body text              |
+| `text--mono-l/m/s/xs`  | Monospace text         |
 
 ### Layout
 
-| Class | Purpose |
-|---|---|
-| `flex--row` | `display: flex; flex-direction: row` |
-| `flex--col` | `display: flex; flex-direction: column` |
-| `flex--wrap` | `flex-wrap: wrap` |
-| `center--all` | Center content both axes |
-| `center--x` / `center--y` | Center on one axis |
-| `gap--xs` through `gap--2xl` | Gap utilities |
-| `col-gap--*` / `row-gap--*` | Column/row gap |
+| Class                        | Purpose                                 |
+| ---------------------------- | --------------------------------------- |
+| `flex--row`                  | `display: flex; flex-direction: row`    |
+| `flex--col`                  | `display: flex; flex-direction: column` |
+| `flex--wrap`                 | `flex-wrap: wrap`                       |
+| `center--all`                | Center content both axes                |
+| `center--x` / `center--y`    | Center on one axis                      |
+| `gap--xs` through `gap--2xl` | Gap utilities                           |
+| `col-gap--*` / `row-gap--*`  | Column/row gap                          |
 
 ### Grid
 
-| Class | Purpose |
-|---|---|
-| `grid--1` through `grid--12` | Fixed column grids |
-| `grid--auto-2` through `grid--auto-12` | Responsive auto-fit grids |
-| `grid--1-2`, `grid--2-1`, etc. | Ratio-based two-column grids |
-| `col-span--*` / `row-span--*` | Span utilities |
+| Class                                  | Purpose                      |
+| -------------------------------------- | ---------------------------- |
+| `grid--1` through `grid--12`           | Fixed column grids           |
+| `grid--auto-2` through `grid--auto-12` | Responsive auto-fit grids    |
+| `grid--1-2`, `grid--2-1`, etc.         | Ratio-based two-column grids |
+| `col-span--*` / `row-span--*`          | Span utilities               |
 
 ### Visual
 
-| Class | Purpose |
-|---|---|
+| Class                               | Purpose       |
+| ----------------------------------- | ------------- |
 | `radius--xs` through `radius--full` | Border radius |
-| `shadow--xs` through `shadow--xl` | Box shadows |
+| `shadow--xs` through `shadow--xl`   | Box shadows   |
 
 ### Responsive Breakpoints
 

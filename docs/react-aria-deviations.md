@@ -1,6 +1,9 @@
 # React Aria Deviations
 
-Tale UI wraps React Aria Components (RAC) but adds, changes, or replaces behaviour in several places. This document is the single reference for every deviation a consumer or agent needs to know about.
+Tale UI wraps React Aria Components (RAC) but adds, changes, or replaces
+behaviour in several places. This document records maintained cross-cutting
+deviations; each component guide remains authoritative for that component's
+parts and props.
 
 Tale UI currently targets **react-aria-components ^1.19.0**.
 
@@ -8,34 +11,40 @@ Each deviation below includes the rationale for the Tale UI choice. When a devia
 
 ## Quick Reference
 
-| Deviation                                     | Impact                                     | Rationale                                                                 | Details                                                                     |
-| --------------------------------------------- | ------------------------------------------ | ------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| Drawer uses `open`, not `isOpen`              | **High** — wrong prop silently fails       | Drawer is a custom bottom-sheet primitive, not a RAC Dialog wrapper       | [Drawer-specific differences](#drawer-specific-differences)                 |
-| Drawer.Backdrop is a sibling, not a wrapper   | **High** — wrong nesting breaks close      | Sibling topology keeps swipe/transition layers independent                | [Backdrop/Popup nesting](#backdroppopup-nesting-rules)                      |
-| IconButton defaults to `variant="ghost"`      | **Medium** — unexpected appearance         | Icon-only controls are usually secondary chrome, not primary actions      | [variant prop](#variant-prop)                                               |
-| Never nest `<Button>` inside a Trigger        | **High** — invalid HTML `<button><button>` | RAC triggers already render interactive elements                          | [Trigger styling](#trigger-button-styling-differences)                      |
-| Checkbox.Indicator needs explicit Icon child  | **Medium** — missing checkmark             | Consumers can choose the check/indeterminate glyph to match their context | [Auto-rendered icons](#auto-rendered-icons)                                 |
-| Pass `value` to both Meter.Root AND Indicator | **Medium** — bar appears empty             | RAC exposes percentage by render prop, while Tale UI keeps a composable part | [Meter/ProgressBar](#meter-and-progressbar-value-passing)                 |
-| 20+ parts auto-render Lucide icons            | **Low** — override by passing children     | Common controls should work with minimal boilerplate                      | [Auto-rendered icons](#auto-rendered-icons)                                 |
-| 7 components are NOT built on React Aria      | **Medium** — no RAC keyboard/ARIA          | These are presentational, token, or custom-interaction components         | [Not built on RAC](#components-not-built-on-react-aria)                     |
-| AlertDialog should NOT have a Close button    | **Medium** — defeats acknowledgement UX    | Alert dialogs should force an explicit safe/destructive choice            | [AlertDialog vs Dialog](#alertdialog-vs-dialog-semantics)                   |
-| Checkbox/Radio/Switch deprecated upstream     | **Low** — still functional                 | Mirrors React Aria Components 1.18.0 deprecations                         | [Deprecated form controls](#deprecated-form-controls-checkbox-radio-switch) |
+| Deviation                                     | Impact                                         | Rationale                                                                                             | Details                                                                                 |
+| --------------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Drawer uses `open`, not `isOpen`              | **High** — wrong prop silently fails           | Drawer is a custom bottom-sheet primitive, not a RAC Dialog wrapper                                   | [Drawer-specific differences](#drawer-specific-differences)                             |
+| Drawer.Backdrop is a sibling, not a wrapper   | **High** — wrong nesting breaks close          | Sibling topology keeps swipe/transition layers independent                                            | [Backdrop/Popup nesting](#backdroppopup-nesting-rules)                                  |
+| IconButton defaults to `variant="ghost"`      | **Medium** — unexpected appearance             | Icon-only controls are usually secondary chrome, not primary actions                                  | [variant prop](#variant-prop)                                                           |
+| Never nest `<Button>` inside a Trigger        | **High** — invalid HTML `<button><button>`     | RAC triggers already render interactive elements                                                      | [Trigger styling](#trigger-button-styling-differences)                                  |
+| Checkbox.Indicator needs explicit Icon child  | **Medium** — missing checkmark                 | Consumers can choose the check/indeterminate glyph to match their context                             | [Auto-rendered icons](#auto-rendered-icons)                                             |
+| Pass `value` to both Meter.Root AND Indicator | **Medium** — bar appears empty                 | RAC exposes percentage by render prop, while Tale UI keeps a composable part                          | [Meter/ProgressBar](#meter-and-progressbar-value-passing)                               |
+| Many parts auto-render Lucide icons           | **Low** — override by passing children         | Common controls should work with minimal boilerplate                                                  | [Auto-rendered icons](#auto-rendered-icons)                                             |
+| Some components have no direct RAC primitive  | **Medium** — verify their documented semantics | Presentational, layout, and custom-interaction components use native elements or internal composition | [Components without a direct RAC primitive](#components-without-a-direct-rac-primitive) |
+| AlertDialog should NOT have a Close button    | **Medium** — defeats acknowledgement UX        | Alert dialogs should force an explicit safe/destructive choice                                        | [AlertDialog vs Dialog](#alertdialog-vs-dialog-semantics)                               |
+| Checkbox/Radio/Switch deprecated upstream     | **Low** — still functional                     | Mirrors React Aria Components 1.18.0 deprecations                                                     | [Deprecated form controls](#deprecated-form-controls-checkbox-radio-switch)             |
 
 ---
 
-## Components NOT built on React Aria
+## Components without a direct RAC primitive
 
-These components are fully custom — they do not use React Aria and do not inherit its keyboard navigation, ARIA attributes, or focus management. The rationale is that no RAC primitive provides meaningful behaviour for these cases, or Tale UI needs behaviour outside RAC's responsibility.
+Presentational and layout components such as `Avatar`, `Badge`, `Container`,
+`Icon`, `Image`, `Row`, `Column`, and `Text` use native elements because RAC
+does not provide meaningful behaviour for them. Composite application
+components can combine Tale UI primitives without importing RAC directly.
+Absence of a direct RAC import is therefore not, by itself, an accessibility
+defect.
 
-| Component           | What it uses instead                                                                                                                          | Rationale                                                                                       |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| **Drawer**          | Custom context + plain HTML `<button>` / `<div>` elements with manual transition state                                                        | Bottom-sheet drag/swipe affordances, backdrop layering, and open-state semantics are custom      |
-| **NavigationMenu**  | Plain `<nav>`, `<ul>`, `<li>`, `<button>`, `<a>` HTML elements                                                                                | Header/site navigation should keep native navigation semantics instead of menu/listbox semantics |
-| **ScrollArea**      | Plain `<div>` elements with CSS-driven scrollbar styling                                                                                      | It is a styling wrapper for overflow, not an interactive widget                                  |
-| **Avatar**          | Plain `<span>` / `<img>` elements                                                                                                             | It is presentational image/fallback rendering with no RAC behaviour to inherit                   |
-| **Icon**            | Renders the Lucide SVG component directly with BEM sizing classes                                                                             | It is presentational SVG output; RAC has no icon primitive                                       |
-| **Container**       | Plain `<div>` that sets `--color-*` CSS custom properties                                                                                     | It scopes design tokens and layout only                                                         |
-| **ColorModeToggle** | Wraps RAC Switch but removes `isSelected`/`onChange` (managed internally) and adds side effects (localStorage, `data-color-mode` on `<html>`) | Theme mode is global application state, so the switch is controlled internally                   |
+The notable custom interactive/stateful components are:
+
+| Component          | What it uses instead                                            | Rationale                                                                           |
+| ------------------ | --------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **Drawer**         | Custom context and native controls with manual transition state | Bottom-sheet drag/swipe affordances, layering, and open-state semantics are custom  |
+| **NavigationMenu** | Native navigation, list, link, and button elements              | Site navigation keeps native navigation semantics instead of menu/listbox semantics |
+| **ScrollArea**     | Native overflow containers with CSS-driven scrollbar styling    | It styles overflow rather than implementing a separate ARIA widget                  |
+
+`ColorModeToggle` is not in this list: it wraps RAC `Switch` while managing
+`localStorage` and the root `data-color-mode` attribute internally.
 
 ### Drawer-specific differences
 
@@ -67,10 +76,10 @@ Added to **Button** and **IconButton**. RAC does not have a variant concept.
 
 Rationale: variants encode Tale UI's visual hierarchy in the component API rather than requiring every consumer to manually compose BEM modifier classes. `IconButton` defaults to `ghost` because icon-only controls are most often toolbar or chrome actions, where a primary default would be visually too strong.
 
-| Component  | Values                                                | Default                         | Rationale for default                                   |
-| ---------- | ----------------------------------------------------- | ------------------------------- | ------------------------------------------------------- |
-| Button     | `'primary'` \| `'neutral'` \| `'ghost'` \| `'danger'` | `'primary'`                     | Text buttons commonly represent the main form action    |
-| IconButton | `'primary'` \| `'neutral'` \| `'ghost'` \| `'danger'` | **`'ghost'`** (not `'primary'`) | Icon-only controls are usually secondary interface chrome |
+| Component  | Values                                                                                                         | Default                         | Rationale for default                                     |
+| ---------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------- |
+| Button     | `'primary'` \| `'neutral'` \| `'ghost'` \| `'danger'` \| `'danger-neutral'` \| `'danger-ghost'` \| `'inverse'` | `'primary'`                     | Text buttons commonly represent the main form action      |
+| IconButton | `'primary'` \| `'neutral'` \| `'ghost'` \| `'danger'` \| `'inverse'`                                           | **`'ghost'`** (not `'primary'`) | Icon-only controls are usually secondary interface chrome |
 
 ### `size` prop
 
@@ -115,32 +124,32 @@ Several components render default icons when no children are provided. Pass chil
 
 Rationale: these icons are part of conventional UI affordances. Auto-rendering them keeps common controls usable with minimal boilerplate, while accepting children preserves full override control.
 
-| Component.Part                 | Default icon                     | Lucide import  | Rationale                                              |
-| ------------------------------ | -------------------------------- | -------------- | ------------------------------------------------------ |
-| `Dialog.Close`                 | X (close)                        | `lucide-react` | Standard close affordance                              |
-| `AlertDialog.Close`            | X (close)                        | `lucide-react` | Available for safe/cancel close patterns               |
-| `Popover.Close`                | X (close)                        | `lucide-react` | Standard close affordance                              |
-| `Combobox.Trigger`             | ChevronDown                      | `lucide-react` | Signals popup/list expansion                           |
-| `Combobox.ChipRemove`          | X (close)                        | `lucide-react` | Standard remove-chip affordance                        |
-| `Select.Icon`                  | ChevronDown                      | `lucide-react` | Signals popup/list expansion                           |
-| `DatePicker.Trigger`           | Calendar                         | `lucide-react` | Signals calendar picker                                |
-| `DateRangePicker.Trigger`      | Calendar                         | `lucide-react` | Signals calendar picker                                |
-| `NumberField.Increment`        | Plus                             | `lucide-react` | Standard stepper increment                             |
-| `NumberField.Decrement`        | Minus                            | `lucide-react` | Standard stepper decrement                             |
-| `Calendar.PreviousButton`      | ChevronLeft                      | `lucide-react` | Standard previous-period navigation                    |
-| `Calendar.NextButton`          | ChevronRight                     | `lucide-react` | Standard next-period navigation                        |
-| `RangeCalendar.PreviousButton` | ChevronLeft                      | `lucide-react` | Standard previous-period navigation                    |
-| `RangeCalendar.NextButton`     | ChevronRight                     | `lucide-react` | Standard next-period navigation                        |
-| `Accordion.Trigger`            | ChevronDown (appended)           | `lucide-react` | Signals disclosure state                               |
-| `NavigationMenu.Icon`          | ChevronDown                      | `lucide-react` | Signals nested navigation disclosure                   |
-| `Carousel.PreviousTrigger`     | ChevronLeft                      | `lucide-react` | Standard previous-slide navigation                     |
-| `Carousel.NextTrigger`         | ChevronRight                     | `lucide-react` | Standard next-slide navigation                         |
-| `PaymentInput.CardIcon`        | CreditCard                       | `lucide-react` | Helps identify card-number entry                       |
-| `RatingStars`                  | Star (repeated per rating value) | `lucide-react` | Rating visual language is star-based                   |
-| `Popover.Arrow`                | Triangle SVG                     | inline         | Indicates the anchored trigger relationship            |
-| `Tooltip.Arrow`                | Triangle SVG                     | inline         | Indicates the anchored trigger relationship            |
-| `PreviewCard.Arrow`            | Triangle SVG                     | inline         | Indicates the anchored trigger relationship            |
-| `Menu.Arrow`                   | Triangle SVG                     | inline         | Indicates the anchored trigger relationship            |
+| Component.Part                 | Default icon                     | Lucide import  | Rationale                                   |
+| ------------------------------ | -------------------------------- | -------------- | ------------------------------------------- |
+| `Dialog.Close`                 | X (close)                        | `lucide-react` | Standard close affordance                   |
+| `AlertDialog.Close`            | X (close)                        | `lucide-react` | Available for safe/cancel close patterns    |
+| `Popover.Close`                | X (close)                        | `lucide-react` | Standard close affordance                   |
+| `Combobox.Trigger`             | ChevronDown                      | `lucide-react` | Signals popup/list expansion                |
+| `Combobox.ChipRemove`          | X (close)                        | `lucide-react` | Standard remove-chip affordance             |
+| `Select.Icon`                  | ChevronDown                      | `lucide-react` | Signals popup/list expansion                |
+| `DatePicker.Trigger`           | Calendar                         | `lucide-react` | Signals calendar picker                     |
+| `DateRangePicker.Trigger`      | Calendar                         | `lucide-react` | Signals calendar picker                     |
+| `NumberField.Increment`        | Plus                             | `lucide-react` | Standard stepper increment                  |
+| `NumberField.Decrement`        | Minus                            | `lucide-react` | Standard stepper decrement                  |
+| `Calendar.PreviousButton`      | ChevronLeft                      | `lucide-react` | Standard previous-period navigation         |
+| `Calendar.NextButton`          | ChevronRight                     | `lucide-react` | Standard next-period navigation             |
+| `RangeCalendar.PreviousButton` | ChevronLeft                      | `lucide-react` | Standard previous-period navigation         |
+| `RangeCalendar.NextButton`     | ChevronRight                     | `lucide-react` | Standard next-period navigation             |
+| `Accordion.Trigger`            | ChevronDown (appended)           | `lucide-react` | Signals disclosure state                    |
+| `NavigationMenu.Icon`          | ChevronDown                      | `lucide-react` | Signals nested navigation disclosure        |
+| `Carousel.PreviousTrigger`     | ChevronLeft                      | `lucide-react` | Standard previous-slide navigation          |
+| `Carousel.NextTrigger`         | ChevronRight                     | `lucide-react` | Standard next-slide navigation              |
+| `PaymentInput.CardIcon`        | CreditCard                       | `lucide-react` | Helps identify card-number entry            |
+| `RatingStars`                  | Star (repeated per rating value) | `lucide-react` | Rating visual language is star-based        |
+| `Popover.Arrow`                | Triangle SVG                     | inline         | Indicates the anchored trigger relationship |
+| `Tooltip.Arrow`                | Triangle SVG                     | inline         | Indicates the anchored trigger relationship |
+| `PreviewCard.Arrow`            | Triangle SVG                     | inline         | Indicates the anchored trigger relationship |
+| `Menu.Arrow`                   | Triangle SVG                     | inline         | Indicates the anchored trigger relationship |
 
 **Exception — `Checkbox.Indicator`** does NOT auto-render a checkmark. You must provide one:
 
@@ -170,14 +179,14 @@ In RAC, triggers are plain unstyled buttons. Tale UI auto-applies BEM classes, b
 
 Rationale: triggers must preserve RAC's trigger semantics and avoid nested interactive elements. Some older Tale UI wrappers auto-apply button classes for convenience; others leave styling explicit to support link-like or custom trigger appearances.
 
-| Trigger                           | Auto-applies `tale-button`? | What you add via `className`                                                | Rationale                                                       |
-| --------------------------------- | :-------------------------: | --------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `Dialog.Trigger`                  |             Yes             | Variant only: `"tale-button--primary"`                                      | Historical convenience for the most common modal trigger        |
-| `AlertDialog.Trigger`             |             No              | Base + variant: `"tale-button tale-button--danger"`                         | Alert triggers are often destructive and should be explicit     |
-| `Drawer.Trigger` / `Drawer.Close` |             No              | Base + variant: `"tale-button tale-button--neutral"`                        | Custom Drawer buttons are plain HTML buttons                    |
-| `Menu.Trigger`                    |             No              | Base + variant + size: `"tale-button tale-button--neutral tale-button--md"` | Menus may be icon, text, or custom trigger controls             |
-| `Popover.Trigger`                 |             No              | Base + variant + size                                                       | Popovers often use arbitrary anchored elements                  |
-| `Tooltip.Trigger`                 |             No              | Base + variant + size                                                       | Tooltips often attach to existing controls or inline content    |
+| Trigger                           | Auto-applies `tale-button`? | What you add via `className`                                                | Rationale                                                      |
+| --------------------------------- | :-------------------------: | --------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `Dialog.Trigger`                  |             Yes             | Variant only: `"tale-button--primary"`                                      | Historical convenience for the most common modal trigger       |
+| `AlertDialog.Trigger`             |             No              | Base + variant: `"tale-button tale-button--danger"`                         | Alert triggers are often destructive and should be explicit    |
+| `Drawer.Trigger` / `Drawer.Close` |             No              | Base + variant: `"tale-button tale-button--neutral"`                        | Custom Drawer buttons are plain HTML buttons                   |
+| `Menu.Trigger`                    |             No              | Base + variant + size: `"tale-button tale-button--neutral tale-button--md"` | Menus may be icon, text, or custom trigger controls            |
+| `Popover.Trigger`                 |             No              | Base + variant + size                                                       | Popovers often use arbitrary anchored elements                 |
+| `Tooltip.Trigger`                 |             No              | Base + variant + size                                                       | Tooltips often attach to existing controls or inline content   |
 | `PreviewCard.Trigger`             |             No              | Base + variant, or style as link                                            | Preview cards commonly attach to text links or custom previews |
 
 Never nest `<Button>` inside a trigger — triggers render their own `<button>`.
@@ -288,11 +297,11 @@ React Aria Components 1.18.0 deprecates `Checkbox`, `Radio`, and `Switch` in fav
 `CheckboxField`/`CheckboxButton`, `RadioField`/`RadioButton`, and `SwitchField`/`SwitchButton`.
 Tale UI mirrors this:
 
-| Deprecated (still works)               | Replacement                                       | Deprecation source                    | Rationale for Tale UI deviation                                                                 |
-| -------------------------------------- | ------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `Checkbox` (`@tale-ui/react/checkbox`) | `CheckboxField` (`@tale-ui/react/checkbox-field`) | react-aria-components 1.18.0          | Mirrors the upstream deprecation and adds built-in `Description` and `Error` parts               |
-| `Radio` (`@tale-ui/react/radio`)       | `RadioField` (`@tale-ui/react/radio-field`)       | react-aria-components 1.18.0          | Mirrors the upstream deprecation and adds built-in `Description` and `Error` parts               |
-| `Switch` (`@tale-ui/react/switch`)     | `SwitchField` (`@tale-ui/react/switch-field`)     | react-aria-components 1.18.0          | Mirrors the upstream deprecation and adds `Description`/`Error` plus validation support          |
+| Deprecated (still works)               | Replacement                                       | Deprecation source           | Rationale for Tale UI deviation                                                         |
+| -------------------------------------- | ------------------------------------------------- | ---------------------------- | --------------------------------------------------------------------------------------- |
+| `Checkbox` (`@tale-ui/react/checkbox`) | `CheckboxField` (`@tale-ui/react/checkbox-field`) | react-aria-components 1.18.0 | Mirrors the upstream deprecation and adds built-in `Description` and `Error` parts      |
+| `Radio` (`@tale-ui/react/radio`)       | `RadioField` (`@tale-ui/react/radio-field`)       | react-aria-components 1.18.0 | Mirrors the upstream deprecation and adds built-in `Description` and `Error` parts      |
+| `Switch` (`@tale-ui/react/switch`)     | `SwitchField` (`@tale-ui/react/switch-field`)     | react-aria-components 1.18.0 | Mirrors the upstream deprecation and adds `Description`/`Error` plus validation support |
 
 Key structural difference: in the `*Field` components the clickable label is a dedicated
 `Button` part (`<label>`), and `Root` is a `<div>` wrapper that also lays out `Description`

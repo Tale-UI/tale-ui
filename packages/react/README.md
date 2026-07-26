@@ -158,7 +158,7 @@ Create a `tale-ui-overrides.css` file in your project (next to your app entry):
 ```css
 /* tale-ui-overrides.css
  *
- * Paste your generated theme from https://tale-ui.github.io/core/scale
+ * Paste your generated theme from https://tale-ui.github.io/tale-ui/scale/
  * This file overrides the default --brand-* palette tokens.
  * Import AFTER @tale-ui/react/styles so overrides take effect.
  */
@@ -171,7 +171,9 @@ import '@tale-ui/react/styles';
 import './tale-ui-overrides.css'; // your custom theme — must come after
 ```
 
-To generate a theme, visit https://tale-ui.github.io/core/scale, configure your colour scale, and paste the generated CSS into `tale-ui-overrides.css`. Dark mode inversion works automatically — you only define the light-mode palette.
+To generate a theme, visit https://tale-ui.github.io/tale-ui/scale/, configure
+your colour scale, and paste the generated CSS into `tale-ui-overrides.css`.
+Dark mode inversion works automatically—you only define the light-mode palette.
 
 If the generated CSS includes foreground pivot overrides (`.tale-ui` selectors), add `class="tale-ui"` to your `<html>` element:
 
