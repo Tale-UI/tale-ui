@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { warn } from '@tale-ui/utils/warn';
 import { cx } from '../_cx';
+import { getSafeUrl } from '../utils/safeUrl';
 
 type SafeDomProps<T> = Omit<T, 'dangerouslySetInnerHTML'>;
 
@@ -29,6 +30,7 @@ const CitationContext = React.createContext<NormalizedCitationRegistry | null>(n
 const ID_PATTERN = /^[A-Za-z][A-Za-z0-9_-]*$/;
 const OFFSET_TIMESTAMP_PATTERN =
   /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.(\d{1,9}))?(Z|([+-])(\d{2}):(\d{2}))$/;
+const HTTP_PROTOCOLS = ['http:', 'https:'] as const;
 
 export interface CitationSource {
   id: string;
@@ -65,41 +67,11 @@ function isValidId(value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0 && ID_PATTERN.test(value);
 }
 
-function containsControlCharacter(value: string): boolean {
-  for (let index = 0; index < value.length; index += 1) {
-    const code = value.charCodeAt(index);
-    if (code <= 31 || code === 127) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
 function parseSafeHttpUrl(value: unknown, baseUrl?: string): string | undefined {
-  if (
-    typeof value !== 'string' ||
-    value.length === 0 ||
-    value.trim() !== value ||
-    containsControlCharacter(value)
-  ) {
-    return undefined;
-  }
-
-  try {
-    const url = baseUrl === undefined ? new URL(value) : new URL(value, baseUrl);
-    if (
-      (url.protocol !== 'http:' && url.protocol !== 'https:') ||
-      url.username !== '' ||
-      url.password !== ''
-    ) {
-      return undefined;
-    }
-
-    return url.href;
-  } catch {
-    return undefined;
-  }
+  return getSafeUrl(value, {
+    protocols: HTTP_PROTOCOLS,
+    baseUrl,
+  });
 }
 
 function normalizeBaseUrl(value: unknown): string | undefined {

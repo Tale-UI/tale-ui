@@ -204,6 +204,8 @@ describe('Citation', () => {
           { id: 'protocol-relative', title: 'Protocol relative', href: '//cdn.example/source' },
           { id: 'credentials', title: 'Credentials', href: 'https://user:secret@example.com/' },
           { id: 'javascript', title: 'Executable', href: ['java', 'script:alert(1)'].join('') },
+          { id: 'malformed', title: 'Malformed', href: 'https://[invalid' },
+          { id: 'control', title: 'Control', href: 'https://example.com/\u0000private' },
           { id: 'whitespace', title: 'Whitespace', href: ' https://example.com/' },
         ]}
       >
@@ -225,6 +227,8 @@ describe('Citation', () => {
     );
     expect(screen.getByText('Credentials').tagName).toBe('SPAN');
     expect(screen.getByText('Executable').tagName).toBe('SPAN');
+    expect(screen.getByText('Malformed').tagName).toBe('SPAN');
+    expect(screen.getByText('Control').tagName).toBe('SPAN');
     expect(screen.getByText('Whitespace').tagName).toBe('SPAN');
   });
 

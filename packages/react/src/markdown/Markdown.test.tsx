@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Lexer, type Token } from 'marked';
 import { screen } from '@tale-ui/monorepo-tests/test-utils';
 import { createRenderer } from '#test-utils';
+// The maintained security corpus is repository-gate evidence, not a package export.
+// eslint-disable-next-line import/no-relative-packages
 import maliciousCorpus from '../../../../test/fixtures/component-equivalence/markdown-malicious-corpus.json';
 import { Markdown, type MarkdownProps } from './index';
 import {
@@ -52,9 +54,7 @@ const safe = true;
     ).toBe(true);
     expect(
       screen.getByText('const safe = true;').closest('pre')?.getAttribute('data-language'),
-    ).toBe(
-      'ts',
-    );
+    ).toBe('ts');
     expect(screen.getByText('First').closest('ol')).toBeTruthy();
     expect(ref.current?.querySelector('hr')).toBeTruthy();
   });
@@ -71,6 +71,17 @@ const safe = true;
     if (absent) {
       expect(document.body.textContent).not.toContain(absent);
     }
+  });
+
+  it('keeps safe HTTP and email angle autolinks as links', async () => {
+    await render(<Markdown>{'<https://example.com/safe>\n\n<maintainer@example.com>'}</Markdown>);
+
+    expect(
+      screen.getByRole('link', { name: 'https://example.com/safe' }).getAttribute('href'),
+    ).toBe('https://example.com/safe');
+    expect(screen.getByRole('link', { name: 'maintainer@example.com' }).getAttribute('href')).toBe(
+      'mailto:maintainer@example.com',
+    );
   });
 
   it('allows only fragments, safe absolute URLs, mailto, and base-resolved links', async () => {
@@ -100,9 +111,7 @@ const safe = true;
     expect(screen.getByRole('link', { name: 'relative' }).getAttribute('href')).toBe(
       'https://docs.example.com/guide',
     );
-    expect(
-      screen.getByRole('link', { name: 'protocol relative' }).getAttribute('href'),
-    ).toBe(
+    expect(screen.getByRole('link', { name: 'protocol relative' }).getAttribute('href')).toBe(
       'https://cdn.example.com/guide',
     );
     expect(screen.queryByRole('link', { name: 'credentials' })).toBeNull();

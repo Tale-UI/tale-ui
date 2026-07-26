@@ -38,5 +38,20 @@
     "id": "protocol-relative-without-base",
     "source": "[No implicit origin](//example.com/path)",
     "text": "No implicit origin"
+  },
+  {
+    "id": "angle-javascript-link",
+    "source": "<javascript:alert(1)>",
+    "text": "javascript:alert(1)"
+  },
+  {
+    "id": "angle-credential-link",
+    "source": "<https://user:secret@example.com/private>",
+    "text": "https://user:secret@example.com/private"
+  },
+  {
+    "id": "angle-malformed-link",
+    "source": "<https://[invalid>",
+    "text": "https://[invalid"
   }
 ]

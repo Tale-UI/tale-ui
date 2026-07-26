@@ -25,6 +25,8 @@ export const timestampPresets = {
   },
 } satisfies Record<AbsoluteTimestampFormat, Intl.DateTimeFormatOptions>;
 
+const intrinsicDateGetTime = Date.prototype.getTime;
+const intrinsicDateToISOString = Date.prototype.toISOString;
 const OFFSET_TIMESTAMP =
   /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(Z|[+-]\d{2}:\d{2})$/;
 
@@ -79,8 +81,12 @@ function isCompleteOffsetTimestamp(value: string) {
 export function normalizeTimestampValue(value: unknown): NormalizedTimestamp | null {
   let milliseconds: number;
 
-  if (value instanceof Date) {
-    milliseconds = new Date(value.getTime()).getTime();
+  if (typeof value === 'object' && value !== null) {
+    try {
+      milliseconds = Reflect.apply(intrinsicDateGetTime, value, []);
+    } catch {
+      return null;
+    }
   } else if (typeof value === 'number') {
     milliseconds = value;
   } else if (typeof value === 'string' && isCompleteOffsetTimestamp(value)) {
@@ -94,14 +100,14 @@ export function normalizeTimestampValue(value: unknown): NormalizedTimestamp | n
   }
 
   const date = new Date(milliseconds);
-  if (!Number.isFinite(date.getTime())) {
+  if (!Number.isFinite(Reflect.apply(intrinsicDateGetTime, date, []))) {
     return null;
   }
 
   try {
     return {
       date,
-      dateTime: date.toISOString(),
+      dateTime: Reflect.apply(intrinsicDateToISOString, date, []),
       milliseconds,
     };
   } catch {
@@ -178,9 +184,7 @@ let relativeFormatObserver: (() => void) | undefined;
  * Installs a private deterministic counter for maintained performance
  * fixtures. This is intentionally absent from the public Timestamp entry.
  */
-export function setRelativeTimestampFormatObserverForTesting(
-  observer: (() => void) | undefined,
-) {
+export function setRelativeTimestampFormatObserverForTesting(observer: (() => void) | undefined) {
   const previous = relativeFormatObserver;
   relativeFormatObserver = observer;
   return () => {

@@ -131,6 +131,49 @@ describe('Timestamp', () => {
     expect(screen.getByTestId('timestamp').getAttribute('datetime')).toBe(expected);
   });
 
+  it('copies Date internal slots without invoking hostile subclass overrides', async () => {
+    class HostileDate extends Date {
+      override getTime(): number {
+        throw new Error('consumer getTime must not run');
+      }
+
+      override toISOString(): string {
+        throw new Error('consumer toISOString must not run');
+      }
+    }
+
+    const value = new HostileDate('2026-07-27T04:30:00Z');
+    await render(<Timestamp value={value} locale="en-US" timeZone="UTC" data-testid="timestamp" />);
+
+    expect(screen.getByTestId('timestamp').getAttribute('datetime')).toBe(
+      '2026-07-27T04:30:00.000Z',
+    );
+  });
+
+  it('fails closed for Date proxies without invoking proxy properties', async () => {
+    const value = new Proxy(new Date('2026-07-27T04:30:00Z'), {
+      get() {
+        throw new Error('proxy property access must not run');
+      },
+    });
+
+    await expect(
+      render(
+        <Timestamp
+          value={value}
+          locale="en-US"
+          timeZone="UTC"
+          invalidFallback="Unavailable"
+          data-testid="timestamp"
+        />,
+      ),
+    ).resolves.toBeTruthy();
+
+    const timestamp = screen.getByTestId('timestamp');
+    expect(timestamp.textContent).toBe('Unavailable');
+    expect(timestamp.getAttribute('datetime')).toBeNull();
+  });
+
   it.each([
     ['2026-07-27T04:30:00', 'missing offset'],
     ['2026-02-30T04:30:00Z', 'invalid calendar date'],
@@ -218,6 +261,48 @@ describe('Timestamp', () => {
       />,
     );
     expect(container.querySelector('time')?.textContent).toBe(expected);
+  });
+
+  it('normalizes relative now through Date intrinsics and fails closed for Date proxies', async () => {
+    class HostileDate extends Date {
+      override getTime(): number {
+        throw new Error('consumer getTime must not run');
+      }
+    }
+
+    const target = '2026-07-27T04:32:00Z';
+    const acceptedNow = new HostileDate('2026-07-27T04:30:00Z');
+    let updateNow!: React.Dispatch<React.SetStateAction<Date>>;
+    function Harness() {
+      const [now, setNow] = React.useState<Date>(acceptedNow);
+      updateNow = setNow;
+      return (
+        <Timestamp
+          value={target}
+          locale="en-US"
+          timeZone="UTC"
+          format="relative"
+          now={now}
+          refreshInterval={0}
+          invalidFallback="Unavailable"
+          data-testid="timestamp"
+        />
+      );
+    }
+
+    await render(<Harness />);
+    expect(screen.getByTestId('timestamp').textContent).toBe('in 2 minutes');
+
+    const proxiedNow = new Proxy(new Date('2026-07-27T04:30:00Z'), {
+      get() {
+        throw new Error('proxy property access must not run');
+      },
+    });
+    expect(() => act(() => updateNow(proxiedNow))).not.toThrow();
+
+    const timestamp = screen.getByTestId('timestamp');
+    expect(timestamp.textContent).toBe('Unavailable');
+    expect(timestamp.getAttribute('datetime')).toBe('2026-07-27T04:32:00.000Z');
   });
 
   it('falls back when formatter option access throws', async () => {
