@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "inventory": "table",
-  "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#table-inventory-and-ranking-contract",
+  "source": "docs/plans/prioritized-roadmap-implementation-plan.md#table-inventory-and-ranking-contract",
   "status": "frozen",
   "candidates": [
     "selection",

@@ -50,4 +50,4 @@ The repository exposes an independent `tooling-v*` release scope whose default
 npm distribution tag is `next`. Merging code never publishes it: publication
 still requires an explicit tag or manually dispatched workflow and the npm
 credentials owned by Release Engineering. The evidence is recorded in
-`analysis/baselines/tooling-package-release.json`.
+`test/baselines/roadmap/tooling-package-release.json`.

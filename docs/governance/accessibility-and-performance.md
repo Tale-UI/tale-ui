@@ -38,6 +38,6 @@ isolated deterministic fixtures. Table retains its dedicated 1k/10k correctness 
 benchmarks.
 
 Each budget has a baseline, warning threshold, blocking threshold, accountable owner, and evidence
-source in `analysis/baselines/performance-budgets.json`. CI uploads the current comparison report.
+source in `test/baselines/roadmap/performance-budgets.json`. CI uploads the current comparison report.
 A regression above the blocking threshold requires an expiring, scoped exception with an understood
 maximum; raising or recapturing a baseline without investigation is not an exception.

@@ -115,7 +115,7 @@
           "digest": "sha256:008184efbadd8e34a5896afac1cc51ed0702228ab52c877775be2d4672b8df97"
         },
         {
-          "path": "analysis/baselines/tooling-package-release.json",
+          "path": "test/baselines/roadmap/tooling-package-release.json",
           "digest": "sha256:767293b19e3bd5ddac4fe1e19954f665d0beaa0622f3d3666e3d8f01a3f7b600"
         }
       ]
@@ -143,7 +143,7 @@
       "manualEvidenceAndOwner": "Developer Experience evaluation",
       "evidence": [
         {
-          "path": "analysis/baselines/agent-cold-start.json",
+          "path": "test/baselines/roadmap/agent-cold-start.json",
           "digest": "sha256:38fe3c17de3d65ff3c8f01d92ac25cc86ef5d6041feb7c84fb6e3b83e7499e8b"
         },
         {
@@ -235,7 +235,7 @@
       "manualEvidenceAndOwner": "Design Systems review",
       "evidence": [
         {
-          "path": "analysis/table-plugins/ranking.json",
+          "path": "registry/sources/roadmap/table-plugins/ranking.json",
           "digest": "sha256:100eb846943c94454f628cccfd3cb6aff90cf4a4fe4ddb95244c53b2f7e417c7"
         },
         {
@@ -287,11 +287,11 @@
       "manualEvidenceAndOwner": "Performance/Release Engineering review",
       "evidence": [
         {
-          "path": "analysis/baselines/table-controller.json",
+          "path": "test/baselines/roadmap/table-controller.json",
           "digest": "sha256:989f0fd4460ae327df663b247dd2d1e8c4e7eca0479c053e00e21d01440fb4ea"
         },
         {
-          "path": "analysis/baselines/table-sorting.json",
+          "path": "test/baselines/roadmap/table-sorting.json",
           "digest": "sha256:d4ff712c86b168f1f5916f7cafbd711adb8e7edf08988ea901af10e20094ebc9"
         }
       ]
@@ -415,7 +415,7 @@
       "manualEvidenceAndOwner": "Localization review",
       "evidence": [
         {
-          "path": "analysis/baselines/i18n-message-inventory.json",
+          "path": "test/baselines/roadmap/i18n-message-inventory.json",
           "digest": "sha256:f67f9f92c644ca1f100a6f2ab1f8593fad22dfa4e7cd22c6db9ccb75317e9c08"
         },
         {
@@ -447,7 +447,7 @@
       "manualEvidenceAndOwner": "Localization review",
       "evidence": [
         {
-          "path": "analysis/baselines/i18n-message-inventory.json",
+          "path": "test/baselines/roadmap/i18n-message-inventory.json",
           "digest": "sha256:f67f9f92c644ca1f100a6f2ab1f8593fad22dfa4e7cd22c6db9ccb75317e9c08"
         },
         {
@@ -495,7 +495,7 @@
       "manualEvidenceAndOwner": "Design Systems review",
       "evidence": [
         {
-          "path": "analysis/app-shell/candidate-dispositions.json",
+          "path": "registry/sources/roadmap/app-shell/candidate-dispositions.json",
           "digest": "sha256:30aa56ea4d58d55a7f2d89e4a6960415f176532ce3f747b7ceb0c8e757eff004"
         },
         {
@@ -527,7 +527,7 @@
       "manualEvidenceAndOwner": "Design Systems/Accessibility review",
       "evidence": [
         {
-          "path": "analysis/baselines/motion-elevation.json",
+          "path": "test/baselines/roadmap/motion-elevation.json",
           "digest": "sha256:2dcdf94cadc22ba2bd2d242afcf6917a67a84478765433802062f71f3ffcd15a"
         },
         {
@@ -559,7 +559,7 @@
       "manualEvidenceAndOwner": "Design Systems review",
       "evidence": [
         {
-          "path": "analysis/chat/candidate-dispositions.json",
+          "path": "registry/sources/roadmap/chat/candidate-dispositions.json",
           "digest": "sha256:fe73a5cc86eadbb96704169c267bf065986599b15a548715a1bba089a9b8e87d"
         },
         {
@@ -623,7 +623,7 @@
       "manualEvidenceAndOwner": "Design Systems/Accessibility/Security review",
       "evidence": [
         {
-          "path": "analysis/content/candidate-dispositions.json",
+          "path": "registry/sources/roadmap/content/candidate-dispositions.json",
           "digest": "sha256:8a39fc4144f2ad6faba3609f9741f6003c498fd6a1b2dddb06fb4810e87a3ed7"
         },
         {
@@ -639,7 +639,7 @@
       "manualEvidenceAndOwner": "Security review",
       "evidence": [
         {
-          "path": "analysis/content/candidate-dispositions.json",
+          "path": "registry/sources/roadmap/content/candidate-dispositions.json",
           "digest": "sha256:8a39fc4144f2ad6faba3609f9741f6003c498fd6a1b2dddb06fb4810e87a3ed7"
         },
         {
@@ -671,7 +671,7 @@
       "manualEvidenceAndOwner": "Performance review",
       "evidence": [
         {
-          "path": "analysis/baselines/performance-budgets.json",
+          "path": "test/baselines/roadmap/performance-budgets.json",
           "digest": "sha256:1d27baac7dd70e1a3f5955bd313e6b94171a1813e35cbddbcfb4dd56556e89d8"
         },
         {
@@ -739,7 +739,7 @@
           "digest": "sha256:b6b5c949a8cdf6ebcc6e3bb636aa667bbef2eb9f017c028e01dcc0976e5210b1"
         },
         {
-          "path": "analysis/extensions/inventory.json",
+          "path": "registry/sources/roadmap/extensions/inventory.json",
           "digest": "sha256:f7511a7b550f74dbafe24b868d28e8713fe0975cc66b2cc05c649df0c0378573"
         }
       ]
@@ -823,7 +823,7 @@
       "manualEvidenceAndOwner": "Design Systems/Accessibility review",
       "evidence": [
         {
-          "path": "analysis/table-plugins/ranking.json",
+          "path": "registry/sources/roadmap/table-plugins/ranking.json",
           "digest": "sha256:100eb846943c94454f628cccfd3cb6aff90cf4a4fe4ddb95244c53b2f7e417c7"
         },
         {
@@ -859,7 +859,7 @@
           "digest": "sha256:e04cf0b8ef7519ace3e6e597511bac835e24c38450ee3a21e06eedcaa6d93a95"
         },
         {
-          "path": "analysis/baselines/tooling-package-release.json",
+          "path": "test/baselines/roadmap/tooling-package-release.json",
           "digest": "sha256:767293b19e3bd5ddac4fe1e19954f665d0beaa0622f3d3666e3d8f01a3f7b600"
         }
       ]
@@ -887,7 +887,7 @@
       "manualEvidenceAndOwner": "Developer Experience/Product Analytics review",
       "evidence": [
         {
-          "path": "analysis/baselines/agent-cold-start.json",
+          "path": "test/baselines/roadmap/agent-cold-start.json",
           "digest": "sha256:38fe3c17de3d65ff3c8f01d92ac25cc86ef5d6041feb7c84fb6e3b83e7499e8b"
         },
         {

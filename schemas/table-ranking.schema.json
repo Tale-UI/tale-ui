@@ -16,7 +16,7 @@
   "properties": {
     "schemaVersion": { "const": "1.0.0" },
     "status": { "enum": ["proposed", "approved"] },
-    "inventory": { "const": "analysis/table-plugins/inventory.json" },
+    "inventory": { "const": "registry/sources/roadmap/table-plugins/inventory.json" },
     "evidenceRevision": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
     "methodology": { "type": "string", "minLength": 1 },
     "prototypeCandidates": {

@@ -2,10 +2,7 @@
   "schemaVersion": "1.0.0",
   "status": "passed",
   "capability": "project.mutate",
-  "surfaces": [
-    "api",
-    "cli"
-  ],
+  "surfaces": ["api", "cli"],
   "operationStore": ".tale/operations",
   "safetyEvidence": [
     "canonical-root-confinement",

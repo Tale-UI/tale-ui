@@ -4,21 +4,21 @@
 
 Add 13 experimental, first-class `@tale-ui/react` components:
 
-| Candidate | Decision |
-| --- | --- |
-| AspectRatio | Tale-owned native/CSS primitive |
-| Blockquote | Tale-owned semantic composition |
-| ButtonGroup | Restricted wrapper over React Aria Components 1.19.0 `Group` |
-| Citation | Tale-owned normalized citation registry |
-| Code | Tale-owned inline semantic primitive |
-| Lightbox | Tale composition over Dialog, Button, and swipe utilities |
-| Markdown | Bounded renderer selected by Gate A |
-| Outline | Tale-owned navigation and observer model |
-| OverflowList | Tale-owned measurement and focus state machine |
-| Resizable | Tale-owned panels using `react-aria@3.50.0` `useMove` |
-| Skeleton | Tale-owned decorative primitive |
-| Timestamp | Tale-owned `Intl` formatter and shared scheduler |
-| Toast | Tale adapter over RAC 1.19.0 unstable Toast primitives |
+| Candidate    | Decision                                                     |
+| ------------ | ------------------------------------------------------------ |
+| AspectRatio  | Tale-owned native/CSS primitive                              |
+| Blockquote   | Tale-owned semantic composition                              |
+| ButtonGroup  | Restricted wrapper over React Aria Components 1.19.0 `Group` |
+| Citation     | Tale-owned normalized citation registry                      |
+| Code         | Tale-owned inline semantic primitive                         |
+| Lightbox     | Tale composition over Dialog, Button, and swipe utilities    |
+| Markdown     | Bounded renderer selected by Gate A                          |
+| Outline      | Tale-owned navigation and observer model                     |
+| OverflowList | Tale-owned measurement and focus state machine               |
+| Resizable    | Tale-owned panels using `react-aria@3.50.0` `useMove`        |
+| Skeleton     | Tale-owned decorative primitive                              |
+| Timestamp    | Tale-owned `Intl` formatter and shared scheduler             |
+| Toast        | Tale adapter over RAC 1.19.0 unstable Toast primitives       |
 
 Raise `@tale-ui/react`’s public Node floor to `>=18`, retaining `tale-ui-mcp` and `@modelcontextprotocol/sdk` in React.
 
@@ -112,7 +112,7 @@ Generated, packaging, release, and verification surfaces:
 - `schemas/candidate-inventory.schema.json`
 - `schemas/candidate-disposition.schema.json`
 - `tools/check-roadmap-contracts.mjs`
-- `analysis/content/candidate-dispositions.json`
+- `registry/sources/roadmap/content/candidate-dispositions.json`
 - `docs/architecture/rfc-chat.md`
 - `docs/upstream/react-aria-components.md`
 - `docs/react-aria-deviations.md`
@@ -140,7 +140,7 @@ Generated, packaging, release, and verification surfaces:
 - `docs/versioned/rollback.json`
 - `SECURITY.md`
 - `schemas/performance-budget.schema.json`
-- `analysis/baselines/performance-budgets.json`
+- `test/baselines/roadmap/performance-budgets.json`
 - `tools/benchmark-roadmap-performance.tsx`
 
 Commands and probes:
@@ -178,21 +178,21 @@ The registry currently contains 120 component records. Generated Figma output co
 
 Every candidate directory and registry record is absent. The matrix records the inspected current Tale state, verified upstream or native state, and resulting ownership boundary.
 
-| Candidate | Current Tale state or nearest credible composition | Verified upstream/native state and evidence | Ownership decision |
-| --- | --- | --- | --- |
-| AspectRatio | No registered primitive. `packages/styles/src/icon-button.css` uses `aspect-ratio: 1`, but IconButton is a specialized control. | No RAC export in `react-aria-components/dist/types/exports/index.d.ts`; CSS `aspect-ratio` is native. | Tale-owned CSS/native primitive. |
-| Blockquote | No semantic blockquote namespace. TextEditor has editor-only ProseMirror blockquote styling. | No RAC export; `blockquote`, `p`, and `footer` are native HTML semantics. | Tale-owned semantic composition. |
-| ButtonGroup | `ToggleButtonGroup` is selection-oriented and `SocialButtonGroup` is provider-specific. | RAC `Group` and `GroupProps` are declared in `dist/types/src/Group.d.ts`. | Restricted Tale wrapper around RAC `Group`; no selection API. |
-| Citation | No normalized source registry, ordinal sharing, reference/list identity, or URL policy. | No RAC citation primitive; anchors, `sup`, `ol`, and `time` are browser semantics. | Tale-owned normalized citation registry. |
-| Code | `CodeBlock` is block content and explicitly excludes Markdown/execution; no distinct inline Code component. | No RAC inline-code primitive; native `code` supplies semantics. | Tale-owned inline semantic primitive, distinct from CodeBlock. |
-| Lightbox | Dialog supplies overlay/focus behavior and Carousel supplies browsing, but neither is an item-keyed lightbox. | No RAC Lightbox export; current Tale Dialog, Button, and `useSwipeDismiss` are reusable. | Tale composition over existing Tale primitives and utilities. |
-| Markdown | Chat accepts React children/plain text and explicitly defers generic Markdown; TextEditor is an editor. | RAC provides no parser or bounded renderer. HTML parsing is insufficient for the required trust boundary. | Tale-owned bounded renderer behind Gate A. |
-| Outline | No document-outline observer/navigation component. Link can provide anchor behavior only. | No RAC Outline export; `nav`, nested lists, anchors, and `IntersectionObserver` are browser facilities. | Tale-owned links and per-instance observer model. |
-| OverflowList | No fit-measured list with overflow control, convergence guard, or focus handoff. | No RAC OverflowList export; `ResizeObserver`, layout measurement, and animation frames are browser facilities. | Tale-owned measurement/focus state machine. |
-| Resizable | No general panel component. Tale Table does not export a general resizer. | RAC `ResizableTableContainer` in `Table.d.ts` is table/column-specific. React Aria 3.50.0 exports `useMove`. | Tale-owned general panel model using direct `useMove`; do not wrap table resizing. |
-| Skeleton | No first-class decorative Skeleton component. | React Spectrum has a Skeleton concept, but RAC 1.19.0 exposes none and no Spectrum Skeleton package is part of React’s dependency topology. | Tale-owned decorative primitive; do not represent it as a RAC wrapper. |
-| Timestamp | No locale/timezone-aware absolute/relative formatter or shared scheduler. | No RAC Timestamp export; `Intl.DateTimeFormat`, `Intl.RelativeTimeFormat`, and native `time` are platform APIs. | Tale-owned `Intl` formatter and scheduler. |
-| Toast | No public Tale queue or Region API. | RAC exports only `UNSTABLE_Toast*`; its queue comes from React Stately, as shown in `Toast.d.ts` and the RAC index. | Tale-owned public queue/Region over a private unstable adapter. |
+| Candidate    | Current Tale state or nearest credible composition                                                                              | Verified upstream/native state and evidence                                                                                                 | Ownership decision                                                                 |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| AspectRatio  | No registered primitive. `packages/styles/src/icon-button.css` uses `aspect-ratio: 1`, but IconButton is a specialized control. | No RAC export in `react-aria-components/dist/types/exports/index.d.ts`; CSS `aspect-ratio` is native.                                       | Tale-owned CSS/native primitive.                                                   |
+| Blockquote   | No semantic blockquote namespace. TextEditor has editor-only ProseMirror blockquote styling.                                    | No RAC export; `blockquote`, `p`, and `footer` are native HTML semantics.                                                                   | Tale-owned semantic composition.                                                   |
+| ButtonGroup  | `ToggleButtonGroup` is selection-oriented and `SocialButtonGroup` is provider-specific.                                         | RAC `Group` and `GroupProps` are declared in `dist/types/src/Group.d.ts`.                                                                   | Restricted Tale wrapper around RAC `Group`; no selection API.                      |
+| Citation     | No normalized source registry, ordinal sharing, reference/list identity, or URL policy.                                         | No RAC citation primitive; anchors, `sup`, `ol`, and `time` are browser semantics.                                                          | Tale-owned normalized citation registry.                                           |
+| Code         | `CodeBlock` is block content and explicitly excludes Markdown/execution; no distinct inline Code component.                     | No RAC inline-code primitive; native `code` supplies semantics.                                                                             | Tale-owned inline semantic primitive, distinct from CodeBlock.                     |
+| Lightbox     | Dialog supplies overlay/focus behavior and Carousel supplies browsing, but neither is an item-keyed lightbox.                   | No RAC Lightbox export; current Tale Dialog, Button, and `useSwipeDismiss` are reusable.                                                    | Tale composition over existing Tale primitives and utilities.                      |
+| Markdown     | Chat accepts React children/plain text and explicitly defers generic Markdown; TextEditor is an editor.                         | RAC provides no parser or bounded renderer. HTML parsing is insufficient for the required trust boundary.                                   | Tale-owned bounded renderer behind Gate A.                                         |
+| Outline      | No document-outline observer/navigation component. Link can provide anchor behavior only.                                       | No RAC Outline export; `nav`, nested lists, anchors, and `IntersectionObserver` are browser facilities.                                     | Tale-owned links and per-instance observer model.                                  |
+| OverflowList | No fit-measured list with overflow control, convergence guard, or focus handoff.                                                | No RAC OverflowList export; `ResizeObserver`, layout measurement, and animation frames are browser facilities.                              | Tale-owned measurement/focus state machine.                                        |
+| Resizable    | No general panel component. Tale Table does not export a general resizer.                                                       | RAC `ResizableTableContainer` in `Table.d.ts` is table/column-specific. React Aria 3.50.0 exports `useMove`.                                | Tale-owned general panel model using direct `useMove`; do not wrap table resizing. |
+| Skeleton     | No first-class decorative Skeleton component.                                                                                   | React Spectrum has a Skeleton concept, but RAC 1.19.0 exposes none and no Spectrum Skeleton package is part of React’s dependency topology. | Tale-owned decorative primitive; do not represent it as a RAC wrapper.             |
+| Timestamp    | No locale/timezone-aware absolute/relative formatter or shared scheduler.                                                       | No RAC Timestamp export; `Intl.DateTimeFormat`, `Intl.RelativeTimeFormat`, and native `time` are platform APIs.                             | Tale-owned `Intl` formatter and scheduler.                                         |
+| Toast        | No public Tale queue or Region API.                                                                                             | RAC exports only `UNSTABLE_Toast*`; its queue comes from React Stately, as shown in `Toast.d.ts` and the RAC index.                         | Tale-owned public queue/Region over a private unstable adapter.                    |
 
 The registry extractor cannot currently flatten the proposed ButtonGroup and Timestamp unions or select `ToastRegionProps`; a scoped local-declaration extension is required to retain all intended enum values.
 
@@ -277,12 +277,9 @@ type OwnedActionTargetProp =
   | 'onDragOver'
   | 'onDrop';
 
-type OwnedActionCaptureProp =
-  `${OwnedActionTargetProp}Capture`;
+type OwnedActionCaptureProp = `${OwnedActionTargetProp}Capture`;
 
-type OwnedActionDomProp =
-  | OwnedActionTargetProp
-  | OwnedActionCaptureProp;
+type OwnedActionDomProp = OwnedActionTargetProp | OwnedActionCaptureProp;
 ```
 
 Rules:
@@ -315,10 +312,9 @@ OverflowList and Lightbox keys accept only strings, finite numbers, and bigints 
 #### AspectRatio
 
 ```ts
-export interface AspectRatioProps
-  extends SafeDomProps<
-    Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>
-  > {
+export interface AspectRatioProps extends SafeDomProps<
+  Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>
+> {
   ratio?: number | `${number}/${number}` | `${number} / ${number}`;
   objectFit?: 'cover' | 'contain';
   children: React.ReactNode;
@@ -332,20 +328,21 @@ The default ratio is `1`. Numbers must be finite and positive. Strings must cont
 #### Blockquote
 
 ```ts
-export interface BlockquoteRootProps
-  extends SafeDomProps<
-    React.BlockquoteHTMLAttributes<HTMLQuoteElement>
-  > {
+export interface BlockquoteRootProps extends SafeDomProps<
+  React.BlockquoteHTMLAttributes<HTMLQuoteElement>
+> {
   children: React.ReactNode;
 }
 
-export interface BlockquoteContentProps
-  extends SafeDomProps<React.HTMLAttributes<HTMLParagraphElement>> {
+export interface BlockquoteContentProps extends SafeDomProps<
+  React.HTMLAttributes<HTMLParagraphElement>
+> {
   children: React.ReactNode;
 }
 
-export interface BlockquoteAttributionProps
-  extends SafeDomProps<React.HTMLAttributes<HTMLElement>> {
+export interface BlockquoteAttributionProps extends SafeDomProps<
+  React.HTMLAttributes<HTMLElement>
+> {
   children: React.ReactNode;
 }
 ```
@@ -382,17 +379,16 @@ type ButtonGroupAccessibleName =
 
 type AriaGroupProps = import('react-aria-components').GroupProps;
 
-export type ButtonGroupProps =
-  Omit<
-    AriaGroupProps,
-    | 'children'
-    | 'className'
-    | 'style'
-    | 'role'
-    | 'aria-label'
-    | 'aria-labelledby'
-    | 'dangerouslySetInnerHTML'
-  > &
+export type ButtonGroupProps = Omit<
+  AriaGroupProps,
+  | 'children'
+  | 'className'
+  | 'style'
+  | 'role'
+  | 'aria-label'
+  | 'aria-labelledby'
+  | 'dangerouslySetInnerHTML'
+> &
   ButtonGroupAccessibleName & {
     orientation?: 'horizontal' | 'vertical';
     isAttached?: boolean;
@@ -420,31 +416,25 @@ export interface CitationSource {
   publishedAt?: string;
 }
 
-export interface CitationRootProps
-  extends SafeDomProps<
-    Omit<React.HTMLAttributes<HTMLDivElement>, 'children' | 'id'>
-  > {
+export interface CitationRootProps extends SafeDomProps<
+  Omit<React.HTMLAttributes<HTMLDivElement>, 'children' | 'id'>
+> {
   id: string;
   sources: readonly CitationSource[];
   baseUrl?: string;
   children: React.ReactNode;
 }
 
-export interface CitationReferenceProps
-  extends SafeDomProps<
-    Omit<React.HTMLAttributes<HTMLElement>, 'children'>
-  > {
+export interface CitationReferenceProps extends SafeDomProps<
+  Omit<React.HTMLAttributes<HTMLElement>, 'children'>
+> {
   sourceId: string;
   children?: React.ReactNode;
 }
 
-export interface CitationListProps
-  extends SafeDomProps<
-    Omit<
-      React.OlHTMLAttributes<HTMLOListElement>,
-      'children' | 'reversed' | 'start' | 'type'
-    >
-  > {
+export interface CitationListProps extends SafeDomProps<
+  Omit<React.OlHTMLAttributes<HTMLOListElement>, 'children' | 'reversed' | 'start' | 'type'>
+> {
   emptyFallback?: React.ReactNode;
 }
 ```
@@ -477,10 +467,9 @@ List renders normalized sources in ordinal order. Tale runtime-strips `reversed`
 #### Code
 
 ```ts
-export interface CodeProps
-  extends SafeDomProps<
-    Omit<React.HTMLAttributes<HTMLElement>, 'children'>
-  > {
+export interface CodeProps extends SafeDomProps<
+  Omit<React.HTMLAttributes<HTMLElement>, 'children'>
+> {
   children: string;
 }
 ```
@@ -492,10 +481,9 @@ Escape content and never parse, highlight, fetch, or execute it. Invalid runtime
 #### Markdown
 
 ```ts
-export interface MarkdownProps
-  extends SafeDomProps<
-    Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>
-  > {
+export interface MarkdownProps extends SafeDomProps<
+  Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>
+> {
   children: string;
   baseUrl?: string;
   invalidFallback?: React.ReactNode;
@@ -524,16 +512,11 @@ Wrong-type input, any limit violation, parser failure, or filtering failure disc
 ```ts
 export type TimestampValue = Date | number | string;
 
-export type TimestampFormatOptions =
-  Omit<Intl.DateTimeFormatOptions, 'timeZone'>;
+export type TimestampFormatOptions = Omit<Intl.DateTimeFormatOptions, 'timeZone'>;
 
-interface TimestampBaseProps
-  extends SafeDomProps<
-    Omit<
-      React.TimeHTMLAttributes<HTMLTimeElement>,
-      'children' | 'dateTime'
-    >
-  > {
+interface TimestampBaseProps extends SafeDomProps<
+  Omit<React.TimeHTMLAttributes<HTMLTimeElement>, 'children' | 'dateTime'>
+> {
   value: TimestampValue;
   locale: string;
   timeZone: string;
@@ -554,9 +537,7 @@ export interface RelativeTimestampProps extends TimestampBaseProps {
   refreshInterval?: number;
 }
 
-export type TimestampProps =
-  | AbsoluteTimestampProps
-  | RelativeTimestampProps;
+export type TimestampProps = AbsoluteTimestampProps | RelativeTimestampProps;
 ```
 
 Export `Timestamp`, `TimestampValue`, `TimestampFormatOptions`, `AbsoluteTimestampProps`, `RelativeTimestampProps`, and `TimestampProps` from `@tale-ui/react/timestamp`; forward `HTMLTimeElement`.
@@ -605,8 +586,8 @@ export interface OutlineItem {
 }
 
 type OutlineAccessibleName =
-  | {'aria-label': string; 'aria-labelledby'?: never}
-  | {'aria-label'?: never; 'aria-labelledby': string};
+  | { 'aria-label': string; 'aria-labelledby'?: never }
+  | { 'aria-label'?: never; 'aria-labelledby': string };
 
 type OutlineActiveState =
   | {
@@ -620,34 +601,21 @@ type OutlineActiveState =
       onActiveChange?: (id: string | null) => void;
     };
 
-interface OutlineBaseProps
-  extends SafeDomProps<
-    Omit<
-      React.HTMLAttributes<HTMLElement>,
-      | 'children'
-      | 'role'
-      | 'aria-label'
-      | 'aria-labelledby'
-      | 'onChange'
-    >
-  > {
+interface OutlineBaseProps extends SafeDomProps<
+  Omit<
+    React.HTMLAttributes<HTMLElement>,
+    'children' | 'role' | 'aria-label' | 'aria-labelledby' | 'onChange'
+  >
+> {
   items: readonly OutlineItem[];
-  onAction?: (
-    id: string,
-    event: React.MouseEvent<HTMLAnchorElement>,
-  ) => void;
+  onAction?: (id: string, event: React.MouseEvent<HTMLAnchorElement>) => void;
   observeTargets?: boolean;
-  getObserverRoot?: (
-    nav: HTMLElement,
-  ) => Element | Document | null;
+  getObserverRoot?: (nav: HTMLElement) => Element | Document | null;
   observerRootMargin?: string;
   observerThreshold?: number | readonly number[];
 }
 
-export type OutlineProps =
-  OutlineBaseProps &
-  OutlineAccessibleName &
-  OutlineActiveState;
+export type OutlineProps = OutlineBaseProps & OutlineAccessibleName & OutlineActiveState;
 ```
 
 Export `Outline`, `OutlineItem`, and `OutlineProps` from `@tale-ui/react/outline`; forward `HTMLElement`.
@@ -687,24 +655,17 @@ export interface OverflowRenderContext {
   overflowControlRef: React.RefCallback<HTMLElement>;
 }
 
-export interface OverflowListProps<T>
-  extends SafeDomProps<
-    Omit<React.HTMLAttributes<HTMLDivElement>, 'children' | 'tabIndex'>
-  > {
+export interface OverflowListProps<T> extends SafeDomProps<
+  Omit<React.HTMLAttributes<HTMLDivElement>, 'children' | 'tabIndex'>
+> {
   items: readonly T[];
   getKey: (item: T) => React.Key;
   renderItem: (item: T) => React.ReactNode;
-  renderOverflow: (
-    hiddenItems: readonly T[],
-    context: OverflowRenderContext,
-  ) => React.ReactNode;
+  renderOverflow: (hiddenItems: readonly T[], context: OverflowRenderContext) => React.ReactNode;
   collapseFrom?: 'start' | 'end';
   minVisibleItems?: number;
   measurementKey?: React.Key;
-  onVisibilityChange?: (
-    visibleItems: readonly T[],
-    hiddenItems: readonly T[],
-  ) => void;
+  onVisibilityChange?: (visibleItems: readonly T[], hiddenItems: readonly T[]) => void;
 }
 ```
 
@@ -736,8 +697,7 @@ Before hiding focused content, record the exact descendant/key/token. Handoff or
 ```ts
 export type ResizablePanelId = string;
 
-export type ResizableSizes =
-  Readonly<Record<ResizablePanelId, number>>;
+export type ResizableSizes = Readonly<Record<ResizablePanelId, number>>;
 
 export interface ResizableChangeMeta {
   handleId: string;
@@ -745,25 +705,15 @@ export interface ResizableChangeMeta {
 }
 
 type ResizableSizeState =
-  | {sizes: ResizableSizes; defaultSizes?: never}
-  | {sizes?: never; defaultSizes?: ResizableSizes};
+  | { sizes: ResizableSizes; defaultSizes?: never }
+  | { sizes?: never; defaultSizes?: ResizableSizes };
 
-interface ResizableRootBaseProps
-  extends SafeDomProps<
-    Omit<
-      React.HTMLAttributes<HTMLDivElement>,
-      'children' | OwnedActionCaptureProp
-    >
-  > {
+interface ResizableRootBaseProps extends SafeDomProps<
+  Omit<React.HTMLAttributes<HTMLDivElement>, 'children' | OwnedActionCaptureProp>
+> {
   orientation?: 'horizontal' | 'vertical';
-  onSizesChange?: (
-    sizes: ResizableSizes,
-    meta: ResizableChangeMeta,
-  ) => void;
-  onSizesCommit?: (
-    sizes: ResizableSizes,
-    meta: ResizableChangeMeta,
-  ) => void;
+  onSizesChange?: (sizes: ResizableSizes, meta: ResizableChangeMeta) => void;
+  onSizesCommit?: (sizes: ResizableSizes, meta: ResizableChangeMeta) => void;
   keyboardStep?: number;
   keyboardLargeStep?: number;
   precision?: number;
@@ -772,13 +722,11 @@ interface ResizableRootBaseProps
   children: React.ReactNode;
 }
 
-export type ResizableRootProps =
-  ResizableRootBaseProps & ResizableSizeState;
+export type ResizableRootProps = ResizableRootBaseProps & ResizableSizeState;
 
-export interface ResizablePanelProps
-  extends SafeDomProps<
-    Omit<React.HTMLAttributes<HTMLDivElement>, 'id'>
-  > {
+export interface ResizablePanelProps extends SafeDomProps<
+  Omit<React.HTMLAttributes<HTMLDivElement>, 'id'>
+> {
   id: ResizablePanelId;
   minSize?: number;
   maxSize?: number;
@@ -786,8 +734,8 @@ export interface ResizablePanelProps
 }
 
 type ResizableHandleName =
-  | {'aria-label': string; 'aria-labelledby'?: never}
-  | {'aria-label'?: never; 'aria-labelledby': string};
+  | { 'aria-label': string; 'aria-labelledby'?: never }
+  | { 'aria-label'?: never; 'aria-labelledby': string };
 
 type ResizableOwnedHandleProp =
   | OwnedActionDomProp
@@ -802,13 +750,9 @@ type ResizableOwnedHandleProp =
   | 'aria-valuenow'
   | 'aria-valuetext';
 
-export type ResizableHandleProps =
-  SafeDomProps<
-    Omit<
-      React.HTMLAttributes<HTMLDivElement>,
-      ResizableOwnedHandleProp
-    >
-  > &
+export type ResizableHandleProps = SafeDomProps<
+  Omit<React.HTMLAttributes<HTMLDivElement>, ResizableOwnedHandleProp>
+> &
   ResizableHandleName & {
     id: string;
     before: ResizablePanelId;
@@ -872,41 +816,27 @@ type LightboxSelectionState<T> =
   | {
       selectedKey: React.Key | null;
       defaultSelectedKey?: never;
-      onSelectionChange?: (
-        key: React.Key | null,
-        item: T | null,
-      ) => void;
+      onSelectionChange?: (key: React.Key | null, item: T | null) => void;
     }
   | {
       selectedKey?: never;
       defaultSelectedKey?: React.Key | null;
-      onSelectionChange?: (
-        key: React.Key | null,
-        item: T | null,
-      ) => void;
+      onSelectionChange?: (key: React.Key | null, item: T | null) => void;
     };
 
-interface LightboxRootBaseProps<T>
-  extends SafeDomProps<
-    Omit<
-      React.HTMLAttributes<HTMLDivElement>,
-      'children' | OwnedActionCaptureProp
-    >
-  > {
+interface LightboxRootBaseProps<T> extends SafeDomProps<
+  Omit<React.HTMLAttributes<HTMLDivElement>, 'children' | OwnedActionCaptureProp>
+> {
   items: readonly T[];
   getKey: (item: T) => React.Key;
   getLabel: (item: T) => string;
-  renderContent: (
-    item: T,
-    context: LightboxRenderContext,
-  ) => React.ReactNode;
+  renderContent: (item: T, context: LightboxRenderContext) => React.ReactNode;
   loop?: boolean;
   swipeNavigation?: boolean;
   children: React.ReactNode;
 }
 
-export type LightboxRootProps<T> =
-  LightboxRootBaseProps<T> &
+export type LightboxRootProps<T> = LightboxRootBaseProps<T> &
   LightboxOpenState &
   LightboxSelectionState<T>;
 
@@ -918,101 +848,78 @@ type LightboxOwnedActivation =
   | 'onPressUp'
   | 'onClick';
 
-type LightboxOwnedControlProp =
-  | LightboxOwnedActivation
-  | OwnedActionDomProp;
+type LightboxOwnedControlProp = LightboxOwnedActivation | OwnedActionDomProp;
 
-type LightboxOwnedOpenStateProp =
-  | 'isOpen'
-  | 'defaultOpen'
-  | 'onOpenChange';
+type LightboxOwnedOpenStateProp = 'isOpen' | 'defaultOpen' | 'onOpenChange';
 
 type LightboxControlName =
-  | {'aria-label': string; 'aria-labelledby'?: never}
-  | {'aria-label'?: never; 'aria-labelledby': string}
-  | {'aria-label'?: never; 'aria-labelledby'?: never};
+  | { 'aria-label': string; 'aria-labelledby'?: never }
+  | { 'aria-label'?: never; 'aria-labelledby': string }
+  | { 'aria-label'?: never; 'aria-labelledby'?: never };
 
-export type LightboxTriggerProps =
-  Omit<
-    ButtonProps,
-    | LightboxOwnedControlProp
-    | 'children'
-    | 'className'
-    | 'style'
-    | 'dangerouslySetInnerHTML'
-  > & {
-    itemKey: React.Key;
-    children: React.ReactNode;
-    className?: string;
-    style?: React.CSSProperties;
-  };
+export type LightboxTriggerProps = Omit<
+  ButtonProps,
+  LightboxOwnedControlProp | 'children' | 'className' | 'style' | 'dangerouslySetInnerHTML'
+> & {
+  itemKey: React.Key;
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+};
 
-export type LightboxBackdropProps =
-  Omit<
-    DialogBackdropProps,
-    | LightboxOwnedOpenStateProp
-    | 'className'
-    | 'dangerouslySetInnerHTML'
-  > & {
-    className?: string;
-  };
+export type LightboxBackdropProps = Omit<
+  DialogBackdropProps,
+  LightboxOwnedOpenStateProp | 'className' | 'dangerouslySetInnerHTML'
+> & {
+  className?: string;
+};
 
-export type LightboxPopupModalProps =
-  Omit<
-    NonNullable<DialogPopupProps['modalProps']>,
-    LightboxOwnedOpenStateProp
-  >;
+export type LightboxPopupModalProps = Omit<
+  NonNullable<DialogPopupProps['modalProps']>,
+  LightboxOwnedOpenStateProp
+>;
 
-export type LightboxPopupProps =
-  Omit<
-    DialogPopupProps,
-    | 'className'
-    | 'aria-label'
-    | 'aria-labelledby'
-    | 'dangerouslySetInnerHTML'
-    | 'modalProps'
-  > & {
-    className?: string;
-    modalProps?: LightboxPopupModalProps;
-  };
+export type LightboxPopupProps = Omit<
+  DialogPopupProps,
+  'className' | 'aria-label' | 'aria-labelledby' | 'dangerouslySetInnerHTML' | 'modalProps'
+> & {
+  className?: string;
+  modalProps?: LightboxPopupModalProps;
+};
 
-export type LightboxContentProps =
-  SafeDomProps<
-    Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>
-  >;
+export type LightboxContentProps = SafeDomProps<
+  Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>
+>;
 
-export interface LightboxCaptionProps
-  extends SafeDomProps<
-    React.HTMLAttributes<HTMLParagraphElement>
-  > {
+export interface LightboxCaptionProps extends SafeDomProps<
+  React.HTMLAttributes<HTMLParagraphElement>
+> {
   children?: React.ReactNode;
 }
 
-export type LightboxPreviousProps =
-  Omit<
-    ButtonProps,
-    | LightboxOwnedControlProp
-    | 'children'
-    | 'aria-label'
-    | 'aria-labelledby'
-    | 'dangerouslySetInnerHTML'
-  > &
+export type LightboxPreviousProps = Omit<
+  ButtonProps,
+  | LightboxOwnedControlProp
+  | 'children'
+  | 'aria-label'
+  | 'aria-labelledby'
+  | 'dangerouslySetInnerHTML'
+> &
   LightboxControlName & {
     children?: React.ReactNode;
   };
 
 export type LightboxNextProps = LightboxPreviousProps;
 
-export type LightboxCloseProps =
-  Omit<
-    DialogCloseProps,
-    | LightboxOwnedControlProp
-    | 'slot'
-    | 'children'
-    | 'aria-label'
-    | 'aria-labelledby'
-    | 'dangerouslySetInnerHTML'
-  > &
+export type LightboxCloseProps = Omit<
+  DialogCloseProps,
+  | LightboxOwnedControlProp
+  | 'slot'
+  | 'children'
+  | 'aria-label'
+  | 'aria-labelledby'
+  | 'dangerouslySetInnerHTML'
+> &
   LightboxControlName & {
     children?: React.ReactNode;
   };
@@ -1057,20 +964,19 @@ Focus restoration waits one frame after RAC and tries the initiating Trigger, la
 #### Skeleton
 
 ```ts
-export interface SkeletonProps
-  extends SafeDomProps<
-    Omit<
-      React.HTMLAttributes<HTMLSpanElement>,
-      | 'children'
-      | 'aria-hidden'
-      | 'aria-label'
-      | 'aria-labelledby'
-      | 'aria-describedby'
-      | 'role'
-      | 'tabIndex'
-      | 'contentEditable'
-    >
-  > {
+export interface SkeletonProps extends SafeDomProps<
+  Omit<
+    React.HTMLAttributes<HTMLSpanElement>,
+    | 'children'
+    | 'aria-hidden'
+    | 'aria-label'
+    | 'aria-labelledby'
+    | 'aria-describedby'
+    | 'role'
+    | 'tabIndex'
+    | 'contentEditable'
+  >
+> {
   variant?: 'text' | 'rectangular' | 'circular';
   width?: React.CSSProperties['width'];
   height?: React.CSSProperties['height'];
@@ -1102,29 +1008,20 @@ export interface ToastAddOptions {
 }
 
 export interface ToastQueue {
-  add(
-    message: ToastMessage,
-    options?: ToastAddOptions,
-  ): string;
+  add(message: ToastMessage, options?: ToastAddOptions): string;
   close(key: string): void;
   clear(): void;
   pauseAll(): void;
   resumeAll(): void;
 }
 
-export function createToastQueue(
-  options?: CreateToastQueueOptions,
-): ToastQueue;
+export function createToastQueue(options?: CreateToastQueueOptions): ToastQueue;
 
 export interface ToastRegionProps {
   queue: ToastQueue;
   'aria-label'?: string;
   className?: string;
-  placement?:
-    | 'top-start'
-    | 'top-end'
-    | 'bottom-start'
-    | 'bottom-end';
+  placement?: 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end';
   dismissLabel?: string;
 }
 ```
@@ -1364,13 +1261,13 @@ Required target changes:
 
 Record these decisions explicitly:
 
-| Area | Decision |
-| --- | --- |
-| ButtonGroup | Adopt RAC 1.19.0 `Group` behind a Tale wrapper that owns naming, orientation, attached styling, and restricted render props. |
-| Toast | Adapt `UNSTABLE_Toast`/`UNSTABLE_ToastRegion` privately; expose only Tale’s queue/Region API and retain experimental lifecycle. |
-| Resizable | Use direct exact `react-aria@3.50.0` `useMove` for pointer movement while Tale owns topology, keyboard behavior, projection, state, ARIA, and cancellation. |
-| `ResizableTableContainer` | Reject as the general Resizable implementation because its contract is table-column-specific. |
-| Skeleton | Build a Tale-owned decorative primitive; React Spectrum Skeleton is not a React Aria Components primitive and creates no RAC wrapper opportunity. |
+| Area                      | Decision                                                                                                                                                    |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ButtonGroup               | Adopt RAC 1.19.0 `Group` behind a Tale wrapper that owns naming, orientation, attached styling, and restricted render props.                                |
+| Toast                     | Adapt `UNSTABLE_Toast`/`UNSTABLE_ToastRegion` privately; expose only Tale’s queue/Region API and retain experimental lifecycle.                             |
+| Resizable                 | Use direct exact `react-aria@3.50.0` `useMove` for pointer movement while Tale owns topology, keyboard behavior, projection, state, ARIA, and cancellation. |
+| `ResizableTableContainer` | Reject as the general Resizable implementation because its contract is table-column-specific.                                                               |
+| Skeleton                  | Build a Tale-owned decorative primitive; React Spectrum Skeleton is not a React Aria Components primitive and creates no RAC wrapper opportunity.           |
 
 `docs/upstream/react-aria-components.md` must state that every RAC upgrade reruns the Group, unstable Toast raw-object/snapshot, and `useMove` coupling tests before the exact pin changes. A dependency version change alone cannot promote Toast; promotion still requires stable upstream primitives or explicit approval to retain the unstable adapter.
 
@@ -1419,13 +1316,13 @@ Run after Bundle 1 and immediately before Bundle 2:
 
 Create:
 
-- `analysis/component-equivalence-expansion/inventory.json`
-- `analysis/component-equivalence-expansion/candidate-dispositions.json`
+- `registry/sources/roadmap/component-equivalence/inventory.json`
+- `registry/sources/roadmap/component-equivalence/candidate-dispositions.json`
 
 Both use source:
 
 ```text
-analysis/gap-analysis-astryx/plans/component-equivalence-expansion-implementation-plan.md
+docs/plans/component-equivalence-expansion-implementation-plan.md
 ```
 
 The frozen candidate order is exactly:
@@ -1456,21 +1353,21 @@ Every disposition record uses `disposition: "approve"` and `a2uiDisposition: "n/
 
 The 13 exact A2UI rationales are:
 
-| Candidate | A2UI `n/a` rationale |
-| --- | --- |
-| AspectRatio | No A2UI publication is authorized. |
-| Blockquote | No A2UI publication is authorized. |
-| ButtonGroup | No A2UI publication is authorized. |
-| Citation | Trust and document identity are outside the current catalog. |
-| Code | No A2UI publication is authorized. |
-| Lightbox | Overlay, focus, and selection state are outside the current catalog. |
-| Markdown | Untrusted parsing is outside the current catalog. |
-| Outline | Document identity and observers are outside the current catalog. |
-| OverflowList | Layout measurement and focus routing are outside the current catalog. |
-| Resizable | Gesture and state callbacks are outside the current catalog. |
-| Skeleton | No A2UI publication is authorized. |
-| Timestamp | Locale, timezone, and clock ownership are outside the current catalog. |
-| Toast | Queues, timers, announcements, and leases are outside the current catalog. |
+| Candidate    | A2UI `n/a` rationale                                                       |
+| ------------ | -------------------------------------------------------------------------- |
+| AspectRatio  | No A2UI publication is authorized.                                         |
+| Blockquote   | No A2UI publication is authorized.                                         |
+| ButtonGroup  | No A2UI publication is authorized.                                         |
+| Citation     | Trust and document identity are outside the current catalog.               |
+| Code         | No A2UI publication is authorized.                                         |
+| Lightbox     | Overlay, focus, and selection state are outside the current catalog.       |
+| Markdown     | Untrusted parsing is outside the current catalog.                          |
+| Outline      | Document identity and observers are outside the current catalog.           |
+| OverflowList | Layout measurement and focus routing are outside the current catalog.      |
+| Resizable    | Gesture and state callbacks are outside the current catalog.               |
+| Skeleton     | No A2UI publication is authorized.                                         |
+| Timestamp    | Locale, timezone, and clock ownership are outside the current catalog.     |
+| Toast        | Queues, timers, announcements, and leases are outside the current catalog. |
 
 Extend `schemas/candidate-inventory.schema.json` with a closed `component-equivalence-expansion` branch:
 
@@ -1536,7 +1433,7 @@ Required negative fixtures:
 
 Supersede prior decisions exactly:
 
-- In `analysis/content/candidate-dispositions.json`, change Timestamp, Blockquote, and Citation from `defer` to `approve`.
+- In `registry/sources/roadmap/content/candidate-dispositions.json`, change Timestamp, Blockquote, and Citation from `defer` to `approve`.
 - Replace each affected rationale and security/state/SSR/performance/ownership/migration evidence with the approved contract in this plan.
 - Regenerate their evidence revision and digests.
 - Leave Kbd, CodeBlock, and MetadataList dispositions unchanged except mechanically necessary revision metadata.
@@ -1632,13 +1529,13 @@ toast
 Preserve byte-for-byte:
 
 - `schemas/performance-budget.schema.json`
-- `analysis/baselines/performance-budgets.json`
+- `test/baselines/roadmap/performance-budgets.json`
 - `tools/benchmark-roadmap-performance.tsx`
 
 Bundle 2 atomically adds:
 
 - `schemas/component-performance-budget.schema.json`
-- `analysis/baselines/component-performance-budgets.json`
+- `test/baselines/roadmap/component-performance-budgets.json`
 - `tools/benchmark-component-performance.tsx`
 - `tools/performance-fixtures/component-expansion/*.tsx`
 - `performance:roadmap:check`
@@ -1678,12 +1575,9 @@ Exact fixtures:
 
    ```ts
    const source =
-     Array.from(
-       {length: 6},
-       () => `---${' '.repeat(9997)}\n`,
-     ).join('') +
+     Array.from({ length: 6 }, () => `---${' '.repeat(9997)}\n`).join('') +
      `---${' '.repeat(88)}\n` +
-     Array.from({length: 9959}, () => '---\n').join('') +
+     Array.from({ length: 9959 }, () => '---\n').join('') +
      `${'> '.repeat(32)}x\n`;
    ```
 
@@ -1693,16 +1587,12 @@ Exact fixtures:
 
    ```ts
    const T0 = 1767225600000;
-   const values = Array.from(
-     {length: 1000},
-     (_, index) => T0 + ((index % 121) - 60) * 1000,
-   );
+   const values = Array.from({ length: 1000 }, (_, index) => T0 + ((index % 121) - 60) * 1000);
    ```
 
    Mount keys `timestamp-0000`–`timestamp-0999` with `locale="en-US"`, `timeZone="UTC"`, `format="relative"`, `now={T0}`, and `refreshInterval={1000}`. Initial render/effects settle and counters reset outside timing. One timed synchronous `act` advances only the injected scheduler to `T0 + 1000`. Assert one scheduler callback, 1,000 recomputations, one Profiler update commit, unchanged normalized `dateTime`, no extra interval, exact Node-22.18/full-ICU text digest, and no pending work.
 
 3. `overflow-list-100-recompute`
-
    - Chromium
    - 100 buttons, each 36 px border-box
    - 4 px gap
@@ -1713,16 +1603,12 @@ Exact fixtures:
    - `measurementKey="benchmark-v1"`
 
    ```ts
-   const widths = Array.from(
-     {length: 100},
-     (_, index) => 84 + 40 * index,
-   );
+   const widths = Array.from({ length: 100 }, (_, index) => 84 + 40 * index);
    ```
 
    Store and hash the expanded width vector. Each width performs one synchronous `act`, one ResizeObserver delivery, and one settling frame plus resulting commit. All 100 deliveries form one sample measured with page `window.performance`. Assert every prefix/suffix partition, callback order, no cycle fallback, one item render per item per render, at most one control invocation/tree, final 100-visible/0-hidden state, and no pending work.
 
 4. `resizable-1000-updates`
-
    - Chromium Root `(left: 0, top: 0, width: 900, height: 240)`
    - Horizontal LTR
    - Uncontrolled `defaultSizes={{A: 40, B: 30, C: 30}}`
@@ -1734,13 +1620,10 @@ Exact fixtures:
    - Origin `(360, 20)`
 
    ```ts
-   const positions = Array.from(
-     {length: 1000},
-     (_, index) => ({
-       clientX: 360 + 0.09 * (index + 1),
-       clientY: 20,
-     }),
-   );
+   const positions = Array.from({ length: 1000 }, (_, index) => ({
+     clientX: 360 + 0.09 * (index + 1),
+     clientY: 20,
+   }));
    ```
 
    Store and hash the expanded position vector. Pointer-down is untimed. Measure 1,000 move deliveries, each in its own synchronous `act`. Pointer-up at `(450, 20)` and final settlement are untimed. Assert 1,000 changes, one commit, exact metadata, monotonic A/B proposals, final `{A: 50, B: 20, C: 30}`, unchanged C, matching flex/ARIA values, capture release, and no pending work. Unit is median milliseconds for the 1,000 measured moves.
@@ -1748,7 +1631,6 @@ Exact fixtures:
 5. `toast-100-operations`
 
    Create one fresh JSDOM queue/Region with maximum visibility 5, default timeout zero, bottom-end placement, localized defaults, and one indexed close callback per record.
-
    - Operations 1–50 add indexes 0–49.
    - Title: `Toast ${index.toString().padStart(2, '0')}`.
    - Even descriptions: `Description ${index}`; odd descriptions absent.
@@ -1761,7 +1643,6 @@ Exact fixtures:
    Each call uses a separate synchronous `act`; all 100 calls form one sample measured with `node:perf_hooks.performance`.
 
    Assert:
-
    - After add `j`, visibility is `[k[j], k[j-1], …, k[max(0, j-4)]]`.
    - After each close, visibility is the five greatest remaining indices descending.
    - Immediately before clear: `[k[49], k[47], k[45], k[43], k[41]]`.
@@ -1851,12 +1732,12 @@ Explicit cumulative report additionally requires:
 
 Reports:
 
-| Bundle | Current candidates | Cumulative candidates | Shared report | Cumulative report |
-| --- | --- | --- | --- | --- |
-| 1 | AspectRatio, Blockquote, ButtonGroup, Code, Skeleton | Same five | `.artifacts/accessibility-bundle-1-shared.json` | `.artifacts/accessibility-bundle-1-cumulative.json` |
-| 2 | Citation, Markdown, Timestamp, Outline | Bundles 1–2 | `.artifacts/accessibility-bundle-2-shared.json` | `.artifacts/accessibility-bundle-2-cumulative.json` |
-| 3 | OverflowList, Resizable, Lightbox | Bundles 1–3 | `.artifacts/accessibility-bundle-3-shared.json` | `.artifacts/accessibility-bundle-3-cumulative.json` |
-| 4 | Toast | All 13 | `.artifacts/accessibility-bundle-4-shared.json` | `.artifacts/accessibility-bundle-4-cumulative.json` |
+| Bundle | Current candidates                                   | Cumulative candidates | Shared report                                   | Cumulative report                                   |
+| ------ | ---------------------------------------------------- | --------------------- | ----------------------------------------------- | --------------------------------------------------- |
+| 1      | AspectRatio, Blockquote, ButtonGroup, Code, Skeleton | Same five             | `.artifacts/accessibility-bundle-1-shared.json` | `.artifacts/accessibility-bundle-1-cumulative.json` |
+| 2      | Citation, Markdown, Timestamp, Outline               | Bundles 1–2           | `.artifacts/accessibility-bundle-2-shared.json` | `.artifacts/accessibility-bundle-2-cumulative.json` |
+| 3      | OverflowList, Resizable, Lightbox                    | Bundles 1–3           | `.artifacts/accessibility-bundle-3-shared.json` | `.artifacts/accessibility-bundle-3-cumulative.json` |
+| 4      | Toast                                                | All 13                | `.artifacts/accessibility-bundle-4-shared.json` | `.artifacts/accessibility-bundle-4-cumulative.json` |
 
 Retain all eight reports as bundle evidence. The final shared report is authoritative for broad shared-foundation coverage; the final cumulative report is authoritative for all 13 candidates.
 
@@ -2055,7 +1936,7 @@ Owning-bundle capture only:
 
 ```bash
 pnpm performance:components:capture
-git diff -- analysis/baselines/component-performance-budgets.json
+git diff -- test/baselines/roadmap/component-performance-budgets.json
 ```
 
 Acceptance and CI:
@@ -2064,7 +1945,7 @@ Acceptance and CI:
 pnpm performance:roadmap:check
 pnpm performance:components:check
 pnpm performance:check
-git diff --exit-code -- analysis/baselines/component-performance-budgets.json
+git diff --exit-code -- test/baselines/roadmap/component-performance-budgets.json
 ```
 
 Legacy protection:
@@ -2072,14 +1953,14 @@ Legacy protection:
 ```bash
 shasum -a 256 \
   schemas/performance-budget.schema.json \
-  analysis/baselines/performance-budgets.json \
+  test/baselines/roadmap/performance-budgets.json \
   tools/benchmark-roadmap-performance.tsx
 
 git diff --exit-code \
   5e539e19287b9f5469d8f13e0ebe44f43d4dda62 \
   -- \
   schemas/performance-budget.schema.json \
-  analysis/baselines/performance-budgets.json \
+  test/baselines/roadmap/performance-budgets.json \
   tools/benchmark-roadmap-performance.tsx
 ```
 

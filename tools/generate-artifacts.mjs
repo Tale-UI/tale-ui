@@ -14,7 +14,7 @@ import {
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const CHECK_MODE = process.argv.includes('--check');
-const PLAN_PATH = 'analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md';
+const PLAN_PATH = 'docs/plans/prioritized-roadmap-implementation-plan.md';
 const ARTIFACT_OUTPUT = 'registry/artifacts.json';
 const CAPABILITY_OUTPUT = 'registry/capabilities.json';
 const TRACEABILITY_OUTPUT = 'registry/roadmap-traceability.json';

@@ -19,7 +19,7 @@ evidence-ranked top five can enter public component work.
 
 ## Preserved inventory
 
-The canonical inventory is `analysis/table-plugins/inventory.json`:
+The canonical inventory is `registry/sources/roadmap/table-plugins/inventory.json`:
 
 1. selection;
 2. sorting;
@@ -35,7 +35,7 @@ The canonical inventory is `analysis/table-plugins/inventory.json`:
 `pnpm roadmap:contracts:check` enforces exact set equality, unique ranks,
 record digests, evidence provenance, selection/sorting prototype coverage, and
 the exact 1k/10k benchmark matrix in
-`analysis/baselines/table-controller.json`.
+`test/baselines/roadmap/table-controller.json`.
 
 ## Controller contract
 
@@ -110,7 +110,7 @@ No migration can require rewriting `Table.Header`, `Table.Column`,
 
 ## Ranking and release gate
 
-`analysis/table-plugins/ranking.json` establishes the top five from repository
+`registry/sources/roadmap/table-plugins/ranking.json` establishes the top five from repository
 evidence and the roadmap’s 1k/10k requirement. Selection and sorting are
 mandatory prototypes but receive no automatic rank bonus. The ranking is
 authoritative while its status is `approved`.

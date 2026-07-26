@@ -29,7 +29,7 @@
       "rationale": "Locale, relative-time refresh, timezone, hydration, and machine-readable formatting need a dedicated contract.",
       "evidence": {
         "sources": [
-          "analysis/content/inventory.json",
+          "registry/sources/roadmap/content/inventory.json",
           "docs/components/i18n-provider.md"
         ],
         "accessibility": "Visible relative text and an absolute accessible label need user testing.",
@@ -47,10 +47,7 @@
       "disposition": "defer",
       "rationale": "Native blockquote plus Text already covers the semantics; repeated design-system demand is not yet demonstrated.",
       "evidence": {
-        "sources": [
-          "analysis/content/inventory.json",
-          "docs/components/text.md"
-        ],
+        "sources": ["registry/sources/roadmap/content/inventory.json", "docs/components/text.md"],
         "accessibility": "Native semantics are sufficient when attribution is authored correctly.",
         "state": "Stateless.",
         "security": "No parser should be introduced.",
@@ -66,10 +63,7 @@
       "disposition": "defer",
       "rationale": "Citation numbering, source identity, links, popovers, SSR, and unsafe URL policy require product evidence and security review.",
       "evidence": {
-        "sources": [
-          "analysis/content/inventory.json",
-          "docs/components/link.md"
-        ],
+        "sources": ["registry/sources/roadmap/content/inventory.json", "docs/components/link.md"],
         "accessibility": "Reference relationships and repeated link names need a defined pattern.",
         "state": "Popover and source-list ownership are unresolved.",
         "security": "External URL and untrusted source metadata policy must precede a component.",
@@ -88,7 +82,7 @@
         "sources": [
           "docs/recipes/use-clipboard.md",
           "docs/components/text-editor.md",
-          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#p2-c--selected-content-primitives"
+          "docs/plans/prioritized-roadmap-implementation-plan.md#p2-c--selected-content-primitives"
         ],
         "accessibility": "Uses pre/code semantics, preserves text, and allows an accessible label.",
         "state": "Stateless; copy actions compose externally.",

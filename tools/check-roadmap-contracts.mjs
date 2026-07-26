@@ -12,7 +12,7 @@ import { compareCanonicalStrings, computeArtifactSourceRevision } from './artifa
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 const INVENTORIES = {
-  'analysis/table-plugins/inventory.json': [
+  'registry/sources/roadmap/table-plugins/inventory.json': [
     'selection',
     'sorting',
     'pagination',
@@ -24,7 +24,7 @@ const INVENTORIES = {
     'grouped/tree rows',
     'virtualization',
   ],
-  'analysis/app-shell/inventory.json': [
+  'registry/sources/roadmap/app-shell/inventory.json': [
     'root',
     'header',
     'sidebar',
@@ -34,7 +34,7 @@ const INVENTORIES = {
     'skip link',
     'resizable-region adapter',
   ],
-  'analysis/chat/inventory.json': [
+  'registry/sources/roadmap/chat/inventory.json': [
     'ChatLayout',
     'MessageList',
     'Message',
@@ -45,7 +45,7 @@ const INVENTORIES = {
     'ToolCall',
     'streaming-text utility',
   ],
-  'analysis/content/inventory.json': [
+  'registry/sources/roadmap/content/inventory.json': [
     'Kbd',
     'Timestamp',
     'Blockquote',
@@ -53,7 +53,7 @@ const INVENTORIES = {
     'CodeBlock',
     'MetadataList',
   ],
-  'analysis/extensions/inventory.json': [
+  'registry/sources/roadmap/extensions/inventory.json': [
     'components-and-docs',
     'recipes-and-templates',
     'validations-and-pitfalls',
@@ -136,7 +136,7 @@ validate(
   'packages/react/src/i18n-provider/catalogs/en.json',
 );
 const i18nCatalog = json('packages/react/src/i18n-provider/catalogs/en.json');
-const i18nInventory = json('analysis/baselines/i18n-message-inventory.json');
+const i18nInventory = json('test/baselines/roadmap/i18n-message-inventory.json');
 assert.deepEqual(
   Object.keys(i18nCatalog.messages).toSorted(compareCanonicalStrings),
   i18nInventory.messageIds.toSorted(compareCanonicalStrings),
@@ -206,7 +206,7 @@ for (const [path, expected] of Object.entries(INVENTORIES)) {
   assert.equal(inventory.candidates.length, expected.length, `${path} must not contain duplicates`);
 }
 
-const tableRankingPath = 'analysis/table-plugins/ranking.json';
+const tableRankingPath = 'registry/sources/roadmap/table-plugins/ranking.json';
 const tableRanking = json(tableRankingPath);
 validate('schemas/table-ranking.schema.json', tableRanking, tableRankingPath);
 assert.equal(
@@ -214,7 +214,7 @@ assert.equal(
   'approved',
   'P0-D cannot exit until every Table candidate disposition and rank is approved',
 );
-const tableCandidates = INVENTORIES['analysis/table-plugins/inventory.json'];
+const tableCandidates = INVENTORIES['registry/sources/roadmap/table-plugins/inventory.json'];
 assert.deepEqual(
   tableRanking.records.map((record) => record.rank),
   Array.from({ length: tableCandidates.length }, (_, index) => index + 1),
@@ -254,11 +254,11 @@ for (const record of tableRanking.records) {
   );
 }
 assert.ok(
-  existsSync(join(ROOT, 'analysis/table-plugins/rfc.md')),
+  existsSync(join(ROOT, 'docs/architecture/rfc-table-controller.md')),
   'Table controller RFC is required with the ranking',
 );
 assert.match(
-  text('analysis/table-plugins/rfc.md'),
+  text('docs/architecture/rfc-table-controller.md'),
   /^- Status: Approved$/m,
   'The Table controller RFC must record its approved status',
 );
@@ -270,7 +270,7 @@ assert.ok(
   existsSync(join(ROOT, 'packages/react/src/table/TableController.experimental.test.tsx')),
   'Selection and sorting prototypes require controller fixtures',
 );
-const tableBenchmarkPath = 'analysis/baselines/table-controller.json';
+const tableBenchmarkPath = 'test/baselines/roadmap/table-controller.json';
 const tableBenchmark = json(tableBenchmarkPath);
 validate('schemas/table-benchmark.schema.json', tableBenchmark, tableBenchmarkPath);
 assert.equal(
@@ -306,7 +306,7 @@ for (const benchmarkCase of tableBenchmark.cases) {
     `${benchmarkCase.name} summary must match its samples`,
   );
 }
-const tableSortingBenchmarkPath = 'analysis/baselines/table-sorting.json';
+const tableSortingBenchmarkPath = 'test/baselines/roadmap/table-sorting.json';
 const tableSortingBenchmark = json(tableSortingBenchmarkPath);
 validate(
   'schemas/table-sorting-benchmark.schema.json',
@@ -348,7 +348,7 @@ assert.ok(
   'Stable Table sorting requires controller fixtures',
 );
 assert.ok(
-  existsSync(join(ROOT, 'analysis/table-plugins/sorting.md')),
+  existsSync(join(ROOT, 'docs/architecture/rfc-table-sorting.md')),
   'Stable Table sorting requires its promotion and A2UI decision record',
 );
 assert.ok(
@@ -688,10 +688,10 @@ assert.equal(
 );
 
 const dispositionInventories = {
-  table: INVENTORIES['analysis/table-plugins/inventory.json'],
-  'app-shell': INVENTORIES['analysis/app-shell/inventory.json'],
-  chat: INVENTORIES['analysis/chat/inventory.json'],
-  content: INVENTORIES['analysis/content/inventory.json'],
+  table: INVENTORIES['registry/sources/roadmap/table-plugins/inventory.json'],
+  'app-shell': INVENTORIES['registry/sources/roadmap/app-shell/inventory.json'],
+  chat: INVENTORIES['registry/sources/roadmap/chat/inventory.json'],
+  content: INVENTORIES['registry/sources/roadmap/content/inventory.json'],
 };
 for (const [inventory, candidates] of Object.entries(dispositionInventories)) {
   const dispositionFixture = {
@@ -755,9 +755,9 @@ for (const [inventory, candidates] of Object.entries(dispositionInventories)) {
 }
 
 for (const [inventory, path] of Object.entries({
-  'app-shell': 'analysis/app-shell/candidate-dispositions.json',
-  chat: 'analysis/chat/candidate-dispositions.json',
-  content: 'analysis/content/candidate-dispositions.json',
+  'app-shell': 'registry/sources/roadmap/app-shell/candidate-dispositions.json',
+  chat: 'registry/sources/roadmap/chat/candidate-dispositions.json',
+  content: 'registry/sources/roadmap/content/candidate-dispositions.json',
 })) {
   const artifact = json(path);
   validate('schemas/candidate-disposition.schema.json', artifact, path);
@@ -789,11 +789,11 @@ assert.equal(
   'Operation postimages must reject undeclared fields',
 );
 
-const rankingCandidates = INVENTORIES['analysis/table-plugins/inventory.json'];
+const rankingCandidates = INVENTORIES['registry/sources/roadmap/table-plugins/inventory.json'];
 const rankingFixture = {
   schemaVersion: '1.0.0',
   status: 'proposed',
-  inventory: 'analysis/table-plugins/inventory.json',
+  inventory: 'registry/sources/roadmap/table-plugins/inventory.json',
   evidenceRevision: digestFixture,
   methodology: 'fixture',
   prototypeCandidates: ['selection', 'sorting'],

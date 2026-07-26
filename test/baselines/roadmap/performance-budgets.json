@@ -72,7 +72,7 @@
       "warnAt": 5.508,
       "blockAt": 10.508,
       "owner": "Design Systems",
-      "evidence": "analysis/baselines/table-controller.json and table-sorting.json."
+      "evidence": "test/baselines/roadmap/table-controller.json and table-sorting.json."
     },
     {
       "id": "charts-esm-gzip",

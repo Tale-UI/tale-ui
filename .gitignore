@@ -61,44 +61,8 @@ storybook-static/
 /.pages/
 /docs/out/
 
-# Analysis (local research notes; canonical roadmap inventories are tracked)
-/analysis/*
-!/analysis/table-plugins/
-/analysis/table-plugins/*
-!/analysis/table-plugins/inventory.json
-!/analysis/table-plugins/ranking.json
-!/analysis/table-plugins/rfc.md
-!/analysis/table-plugins/sorting.md
-!/analysis/baselines/
-/analysis/baselines/*
-!/analysis/baselines/table-controller.json
-!/analysis/baselines/table-sorting.json
-!/analysis/baselines/project-mutation-runtime.json
-!/analysis/baselines/i18n-message-inventory.json
-!/analysis/baselines/performance-budgets.json
-!/analysis/baselines/agent-cold-start.json
-!/analysis/baselines/tooling-package-release.json
-!/analysis/app-shell/
-/analysis/app-shell/*
-!/analysis/app-shell/inventory.json
-!/analysis/app-shell/candidate-dispositions.json
-!/analysis/chat/
-/analysis/chat/*
-!/analysis/chat/inventory.json
-!/analysis/chat/candidate-dispositions.json
-!/analysis/content/
-/analysis/content/*
-!/analysis/content/inventory.json
-!/analysis/content/candidate-dispositions.json
-!/analysis/extensions/
-/analysis/extensions/*
-!/analysis/extensions/inventory.json
-!/analysis/gap-analysis-astryx/
-/analysis/gap-analysis-astryx/*
-!/analysis/gap-analysis-astryx/plans/
-/analysis/gap-analysis-astryx/plans/*
-!/analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md
-!/analysis/gap-analysis-astryx/plans/component-equivalence-expansion-implementation-plan.md
+# Analysis (local development and research only)
+/analysis/
 /.agentic-loop/
 /.agentic-loops/
 /plans/

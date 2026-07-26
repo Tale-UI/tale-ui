@@ -83,7 +83,7 @@
       "evidence": {
         "sources": [
           "packages/tooling/templates/chart-dashboard/source/App.tsx",
-          "analysis/app-shell/inventory.json"
+          "registry/sources/roadmap/app-shell/inventory.json"
         ],
         "repeatedTemplateEvidence": "Dashboard cards show secondary content, but no packed template repeats a shell-level secondary panel.",
         "accessibility": "Landmark naming and reading order need product evidence before standardization.",
@@ -119,7 +119,7 @@
         "sources": [
           "packages/tooling/templates/sidebar-header/source/App.tsx",
           "docs/recipes/sidebar-navigation.md",
-          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#p1-e--appshell-evidence-gate"
+          "docs/plans/prioritized-roadmap-implementation-plan.md#p1-e--appshell-evidence-gate"
         ],
         "repeatedTemplateEvidence": "Every repeated header/sidebar shell has navigation before main content, creating the same keyboard bypass need.",
         "accessibility": "The link becomes visible on focus and targets the AppShell main landmark.",
@@ -135,7 +135,7 @@
       "rationale": "No packed template supplies repeated pointer, keyboard, persistence, RTL, or minimum-size evidence for shell resizing.",
       "evidence": {
         "sources": [
-          "analysis/app-shell/inventory.json",
+          "registry/sources/roadmap/app-shell/inventory.json",
           "docs/recipes/sidebar-with-header.md"
         ],
         "repeatedTemplateEvidence": "The recipes use fixed sidebar widths; none demonstrates an accessible resizable shell boundary.",
