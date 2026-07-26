@@ -9,7 +9,7 @@
     { "subpath": "./lightbox", "enabled": false },
     { "subpath": "./markdown", "enabled": true },
     { "subpath": "./outline", "enabled": true },
-    { "subpath": "./overflow-list", "enabled": false },
+    { "subpath": "./overflow-list", "enabled": true },
     { "subpath": "./resizable", "enabled": false },
     { "subpath": "./skeleton", "enabled": true },
     { "subpath": "./timestamp", "enabled": true },

@@ -107,6 +107,7 @@
     "./navigation-menu": "./src/navigation-menu/index.ts",
     "./number-field": "./src/number-field/index.ts",
     "./outline": "./src/outline/index.ts",
+    "./overflow-list": "./src/overflow-list/index.ts",
     "./pagination": "./src/pagination/index.ts",
     "./pagination-dot": "./src/pagination-dot/index.ts",
     "./pagination-line": "./src/pagination-line/index.ts",

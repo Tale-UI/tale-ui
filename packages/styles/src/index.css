@@ -56,6 +56,7 @@
 @import './column.css';
 @import './card.css';
 @import './aspect-ratio.css';
+@import './overflow-list.css';
 
 /* ─── Overlay ───────────────────────────────────────────────────────────────── */
 @import './dialog.css';

@@ -94,6 +94,7 @@
     "./navigation-menu": "./src/navigation-menu.css",
     "./number-field": "./src/number-field.css",
     "./outline": "./src/outline.css",
+    "./overflow-list": "./src/overflow-list.css",
     "./pagination": "./src/pagination.css",
     "./pagination-dot": "./src/pagination-dot.css",
     "./pagination-line": "./src/pagination-line.css",
