@@ -2,7 +2,6 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { performance } from 'node:perf_hooks';
 import * as React from 'react';
-import { act } from 'react';
 import * as ReactDOMClient from 'react-dom/client';
 import { JSDOM } from 'jsdom';
 import { Timestamp } from '../../../packages/react/src/timestamp/index.ts';
@@ -155,7 +154,7 @@ function runSample(): ComponentPerformanceSample {
   };
 
   try {
-    act(() => {
+    React.act(() => {
       root.render(<TimestampVector onRender={onRender} />);
     });
     assert.equal(scheduler.createdIntervals, 1);
@@ -169,7 +168,7 @@ function runSample(): ComponentPerformanceSample {
     updateCommits = 0;
     scheduler.schedulerCallbacks = 0;
     const started = performance.now();
-    act(() => {
+    React.act(() => {
       scheduler.advanceTo(TIMESTAMP_T0 + 1000);
     });
     const duration = performance.now() - started;
@@ -204,7 +203,7 @@ function runSample(): ComponentPerformanceSample {
       assert.equal(postconditionDigest, expectedPostconditionDigest);
     }
 
-    act(() => {
+    React.act(() => {
       root.unmount();
     });
     assert.equal(scheduler.activeIntervalCount, 0);
@@ -214,7 +213,7 @@ function runSample(): ComponentPerformanceSample {
     restoreObserver();
     restoreScheduler();
     if (scheduler.activeIntervalCount !== 0) {
-      act(() => {
+      React.act(() => {
         root.unmount();
       });
     }

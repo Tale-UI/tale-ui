@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { performance } from 'node:perf_hooks';
 import * as React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
+import * as ReactDOM from 'react-dom/server';
 import { Markdown } from '../../../packages/react/src/markdown/index.ts';
 import {
   parseMarkdown,
@@ -65,7 +65,7 @@ assert.equal(vector.length, 10_000);
 
 const sourceDigest = sha256(markdownAdversarialSource);
 const vectorDigest = sha256(JSON.stringify(vector));
-const expectedMarkup = renderToStaticMarkup(
+const expectedMarkup = ReactDOM.renderToStaticMarkup(
   <Markdown>{markdownAdversarialSource}</Markdown>,
 );
 const markupDigest = sha256(expectedMarkup);
@@ -106,7 +106,7 @@ const expectedPostconditionDigest = sha256(
 
 function runSample(): ComponentPerformanceSample {
   const started = performance.now();
-  const markup = renderToStaticMarkup(
+  const markup = ReactDOM.renderToStaticMarkup(
     <Markdown>{markdownAdversarialSource}</Markdown>,
   );
   const duration = performance.now() - started;
