@@ -1,0 +1,55 @@
+/*
+ * Outline — @tale-ui/react
+ *
+ * Semantic nested document navigation with an observed or controlled active marker.
+ */
+
+.tale-outline {
+  color: var(--neutral-80);
+  font-family: var(--text-font-family);
+  font-size: var(--text-s-font-size);
+}
+
+.tale-outline__list {
+  display: grid;
+  gap: var(--space-4xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tale-outline__list--nested {
+  margin-top: var(--space-4xs);
+  padding-inline-start: var(--space-m);
+}
+
+.tale-outline__item {
+  min-width: 0;
+}
+
+.tale-outline__link {
+  display: block;
+  padding: var(--space-4xs) var(--space-2xs);
+  border-inline-start: 2px solid transparent;
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  color: var(--neutral-70);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.tale-outline__link:hover {
+  background-color: var(--neutral-10);
+  color: var(--neutral-90);
+}
+
+.tale-outline__link:focus-visible {
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: 2px;
+}
+
+.tale-outline__link[data-active] {
+  border-inline-start-color: var(--color-60);
+  background-color: var(--color-10);
+  color: var(--neutral-100);
+  font-weight: var(--label-font-weight);
+}
