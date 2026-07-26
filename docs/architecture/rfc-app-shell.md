@@ -3,7 +3,7 @@
 - Status: Approved
 - Date: 2026-07-25
 - Approval: Repository owner delegated implementation authority
-- Evidence: `analysis/app-shell/candidate-dispositions.json`
+- Evidence: `registry/sources/roadmap/app-shell/candidate-dispositions.json`
 
 ## Decision
 

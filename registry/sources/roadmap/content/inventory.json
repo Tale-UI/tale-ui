@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "inventory": "content",
-  "source": "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#p2-c--selected-content-primitives",
+  "source": "docs/plans/prioritized-roadmap-implementation-plan.md#p2-c--selected-content-primitives",
   "status": "frozen",
   "candidates": ["Kbd", "Timestamp", "Blockquote", "Citation", "CodeBlock", "MetadataList"]
 }

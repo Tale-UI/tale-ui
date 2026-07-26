@@ -22,7 +22,7 @@ import { AppShell } from '../packages/react/src/app-shell/index.ts';
 const ROOT = resolve(process.cwd());
 const args = process.argv.slice(2);
 const CAPTURE = args.includes('--capture');
-const BASELINE_PATH = join(ROOT, 'analysis/baselines/performance-budgets.json');
+const BASELINE_PATH = join(ROOT, 'test/baselines/roadmap/performance-budgets.json');
 const outputIndex = args.indexOf('--output');
 const OUTPUT =
   outputIndex === -1
@@ -180,8 +180,8 @@ function buildCssAndMeasure() {
 }
 
 async function main() {
-  const tableController = readJson(join(ROOT, 'analysis/baselines/table-controller.json'));
-  const tableSorting = readJson(join(ROOT, 'analysis/baselines/table-sorting.json'));
+  const tableController = readJson(join(ROOT, 'test/baselines/roadmap/table-controller.json'));
+  const tableSorting = readJson(join(ROOT, 'test/baselines/roadmap/table-sorting.json'));
   const table10kP95 = Math.max(
     ...[...tableController.cases, ...tableSorting.cases]
       .filter(({ name }) => name.includes('10k'))
@@ -241,7 +241,7 @@ async function main() {
       unit: 'milliseconds',
       value: table10kP95,
       owner: 'Design Systems',
-      evidence: 'analysis/baselines/table-controller.json and table-sorting.json.',
+      evidence: 'test/baselines/roadmap/table-controller.json and table-sorting.json.',
     },
     {
       id: 'charts-esm-gzip',
@@ -281,7 +281,7 @@ async function main() {
 
   if (CAPTURE) {
     const budget = {
-      $schema: '../../schemas/performance-budget.schema.json',
+      $schema: '../../../schemas/performance-budget.schema.json',
       schemaVersion: '1.0.0',
       capturedOn: TODAY,
       runner: {

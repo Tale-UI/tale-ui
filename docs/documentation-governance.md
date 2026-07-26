@@ -25,10 +25,10 @@ Current guidance includes the root and package READMEs, `CLAUDE.md`,
 `CONTRIBUTING.md`, `SECURITY.md`, current files under `docs/`, and operational
 guides under `test/` and `tools/`.
 
-The following scopes record decisions or preserve released material and are not
-rewritten merely to match the current tree:
+The following scopes record decisions, preserve released material, or contain
+ignored local work and are not rewritten merely to match the current tree:
 
-- `analysis/` and `plans/`;
+- ignored local-only `analysis/` and `plans/` workspaces;
 - `docs/plans/` and `docs/archive/`;
 - `docs/versioned/v1/`; and
 - package changelogs.

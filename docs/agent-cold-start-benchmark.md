@@ -15,7 +15,7 @@ runtime in a temporary clean project and checks five tasks:
 
 Context cost is reported as UTF-8 bytes and a stable estimate of one token per
 four bytes. The committed history lives in
-`analysis/baselines/agent-cold-start.json`. CI reruns the same fixture and fails
+`test/baselines/roadmap/agent-cold-start.json`. CI reruns the same fixture and fails
 on unexplained drift.
 
 Capture an intentional new baseline with:

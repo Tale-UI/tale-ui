@@ -6,9 +6,9 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const ADR_PATH = 'docs/architecture/adr-001-tooling-package.md';
-const VALIDATION_BASELINE_PATH = 'analysis/baselines/validation-runtime.json';
-const MUTATION_BASELINE_PATH = 'analysis/baselines/project-mutation-runtime.json';
-const RELEASE_BASELINE_PATH = 'analysis/baselines/tooling-package-release.json';
+const VALIDATION_BASELINE_PATH = 'test/baselines/roadmap/validation-runtime.json';
+const MUTATION_BASELINE_PATH = 'test/baselines/roadmap/project-mutation-runtime.json';
+const RELEASE_BASELINE_PATH = 'test/baselines/roadmap/tooling-package-release.json';
 const adr = readFileSync(join(ROOT, ADR_PATH), 'utf8');
 const accepted = /^- Status: Accepted$/m.test(adr);
 

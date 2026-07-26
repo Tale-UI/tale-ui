@@ -56,7 +56,7 @@ function healthValue(metricId) {
       knownLegacyAxeViolations: knownViolations.length,
       changedComponentAxeGate: true,
       maintainedPerformanceBudgets: readJson(
-        join(ROOT, 'analysis/baselines/performance-budgets.json'),
+        join(ROOT, 'test/baselines/roadmap/performance-budgets.json'),
       ).budgets.length,
     };
   }
@@ -116,7 +116,7 @@ function buildSnapshot() {
           'registry/components.json',
           'tools/golden-prompts/index.json',
           'test/accessibility/baseline.json',
-          'analysis/baselines/performance-budgets.json',
+          'test/baselines/roadmap/performance-budgets.json',
         ],
         decisionUse: true,
       };

@@ -12,6 +12,27 @@ const CHECK = process.argv.includes('--check');
 const OUTPUT = 'registry/roadmap-evidence.json';
 const TRACEABILITY = 'registry/roadmap-traceability.json';
 const REVIEWED_HEAD = 'f164d4ac8be806a2f8177d8f877c6d47965e2279';
+// The consolidated review predates the path-only migration out of analysis/.
+// These aliases read the immutable reviewed commit; current checks use the canonical paths below.
+const REVIEWED_PATH_ALIASES = {
+  'registry/sources/roadmap/app-shell/candidate-dispositions.json':
+    'analysis/app-shell/candidate-dispositions.json',
+  'registry/sources/roadmap/chat/candidate-dispositions.json':
+    'analysis/chat/candidate-dispositions.json',
+  'registry/sources/roadmap/content/candidate-dispositions.json':
+    'analysis/content/candidate-dispositions.json',
+  'registry/sources/roadmap/extensions/inventory.json': 'analysis/extensions/inventory.json',
+  'registry/sources/roadmap/table-plugins/ranking.json': 'analysis/table-plugins/ranking.json',
+  'test/baselines/roadmap/agent-cold-start.json': 'analysis/baselines/agent-cold-start.json',
+  'test/baselines/roadmap/i18n-message-inventory.json':
+    'analysis/baselines/i18n-message-inventory.json',
+  'test/baselines/roadmap/motion-elevation.json': 'analysis/baselines/motion-elevation.json',
+  'test/baselines/roadmap/performance-budgets.json': 'analysis/baselines/performance-budgets.json',
+  'test/baselines/roadmap/table-controller.json': 'analysis/baselines/table-controller.json',
+  'test/baselines/roadmap/table-sorting.json': 'analysis/baselines/table-sorting.json',
+  'test/baselines/roadmap/tooling-package-release.json':
+    'analysis/baselines/tooling-package-release.json',
+};
 
 const evidence = {
   'R01.1': ['registry/artifacts.json', 'tools/check-roadmap-contracts.mjs'],
@@ -22,23 +43,26 @@ const evidence = {
   'R02.2': ['packages/tooling/src/materialize.test.ts', 'packages/tooling/src/operations.test.ts'],
   'R02.3': [
     'packages/tooling/scripts/test-packed.mjs',
-    'analysis/baselines/tooling-package-release.json',
+    'test/baselines/roadmap/tooling-package-release.json',
   ],
   'R02.4': ['.github/workflows/ci.yml', 'tools/check-roadmap-contracts.mjs'],
-  'R02.5': ['analysis/baselines/agent-cold-start.json', 'tools/benchmark-agent-cold-start.ts'],
+  'R02.5': ['test/baselines/roadmap/agent-cold-start.json', 'tools/benchmark-agent-cold-start.ts'],
   'R03.1': ['tools/generate-roadmap-templates.mjs', 'packages/tooling/src/materialize.test.ts'],
   'R03.2': ['packages/tooling/src/cli.ts', 'packages/tooling/src/materialize.test.ts'],
   'R03.3': ['packages/tooling/src/materialize.test.ts', 'packages/tooling/src/operations.test.ts'],
   'R03.4': ['packages/tooling/scripts/test-packed.mjs'],
   'R03.5': ['registry/reports/roadmap-visuals.json', 'test/visual/roadmap.spec.ts'],
   'R04.1': [
-    'analysis/table-plugins/ranking.json',
+    'registry/sources/roadmap/table-plugins/ranking.json',
     'packages/react/src/table/TableController.experimental.test.tsx',
   ],
   'R04.2': ['packages/react/src/table/TableController.experimental.test.tsx'],
   'R04.3': ['packages/react/src/table/TableController.experimental.test.tsx'],
   'R04.4': ['packages/react/src/table/TableController.experimental.test.tsx'],
-  'R04.5': ['analysis/baselines/table-controller.json', 'analysis/baselines/table-sorting.json'],
+  'R04.5': [
+    'test/baselines/roadmap/table-controller.json',
+    'test/baselines/roadmap/table-sorting.json',
+  ],
   'R05.1': ['tools/generate-roadmap-migrations.mjs', 'packages/tooling/src/migrations.test.ts'],
   'R05.2': ['packages/tooling/src/migrations.test.ts', 'registry/reports/migrations.json'],
   'R05.3': [
@@ -50,24 +74,33 @@ const evidence = {
   'R06.3': ['apps/hosted-mcp/src/worker.test.ts', 'apps/hosted-mcp/src/worker.ts'],
   'R06.4': ['apps/hosted-mcp/src/worker.test.ts', 'apps/hosted-mcp/README.md'],
   'R07.1': [
-    'analysis/baselines/i18n-message-inventory.json',
+    'test/baselines/roadmap/i18n-message-inventory.json',
     'packages/react/src/i18n-provider/catalogs/en.json',
   ],
   'R07.2': [
     'packages/react/src/i18n-provider/I18nProvider.test.tsx',
     'registry/reports/roadmap-visuals.json',
   ],
-  'R07.3': ['analysis/baselines/i18n-message-inventory.json', 'tools/check-roadmap-contracts.mjs'],
+  'R07.3': [
+    'test/baselines/roadmap/i18n-message-inventory.json',
+    'tools/check-roadmap-contracts.mjs',
+  ],
   'R08.1': ['registry/metrics/current.json', 'apps/metrics-dashboard/README.md'],
   'R08.2': ['docs/architecture/adr-003-hosting-and-metrics.md', 'schemas/metrics.schema.json'],
-  'R09.1': ['analysis/app-shell/candidate-dispositions.json', 'docs/architecture/rfc-app-shell.md'],
+  'R09.1': [
+    'registry/sources/roadmap/app-shell/candidate-dispositions.json',
+    'docs/architecture/rfc-app-shell.md',
+  ],
   'R09.2': ['packages/react/src/app-shell/AppShell.test.tsx', 'docs/components/app-shell.md'],
-  'R10.1': ['analysis/baselines/motion-elevation.json', 'tools/audit-motion-elevation.mjs'],
+  'R10.1': ['test/baselines/roadmap/motion-elevation.json', 'tools/audit-motion-elevation.mjs'],
   'R10.2': [
     'playground/storybook/src/stories/MotionElevation.stories.tsx',
     'registry/reports/roadmap-visuals.json',
   ],
-  'R11.1': ['analysis/chat/candidate-dispositions.json', 'docs/architecture/rfc-chat.md'],
+  'R11.1': [
+    'registry/sources/roadmap/chat/candidate-dispositions.json',
+    'docs/architecture/rfc-chat.md',
+  ],
   'R11.2': ['packages/react/src/chat/Chat.test.tsx', 'docs/components/chat.md'],
   'R11.3': ['packages/react/src/chat/Chat.test.tsx', 'docs/architecture/rfc-chat.md'],
   'R11.4': [
@@ -75,16 +108,16 @@ const evidence = {
     'packages/tooling/templates/chat-artifact-panel/template.json',
   ],
   'R12.1': [
-    'analysis/content/candidate-dispositions.json',
+    'registry/sources/roadmap/content/candidate-dispositions.json',
     'packages/react/src/code-block/CodeBlock.test.tsx',
   ],
   'R12.2': [
-    'analysis/content/candidate-dispositions.json',
+    'registry/sources/roadmap/content/candidate-dispositions.json',
     'docs/architecture/roadmap-decisions.md',
   ],
   'R13.1': ['docs/governance/lifecycle.md', 'registry/reports/status.json'],
   'R14.1': [
-    'analysis/baselines/performance-budgets.json',
+    'test/baselines/roadmap/performance-budgets.json',
     'tools/benchmark-roadmap-performance.tsx',
   ],
   'R14.2': ['.github/workflows/ci.yml', 'tools/benchmark-roadmap-performance.tsx'],
@@ -93,33 +126,37 @@ const evidence = {
     'registry/integrations/code-connect.json',
     'registry/integrations/figma-parity-public.json',
   ],
-  'R16.1': ['packages/tooling/src/extensions.test.ts', 'analysis/extensions/inventory.json'],
+  'R16.1': [
+    'packages/tooling/src/extensions.test.ts',
+    'registry/sources/roadmap/extensions/inventory.json',
+  ],
   'R16.2': ['packages/tooling/src/extensions.test.ts', 'registry/extensions/trust.json'],
   'R17.1': ['registry/conformance/report.json', 'examples/react-native/TokenCard.tsx'],
   'R17.2': ['tools/generate-native-conformance.mjs'],
   SM01: ['packages/tooling/scripts/test-packed.mjs'],
   SM02: ['tools/generate-roadmap-templates.mjs', 'packages/tooling/src/materialize.test.ts'],
   SM03: [
-    'analysis/table-plugins/ranking.json',
+    'registry/sources/roadmap/table-plugins/ranking.json',
     'packages/react/src/table/TableController.experimental.test.tsx',
   ],
   SM04: ['packages/tooling/src/migrations.test.ts', 'registry/reports/migrations.json'],
-  SM05: ['registry/artifacts.json', 'analysis/baselines/tooling-package-release.json'],
+  SM05: ['registry/artifacts.json', 'test/baselines/roadmap/tooling-package-release.json'],
   SM06: ['.github/workflows/ci.yml', '.github/workflows/accessibility-full.yml'],
-  SM07: ['analysis/baselines/agent-cold-start.json', 'registry/metrics/current.json'],
+  SM07: ['test/baselines/roadmap/agent-cold-start.json', 'registry/metrics/current.json'],
   SM08: ['docs/architecture/adr-003-hosting-and-metrics.md', 'registry/metrics/current.json'],
 };
 
 function digest(path) {
+  const reviewedPath = REVIEWED_PATH_ALIASES[path] ?? path;
   let reviewedContent;
   try {
-    reviewedContent = execFileSync('git', ['show', `${REVIEWED_HEAD}:${path}`], {
+    reviewedContent = execFileSync('git', ['show', `${REVIEWED_HEAD}:${reviewedPath}`], {
       cwd: ROOT,
       maxBuffer: 10 * 1024 * 1024,
     });
   } catch {
     throw new Error(
-      `Cannot read roadmap evidence from reviewed commit ${REVIEWED_HEAD}. ` +
+      `Cannot read roadmap evidence ${reviewedPath} from reviewed commit ${REVIEWED_HEAD}. ` +
         'Fetch the repository history (for CI, use actions/checkout with fetch-depth: 0).',
     );
   }

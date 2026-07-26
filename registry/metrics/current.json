@@ -187,7 +187,7 @@
         "registry/components.json",
         "tools/golden-prompts/index.json",
         "test/accessibility/baseline.json",
-        "analysis/baselines/performance-budgets.json"
+        "test/baselines/roadmap/performance-budgets.json"
       ],
       "decisionUse": true
     },
@@ -215,7 +215,7 @@
         "registry/components.json",
         "tools/golden-prompts/index.json",
         "test/accessibility/baseline.json",
-        "analysis/baselines/performance-budgets.json"
+        "test/baselines/roadmap/performance-budgets.json"
       ],
       "decisionUse": true
     },
@@ -277,5 +277,5 @@
       "decisionUse": false
     }
   ],
-  "digest": "sha256:905d55533eb6a666430476eb4ac28242552c9c79b49bddb7675aa1f5f712b043"
+  "digest": "sha256:947dd1a3a56c8bfa8388cdceeebf90592edf8e6663be1b838ccb031540d07f1a"
 }

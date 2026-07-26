@@ -15,18 +15,7 @@
     "command": "pnpm --filter @tale-ui/tooling build, followed by in-process validateCode calls"
   },
   "normalTypeScriptSamplesMs": [
-    401.08,
-    402.94,
-    407.7,
-    408.47,
-    412.04,
-    412.79,
-    413.89,
-    415.85,
-    419.56,
-    428.76,
-    435.22,
-    446.62
+    401.08, 402.94, 407.7, 408.47, 412.04, 412.79, 413.89, 415.85, 419.56, 428.76, 435.22, 446.62
   ],
   "normalTypeScriptSummaryMs": {
     "minimum": 401.08,

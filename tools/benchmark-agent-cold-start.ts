@@ -15,7 +15,7 @@ import { initializeProject } from '../packages/tooling/src/materialize.ts';
 
 const ROOT = resolve(process.cwd());
 const CAPTURE = process.argv.includes('--capture');
-const BASELINE_PATH = join(ROOT, 'analysis/baselines/agent-cold-start.json');
+const BASELINE_PATH = join(ROOT, 'test/baselines/roadmap/agent-cold-start.json');
 const TASKS = [
   {
     id: 'registry-first-guidance',

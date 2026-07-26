@@ -91,7 +91,7 @@ const result = {
 
 if (process.argv.includes('--check')) {
   const baseline = JSON.parse(
-    readFileSync(new URL('../analysis/baselines/table-sorting.json', import.meta.url), 'utf8'),
+    readFileSync(new URL('../test/baselines/roadmap/table-sorting.json', import.meta.url), 'utf8'),
   ) as typeof result;
   const deterministicResults = (benchmark: typeof result) =>
     benchmark.cases.map(({ operation, rowCount, resultDigest }) => ({

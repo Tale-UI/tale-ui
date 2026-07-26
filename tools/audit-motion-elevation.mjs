@@ -8,7 +8,7 @@ import addFormats from 'ajv-formats';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const STYLE_ROOT = join(ROOT, 'packages/styles/src');
-const INVENTORY_PATH = join(ROOT, 'analysis/baselines/motion-elevation.json');
+const INVENTORY_PATH = join(ROOT, 'test/baselines/roadmap/motion-elevation.json');
 const CHECK = process.argv.includes('--check');
 const TODAY = new Date().toISOString().slice(0, 10);
 

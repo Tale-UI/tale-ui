@@ -9,8 +9,8 @@
       "rationale": "A protocol-neutral layout gives mobile and artifact-panel templates a shared responsive structure without owning conversation state.",
       "evidence": {
         "sources": [
-          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#p2-b--protocol-agnostic-chat",
-          "analysis/chat/inventory.json"
+          "docs/plans/prioritized-roadmap-implementation-plan.md#p2-b--protocol-agnostic-chat",
+          "registry/sources/roadmap/chat/inventory.json"
         ],
         "ordinaryDataApi": "Accepts React children and an optional artifact panel; no SDK message types.",
         "accessibility": "Preserves document order, zoom reflow, landmarks, RTL, and reduced-motion behavior.",
@@ -31,7 +31,7 @@
       "rationale": "A labelled log with an explicit live-region policy is difficult to reproduce safely in each product.",
       "evidence": {
         "sources": [
-          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#async-and-state-contracts",
+          "docs/plans/prioritized-roadmap-implementation-plan.md#async-and-state-contracts",
           "docs/components/list.md"
         ],
         "ordinaryDataApi": "Renders caller-owned Message children and accepts standard landmark labels.",
@@ -53,8 +53,8 @@
       "rationale": "A role-aware message article centralizes stable message identity and speaker semantics while retaining ordinary app data.",
       "evidence": {
         "sources": [
-          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#chat-evaluation-contract",
-          "analysis/chat/inventory.json"
+          "docs/plans/prioritized-roadmap-implementation-plan.md#chat-evaluation-contract",
+          "registry/sources/roadmap/chat/inventory.json"
         ],
         "ordinaryDataApi": "Accepts a stable id, user/assistant/system role, and React children.",
         "accessibility": "Uses an article with an accessible label supplied or derived from the role.",
@@ -74,10 +74,7 @@
       "disposition": "approve",
       "rationale": "A role-inheriting visual bubble keeps alignment and long-content behavior consistent without duplicating message semantics.",
       "evidence": {
-        "sources": [
-          "analysis/chat/inventory.json",
-          "packages/styles/src/text.css"
-        ],
+        "sources": ["registry/sources/roadmap/chat/inventory.json", "packages/styles/src/text.css"],
         "ordinaryDataApi": "Accepts React children and inherits role through Chat context.",
         "accessibility": "Adds no landmark or live region; long text wraps and remains zoom-safe.",
         "state": "Stateless.",
@@ -96,10 +93,7 @@
       "disposition": "approve",
       "rationale": "A metadata slot provides consistent low-emphasis placement for caller-formatted timestamps, status, and attribution.",
       "evidence": {
-        "sources": [
-          "analysis/chat/inventory.json",
-          "docs/components/text.md"
-        ],
+        "sources": ["registry/sources/roadmap/chat/inventory.json", "docs/components/text.md"],
         "ordinaryDataApi": "Accepts caller-rendered React content rather than a protocol timestamp or status shape.",
         "accessibility": "Metadata remains perceivable and does not rely on color alone.",
         "state": "Stateless descriptive output.",
@@ -119,8 +113,8 @@
       "rationale": "A separate component duplicates Message; system output is represented by Chat.Message role=\"system\".",
       "evidence": {
         "sources": [
-          "analysis/chat/inventory.json",
-          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#chat-evaluation-contract"
+          "registry/sources/roadmap/chat/inventory.json",
+          "docs/plans/prioritized-roadmap-implementation-plan.md#chat-evaluation-contract"
         ],
         "ordinaryDataApi": "The ordinary role field already expresses system messages.",
         "accessibility": "One message semantic avoids divergent labels and announcement behavior.",
@@ -141,7 +135,7 @@
       "rationale": "A form-based composer can standardize submit semantics and disabled/busy behavior while leaving draft and transport state controlled.",
       "evidence": {
         "sources": [
-          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#p2-b--protocol-agnostic-chat",
+          "docs/plans/prioritized-roadmap-implementation-plan.md#p2-b--protocol-agnostic-chat",
           "docs/components/text-area.md",
           "docs/components/form.md"
         ],
@@ -164,7 +158,7 @@
       "rationale": "A disclosure-based tool-call surface standardizes collapsed, running, success, and error states without executing tools.",
       "evidence": {
         "sources": [
-          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#p2-b--protocol-agnostic-chat",
+          "docs/plans/prioritized-roadmap-implementation-plan.md#p2-b--protocol-agnostic-chat",
           "docs/components/disclosure.md"
         ],
         "ordinaryDataApi": "Accepts a string label, four-state enum, and React summary/details.",
@@ -186,8 +180,8 @@
       "rationale": "A small reducer for ordered text chunks prevents duplicate, stale, and post-terminal updates without coupling to a transport.",
       "evidence": {
         "sources": [
-          "analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md#async-and-state-contracts",
-          "analysis/chat/inventory.json"
+          "docs/plans/prioritized-roadmap-implementation-plan.md#async-and-state-contracts",
+          "registry/sources/roadmap/chat/inventory.json"
         ],
         "ordinaryDataApi": "Consumes serializable stream/message IDs, integer sequence numbers, text chunks, and terminal states.",
         "accessibility": "Returns batched text; callers choose deliberate live-region announcements.",

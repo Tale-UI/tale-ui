@@ -49,5 +49,5 @@ that matches the surface. The `audit:motion:elevation:check` ratchet blocks new 
 while allowing the existing inventory to decrease incrementally.
 
 React Native does not consume CSS shadow recipes or cubic-bezier strings directly. The temporary
-platform exception is recorded in `analysis/baselines/motion-elevation.json`; P3-C owns the native
+platform exception is recorded in `test/baselines/roadmap/motion-elevation.json`; P3-C owns the native
 object mapping and its conformance tests.

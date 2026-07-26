@@ -4,16 +4,19 @@ This monorepo is managed with **pnpm workspaces**.
 
 ## Directory Conventions
 
-| Directory        | Purpose                                                                         | Published to npm?                     |
-| ---------------- | ------------------------------------------------------------------------------- | ------------------------------------- |
-| `packages/`      | Reusable public packages                                                        | Package-specific                      |
-| `apps/`          | Private hosted services and maintainer applications                             | No                                    |
-| `docs/`          | Current documentation, public Next.js site, versioned snapshots, and governance | No                                    |
-| `docs/upstream/` | Maintainer adoption logs for upstream dependency releases                       | No                                    |
-| `playground/`    | Storybook, Vite component playground, and colour-scale playground               | No                                    |
-| `scripts/`       | Release and repository automation                                               | No                                    |
-| `tools/`         | Audit, generation, evaluation, build, and release scripts                       | No                                    |
-| `test/`          | Shared unit helpers, browser projects, visual tests, and fixtures               | Workspace packages only; not released |
+| Directory                   | Purpose                                                                         | Published to npm?                     |
+| --------------------------- | ------------------------------------------------------------------------------- | ------------------------------------- |
+| `packages/`                 | Reusable public packages                                                        | Package-specific                      |
+| `apps/`                     | Private hosted services and maintainer applications                             | No                                    |
+| `docs/`                     | Current documentation, public Next.js site, versioned snapshots, and governance | No                                    |
+| `docs/upstream/`            | Maintainer adoption logs for upstream dependency releases                       | No                                    |
+| `registry/sources/roadmap/` | Canonical roadmap inventories and disposition evidence                          | No                                    |
+| `test/baselines/roadmap/`   | Maintained benchmark and repository-gate baselines                              | No                                    |
+| `analysis/`                 | Ignored local development and research notes                                    | No                                    |
+| `playground/`               | Storybook, Vite component playground, and colour-scale playground               | No                                    |
+| `scripts/`                  | Release and repository automation                                               | No                                    |
+| `tools/`                    | Audit, generation, evaluation, build, and release scripts                       | No                                    |
+| `test/`                     | Shared unit helpers, browser projects, visual tests, and fixtures               | Workspace packages only; not released |
 
 ## Directory Layout
 

@@ -2,7 +2,7 @@
 
 ## Objective
 
-Deliver the complete P0–P3 roadmap in `analysis/gap-analysis-astryx/05-prioritized-roadmap.md` through incremental capability releases while preserving Tale UI’s registry-first, React Aria, CSS-first, MCP, golden-prompt, and A2UI strengths.
+Deliver the complete P0–P3 roadmap derived from the local gap-analysis research through incremental capability releases while preserving Tale UI’s registry-first, React Aria, CSS-first, MCP, golden-prompt, and A2UI strengths.
 
 This plan defines contracts, accountable roles, package and runtime ownership, dependencies, reviewable work packages, verification, rollout, rollback, and measurable exit gates. It is not a commitment to deliver every workstream in one release and does not invent dates, staffing, budgets, vendors, credentials, or individual owners.
 
@@ -21,7 +21,7 @@ This plan defines contracts, accountable roles, package and runtime ownership, d
 - `docs/authoring-components.md`
 - `docs/react-aria-deviations.md`
 - `docs/upstream/react-aria-components.md`
-- `analysis/gap-analysis-astryx/05-prioritized-roadmap.md`
+- Local gap-analysis research retained outside version control
 - `.agentic-loop/runs/20260724T083741Z/request.md`
 - `.agentic-loop/runs/20260724T083741Z/memory.md`
 - `.agentic-loop/runs/20260724T083741Z/reviewer-02/round-02/plan.md`
@@ -428,7 +428,7 @@ The immutable initial inventory is:
 9. grouped/tree rows; and
 10. virtualization.
 
-Add `analysis/table-plugins/ranking.json` and a schema requiring one record per candidate with demand evidence, React Aria compatibility, accessibility risks, client/server state, SSR/hydration, controlled/uncontrolled behavior, 1k/10k performance implications, implementation/migration/maintenance cost, disposition, rank, and evidence digest.
+Add `registry/sources/roadmap/table-plugins/ranking.json` and a schema requiring one record per candidate with demand evidence, React Aria compatibility, accessibility risks, client/server state, SSR/hydration, controlled/uncontrolled behavior, 1k/10k performance implications, implementation/migration/maintenance cost, disposition, rank, and evidence digest.
 
 A deterministic set-equality check rejects missing, duplicate, substituted, or extra candidates. Selection and sorting remain mandatory prototypes but receive no automatic ranking advantage.
 
@@ -445,7 +445,7 @@ The RFC inventory contains exactly these eight distinct candidates:
 7. skip link; and
 8. resizable-region adapter.
 
-`analysis/app-shell/candidate-dispositions.json` records an evidence-backed `approve`, `defer`, or `reject` disposition for every candidate, with repeated-template evidence, accessibility/state/SSR implications, ownership boundary, rationale, and evidence digest. Set equality is enforced.
+`registry/sources/roadmap/app-shell/candidate-dispositions.json` records an evidence-backed `approve`, `defer`, or `reject` disposition for every candidate, with repeated-template evidence, accessibility/state/SSR implications, ownership boundary, rationale, and evidence digest. Set equality is enforced.
 
 No public family is committed until the first template set demonstrates repeated structure under the Phase 0-approved threshold. An approved AppShell must not own routing, data loading, authentication, or application state.
 
@@ -463,7 +463,7 @@ The RFC inventory contains exactly:
 8. `ToolCall`; and
 9. streaming-text utility.
 
-`analysis/chat/candidate-dispositions.json` records an `approve`, `defer`, or `reject` disposition for every candidate, with ordinary-data API, accessibility, streaming/state, localization, security, SSR, performance, ownership, and migration evidence. Set equality is enforced.
+`registry/sources/roadmap/chat/candidate-dispositions.json` records an `approve`, `defer`, or `reject` disposition for every candidate, with ordinary-data API, accessibility, streaming/state, localization, security, SSR, performance, ownership, and migration evidence. Set equality is enforced.
 
 Enumeration does not commit each candidate to a public API. Stable promotion follows the RFC and evidence gate. Mobile and artifact-panel templates remain required outcomes.
 
