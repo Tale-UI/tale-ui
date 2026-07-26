@@ -127,18 +127,14 @@ interface HandleRecord {
   id: string;
   before: string;
   after: string;
-  beforeIndex: number;
-  afterIndex: number;
   domId: string;
 }
 
 interface Topology {
   panels: PanelRecord[];
   panelById: Map<string, PanelRecord>;
-  handles: HandleRecord[];
   handleById: Map<string, HandleRecord>;
   signature: string;
-  boundsSignature: string;
 }
 
 interface RootConfiguration {
@@ -162,24 +158,44 @@ interface Gesture {
   topologySignature: string;
 }
 
-interface PanelView {
-  domId: string;
-  size: number | undefined;
-  valid: boolean;
+type PanelView = { valid: false } | { valid: true; domId: string; size: number };
+
+type HandleView =
+  | {
+      valid: false;
+      domId?: string;
+      orientation: 'horizontal' | 'vertical';
+    }
+  | {
+      valid: true;
+      beforeDomId: string;
+      afterDomId: string;
+      disabled: boolean;
+      domId: string;
+      lower: number;
+      orientation: 'horizontal' | 'vertical';
+      upper: number;
+      value: number;
+      valueText: string;
+    };
+
+interface InvalidRuntimeState {
+  valid: false;
+  configuration: RootConfiguration | null;
+  mode: SizeMode | undefined;
+  sizes: ResizableSizes | null;
+  topology: Topology | null;
 }
 
-interface HandleView {
-  beforeDomId: string | undefined;
-  afterDomId: string | undefined;
-  disabled: boolean;
-  domId: string | undefined;
-  lower: number | undefined;
-  orientation: 'horizontal' | 'vertical';
-  upper: number | undefined;
-  valid: boolean;
-  value: number | undefined;
-  valueText: string | undefined;
+interface ValidRuntimeState {
+  valid: true;
+  configuration: RootConfiguration;
+  mode: SizeMode;
+  sizes: ResizableSizes;
+  topology: Topology;
 }
+
+type RuntimeState = InvalidRuntimeState | ValidRuntimeState;
 
 interface ResizableContextValue {
   acquirePointer: (handleId: string, element: HTMLDivElement, pointerId: number | null) => boolean;
@@ -195,57 +211,10 @@ interface ResizableContextValue {
 
 const ResizableContext = React.createContext<ResizableContextValue | null>(null);
 const ID_PATTERN = /^[A-Za-z][A-Za-z0-9_-]*$/;
-const ACTION_TARGET_PROPS = new Set<string>([
-  'onKeyDown',
-  'onKeyUp',
-  'onKeyPress',
-  'onClick',
-  'onAuxClick',
-  'onContextMenu',
-  'onDoubleClick',
-  'onMouseDown',
-  'onMouseMove',
-  'onMouseUp',
-  'onMouseOver',
-  'onMouseOut',
-  'onTouchStart',
-  'onTouchMove',
-  'onTouchEnd',
-  'onTouchCancel',
-  'onPointerDown',
-  'onPointerMove',
-  'onPointerUp',
-  'onPointerCancel',
-  'onPointerOver',
-  'onPointerOut',
-  'onGotPointerCapture',
-  'onLostPointerCapture',
-  'onDrag',
-  'onDragStart',
-  'onDragEnd',
-  'onDragEnter',
-  'onDragExit',
-  'onDragLeave',
-  'onDragOver',
-  'onDrop',
-]);
-const ACTION_CAPTURE_PROPS = new Set(
-  [...ACTION_TARGET_PROPS].map((property) => `${property}Capture`),
-);
-const HANDLE_OWNED_PROPS = new Set<string>([
-  ...ACTION_TARGET_PROPS,
-  ...ACTION_CAPTURE_PROPS,
-  'role',
-  'tabIndex',
-  'draggable',
-  'aria-controls',
-  'aria-disabled',
-  'aria-orientation',
-  'aria-valuemin',
-  'aria-valuemax',
-  'aria-valuenow',
-  'aria-valuetext',
-]);
+const ACTION_PROP =
+  /^on(?:Key(?:Down|Up|Press)|(?:Aux|Double)?Click|ContextMenu|Mouse(?:Down|Move|Up|Over|Out)|Touch(?:Start|Move|End|Cancel)|Pointer(?:Down|Move|Up|Cancel|Over|Out)|(?:Got|Lost)PointerCapture|Drag(?:Start|End|Enter|Exit|Leave|Over)?|Drop)(?:Capture)?$/;
+const HANDLE_PROP =
+  /^(?:role|tabIndex|draggable|aria-(?:controls|disabled|orientation|value(?:min|max|now|text)))$/;
 
 function isValidId(value: unknown): value is string {
   return typeof value === 'string' && ID_PATTERN.test(value);
@@ -278,27 +247,24 @@ function normalizeResidual(
   panels: readonly PanelRecord[],
   precision: number,
 ): ResizableSizes | null {
+  const tolerance = toleranceFor(precision);
   const normalized: Record<string, number> = {};
+  let total = 0;
   for (const panel of panels) {
     const value = roundTo(values[panel.id]!, precision);
-    if (
-      value < panel.min - toleranceFor(precision) ||
-      value > panel.max + toleranceFor(precision)
-    ) {
+    if (value < panel.min - tolerance || value > panel.max + tolerance) {
       return null;
     }
     normalized[panel.id] = Math.min(panel.max, Math.max(panel.min, value));
+    total += normalized[panel.id]!;
   }
 
-  let residual = roundTo(
-    100 - panels.reduce((sum, panel) => sum + normalized[panel.id]!, 0),
-    precision,
-  );
+  let residual = roundTo(100 - total, precision);
   if (residual !== 0) {
     const panel = panels.find((candidate) =>
       residual > 0
-        ? candidate.max - normalized[candidate.id]! >= residual - toleranceFor(precision)
-        : normalized[candidate.id]! - candidate.min >= -residual - toleranceFor(precision),
+        ? candidate.max - normalized[candidate.id]! >= residual - tolerance
+        : normalized[candidate.id]! - candidate.min >= -residual - tolerance,
     );
     if (!panel) {
       return null;
@@ -310,7 +276,7 @@ function normalizeResidual(
     );
   }
 
-  return Math.abs(residual) <= toleranceFor(precision) ? immutableSizes(normalized, panels) : null;
+  return Math.abs(residual) <= tolerance ? immutableSizes(normalized, panels) : null;
 }
 
 function projectSizes(
@@ -318,6 +284,7 @@ function projectSizes(
   seeds: Readonly<Record<string, number>>,
   precision: number,
 ): ResizableSizes | null {
+  const tolerance = toleranceFor(precision) / 2;
   const values: Record<string, number> = {};
   for (const panel of panels) {
     const seed = isFiniteNumber(seeds[panel.id]) ? seeds[panel.id]! : panel.min;
@@ -327,14 +294,14 @@ function projectSizes(
   for (let pass = 0; pass <= panels.length; pass += 1) {
     const total = panels.reduce((sum, panel) => sum + values[panel.id]!, 0);
     const delta = 100 - total;
-    if (Math.abs(delta) <= toleranceFor(precision) / 2) {
+    if (Math.abs(delta) <= tolerance) {
       break;
     }
 
     const candidates = panels.filter((panel) =>
       delta > 0
-        ? values[panel.id]! < panel.max - toleranceFor(precision) / 2
-        : values[panel.id]! > panel.min + toleranceFor(precision) / 2,
+        ? values[panel.id]! < panel.max - tolerance
+        : values[panel.id]! > panel.min + tolerance,
     );
     if (candidates.length === 0) {
       return null;
@@ -366,28 +333,27 @@ function normalizeSizeRecord(
     return null;
   }
 
-  let keys: string[];
   const values: Record<string, number> = {};
+  let sum = 0;
   try {
-    keys = Object.keys(value);
-    if (
-      keys.length !== panels.length ||
-      keys.some((key) => !panels.some((panel) => panel.id === key))
-    ) {
+    if (Object.keys(value).length !== panels.length) {
       return null;
     }
     for (const panel of panels) {
+      if (!Object.prototype.hasOwnProperty.call(value, panel.id)) {
+        return null;
+      }
       const candidate = (value as Record<string, unknown>)[panel.id];
       if (!isFiniteNumber(candidate) || candidate < panel.min || candidate > panel.max) {
         return null;
       }
       values[panel.id] = candidate;
+      sum += candidate;
     }
   } catch {
     return null;
   }
 
-  const sum = panels.reduce((total, panel) => total + values[panel.id]!, 0);
   if (Math.abs(sum - 100) > toleranceFor(precision)) {
     return null;
   }
@@ -411,18 +377,33 @@ function sizesEqual(
 
 function stripOwnedProps(
   input: Record<string, unknown>,
-  owned: ReadonlySet<string>,
+  owned?: 'capture' | 'handle',
 ): { props: Record<string, unknown>; stripped: boolean } {
   const props: Record<string, unknown> = {};
   let stripped = false;
   for (const [key, value] of Object.entries(input)) {
-    if (key === 'dangerouslySetInnerHTML' || owned.has(key)) {
+    const action = ACTION_PROP.test(key);
+    if (
+      key === 'dangerouslySetInnerHTML' ||
+      (owned === 'capture' && action && key.endsWith('Capture')) ||
+      (owned === 'handle' && (action || HANDLE_PROP.test(key)))
+    ) {
       stripped ||= value !== undefined;
     } else {
       props[key] = value;
     }
   }
   return { props, stripped };
+}
+
+function warnOnce(active: boolean, warned: React.MutableRefObject<boolean>, code: string) {
+  if (warned.current === active) {
+    return;
+  }
+  warned.current = active;
+  if (active) {
+    warn(code);
+  }
 }
 
 function flattenChildren(children: React.ReactNode): React.ReactNode[] | null {
@@ -503,43 +484,47 @@ function parseTopology(
 
   const panels: PanelRecord[] = [];
   const handles: HandleRecord[] = [];
-  const panelIds = new Set<string>();
-  const handleIds = new Set<string>();
-  let valid = content.length > 0 && content.length % 2 === 1;
+  const ids = new Set<string>();
+  if (content.length === 0 || content.length % 2 === 0) {
+    return { content, topology: null };
+  }
 
-  for (let index = 0; index < content.length; index += 1) {
-    const child = content[index];
-    if (!React.isValidElement(child)) {
-      valid = false;
-      continue;
-    }
+  try {
+    for (let index = 0; index < content.length; index += 1) {
+      const child = content[index];
+      if (!React.isValidElement(child)) {
+        return { content, topology: null };
+      }
 
-    try {
-      if (index % 2 === 0 && child.type === Panel) {
+      if (index % 2 === 0) {
+        if (child.type !== Panel) {
+          return { content, topology: null };
+        }
         const props = child.props as RuntimePanelProps;
         const min = props.minSize === undefined ? 0 : props.minSize;
         const max = props.maxSize === undefined ? 100 : props.maxSize;
         if (
           !isValidId(props.id) ||
-          panelIds.has(props.id) ||
-          handleIds.has(props.id) ||
+          ids.has(props.id) ||
           !isFiniteNumber(min) ||
           !isFiniteNumber(max) ||
           min < 0 ||
           max > 100 ||
           min > max
         ) {
-          valid = false;
-          continue;
+          return { content, topology: null };
         }
-        panelIds.add(props.id);
+        ids.add(props.id);
         panels.push({
           id: props.id,
           min,
           max,
           domId: `${rootId}-panel-${panels.length}`,
         });
-      } else if (index % 2 === 1 && child.type === Handle) {
+      } else {
+        if (child.type !== Handle) {
+          return { content, topology: null };
+        }
         const props = child.props as RuntimeHandleProps;
         const hasName =
           (typeof props['aria-label'] === 'string' &&
@@ -553,55 +538,34 @@ function parseTopology(
           !isValidId(props.before) ||
           !isValidId(props.after) ||
           (props.isDisabled !== undefined && typeof props.isDisabled !== 'boolean') ||
-          handleIds.has(props.id) ||
-          panelIds.has(props.id) ||
+          ids.has(props.id) ||
           !hasName
         ) {
-          valid = false;
-          continue;
+          return { content, topology: null };
         }
-        handleIds.add(props.id);
+        ids.add(props.id);
         handles.push({
           id: props.id,
           before: props.before,
           after: props.after,
-          beforeIndex: index - 1,
-          afterIndex: index + 1,
           domId: `${rootId}-handle-${handles.length}`,
         });
-      } else {
-        valid = false;
       }
-    } catch {
-      valid = false;
     }
-  }
 
-  if (valid && (panels.length !== handles.length + 1 || panels.length === 0)) {
-    valid = false;
-  }
-
-  if (valid) {
     for (let index = 0; index < handles.length; index += 1) {
       const handle = handles[index]!;
-      if (
-        handle.before !== panels[index]!.id ||
-        handle.after !== panels[index + 1]!.id ||
-        panelIds.has(handle.id)
-      ) {
-        valid = false;
-        break;
+      if (handle.before !== panels[index]!.id || handle.after !== panels[index + 1]!.id) {
+        return { content, topology: null };
       }
     }
-  }
 
-  if (valid) {
     const minimum = panels.reduce((sum, panel) => sum + panel.min, 0);
     const maximum = panels.reduce((sum, panel) => sum + panel.max, 0);
-    valid = minimum <= 100 && maximum >= 100;
-  }
-
-  if (!valid) {
+    if (minimum > 100 || maximum < 100) {
+      return { content, topology: null };
+    }
+  } catch {
     return { content, topology: null };
   }
 
@@ -612,13 +576,11 @@ function parseTopology(
     topology: {
       panels,
       panelById,
-      handles,
       handleById,
       signature: JSON.stringify([
         panels.map(({ id, min, max }) => [id, min, max]),
         handles.map(({ id, before, after }) => [id, before, after]),
       ]),
-      boundsSignature: JSON.stringify(panels.map(({ id, min, max }) => [id, min, max])),
     },
   };
 }
@@ -646,15 +608,11 @@ function pairBounds(
   topology: Topology,
   handle: HandleRecord,
   sizes: ResizableSizes,
-): { lower: number; upper: number; total: number } {
+): [lower: number, upper: number, total: number] {
   const before = topology.panelById.get(handle.before)!;
   const after = topology.panelById.get(handle.after)!;
   const total = sizes[before.id]! + sizes[after.id]!;
-  return {
-    lower: Math.max(before.min, total - after.max),
-    upper: Math.min(before.max, total - after.min),
-    total,
-  };
+  return [Math.max(before.min, total - after.max), Math.min(before.max, total - after.min), total];
 }
 
 function updatePair(
@@ -664,7 +622,7 @@ function updatePair(
   nextBefore: number,
   precision: number,
 ): ResizableSizes {
-  const { lower, upper, total } = pairBounds(topology, handle, sizes);
+  const [lower, upper, total] = pairBounds(topology, handle, sizes);
   const before = roundTo(Math.min(upper, Math.max(lower, nextBefore)), precision);
   const values = {
     ...sizes,
@@ -689,23 +647,14 @@ function rootDirection(element: HTMLDivElement): 1 | -1 {
 /** A flex-sized region owned by the nearest Resizable Root. @status experimental */
 export const Panel = React.forwardRef<HTMLDivElement, ResizablePanelProps>(
   (inputProps, forwardedRef) => {
-    const { props, stripped } = stripOwnedProps(inputProps as RuntimePanelProps, new Set());
+    const { props, stripped } = stripOwnedProps(inputProps as RuntimePanelProps);
     const { id, minSize, maxSize, className, style, ...domProps } = props as RuntimePanelProps;
     void minSize;
     void maxSize;
     const context = React.useContext(ResizableContext);
-    const view = context?.getPanel(typeof id === 'string' ? id : '') ?? {
-      domId: '',
-      size: undefined,
-      valid: false,
-    };
+    const view = context?.getPanel(typeof id === 'string' ? id : '') ?? { valid: false };
     const warnedRef = React.useRef(false);
-    if (stripped && !warnedRef.current) {
-      warnedRef.current = true;
-      warn('RESIZABLE_DANGEROUS_HTML_OMITTED');
-    } else if (!stripped) {
-      warnedRef.current = false;
-    }
+    warnOnce(stripped, warnedRef, 'RESIZABLE_DANGEROUS_HTML_OMITTED');
 
     const ownedStyle = view.valid
       ? {
@@ -739,10 +688,7 @@ Panel.displayName = 'Resizable.Panel';
 /** An accessible separator controlling its exact adjacent Panels. @status experimental */
 export const Handle = React.forwardRef<HTMLDivElement, ResizableHandleProps>(
   (inputProps, forwardedRef) => {
-    const { props, stripped } = stripOwnedProps(
-      inputProps as RuntimeHandleProps,
-      HANDLE_OWNED_PROPS,
-    );
+    const { props, stripped } = stripOwnedProps(inputProps as RuntimeHandleProps, 'handle');
     const {
       id,
       before,
@@ -760,27 +706,11 @@ export const Handle = React.forwardRef<HTMLDivElement, ResizableHandleProps>(
       typeof before === 'string' ? before : '',
       typeof after === 'string' ? after : '',
       isDisabled === true,
-    ) ?? {
-      beforeDomId: undefined,
-      afterDomId: undefined,
-      disabled: true,
-      domId: undefined,
-      lower: undefined,
-      orientation: 'horizontal' as const,
-      upper: undefined,
-      valid: false,
-      value: undefined,
-      valueText: undefined,
-    };
+    ) ?? { valid: false, orientation: 'horizontal' as const };
     const localRef = React.useRef<HTMLDivElement>(null);
     const mergedRef = useMergedRefs(localRef, forwardedRef);
     const warnedRef = React.useRef(false);
-    if (stripped && !warnedRef.current) {
-      warnedRef.current = true;
-      warn('RESIZABLE_OWNED_HANDLER_OMITTED');
-    } else if (!stripped) {
-      warnedRef.current = false;
-    }
+    warnOnce(stripped, warnedRef, 'RESIZABLE_OWNED_HANDLER_OMITTED');
 
     const { moveProps } = useMove({
       onMoveStart(event) {
@@ -870,20 +800,18 @@ export const Handle = React.forwardRef<HTMLDivElement, ResizableHandleProps>(
         draggable={false}
         aria-label={typeof ariaLabel === 'string' ? ariaLabel : undefined}
         aria-labelledby={typeof ariaLabelledby === 'string' ? ariaLabelledby : undefined}
-        aria-controls={
-          view.beforeDomId && view.afterDomId ? `${view.beforeDomId} ${view.afterDomId}` : undefined
-        }
-        aria-disabled={view.disabled || !view.valid || undefined}
+        aria-controls={view.valid ? `${view.beforeDomId} ${view.afterDomId}` : undefined}
+        aria-disabled={!view.valid || view.disabled || undefined}
         aria-orientation={view.orientation === 'horizontal' ? 'vertical' : 'horizontal'}
-        aria-valuemin={view.lower}
-        aria-valuemax={view.upper}
-        aria-valuenow={view.value}
-        aria-valuetext={view.valueText}
+        aria-valuemin={view.valid ? view.lower : undefined}
+        aria-valuemax={view.valid ? view.upper : undefined}
+        aria-valuenow={view.valid ? view.value : undefined}
+        aria-valuetext={view.valid ? view.valueText : undefined}
         className={cx(
           'tale-resizable__handle',
           typeof className === 'string' ? className : undefined,
         )}
-        data-disabled={view.disabled || undefined}
+        data-disabled={!view.valid || view.disabled || undefined}
         data-handle-id={isValidId(id) ? id : undefined}
         data-invalid={!view.valid || undefined}
         onPointerDown={onPointerDown}
@@ -921,7 +849,7 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
   (inputProps, forwardedRef) => {
     const { props: safeProps, stripped } = stripOwnedProps(
       inputProps as RuntimeRootProps,
-      ACTION_CAPTURE_PROPS,
+      'capture',
     );
     const {
       children,
@@ -962,33 +890,27 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
     const candidateMode: SizeMode = hasControlled ? 'controlled' : 'uncontrolled';
     const modeShapeValid = !(hasControlled && hasDefault);
     const modeMatches = modeRef.current === undefined || modeRef.current === candidateMode;
-    const normalizedControlled =
+    const candidateSizes =
       topology && configuration
-        ? normalizeSizeRecord(sizesInput, topology.panels, configuration.precision)
+        ? candidateMode === 'controlled'
+          ? normalizeSizeRecord(sizesInput, topology.panels, configuration.precision)
+          : hasDefault && modeRef.current !== 'uncontrolled'
+            ? normalizeSizeRecord(defaultSizesInput, topology.panels, configuration.precision)
+            : projectSizes(topology.panels, {}, configuration.precision)
         : null;
-    const normalizedDefault =
-      topology && configuration && hasDefault && modeRef.current !== 'uncontrolled'
-        ? normalizeSizeRecord(defaultSizesInput, topology.panels, configuration.precision)
-        : null;
-    const initialUncontrolled =
-      topology && configuration
-        ? hasDefault
-          ? normalizedDefault
-          : projectSizes(topology.panels, {}, configuration.precision)
-        : null;
-    const initialRef = React.useRef<ResizableSizes | null>(initialUncontrolled);
-    const [uncontrolledSizes, setUncontrolledSizes] = React.useState<ResizableSizes | null>(
-      initialRef.current,
+    const initialUncontrolled = candidateMode === 'uncontrolled' ? candidateSizes : null;
+    const committedSizesRef = React.useRef<ResizableSizes | null>(initialUncontrolled);
+    const [, setUncontrolledSizes] = React.useState<ResizableSizes | null>(
+      committedSizesRef.current,
     );
-    const committedSizesRef = React.useRef<ResizableSizes | null>(initialRef.current);
     const committedTopologyRef = React.useRef<Topology | null>(topology);
     const gestureRef = React.useRef<Gesture | null>(null);
     const topologyValid = topology !== null;
     const rootConfigValid = configuration !== null && callbacksValid;
     const recordValid =
       candidateMode === 'controlled'
-        ? normalizedControlled !== null
-        : modeRef.current === 'uncontrolled' || !hasDefault || normalizedDefault !== null;
+        ? candidateSizes !== null
+        : modeRef.current === 'uncontrolled' || !hasDefault || candidateSizes !== null;
     const canEstablish =
       topologyValid && rootConfigValid && modeShapeValid && modeMatches && recordValid;
     const renderMode = modeRef.current ?? (canEstablish ? candidateMode : undefined);
@@ -996,7 +918,7 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
     let projectedUncontrolled: ResizableSizes | null =
       topology && committedTopologyRef.current?.signature === topology.signature
         ? committedSizesRef.current
-        : uncontrolledSizes;
+        : null;
     if (
       renderMode === 'uncontrolled' &&
       topology &&
@@ -1016,7 +938,7 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
     ) {
       projectedUncontrolled =
         modeRef.current === undefined && hasDefault
-          ? normalizedDefault
+          ? candidateSizes
           : projectSizes(topology.panels, {}, configuration.precision);
     }
 
@@ -1027,29 +949,31 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
       callbacksValid &&
       modeShapeValid &&
       modeMatches &&
-      (renderMode === 'controlled'
-        ? normalizedControlled !== null
-        : projectedUncontrolled !== null);
+      (renderMode === 'controlled' ? candidateSizes !== null : projectedUncontrolled !== null);
     const renderedSizes =
       stateValid && topology && configuration
         ? renderMode === 'controlled'
-          ? normalizedControlled
+          ? candidateSizes
           : projectedUncontrolled
         : null;
-    const latestRef = React.useRef({
-      configuration,
-      mode: renderMode,
-      sizes: renderedSizes,
-      topology,
-      valid: stateValid,
-    });
-    latestRef.current = {
-      configuration,
-      mode: renderMode,
-      sizes: renderedSizes,
-      topology,
-      valid: stateValid,
-    };
+    const runtimeState: RuntimeState =
+      stateValid && configuration && renderMode && renderedSizes && topology
+        ? {
+            configuration,
+            mode: renderMode,
+            sizes: renderedSizes,
+            topology,
+            valid: true,
+          }
+        : {
+            configuration,
+            mode: renderMode,
+            sizes: renderedSizes,
+            topology,
+            valid: false,
+          };
+    const latestRef = React.useRef<RuntimeState>(runtimeState);
+    latestRef.current = runtimeState;
     const onChangeStable = useStableCallback(
       typeof onSizesChange === 'function' ? onSizesChange : undefined,
     );
@@ -1092,9 +1016,6 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
       const latest = latestRef.current;
       if (
         !latest.valid ||
-        !latest.configuration ||
-        !latest.sizes ||
-        !latest.topology ||
         latest.configuration.isDisabled ||
         latest.configuration.isReadOnly ||
         !latest.topology.handleById.has(gesture.handleId) ||
@@ -1116,7 +1037,6 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
       configuration?.isReadOnly,
       renderedSizes,
       stateValid,
-      topology?.boundsSignature,
       topology?.signature,
     ]);
 
@@ -1134,40 +1054,13 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
       };
     }, [cancel]);
 
-    const commitMutation = useStableCallback(
-      (next: ResizableSizes, handleId: string, source: 'pointer' | 'keyboard', commit: boolean) => {
-        const latest = latestRef.current;
-        if (!latest.valid || !latest.topology || !latest.configuration || !latest.sizes) {
-          return false;
-        }
-        if (
-          sizesEqual(latest.sizes, next, latest.topology.panels, latest.configuration.precision)
-        ) {
-          return false;
-        }
-
-        if (latest.mode === 'uncontrolled') {
-          committedSizesRef.current = next;
-          latest.sizes = next;
-          setUncontrolledSizes(next);
-        }
-        const meta = Object.freeze({ handleId, source });
-        onChangeStable?.(next, meta);
-        if (commit) {
-          onCommitStable?.(next, meta);
-        }
-        return true;
-      },
-    );
-
     const start = useStableCallback((handleId: string, source: 'pointer' | 'keyboard') => {
       const latest = latestRef.current;
       if (
         !latest.valid ||
-        !latest.configuration ||
         latest.configuration.isDisabled ||
         latest.configuration.isReadOnly ||
-        !latest.topology?.handleById.has(handleId)
+        !latest.topology.handleById.has(handleId)
       ) {
         return false;
       }
@@ -1198,7 +1091,7 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
         }
         const root = rootRef.current;
         const latest = latestRef.current;
-        if (!root || !latest.configuration) {
+        if (!root || !latest.valid) {
           cancel(handleId);
           return false;
         }
@@ -1246,10 +1139,7 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
           !gesture ||
           gesture.handleId !== handleId ||
           gesture.source !== source ||
-          !latest.valid ||
-          !latest.topology ||
-          !latest.configuration ||
-          !latest.sizes
+          !latest.valid
         ) {
           return;
         }
@@ -1275,17 +1165,30 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
           latest.sizes[handle.before]! + amount,
           latest.configuration.precision,
         );
-        if (commitMutation(next, handleId, source, source === 'keyboard')) {
-          gesture.changed = true;
-          gesture.lastProposal = next;
+        if (
+          sizesEqual(latest.sizes, next, latest.topology.panels, latest.configuration.precision)
+        ) {
+          return;
         }
+        if (latest.mode === 'uncontrolled') {
+          committedSizesRef.current = next;
+          latest.sizes = next;
+          setUncontrolledSizes(next);
+        }
+        const meta = Object.freeze({ handleId, source });
+        onChangeStable?.(next, meta);
+        if (source === 'keyboard') {
+          onCommitStable?.(next, meta);
+        }
+        gesture.changed = true;
+        gesture.lastProposal = next;
       },
     );
 
     const move = useStableCallback((handleId: string, event: MoveMoveEvent) => {
       const gesture = gestureRef.current;
       const latest = latestRef.current;
-      if (!gesture || !latest.configuration) {
+      if (!gesture || !latest.valid) {
         return;
       }
       if (event.pointerType === 'keyboard') {
@@ -1320,8 +1223,6 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
         const latest = latestRef.current;
         if (
           latest.valid &&
-          latest.topology &&
-          latest.configuration &&
           (latest.mode !== 'controlled' ||
             sizesEqual(
               latest.sizes,
@@ -1346,8 +1247,8 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
           return;
         }
         const latest = latestRef.current;
-        const handle = latest.topology?.handleById.get(handleId);
-        if (!latest.configuration || !latest.topology || !latest.sizes || !handle) {
+        const handle = latest.valid ? latest.topology.handleById.get(handleId) : undefined;
+        if (!latest.valid || !handle) {
           cancel(handleId);
           return;
         }
@@ -1355,9 +1256,9 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
         const current = latest.sizes[handle.before]!;
         const target =
           command === 'home'
-            ? bounds.lower
+            ? bounds[0]
             : command === 'end'
-              ? bounds.upper
+              ? bounds[1]
               : current + (command === 'page-up' ? 1 : -1) * latest.configuration.keyboardLargeStep;
         applyDelta(handleId, 'keyboard', target - current);
         end(handleId, 'keyboard');
@@ -1367,32 +1268,20 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
     const getPanel = React.useCallback((id: string): PanelView => {
       const latest = latestRef.current;
       const panel = latest.topology?.panelById.get(id);
-      return {
-        domId: panel?.domId ?? '',
-        size: latest.valid && panel ? latest.sizes?.[id] : undefined,
-        valid: Boolean(latest.valid && panel),
-      };
+      return latest.valid && panel
+        ? { domId: panel.domId, size: latest.sizes[id]!, valid: true }
+        : { valid: false };
     }, []);
 
     const getHandle = React.useCallback(
       (id: string, before: string, after: string, disabled: boolean): HandleView => {
         const latest = latestRef.current;
         const handle = latest.topology?.handleById.get(id);
-        const valid = Boolean(
-          latest.valid && handle && handle.before === before && handle.after === after,
-        );
-        if (!valid || !handle || !latest.topology || !latest.sizes || !latest.configuration) {
+        if (!latest.valid || !handle || handle.before !== before || handle.after !== after) {
           return {
-            beforeDomId: undefined,
-            afterDomId: undefined,
-            disabled: true,
             domId: handle?.domId,
-            lower: undefined,
             orientation: latest.configuration?.orientation ?? 'horizontal',
-            upper: undefined,
             valid: false,
-            value: undefined,
-            valueText: undefined,
           };
         }
         const bounds = pairBounds(latest.topology, handle, latest.sizes);
@@ -1405,9 +1294,9 @@ export const Root = React.forwardRef<HTMLDivElement, ResizableRootProps>(
           afterDomId: afterPanel.domId,
           disabled: disabled || latest.configuration.isDisabled || latest.configuration.isReadOnly,
           domId: handle.domId,
-          lower: bounds.lower,
+          lower: bounds[0],
           orientation: latest.configuration.orientation,
-          upper: bounds.upper,
+          upper: bounds[1],
           valid: true,
           value: beforeValue,
           valueText: `${beforeValue}% / ${afterValue}%`,
