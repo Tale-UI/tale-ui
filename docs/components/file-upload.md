@@ -2,17 +2,18 @@
 
 `import { FileUpload } from '@tale-ui/react/file-upload';`
 
-Drag-and-drop file upload with a drop zone and animated file list. Requires the `motion` peer dependency for list animations.
+Drag-and-drop file upload with a drop zone and file list. List-item layout is
+React-version-independent and does not require an animation peer dependency.
 
 ## Parts
 
-| Part | Description |
-|------|-------------|
-| `FileUpload.Root` | Outer wrapper — flex column container. |
-| `FileUpload.DropZone` | Interactive drop zone with drag-over highlight, click-to-browse, and file validation. |
-| `FileUpload.List` | Animated `<ul>` using `motion/react` `AnimatePresence` — wraps list items. |
-| `FileUpload.ListItem` | Generic `<li>` for custom list item content. |
-| `FileUpload.ListItemProgressBar` | Pre-built list item with a linear progress bar, status text, and delete/retry controls. |
+| Part                              | Description                                                                                            |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `FileUpload.Root`                 | Outer wrapper — flex column container.                                                                 |
+| `FileUpload.DropZone`             | Interactive drop zone with drag-over highlight, click-to-browse, and file validation.                  |
+| `FileUpload.List`                 | Semantic `<ul>` wrapper for file-list items.                                                           |
+| `FileUpload.ListItem`             | Generic `<li>` for custom list item content.                                                           |
+| `FileUpload.ListItemProgressBar`  | Pre-built list item with a linear progress bar, status text, and delete/retry controls.                |
 | `FileUpload.ListItemProgressFill` | Pre-built list item with a fill-from-left progress background, status text, and delete/retry controls. |
 
 ## Props
@@ -23,16 +24,16 @@ No Tale UI-specific props. Accepts all standard `<div>` HTML attributes.
 
 ### FileUpload.DropZone
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `hint` | `string` | `'SVG, PNG, JPG or GIF (max. 800×400px)'` | Helper text shown below the upload prompt |
-| `isDisabled` | `boolean` | — | Disables drag-and-drop and click-to-browse |
-| `accept` | `string` | — | Accepted file types — comma-separated MIME types or extensions (e.g. `"image/*,.pdf"`) |
-| `allowsMultiple` | `boolean` | `true` | Allow multiple files |
-| `maxSize` | `number` | — | Maximum file size in bytes |
-| `onDropFiles` | `(files: FileList) => void` | — | Called with accepted files |
-| `onDropUnacceptedFiles` | `(files: FileList) => void` | — | Called with files not matching `accept` |
-| `onSizeLimitExceed` | `(files: FileList) => void` | — | Called with files exceeding `maxSize` |
+| Prop                    | Type                        | Default                                   | Description                                                                            |
+| ----------------------- | --------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------------- |
+| `hint`                  | `string`                    | `'SVG, PNG, JPG or GIF (max. 800×400px)'` | Helper text shown below the upload prompt                                              |
+| `isDisabled`            | `boolean`                   | —                                         | Disables drag-and-drop and click-to-browse                                             |
+| `accept`                | `string`                    | —                                         | Accepted file types — comma-separated MIME types or extensions (e.g. `"image/*,.pdf"`) |
+| `allowsMultiple`        | `boolean`                   | `true`                                    | Allow multiple files                                                                   |
+| `maxSize`               | `number`                    | —                                         | Maximum file size in bytes                                                             |
+| `onDropFiles`           | `(files: FileList) => void` | —                                         | Called with accepted files                                                             |
+| `onDropUnacceptedFiles` | `(files: FileList) => void` | —                                         | Called with files not matching `accept`                                                |
+| `onSizeLimitExceed`     | `(files: FileList) => void` | —                                         | Called with files exceeding `maxSize`                                                  |
 
 ### FileUpload.List
 
@@ -44,15 +45,15 @@ No Tale UI-specific props. Accepts all standard `<li>` HTML attributes.
 
 ### FileUpload.ListItemProgressBar / FileUpload.ListItemProgressFill
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `name` | `string` | required | File name |
-| `size` | `number` | required | File size in bytes (displayed as human-readable) |
-| `progress` | `number` | required | Upload progress 0–100 |
-| `failed` | `boolean` | — | Marks the item as failed |
-| `icon` | `ReactNode` | — | Optional file type icon element |
-| `onDelete` | `() => void` | — | Called when the delete button is clicked |
-| `onRetry` | `() => void` | — | Called when the "Try again" link is clicked |
+| Prop       | Type         | Default  | Description                                      |
+| ---------- | ------------ | -------- | ------------------------------------------------ |
+| `name`     | `string`     | required | File name                                        |
+| `size`     | `number`     | required | File size in bytes (displayed as human-readable) |
+| `progress` | `number`     | required | Upload progress 0–100                            |
+| `failed`   | `boolean`    | —        | Marks the item as failed                         |
+| `icon`     | `ReactNode`  | —        | Optional file type icon element                  |
+| `onDelete` | `() => void` | —        | Called when the delete button is clicked         |
+| `onRetry`  | `() => void` | —        | Called when the "Try again" link is clicked      |
 
 ## Utility
 
@@ -115,7 +116,9 @@ function Example() {
 ### With Custom File Icon
 
 ```tsx
-{/* Using @untitledui/file-icons */}
+{
+  /* Using @untitledui/file-icons */
+}
 import { FileIcon } from '@untitledui/file-icons';
 
 <FileUpload.ListItemProgressBar
@@ -124,7 +127,7 @@ import { FileIcon } from '@untitledui/file-icons';
   progress={45}
   icon={<FileIcon type="pdf" theme="light" className="tale-file-upload-item__icon" />}
   onDelete={() => {}}
-/>
+/>;
 ```
 
 ### Failed State
@@ -183,8 +186,8 @@ import { FileIcon } from '@untitledui/file-icons';
 
 ## Notes
 
-- Requires `motion` to be installed: `npm install motion`
-- `FileUpload.List` uses `AnimatePresence` from `motion/react` — list items animate in/out automatically.
+- File-list rendering has no animation-library peer dependency, preserving the
+  package's React 17/18/19 compatibility contract.
 - `getReadableFileSize` is also available as a named export: `import { getReadableFileSize } from '@tale-ui/react/file-upload'`.
 
 ## Pitfalls
@@ -253,7 +256,7 @@ import { FileIcon } from '@untitledui/file-icons';
     import * as React from 'react';
     import { FileUpload } from '@tale-ui/react/file-upload';
     import { Column } from '@tale-ui/react/column';
-    
+
     export function ImagePdfUploader() {
       return (
         <Column gap="m" style={{ maxWidth: 560 }}>

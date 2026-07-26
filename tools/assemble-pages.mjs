@@ -39,7 +39,7 @@ function historicalRoute(path) {
     .replace(/\.md$/, '');
 }
 
-function rewriteHistoricalHref(href, source, publicSources, basePath) {
+function rewriteHistoricalHref(href, source, publicSources, basePath, major) {
   if (/^(?:[a-z]+:|#|\/)/i.test(href)) {
     return href;
   }
@@ -54,14 +54,14 @@ function rewriteHistoricalHref(href, source, publicSources, basePath) {
   if (!publicSources.has(target)) {
     return href;
   }
-  return `${basePath}/docs/v1/${historicalRoute(target)}/${match[2] ?? ''}`;
+  return `${basePath}/docs/v${major}/${historicalRoute(target)}/${match[2] ?? ''}`;
 }
 
-function historicalPage(title, content, source, sourcePath, publicSources, basePath) {
+function historicalPage(title, content, source, sourcePath, publicSources, basePath, major) {
   const rendered = marked.parse(content, {
     walkTokens(token) {
       if (token.type === 'link') {
-        token.href = rewriteHistoricalHref(token.href, sourcePath, publicSources, basePath);
+        token.href = rewriteHistoricalHref(token.href, sourcePath, publicSources, basePath, major);
       }
     },
   });
@@ -70,7 +70,7 @@ function historicalPage(title, content, source, sourcePath, publicSources, baseP
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${escapeHtml(title)} — Tale UI v1</title>
+    <title>${escapeHtml(title)} — Tale UI v${major}</title>
     <style>
       body { color: #17202a; font: 16px/1.6 system-ui, sans-serif; margin: 0 auto; max-width: 76rem; padding: 2rem; }
       .version-banner { background: #fff4d6; border: 1px solid #d7a20f; border-radius: .5rem; padding: .75rem 1rem; }
@@ -79,7 +79,7 @@ function historicalPage(title, content, source, sourcePath, publicSources, baseP
     </style>
   </head>
   <body>
-    <p class="version-banner">Archived Tale UI v1 documentation. <a href="${basePath}/docs/">View current v2 documentation</a>.</p>
+    <p class="version-banner">${major === 2 ? 'Previous supported Tale UI v2 documentation.' : `Archived Tale UI v${major} documentation.`} <a href="${basePath}/docs/">View current v3 documentation</a>.</p>
     <article>${rendered}</article>
     <footer><p>Immutable source: <code>${escapeHtml(source)}</code></p></footer>
   </body>
@@ -91,47 +91,59 @@ export function assemblePages({ docsOutput, pagesOutput, basePath = '', root = R
   const docsTarget = join(pagesOutput, 'docs');
   mkdirSync(docsTarget, { recursive: true });
   cpSync(docsOutput, docsTarget, { recursive: true });
-  cpSync(docsOutput, join(docsTarget, 'v2'), { recursive: true });
+  cpSync(docsOutput, join(docsTarget, 'v3'), { recursive: true });
   cpSync(docsOutput, join(docsTarget, 'current'), { recursive: true });
 
   const manifestPath = join(root, 'docs/versioned/manifest.json');
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
-  const v1 = manifest.versions.find(({ major }) => major === 1);
-  if (!v1) {
-    throw new Error('Version manifest does not contain v1.');
-  }
-  const snapshotRoot = join(root, 'docs/versioned/v1/content');
-  const publicSources = new Set(v1.publicAllowlist);
-  const links = [];
-  for (const source of v1.publicAllowlist) {
-    const snapshot = join(snapshotRoot, source);
-    if (!existsSync(snapshot)) {
-      throw new Error(`Versioned docs snapshot is missing ${source}.`);
+  const previousRoutes = [];
+  for (const major of [2, 1]) {
+    const version = manifest.versions.find((entry) => entry.major === major);
+    if (!version) {
+      throw new Error(`Version manifest does not contain v${major}.`);
     }
-    const content = readFileSync(snapshot, 'utf8');
-    const title = content.match(/^#\s+(.+)$/m)?.[1]?.trim() ?? basename(source, '.md');
-    const route = historicalRoute(source);
-    const output = join(docsTarget, 'v1', route, 'index.html');
-    mkdirSync(dirname(output), { recursive: true });
-    writeFileSync(
-      output,
-      historicalPage(title, content, `${v1.source}:${source}`, source, publicSources, basePath),
-    );
-    links.push({ route, title });
-  }
-  const v1Index = `<!doctype html><html lang="en"><head><meta charset="utf-8" />
+    const snapshotRoot = join(root, `docs/versioned/v${major}/content`);
+    const publicSources = new Set(version.publicAllowlist);
+    const links = [];
+    for (const source of version.publicAllowlist) {
+      const snapshot = join(snapshotRoot, source);
+      if (!existsSync(snapshot)) {
+        throw new Error(`Versioned v${major} docs snapshot is missing ${source}.`);
+      }
+      const content = readFileSync(snapshot, 'utf8');
+      const title = content.match(/^#\s+(.+)$/m)?.[1]?.trim() ?? basename(source, '.md');
+      const route = historicalRoute(source);
+      const output = join(docsTarget, `v${major}`, route, 'index.html');
+      mkdirSync(dirname(output), { recursive: true });
+      writeFileSync(
+        output,
+        historicalPage(
+          title,
+          content,
+          `${version.source}:${source}`,
+          source,
+          publicSources,
+          basePath,
+          major,
+        ),
+      );
+      links.push({ route, title });
+      previousRoutes.push(`/docs/v${major}/${route}/`);
+    }
+    const versionIndex = `<!doctype html><html lang="en"><head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tale UI v1 documentation</title></head><body>
-<main><h1>Tale UI v1 documentation</h1><p>Immutable public snapshot from ${escapeHtml(
-    v1.source,
-  )}.</p><ul>${links
-    .map(
-      ({ route, title }) =>
-        `<li><a href="${basePath}/docs/v1/${route}/">${escapeHtml(title)}</a></li>`,
-    )
-    .join('')}</ul></main></body></html>`;
-  mkdirSync(join(docsTarget, 'v1'), { recursive: true });
-  writeFileSync(join(docsTarget, 'v1/index.html'), v1Index);
+<title>Tale UI v${major} documentation</title></head><body>
+<main><h1>Tale UI v${major} documentation</h1><p>Immutable public snapshot from ${escapeHtml(
+      version.source,
+    )}.</p><ul>${links
+      .map(
+        ({ route, title }) =>
+          `<li><a href="${basePath}/docs/v${major}/${route}/">${escapeHtml(title)}</a></li>`,
+      )
+      .join('')}</ul></main></body></html>`;
+    mkdirSync(join(docsTarget, `v${major}`), { recursive: true });
+    writeFileSync(join(docsTarget, `v${major}/index.html`), versionIndex);
+  }
 
   cpSync(manifestPath, join(docsTarget, 'versions.json'));
   cpSync(join(root, 'docs/versioned/rollback.json'), join(docsTarget, 'rollback.json'));
@@ -146,8 +158,8 @@ export function assemblePages({ docsOutput, pagesOutput, basePath = '', root = R
     });
   }
   return {
-    currentRoutes: ['/docs/', '/docs/current/', '/docs/v2/'],
-    previousRoutes: links.map(({ route }) => `/docs/v1/${route}/`),
+    currentRoutes: ['/docs/', '/docs/current/', '/docs/v3/'],
+    previousRoutes,
     agentRoute: '/llms.txt',
   };
 }
@@ -158,6 +170,6 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const basePath = process.env.PAGES_BASE_PATH ?? '';
   const result = assemblePages({ docsOutput, pagesOutput, basePath });
   console.log(
-    `Assembled ${result.currentRoutes.length} current routes, ${result.previousRoutes.length} v1 routes, and ${result.agentRoute}.`,
+    `Assembled ${result.currentRoutes.length} current routes, ${result.previousRoutes.length} historical routes, and ${result.agentRoute}.`,
   );
 }

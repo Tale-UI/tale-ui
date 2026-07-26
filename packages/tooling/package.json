@@ -1,6 +1,6 @@
 {
   "name": "@tale-ui/tooling",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Tale UI registry, validation, and safe project tooling.",
   "type": "module",
   "engines": {
@@ -26,7 +26,8 @@
     "prebuild": "rimraf --glob build build-tests \"*.tsbuildinfo\"",
     "build": "node scripts/build.mjs",
     "test": "tsx --test src/api.test.ts src/extensions.test.ts src/materialize.test.ts src/mcp.test.ts src/migrations.test.ts src/operations.test.ts src/validation/validation.test.ts",
-    "test:package": "pnpm build && publint run ./build && attw --profile esm-only --pack ./build && node scripts/test-packed.mjs",
+    "test:package": "pnpm build && publint run ./build && attw --profile esm-only --pack ./build && node scripts/test-packed.mjs && node scripts/test-template-consumers.mjs --tooling-built",
+    "test:template-consumers": "node scripts/test-template-consumers.mjs",
     "typescript": "tsc -b tsconfig.json"
   },
   "dependencies": {

@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0.0",
   "id": "tale:template:sortable-table",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "source": "source/App.tsx",
   "skeleton": "skeleton/App.tsx",
   "dependencies": {
-    "@tale-ui/react": "^2.0.0",
+    "@tale-ui/react": "^3.0.0",
     "react": ">=18.0.0",
     "lucide-react": "^0.468.0"
   },
@@ -17,7 +17,7 @@
   "golden": "tools/golden-prompts/table-controller-sorting.json",
   "compatibility": {
     "react": ">=18.0.0",
-    "tale": ">=2.0.0 <3.0.0",
+    "tale": ">=3.0.0 <4.0.0",
     "frameworks": [
       "next",
       "vite"
@@ -33,5 +33,5 @@
     "firstParty": true
   },
   "license": "MIT",
-  "digest": "sha256:8b7771297eafeab36a5bc5b06868ff20fe92dc6783dec761b716789ff350c625"
+  "digest": "sha256:4f97fa37389a15e16f0a91f8a9d4adc979431dc52125ac7d42a842b2f8613ea6"
 }

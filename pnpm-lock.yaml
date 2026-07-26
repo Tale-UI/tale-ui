@@ -267,7 +267,7 @@ importers:
         specifier: 19.2.4
         version: 19.2.4
       react-aria-components:
-        specifier: ^1.19.0
+        specifier: 1.19.0
         version: 1.19.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-dom:
         specifier: 19.2.4
@@ -312,7 +312,7 @@ importers:
         specifier: 19.2.4
         version: 19.2.4
       react-aria-components:
-        specifier: ^1.19.0
+        specifier: 1.19.0
         version: 1.19.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-dom:
         specifier: 19.2.4
@@ -419,7 +419,7 @@ importers:
         specifier: 19.2.4
         version: 19.2.4
       react-aria-components:
-        specifier: ^1.19.0
+        specifier: 1.19.0
         version: 1.19.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-dom:
         specifier: 19.2.4
@@ -508,8 +508,11 @@ importers:
       '@tale-ui/utils':
         specifier: workspace:*
         version: link:../utils/build
+      react-aria:
+        specifier: 3.50.0
+        version: 3.50.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-aria-components:
-        specifier: ^1.19.0
+        specifier: 1.19.0
         version: 1.19.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       zod:
         specifier: ^3.25.76
@@ -596,9 +599,6 @@ importers:
       luxon:
         specifier: ^3.7.2
         version: 3.7.2
-      motion:
-        specifier: ^12.37.0
-        version: 12.37.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       qr-code-styling:
         specifier: ^1.9.2
         version: 1.9.2
@@ -764,7 +764,7 @@ importers:
         specifier: '*'
         version: 19.2.4
       react-aria-components:
-        specifier: ^1.19.0
+        specifier: 1.19.0
         version: 1.19.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-copy-to-clipboard:
         specifier: ^5.0.2
@@ -829,7 +829,7 @@ importers:
         specifier: 19.2.4
         version: 19.2.4
       react-aria-components:
-        specifier: ^1.19.0
+        specifier: 1.19.0
         version: 1.19.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-copy-to-clipboard:
         specifier: ^5.0.2
@@ -880,7 +880,7 @@ importers:
         specifier: 19.2.4
         version: 19.2.4
       react-aria-components:
-        specifier: ^1.19.0
+        specifier: 1.19.0
         version: 1.19.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-dom:
         specifier: 19.2.4

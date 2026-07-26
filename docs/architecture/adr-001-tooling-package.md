@@ -44,7 +44,9 @@ publication until their acceptance evidence exists.
 
 On 2026-07-25 the packed Vite and Next fixtures, installed validator,
 CLI/API/local-MCP parity, package lint, type-surface, mutation, and recovery
-gates passed. `@tale-ui/tooling@0.1.0` is therefore a public-beta candidate.
+gates passed. `@tale-ui/tooling@0.1.0` was therefore the initial public-beta
+candidate; the v3 compatibility and template migration prepares the independent
+Tooling line at `0.2.0`.
 
 The repository exposes an independent `tooling-v*` release scope whose default
 npm distribution tag is `next`. Merging code never publishes it: publication

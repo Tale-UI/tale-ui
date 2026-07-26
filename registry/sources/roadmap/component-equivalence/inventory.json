@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "inventory": "component-equivalence-expansion",
+  "source": "docs/plans/component-equivalence-expansion-implementation-plan.md",
+  "status": "frozen",
+  "candidates": [
+    "AspectRatio",
+    "Blockquote",
+    "ButtonGroup",
+    "Citation",
+    "Code",
+    "Lightbox",
+    "Markdown",
+    "Outline",
+    "OverflowList",
+    "Resizable",
+    "Skeleton",
+    "Timestamp",
+    "Toast"
+  ]
+}

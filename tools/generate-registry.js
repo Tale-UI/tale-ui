@@ -17,6 +17,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const ts = require('typescript');
 
 const ROOT = path.resolve(__dirname, '..');
 const REACT_SRC = path.join(ROOT, 'packages/react/src');
@@ -159,6 +160,150 @@ function extractTypeAliases(content) {
     }
   }
   return map;
+}
+
+// Only these expansion props may resolve through local declarations. The
+// resolver deliberately ignores imported types so registry generation cannot
+// turn into an unbounded dependency/type-graph traversal.
+const LOCAL_DECLARATION_PROP_CONFIG = {
+  'button-group': [{ declaration: 'ButtonGroupProps', prop: 'role' }],
+  timestamp: [{ declaration: 'TimestampProps', prop: 'format' }],
+  toast: [{ declaration: 'ToastRegionProps', prop: 'placement' }],
+};
+
+function resolveConfiguredLocalProp(content, declarationName, propName) {
+  const source = ts.createSourceFile(
+    'component.tsx',
+    content,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX,
+  );
+  const declarations = new Map();
+  for (const statement of source.statements) {
+    if (!ts.isInterfaceDeclaration(statement) && !ts.isTypeAliasDeclaration(statement)) {
+      continue;
+    }
+    const name = statement.name.text;
+    if (declarations.has(name)) {
+      throw new Error(`Conflicting local declaration ${name}`);
+    }
+    declarations.set(name, statement);
+  }
+
+  const propertyNodes = [];
+  const visited = new Set();
+
+  function visitType(typeNode) {
+    if (!typeNode) {
+      return;
+    }
+    if (ts.isParenthesizedTypeNode(typeNode)) {
+      visitType(typeNode.type);
+      return;
+    }
+    if (ts.isUnionTypeNode(typeNode) || ts.isIntersectionTypeNode(typeNode)) {
+      typeNode.types.forEach(visitType);
+      return;
+    }
+    if (ts.isTypeLiteralNode(typeNode)) {
+      visitMembers(typeNode.members);
+      return;
+    }
+    if (ts.isTypeReferenceNode(typeNode) && ts.isIdentifier(typeNode.typeName)) {
+      visitDeclaration(typeNode.typeName.text);
+    }
+  }
+
+  function visitMembers(members) {
+    for (const member of members) {
+      if (
+        ts.isPropertySignature(member) &&
+        member.name &&
+        ((ts.isIdentifier(member.name) && member.name.text === propName) ||
+          (ts.isStringLiteral(member.name) && member.name.text === propName))
+      ) {
+        propertyNodes.push(member);
+      }
+    }
+  }
+
+  function visitDeclaration(name) {
+    if (visited.has(name)) {
+      return;
+    }
+    visited.add(name);
+    const declaration = declarations.get(name);
+    if (!declaration) {
+      return;
+    }
+    if (ts.isInterfaceDeclaration(declaration)) {
+      visitMembers(declaration.members);
+      for (const clause of declaration.heritageClauses ?? []) {
+        for (const type of clause.types) {
+          if (ts.isIdentifier(type.expression)) {
+            visitDeclaration(type.expression.text);
+          }
+        }
+      }
+      return;
+    }
+    visitType(declaration.type);
+  }
+
+  visitDeclaration(declarationName);
+  if (propertyNodes.length === 0) {
+    throw new Error(
+      `Configured local declaration ${declarationName}.${propName} could not be resolved`,
+    );
+  }
+
+  const values = [];
+  function collectStringLiterals(typeNode) {
+    if (ts.isLiteralTypeNode(typeNode) && ts.isStringLiteral(typeNode.literal)) {
+      values.push(typeNode.literal.text);
+      return;
+    }
+    if (ts.isUnionTypeNode(typeNode)) {
+      typeNode.types.forEach(collectStringLiterals);
+      return;
+    }
+    if (ts.isParenthesizedTypeNode(typeNode)) {
+      collectStringLiterals(typeNode.type);
+      return;
+    }
+    throw new Error(
+      `Configured local declaration ${declarationName}.${propName} must resolve only to string literals`,
+    );
+  }
+  for (const property of propertyNodes) {
+    if (!property.type) {
+      throw new Error(
+        `Configured local declaration ${declarationName}.${propName} has no explicit type`,
+      );
+    }
+    collectStringLiterals(property.type);
+  }
+  const allowedValues = [...new Set(values)];
+  if (allowedValues.length === 0) {
+    throw new Error(
+      `Configured local declaration ${declarationName}.${propName} has no string values`,
+    );
+  }
+  return {
+    name: propName,
+    type: allowedValues.map((value) => `'${value}'`).join(' | '),
+    required: propertyNodes.every((property) => !property.questionToken),
+    description: null,
+    default: null,
+    allowedValues,
+  };
+}
+
+function extractConfiguredLocalProps(slug, content) {
+  return (LOCAL_DECLARATION_PROP_CONFIG[slug] ?? []).map(({ declaration, prop }) =>
+    resolveConfiguredLocalProp(content, declaration, prop),
+  );
 }
 
 // ─── Kind detection ─────────────────────────────────────────────────────────
@@ -741,6 +886,7 @@ function generateRegistry() {
     const typeAliases = extractTypeAliases(styledContent);
     const rawProps = extractProps(styledContent, pascal);
     const defaults = extractDefaults(styledContent);
+    const configuredLocalProps = extractConfiguredLocalProps(slug, styledContent ?? '');
 
     const aliasProps = rawProps.length === 0 ? extractRootAliasProps(styledContent, pascal) : [];
     if (aliasProps.length > 0) {
@@ -750,6 +896,16 @@ function generateRegistry() {
           rawProps.push(ap);
           existingNames.add(ap.name);
         }
+      }
+    }
+    for (const localProp of configuredLocalProps) {
+      const existing = rawProps.find((prop) => prop.name === localProp.name);
+      if (existing) {
+        existing.type = localProp.type;
+        existing.required = localProp.required;
+        existing.allowedValues = localProp.allowedValues;
+      } else {
+        rawProps.push(localProp);
       }
     }
 
@@ -768,8 +924,8 @@ function generateRegistry() {
     const props = rawProps.map((p) => {
       // Resolve allowedValues: if the type is a known alias → expand to string array;
       // if type is an inline string union ('a' | 'b') → parse directly.
-      let allowedValues = null;
-      if (typeAliases.has(p.type)) {
+      let allowedValues = p.allowedValues ?? null;
+      if (!allowedValues && typeAliases.has(p.type)) {
         allowedValues = typeAliases.get(p.type);
       } else if (/^'[^']*'(\s*\|\s*'[^']*')+$/.test(p.type)) {
         allowedValues = [...p.type.matchAll(/'([^']*)'/g)].map((v) => v[1]);
@@ -826,24 +982,31 @@ function generateRegistry() {
 
 // ─── Run ────────────────────────────────────────────────────────────────────
 
-const registry = generateRegistry();
-const output = `${JSON.stringify(registry, null, 2)}\n`;
+if (require.main === module) {
+  const registry = generateRegistry();
+  const output = `${JSON.stringify(registry, null, 2)}\n`;
 
-if (checkMode) {
-  const existing = readFile(REGISTRY_PATH);
-  if (existing === output) {
-    console.log('✅ Registry is up-to-date.');
-    process.exit(0);
+  if (checkMode) {
+    const existing = readFile(REGISTRY_PATH);
+    if (existing === output) {
+      console.log('✅ Registry is up-to-date.');
+      process.exit(0);
+    } else {
+      console.error('❌ Registry is out of date. Run: pnpm registry:generate');
+      process.exit(1);
+    }
   } else {
-    console.error('❌ Registry is out of date. Run: pnpm registry:generate');
-    process.exit(1);
+    // Ensure registry directory exists
+    const registryDir = path.dirname(REGISTRY_PATH);
+    if (!fs.existsSync(registryDir)) {
+      fs.mkdirSync(registryDir, { recursive: true });
+    }
+    fs.writeFileSync(REGISTRY_PATH, output);
+    console.log(`✅ Generated registry/components.json (${registry.components.length} components)`);
   }
-} else {
-  // Ensure registry directory exists
-  const registryDir = path.dirname(REGISTRY_PATH);
-  if (!fs.existsSync(registryDir)) {
-    fs.mkdirSync(registryDir, { recursive: true });
-  }
-  fs.writeFileSync(REGISTRY_PATH, output);
-  console.log(`✅ Generated registry/components.json (${registry.components.length} components)`);
 }
+
+module.exports = {
+  extractConfiguredLocalProps,
+  resolveConfiguredLocalProp,
+};

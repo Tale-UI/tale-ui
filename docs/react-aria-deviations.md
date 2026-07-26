@@ -5,24 +5,47 @@ behaviour in several places. This document records maintained cross-cutting
 deviations; each component guide remains authoritative for that component's
 parts and props.
 
-Tale UI currently targets **react-aria-components ^1.19.0**.
+Tale UI targets the exact **react-aria-components 1.19.0** release. The pin
+protects wrapper behavior that depends on `Group`, unstable Toast declarations
+and runtime objects, and the resolved `react-aria` stack.
 
 Each deviation below includes the rationale for the Tale UI choice. When a deviation exists because React Aria Components deprecated an upstream primitive, the deprecation version is called out explicitly.
 
 ## Quick Reference
 
-| Deviation                                     | Impact                                         | Rationale                                                                                             | Details                                                                                 |
-| --------------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Drawer uses `open`, not `isOpen`              | **High** — wrong prop silently fails           | Drawer is a custom bottom-sheet primitive, not a RAC Dialog wrapper                                   | [Drawer-specific differences](#drawer-specific-differences)                             |
-| Drawer.Backdrop is a sibling, not a wrapper   | **High** — wrong nesting breaks close          | Sibling topology keeps swipe/transition layers independent                                            | [Backdrop/Popup nesting](#backdroppopup-nesting-rules)                                  |
-| IconButton defaults to `variant="ghost"`      | **Medium** — unexpected appearance             | Icon-only controls are usually secondary chrome, not primary actions                                  | [variant prop](#variant-prop)                                                           |
-| Never nest `<Button>` inside a Trigger        | **High** — invalid HTML `<button><button>`     | RAC triggers already render interactive elements                                                      | [Trigger styling](#trigger-button-styling-differences)                                  |
-| Checkbox.Indicator needs explicit Icon child  | **Medium** — missing checkmark                 | Consumers can choose the check/indeterminate glyph to match their context                             | [Auto-rendered icons](#auto-rendered-icons)                                             |
-| Pass `value` to both Meter.Root AND Indicator | **Medium** — bar appears empty                 | RAC exposes percentage by render prop, while Tale UI keeps a composable part                          | [Meter/ProgressBar](#meter-and-progressbar-value-passing)                               |
-| Many parts auto-render Lucide icons           | **Low** — override by passing children         | Common controls should work with minimal boilerplate                                                  | [Auto-rendered icons](#auto-rendered-icons)                                             |
-| Some components have no direct RAC primitive  | **Medium** — verify their documented semantics | Presentational, layout, and custom-interaction components use native elements or internal composition | [Components without a direct RAC primitive](#components-without-a-direct-rac-primitive) |
-| AlertDialog should NOT have a Close button    | **Medium** — defeats acknowledgement UX        | Alert dialogs should force an explicit safe/destructive choice                                        | [AlertDialog vs Dialog](#alertdialog-vs-dialog-semantics)                               |
-| Checkbox/Radio/Switch deprecated upstream     | **Low** — still functional                     | Mirrors React Aria Components 1.18.0 deprecations                                                     | [Deprecated form controls](#deprecated-form-controls-checkbox-radio-switch)             |
+| Deviation                                     | Impact                                                          | Rationale                                                                                             | Details                                                                                 |
+| --------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Drawer uses `open`, not `isOpen`              | **High** — wrong prop silently fails                            | Drawer is a custom bottom-sheet primitive, not a RAC Dialog wrapper                                   | [Drawer-specific differences](#drawer-specific-differences)                             |
+| Drawer.Backdrop is a sibling, not a wrapper   | **High** — wrong nesting breaks close                           | Sibling topology keeps swipe/transition layers independent                                            | [Backdrop/Popup nesting](#backdroppopup-nesting-rules)                                  |
+| IconButton defaults to `variant="ghost"`      | **Medium** — unexpected appearance                              | Icon-only controls are usually secondary chrome, not primary actions                                  | [variant prop](#variant-prop)                                                           |
+| Never nest `<Button>` inside a Trigger        | **High** — invalid HTML `<button><button>`                      | RAC triggers already render interactive elements                                                      | [Trigger styling](#trigger-button-styling-differences)                                  |
+| Checkbox.Indicator needs explicit Icon child  | **Medium** — missing checkmark                                  | Consumers can choose the check/indeterminate glyph to match their context                             | [Auto-rendered icons](#auto-rendered-icons)                                             |
+| Pass `value` to both Meter.Root AND Indicator | **Medium** — bar appears empty                                  | RAC exposes percentage by render prop, while Tale UI keeps a composable part                          | [Meter/ProgressBar](#meter-and-progressbar-value-passing)                               |
+| Many parts auto-render Lucide icons           | **Low** — override by passing children                          | Common controls should work with minimal boilerplate                                                  | [Auto-rendered icons](#auto-rendered-icons)                                             |
+| Some components have no direct RAC primitive  | **Medium** — verify their documented semantics                  | Presentational, layout, and custom-interaction components use native elements or internal composition | [Components without a direct RAC primitive](#components-without-a-direct-rac-primitive) |
+| AlertDialog should NOT have a Close button    | **Medium** — defeats acknowledgement UX                         | Alert dialogs should force an explicit safe/destructive choice                                        | [AlertDialog vs Dialog](#alertdialog-vs-dialog-semantics)                               |
+| Checkbox/Radio/Switch deprecated upstream     | **Low** — still functional                                      | Mirrors React Aria Components 1.18.0 deprecations                                                     | [Deprecated form controls](#deprecated-form-controls-checkbox-radio-switch)             |
+| ButtonGroup restricts RAC `Group`             | **Medium** — RAC render-function escape hatches are unavailable | Tale owns naming recovery, orientation, and attached visual topology                                  | [Component-equivalence boundaries](#component-equivalence-boundaries)                   |
+| Toast isolates unstable RAC primitives        | **High** — upstream queue objects are not public Tale API       | Tale owns snapshot identity, raw-generation replacement, and lifecycle                                | [Component-equivalence boundaries](#component-equivalence-boundaries)                   |
+| Resizable is a Tale state model               | **High** — not a `ResizableTableContainer` wrapper              | Table-column resizing is not a general panel topology                                                 | [Component-equivalence boundaries](#component-equivalence-boundaries)                   |
+| Skeleton is decorative                        | **Medium** — loading announcements remain consumer-owned        | React Spectrum Skeleton is not a RAC primitive                                                        | [Component-equivalence boundaries](#component-equivalence-boundaries)                   |
+
+---
+
+## Component-equivalence boundaries
+
+| Decision ID                                       | Consumer-visible boundary                                                                                                                                                                                                                       |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `component-equivalence:button-group`              | ButtonGroup wraps RAC 1.19.0 `Group` but excludes render-function `children`, `className`, and `style`; Tale owns accessible-name recovery, orientation, and attached styling.                                                                  |
+| `component-equivalence:toast`                     | Toast privately adapts `UNSTABLE_Toast` and `UNSTABLE_ToastRegion`. Its public queue is intentionally not structurally compatible with the upstream queue class, and Tale owns stable snapshots and replaceable raw generations.                |
+| `component-equivalence:resizable`                 | Resizable is a Tale state model that uses exact `react-aria@3.50.0` `useMove` for pointer movement. It is not a wrapper around table-only `ResizableTableContainer`; Tale owns topology, keyboard behavior, projection, ARIA, and cancellation. |
+| `component-equivalence:resizable-table-container` | `ResizableTableContainer` remains rejected for general panel resizing because its contract is table-column-specific.                                                                                                                            |
+| `component-equivalence:skeleton`                  | Skeleton is a Tale-owned decorative primitive. React Spectrum Skeleton is not a React Aria Components primitive, and consumers remain responsible for announcing loading state when an announcement is needed.                                  |
+
+Every RAC upgrade reruns the `Group`, unstable Toast raw-object/snapshot, and
+`useMove` coupling contracts before the exact pin changes. Toast remains
+experimental until stable upstream primitives exist or maintainers explicitly
+approve retaining the unstable adapter.
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "name": "@tale-ui/tokens",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Platform-neutral design tokens for Tale UI web and native libraries.",
   "keywords": [
     "tale-ui",

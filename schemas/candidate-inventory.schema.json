@@ -7,7 +7,16 @@
   "required": ["schemaVersion", "inventory", "source", "status", "candidates"],
   "properties": {
     "schemaVersion": { "const": "1.0.0" },
-    "inventory": { "enum": ["table", "app-shell", "chat", "content", "extensions"] },
+    "inventory": {
+      "enum": [
+        "table",
+        "app-shell",
+        "chat",
+        "content",
+        "extensions",
+        "component-equivalence-expansion"
+      ]
+    },
     "source": { "type": "string" },
     "status": { "const": "frozen" },
     "candidates": {
@@ -16,5 +25,42 @@
       "uniqueItems": true,
       "items": { "type": "string", "minLength": 1 }
     }
-  }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "inventory": { "enum": ["table", "app-shell", "chat", "content", "extensions"] }
+      }
+    },
+    {
+      "properties": {
+        "inventory": { "const": "component-equivalence-expansion" },
+        "source": {
+          "const": "docs/plans/component-equivalence-expansion-implementation-plan.md"
+        },
+        "candidates": {
+          "type": "array",
+          "prefixItems": [
+            { "const": "AspectRatio" },
+            { "const": "Blockquote" },
+            { "const": "ButtonGroup" },
+            { "const": "Citation" },
+            { "const": "Code" },
+            { "const": "Lightbox" },
+            { "const": "Markdown" },
+            { "const": "Outline" },
+            { "const": "OverflowList" },
+            { "const": "Resizable" },
+            { "const": "Skeleton" },
+            { "const": "Timestamp" },
+            { "const": "Toast" }
+          ],
+          "items": false,
+          "minItems": 13,
+          "maxItems": 13,
+          "uniqueItems": true
+        }
+      }
+    }
+  ]
 }

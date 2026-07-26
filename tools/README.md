@@ -142,7 +142,7 @@ Reads `packages/css/src/index.css`, resolves one level of `@import` statements, 
 
 Used internally by the charts, React, themes, tokens, and utils package build scripts. Babel emits separate CJS and ESM JavaScript trees, TypeScript emits declarations when a `tsconfig.build.json` is present, and the script copies package-specific static files through `--copy`.
 
-The publish root is explicitly marked CommonJS and the `esm/` subtree is marked ESM. Relative specifiers in ESM JavaScript and declarations are normalized to explicit `.js` or `/index.js` targets so Node 16 resolution, Publint, and Are the Types Wrong validate the packed package consistently. The `--ignore`, `--copy`, and `--minimal` flags support package-specific output needs. This script is not intended to be run directly.
+The publish root is explicitly marked CommonJS and the `esm/` subtree is marked ESM. Relative specifiers in ESM JavaScript and declarations are normalized to explicit `.js` or `/index.js` targets so Node resolution, Publint, and Are the Types Wrong validate the packed package consistently. The `--ignore`, `--copy`, and `--minimal` flags support package-specific output needs. React alone uses `--runtime-assets` to include a bounded Markdown/MCP data allowlist; site caches, output, application sources, versioned snapshots, and private registry sources are never packaged. This script is not intended to be run directly.
 
 ## Release Tools
 

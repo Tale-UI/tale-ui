@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0.0",
+  "headlessExports": [
+    {
+      "subpath": "./color-picker",
+      "rationale": "ColorPicker is a context provider; its rendered controls own their component CSS."
+    },
+    {
+      "subpath": "./file-trigger",
+      "rationale": "FileTrigger renders its consumer-supplied trigger and a hidden input without visible Tale-owned styling."
+    }
+  ]
+}

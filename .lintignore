@@ -5,6 +5,7 @@
 /docs/export
 /docs/consumer-claude-md-snippet-full.md
 /docs/consumer-claude-md-snippet.md
+/docs/versioned/
 /docs/src/app/(private)/playground/
 /packages/react/**/*.min.*
 build

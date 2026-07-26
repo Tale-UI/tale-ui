@@ -186,13 +186,27 @@ const doctorResult = JSON.parse(
     encoding: 'utf8',
   }),
 );
+const migrationRoot = join(fixtureRoot, 'legacy-migration-app');
+await mkdir(join(migrationRoot, 'src'), { recursive: true });
 await writeFile(
-  join(consumerRoot, 'src/tale-templates/import-fixture.ts'),
+  join(migrationRoot, 'package.json'),
+  `${JSON.stringify(
+    {
+      name: 'legacy-migration-app',
+      private: true,
+      dependencies: { '@tale-ui/react': '^2.0.0' },
+    },
+    null,
+    2,
+  )}\n`,
+);
+await writeFile(
+  join(migrationRoot, 'src/import-fixture.ts'),
   "import { TextArea } from '@tale-ui/react/textarea';\nexport { TextArea };\n",
 );
 const migrationPlanResult = JSON.parse(
   execFileSync(cliPath, ['upgrade', 'known-import-path-corrections', '--json'], {
-    cwd: consumerRoot,
+    cwd: migrationRoot,
     encoding: 'utf8',
   }),
 );
@@ -208,7 +222,7 @@ const migrationApplyResult = JSON.parse(
       '--json',
     ],
     {
-      cwd: consumerRoot,
+      cwd: migrationRoot,
       encoding: 'utf8',
     },
   ),
@@ -231,7 +245,7 @@ if (
   !(await readFile(join(consumerRoot, 'src/tale-templates/empty-state.tsx'), 'utf8')).includes(
     'export function Example',
   ) ||
-  !(await readFile(join(consumerRoot, 'src/tale-templates/import-fixture.ts'), 'utf8')).includes(
+  !(await readFile(join(migrationRoot, 'src/import-fixture.ts'), 'utf8')).includes(
     '@tale-ui/react/text-area',
   )
 ) {

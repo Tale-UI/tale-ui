@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "status": "passed",
   "package": "@tale-ui/tooling",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "releaseChannel": "beta",
   "node": ">=22",
   "verification": {
@@ -14,7 +14,7 @@
   },
   "publication": {
     "automaticOnMerge": false,
-    "explicitTag": "tooling-v0.1.0",
+    "explicitTag": "tooling-v0.2.0",
     "defaultDistTag": "next",
     "provenance": true,
     "duplicateSafe": true

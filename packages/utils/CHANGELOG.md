@@ -2,6 +2,17 @@
 
 All notable changes to the utility library are documented in this file.
 
+## v3.0.0 — 2026-07-27
+
+### Fixed
+
+- Corrected the ID fallback documentation and retained deterministic React 17-compatible ID
+  generation for components that cannot call `React.useId`.
+
+### Changed
+
+- Prepared the package for the coordinated Tale UI 3 release.
+
 ## v2.0.0 — 2026-07-24
 
 ### Changed

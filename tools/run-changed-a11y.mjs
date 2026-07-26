@@ -13,6 +13,11 @@ import {
   accessibilityViolationKey,
   resolvedAccessibilityViolations,
 } from './accessibility-baseline.mjs';
+import {
+  createAccessibilitySelection,
+  selectAccessibilityStories,
+  storybookAccessibilityStories,
+} from './accessibility-selection.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -133,62 +138,27 @@ if (SMOKE) {
 assert.ok(URL, 'Pass --url for a running Storybook, or use --smoke');
 
 function changedPaths() {
-  if (FULL) {
-    return { paths: [], fallback: true, reason: SCHEDULED ? 'scheduled-full' : 'explicit-full' };
-  }
   try {
     const output = execFileSync('git', ['diff', '--name-only', `${BASE}...HEAD`], {
       cwd: ROOT,
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'ignore'],
     });
-    return { paths: output.trim().split('\n').filter(Boolean), fallback: false };
+    return { paths: output.trim().split('\n').filter(Boolean), baseAvailable: true };
   } catch {
-    return { paths: [], fallback: true, reason: 'base-unavailable' };
+    return { paths: [], baseAvailable: false };
   }
 }
 
-function slugify(value) {
-  return value
-    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
-    .replace(/([A-Z])([A-Z][a-z])/g, '$1-$2')
-    .replace(/[^a-zA-Z0-9]+/g, '-')
-    .replace(/^-|-$/g, '')
-    .toLowerCase();
-}
-
-const changes = COMPONENTS
-  ? { paths: [], fallback: false, reason: 'explicit-components' }
-  : changedPaths();
-const sharedPatterns = [
-  /^packages\/tokens\//,
-  /^packages\/css\/src\/tokens\//,
-  /^packages\/react\/src\/_primitives\//,
-  /^packages\/styles\/src\/index\.css$/,
-  /^packages\/a2ui\/src\/(?:catalog|renderer)\b/,
-  /^playground\/storybook\/\.storybook\//,
-];
-if (changes.paths.some((path) => sharedPatterns.some((pattern) => pattern.test(path)))) {
-  changes.fallback = true;
-  changes.reason = 'shared-foundation-change';
-}
-
-const changedSlugs = new Set();
-for (const component of COMPONENTS ?? []) {
-  changedSlugs.add(slugify(component));
-}
-for (const path of changes.paths) {
-  const component = path.match(
-    /^(?:packages\/react\/src|docs\/components)\/([^/]+)(?:\/|\.md$)/,
-  )?.[1];
-  const style = path.match(/^packages\/styles\/src\/([^/]+)\.css$/)?.[1];
-  const story = path.match(/\/([^/]+)\.stories\.[jt]sx?$/)?.[1];
-  for (const value of [component, style, story]) {
-    if (value) {
-      changedSlugs.add(slugify(value));
-    }
-  }
-}
+const changes = COMPONENTS || FULL ? { paths: [], baseAvailable: true } : changedPaths();
+const selection = createAccessibilitySelection({
+  changedPaths: changes.paths,
+  components: COMPONENTS,
+  full: FULL,
+  scheduled: SCHEDULED,
+  baseAvailable: changes.baseAvailable,
+  repositoryRoot: ROOT,
+});
 
 async function fetchWithRetry(url, attempts = 60) {
   try {
@@ -211,38 +181,8 @@ const indexUrl = new globalThis.URL('index.json', `${URL.replace(/\/$/, '')}/`);
 const response = await fetchWithRetry(indexUrl);
 assert.ok(response.ok, `Unable to load Storybook index: ${response.status}`);
 const storyIndex = await response.json();
-const stories = Object.values(storyIndex.entries)
-  .filter((entry) => entry.type === 'story')
-  .filter(
-    (entry) => entry.title.startsWith('Components/') || entry.title.startsWith('Foundations/'),
-  )
-  .sort((left, right) => left.id.localeCompare(right.id));
-
-function primaryStories(entries) {
-  const byTitle = new Map();
-  for (const story of entries) {
-    const group = byTitle.get(story.title) ?? [];
-    group.push(story);
-    byTitle.set(story.title, group);
-  }
-  return [...byTitle.values()].map(
-    (group) =>
-      group.find(({ id }) => id.endsWith('--all-variations')) ??
-      group.find(({ id }) => id.endsWith('--default')) ??
-      group.find(({ id }) => id.endsWith('--basic')) ??
-      group[0],
-  );
-}
-
-let selected;
-if (changes.fallback) {
-  selected = SCHEDULED ? stories : primaryStories(stories);
-} else {
-  selected = stories.filter((story) => {
-    const titleSlug = slugify(story.title.split('/').at(-1));
-    return changedSlugs.has(titleSlug);
-  });
-}
+const stories = storybookAccessibilityStories(storyIndex);
+const selected = selectAccessibilityStories(stories, selection);
 
 const browser = await chromium.launch({ headless: true });
 const violations = [];
@@ -303,9 +243,9 @@ const report = {
   runner: { name: 'axe-core', version: axe.version },
   selection: {
     base: BASE,
-    mode: changes.fallback ? changes.reason : (changes.reason ?? 'changed-components'),
-    changedPaths: changes.paths,
-    changedSlugs: [...changedSlugs].sort(),
+    mode: selection.mode,
+    changedPaths: selection.changedPaths,
+    changedSlugs: selection.changedSlugs,
     storyCount: selected.length,
     stories: selected.map(({ id }) => id),
   },

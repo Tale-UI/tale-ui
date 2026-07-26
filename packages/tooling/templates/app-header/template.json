@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0.0",
   "id": "tale:template:app-header",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "source": "source/App.tsx",
   "skeleton": "skeleton/App.tsx",
   "dependencies": {
-    "@tale-ui/react": "^2.0.0",
+    "@tale-ui/react": "^3.0.0",
     "react": ">=18.0.0",
     "lucide-react": "^0.468.0"
   },
@@ -17,7 +17,7 @@
   "golden": "tools/golden-prompts/header-nav-basic.json",
   "compatibility": {
     "react": ">=18.0.0",
-    "tale": ">=2.0.0 <3.0.0",
+    "tale": ">=3.0.0 <4.0.0",
     "frameworks": [
       "next",
       "vite"
@@ -33,5 +33,5 @@
     "firstParty": true
   },
   "license": "MIT",
-  "digest": "sha256:a4e0ac86bad4e49786124aa186854334c1546410cd8157504e0f2368b9cabd06"
+  "digest": "sha256:08fd22ada9e780cda40dbea9a40300dae0b681eb37f1d49c08b3f5c5887b9196"
 }

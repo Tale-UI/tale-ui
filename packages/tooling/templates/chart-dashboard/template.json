@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0.0",
   "id": "tale:template:chart-dashboard",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "source": "source/App.tsx",
   "skeleton": "skeleton/App.tsx",
   "dependencies": {
-    "@tale-ui/react": "^2.0.0",
+    "@tale-ui/react": "^3.0.0",
     "react": ">=18.0.0",
     "@tale-ui/charts": "^0.1.5"
   },
@@ -17,7 +17,7 @@
   "golden": "tools/golden-prompts/area-chart-revenue.json",
   "compatibility": {
     "react": ">=18.0.0",
-    "tale": ">=2.0.0 <3.0.0",
+    "tale": ">=3.0.0 <4.0.0",
     "frameworks": [
       "next",
       "vite"
@@ -33,5 +33,5 @@
     "firstParty": true
   },
   "license": "MIT",
-  "digest": "sha256:fdd295b4fea446c7ad59efbd22fd3850822b45aed754741ce5aef7f1c7f0fcd7"
+  "digest": "sha256:93146fe3c8bd88d47d06629a5e2a38b78c02ffcce812e8a635960b9b9546a2ad"
 }

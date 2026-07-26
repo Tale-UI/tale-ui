@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0.0",
   "id": "tale:template:sidebar-header",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "source": "source/App.tsx",
   "skeleton": "skeleton/App.tsx",
   "dependencies": {
-    "@tale-ui/react": "^2.0.0",
+    "@tale-ui/react": "^3.0.0",
     "react": ">=18.0.0",
     "lucide-react": "^0.468.0"
   },
@@ -17,7 +17,7 @@
   "golden": "tools/golden-prompts/sidebar-basic.json",
   "compatibility": {
     "react": ">=18.0.0",
-    "tale": ">=2.0.0 <3.0.0",
+    "tale": ">=3.0.0 <4.0.0",
     "frameworks": [
       "next",
       "vite"
@@ -33,5 +33,5 @@
     "firstParty": true
   },
   "license": "MIT",
-  "digest": "sha256:6382ccab900db5cef2df4217c5ce40205e70b5e48c865e03fecd76b95cb379d4"
+  "digest": "sha256:6b5985ecdfeeb438a408004c42a080cd0882b471d56b6cbc1eb5e02fd1e90f9f"
 }

@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "1.0.0",
+  "properties": [
+    {
+      "name": "--anchor-width",
+      "rationale": "React Aria supplies the overlay anchor width at runtime."
+    },
+    {
+      "name": "--container-max-width",
+      "rationale": "Consumer-configurable utility value with an inline fallback."
+    },
+    {
+      "name": "--disclosure-panel-height",
+      "rationale": "React Aria supplies disclosure animation height at runtime."
+    },
+    {
+      "name": "--divider-gap",
+      "rationale": "Documented consumer-configurable divider utility value."
+    },
+    {
+      "name": "--divider-size",
+      "rationale": "Documented consumer-configurable divider utility value."
+    },
+    {
+      "name": "--label-xl-font-size",
+      "rationale": "Maintained legacy typography alias pending a separately governed token migration."
+    },
+    {
+      "name": "--object-fit",
+      "rationale": "Consumer-configurable visual utility value with an inline fallback."
+    },
+    {
+      "name": "--radius-lg",
+      "rationale": "Maintained legacy radius alias with an inline fallback."
+    },
+    {
+      "name": "--radius-md",
+      "rationale": "Maintained legacy radius alias with an inline fallback."
+    },
+    {
+      "name": "--radius-sm",
+      "rationale": "Maintained legacy radius alias with an inline fallback."
+    },
+    {
+      "name": "--rc-drag-handle-size",
+      "rationale": "react-image-crop integration value with an inline fallback."
+    },
+    {
+      "name": "--sticky-offset",
+      "rationale": "Documented consumer-configurable positioning utility value."
+    },
+    {
+      "name": "--tale-color-swatch-secondary",
+      "rationale": "ColorSwatch supplies this Tale-owned runtime value."
+    },
+    {
+      "name": "--tale-key-value-pairs-columns",
+      "rationale": "KeyValuePairs supplies this Tale-owned runtime measurement."
+    },
+    {
+      "name": "--tale-number-field-group-width",
+      "rationale": "Documented NumberField consumer override with an inline fallback."
+    },
+    {
+      "name": "--tale-number-field-width",
+      "rationale": "Documented NumberField consumer override with an inline fallback."
+    },
+    {
+      "name": "--text-l-line-height",
+      "rationale": "Maintained legacy typography alias pending a separately governed token migration."
+    },
+    {
+      "name": "--text-m-line-height",
+      "rationale": "Maintained legacy typography alias pending a separately governed token migration."
+    },
+    {
+      "name": "--text-s-line-height",
+      "rationale": "Maintained legacy typography alias pending a separately governed token migration."
+    },
+    {
+      "name": "--text-xs-line-height",
+      "rationale": "Maintained legacy typography alias pending a separately governed token migration."
+    },
+    {
+      "name": "--transparent",
+      "rationale": "Maintained legacy color alias pending a separately governed token migration."
+    }
+  ]
+}

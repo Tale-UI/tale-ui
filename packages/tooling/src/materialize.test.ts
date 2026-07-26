@@ -59,13 +59,10 @@ test('init safely manages the four requested outputs and terminally replays', as
     assert.deepEqual(JSON.parse(await readFile(join(root, '.mcp.json'), 'utf8')).mcpServers, {
       'tale-ui': { command: 'tale-mcp', args: [] },
     });
-    assert.deepEqual(
-      JSON.parse(await readFile(join(root, 'package.json'), 'utf8')).scripts,
-      {
-        'tale:doctor': 'tale doctor --json',
-        'tale:validate': 'tale validate src --rules registry,typescript',
-      },
-    );
+    assert.deepEqual(JSON.parse(await readFile(join(root, 'package.json'), 'utf8')).scripts, {
+      'tale:doctor': 'tale doctor --json',
+      'tale:validate': 'tale validate src --rules registry,typescript',
+    });
     const replay = await initializeProject({ ...request, requestId: 'init-2' });
     assert.equal(replay.replayed, true);
   } finally {
@@ -90,10 +87,8 @@ test('template add materializes source, merges dependencies, and refuses overwri
       /export function Example/,
     );
     assert.equal(
-      JSON.parse(await readFile(join(root, 'package.json'), 'utf8')).dependencies[
-        '@tale-ui/react'
-      ],
-      '^2.0.0',
+      JSON.parse(await readFile(join(root, 'package.json'), 'utf8')).dependencies['@tale-ui/react'],
+      '^3.0.0',
     );
     const replay = await addTemplate({ ...request, requestId: 'template-2' });
     assert.equal(replay.replayed, true);

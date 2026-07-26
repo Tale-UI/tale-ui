@@ -2,6 +2,24 @@
 
 All notable changes to the React component library are documented in this file.
 
+## v3.0.0 — 2026-07-27
+
+### Changed
+
+- Set the consumer runtime requirement to Node 18+ while retaining React 17, 18, and 19 peers.
+- Pinned `react-aria-components` exactly to 1.19.0 and added exact direct
+  `react-aria@3.50.0` ownership for the expansion adapters.
+- Migrated TextEditor, IPhoneMockup, FileUpload, InputTags, MultiSelect, and TagSelect from direct
+  `React.useId` calls to Tale UI's React-17-compatible ID utility.
+- Prevented IPhoneMockup's React 17 server render from emitting unresolved `undefined-*` SVG
+  references; hydration assigns collision-free instance IDs.
+- Added public-type, dependency-coupling, package-export, and packed-consumer release gates.
+- Removed FileUpload's optional Motion peer and layout wrapper so every declared
+  React 17/18/19 consumer can install and render the subpath under strict peer
+  validation.
+- Added a React 17 hydration boundary around TagSelect's RAC hidden collection:
+  the closed field hydrates deterministically before client-side enhancement.
+
 ## v2.0.0 — 2026-07-24
 
 ### Changed

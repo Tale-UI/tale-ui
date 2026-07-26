@@ -16,5 +16,12 @@
  *     <DateField.ErrorMessage className="tale-date-field__error" />
  *   </DateField.Root>
  *
- * All styles are shared in _primitives.css (groups 1, 2, 8–11).
+ * Shared field-control styles remain in _primitives.css (groups 1, 2, 8–11).
  */
+
+.tale-date-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+  width: max-content;
+}

@@ -30,7 +30,7 @@ const maybeReactUseId: undefined | (() => string) = SafeReact.useId;
  * @returns {string}
  */
 export function useId(idOverride?: string, prefix?: string): string | undefined {
-  // React.useId() is only available from React 17.0.0.
+  // React.useId() is only available from React 18.0.0.
   if (maybeReactUseId !== undefined) {
     const reactId = maybeReactUseId();
     return idOverride ?? (prefix ? `${prefix}-${reactId}` : reactId);

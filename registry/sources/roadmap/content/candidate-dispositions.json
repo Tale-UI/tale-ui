@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "inventory": "content",
-  "evidenceRevision": "sha256:32531846a9133755c1aa592755be118ef94a7834f929c685ffffab7bb1e81c5f",
+  "evidenceRevision": "sha256:fa916de24167e2dc9070190ce175a1e8858cc865172dca770e5bb8a2774877e3",
   "records": [
     {
       "candidate": "Kbd",
@@ -25,54 +25,63 @@
     },
     {
       "candidate": "Timestamp",
-      "disposition": "defer",
-      "rationale": "Locale, relative-time refresh, timezone, hydration, and machine-readable formatting need a dedicated contract.",
+      "disposition": "approve",
+      "rationale": "The expansion plan now freezes explicit locale, timezone, hydration-clock, formatter, and shared-scheduler ownership.",
       "evidence": {
         "sources": [
-          "registry/sources/roadmap/content/inventory.json",
-          "docs/components/i18n-provider.md"
+          "docs/components/i18n-provider.md",
+          "docs/plans/component-equivalence-expansion-implementation-plan.md"
         ],
-        "accessibility": "Visible relative text and an absolute accessible label need user testing.",
-        "state": "Periodic relative-time refresh ownership is unresolved.",
-        "security": "No special parser is needed.",
-        "ssr": "Server timezone and hydration drift require an approved deterministic policy.",
-        "performance": "Shared scheduling is needed before many timestamps can update efficiently.",
-        "ownership": "Deferred until I18nProvider and application timezone responsibilities are explicit.",
-        "migration": "Applications retain native time elements and their existing formatters."
+        "accessibility": "Native time semantics retain a UTC-normalized machine-readable dateTime alongside visible localized output.",
+        "state": "Relative timestamps use the supplied now for SSR and first hydration, then share interval subscriptions by refresh interval.",
+        "localization": "Consumers explicitly provide locale and timezone; absolute presets and relative formatting behavior are frozen.",
+        "security": "Values accept Date copies, finite epoch milliseconds, or complete offset-bearing timestamps only.",
+        "ssr": "The supplied now anchors identical server and first-hydration output before elapsed client time is applied.",
+        "performance": "One Tale scheduler groups subscribers by interval and the 1,000-timestamp tick vector is a maintained benchmark.",
+        "ownership": "Tale owns validation, Intl formatting, hydration anchoring, and scheduling; applications own locale, timezone, and now.",
+        "migration": "Applications can replace native time elements or app formatters with explicit absolute or relative Timestamp props."
       },
-      "evidenceDigest": "sha256:4ce0c55b169cc4a51c559f62b022f9c32fffb3cf561ef60236a2931da1ccc478"
+      "evidenceDigest": "sha256:75c3e6146d01eb577606821260af8c6ed2a27cf0ac6089ff2941dc0d7bd9e1cd"
     },
     {
       "candidate": "Blockquote",
-      "disposition": "defer",
-      "rationale": "Native blockquote plus Text already covers the semantics; repeated design-system demand is not yet demonstrated.",
+      "disposition": "approve",
+      "rationale": "The expansion plan approves a small semantic Root, Content, and Attribution composition with a strict cite boundary.",
       "evidence": {
-        "sources": ["registry/sources/roadmap/content/inventory.json", "docs/components/text.md"],
-        "accessibility": "Native semantics are sufficient when attribution is authored correctly.",
+        "sources": [
+          "docs/components/text.md",
+          "docs/plans/component-equivalence-expansion-implementation-plan.md"
+        ],
+        "accessibility": "Native blockquote, paragraph, and footer elements preserve quotation and attribution semantics.",
         "state": "Stateless.",
-        "security": "No parser should be introduced.",
-        "ssr": "Native markup is deterministic.",
-        "performance": "No design-system abstraction is needed for performance.",
-        "ownership": "Consumers retain content and attribution semantics.",
-        "migration": "Continue native blockquote composition."
+        "localization": "Quoted content and attribution remain consumer-authored.",
+        "security": "Root cite accepts credential-free absolute HTTP(S) only; the parts expose no raw-HTML escape hatch.",
+        "ssr": "The semantic part tree and validated cite attribute are deterministic.",
+        "performance": "The composition adds no parser, observer, timer, or client state.",
+        "ownership": "Tale owns semantic structure, styling, and cite validation while consumers own quotation content.",
+        "migration": "Existing blockquote, paragraph, and footer markup maps directly to the three namespace parts."
       },
-      "evidenceDigest": "sha256:81b2092132146ad28ccf398406797c792e5242389f2eb7a00d2a30c6ea114701"
+      "evidenceDigest": "sha256:d026269c91f0600f7833d6bd87de99b87b5c1d09aca485ba68e78197c145d1fe"
     },
     {
       "candidate": "Citation",
-      "disposition": "defer",
-      "rationale": "Citation numbering, source identity, links, popovers, SSR, and unsafe URL policy require product evidence and security review.",
+      "disposition": "approve",
+      "rationale": "The expansion plan now freezes atomic source normalization, shared ordinals, document identity, timestamps, and URL policy.",
       "evidence": {
-        "sources": ["registry/sources/roadmap/content/inventory.json", "docs/components/link.md"],
-        "accessibility": "Reference relationships and repeated link names need a defined pattern.",
-        "state": "Popover and source-list ownership are unresolved.",
-        "security": "External URL and untrusted source metadata policy must precede a component.",
-        "ssr": "Stable citation numbering needs a deterministic document-level model.",
-        "performance": "Large source lists may require shared indexing.",
-        "ownership": "Deferred until an ordinary citation data contract is evidenced.",
-        "migration": "Consumers retain Link-based citations."
+        "sources": [
+          "docs/components/link.md",
+          "docs/plans/component-equivalence-expansion-implementation-plan.md"
+        ],
+        "accessibility": "References own stable targets and labels, unavailable sources are named, and the source list uses ordered-list semantics.",
+        "state": "One immutable document-local registry normalizes atomically and repeated References share source-order ordinals.",
+        "localization": "Source metadata remains consumer-authored while machine timestamps normalize to UTC independently of visible text.",
+        "security": "Malformed, credential-bearing, unsupported, and unbased relative URLs lose their anchor while escaped metadata remains.",
+        "ssr": "Normalized source order deterministically produces ordinals and Root-local entry IDs.",
+        "performance": "Normalization builds one indexed source registry for repeated reference and list lookup.",
+        "ownership": "Tale owns document identity, source normalization, numbering, list attributes, and URL policy.",
+        "migration": "Existing Link-based references can move to explicit sources, references, and one ordered source list."
       },
-      "evidenceDigest": "sha256:8ea873a8b69bf113fb4a128e39decbcbefa7e3abb652167b72b593ea5c6b281b"
+      "evidenceDigest": "sha256:e42e7ea8890478089b4b4b4db1730f452fc230a2da4e02ac495d0ff3ef6676b0"
     },
     {
       "candidate": "CodeBlock",

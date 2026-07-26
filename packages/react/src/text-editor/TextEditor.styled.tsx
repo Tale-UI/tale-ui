@@ -18,11 +18,7 @@ import { Placeholder } from '@tiptap/extension-placeholder';
 import { TextAlign } from '@tiptap/extension-text-align';
 import { TextStyleKit } from '@tiptap/extension-text-style';
 import type { Editor, EditorContentProps, EditorOptions } from '@tiptap/react';
-import {
-  EditorContent,
-  useEditor,
-  useEditorState,
-} from '@tiptap/react';
+import { EditorContent, useEditor, useEditorState } from '@tiptap/react';
 import { StarterKit } from '@tiptap/starter-kit';
 import { Extension } from '@tiptap/core';
 import type { Node as ProseMirrorNode } from '@tiptap/pm/model';
@@ -36,6 +32,7 @@ import {
 } from 'react-aria-components';
 import type { Color } from 'react-aria-components';
 import { cx } from '../_cx';
+import { useTaleUiId } from '../utils/useTaleUiId';
 
 /* ─── CharacterCount Extension (internal) ────────────────────────────────── */
 
@@ -87,7 +84,7 @@ const CharacterCount = Extension.create({
 
 interface EditorContextValue {
   editor: Editor;
-  editorId: string;
+  editorId: string | undefined;
   isDisabled?: boolean;
   limit?: number;
   isInvalid?: boolean;
@@ -185,7 +182,7 @@ export const Root = React.forwardRef<HTMLDivElement, RootProps>(
     },
     ref,
   ) => {
-    const editorId = React.useId();
+    const editorId = useTaleUiId();
 
     const editor = useEditor({
       immediatelyRender: false,
@@ -238,7 +235,6 @@ export const Root = React.forwardRef<HTMLDivElement, RootProps>(
     }
 
     return (
-       
       <EditorContext.Provider value={{ editor, editorId, isDisabled, limit, isInvalid }}>
         <div
           ref={ref}
@@ -283,7 +279,7 @@ export function Label({ children, className, htmlFor, ...props }: LabelProps) {
 
   return (
     <label
-      id={`${editorId}-label`}
+      id={editorId ? `${editorId}-label` : undefined}
       htmlFor={htmlFor ?? editorId}
       className={cx('tale-text-editor__label', className)}
       {...props}
@@ -305,8 +301,9 @@ export function HintText({ children, className, ...props }: HintTextProps) {
   const { editor, limit, isInvalid } = useEditorContext();
 
   const characterCount =
-    (editor.storage as { characterCount?: { characters?: () => number } })
-      ?.characterCount?.characters?.() ?? 0;
+    (
+      editor.storage as { characterCount?: { characters?: () => number } }
+    )?.characterCount?.characters?.() ?? 0;
 
   const hasLimit = typeof limit === 'number';
 
@@ -397,7 +394,9 @@ export function BubbleMenu({ className, children, ...props }: BubbleMenuProps) {
     }),
   });
 
-  if (!hasSelection) { return null; }
+  if (!hasSelection) {
+    return null;
+  }
 
   return (
     <div className={cx('tale-text-editor__bubble-menu', className)} {...props}>
@@ -668,11 +667,7 @@ export function TextEditorImage() {
         aria-hidden="true"
         tabIndex={-1}
       />
-      <EditorButton
-        isDisabled={isDisabled}
-        aria-label="Insert image"
-        onClick={handleButtonClick}
-      >
+      <EditorButton isDisabled={isDisabled} aria-label="Insert image" onClick={handleButtonClick}>
         <ImageIcon size={16} />
       </EditorButton>
     </React.Fragment>
@@ -709,7 +704,9 @@ export function TextEditorColor() {
   }
 
   function handleColorChange(value: Color | null) {
-    if (!value) { return; }
+    if (!value) {
+      return;
+    }
     setColor(value);
     const hex = `#${value.toFormat('hex')}`;
     editor.chain().focus().setColor(hex).run();
@@ -735,9 +732,7 @@ export function TextEditorColor() {
             ))}
           </div>
           <div className="tale-text-editor__color-field-row">
-            <AriaLabel className="tale-text-editor__color-field-label">
-              Custom
-            </AriaLabel>
+            <AriaLabel className="tale-text-editor__color-field-label">Custom</AriaLabel>
             <AriaColorField
               value={color}
               onChange={handleColorChange}

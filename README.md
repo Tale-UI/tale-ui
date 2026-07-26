@@ -32,7 +32,8 @@ npm install @tale-ui/react @tale-ui/react-styles
 npm install @tale-ui/themes
 ```
 
-**Requirements:** React 17, 18, or 19. Node 22+.
+**Consumer requirements:** React 17, 18, or 19. React 3 requires Node 18+.
+Repository development requires Node 22+ and pnpm 10+.
 
 ## Usage
 
@@ -85,6 +86,8 @@ The index is checked against source in CI.
 ## Documentation
 
 - [Consume Tale UI](docs/consuming-design-system.md)
+- [Runtime and release compatibility](docs/compatibility.md)
+- [Migrate from React 2 to React 3](docs/migrating-to-v3.md)
 - [Author components](docs/authoring-components.md)
 - [Test the repository](test/README.md)
 - [Maintain documentation and generated artifacts](docs/documentation-governance.md)

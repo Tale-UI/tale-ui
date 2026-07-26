@@ -7,15 +7,16 @@ Tale UI has one public documentation origin:
 
 | Route                 | Contract                                                    |
 | --------------------- | ----------------------------------------------------------- |
-| `/docs/`              | Current v2 documentation                                    |
+| `/docs/`              | Current v3 documentation                                    |
 | `/docs/current/`      | Current-major alias                                         |
-| `/docs/v2/`           | Explicit current major                                      |
+| `/docs/v3/`           | Explicit current major                                      |
+| `/docs/v2/`           | Previous supported major from `release-v2.0.0`              |
 | `/docs/v1/`           | Immutable public snapshot from `react-v1.3.56`              |
 | `/docs/versions.json` | Version, provenance, registry, package, and content digests |
 | `/docs/rollback.json` | Last-known-good static rollback target                      |
 | `/llms.txt`           | Compact agent entry point                                   |
 
-The v1 snapshot uses a public-path allowlist. Private experiments, build
+The v2 and v1 snapshots use public-path allowlists. Private experiments, build
 outputs, dependencies, local analysis, and secrets are excluded. CI verifies
 every retained file against the content-addressed manifest.
 

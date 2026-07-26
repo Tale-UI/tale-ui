@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.0.0",
+  "subpaths": [
+    { "subpath": "./aspect-ratio", "enabled": false },
+    { "subpath": "./blockquote", "enabled": false },
+    { "subpath": "./button-group", "enabled": false },
+    { "subpath": "./citation", "enabled": false },
+    { "subpath": "./code", "enabled": false },
+    { "subpath": "./lightbox", "enabled": false },
+    { "subpath": "./markdown", "enabled": false },
+    { "subpath": "./outline", "enabled": false },
+    { "subpath": "./overflow-list", "enabled": false },
+    { "subpath": "./resizable", "enabled": false },
+    { "subpath": "./skeleton", "enabled": false },
+    { "subpath": "./timestamp", "enabled": false },
+    { "subpath": "./toast", "enabled": false }
+  ]
+}

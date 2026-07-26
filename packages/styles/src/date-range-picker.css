@@ -25,5 +25,12 @@
  *     </DateRangePicker.Popover>
  *   </DateRangePicker.Root>
  *
- * All styles are shared in _primitives.css (groups 2, 8–13).
+ * Shared picker styles remain in _primitives.css (groups 2, 8–13).
  */
+
+.tale-date-range-picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+  width: max-content;
+}

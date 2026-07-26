@@ -12,6 +12,7 @@ import {
   type ListBoxItemProps as AriaListBoxItemProps,
 } from 'react-aria-components';
 import { cx } from '../_cx';
+import { useTaleUiId } from '../utils/useTaleUiId';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -20,8 +21,10 @@ export type TagSelectItem = { id: Key; [key: string]: unknown };
 
 // ── Root ───────────────────────────────────────────────────────────────────
 
-export interface RootProps<T extends TagSelectItem = TagSelectItem>
-  extends Omit<React.ComponentPropsWithoutRef<'div'>, 'children'> {
+export interface RootProps<T extends TagSelectItem = TagSelectItem> extends Omit<
+  React.ComponentPropsWithoutRef<'div'>,
+  'children'
+> {
   /**
    * Size variant.
    * @default 'md'
@@ -126,7 +129,20 @@ export function Root<T extends TagSelectItem = TagSelectItem>({
   const groupRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const tagButtonRefs = React.useRef<(HTMLButtonElement | null)[]>([]);
-  const labelId = React.useId();
+  const labelId = useTaleUiId();
+  const hasReactSsrId = typeof (React as typeof React & { useId?: unknown }).useId === 'function';
+  const [canRenderAriaCollection, setCanRenderAriaCollection] = React.useState(hasReactSsrId);
+
+  React.useEffect(() => {
+    if (!canRenderAriaCollection) {
+      // RAC 1.19's hidden ComboBox collection produces a React 17 hydration
+      // mismatch. Hydrate the deterministic closed field first, then enhance
+      // it in a later task once React has completed the hydration commit.
+      const timeout = setTimeout(() => setCanRenderAriaCollection(true), 0);
+      return () => clearTimeout(timeout);
+    }
+    return undefined;
+  }, [canRenderAriaCollection]);
 
   // ── Controlled / uncontrolled selectedKeys ────────────────────────────────
 
@@ -138,7 +154,9 @@ export function Root<T extends TagSelectItem = TagSelectItem>({
 
   const setSelectedKeys = React.useCallback(
     (keys: Set<Key>) => {
-      if (!isControlled) {setInternalKeys(keys);}
+      if (!isControlled) {
+        setInternalKeys(keys);
+      }
       onSelectionChange?.(keys);
     },
     [isControlled, onSelectionChange],
@@ -155,7 +173,9 @@ export function Root<T extends TagSelectItem = TagSelectItem>({
 
   const itemsById = React.useMemo(() => {
     const map = new Map<Key, T>();
-    for (const item of items) {map.set(item.id, item);}
+    for (const item of items) {
+      map.set(item.id, item);
+    }
     return map;
   }, [items]);
 
@@ -181,7 +201,9 @@ export function Root<T extends TagSelectItem = TagSelectItem>({
 
   const handleSelectionChange = React.useCallback(
     (key: Key | null) => {
-      if (!key) {return;}
+      if (!key) {
+        return;
+      }
       const newKeys = new Set(selectedKeys);
       newKeys.add(key);
       setSelectedKeys(newKeys);
@@ -225,7 +247,9 @@ export function Root<T extends TagSelectItem = TagSelectItem>({
     key: Key,
     index: number,
   ) => {
-    if (event.key === 'Tab') {return;}
+    if (event.key === 'Tab') {
+      return;
+    }
     event.preventDefault();
     switch (event.key) {
       case ' ':
@@ -239,7 +263,9 @@ export function Root<T extends TagSelectItem = TagSelectItem>({
         }
         break;
       case 'ArrowLeft':
-        if (index > 0) {tagButtonRefs.current[index - 1]?.focus();}
+        if (index > 0) {
+          tagButtonRefs.current[index - 1]?.focus();
+        }
         break;
       case 'ArrowRight':
         if (index < selectedItems.length - 1) {
@@ -254,6 +280,43 @@ export function Root<T extends TagSelectItem = TagSelectItem>({
   // ── Render ─────────────────────────────────────────────────────────────────
 
   const groupClass = `tale-tag-select__group tale-tag-select__group--${size}${isInvalid ? ' tale-tag-select__group--invalid' : ''}`;
+
+  if (!canRenderAriaCollection) {
+    return (
+      <div
+        {...rest}
+        className={cx('tale-tag-select', className)}
+        data-disabled={isDisabled || undefined}
+        data-invalid={isInvalid || undefined}
+      >
+        {label && (
+          <span className="tale-tag-select__label">
+            {label}
+            {isRequired && <span aria-hidden="true"> *</span>}
+          </span>
+        )}
+        <div className="tale-tag-select__combobox">
+          <div className={groupClass}>
+            <input
+              className="tale-tag-select__input"
+              aria-label={typeof label === 'string' ? label : undefined}
+              aria-required={isRequired || undefined}
+              aria-invalid={isInvalid || undefined}
+              disabled={isDisabled}
+              placeholder={placeholder}
+              value={inputValue}
+              readOnly
+            />
+          </div>
+        </div>
+        {isInvalid && errorMessage ? (
+          <span className="tale-tag-select__error">{errorMessage}</span>
+        ) : description ? (
+          <span className="tale-tag-select__description">{description}</span>
+        ) : null}
+      </div>
+    );
+  }
 
   return (
     <div
@@ -270,7 +333,6 @@ export function Root<T extends TagSelectItem = TagSelectItem>({
       )}
 
       <AriaComboBox
-        items={filteredItems}
         inputValue={inputValue}
         onInputChange={setInputValue}
         onSelectionChange={handleSelectionChange}
@@ -283,9 +345,17 @@ export function Root<T extends TagSelectItem = TagSelectItem>({
         onOpenChange={handleOpenChange}
         className="tale-tag-select__combobox"
       >
-        <AriaGroup ref={groupRef} isDisabled={isDisabled} isInvalid={isInvalid} className={groupClass}>
+        <AriaGroup
+          ref={groupRef}
+          isDisabled={isDisabled}
+          isInvalid={isInvalid}
+          className={groupClass}
+        >
           {selectedItems.map((item, index) => (
-            <span key={String(item.id)} className={`tale-tag-select__tag tale-tag-select__tag--${size}`}>
+            <span
+              key={String(item.id)}
+              className={`tale-tag-select__tag tale-tag-select__tag--${size}`}
+            >
               <span className="tale-tag-select__tag-text">{resolveLabel(item)}</span>
               <button
                 ref={(el) => {
@@ -319,8 +389,8 @@ export function Root<T extends TagSelectItem = TagSelectItem>({
           style={{ width: popoverWidth || undefined }}
           className="tale-tag-select__popup"
         >
-          <AriaListBox className="tale-tag-select__listbox">
-            {children as React.ReactNode}
+          <AriaListBox items={filteredItems} className="tale-tag-select__listbox">
+            {children as any}
           </AriaListBox>
         </AriaPopover>
       </AriaComboBox>

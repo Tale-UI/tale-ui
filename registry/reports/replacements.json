@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "reportType": "replacements",
-  "sourceRevision": "sha256:36ce9764ffda139cba24365fd993833811d583ac2951d9387f6e434404240df0",
+  "sourceRevision": "sha256:44e7a4624cfc92448fa3b4bca215fccd33828a13de1c5928d584be33bd5abfa5",
   "replacements": [
     {
       "artifactId": "tale:a2ui-type:checkbox",

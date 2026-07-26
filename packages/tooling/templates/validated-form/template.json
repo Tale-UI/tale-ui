@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0.0",
   "id": "tale:template:validated-form",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "source": "source/App.tsx",
   "skeleton": "skeleton/App.tsx",
   "dependencies": {
-    "@tale-ui/react": "^2.0.0",
+    "@tale-ui/react": "^3.0.0",
     "react": ">=18.0.0",
     "lucide-react": "^0.468.0"
   },
@@ -17,7 +17,7 @@
   "golden": "tools/golden-prompts/form-login.json",
   "compatibility": {
     "react": ">=18.0.0",
-    "tale": ">=2.0.0 <3.0.0",
+    "tale": ">=3.0.0 <4.0.0",
     "frameworks": [
       "next",
       "vite"
@@ -33,5 +33,5 @@
     "firstParty": true
   },
   "license": "MIT",
-  "digest": "sha256:72ea014ca23a68b054815c23609f82ce3910096b525553cf6950e1f6f317a680"
+  "digest": "sha256:d171610034200c0fd6765813dd8e3525bd5ae718bb3211c94bcad39caff0b267"
 }
