@@ -586,8 +586,14 @@ describe('<Lightbox />', () => {
         renderContent={(item) => item.label}
         defaultOpen
       >
+        <span id="hostile-popup-name">Injected popup name</span>
         <Lightbox.Backdrop>
-          <Lightbox.Popup>
+          <Lightbox.Popup
+            {...({
+              'aria-label': 'Injected popup label',
+              'aria-labelledby': 'hostile-popup-name',
+            } as any)}
+          >
             <Lightbox.Caption data-testid="default-caption" />
             <Lightbox.Caption data-testid="empty-caption">{null}</Lightbox.Caption>
             <Lightbox.Previous {...({ 'aria-label': ' ', 'aria-labelledby': 'both' } as any)} />
@@ -601,6 +607,9 @@ describe('<Lightbox />', () => {
 
     expect(screen.getByTestId('default-caption')).to.have.text('First image');
     expect(screen.getByTestId('empty-caption')).to.have.text('');
+    const popup = screen.getByRole('dialog', { name: 'First image' });
+    expect(popup).to.have.attribute('aria-label', 'First image');
+    expect(popup).not.to.have.attribute('aria-labelledby');
     const previous = screen.getByRole('button', { name: 'Previous item' });
     expect(previous).not.to.have.attribute('aria-labelledby');
     expect(screen.getByRole('button', { name: 'Advance gallery' })).to.exist;

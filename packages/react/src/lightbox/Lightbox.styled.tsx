@@ -987,7 +987,10 @@ const Popup = React.forwardRef<HTMLElement, LightboxPopupProps>(
           (key) => key === 'isOpen' || key === 'defaultOpen' || key === 'onOpenChange',
         )
       : undefined;
-    const sanitized = sanitizeDomProps(props as Record<string, unknown>);
+    const sanitized = removeKeys(
+      sanitizeDomProps(props as Record<string, unknown>),
+      (key) => key === 'aria-label' || key === 'aria-labelledby',
+    );
 
     return (
       <Dialog.Popup
