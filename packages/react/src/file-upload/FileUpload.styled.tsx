@@ -214,6 +214,7 @@ export const DropZone = React.forwardRef<HTMLDivElement, DropZoneProps>(
               ref={inputRef}
               id={id}
               type="file"
+              aria-label="Upload files"
               className="tale-file-upload-drop-zone__input"
               disabled={isDisabled}
               accept={accept}
