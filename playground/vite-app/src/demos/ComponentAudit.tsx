@@ -33,6 +33,7 @@ import { AlertDialog } from '@tale-ui/react/alert-dialog';
 import { Popover } from '@tale-ui/react/popover';
 import { PreviewCard } from '@tale-ui/react/preview-card';
 import { Drawer } from '@tale-ui/react/drawer';
+import { Lightbox } from '@tale-ui/react/lightbox';
 import { Tooltip } from '@tale-ui/react/tooltip';
 
 // Navigation
@@ -55,6 +56,8 @@ import { AspectRatio } from '@tale-ui/react/aspect-ratio';
 import { AppShell } from '@tale-ui/react/app-shell';
 import { Chat } from '@tale-ui/react/chat';
 import { Column } from '@tale-ui/react/column';
+import { OverflowList } from '@tale-ui/react/overflow-list';
+import { Resizable } from '@tale-ui/react/resizable';
 import { Row as LayoutRow } from '@tale-ui/react/row';
 
 // Feedback
@@ -188,6 +191,18 @@ const numberFieldCustomControlStyle: NumberFieldSizingStyle = {
   '--tale-number-field-width': '20rem',
   '--tale-number-field-group-width': '8.75rem',
 };
+
+const auditOverflowActions = [
+  { id: 'edit', label: 'Edit' },
+  { id: 'duplicate', label: 'Duplicate' },
+  { id: 'archive', label: 'Archive' },
+  { id: 'share', label: 'Share' },
+] as const;
+
+const auditLightboxItems = [
+  { id: 'coast', label: 'Rocky coast', color: 'var(--neutral-30)' },
+  { id: 'forest', label: 'Forest trail', color: 'var(--neutral-50)' },
+] as const;
 
 // ---------------------------------------------------------------------------
 // Layout helpers
@@ -366,6 +381,7 @@ const TOC = [
       { id: 'preview-card', label: 'PreviewCard' },
       { id: 'drawer', label: 'Drawer' },
       { id: 'tooltip', label: 'Tooltip' },
+      { id: 'lightbox', label: 'Lightbox' },
     ],
   },
   {
@@ -402,6 +418,8 @@ const TOC = [
       { id: 'chat', label: 'Chat' },
       { id: 'column', label: 'Column' },
       { id: 'row', label: 'Row' },
+      { id: 'overflow-list', label: 'OverflowList' },
+      { id: 'resizable', label: 'Resizable' },
     ],
   },
   {
@@ -1381,6 +1399,59 @@ export default function ComponentAudit() {
               </div>
             ))}
           </div>
+        </Section>
+
+        <Section
+          id="lightbox"
+          title="Lightbox"
+          classes={[
+            'tale-lightbox',
+            'tale-lightbox__trigger',
+            'tale-lightbox__backdrop',
+            'tale-lightbox__popup',
+            'tale-lightbox__content',
+            'tale-lightbox__caption',
+            'tale-lightbox__previous',
+            'tale-lightbox__next',
+            'tale-lightbox__close',
+          ]}
+        >
+          <SubHeading>Collection viewer</SubHeading>
+          <Lightbox.Root
+            items={auditLightboxItems}
+            getKey={(item) => item.id}
+            getLabel={(item) => item.label}
+            renderContent={(item) => (
+              <div
+                role="img"
+                aria-label={item.label}
+                style={{
+                  width: '32rem',
+                  maxWidth: '70vw',
+                  aspectRatio: '3 / 2',
+                  borderRadius: 'var(--radius-m)',
+                  background: item.color,
+                }}
+              />
+            )}
+          >
+            <LayoutRow gap="s">
+              {auditLightboxItems.map((item) => (
+                <Lightbox.Trigger key={item.id} itemKey={item.id} variant="neutral">
+                  Open {item.label}
+                </Lightbox.Trigger>
+              ))}
+            </LayoutRow>
+            <Lightbox.Backdrop isDismissable>
+              <Lightbox.Popup>
+                <Lightbox.Content />
+                <Lightbox.Caption />
+                <Lightbox.Previous />
+                <Lightbox.Next />
+                <Lightbox.Close />
+              </Lightbox.Popup>
+            </Lightbox.Backdrop>
+          </Lightbox.Root>
         </Section>
 
         {/* ============================================================= */}
@@ -4386,6 +4457,73 @@ export default function ComponentAudit() {
               </span>
             ))}
           </LayoutRow>
+        </Section>
+
+        <Section
+          id="overflow-list"
+          title="OverflowList"
+          classes={[
+            'tale-overflow-list',
+            'tale-overflow-list__item',
+            'tale-overflow-list__overflow',
+          ]}
+        >
+          <SubHeading>Measured actions</SubHeading>
+          <OverflowList
+            aria-label="Document actions"
+            items={auditOverflowActions}
+            getKey={(action) => action.id}
+            renderItem={(action) => <Button variant="neutral">{action.label}</Button>}
+            renderOverflow={(hidden, { overflowControlRef }) => (
+              <Button
+                ref={overflowControlRef}
+                variant="neutral"
+                aria-label={`${hidden.length} more actions`}
+              >
+                More
+              </Button>
+            )}
+            style={{ width: '16.25rem' }}
+          />
+        </Section>
+
+        <Section
+          id="resizable"
+          title="Resizable"
+          classes={[
+            'tale-resizable',
+            'tale-resizable--horizontal',
+            'tale-resizable__panel',
+            'tale-resizable__handle',
+          ]}
+        >
+          <SubHeading>Bounded workspace</SubHeading>
+          <Resizable.Root
+            defaultSizes={{ navigation: 30, content: 70 }}
+            style={{ height: '12rem' }}
+          >
+            <Resizable.Panel
+              id="navigation"
+              minSize={20}
+              maxSize={50}
+              style={{ padding: 'var(--space-s)', background: 'var(--neutral-10)' }}
+            >
+              Navigation
+            </Resizable.Panel>
+            <Resizable.Handle
+              id="navigation-content"
+              before="navigation"
+              after="content"
+              aria-label="Resize navigation and content"
+            />
+            <Resizable.Panel
+              id="content"
+              minSize={40}
+              style={{ padding: 'var(--space-s)', background: 'var(--neutral-5)' }}
+            >
+              Content
+            </Resizable.Panel>
+          </Resizable.Root>
         </Section>
 
         {/* ============================================================= */}
