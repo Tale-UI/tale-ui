@@ -175,7 +175,9 @@ bubble handlers for permitted observation after Tale descendant actions.
 ## Pitfalls
 
 - Keep collection keys primitive, unique, and stable across reorders.
-- Render `Popup` inside `Backdrop`; place `Content`, `Caption`, and controls
-  inside `Popup`.
 - Remount Root to switch either controlled/uncontrolled state mode.
 - Use `Image` for image media rather than a raw `<img>` in Tale UI examples.
+<!-- pitfall: lightbox-popup-inside-backdrop -->
+- **Nest Lightbox Popup inside Backdrop** — The Backdrop owns the React Aria modal overlay that contains and dismisses the Popup.
+  - anti-pattern: `<><Lightbox.Backdrop /><Lightbox.Popup /></>`
+  - fix: `<Lightbox.Backdrop><Lightbox.Popup /></Lightbox.Backdrop>`

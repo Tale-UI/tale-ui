@@ -82,5 +82,7 @@ and CSS gap before settling at most one partition per animation frame.
   and `1n` are distinct.
 - Change `measurementKey` when hidden item content changes size without
   replacing the collection.
-- Attach `overflowControlRef` to the actual enabled focusable control, not its
-  decorative wrapper.
+<!-- pitfall: overflow-list-control-ref -->
+- **Attach overflowControlRef to the enabled overflow control** — OverflowList moves focus to this exact node before a focused item becomes hidden.
+  - anti-pattern: `renderOverflow={() => <span>More</span>}`
+  - fix: `renderOverflow={(_, { overflowControlRef }) => <Button ref={overflowControlRef}>More</Button>}`

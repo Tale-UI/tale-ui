@@ -6387,6 +6387,125 @@
       "crossPitfallRefs": null
     },
     {
+      "name": "Lightbox",
+      "slug": "lightbox",
+      "import": "@tale-ui/react/lightbox",
+      "category": null,
+      "description": null,
+      "kind": "compound",
+      "status": "stable",
+      "props": [
+        {
+          "name": "items",
+          "type": "string",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "getKey",
+          "type": "string",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "getLabel",
+          "type": "string",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "renderContent",
+          "type": "string",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "alt",
+          "type": "string",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "fit",
+          "type": "string",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "isOpen",
+          "type": "boolean",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "onOpenChange",
+          "type": "function",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "selectedKey",
+          "type": "string",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "onSelectionChange",
+          "type": "function",
+          "required": false,
+          "description": null,
+          "default": null
+        }
+      ],
+      "parts": [
+        "Trigger",
+        "Backdrop",
+        "Popup",
+        "Content",
+        "Caption",
+        "Previous",
+        "Next",
+        "Close"
+      ],
+      "examples": [
+        "import { Image } from '@tale-ui/react/image';\nimport { Lightbox } from '@tale-ui/react/lightbox';\n\nconst photos = [\n  { id: 'coast', label: 'Rocky coast at golden hour', src: '/coast.jpg' },\n  { id: 'forest', label: 'Sunlight through a green forest', src: '/forest.jpg' },\n] as const;\n\nexport function PhotoGallery() {\n  return (\n    <Lightbox.Root\n      items={photos}\n      getKey={(photo) => photo.id}\n      getLabel={(photo) => photo.label}\n      renderContent={(photo) => <Image src={photo.src} alt={photo.label} fit=\"contain\" />}\n    >\n      {photos.map((photo) => (\n        <Lightbox.Trigger key={photo.id} itemKey={photo.id} variant=\"ghost\">\n          Open {photo.label}\n        </Lightbox.Trigger>\n      ))}\n      <Lightbox.Backdrop isDismissable>\n        <Lightbox.Popup>\n          <Lightbox.Content />\n          <Lightbox.Caption />\n          <Lightbox.Previous />\n          <Lightbox.Next />\n          <Lightbox.Close />\n        </Lightbox.Popup>\n      </Lightbox.Backdrop>\n    </Lightbox.Root>\n  );\n}",
+        "const [open, setOpen] = useState(false);\nconst [selectedKey, setSelectedKey] = useState<React.Key | null>('coast');\n\n<Lightbox.Root\n  items={photos}\n  getKey={(photo) => photo.id}\n  getLabel={(photo) => photo.label}\n  renderContent={(photo) => <Image src={photo.src} alt={photo.label} />}\n  isOpen={open}\n  onOpenChange={setOpen}\n  selectedKey={selectedKey}\n  onSelectionChange={setSelectedKey}\n>\n  {/* Triggers and overlay */}\n</Lightbox.Root>;"
+      ],
+      "cssClasses": [
+        "tale-lightbox__backdrop",
+        "tale-lightbox__caption",
+        "tale-lightbox__close",
+        "tale-lightbox__content",
+        "tale-lightbox__next",
+        "tale-lightbox__popup",
+        "tale-lightbox__previous",
+        "tale-lightbox__trigger"
+      ],
+      "pitfalls": [
+        {
+          "id": "lightbox-popup-inside-backdrop",
+          "summary": "Nest Lightbox Popup inside Backdrop",
+          "detail": "The Backdrop owns the React Aria modal overlay that contains and dismisses the Popup.",
+          "antiPatterns": [
+            "<><Lightbox.Backdrop /><Lightbox.Popup /></>"
+          ],
+          "fixes": [
+            "<Lightbox.Backdrop><Lightbox.Popup /></Lightbox.Backdrop>"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
       "name": "Link",
       "slug": "link",
       "import": "@tale-ui/react/link",
@@ -7446,6 +7565,39 @@
         "tale-outline__list--nested"
       ],
       "pitfalls": null,
+      "crossPitfallRefs": null
+    },
+    {
+      "name": "OverflowList",
+      "slug": "overflow-list",
+      "import": "@tale-ui/react/overflow-list",
+      "category": null,
+      "description": null,
+      "kind": "simple",
+      "status": "experimental",
+      "props": [],
+      "parts": null,
+      "examples": [
+        "import { Button } from '@tale-ui/react/button';\nimport { OverflowList } from '@tale-ui/react/overflow-list';\n\nconst actions = [\n  { id: 'edit', label: 'Edit' },\n  { id: 'duplicate', label: 'Duplicate' },\n  { id: 'archive', label: 'Archive' },\n  { id: 'share', label: 'Share' },\n] as const;\n\nexport function ResponsiveActions() {\n  return (\n    <OverflowList\n      aria-label=\"Document actions\"\n      items={actions}\n      getKey={(action) => action.id}\n      renderItem={(action) => <Button variant=\"neutral\">{action.label}</Button>}\n      renderOverflow={(hidden, { overflowControlRef }) => (\n        <Button\n          ref={overflowControlRef}\n          variant=\"neutral\"\n          aria-label={`${hidden.length} more actions`}\n        >\n          More\n        </Button>\n      )}\n    />\n  );\n}"
+      ],
+      "cssClasses": [
+        "tale-overflow-list",
+        "tale-overflow-list__item",
+        "tale-overflow-list__overflow"
+      ],
+      "pitfalls": [
+        {
+          "id": "overflow-list-control-ref",
+          "summary": "Attach overflowControlRef to the enabled overflow control",
+          "detail": "OverflowList moves focus to this exact node before a focused item becomes hidden.",
+          "antiPatterns": [
+            "renderOverflow={() => <span>More</span>}"
+          ],
+          "fixes": [
+            "renderOverflow={(_, { overflowControlRef }) => <Button ref={overflowControlRef}>More</Button>}"
+          ]
+        }
+      ],
       "crossPitfallRefs": null
     },
     {
@@ -8628,6 +8780,70 @@
             "import { RatingStars } from '@tale-ui/react/rating-stars'; ... <RatingStars value={4} />"
           ],
           "completeExample": "import { RatingStars } from '@tale-ui/react/rating-stars';\nexport function MyComponent() {\n  return <RatingStars value={4} />;\n}"
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
+      "name": "Resizable",
+      "slug": "resizable",
+      "import": "@tale-ui/react/resizable",
+      "category": null,
+      "description": null,
+      "kind": "compound",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "defaultSizes",
+          "type": "string",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "sizes",
+          "type": "string",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "onSizesChange",
+          "type": "function",
+          "required": false,
+          "description": null,
+          "default": null
+        }
+      ],
+      "parts": [
+        "Panel",
+        "Handle",
+        "Root"
+      ],
+      "examples": [
+        "import { Resizable } from '@tale-ui/react/resizable';",
+        "import '@tale-ui/css';\nimport '@tale-ui/react-styles/resizable';",
+        "<Resizable.Root defaultSizes={{ navigation: 30, content: 70 }}>\n  <Resizable.Panel id=\"navigation\">Navigation</Resizable.Panel>\n  <Resizable.Handle\n    id=\"navigation-content\"\n    before=\"navigation\"\n    after=\"content\"\n    aria-label=\"Resize navigation\"\n  />\n  <Resizable.Panel id=\"content\">Content</Resizable.Panel>\n</Resizable.Root>",
+        "import * as React from 'react';\nimport { Resizable, type ResizableSizes } from '@tale-ui/react/resizable';\n\nexport function ControlledWorkspace() {\n  const [sizes, setSizes] = React.useState<ResizableSizes>({ list: 35, detail: 65 });\n\n  return (\n    <Resizable.Root sizes={sizes} onSizesChange={setSizes}>\n      <Resizable.Panel id=\"list\" minSize={20} maxSize={60}>\n        List\n      </Resizable.Panel>\n      <Resizable.Handle\n        id=\"list-detail\"\n        before=\"list\"\n        after=\"detail\"\n        aria-label=\"Resize list and detail\"\n      />\n      <Resizable.Panel id=\"detail\" minSize={40}>\n        Detail\n      </Resizable.Panel>\n    </Resizable.Root>\n  );\n}"
+      ],
+      "cssClasses": [
+        "tale-resizable",
+        "tale-resizable--horizontal",
+        "tale-resizable--vertical",
+        "tale-resizable__handle",
+        "tale-resizable__panel"
+      ],
+      "pitfalls": [
+        {
+          "id": "resizable-controlled-proposal-acknowledgement",
+          "summary": "Apply each controlled Resizable proposal before the next move",
+          "detail": "A controlled pointer gesture cancels when the parent does not acknowledge the latest proposed sizes.",
+          "antiPatterns": [
+            "<Resizable.Root sizes={sizes} onSizesChange={() => {}}>"
+          ],
+          "fixes": [
+            "<Resizable.Root sizes={sizes} onSizesChange={setSizes}>"
+          ]
         }
       ],
       "crossPitfallRefs": null

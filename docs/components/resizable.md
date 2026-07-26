@@ -146,5 +146,8 @@ pointer capture is lost, the browser cancels the pointer, or the Root unmounts.
 - Do not use `ResizableTableContainer` for general application panels; it is table-column-specific.
 - Keep logical IDs stable across reorder so uncontrolled values can follow their Panels.
 - Do not mix `sizes` and `defaultSizes`, or switch ownership mode after mount.
-- In controlled pointer interactions, apply each proposal before the next movement delivery.
 - Provide usable container width or height; zero-size Roots cannot acquire a pointer gesture.
+<!-- pitfall: resizable-controlled-proposal-acknowledgement -->
+- **Apply each controlled Resizable proposal before the next move** — A controlled pointer gesture cancels when the parent does not acknowledge the latest proposed sizes.
+  - anti-pattern: `<Resizable.Root sizes={sizes} onSizesChange={() => {}}>`
+  - fix: `<Resizable.Root sizes={sizes} onSizesChange={setSizes}>`

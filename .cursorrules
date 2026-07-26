@@ -17,9 +17,9 @@ Use **only** components from `@tale-ui/react` for all UI. Never invent new impor
 
 ## Namespace vs simple
 
-**Namespace** (use `.Root`): Accordion, AlertDialog, AppShell, Autocomplete, Avatar, BadgeGroup, Banner, Blockquote, Breadcrumbs, Calendar, Card, Carousel, Chat, CheckboxField, Citation, ColorArea, ColorField, ColorPicker, ColorSlider, ColorSwatchPicker, ColorWheel, Combobox, CommandPalette, ContextMenu, CreditCard, DateField, DatePicker, DateRangePicker, Dialog, Disclosure, Drawer, EmptyState, Field, Fieldset, FileUpload, GridList, HeaderNav, ImageCropper, Input, InputGroup, InputTags, KeyValuePairs, List, ListBox, Menu, Menubar, Meter, MultiSelect, NavigationMenu, NumberField, Pagination, PaymentInput, PinInput, Popover, PreviewCard, ProgressBar, ProgressCircle, QRCode, RadioField, RangeCalendar, ScrollArea, SearchField, Select, Sidebar, Slider, SwitchField, Table, Tabs, TagGroup, TagSelect, TextArea, TextEditor, TextField, TimeField, Toolbar, Tooltip, Tree, VideoPlayer.
+**Namespace** (use `.Root`): Accordion, AlertDialog, AppShell, Autocomplete, Avatar, BadgeGroup, Banner, Blockquote, Breadcrumbs, Calendar, Card, Carousel, Chat, CheckboxField, Citation, ColorArea, ColorField, ColorPicker, ColorSlider, ColorSwatchPicker, ColorWheel, Combobox, CommandPalette, ContextMenu, CreditCard, DateField, DatePicker, DateRangePicker, Dialog, Disclosure, Drawer, EmptyState, Field, Fieldset, FileUpload, GridList, HeaderNav, ImageCropper, Input, InputGroup, InputTags, KeyValuePairs, Lightbox, List, ListBox, Menu, Menubar, Meter, MultiSelect, NavigationMenu, NumberField, Pagination, PaymentInput, PinInput, Popover, PreviewCard, ProgressBar, ProgressCircle, QRCode, RadioField, RangeCalendar, Resizable, ScrollArea, SearchField, Select, Sidebar, Slider, SwitchField, Table, Tabs, TagGroup, TagSelect, TextArea, TextEditor, TextField, TimeField, Toolbar, Tooltip, Tree, VideoPlayer.
 
-**Simple** (direct use): AppStoreButton, AspectRatio, BackgroundPattern, Badge, Button, ButtonGroup, CSPProvider, CheckboxGroup, Code, CodeBlock, ColorModeToggle, ColorSwatch, Column, Container, DotIcon, DropZone, FeaturedIcon, FileTrigger, Form, I18nProvider, Icon, IconButton, Illustration, Image, IphoneMockup, Kbd, Link, Markdown, Outline, PaginationDot, PaginationLine, RadioGroup, RatingBadge, RatingStars, Row, SectionDivider, SelectNative, Separator, Skeleton, SocialButton, SocialButtonGroup, Spinner, Text, Timestamp, ToggleButton, ToggleButtonGroup, Virtualizer, mergeProps.
+**Simple** (direct use): AppStoreButton, AspectRatio, BackgroundPattern, Badge, Button, ButtonGroup, CSPProvider, CheckboxGroup, Code, CodeBlock, ColorModeToggle, ColorSwatch, Column, Container, DotIcon, DropZone, FeaturedIcon, FileTrigger, Form, I18nProvider, Icon, IconButton, Illustration, Image, IphoneMockup, Kbd, Link, Markdown, Outline, OverflowList, PaginationDot, PaginationLine, RadioGroup, RatingBadge, RatingStars, Row, SectionDivider, SelectNative, Separator, Skeleton, SocialButton, SocialButtonGroup, Spinner, Text, Timestamp, ToggleButton, ToggleButtonGroup, Virtualizer, mergeProps.
 
 **Deprecated** (still functional; avoid in new code): Checkbox (use CheckboxField), Radio (use RadioField), Switch (use SwitchField).
 
@@ -246,6 +246,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [KeyValuePairs] columns accepts only 1, 2, 3, or 4
 - [KeyValuePairs] Place Term before Details inside each Item
 - [KeyValuePairs] Use GroupTitle plus GroupList for grouped pairs
+- [Lightbox] Nest Lightbox Popup inside Backdrop
 - [Link] There is no isExternal prop — use target, rel, and iconTrailing directly
 - [List] variant accepts 'plain' or 'divided' only
 - [ListBox] Use ListBox.Section and ListBox.Header for grouped options
@@ -266,6 +267,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [NavigationMenu] Use <NavigationMenu> for any prompt that asks for a site navigation bar or a list of nav links — never substitute HeaderNav
 - [NumberField] NumberField.Root value prop accepts number | undefined, NOT number | null.
 - [NumberField] No phantom sub-parts: NumberField.Step and NumberField.HintText do not exist
+- [OverflowList] Attach overflowControlRef to the enabled overflow control
 - [Pagination] Root does NOT accept currentPage, totalPages, or onPageChange
 - [PaymentInput] No phantom sub-parts: PaymentInput.Number, PaymentInput.CardNumber, and PaymentInput.NumberInput do not exist
 - [PinInput] Uses PinInput.Slot (NOT PinInput.Input)
@@ -288,6 +290,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [RangeCalendar] Use isDateUnavailable to disable dates, not isOutsideRange
 - [RatingBadge] The value prop is required
 - [RatingStars] value prop is required
+- [Resizable] Apply each controlled Resizable proposal before the next move
 - [ScrollArea] Scrollbar orientation is a string, not a boolean
 - [ScrollArea] Requires a specific nested structure
 - [SearchField] SearchField.ClearButton does NOT auto-render an icon

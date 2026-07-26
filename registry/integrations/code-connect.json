@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "sourceDigest": "sha256:aa5187545d093121f9e06ce43e43bfbdec709992717610cdf1c3161e1ad6fa1a",
+  "sourceDigest": "sha256:174ab1ae6d765b4901b72954b6d6e6c770d218a86eef5fb29405f092b78471b0",
   "mappingKind": "code-connect-equivalent",
   "mappings": [
     {
@@ -861,6 +861,17 @@
       }
     },
     {
+      "registryId": "tale:component:lightbox",
+      "componentName": "Lightbox",
+      "package": "@tale-ui/react/lightbox",
+      "source": "packages/react/src/lightbox/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
       "registryId": "tale:component:link",
       "componentName": "Link",
       "package": "@tale-ui/react/link",
@@ -991,6 +1002,17 @@
       "componentName": "Outline",
       "package": "@tale-ui/react/outline",
       "source": "packages/react/src/outline/index.ts",
+      "properties": {},
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:overflow-list",
+      "componentName": "OverflowList",
+      "package": "@tale-ui/react/overflow-list",
+      "source": "packages/react/src/overflow-list/index.ts",
       "properties": {},
       "ownership": {
         "design": "design-systems",
@@ -1188,6 +1210,17 @@
       "properties": {
         "size": ["sm", "md", "lg"]
       },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:resizable",
+      "componentName": "Resizable",
+      "package": "@tale-ui/react/resizable",
+      "source": "packages/react/src/resizable/index.ts",
+      "properties": {},
       "ownership": {
         "design": "design-systems",
         "code": "design-systems"

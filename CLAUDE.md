@@ -274,15 +274,15 @@ Format:
 
 ## Component Artifact Audit
 
-Status of required artifacts for all 129 components. When adding or updating a component, update the relevant row below.
+Status of required artifacts for all 132 components. When adding or updating a component, update the relevant row below.
 
 **Legend:** styled = `{Component}.styled.tsx` | index = `index.ts` | test = `{Component}.test.tsx` (non-trivial logic only) | css = `{component}.css` in styles/src | prim = `_primitives.css` entry (if shared declarations apply) | doc = `docs/components/{name}.md` | snip = consumer-claude-md-snippet.md | rdme = react/README.md | idx = `docs/component-index.md` entry | story = Storybook story | audit = ComponentAudit.tsx entry | a2ui = A2UI catalog adapter in `packages/a2ui/src/catalog.ts` | status = `@status` JSDoc tag in `{Component}.styled.tsx` (`stable` \| `experimental` \| `deprecated`)
 
 **✓** = present | **✗** = missing | **n/a** = not applicable
 
-**Non-trivial components requiring tests:** Drawer (custom state/swipe), Meter (percentage calc), ProgressBar (percentage calc + indeterminate), ColorModeToggle (localStorage/OS preference), Tabs (MutationObserver/ResizeObserver indicator), KeyValuePairs (ResizeObserver column calculation), Citation (normalization/source identity), Markdown (bounded parsing/filtering), Outline (observer/state reconciliation), Timestamp (formatting/shared scheduler)
+**Non-trivial components requiring tests:** Drawer (custom state/swipe), Meter (percentage calc), ProgressBar (percentage calc + indeterminate), ColorModeToggle (localStorage/OS preference), Tabs (MutationObserver/ResizeObserver indicator), KeyValuePairs (ResizeObserver column calculation), Citation (normalization/source identity), Markdown (bounded parsing/filtering), Outline (observer/state reconciliation), Timestamp (formatting/shared scheduler), Lightbox (collection/selection/focus/swipe state), OverflowList (measurement/focus state), Resizable (projection/gesture state)
 
-**Total:** 129 components | **Fully complete:** 129 | **Missing artifacts:** 0
+**Total:** 132 components | **Fully complete:** 132 | **Missing artifacts:** 0
 
 ### Form Controls
 
@@ -344,14 +344,15 @@ Status of required artifacts for all 129 components. When adding or updating a c
 
 ### Overlay
 
-| Component   | styled | index | test | css | prim | doc | snip | rdme | idx | story | audit | a2ui | status |
-| ----------- | ------ | ----- | ---- | --- | ---- | --- | ---- | ---- | --- | ----- | ----- | ---- | ------ |
-| Dialog      | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| AlertDialog | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| Popover     | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| PreviewCard | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| Drawer      | ✓      | ✓     | ✓    | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| Tooltip     | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
+| Component   | styled | index | test | css | prim | doc | snip | rdme | idx | story | audit | a2ui | status       |
+| ----------- | ------ | ----- | ---- | --- | ---- | --- | ---- | ---- | --- | ----- | ----- | ---- | ------------ |
+| Dialog      | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| AlertDialog | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Popover     | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| PreviewCard | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Drawer      | ✓      | ✓     | ✓    | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Tooltip     | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Lightbox    | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
 
 ### Navigation
 
@@ -373,21 +374,23 @@ Status of required artifacts for all 129 components. When adding or updating a c
 
 ### Layout
 
-| Component   | styled | index | test | css | prim | doc | snip | rdme | idx | story | audit | a2ui | status       |
-| ----------- | ------ | ----- | ---- | --- | ---- | --- | ---- | ---- | --- | ----- | ----- | ---- | ------------ |
-| Accordion   | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
-| AppShell    | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
-| AspectRatio | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
-| Card        | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
-| Carousel    | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
-| Chat        | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
-| Column      | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
-| Disclosure  | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
-| Row         | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
-| ScrollArea  | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
-| Separator   | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
-| Tabs        | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
-| Toolbar     | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Component    | styled | index | test | css | prim | doc | snip | rdme | idx | story | audit | a2ui | status       |
+| ------------ | ------ | ----- | ---- | --- | ---- | --- | ---- | ---- | --- | ----- | ----- | ---- | ------------ |
+| Accordion    | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| AppShell     | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
+| AspectRatio  | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
+| Card         | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Carousel     | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Chat         | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
+| Column       | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Disclosure   | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Row          | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| ScrollArea   | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Separator    | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Tabs         | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Toolbar      | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| OverflowList | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
+| Resizable    | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
 
 ### Feedback
 
