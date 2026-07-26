@@ -19,6 +19,14 @@ export function slugifyAccessibilityName(value) {
     .toLowerCase();
 }
 
+export function storybookIframePathFromProbe(status, location) {
+  if (status < 300 || status >= 400 || !location) {
+    return 'iframe.html';
+  }
+  const pathname = new URL(location, 'https://storybook.invalid/').pathname;
+  return pathname === '/iframe' ? 'iframe' : 'iframe.html';
+}
+
 export function normalizeRepositoryPath(value, repositoryRoot) {
   assert.equal(typeof value, 'string', 'Accessibility changed paths must be strings');
   let normalized = value.replaceAll('\\', '/').replace(/\/+/g, '/');

@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import {
   accessibilityViolationKey,
@@ -49,10 +48,4 @@ test('only resolves baseline violations for stories included in the scan', () =>
   assert.deepEqual(resolvedAccessibilityViolations(known, [], ['components-button--default']), [
     known[0],
   ]);
-});
-
-test('changed accessibility scans use the Storybook dev-server iframe route', () => {
-  const runner = readFileSync(new URL('./run-changed-a11y.mjs', import.meta.url), 'utf8');
-  assert.match(runner, /new globalThis\.URL\('iframe\.html'/);
-  assert.doesNotMatch(runner, /new globalThis\.URL\('iframe'/);
 });

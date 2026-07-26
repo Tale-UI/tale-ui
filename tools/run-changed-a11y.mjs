@@ -17,6 +17,7 @@ import {
   createAccessibilitySelection,
   selectAccessibilityStories,
   storybookAccessibilityStories,
+  storybookIframePathFromProbe,
 } from './accessibility-selection.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
@@ -183,13 +184,20 @@ assert.ok(response.ok, `Unable to load Storybook index: ${response.status}`);
 const storyIndex = await response.json();
 const stories = storybookAccessibilityStories(storyIndex);
 const selected = selectAccessibilityStories(stories, selection);
+const iframeProbe = await fetch(new globalThis.URL('iframe.html', `${URL.replace(/\/$/, '')}/`), {
+  redirect: 'manual',
+});
+const iframePath = storybookIframePathFromProbe(
+  iframeProbe.status,
+  iframeProbe.headers.get('location'),
+);
 
 const browser = await chromium.launch({ headless: true });
 const violations = [];
 try {
   const page = await browser.newPage();
   for (const story of selected) {
-    const storyUrl = new globalThis.URL('iframe.html', `${URL.replace(/\/$/, '')}/`);
+    const storyUrl = new globalThis.URL(iframePath, `${URL.replace(/\/$/, '')}/`);
     storyUrl.searchParams.set('id', story.id);
     storyUrl.searchParams.set('viewMode', 'story');
     await page.goto(storyUrl.toString(), { waitUntil: 'networkidle' });

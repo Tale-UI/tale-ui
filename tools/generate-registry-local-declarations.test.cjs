@@ -18,6 +18,7 @@ test('prop extraction preserves members after template-literal type braces', () 
   assert.deepEqual(extractProps(source, 'AspectRatio'), [
     {
       name: 'ratio',
+      // eslint-disable-next-line no-template-curly-in-string -- verifies the literal type text.
       type: 'number | `${number}/${number}` | `${number} / ${number}`',
       required: false,
       description: null,

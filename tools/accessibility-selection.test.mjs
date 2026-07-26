@@ -6,6 +6,7 @@ import {
   primaryAccessibilityStories,
   selectAccessibilityStories,
   slugifyAccessibilityName,
+  storybookIframePathFromProbe,
 } from './accessibility-selection.mjs';
 
 const stories = [
@@ -29,6 +30,13 @@ test('normalizes repository paths and component names deterministically', () => 
     'packages/react/src/button/Button.styled.tsx',
   );
   assert.equal(slugifyAccessibilityName('OverflowList'), 'overflow-list');
+});
+
+test('selects the supported iframe route for dev and static Storybook servers', () => {
+  assert.equal(storybookIframePathFromProbe(200, null), 'iframe.html');
+  assert.equal(storybookIframePathFromProbe(301, '/iframe'), 'iframe');
+  assert.equal(storybookIframePathFromProbe(302, 'https://storybook.test/iframe'), 'iframe');
+  assert.equal(storybookIframePathFromProbe(302, '/unrelated'), 'iframe.html');
 });
 
 test('retains component paths and slugs when a shared style entry triggers broad coverage', () => {
