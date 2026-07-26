@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0.0",
   "reportType": "status",
-  "sourceRevision": "sha256:23147a174d054c12791c81b53e287dc7441508c2ee66ff9ffe6758700f0c7a18",
+  "sourceRevision": "sha256:6848a671a13ef0df51069c4c2206e47c6f9b2f1347af47e039fa961eb78043df",
   "states": [
     {
       "state": "experimental",
-      "artifactCount": 16,
+      "artifactCount": 17,
       "artifacts": [
         "tale:component:app-shell",
         "tale:component:aspect-ratio",
@@ -16,6 +16,7 @@
         "tale:component:code",
         "tale:component:code-block",
         "tale:component:kbd",
+        "tale:component:lightbox",
         "tale:component:markdown",
         "tale:component:outline",
         "tale:component:overflow-list",
@@ -27,7 +28,7 @@
     },
     {
       "state": "stable",
-      "artifactCount": 905,
+      "artifactCount": 904,
       "artifacts": [
         "tale:a2ui-type:accordion",
         "tale:a2ui-type:accordion-header",
@@ -241,7 +242,6 @@
         "tale:component:input-tags",
         "tale:component:iphone-mockup",
         "tale:component:key-value-pairs",
-        "tale:component:lightbox",
         "tale:component:line-chart",
         "tale:component:link",
         "tale:component:list",

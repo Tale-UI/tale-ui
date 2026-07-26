@@ -293,7 +293,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:155dc8ce6e36def62d9cfa7127ba8fc67c3e8f9a02f7af361d2ac00aeb72414e",
+  "sourceRevision": "sha256:791b4a61fd7a18e5e2ed7f5a53e71de75b5590f9335f1ab9cb340a5f7d35de28",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -12854,7 +12854,7 @@
       "slug": "lightbox",
       "name": "Lightbox",
       "description": "",
-      "lifecycle": "stable",
+      "lifecycle": "experimental",
       "package": "@tale-ui/react",
       "version": "3.0.0",
       "aliases": [
@@ -53612,5 +53612,5 @@
       }
     }
   ],
-  "digest": "sha256:f06c2ed1babbcf7b9428ba995761ce27a0c0d1fb33c029fff5a380eae14a09a5"
+  "digest": "sha256:752c67388c4ebb0fecea3e11f1faa4f32fac8b00ea066ad4c586e89e914aaa57"
 }
