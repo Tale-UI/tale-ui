@@ -383,7 +383,7 @@ Tests use **Vitest + Testing Library** with jsdom. Located at `{Component}.test.
 ### Test boilerplate
 
 ```tsx
-import { expect, fn } from 'vitest';
+import { expect, vi } from 'vitest';
 import { MyComponent } from '@tale-ui/react/my-component';
 import { screen } from '@tale-ui/monorepo-tests/test-utils';
 import { createRenderer } from '#test-utils';
@@ -424,7 +424,7 @@ describe('<MyComponent />', () => {
   });
 
   it('does not fire onPress when disabled', async () => {
-    const handlePress = fn();
+    const handlePress = vi.fn();
     const { user } = await render(
       <MyComponent isDisabled onPress={handlePress}>
         Label
@@ -461,7 +461,7 @@ When adding a new component, complete every step:
 17. [ ] Run `pnpm build` — verify build succeeds
 18. [ ] Update the component's row in the **Component Artifact Audit** section of `CLAUDE.md`
 19. [ ] Run `pnpm audit:components -- --component={component}` — verify all checks pass
-20. [ ] Run `pnpm generate-docs` — regenerate component, consumer-guidance, A2UI, and unified artifact outputs
-21. [ ] Run `pnpm governance:check && pnpm performance:check`
-22. [ ] Run changed-component accessibility and retain applicable manual evidence as described in `docs/governance/accessibility-and-performance.md`
-23. [ ] **If the component should be available in A2UI:** register it in `packages/a2ui/src/catalog.ts` (add adapter), `tools/a2ui-catalog-metadata.js` (add description/props), then run `pnpm a2ui:generate-docs && pnpm a2ui:generate-catalog && pnpm a2ui:audit-docs`
+20. [ ] **If the component should be available in A2UI:** register it in `packages/a2ui/src/catalog.ts` (add adapter) and `tools/a2ui-catalog-metadata.js` (add description/props)
+21. [ ] Run `pnpm generate-docs` — regenerate component and consumer guidance, A2UI and unified artifacts, governance reports, versioned docs, and roadmap evidence in dependency order
+22. [ ] Run `pnpm generate-docs:check && pnpm performance:check`
+23. [ ] Run changed-component accessibility and retain applicable manual evidence as described in `docs/governance/accessibility-and-performance.md`

@@ -20,7 +20,7 @@
       "evidence": [
         {
           "path": "registry/artifacts.json",
-          "digest": "sha256:c20e36fe4e4e6f76e338199b265efbdde0e8b900af73fc8f1a9f413117bfcea2"
+          "digest": "sha256:e04cf0b8ef7519ace3e6e597511bac835e24c38450ee3a21e06eedcaa6d93a95"
         },
         {
           "path": "tools/check-roadmap-contracts.mjs",
@@ -48,7 +48,7 @@
       "evidence": [
         {
           "path": "registry/reports/replacements.json",
-          "digest": "sha256:3bedd910efca1be39eb9f06e7f4e8f1ce2fd3b54a710e4e147bdbf36ee4aea95"
+          "digest": "sha256:2f78bcbd73166f1fd478636f6163731cf38ebe4e0d618727c73adefe08a77edc"
         },
         {
           "path": "tools/generate-governance-reports.mjs",
@@ -128,7 +128,7 @@
       "evidence": [
         {
           "path": ".github/workflows/ci.yml",
-          "digest": "sha256:f646736200a0e56a2a2f3c92cb02e52838ed557f3c3f945220cc46708c40da75"
+          "digest": "sha256:91c4b16d61c2e145d3b1a278400f4ed8b51fe56b1ec23f7e9efa8c6eec364c17"
         },
         {
           "path": "tools/check-roadmap-contracts.mjs",
@@ -236,7 +236,7 @@
       "evidence": [
         {
           "path": "analysis/table-plugins/ranking.json",
-          "digest": "sha256:e411b49e1e147cb37b5e7fc251953d8641b336a83acfd41894c6a2bafaa417ea"
+          "digest": "sha256:100eb846943c94454f628cccfd3cb6aff90cf4a4fe4ddb95244c53b2f7e417c7"
         },
         {
           "path": "packages/react/src/table/TableController.experimental.test.tsx",
@@ -324,7 +324,7 @@
         },
         {
           "path": "registry/reports/migrations.json",
-          "digest": "sha256:abe6fda860dabc9a6855025740a89769e7abb18939b40474f8db23fad61aca05"
+          "digest": "sha256:6ac34037002fae241da77cd044f4723dd64f935fd9b5bd208ece68f2d9d92ce8"
         }
       ]
     },
@@ -352,7 +352,7 @@
       "evidence": [
         {
           "path": "docs/versioned/manifest.json",
-          "digest": "sha256:de987c4055c5d1b7bc3235034ed263536a3fe08e37ff2541eb58188b9c74a4e4"
+          "digest": "sha256:cd85b7d472e767a1c18e72e5ae6fb8328061bfbad8260df4419084358a194756"
         },
         {
           "path": "tools/generate-versioned-docs.mjs",
@@ -660,7 +660,7 @@
         },
         {
           "path": "registry/reports/status.json",
-          "digest": "sha256:c8b5cb8e33d54220001911ccca3b93b3fcfbd9d46b89d6fa8c2e39bd45f8dbbe"
+          "digest": "sha256:72e5305781536aa62f3625ba4faa6e8eb2aff98bc8f0055cf1dfd31a8025efe5"
         }
       ]
     },
@@ -688,7 +688,7 @@
       "evidence": [
         {
           "path": ".github/workflows/ci.yml",
-          "digest": "sha256:f646736200a0e56a2a2f3c92cb02e52838ed557f3c3f945220cc46708c40da75"
+          "digest": "sha256:91c4b16d61c2e145d3b1a278400f4ed8b51fe56b1ec23f7e9efa8c6eec364c17"
         },
         {
           "path": "tools/benchmark-roadmap-performance.tsx",
@@ -824,7 +824,7 @@
       "evidence": [
         {
           "path": "analysis/table-plugins/ranking.json",
-          "digest": "sha256:e411b49e1e147cb37b5e7fc251953d8641b336a83acfd41894c6a2bafaa417ea"
+          "digest": "sha256:100eb846943c94454f628cccfd3cb6aff90cf4a4fe4ddb95244c53b2f7e417c7"
         },
         {
           "path": "packages/react/src/table/TableController.experimental.test.tsx",
@@ -844,7 +844,7 @@
         },
         {
           "path": "registry/reports/migrations.json",
-          "digest": "sha256:abe6fda860dabc9a6855025740a89769e7abb18939b40474f8db23fad61aca05"
+          "digest": "sha256:6ac34037002fae241da77cd044f4723dd64f935fd9b5bd208ece68f2d9d92ce8"
         }
       ]
     },
@@ -856,7 +856,7 @@
       "evidence": [
         {
           "path": "registry/artifacts.json",
-          "digest": "sha256:c20e36fe4e4e6f76e338199b265efbdde0e8b900af73fc8f1a9f413117bfcea2"
+          "digest": "sha256:e04cf0b8ef7519ace3e6e597511bac835e24c38450ee3a21e06eedcaa6d93a95"
         },
         {
           "path": "analysis/baselines/tooling-package-release.json",
@@ -872,7 +872,7 @@
       "evidence": [
         {
           "path": ".github/workflows/ci.yml",
-          "digest": "sha256:f646736200a0e56a2a2f3c92cb02e52838ed557f3c3f945220cc46708c40da75"
+          "digest": "sha256:91c4b16d61c2e145d3b1a278400f4ed8b51fe56b1ec23f7e9efa8c6eec364c17"
         },
         {
           "path": ".github/workflows/accessibility-full.yml",

@@ -17,14 +17,6 @@ import { fileURLToPath } from 'node:url';
 const MARKER = '## UI Components (@tale-ui/react)';
 const packageRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const snippetPath = path.join(packageRoot, 'docs/consumer-claude-md-snippet.md');
-const generatedSnippet = fs.readFileSync(snippetPath, 'utf8');
-const markerIndex = generatedSnippet.indexOf(MARKER);
-
-if (markerIndex === -1) {
-  throw new Error(`Tale UI consumer guidance is malformed: ${snippetPath}`);
-}
-
-const SNIPPET = generatedSnippet.slice(markerIndex).trimEnd();
 
 // Walk up from cwd looking for the consuming project's root. node_modules is
 // accepted because a package manager may create it before package.json exists.
@@ -59,6 +51,15 @@ if (fs.existsSync(projectPkgPath)) {
     // Continue when the consuming package manifest cannot be read.
   }
 }
+
+const generatedSnippet = fs.readFileSync(snippetPath, 'utf8');
+const markerIndex = generatedSnippet.indexOf(MARKER);
+
+if (markerIndex === -1) {
+  throw new Error(`Tale UI consumer guidance is malformed: ${snippetPath}`);
+}
+
+const SNIPPET = generatedSnippet.slice(markerIndex).trimEnd();
 
 const claudeMdPath = path.join(projectRoot, 'CLAUDE.md');
 
