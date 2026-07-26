@@ -119,6 +119,6 @@
 @media (prefers-reduced-motion: reduce) {
   .tale-lightbox__backdrop,
   .tale-lightbox__popup {
-    transition-duration: 0s;
+    transition: none;
   }
 }
