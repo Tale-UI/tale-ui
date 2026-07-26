@@ -41,6 +41,12 @@ const VISUAL_AUDIT_EXCLUDED = new Set(['CSPProvider', 'I18nProvider', 'mergeProp
  */
 const A2UI_SHOWCASE_EXCLUDED = new Set(['Checkbox', 'Radio', 'Switch']);
 
+/**
+ * Public render surfaces whose registry component is intentionally represented
+ * by a differently named export.
+ */
+const STORYBOOK_COVERAGE_ALIASES = new Map([['ToastRegion', 'Toast']]);
+
 /* ─── Sources ─────────────────────────────────────────────────────────────── */
 
 /** All Tale UI React component names from registry */
@@ -88,7 +94,11 @@ function parseStorybookCoverage() {
     for (const match of source.matchAll(/import\s+\{([^}]+)\}\s+from\s+'@tale-ui\/react\/[^']+'/g)) {
       for (const name of match[1].split(',')) {
         const trimmed = name.trim().split(/\s+as\s+/)[0].trim();
-        if (/^[A-Z]/.test(trimmed)) {covered.add(trimmed);}
+        if (/^[A-Z]/.test(trimmed)) {
+          covered.add(trimmed);
+          const registryName = STORYBOOK_COVERAGE_ALIASES.get(trimmed);
+          if (registryName) {covered.add(registryName);}
+        }
       }
     }
   }
