@@ -172,6 +172,22 @@ const relativeUnits: ReadonlyArray<{
   { unit: 'year', milliseconds: 31_536_000_000, upperBound: Number.POSITIVE_INFINITY },
 ];
 
+let relativeFormatObserver: (() => void) | undefined;
+
+/**
+ * Installs a private deterministic counter for maintained performance
+ * fixtures. This is intentionally absent from the public Timestamp entry.
+ */
+export function setRelativeTimestampFormatObserverForTesting(
+  observer: (() => void) | undefined,
+) {
+  const previous = relativeFormatObserver;
+  relativeFormatObserver = observer;
+  return () => {
+    relativeFormatObserver = previous;
+  };
+}
+
 function roundHalfAwayFromZero(value: number) {
   return Math.sign(value) * Math.floor(Math.abs(value) + 0.5);
 }
@@ -181,6 +197,8 @@ export function formatRelativeTimestamp(
   nowMilliseconds: number,
   formatter: Intl.RelativeTimeFormat,
 ) {
+  relativeFormatObserver?.();
+
   if (!Number.isFinite(targetMilliseconds) || !Number.isFinite(nowMilliseconds)) {
     return null;
   }

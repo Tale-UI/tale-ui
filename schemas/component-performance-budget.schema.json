@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tale-ui.dev/schemas/component-performance-budget.schema.json",
+  "title": "Maintained component expansion performance budgets",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "capturedOn", "revision", "environment", "budgets", "exceptions"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": "1.0.0" },
+    "capturedOn": { "type": "string", "format": "date" },
+    "revision": { "$ref": "#/$defs/sha1" },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "os",
+        "node",
+        "react",
+        "reactDom",
+        "jsdom",
+        "playwright",
+        "chromium",
+        "lockfileSha256"
+      ],
+      "properties": {
+        "os": { "const": "Ubuntu 24.04" },
+        "node": { "const": "22.18.0" },
+        "react": { "const": "19.2.4" },
+        "reactDom": { "const": "19.2.4" },
+        "jsdom": { "const": "27.4.0" },
+        "playwright": { "const": "1.58.2" },
+        "chromium": { "type": "string", "minLength": 1 },
+        "lockfileSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "budgets": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "$ref": "#/$defs/budget" }
+    },
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "budgetId", "maximum", "owner", "rationale", "expiresOn"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^PERF-[0-9]{4}$" },
+          "budgetId": { "type": "string" },
+          "maximum": { "type": "number", "minimum": 0 },
+          "owner": { "type": "string", "minLength": 1 },
+          "rationale": { "type": "string", "minLength": 20 },
+          "expiresOn": { "type": "string", "format": "date" },
+          "trackingIssue": { "type": "string", "format": "uri" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha1": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "description",
+        "fixture",
+        "fixtureSha256",
+        "sourceSha256",
+        "vectorSha256",
+        "markupSha256",
+        "postconditionSha256",
+        "setup",
+        "operationCount",
+        "warmups",
+        "samples",
+        "statistic",
+        "clock",
+        "unit",
+        "baseline",
+        "warnAt",
+        "blockAt",
+        "owner",
+        "evidence"
+      ],
+      "properties": {
+        "id": { "enum": ["markdown-100k-adversarial", "timestamp-1000-tick"] },
+        "description": { "type": "string", "minLength": 1 },
+        "fixture": { "type": "string", "pattern": "^tools/performance-fixtures/component-expansion/.+\\.tsx$" },
+        "fixtureSha256": { "$ref": "#/$defs/sha256" },
+        "sourceSha256": { "$ref": "#/$defs/sha256" },
+        "vectorSha256": { "$ref": "#/$defs/sha256" },
+        "markupSha256": { "$ref": "#/$defs/sha256" },
+        "postconditionSha256": { "$ref": "#/$defs/sha256" },
+        "setup": { "type": "string", "minLength": 1 },
+        "operationCount": { "const": 1 },
+        "warmups": { "const": 5 },
+        "samples": { "const": 15 },
+        "statistic": { "const": "median" },
+        "clock": { "const": "node:perf_hooks.performance" },
+        "unit": { "const": "milliseconds" },
+        "baseline": { "type": "number", "minimum": 0 },
+        "warnAt": { "type": "number", "minimum": 0 },
+        "blockAt": { "type": "number", "minimum": 0 },
+        "owner": { "const": "Design Systems" },
+        "evidence": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
