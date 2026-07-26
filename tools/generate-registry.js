@@ -336,7 +336,12 @@ function extractProps(styledContent, pascal) {
 
   // Find exported interfaces (only those that end with Props)
   const props = [];
-  const normalized = styledContent.replace(/\r\n/g, '\n');
+  const normalized = styledContent
+    .replace(/\r\n/g, '\n')
+    // The legacy block matcher treats `}` inside template-literal types as the
+    // end of an interface. Mask only `${...}` braces while locating the block,
+    // then restore them before parsing member types.
+    .replace(/\$\{([^{}]*)\}/g, (_match, expression) => `$\uE000${expression}\uE001`);
 
   // Identify the "main" props interface: RootProps, {Pascal}Props, or {Pascal}RootProps
   const mainPropNames = new Set(['RootProps', `${pascal}Props`, `${pascal}RootProps`]);
@@ -348,7 +353,7 @@ function extractProps(styledContent, pascal) {
 
   while ((ifaceMatch = ifaceRegex.exec(normalized)) !== null) {
     const ifaceName = ifaceMatch[1];
-    const body = ifaceMatch[2];
+    const body = ifaceMatch[2].replaceAll('\uE000', '{').replaceAll('\uE001', '}');
     if (!mainPropNames.has(ifaceName)) {
       continue;
     }
@@ -1008,5 +1013,6 @@ if (require.main === module) {
 
 module.exports = {
   extractConfiguredLocalProps,
+  extractProps,
   resolveConfiguredLocalProp,
 };

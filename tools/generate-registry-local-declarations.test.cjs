@@ -3,8 +3,34 @@ const assert = require('node:assert/strict');
 const { test } = require('node:test');
 const {
   extractConfiguredLocalProps,
+  extractProps,
   resolveConfiguredLocalProp,
 } = require('./generate-registry.js');
+
+test('prop extraction preserves members after template-literal type braces', () => {
+  const source = `
+    export interface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {
+      ratio?: number | \`\${number}/\${number}\` | \`\${number} / \${number}\`;
+      objectFit?: 'cover' | 'contain';
+      children: React.ReactNode;
+    }
+  `;
+  assert.deepEqual(extractProps(source, 'AspectRatio'), [
+    {
+      name: 'ratio',
+      // eslint-disable-next-line no-template-curly-in-string -- verifies the literal type text.
+      type: 'number | `${number}/${number}` | `${number} / ${number}`',
+      required: false,
+      description: null,
+    },
+    {
+      name: 'objectFit',
+      type: "'cover' | 'contain'",
+      required: false,
+      description: null,
+    },
+  ]);
+});
 
 test('configured local resolver flattens aliases, unions, intersections, and object members', () => {
   const source = `

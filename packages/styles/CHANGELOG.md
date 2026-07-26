@@ -4,6 +4,11 @@ All notable changes to the component styles package are documented in this file.
 
 ## v3.0.0 — 2026-07-27
 
+### Added
+
+- Added standalone styles and package exports for AspectRatio, Blockquote, ButtonGroup, Code, and
+  Skeleton.
+
 ### Changed
 
 - Prepared the component stylesheet package for the coordinated Tale UI 3 release.

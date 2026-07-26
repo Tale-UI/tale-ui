@@ -1,0 +1,19 @@
+.tale-aspect-ratio {
+  display: block;
+  inline-size: 100%;
+  overflow: hidden;
+}
+
+.tale-aspect-ratio > :is(img, video) {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.tale-aspect-ratio--cover > :is(img, video) {
+  object-fit: cover;
+}
+
+.tale-aspect-ratio--contain > :is(img, video) {
+  object-fit: contain;
+}

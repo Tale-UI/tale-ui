@@ -25,6 +25,7 @@ import { test, expect } from '@playwright/test';
 const STORIES: { id: string; label: string }[] = [
   // Form Controls
   { id: 'components-button--default', label: 'Button' },
+  { id: 'components-buttongroup--default', label: 'ButtonGroup' },
   { id: 'components-input--default', label: 'Input' },
   { id: 'components-checkbox--default', label: 'Checkbox' },
   { id: 'components-checkboxfield--default', label: 'CheckboxField' },
@@ -52,6 +53,7 @@ const STORIES: { id: string; label: string }[] = [
   { id: 'components-timefield--default', label: 'TimeField' },
   // Layout
   { id: 'components-accordion--default', label: 'Accordion' },
+  { id: 'components-aspectratio--default', label: 'AspectRatio' },
   { id: 'components-card--default', label: 'Card' },
   { id: 'components-disclosure--default', label: 'Disclosure' },
   { id: 'components-tabs--default', label: 'Tabs' },
@@ -67,6 +69,7 @@ const STORIES: { id: string; label: string }[] = [
   // Feedback
   { id: 'components-progressbar--default', label: 'ProgressBar' },
   { id: 'components-meter--default', label: 'Meter' },
+  { id: 'components-skeleton--default', label: 'Skeleton' },
   { id: 'components-spinner--default', label: 'Spinner' },
   { id: 'components-banner--default', label: 'Banner' },
   // Display
@@ -77,6 +80,9 @@ const STORIES: { id: string; label: string }[] = [
   // Utility
   { id: 'components-icon--default', label: 'Icon' },
   { id: 'components-iconbutton--default', label: 'IconButton' },
+  // Typography
+  { id: 'components-blockquote--default', label: 'Blockquote' },
+  { id: 'components-code--default', label: 'Code' },
   { id: 'components-text--default', label: 'Text' },
 ];
 

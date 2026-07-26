@@ -1,0 +1,11 @@
+.tale-code {
+  padding-block: var(--space-4xs);
+  padding-inline: var(--space-3xs);
+  border-radius: var(--radius-xs);
+  background: var(--neutral-12);
+  color: var(--neutral-90);
+  font-family: var(--mono-font-family);
+  font-size: var(--mono-s-font-size);
+  line-height: var(--mono-line-height);
+  overflow-wrap: anywhere;
+}

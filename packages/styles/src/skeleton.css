@@ -1,0 +1,54 @@
+/*
+ * Skeleton — @tale-ui/react
+ *
+ * Decorative placeholders for content that is still loading.
+ * Variants: text (default), rectangular, circular
+ * Animations: pulse (default), none
+ */
+
+.tale-skeleton {
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  height: 1em;
+  background-color: var(--neutral-18);
+  pointer-events: none;
+  user-select: none;
+}
+
+.tale-skeleton--text {
+  border-radius: var(--radius-xs);
+}
+
+.tale-skeleton--rectangular {
+  height: 4rem;
+  border-radius: var(--radius-m);
+}
+
+.tale-skeleton--circular {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+
+.tale-skeleton--none {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tale-skeleton--pulse {
+    animation: tale-skeleton-pulse calc(var(--motion-duration-deliberate) * 3)
+      var(--motion-easing-standard) infinite alternate;
+  }
+}
+
+@keyframes tale-skeleton-pulse {
+  from {
+    opacity: 0.55;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
