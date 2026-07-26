@@ -20,6 +20,19 @@ Copy-paste multi-component patterns for common real-world scenarios. Each recipe
 | [Dashboard with Charts](dashboard-with-charts.md)       | BarChart, LineChart, PieChart, ChartContainer | Multi-chart dashboard layout                        |
 | [Search with Autocomplete](search-with-autocomplete.md) | Combobox, Icon                                | Search input with filtered suggestions              |
 
+## Layout
+
+| Recipe                                          | Components Used            | Description                                  |
+| ----------------------------------------------- | -------------------------- | -------------------------------------------- |
+| [Resizable Workspaces](resizable-workspaces.md) | Resizable                  | Bounded keyboard-accessible split workspace  |
+| [Responsive Actions](responsive-actions.md)     | OverflowList, Button, Menu | Actions that collapse into one overflow menu |
+
+## Media
+
+| Recipe                            | Components Used | Description                                             |
+| --------------------------------- | --------------- | ------------------------------------------------------- |
+| [Media Viewing](media-viewing.md) | Lightbox        | Localized keyboard- and swipe-navigable gallery overlay |
+
 ## Document Content
 
 | Recipe                                  | Components Used                              | Description                                                    |

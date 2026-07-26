@@ -78,6 +78,7 @@
     "docs/components/iphone-mockup.md",
     "docs/components/kbd.md",
     "docs/components/key-value-pairs.md",
+    "docs/components/lightbox.md",
     "docs/components/line-chart.md",
     "docs/components/link.md",
     "docs/components/list-box.md",
@@ -91,6 +92,7 @@
     "docs/components/navigation-menu.md",
     "docs/components/number-field.md",
     "docs/components/outline.md",
+    "docs/components/overflow-list.md",
     "docs/components/pagination-dot.md",
     "docs/components/pagination-line.md",
     "docs/components/pagination.md",
@@ -110,6 +112,7 @@
     "docs/components/range-calendar.md",
     "docs/components/rating-badge.md",
     "docs/components/rating-stars.md",
+    "docs/components/resizable.md",
     "docs/components/row.md",
     "docs/components/scroll-area.md",
     "docs/components/search-field.md",
@@ -190,7 +193,10 @@
     "docs/recipes/header-navigation.md",
     "docs/recipes/loading-patterns.md",
     "docs/recipes/marketing-header.md",
+    "docs/recipes/media-viewing.md",
     "docs/recipes/react-hook-form.md",
+    "docs/recipes/resizable-workspaces.md",
+    "docs/recipes/responsive-actions.md",
     "docs/recipes/search-with-autocomplete.md",
     "docs/recipes/settings-page.md",
     "docs/recipes/sidebar-dual-tier.md",
@@ -287,7 +293,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:95da0f8895e56ee1519cd5666a3832c3df88955a8eea0f5d66e67fae0c3b5cf3",
+  "sourceRevision": "sha256:a65099b522c7a136146bf1eab719d133a5a1781bad59b0c8c656a49a2d2ca025",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -12842,6 +12848,66 @@
       }
     },
     {
+      "id": "tale:component:lightbox",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "lightbox",
+      "name": "Lightbox",
+      "description": "Collection-driven modal media viewer with owned navigation and focus restoration",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "3.0.0",
+      "aliases": [
+        "Lightbox"
+      ],
+      "keywords": [
+        "and",
+        "collection",
+        "driven",
+        "focus",
+        "lightbox",
+        "media",
+        "modal",
+        "navigation",
+        "overlay",
+        "owned",
+        "restoration",
+        "viewer",
+        "with"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=lightbox]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/lightbox"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/lightbox/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Overlay",
+        "componentKind": "compound"
+      }
+    },
+    {
       "id": "tale:component:line-chart",
       "namespace": "tale",
       "kind": "component",
@@ -13552,6 +13618,65 @@
       "trust": "first-party",
       "metadata": {
         "category": "Navigation",
+        "componentKind": "simple"
+      }
+    },
+    {
+      "id": "tale:component:overflow-list",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "overflow-list",
+      "name": "OverflowList",
+      "description": "Measured list that collapses items into one deterministic overflow control",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "3.0.0",
+      "aliases": [
+        "OverflowList"
+      ],
+      "keywords": [
+        "collapses",
+        "control",
+        "deterministic",
+        "into",
+        "items",
+        "layout",
+        "list",
+        "measured",
+        "one",
+        "overflow",
+        "overflowlist",
+        "that"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=overflow-list]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/overflow-list"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/overflow-list/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Layout",
         "componentKind": "simple"
       }
     },
@@ -14636,6 +14761,65 @@
       "metadata": {
         "category": "Display",
         "componentKind": "simple"
+      }
+    },
+    {
+      "id": "tale:component:resizable",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "resizable",
+      "name": "Resizable",
+      "description": "Adjacent flex panels with owned sizing, bounds, and accessible handles",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "3.0.0",
+      "aliases": [
+        "Resizable"
+      ],
+      "keywords": [
+        "accessible",
+        "adjacent",
+        "and",
+        "bounds",
+        "flex",
+        "handles",
+        "layout",
+        "owned",
+        "panels",
+        "resizable",
+        "sizing",
+        "with"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=resizable]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/resizable"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/resizable/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Layout",
+        "componentKind": "compound"
       }
     },
     {
@@ -19320,6 +19504,44 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:doc:docs-components-lightbox",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-lightbox",
+      "name": "Lightbox",
+      "description": "Public Tale UI documentation: Lightbox",
+      "lifecycle": "stable",
+      "keywords": [
+        "components",
+        "docs",
+        "lightbox",
+        "md"
+      ],
+      "related": [
+        "tale:component:lightbox"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/lightbox.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/lightbox.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:doc:docs-components-line-chart",
       "namespace": "tale",
       "kind": "doc",
@@ -19820,6 +20042,46 @@
       ],
       "provenance": {
         "source": "docs/components/outline.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:doc:docs-components-overflow-list",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-overflow-list",
+      "name": "OverflowList",
+      "description": "Public Tale UI documentation: OverflowList",
+      "lifecycle": "stable",
+      "keywords": [
+        "components",
+        "docs",
+        "list",
+        "md",
+        "overflow",
+        "overflowlist"
+      ],
+      "related": [
+        "tale:component:overflow-list"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/overflow-list.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/overflow-list.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -20575,6 +20837,44 @@
       ],
       "provenance": {
         "source": "docs/components/rating-stars.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:doc:docs-components-resizable",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-resizable",
+      "name": "Resizable",
+      "description": "Public Tale UI documentation: Resizable",
+      "lifecycle": "stable",
+      "keywords": [
+        "components",
+        "docs",
+        "md",
+        "resizable"
+      ],
+      "related": [
+        "tale:component:resizable"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/resizable.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/resizable.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -39037,6 +39337,61 @@
       }
     },
     {
+      "id": "tale:pitfall:lightbox--lightbox-popup-inside-backdrop",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "lightbox--lightbox-popup-inside-backdrop",
+      "name": "Nest Lightbox Popup inside Backdrop",
+      "description": "The Backdrop owns the React Aria modal overlay that contains and dismisses the Popup.",
+      "lifecycle": "stable",
+      "keywords": [
+        "and",
+        "aria",
+        "backdrop",
+        "contains",
+        "dismisses",
+        "inside",
+        "lightbox",
+        "modal",
+        "nest",
+        "overlay",
+        "owns",
+        "popup",
+        "react",
+        "that",
+        "the"
+      ],
+      "related": [
+        "tale:component:lightbox"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=lightbox].pitfalls[id=lightbox-popup-inside-backdrop]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/lightbox.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "lightbox-popup-inside-backdrop",
+        "category": "component",
+        "component": "Lightbox"
+      }
+    },
+    {
       "id": "tale:pitfall:link--link-no-isexternal-prop",
       "namespace": "tale",
       "kind": "pitfall",
@@ -41802,6 +42157,66 @@
       }
     },
     {
+      "id": "tale:pitfall:overflow-list--overflow-list-control-ref",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "overflow-list--overflow-list-control-ref",
+      "name": "Attach overflowControlRef to the enabled overflow control",
+      "description": "OverflowList moves focus to this exact node before a focused item becomes hidden.",
+      "lifecycle": "stable",
+      "keywords": [
+        "attach",
+        "becomes",
+        "before",
+        "control",
+        "enabled",
+        "exact",
+        "focus",
+        "focused",
+        "hidden",
+        "item",
+        "list",
+        "moves",
+        "node",
+        "overflow",
+        "overflowcontrolref",
+        "overflowlist",
+        "ref",
+        "the",
+        "this",
+        "to"
+      ],
+      "related": [
+        "tale:component:overflow-list"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=overflow-list].pitfalls[id=overflow-list-control-ref]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/overflow-list.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "overflow-list-control-ref",
+        "category": "component",
+        "component": "OverflowList"
+      }
+    },
+    {
       "id": "tale:pitfall:pagination--pagination-no-page-control-props-on-root",
       "namespace": "tale",
       "kind": "pitfall",
@@ -43854,6 +44269,67 @@
         "ruleId": "rating-stars-requires-value-prop",
         "category": "component",
         "component": "RatingStars"
+      }
+    },
+    {
+      "id": "tale:pitfall:resizable--resizable-controlled-proposal-acknowledgement",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "resizable--resizable-controlled-proposal-acknowledgement",
+      "name": "Apply each controlled Resizable proposal before the next move",
+      "description": "A controlled pointer gesture cancels when the parent does not acknowledge the latest proposed sizes.",
+      "lifecycle": "stable",
+      "keywords": [
+        "acknowledge",
+        "acknowledgement",
+        "apply",
+        "before",
+        "cancels",
+        "controlled",
+        "does",
+        "each",
+        "gesture",
+        "latest",
+        "move",
+        "next",
+        "not",
+        "parent",
+        "pointer",
+        "proposal",
+        "proposed",
+        "resizable",
+        "sizes",
+        "the",
+        "when"
+      ],
+      "related": [
+        "tale:component:resizable"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=resizable].pitfalls[id=resizable-controlled-proposal-acknowledgement]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/resizable.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "resizable-controlled-proposal-acknowledgement",
+        "category": "component",
+        "component": "Resizable"
       }
     },
     {
@@ -51803,6 +52279,43 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:recipe:media-viewing",
+      "namespace": "tale",
+      "kind": "recipe",
+      "slug": "media-viewing",
+      "name": "Media Viewing",
+      "description": "Canonical Tale UI recipe: Media Viewing",
+      "lifecycle": "stable",
+      "keywords": [
+        "media",
+        "viewing"
+      ],
+      "related": [
+        "tale:component:lightbox"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/recipes/media-viewing.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "recipe.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/recipes/media-viewing.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:recipe:react-hook-form",
       "namespace": "tale",
       "kind": "recipe",
@@ -51844,6 +52357,82 @@
       ],
       "provenance": {
         "source": "docs/recipes/react-hook-form.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:recipe:resizable-workspaces",
+      "namespace": "tale",
+      "kind": "recipe",
+      "slug": "resizable-workspaces",
+      "name": "Resizable Workspaces",
+      "description": "Canonical Tale UI recipe: Resizable Workspaces",
+      "lifecycle": "stable",
+      "keywords": [
+        "resizable",
+        "workspaces"
+      ],
+      "related": [
+        "tale:component:resizable"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/recipes/resizable-workspaces.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "recipe.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/recipes/resizable-workspaces.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:recipe:responsive-actions",
+      "namespace": "tale",
+      "kind": "recipe",
+      "slug": "responsive-actions",
+      "name": "Responsive Actions",
+      "description": "Canonical Tale UI recipe: Responsive Actions",
+      "lifecycle": "stable",
+      "keywords": [
+        "actions",
+        "responsive"
+      ],
+      "related": [
+        "tale:component:button",
+        "tale:component:menu",
+        "tale:component:overflow-list"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/recipes/responsive-actions.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "recipe.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/recipes/responsive-actions.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -53057,5 +53646,5 @@
       }
     }
   ],
-  "digest": "sha256:a683f2137863fd1b15ddcd96f4bdd177d840a3054ba7fab3a54e4a0e73674d09"
+  "digest": "sha256:eb29f406fb07f24bb44114de51b24577071bb446c588c883ab0287d604d1ebc9"
 }

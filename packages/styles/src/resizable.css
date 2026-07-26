@@ -1,0 +1,69 @@
+/*
+ * Resizable — @tale-ui/react
+ *
+ * General panel resizing with Tale-owned sizing and React Aria movement.
+ */
+
+.tale-resizable {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.tale-resizable--horizontal {
+  flex-direction: row;
+}
+
+.tale-resizable--vertical {
+  flex-direction: column;
+  height: 100%;
+}
+
+.tale-resizable__panel {
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+}
+
+.tale-resizable__handle {
+  position: relative;
+  flex: 0 0 var(--space-3xs);
+  border: 0;
+  background-color: var(--neutral-20);
+  outline: none;
+  touch-action: none;
+  user-select: none;
+}
+
+.tale-resizable--horizontal > .tale-resizable__handle {
+  cursor: col-resize;
+}
+
+.tale-resizable--vertical > .tale-resizable__handle {
+  cursor: row-resize;
+}
+
+.tale-resizable__handle::after {
+  position: absolute;
+  inset: var(--space-4xs);
+  border-radius: var(--radius-full);
+  background-color: var(--neutral-40);
+  content: '';
+}
+
+.tale-resizable__handle:focus-visible {
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: 2px;
+  z-index: 1;
+}
+
+.tale-resizable__handle[data-disabled] {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.tale-resizable[data-invalid] > .tale-resizable__handle {
+  cursor: default;
+}

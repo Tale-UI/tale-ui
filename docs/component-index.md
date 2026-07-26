@@ -1,6 +1,6 @@
 # Component Index
 
-Quick-reference table for all 125 `@tale-ui/react` components plus 6 `@tale-ui/charts` components.
+Quick-reference table for all 132 `@tale-ui/react` components plus 6 `@tale-ui/charts` components.
 For detailed usage, see the per-component docs in [docs/components/](components/index.md).
 
 ## Form Controls (28)
@@ -60,7 +60,7 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | ColorField        | Text input for color values                                                                        | `@tale-ui/react/color-field`         | Root, Input, Label, Description, ErrorMessage |
 | ColorPicker       | Composable color picker that provides shared color state to ColorArea, ColorSlider, and ColorWheel | `@tale-ui/react/color-picker`        | --                                            |
 
-## Overlay (6)
+## Overlay (7)
 
 | Component   | Description                                                                                  | Import                        | Parts                                                                        |
 | ----------- | -------------------------------------------------------------------------------------------- | ----------------------------- | ---------------------------------------------------------------------------- |
@@ -69,6 +69,7 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | Popover     | Floating panel anchored to a trigger element, for pickers, tooltips, and contextual content  | `@tale-ui/react/popover`      | Root, Trigger, Popup, Arrow, Title, Description, Close                       |
 | PreviewCard | Floating preview panel that appears when hovering a link or trigger element                  | `@tale-ui/react/preview-card` | Root, Trigger, Popup, Content, Arrow                                         |
 | Drawer      | Panel that slides in from the screen edge, for navigation drawers and detail views           | `@tale-ui/react/drawer`       | Root, Trigger, Backdrop, Popup, Title, Description, Close, Handle, SwipeArea |
+| Lightbox    | Collection-driven modal media viewer with owned navigation and focus restoration             | `@tale-ui/react/lightbox`     | Root, Trigger, Backdrop, Popup, Content, Caption, Previous, Next, Close      |
 | Tooltip     | Hover tooltip                                                                                | `@tale-ui/react/tooltip`      | Root, Trigger, Popup, Arrow, Title, Description                              |
 
 ## Navigation (13)
@@ -81,7 +82,7 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | NavigationMenu | Top-level navigation bar                                                                          | `@tale-ui/react/navigation-menu` | Root, List, Item, Link, Trigger, Popup, Content, Icon                                                                                                                                                                                                                                          |
 | Menubar        | Horizontal menu bar                                                                               | `@tale-ui/react/menubar`         | Root, Item                                                                                                                                                                                                                                                                                     |
 | Breadcrumbs    | Breadcrumb navigation                                                                             | `@tale-ui/react/breadcrumbs`     | Root, Item, Link                                                                                                                                                                                                                                                                               |
-| Outline        | Document outline navigation with active-heading observation                                      | `@tale-ui/react/outline`         | --                                                                                                                                                                                                                                                                                             |
+| Outline        | Document outline navigation with active-heading observation                                       | `@tale-ui/react/outline`         | --                                                                                                                                                                                                                                                                                             |
 | Link           | Styled anchor link                                                                                | `@tale-ui/react/link`            | --                                                                                                                                                                                                                                                                                             |
 | Pagination     | Page navigation controls                                                                          | `@tale-ui/react/pagination`      | Root, PreviousTrigger, NextTrigger, Item, Ellipsis, Dot, Line                                                                                                                                                                                                                                  |
 | PaginationDot  | Auto-rendering dot indicators for carousel/slide pagination                                       | `@tale-ui/react/pagination-dot`  | --                                                                                                                                                                                                                                                                                             |
@@ -89,23 +90,25 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | Sidebar        | Sidebar navigation primitives for composing simple, dual-tier, slim, and section-divided sidebars | `@tale-ui/react/sidebar`         | Root, Header, Search, Divider, NavList, NavItem, NavButton, AccountCard, AccountMenu, MobileTrigger, FeatureCard                                                                                                                                                                               |
 | HeaderNav      | Horizontal header navigation primitives                                                           | `@tale-ui/react/header-nav`      | Root, Logo, NavButton, Actions, Secondary, MobileTrigger                                                                                                                                                                                                                                       |
 
-## Layout (13)
+## Layout (15)
 
-| Component   | Description                                                                  | Import                        | Parts                                                                    |
-| ----------- | ---------------------------------------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------ |
-| Accordion   | Collapsible content sections                                                 | `@tale-ui/react/accordion`    | Root, Item, Header, Trigger, Panel                                       |
-| AspectRatio | Media container that preserves a positive width-to-height ratio              | `@tale-ui/react/aspect-ratio` | --                                                                       |
-| AppShell    | Experimental structural application layout slots                             | `@tale-ui/react/app-shell`    | Root, Header, Sidebar, Main, MobileNavigation, SkipLink                  |
-| Card        | Presentational and interactive card surfaces                                 | `@tale-ui/react/card`         | Root, Button, Header, Body, Footer                                       |
-| Carousel    | Slide carousel with navigation                                               | `@tale-ui/react/carousel`     | Root, Content, Item, PreviousTrigger, NextTrigger, Indicators, Indicator |
-| Chat        | Experimental protocol-neutral conversation layout and semantics              | `@tale-ui/react/chat`         | Root, List, Message, Bubble, Metadata, Composer, ToolCall                |
-| Column      | Vertical flex-column layout with gap, align, and justify props               | `@tale-ui/react/column`       | --                                                                       |
-| Disclosure  | Single collapsible section                                                   | `@tale-ui/react/disclosure`   | Root, Trigger, Panel                                                     |
-| Row         | Horizontal flex-row layout with gap, align, and justify props                | `@tale-ui/react/row`          | --                                                                       |
-| ScrollArea  | Custom scrollbar container                                                   | `@tale-ui/react/scroll-area`  | Root, Viewport, Content, Scrollbar, Thumb, Corner                        |
-| Separator   | Horizontal or vertical divider                                               | `@tale-ui/react/separator`    | --                                                                       |
-| Tabs        | Tabbed content with indicator                                                | `@tale-ui/react/tabs`         | Root, List, Tab, Panel, Indicator                                        |
-| Toolbar     | Horizontal bar of buttons, toggles, or controls for a related set of actions | `@tale-ui/react/toolbar`      | Root, Group, Button, Link, Input, Separator                              |
+| Component    | Description                                                                  | Import                         | Parts                                                                    |
+| ------------ | ---------------------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------ |
+| Accordion    | Collapsible content sections                                                 | `@tale-ui/react/accordion`     | Root, Item, Header, Trigger, Panel                                       |
+| AspectRatio  | Media container that preserves a positive width-to-height ratio              | `@tale-ui/react/aspect-ratio`  | --                                                                       |
+| AppShell     | Experimental structural application layout slots                             | `@tale-ui/react/app-shell`     | Root, Header, Sidebar, Main, MobileNavigation, SkipLink                  |
+| Card         | Presentational and interactive card surfaces                                 | `@tale-ui/react/card`          | Root, Button, Header, Body, Footer                                       |
+| Carousel     | Slide carousel with navigation                                               | `@tale-ui/react/carousel`      | Root, Content, Item, PreviousTrigger, NextTrigger, Indicators, Indicator |
+| Chat         | Experimental protocol-neutral conversation layout and semantics              | `@tale-ui/react/chat`          | Root, List, Message, Bubble, Metadata, Composer, ToolCall                |
+| Column       | Vertical flex-column layout with gap, align, and justify props               | `@tale-ui/react/column`        | --                                                                       |
+| Disclosure   | Single collapsible section                                                   | `@tale-ui/react/disclosure`    | Root, Trigger, Panel                                                     |
+| OverflowList | Measured list that collapses items into one deterministic overflow control   | `@tale-ui/react/overflow-list` | --                                                                       |
+| Resizable    | Adjacent flex panels with owned sizing, bounds, and accessible handles       | `@tale-ui/react/resizable`     | Root, Panel, Handle                                                      |
+| Row          | Horizontal flex-row layout with gap, align, and justify props                | `@tale-ui/react/row`           | --                                                                       |
+| ScrollArea   | Custom scrollbar container                                                   | `@tale-ui/react/scroll-area`   | Root, Viewport, Content, Scrollbar, Thumb, Corner                        |
+| Separator    | Horizontal or vertical divider                                               | `@tale-ui/react/separator`     | --                                                                       |
+| Tabs         | Tabbed content with indicator                                                | `@tale-ui/react/tabs`          | Root, List, Tab, Panel, Indicator                                        |
+| Toolbar      | Horizontal bar of buttons, toggles, or controls for a related set of actions | `@tale-ui/react/toolbar`       | Root, Group, Button, Link, Input, Separator                              |
 
 ## Feedback (6)
 
@@ -160,15 +163,15 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 
 ## Typography (7)
 
-| Component  | Description                                                                 | Import                      | Parts                      |
-| ---------- | --------------------------------------------------------------------------- | --------------------------- | -------------------------- |
-| Blockquote | Semantic quotation with content and attribution                             | `@tale-ui/react/blockquote` | Root, Content, Attribution |
-| Citation   | Normalized document sources with shared reference ordinals                   | `@tale-ui/react/citation`   | Root, Reference, List      |
-| Code       | Inline plain-text code without parsing, highlighting, or execution          | `@tale-ui/react/code`       | --                         |
-| CodeBlock  | Plain-text code surface without parsing, highlighting, or execution         | `@tale-ui/react/code-block` | --                         |
-| Kbd        | Semantic keyboard input or shortcut hint                                    | `@tale-ui/react/kbd`        | --                         |
-| Markdown   | Bounded Markdown rendered through Tale semantic primitives                  | `@tale-ui/react/markdown`   | --                         |
-| Text       | Polymorphic typography wrapper with variant, size, and colour props         | `@tale-ui/react/text`       | --                         |
+| Component  | Description                                                         | Import                      | Parts                      |
+| ---------- | ------------------------------------------------------------------- | --------------------------- | -------------------------- |
+| Blockquote | Semantic quotation with content and attribution                     | `@tale-ui/react/blockquote` | Root, Content, Attribution |
+| Citation   | Normalized document sources with shared reference ordinals          | `@tale-ui/react/citation`   | Root, Reference, List      |
+| Code       | Inline plain-text code without parsing, highlighting, or execution  | `@tale-ui/react/code`       | --                         |
+| CodeBlock  | Plain-text code surface without parsing, highlighting, or execution | `@tale-ui/react/code-block` | --                         |
+| Kbd        | Semantic keyboard input or shortcut hint                            | `@tale-ui/react/kbd`        | --                         |
+| Markdown   | Bounded Markdown rendered through Tale semantic primitives          | `@tale-ui/react/markdown`   | --                         |
+| Text       | Polymorphic typography wrapper with variant, size, and colour props | `@tale-ui/react/text`       | --                         |
 
 ## Utility (8)
 

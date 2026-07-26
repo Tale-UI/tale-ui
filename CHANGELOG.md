@@ -12,6 +12,9 @@ All notable changes to the Tale UI monorepo are documented in this file.
 - **Component-equivalence Bundle 2**: Added experimental Citation, Markdown, Outline, and
   Timestamp components, the bounded Markdown parser contract, shared timestamp scheduling, the
   `document-sources` recipe, and maintained component-performance evidence.
+- **Component-equivalence Bundle 3**: Added experimental OverflowList, Resizable, and Lightbox
+  components with responsive action, split-workspace, and media-viewing recipes plus maintained
+  Chromium performance evidence.
 
 ### Changed
 

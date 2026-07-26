@@ -56,9 +56,12 @@
 @import './column.css';
 @import './card.css';
 @import './aspect-ratio.css';
+@import './overflow-list.css';
+@import './resizable.css';
 
 /* ─── Overlay ───────────────────────────────────────────────────────────────── */
 @import './dialog.css';
+@import './lightbox.css';
 @import './alert-dialog.css';
 @import './popover.css';
 @import './drawer.css';

@@ -1,0 +1,33 @@
+/*
+ * OverflowList — @tale-ui/react
+ *
+ * Fit-measured inline collection with one overflow-control tree.
+ */
+
+.tale-overflow-list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  min-width: 0;
+  color: var(--neutral-80);
+  font-family: var(--text-font-family);
+  font-size: var(--text-s-font-size);
+  outline: none;
+}
+
+.tale-overflow-list__item,
+.tale-overflow-list__overflow {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  flex: none;
+}
+
+.tale-overflow-list__item[hidden] {
+  display: none;
+}
+
+.tale-overflow-list:focus-visible {
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: 2px;
+}

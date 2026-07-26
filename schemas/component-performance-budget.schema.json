@@ -118,11 +118,13 @@
         "markupSha256": { "$ref": "#/$defs/sha256" },
         "postconditionSha256": { "$ref": "#/$defs/sha256" },
         "setup": { "type": "string", "minLength": 1 },
-        "operationCount": { "const": 1 },
+        "operationCount": { "type": "integer", "minimum": 1 },
         "warmups": { "const": 5 },
         "samples": { "const": 15 },
         "statistic": { "const": "median" },
-        "clock": { "const": "node:perf_hooks.performance" },
+        "clock": {
+          "enum": ["node:perf_hooks.performance", "page:window.performance"]
+        },
         "unit": { "const": "milliseconds" },
         "baseline": { "type": "number", "minimum": 0 },
         "warnAt": { "type": "number", "minimum": 0 },
@@ -134,31 +136,61 @@
     "markdownBudget": {
       "allOf": [
         { "$ref": "#/$defs/budget" },
-        { "properties": { "id": { "const": "markdown-100k-adversarial" } } }
+        {
+          "properties": {
+            "id": { "const": "markdown-100k-adversarial" },
+            "clock": { "const": "node:perf_hooks.performance" },
+            "operationCount": { "const": 1 }
+          }
+        }
       ]
     },
     "timestampBudget": {
       "allOf": [
         { "$ref": "#/$defs/budget" },
-        { "properties": { "id": { "const": "timestamp-1000-tick" } } }
+        {
+          "properties": {
+            "id": { "const": "timestamp-1000-tick" },
+            "clock": { "const": "node:perf_hooks.performance" },
+            "operationCount": { "const": 1 }
+          }
+        }
       ]
     },
     "overflowListBudget": {
       "allOf": [
         { "$ref": "#/$defs/budget" },
-        { "properties": { "id": { "const": "overflow-list-100-recompute" } } }
+        {
+          "properties": {
+            "id": { "const": "overflow-list-100-recompute" },
+            "clock": { "const": "page:window.performance" },
+            "operationCount": { "const": 100 }
+          }
+        }
       ]
     },
     "resizableBudget": {
       "allOf": [
         { "$ref": "#/$defs/budget" },
-        { "properties": { "id": { "const": "resizable-1000-updates" } } }
+        {
+          "properties": {
+            "id": { "const": "resizable-1000-updates" },
+            "clock": { "const": "page:window.performance" },
+            "operationCount": { "const": 1000 }
+          }
+        }
       ]
     },
     "toastBudget": {
       "allOf": [
         { "$ref": "#/$defs/budget" },
-        { "properties": { "id": { "const": "toast-100-operations" } } }
+        {
+          "properties": {
+            "id": { "const": "toast-100-operations" },
+            "clock": { "const": "node:perf_hooks.performance" },
+            "operationCount": { "const": 100 }
+          }
+        }
       ]
     },
     "normalStates": {

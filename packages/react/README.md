@@ -105,7 +105,7 @@ Color Area · Color Field · Color Picker · Color Slider · Color Swatch · Col
 
 ### Overlay
 
-Alert Dialog · Dialog · Drawer · Popover · Preview Card · Tooltip
+Alert Dialog · Dialog · Drawer · Lightbox · Popover · Preview Card · Tooltip
 
 ### Navigation
 
@@ -113,7 +113,7 @@ Breadcrumbs · Command Palette · Context Menu · Header Nav · Link · Menu · 
 
 ### Layout
 
-Accordion · App Shell · Aspect Ratio · Card · Carousel · Chat · Column · Disclosure · Row · Scroll Area · Separator · Tabs · Toolbar
+Accordion · App Shell · Aspect Ratio · Card · Carousel · Chat · Column · Disclosure · Overflow List · Resizable · Row · Scroll Area · Separator · Tabs · Toolbar
 
 ### Feedback
 

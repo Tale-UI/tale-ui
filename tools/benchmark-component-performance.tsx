@@ -14,6 +14,7 @@ import {
   assertComponentPerformanceBaselineContract,
   assertComponentPerformanceFixtureIds,
   assertNoComponentCaptureInCi,
+  COMPONENT_PERFORMANCE_CLOCKS,
   COMPONENT_PERFORMANCE_SAMPLE_POLICY,
   COMPONENT_PERFORMANCE_ROLLBACK_FIXTURE_IDS,
   componentThresholds,
@@ -29,6 +30,12 @@ import {
 // Runtime TypeScript execution requires the source extension.
 // eslint-disable-next-line import/extensions
 import { markdown100kAdversarialFixture } from './performance-fixtures/component-expansion/markdown-100k-adversarial.tsx';
+// Runtime TypeScript execution requires the source extension.
+// eslint-disable-next-line import/extensions
+import { overflowList100RecomputeFixture } from './performance-fixtures/component-expansion/overflow-list-100-recompute.tsx';
+// Runtime TypeScript execution requires the source extension.
+// eslint-disable-next-line import/extensions
+import { resizable1000UpdatesFixture } from './performance-fixtures/component-expansion/resizable-1000-updates.tsx';
 // Runtime TypeScript execution requires the source extension.
 // eslint-disable-next-line import/extensions
 import { timestamp1000TickFixture } from './performance-fixtures/component-expansion/timestamp-1000-tick.tsx';
@@ -118,12 +125,20 @@ async function measureFixture(fixture: ComponentPerformanceFixture) {
 
 async function measureFixtures(fixtures: ComponentPerformanceFixture[]) {
   const measurements = [];
-  for (const fixture of fixtures) {
-    // Fixtures are intentionally measured serially to avoid shared CPU/DOM interference.
-    // eslint-disable-next-line no-await-in-loop
-    measurements.push({ fixture, ...(await measureFixture(fixture)) });
+  try {
+    for (const fixture of fixtures) {
+      // Fixtures are intentionally measured serially to avoid shared CPU/DOM interference.
+      // eslint-disable-next-line no-await-in-loop
+      measurements.push({ fixture, ...(await measureFixture(fixture)) });
+    }
+    return measurements;
+  } finally {
+    for (const fixture of [...fixtures].reverse()) {
+      // Browser fixtures may share reusable processes and therefore dispose after all samples.
+      // eslint-disable-next-line no-await-in-loop
+      await fixture.teardown?.();
+    }
   }
-  return measurements;
 }
 
 function runEnvironment() {
@@ -179,7 +194,7 @@ async function captureBaseline(fixtures: ComponentPerformanceFixture[]) {
       warmups: COMPONENT_PERFORMANCE_SAMPLE_POLICY.warmups,
       samples: COMPONENT_PERFORMANCE_SAMPLE_POLICY.samples,
       statistic: COMPONENT_PERFORMANCE_SAMPLE_POLICY.statistic,
-      clock: COMPONENT_PERFORMANCE_SAMPLE_POLICY.clock,
+      clock: COMPONENT_PERFORMANCE_CLOCKS[fixture.id as keyof typeof COMPONENT_PERFORMANCE_CLOCKS],
       unit: 'milliseconds',
       baseline: value,
       ...componentThresholds(value),
@@ -276,6 +291,8 @@ async function main() {
   const installedFixtures: ComponentPerformanceFixture[] = [
     markdown100kAdversarialFixture,
     timestamp1000TickFixture,
+    overflowList100RecomputeFixture,
+    resizable1000UpdatesFixture,
   ];
   assertComponentPerformanceFixtureIds(installedFixtures.map(({ id }) => id));
   const fixtures = ROLLBACK

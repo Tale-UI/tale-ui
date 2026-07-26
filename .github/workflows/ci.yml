@@ -213,6 +213,8 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
       - name: Smoke-test axe runner
         run: pnpm a11y:smoke
+      - name: Check performance fixture contracts
+        run: pnpm performance:fixtures:check
       - name: Build accessibility Storybook
         run: pnpm -C playground/storybook build --output-dir ../../.artifacts/storybook-a11y
       - name: Check changed components with axe

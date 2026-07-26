@@ -1,0 +1,7 @@
+{
+  "slug": "overflow-list-responsive-actions",
+  "difficulty": "complex",
+  "prompt": "Build a responsive Tale UI action row that keeps as many actions visible as fit and moves the remaining actions into one overflow menu.",
+  "reference": "import { Button } from '@tale-ui/react/button';\nimport { Menu } from '@tale-ui/react/menu';\nimport { OverflowList } from '@tale-ui/react/overflow-list';\n\nconst actions = [\n  { id: 'edit', label: 'Edit' },\n  { id: 'share', label: 'Share' },\n  { id: 'archive', label: 'Archive' },\n  { id: 'delete', label: 'Delete' },\n] as const;\n\nexport function ResponsiveActions() {\n  return (\n    <OverflowList\n      aria-label=\"Document actions\"\n      items={actions}\n      getKey={(action) => action.id}\n      renderItem={(action) => <Button>{action.label}</Button>}\n      renderOverflow={(hiddenActions, { overflowControlRef }) => (\n        <Menu.Root>\n          <Menu.Trigger ref={overflowControlRef}>More</Menu.Trigger>\n          <Menu.Popover>\n            <Menu.MenuList aria-label=\"More document actions\">\n              {hiddenActions.map((action) => (\n                <Menu.Item key={action.id} id={action.id} textValue={action.label}>\n                  {action.label}\n                </Menu.Item>\n              ))}\n            </Menu.MenuList>\n          </Menu.Popover>\n        </Menu.Root>\n      )}\n    />\n  );\n}",
+  "tags": ["OverflowList", "Button", "Menu"]
+}

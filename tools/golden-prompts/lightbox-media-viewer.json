@@ -1,0 +1,7 @@
+{
+  "slug": "lightbox-media-viewer",
+  "difficulty": "complex",
+  "prompt": "Build a Tale UI image gallery whose thumbnails open an accessible lightbox with previous, next, caption, and close controls.",
+  "reference": "import { Lightbox } from '@tale-ui/react/lightbox';\n\nconst images = [\n  { id: 'coast', label: 'Rocky coast at sunrise', src: '/coast.jpg' },\n  { id: 'forest', label: 'Forest trail after rain', src: '/forest.jpg' },\n] as const;\n\nexport function MediaViewer() {\n  return (\n    <Lightbox.Root\n      items={images}\n      getKey={(image) => image.id}\n      getLabel={(image) => image.label}\n      renderContent={(image) => <img src={image.src} alt={image.label} />}\n    >\n      {images.map((image) => (\n        <Lightbox.Trigger key={image.id} itemKey={image.id}>\n          <img src={image.src} alt={image.label} />\n        </Lightbox.Trigger>\n      ))}\n      <Lightbox.Backdrop>\n        <Lightbox.Popup>\n          <Lightbox.Content />\n          <Lightbox.Caption />\n          <Lightbox.Previous />\n          <Lightbox.Next />\n          <Lightbox.Close />\n        </Lightbox.Popup>\n      </Lightbox.Backdrop>\n    </Lightbox.Root>\n  );\n}",
+  "tags": ["Lightbox"]
+}

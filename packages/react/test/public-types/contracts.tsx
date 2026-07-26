@@ -17,8 +17,35 @@ import {
 } from '@tale-ui/react/citation';
 import { Code, type CodeProps } from '@tale-ui/react/code';
 import type { DialogRootProps } from '@tale-ui/react/dialog';
+import {
+  Lightbox,
+  type LightboxBackdropProps,
+  type LightboxCaptionProps,
+  type LightboxCloseProps,
+  type LightboxContentProps,
+  type LightboxNextProps,
+  type LightboxPopupModalProps,
+  type LightboxPopupProps,
+  type LightboxPreviousProps,
+  type LightboxRenderContext,
+  type LightboxRootProps,
+  type LightboxTriggerProps,
+} from '@tale-ui/react/lightbox';
 import { Markdown, type MarkdownProps } from '@tale-ui/react/markdown';
 import { Outline, type OutlineItem, type OutlineProps } from '@tale-ui/react/outline';
+import {
+  OverflowList,
+  type OverflowListProps,
+  type OverflowRenderContext,
+} from '@tale-ui/react/overflow-list';
+import {
+  Resizable,
+  type ResizableChangeMeta,
+  type ResizableHandleProps,
+  type ResizablePanelProps,
+  type ResizableRootProps,
+  type ResizableSizes,
+} from '@tale-ui/react/resizable';
 import { Skeleton, type SkeletonProps } from '@tale-ui/react/skeleton';
 import type { TableControllerQuery } from '@tale-ui/react/table';
 import {
@@ -148,6 +175,80 @@ export const markdownPropsContract = {
 
 export const markdownContract = <Markdown {...markdownPropsContract} />;
 
+const lightboxItems = [
+  { id: 'coast', label: 'Rocky coast' },
+  { id: 'forest', label: 'Forest trail' },
+] as const;
+
+export const lightboxRenderContextContract: LightboxRenderContext = {
+  key: 'coast',
+  index: 0,
+  count: 2,
+};
+
+export const lightboxRootPropsContract = {
+  items: lightboxItems,
+  getKey: (item) => item.id,
+  getLabel: (item) => item.label,
+  renderContent: (item) => item.label,
+  defaultSelectedKey: 'coast',
+  children: null,
+} satisfies LightboxRootProps<(typeof lightboxItems)[number]>;
+
+export const lightboxTriggerPropsContract = {
+  itemKey: 'coast',
+  children: 'Open coast',
+} satisfies LightboxTriggerProps;
+
+export const lightboxBackdropPropsContract = {
+  isDismissable: true,
+  children: null,
+} satisfies LightboxBackdropProps;
+
+export const lightboxPopupModalPropsContract = {
+  isDismissable: true,
+} satisfies LightboxPopupModalProps;
+
+export const lightboxPopupPropsContract = {
+  modalProps: lightboxPopupModalPropsContract,
+  children: null,
+} satisfies LightboxPopupProps;
+
+export const lightboxContentPropsContract = {
+  id: 'lightbox-content',
+} satisfies LightboxContentProps;
+
+export const lightboxCaptionPropsContract = {
+  children: null,
+} satisfies LightboxCaptionProps;
+
+export const lightboxPreviousPropsContract = {
+  'aria-label': 'Previous photograph',
+} satisfies LightboxPreviousProps;
+
+export const lightboxNextPropsContract = {
+  'aria-labelledby': 'next-photograph-label',
+} satisfies LightboxNextProps;
+
+export const lightboxClosePropsContract = {
+  'aria-label': 'Close gallery',
+} satisfies LightboxCloseProps;
+
+export const lightboxContract = (
+  <Lightbox.Root {...lightboxRootPropsContract}>
+    <Lightbox.Trigger {...lightboxTriggerPropsContract} />
+    <Lightbox.Backdrop {...lightboxBackdropPropsContract}>
+      <Lightbox.Popup {...lightboxPopupPropsContract}>
+        <Lightbox.Content {...lightboxContentPropsContract} />
+        <Lightbox.Caption {...lightboxCaptionPropsContract} />
+        <Lightbox.Previous {...lightboxPreviousPropsContract} />
+        <Lightbox.Next {...lightboxNextPropsContract} />
+        <Lightbox.Close {...lightboxClosePropsContract} />
+      </Lightbox.Popup>
+    </Lightbox.Backdrop>
+  </Lightbox.Root>
+);
+
 const outlineItems = [
   { id: 'overview', targetId: 'overview', label: 'Overview', level: 1 },
   { id: 'setup', targetId: 'setup', label: 'Setup', level: 2 },
@@ -160,6 +261,68 @@ export const outlinePropsContract = {
 } satisfies OutlineProps;
 
 export const outlineContract = <Outline {...outlinePropsContract} />;
+
+const overflowActions = [
+  { id: 'edit', label: 'Edit' },
+  { id: 'share', label: 'Share' },
+] as const;
+
+export const overflowRenderContextContract: OverflowRenderContext = {
+  overflowControlRef: () => undefined,
+};
+
+export const overflowListPropsContract = {
+  items: overflowActions,
+  getKey: (action) => action.id,
+  renderItem: (action) => <Button>{action.label}</Button>,
+  renderOverflow: (hidden, context) => (
+    <Button ref={context.overflowControlRef}>More ({hidden.length})</Button>
+  ),
+  collapseFrom: 'end',
+  minVisibleItems: 1,
+  measurementKey: 'actions-v1',
+} satisfies OverflowListProps<(typeof overflowActions)[number]>;
+
+export const overflowListContract = <OverflowList {...overflowListPropsContract} />;
+
+export const resizableSizesContract: ResizableSizes = {
+  navigation: 30,
+  editor: 70,
+};
+
+export const resizableChangeMetaContract: ResizableChangeMeta = {
+  handleId: 'navigation-editor',
+  source: 'keyboard',
+};
+
+export const resizableRootPropsContract = {
+  defaultSizes: resizableSizesContract,
+  children: null,
+} satisfies ResizableRootProps;
+
+export const resizablePanelPropsContract = {
+  id: 'navigation',
+  minSize: 20,
+  maxSize: 45,
+  children: 'Navigation',
+} satisfies ResizablePanelProps;
+
+export const resizableHandlePropsContract = {
+  id: 'navigation-editor',
+  before: 'navigation',
+  after: 'editor',
+  'aria-label': 'Resize navigation and editor',
+} satisfies ResizableHandleProps;
+
+export const resizableContract = (
+  <Resizable.Root defaultSizes={resizableSizesContract}>
+    <Resizable.Panel {...resizablePanelPropsContract} />
+    <Resizable.Handle {...resizableHandlePropsContract} />
+    <Resizable.Panel id="editor" minSize={55} maxSize={80}>
+      Editor
+    </Resizable.Panel>
+  </Resizable.Root>
+);
 
 export const timestampValueContract: TimestampValue = '2026-07-27T12:05:00Z';
 
@@ -332,6 +495,63 @@ export const conflictingOutlineStateContract = (
     defaultActiveId="overview"
   />
 );
+
+export const unsafeOverflowListHtmlContract = {
+  items: overflowActions,
+  getKey: (action: (typeof overflowActions)[number]) => action.id,
+  renderItem: (action: (typeof overflowActions)[number]) => action.label,
+  renderOverflow: () => 'More',
+  // @ts-expect-error OverflowList does not expose raw HTML injection.
+  dangerouslySetInnerHTML: { __html: '<img src=x>' },
+} satisfies OverflowListProps<(typeof overflowActions)[number]>;
+
+export const overflowListChildrenContract = {
+  ...overflowListPropsContract,
+  // @ts-expect-error OverflowList owns item rendering through renderItem.
+  children: 'Child',
+} satisfies OverflowListProps<(typeof overflowActions)[number]>;
+
+export const conflictingResizableStateContract = (
+  // @ts-expect-error Resizable cannot be controlled and uncontrolled simultaneously.
+  <Resizable.Root sizes={resizableSizesContract} defaultSizes={resizableSizesContract}>
+    <Resizable.Panel id="navigation" />
+    <Resizable.Handle
+      id="navigation-editor"
+      before="navigation"
+      after="editor"
+      aria-label="Resize panels"
+    />
+    <Resizable.Panel id="editor" />
+  </Resizable.Root>
+);
+
+export const unnamedResizableHandleContract = (
+  // @ts-expect-error Resizable Handle requires exactly one accessible-name branch.
+  <Resizable.Handle id="navigation-editor" before="navigation" after="editor" />
+);
+
+export const conflictingLightboxOpenStateContract = (
+  // @ts-expect-error Lightbox cannot be controlled and uncontrolled simultaneously.
+  <Lightbox.Root
+    {...lightboxRootPropsContract}
+    isOpen
+    defaultOpen
+  />
+);
+
+export const conflictingLightboxSelectionStateContract = (
+  // @ts-expect-error Lightbox selection cannot be controlled and uncontrolled simultaneously.
+  <Lightbox.Root
+    {...lightboxRootPropsContract}
+    selectedKey="coast"
+    defaultSelectedKey="forest"
+  />
+);
+
+export const unsafeLightboxContentHtmlContract = {
+  // @ts-expect-error Lightbox Content does not expose raw HTML injection.
+  dangerouslySetInnerHTML: { __html: '<img src=x>' },
+} satisfies LightboxContentProps;
 
 // @ts-expect-error Absolute Timestamp does not accept a relative clock.
 export const absoluteTimestampNowContract: TimestampProps = {

@@ -13,9 +13,27 @@ import { basename, dirname, join } from 'node:path';
 export const COMPONENT_PERFORMANCE_FIXTURE_IDS = Object.freeze([
   'markdown-100k-adversarial',
   'timestamp-1000-tick',
+  'overflow-list-100-recompute',
+  'resizable-1000-updates',
 ]);
 
 export const COMPONENT_PERFORMANCE_ROLLBACK_FIXTURE_IDS = Object.freeze(['timestamp-1000-tick']);
+
+export const COMPONENT_PERFORMANCE_OPERATION_COUNTS = Object.freeze({
+  'markdown-100k-adversarial': 1,
+  'timestamp-1000-tick': 1,
+  'overflow-list-100-recompute': 100,
+  'resizable-1000-updates': 1000,
+  'toast-100-operations': 100,
+});
+
+export const COMPONENT_PERFORMANCE_CLOCKS = Object.freeze({
+  'markdown-100k-adversarial': 'node:perf_hooks.performance',
+  'timestamp-1000-tick': 'node:perf_hooks.performance',
+  'overflow-list-100-recompute': 'page:window.performance',
+  'resizable-1000-updates': 'page:window.performance',
+  'toast-100-operations': 'node:perf_hooks.performance',
+});
 
 export const COMPONENT_PERFORMANCE_NORMAL_STATES = Object.freeze([
   Object.freeze(['markdown-100k-adversarial', 'timestamp-1000-tick']),
@@ -118,8 +136,16 @@ export function assertComponentPerformanceBaselineContract(
     assert.equal(budget.warmups, COMPONENT_PERFORMANCE_SAMPLE_POLICY.warmups);
     assert.equal(budget.samples, COMPONENT_PERFORMANCE_SAMPLE_POLICY.samples);
     assert.equal(budget.statistic, COMPONENT_PERFORMANCE_SAMPLE_POLICY.statistic);
-    assert.equal(budget.clock, COMPONENT_PERFORMANCE_SAMPLE_POLICY.clock);
-    assert.equal(budget.operationCount, 1);
+    assert.equal(
+      budget.clock,
+      COMPONENT_PERFORMANCE_CLOCKS[budget.id],
+      `Performance clock must match the approved boundary for ${budget.id}`,
+    );
+    assert.equal(
+      budget.operationCount,
+      COMPONENT_PERFORMANCE_OPERATION_COUNTS[budget.id],
+      `Performance operation count must match the approved vector for ${budget.id}`,
+    );
     assert.equal(budget.unit, 'milliseconds');
     assert.equal(budget.owner, 'Design Systems');
     assert.deepEqual(

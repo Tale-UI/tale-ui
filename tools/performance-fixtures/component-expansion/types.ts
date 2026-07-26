@@ -14,4 +14,5 @@ export type ComponentPerformanceFixture = {
   markupDigest: string;
   expectedPostconditionDigest: string;
   runSample: () => ComponentPerformanceSample | Promise<ComponentPerformanceSample>;
+  teardown?: () => void | Promise<void>;
 };

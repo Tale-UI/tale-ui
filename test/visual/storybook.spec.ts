@@ -22,7 +22,7 @@ import { test, expect } from '@playwright/test';
 // ─── Story list ───────────────────────────────────────────────────────────────
 // One Default story per component. Story IDs are derived from Meta.title and
 // the exported story name. Adjust if a component's Storybook title differs.
-const STORIES: { id: string; label: string }[] = [
+const STORIES: { id: string; label: string; variant?: string; fullViewport?: boolean }[] = [
   // Form Controls
   { id: 'components-button--default', label: 'Button' },
   { id: 'components-buttongroup--default', label: 'ButtonGroup' },
@@ -59,10 +59,21 @@ const STORIES: { id: string; label: string }[] = [
   { id: 'components-disclosure--default', label: 'Disclosure' },
   { id: 'components-tabs--default', label: 'Tabs' },
   { id: 'components-separator--default', label: 'Separator' },
+  { id: 'components-overflowlist--default', label: 'OverflowList' },
+  { id: 'components-overflowlist--measured', label: 'OverflowList', variant: 'Measured' },
+  { id: 'components-resizable--default', label: 'Resizable' },
+  { id: 'components-resizable--vertical', label: 'Resizable', variant: 'Vertical' },
   // Overlay
   { id: 'components-dialog--default', label: 'Dialog' },
   { id: 'components-popover--default', label: 'Popover' },
   { id: 'components-tooltip--default', label: 'Tooltip' },
+  { id: 'components-lightbox--default', label: 'Lightbox' },
+  {
+    id: 'components-lightbox--open',
+    label: 'Lightbox',
+    variant: 'Open',
+    fullViewport: true,
+  },
   // Navigation
   { id: 'components-menu--default', label: 'Menu' },
   { id: 'components-breadcrumbs--default', label: 'Breadcrumbs' },
@@ -92,8 +103,8 @@ const STORIES: { id: string; label: string }[] = [
 
 // ─── Test factory ─────────────────────────────────────────────────────────────
 
-for (const { id, label } of STORIES) {
-  test(`${label} Default story`, async ({ page }) => {
+for (const { id, label, variant = 'Default', fullViewport = false } of STORIES) {
+  test(`${label} ${variant} story`, async ({ page }) => {
     // The Storybook dev server serves the preview at /iframe.html and has no
     // /iframe route (404). Static builds may redirect /iframe.html → /iframe;
     // page.goto follows that redirect, so /iframe.html works in both modes.
@@ -105,13 +116,18 @@ for (const { id, label } of STORIES) {
       timeout: 10_000,
     });
 
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+      });
+    });
+
     // Move mouse offscreen to avoid hover states
     await page.mouse.move(0, 0);
 
     // Capture and compare against baseline
-    await expect(page).toHaveScreenshot(`${id}.png`, {
-      // Clip to the story root element to exclude Storybook chrome
-      clip: (await page.locator('#storybook-root').boundingBox()) ?? undefined,
-    });
+    const clip = fullViewport ? undefined : await page.locator('#storybook-root').boundingBox();
+    await expect(page).toHaveScreenshot(`${id}.png`, clip ? { clip } : {});
   });
 }

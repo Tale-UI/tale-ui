@@ -105,6 +105,7 @@
     "performance:components:capture": "tsx tools/benchmark-component-performance.tsx --capture",
     "performance:components:check": "tsx tools/benchmark-component-performance.tsx",
     "performance:check": "pnpm performance:roadmap:check && pnpm performance:components:check",
+    "performance:fixtures:check": "tsx --test tools/performance-fixtures/component-expansion/overflow-list-100-recompute.test.ts tools/performance-fixtures/component-expansion/resizable-1000-updates.test.ts",
     "performance:gate-b:check": "node --test tools/gate-b-performance-protection.test.mjs tools/component-performance-contract.test.mjs && node tools/gate-b-performance-protection.mjs",
     "agent:cold-start:capture": "tsx tools/benchmark-agent-cold-start.ts --capture",
     "agent:cold-start:check": "tsx tools/benchmark-agent-cold-start.ts",
