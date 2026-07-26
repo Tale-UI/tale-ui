@@ -98,6 +98,7 @@ storybook-static/
 !/analysis/gap-analysis-astryx/plans/
 /analysis/gap-analysis-astryx/plans/*
 !/analysis/gap-analysis-astryx/plans/prioritized-roadmap-implementation-plan.md
+!/analysis/gap-analysis-astryx/plans/component-equivalence-expansion-implementation-plan.md
 /.agentic-loop/
 /.agentic-loops/
 /plans/
