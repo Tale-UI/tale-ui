@@ -122,7 +122,9 @@
         "warmups": { "const": 5 },
         "samples": { "const": 15 },
         "statistic": { "const": "median" },
-        "clock": { "const": "node:perf_hooks.performance" },
+        "clock": {
+          "enum": ["node:perf_hooks.performance", "page:window.performance"]
+        },
         "unit": { "const": "milliseconds" },
         "baseline": { "type": "number", "minimum": 0 },
         "warnAt": { "type": "number", "minimum": 0 },
@@ -137,6 +139,7 @@
         {
           "properties": {
             "id": { "const": "markdown-100k-adversarial" },
+            "clock": { "const": "node:perf_hooks.performance" },
             "operationCount": { "const": 1 }
           }
         }
@@ -148,6 +151,7 @@
         {
           "properties": {
             "id": { "const": "timestamp-1000-tick" },
+            "clock": { "const": "node:perf_hooks.performance" },
             "operationCount": { "const": 1 }
           }
         }
@@ -159,6 +163,7 @@
         {
           "properties": {
             "id": { "const": "overflow-list-100-recompute" },
+            "clock": { "const": "page:window.performance" },
             "operationCount": { "const": 100 }
           }
         }
@@ -170,6 +175,7 @@
         {
           "properties": {
             "id": { "const": "resizable-1000-updates" },
+            "clock": { "const": "page:window.performance" },
             "operationCount": { "const": 1000 }
           }
         }
@@ -181,6 +187,7 @@
         {
           "properties": {
             "id": { "const": "toast-100-operations" },
+            "clock": { "const": "node:perf_hooks.performance" },
             "operationCount": { "const": 100 }
           }
         }

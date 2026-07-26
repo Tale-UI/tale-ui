@@ -19,6 +19,7 @@ import {
   assertComponentPerformanceBaselineContract,
   assertComponentPerformanceFixtureIds,
   assertNoComponentCaptureInCi,
+  COMPONENT_PERFORMANCE_CLOCKS,
   COMPONENT_PERFORMANCE_FIXTURE_IDS,
   COMPONENT_PERFORMANCE_NORMAL_STATES,
   COMPONENT_PERFORMANCE_OPERATION_COUNTS,
@@ -101,6 +102,7 @@ function baselineForState(source, ids, { rollback = false } = {}) {
         ...structuredClone(existing),
         id,
         fixture: `tools/performance-fixtures/component-expansion/${id}.tsx`,
+        clock: COMPONENT_PERFORMANCE_CLOCKS[id],
         operationCount: COMPONENT_PERFORMANCE_OPERATION_COUNTS[id],
       };
     }),
@@ -152,6 +154,13 @@ test('freezes the sample policy and threshold formulas', () => {
     'overflow-list-100-recompute': 100,
     'resizable-1000-updates': 1000,
     'toast-100-operations': 100,
+  });
+  assert.deepEqual(COMPONENT_PERFORMANCE_CLOCKS, {
+    'markdown-100k-adversarial': 'node:perf_hooks.performance',
+    'timestamp-1000-tick': 'node:perf_hooks.performance',
+    'overflow-list-100-recompute': 'page:window.performance',
+    'resizable-1000-updates': 'page:window.performance',
+    'toast-100-operations': 'node:perf_hooks.performance',
   });
 });
 
