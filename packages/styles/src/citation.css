@@ -1,0 +1,61 @@
+/*
+ * Citation — @tale-ui/react
+ *
+ * Tale-owned normalized source references and source list.
+ */
+
+.tale-citation {
+  color: var(--neutral-90);
+  font-family: var(--text-font-family);
+}
+
+.tale-citation__reference {
+  margin-inline: var(--space-4xs);
+  font-size: var(--label-xs-font-size);
+  line-height: 1;
+  vertical-align: super;
+}
+
+.tale-citation__reference-link,
+.tale-citation__title {
+  color: var(--color-70);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.tale-citation__reference-link:hover,
+.tale-citation__title:hover {
+  color: var(--color-80);
+}
+
+.tale-citation__reference-link:focus-visible,
+.tale-citation__title:focus-visible {
+  border-radius: var(--radius-xs);
+  outline: 0.125rem solid var(--focus-ring-color);
+  outline-offset: 0.125rem;
+}
+
+.tale-citation__list {
+  display: grid;
+  gap: var(--space-2xs);
+  margin-block: var(--space-s) 0;
+  padding-inline-start: var(--space-m);
+  font-size: var(--text-s-font-size);
+  line-height: var(--text-line-height);
+}
+
+.tale-citation__source {
+  padding-inline-start: var(--space-4xs);
+}
+
+.tale-citation__source > .tale-citation__title:not(a) {
+  color: var(--neutral-90);
+  text-decoration: none;
+}
+
+.tale-citation__metadata {
+  display: block;
+  margin-block-start: var(--space-4xs);
+  color: var(--neutral-70);
+  font-size: var(--text-xs-font-size);
+}
