@@ -36,7 +36,7 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | PinInput          | OTP/verification code input                                                   | `@tale-ui/react/pin-input`      | Root, Group, Slot, Separator                                                                                                               |
 | SelectNative      | Styled native `<select>` element                                              | `@tale-ui/react/select-native`  | --                                                                                                                                         |
 
-## Date & Time (6)
+## Date & Time (7)
 
 | Component       | Description                                                 | Import                             | Parts                                                                                                                        |
 | --------------- | ----------------------------------------------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -46,6 +46,7 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | DatePicker      | Date field with calendar popover                            | `@tale-ui/react/date-picker`       | Root, Group, DateInput, Segment, Trigger, Popover, Dialog, Label, Description, ErrorMessage                                  |
 | DateRangePicker | Start/end date picker                                       | `@tale-ui/react/date-range-picker` | Root, Group, StartDate, EndDate, Segment, Trigger, Popover, Dialog, Label, Description, ErrorMessage                         |
 | TimeField       | Segmented time input                                        | `@tale-ui/react/time-field`        | Root, DateInput, Segment, Label, Description, ErrorMessage                                                                   |
+| Timestamp       | Locale- and timezone-explicit absolute or relative time     | `@tale-ui/react/timestamp`         | --                                                                                                                           |
 
 ## Color (7)
 
@@ -70,7 +71,7 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | Drawer      | Panel that slides in from the screen edge, for navigation drawers and detail views           | `@tale-ui/react/drawer`       | Root, Trigger, Backdrop, Popup, Title, Description, Close, Handle, SwipeArea |
 | Tooltip     | Hover tooltip                                                                                | `@tale-ui/react/tooltip`      | Root, Trigger, Popup, Arrow, Title, Description                              |
 
-## Navigation (12)
+## Navigation (13)
 
 | Component      | Description                                                                                       | Import                           | Parts                                                                                                                                                                                                                                                                                          |
 | -------------- | ------------------------------------------------------------------------------------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -80,6 +81,7 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | NavigationMenu | Top-level navigation bar                                                                          | `@tale-ui/react/navigation-menu` | Root, List, Item, Link, Trigger, Popup, Content, Icon                                                                                                                                                                                                                                          |
 | Menubar        | Horizontal menu bar                                                                               | `@tale-ui/react/menubar`         | Root, Item                                                                                                                                                                                                                                                                                     |
 | Breadcrumbs    | Breadcrumb navigation                                                                             | `@tale-ui/react/breadcrumbs`     | Root, Item, Link                                                                                                                                                                                                                                                                               |
+| Outline        | Document outline navigation with active-heading observation                                      | `@tale-ui/react/outline`         | --                                                                                                                                                                                                                                                                                             |
 | Link           | Styled anchor link                                                                                | `@tale-ui/react/link`            | --                                                                                                                                                                                                                                                                                             |
 | Pagination     | Page navigation controls                                                                          | `@tale-ui/react/pagination`      | Root, PreviousTrigger, NextTrigger, Item, Ellipsis, Dot, Line                                                                                                                                                                                                                                  |
 | PaginationDot  | Auto-rendering dot indicators for carousel/slide pagination                                       | `@tale-ui/react/pagination-dot`  | --                                                                                                                                                                                                                                                                                             |
@@ -156,15 +158,17 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | ImageCropper | Interactive image crop region with aspect ratio and circular crop support | `@tale-ui/react/image-cropper` | Root, Img                                                                                                                                                                                      |
 | TextEditor   | Rich-text editor built on Tiptap v3 with simple and advanced toolbars     | `@tale-ui/react/text-editor`   | Root, Label, HintText, Content, Toolbar, BubbleMenu, Bold, Italic, Underline, BulletList, AlignLeft, AlignCenter, AlignRight, AlignJustify, Link, Image, Color, FontFamily, FontSize, Generate |
 
-## Typography (5)
+## Typography (7)
 
-| Component  | Description                                                         | Import                      | Parts                      |
-| ---------- | ------------------------------------------------------------------- | --------------------------- | -------------------------- |
-| Blockquote | Semantic quotation with content and attribution                     | `@tale-ui/react/blockquote` | Root, Content, Attribution |
-| Code       | Inline plain-text code without parsing, highlighting, or execution  | `@tale-ui/react/code`       | --                         |
-| CodeBlock  | Plain-text code surface without parsing, highlighting, or execution | `@tale-ui/react/code-block` | --                         |
-| Kbd        | Semantic keyboard input or shortcut hint                            | `@tale-ui/react/kbd`        | --                         |
-| Text       | Polymorphic typography wrapper with variant, size, and colour props | `@tale-ui/react/text`       | --                         |
+| Component  | Description                                                                 | Import                      | Parts                      |
+| ---------- | --------------------------------------------------------------------------- | --------------------------- | -------------------------- |
+| Blockquote | Semantic quotation with content and attribution                             | `@tale-ui/react/blockquote` | Root, Content, Attribution |
+| Citation   | Normalized document sources with shared reference ordinals                   | `@tale-ui/react/citation`   | Root, Reference, List      |
+| Code       | Inline plain-text code without parsing, highlighting, or execution          | `@tale-ui/react/code`       | --                         |
+| CodeBlock  | Plain-text code surface without parsing, highlighting, or execution         | `@tale-ui/react/code-block` | --                         |
+| Kbd        | Semantic keyboard input or shortcut hint                                    | `@tale-ui/react/kbd`        | --                         |
+| Markdown   | Bounded Markdown rendered through Tale semantic primitives                  | `@tale-ui/react/markdown`   | --                         |
+| Text       | Polymorphic typography wrapper with variant, size, and colour props         | `@tale-ui/react/text`       | --                         |
 
 ## Utility (8)
 

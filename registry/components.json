@@ -2283,8 +2283,8 @@
       "name": "Citation",
       "slug": "citation",
       "import": "@tale-ui/react/citation",
-      "category": null,
-      "description": null,
+      "category": "Typography",
+      "description": "Normalized document sources with shared reference ordinals",
       "kind": "compound",
       "status": "experimental",
       "props": [
@@ -6605,8 +6605,8 @@
       "name": "Markdown",
       "slug": "markdown",
       "import": "@tale-ui/react/markdown",
-      "category": null,
-      "description": null,
+      "category": "Typography",
+      "description": "Bounded Markdown rendered through Tale semantic primitives",
       "kind": "simple",
       "status": "experimental",
       "props": [
@@ -7351,8 +7351,8 @@
       "name": "Outline",
       "slug": "outline",
       "import": "@tale-ui/react/outline",
-      "category": null,
-      "description": null,
+      "category": "Navigation",
+      "description": "Document outline navigation with active-heading observation",
       "kind": "simple",
       "status": "experimental",
       "props": [
@@ -10933,8 +10933,8 @@
       "name": "Timestamp",
       "slug": "timestamp",
       "import": "@tale-ui/react/timestamp",
-      "category": null,
-      "description": null,
+      "category": "Date & Time",
+      "description": "Locale- and timezone-explicit absolute or relative time",
       "kind": "simple",
       "status": "experimental",
       "props": [

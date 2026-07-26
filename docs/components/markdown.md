@@ -54,6 +54,10 @@ The ref targets the root `HTMLDivElement`. DOM props are forwarded except
 `dangerouslySetInnerHTML`, which is omitted from the public type and
 runtime-stripped.
 
+## CSS Classes
+
+- `.tale-markdown`
+
 ## Pitfalls
 
 <!-- pitfall: markdown-fixed-trust-boundary -->

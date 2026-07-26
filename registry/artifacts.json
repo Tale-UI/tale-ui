@@ -287,7 +287,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:21a9825f7b9d0ab18da5125c7bfef8ba130011ee53eb4be4d7b049e9a09e7ab1",
+  "sourceRevision": "sha256:95da0f8895e56ee1519cd5666a3832c3df88955a8eea0f5d66e67fae0c3b5cf3",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -10244,7 +10244,7 @@
       "kind": "component",
       "slug": "citation",
       "name": "Citation",
-      "description": "",
+      "description": "Normalized document sources with shared reference ordinals",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
       "version": "3.0.0",
@@ -10252,7 +10252,15 @@
         "Citation"
       ],
       "keywords": [
-        "citation"
+        "citation",
+        "document",
+        "normalized",
+        "ordinals",
+        "reference",
+        "shared",
+        "sources",
+        "typography",
+        "with"
       ],
       "related": [],
       "retrieval": [
@@ -10282,7 +10290,7 @@
       },
       "trust": "first-party",
       "metadata": {
-        "category": null,
+        "category": "Typography",
         "componentKind": "compound"
       }
     },
@@ -13056,7 +13064,7 @@
       "kind": "component",
       "slug": "markdown",
       "name": "Markdown",
-      "description": "",
+      "description": "Bounded Markdown rendered through Tale semantic primitives",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
       "version": "3.0.0",
@@ -13064,7 +13072,14 @@
         "Markdown"
       ],
       "keywords": [
-        "markdown"
+        "bounded",
+        "markdown",
+        "primitives",
+        "rendered",
+        "semantic",
+        "tale",
+        "through",
+        "typography"
       ],
       "related": [],
       "retrieval": [
@@ -13094,7 +13109,7 @@
       },
       "trust": "first-party",
       "metadata": {
-        "category": null,
+        "category": "Typography",
         "componentKind": "simple"
       }
     },
@@ -13492,7 +13507,7 @@
       "kind": "component",
       "slug": "outline",
       "name": "Outline",
-      "description": "",
+      "description": "Document outline navigation with active-heading observation",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
       "version": "3.0.0",
@@ -13500,7 +13515,13 @@
         "Outline"
       ],
       "keywords": [
-        "outline"
+        "active",
+        "document",
+        "heading",
+        "navigation",
+        "observation",
+        "outline",
+        "with"
       ],
       "related": [],
       "retrieval": [
@@ -13530,7 +13551,7 @@
       },
       "trust": "first-party",
       "metadata": {
-        "category": null,
+        "category": "Navigation",
         "componentKind": "simple"
       }
     },
@@ -15969,7 +15990,7 @@
       "kind": "component",
       "slug": "timestamp",
       "name": "Timestamp",
-      "description": "",
+      "description": "Locale- and timezone-explicit absolute or relative time",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
       "version": "3.0.0",
@@ -15977,7 +15998,16 @@
         "Timestamp"
       ],
       "keywords": [
-        "timestamp"
+        "absolute",
+        "and",
+        "date",
+        "explicit",
+        "locale",
+        "or",
+        "relative",
+        "time",
+        "timestamp",
+        "timezone"
       ],
       "related": [],
       "retrieval": [
@@ -16007,7 +16037,7 @@
       },
       "trust": "first-party",
       "metadata": {
-        "category": null,
+        "category": "Date & Time",
         "componentKind": "simple"
       }
     },
@@ -53027,5 +53057,5 @@
       }
     }
   ],
-  "digest": "sha256:30a96cd10551a8f4aabe9914d9900a9e602d33769f11434d91272678248e4141"
+  "digest": "sha256:a683f2137863fd1b15ddcd96f4bdd177d840a3054ba7fab3a54e4a0e73674d09"
 }
