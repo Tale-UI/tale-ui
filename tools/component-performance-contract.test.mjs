@@ -21,6 +21,7 @@ import {
   assertNoComponentCaptureInCi,
   COMPONENT_PERFORMANCE_FIXTURE_IDS,
   COMPONENT_PERFORMANCE_NORMAL_STATES,
+  COMPONENT_PERFORMANCE_OPERATION_COUNTS,
   COMPONENT_PERFORMANCE_ROLLBACK_FIXTURE_IDS,
   COMPONENT_PERFORMANCE_ROLLBACK_STATES,
   COMPONENT_PERFORMANCE_SAMPLE_POLICY,
@@ -100,6 +101,7 @@ function baselineForState(source, ids, { rollback = false } = {}) {
         ...structuredClone(existing),
         id,
         fixture: `tools/performance-fixtures/component-expansion/${id}.tsx`,
+        operationCount: COMPONENT_PERFORMANCE_OPERATION_COUNTS[id],
       };
     }),
   };
@@ -144,6 +146,13 @@ test('freezes the sample policy and threshold formulas', () => {
   assert.deepEqual(componentThresholds(10), { warnAt: 20, blockAt: 30 });
   assert.equal(roundMilliseconds(1.23449), 1.234);
   assert.equal(roundMilliseconds(1.2345), 1.235);
+  assert.deepEqual(COMPONENT_PERFORMANCE_OPERATION_COUNTS, {
+    'markdown-100k-adversarial': 1,
+    'timestamp-1000-tick': 1,
+    'overflow-list-100-recompute': 100,
+    'resizable-1000-updates': 1000,
+    'toast-100-operations': 100,
+  });
 });
 
 test('uses an untrimmed median over exact fresh-state samples', () => {
