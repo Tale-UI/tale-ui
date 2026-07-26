@@ -51,6 +51,7 @@ const STORIES: { id: string; label: string }[] = [
   { id: 'components-datefield--default', label: 'DateField' },
   { id: 'components-datepicker--default', label: 'DatePicker' },
   { id: 'components-timefield--default', label: 'TimeField' },
+  { id: 'components-timestamp--default', label: 'Timestamp' },
   // Layout
   { id: 'components-accordion--default', label: 'Accordion' },
   { id: 'components-aspectratio--default', label: 'AspectRatio' },
@@ -65,6 +66,7 @@ const STORIES: { id: string; label: string }[] = [
   // Navigation
   { id: 'components-menu--default', label: 'Menu' },
   { id: 'components-breadcrumbs--default', label: 'Breadcrumbs' },
+  { id: 'components-outline--default', label: 'Outline' },
   { id: 'components-pagination--default', label: 'Pagination' },
   // Feedback
   { id: 'components-progressbar--default', label: 'ProgressBar' },
@@ -82,7 +84,9 @@ const STORIES: { id: string; label: string }[] = [
   { id: 'components-iconbutton--default', label: 'IconButton' },
   // Typography
   { id: 'components-blockquote--default', label: 'Blockquote' },
+  { id: 'components-citation--default', label: 'Citation' },
   { id: 'components-code--default', label: 'Code' },
+  { id: 'components-markdown--default', label: 'Markdown' },
   { id: 'components-text--default', label: 'Text' },
 ];
 
