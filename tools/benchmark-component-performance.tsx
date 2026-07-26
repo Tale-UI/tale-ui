@@ -11,13 +11,19 @@ import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import {
   assertCaptureEnvironment,
+  assertComponentPerformanceBaselineContract,
   assertComponentPerformanceFixtureIds,
   assertNoComponentCaptureInCi,
   COMPONENT_PERFORMANCE_SAMPLE_POLICY,
+  COMPONENT_PERFORMANCE_ROLLBACK_FIXTURE_IDS,
   componentThresholds,
+  executeComponentPerformanceOperation,
   median,
+  replaceComponentPerformanceBaseline,
   roundMilliseconds,
+  selectComponentPerformanceOperation,
   sha256,
+  withReadOnlyComponentPerformanceBaseline,
   // eslint-disable-next-line import/extensions
 } from './component-performance-contract.mjs';
 // Runtime TypeScript execution requires the source extension.
@@ -34,7 +40,8 @@ import type {
 
 const ROOT = resolve(process.cwd());
 const args = process.argv.slice(2);
-const CAPTURE = args.includes('--capture');
+const OPERATION = selectComponentPerformanceOperation(args);
+const ROLLBACK = args.includes('--rollback');
 const BASELINE_PATH = join(ROOT, 'test/baselines/roadmap/component-performance-budgets.json');
 const outputIndex = args.indexOf('--output');
 const OUTPUT =
@@ -109,73 +116,35 @@ async function measureFixture(fixture: ComponentPerformanceFixture) {
   };
 }
 
-async function main() {
-  assertNoComponentCaptureInCi(ROOT);
-
-  const fixtures: ComponentPerformanceFixture[] = [
-    markdown100kAdversarialFixture,
-    timestamp1000TickFixture,
-  ];
-  assertComponentPerformanceFixtureIds(fixtures.map(({ id }) => id));
-
+async function measureFixtures(fixtures: ComponentPerformanceFixture[]) {
   const measurements = [];
   for (const fixture of fixtures) {
     // Fixtures are intentionally measured serially to avoid shared CPU/DOM interference.
     // eslint-disable-next-line no-await-in-loop
     measurements.push({ fixture, ...(await measureFixture(fixture)) });
   }
+  return measurements;
+}
 
+function runEnvironment() {
   const environment = currentEnvironment();
   const revision = execFileSync('git', ['rev-parse', 'HEAD'], {
     cwd: ROOT,
     encoding: 'utf8',
   }).trim();
+  return { environment, revision };
+}
 
-  if (CAPTURE) {
-    assertCaptureEnvironment(environment);
-    const baseline = {
-      $schema: '../../../schemas/component-performance-budget.schema.json',
-      schemaVersion: '1.0.0',
-      capturedOn: TODAY,
-      revision,
-      environment,
-      budgets: measurements.map(({ fixture, value }) => ({
-        id: fixture.id,
-        description: fixture.description,
-        fixture: fixture.path,
-        fixtureSha256: sha256(readFileSync(join(ROOT, fixture.path))),
-        sourceSha256: fixture.sourceDigest,
-        vectorSha256: fixture.vectorDigest,
-        markupSha256: fixture.markupDigest,
-        postconditionSha256: fixture.expectedPostconditionDigest,
-        setup: fixture.setup,
-        operationCount: fixture.operationCount,
-        warmups: COMPONENT_PERFORMANCE_SAMPLE_POLICY.warmups,
-        samples: COMPONENT_PERFORMANCE_SAMPLE_POLICY.samples,
-        statistic: COMPONENT_PERFORMANCE_SAMPLE_POLICY.statistic,
-        clock: COMPONENT_PERFORMANCE_SAMPLE_POLICY.clock,
-        unit: 'milliseconds',
-        baseline: value,
-        ...componentThresholds(value),
-        owner: 'Design Systems',
-        evidence:
-          'Exact vector and postcondition digests are reasserted for every fresh-state sample.',
-      })),
-      exceptions: [],
-    };
-    mkdirSync(dirname(BASELINE_PATH), { recursive: true });
-    writeFileSync(BASELINE_PATH, `${JSON.stringify(baseline, null, 2)}\n`);
-    process.stdout.write(`CAPTURED: ${BASELINE_PATH.slice(ROOT.length + 1)}\n`);
-    return;
-  }
-
-  const baseline = readJson(BASELINE_PATH);
+function validateBaseline(baseline: Record<string, any>, expectedFixtureIds: readonly string[]) {
   const schema = readJson(join(ROOT, 'schemas/component-performance-budget.schema.json'));
   const ajv = new Ajv2020({ allErrors: true, strict: false });
   addFormats(ajv);
   const validator = ajv.compile(schema);
   assert.ok(validator(baseline), ajv.errorsText(validator.errors, { separator: '\n' }));
-  assertComponentPerformanceFixtureIds(baseline.budgets.map(({ id }: { id: string }) => id));
+  assertComponentPerformanceBaselineContract(baseline, {
+    rollback: ROLLBACK,
+    expectedFixtureIds,
+  });
   for (const exception of baseline.exceptions) {
     assert.ok(exception.expiresOn >= TODAY, `Expired performance exception ${exception.id}`);
     assert.ok(
@@ -183,15 +152,73 @@ async function main() {
       `${exception.id} references an unknown budget`,
     );
   }
+}
 
+async function captureBaseline(fixtures: ComponentPerformanceFixture[]) {
+  const measurements = await measureFixtures(fixtures);
+  const { environment, revision } = runEnvironment();
+  assertCaptureEnvironment(environment);
+  const baseline = {
+    $schema: '../../../schemas/component-performance-budget.schema.json',
+    schemaVersion: '1.0.0',
+    ...(ROLLBACK ? { mode: 'rollback' } : {}),
+    capturedOn: TODAY,
+    revision,
+    environment,
+    budgets: measurements.map(({ fixture, value }) => ({
+      id: fixture.id,
+      description: fixture.description,
+      fixture: fixture.path,
+      fixtureSha256: sha256(readFileSync(join(ROOT, fixture.path))),
+      sourceSha256: fixture.sourceDigest,
+      vectorSha256: fixture.vectorDigest,
+      markupSha256: fixture.markupDigest,
+      postconditionSha256: fixture.expectedPostconditionDigest,
+      setup: fixture.setup,
+      operationCount: fixture.operationCount,
+      warmups: COMPONENT_PERFORMANCE_SAMPLE_POLICY.warmups,
+      samples: COMPONENT_PERFORMANCE_SAMPLE_POLICY.samples,
+      statistic: COMPONENT_PERFORMANCE_SAMPLE_POLICY.statistic,
+      clock: COMPONENT_PERFORMANCE_SAMPLE_POLICY.clock,
+      unit: 'milliseconds',
+      baseline: value,
+      ...componentThresholds(value),
+      owner: 'Design Systems',
+      evidence:
+        'Exact vector and postcondition digests are reasserted for every fresh-state sample.',
+    })),
+    exceptions: [],
+  };
+  const expectedFixtureIds = fixtures.map(({ id }) => id);
+  mkdirSync(dirname(BASELINE_PATH), { recursive: true });
+  replaceComponentPerformanceBaseline({
+    targetPath: BASELINE_PATH,
+    candidate: baseline,
+    validate: (candidate) => validateBaseline(candidate, expectedFixtureIds),
+  });
+  process.stdout.write(`CAPTURED: ${BASELINE_PATH.slice(ROOT.length + 1)}\n`);
+}
+
+async function checkBaseline(fixtures: ComponentPerformanceFixture[]) {
+  const measurements = await measureFixtures(fixtures);
+  const { environment } = runEnvironment();
+  const baseline = readJson(BASELINE_PATH);
+  validateBaseline(
+    baseline,
+    fixtures.map(({ id }) => id),
+  );
   const comparisons = measurements.map(({ fixture, value, samples }) => {
     const budget = baseline.budgets.find(({ id }: { id: string }) => id === fixture.id);
     assert.ok(budget, `Missing component performance budget ${fixture.id}`);
+    assert.equal(budget.description, fixture.description);
+    assert.equal(budget.fixture, fixture.path);
     assert.equal(budget.fixtureSha256, sha256(readFileSync(join(ROOT, fixture.path))));
     assert.equal(budget.sourceSha256, fixture.sourceDigest);
     assert.equal(budget.vectorSha256, fixture.vectorDigest);
     assert.equal(budget.markupSha256, fixture.markupDigest);
     assert.equal(budget.postconditionSha256, fixture.expectedPostconditionDigest);
+    assert.equal(budget.setup, fixture.setup);
+    assert.equal(budget.operationCount, fixture.operationCount);
     const exception = baseline.exceptions.find(
       ({ budgetId }: { budgetId: string }) => budgetId === fixture.id,
     );
@@ -242,6 +269,24 @@ async function main() {
     `Component performance regression exceeded an understood limit; inspect ${OUTPUT}`,
   );
   process.stdout.write(`OK: ${comparisons.length} component performance budgets\n`);
+}
+
+async function main() {
+  assertNoComponentCaptureInCi(ROOT);
+  const installedFixtures: ComponentPerformanceFixture[] = [
+    markdown100kAdversarialFixture,
+    timestamp1000TickFixture,
+  ];
+  assertComponentPerformanceFixtureIds(installedFixtures.map(({ id }) => id));
+  const fixtures = ROLLBACK
+    ? installedFixtures.filter(({ id }) => COMPONENT_PERFORMANCE_ROLLBACK_FIXTURE_IDS.includes(id))
+    : installedFixtures;
+
+  await executeComponentPerformanceOperation(OPERATION, {
+    capture: () => captureBaseline(fixtures),
+    check: () =>
+      withReadOnlyComponentPerformanceBaseline(BASELINE_PATH, () => checkBaseline(fixtures)),
+  });
 }
 
 main().catch((error) => {

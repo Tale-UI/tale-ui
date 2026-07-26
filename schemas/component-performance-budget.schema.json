@@ -8,6 +8,7 @@
   "properties": {
     "$schema": { "type": "string" },
     "schemaVersion": { "const": "1.0.0" },
+    "mode": { "const": "rollback" },
     "capturedOn": { "type": "string", "format": "date" },
     "revision": { "$ref": "#/$defs/sha1" },
     "environment": {
@@ -34,12 +35,7 @@
         "lockfileSha256": { "$ref": "#/$defs/sha256" }
       }
     },
-    "budgets": {
-      "type": "array",
-      "minItems": 2,
-      "maxItems": 2,
-      "items": { "$ref": "#/$defs/budget" }
-    },
+    "budgets": { "type": "array" },
     "exceptions": {
       "type": "array",
       "items": {
@@ -58,6 +54,21 @@
       }
     }
   },
+  "oneOf": [
+    {
+      "not": { "required": ["mode"] },
+      "properties": {
+        "budgets": { "$ref": "#/$defs/normalStates" }
+      }
+    },
+    {
+      "required": ["mode"],
+      "properties": {
+        "mode": { "const": "rollback" },
+        "budgets": { "$ref": "#/$defs/rollbackStates" }
+      }
+    }
+  ],
   "$defs": {
     "sha1": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
     "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
@@ -87,9 +98,20 @@
         "evidence"
       ],
       "properties": {
-        "id": { "enum": ["markdown-100k-adversarial", "timestamp-1000-tick"] },
+        "id": {
+          "enum": [
+            "markdown-100k-adversarial",
+            "timestamp-1000-tick",
+            "overflow-list-100-recompute",
+            "resizable-1000-updates",
+            "toast-100-operations"
+          ]
+        },
         "description": { "type": "string", "minLength": 1 },
-        "fixture": { "type": "string", "pattern": "^tools/performance-fixtures/component-expansion/.+\\.tsx$" },
+        "fixture": {
+          "type": "string",
+          "pattern": "^tools/performance-fixtures/component-expansion/.+\\.tsx$"
+        },
         "fixtureSha256": { "$ref": "#/$defs/sha256" },
         "sourceSha256": { "$ref": "#/$defs/sha256" },
         "vectorSha256": { "$ref": "#/$defs/sha256" },
@@ -108,6 +130,143 @@
         "owner": { "const": "Design Systems" },
         "evidence": { "type": "string", "minLength": 1 }
       }
+    },
+    "markdownBudget": {
+      "allOf": [
+        { "$ref": "#/$defs/budget" },
+        { "properties": { "id": { "const": "markdown-100k-adversarial" } } }
+      ]
+    },
+    "timestampBudget": {
+      "allOf": [
+        { "$ref": "#/$defs/budget" },
+        { "properties": { "id": { "const": "timestamp-1000-tick" } } }
+      ]
+    },
+    "overflowListBudget": {
+      "allOf": [
+        { "$ref": "#/$defs/budget" },
+        { "properties": { "id": { "const": "overflow-list-100-recompute" } } }
+      ]
+    },
+    "resizableBudget": {
+      "allOf": [
+        { "$ref": "#/$defs/budget" },
+        { "properties": { "id": { "const": "resizable-1000-updates" } } }
+      ]
+    },
+    "toastBudget": {
+      "allOf": [
+        { "$ref": "#/$defs/budget" },
+        { "properties": { "id": { "const": "toast-100-operations" } } }
+      ]
+    },
+    "normalStates": {
+      "oneOf": [
+        {
+          "type": "array",
+          "prefixItems": [
+            { "$ref": "#/$defs/markdownBudget" },
+            { "$ref": "#/$defs/timestampBudget" }
+          ],
+          "items": false,
+          "minItems": 2
+        },
+        {
+          "type": "array",
+          "prefixItems": [
+            { "$ref": "#/$defs/markdownBudget" },
+            { "$ref": "#/$defs/timestampBudget" },
+            { "$ref": "#/$defs/overflowListBudget" },
+            { "$ref": "#/$defs/resizableBudget" }
+          ],
+          "items": false,
+          "minItems": 4
+        },
+        {
+          "type": "array",
+          "prefixItems": [
+            { "$ref": "#/$defs/markdownBudget" },
+            { "$ref": "#/$defs/timestampBudget" },
+            { "$ref": "#/$defs/overflowListBudget" },
+            { "$ref": "#/$defs/resizableBudget" },
+            { "$ref": "#/$defs/toastBudget" }
+          ],
+          "items": false,
+          "minItems": 5
+        }
+      ]
+    },
+    "rollbackStates": {
+      "oneOf": [
+        {
+          "type": "array",
+          "prefixItems": [{ "$ref": "#/$defs/timestampBudget" }],
+          "items": false,
+          "minItems": 1
+        },
+        {
+          "type": "array",
+          "prefixItems": [
+            { "$ref": "#/$defs/timestampBudget" },
+            { "$ref": "#/$defs/overflowListBudget" },
+            { "$ref": "#/$defs/resizableBudget" }
+          ],
+          "items": false,
+          "minItems": 3
+        },
+        {
+          "type": "array",
+          "prefixItems": [
+            { "$ref": "#/$defs/markdownBudget" },
+            { "$ref": "#/$defs/timestampBudget" },
+            { "$ref": "#/$defs/overflowListBudget" }
+          ],
+          "items": false,
+          "minItems": 3
+        },
+        {
+          "type": "array",
+          "prefixItems": [
+            { "$ref": "#/$defs/timestampBudget" },
+            { "$ref": "#/$defs/overflowListBudget" }
+          ],
+          "items": false,
+          "minItems": 2
+        },
+        {
+          "type": "array",
+          "prefixItems": [
+            { "$ref": "#/$defs/timestampBudget" },
+            { "$ref": "#/$defs/overflowListBudget" },
+            { "$ref": "#/$defs/resizableBudget" },
+            { "$ref": "#/$defs/toastBudget" }
+          ],
+          "items": false,
+          "minItems": 4
+        },
+        {
+          "type": "array",
+          "prefixItems": [
+            { "$ref": "#/$defs/markdownBudget" },
+            { "$ref": "#/$defs/timestampBudget" },
+            { "$ref": "#/$defs/overflowListBudget" },
+            { "$ref": "#/$defs/toastBudget" }
+          ],
+          "items": false,
+          "minItems": 4
+        },
+        {
+          "type": "array",
+          "prefixItems": [
+            { "$ref": "#/$defs/timestampBudget" },
+            { "$ref": "#/$defs/overflowListBudget" },
+            { "$ref": "#/$defs/toastBudget" }
+          ],
+          "items": false,
+          "minItems": 3
+        }
+      ]
     }
   }
 }

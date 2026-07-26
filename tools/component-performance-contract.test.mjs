@@ -1,21 +1,37 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { readFileSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import {
+  readFileSync,
+  mkdirSync,
+  mkdtempSync,
+  readdirSync,
+  renameSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join, resolve } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import test from 'node:test';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import {
   assertCaptureEnvironment,
+  assertComponentPerformanceBaselineContract,
   assertComponentPerformanceFixtureIds,
   assertNoComponentCaptureInCi,
   COMPONENT_PERFORMANCE_FIXTURE_IDS,
+  COMPONENT_PERFORMANCE_NORMAL_STATES,
+  COMPONENT_PERFORMANCE_ROLLBACK_FIXTURE_IDS,
+  COMPONENT_PERFORMANCE_ROLLBACK_STATES,
   COMPONENT_PERFORMANCE_SAMPLE_POLICY,
   componentThresholds,
+  executeComponentPerformanceOperation,
   median,
+  replaceComponentPerformanceBaseline,
   roundMilliseconds,
+  selectComponentPerformanceOperation,
   sha256,
+  withReadOnlyComponentPerformanceBaseline,
 } from './component-performance-contract.mjs';
 
 const REPOSITORY_ROOT = resolve(import.meta.dirname, '..');
@@ -65,6 +81,28 @@ const VALID_ENVIRONMENT = Object.freeze({
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, 'utf8'));
+}
+
+function schemaValidator() {
+  const ajv = new Ajv2020({ allErrors: true, strict: false });
+  addFormats(ajv);
+  return ajv.compile(readJson(SCHEMA_PATH));
+}
+
+function baselineForState(source, ids, { rollback = false } = {}) {
+  const budgetsById = new Map(source.budgets.map((budget) => [budget.id, budget]));
+  return {
+    ...structuredClone(source),
+    ...(rollback ? { mode: 'rollback' } : {}),
+    budgets: ids.map((id) => {
+      const existing = budgetsById.get(id) ?? source.budgets[0];
+      return {
+        ...structuredClone(existing),
+        id,
+        fixture: `tools/performance-fixtures/component-expansion/${id}.tsx`,
+      };
+    }),
+  };
 }
 
 function workflowFixture(t, content) {
@@ -150,14 +188,11 @@ test('rejects component baseline capture commands in CI', (t) => {
   assert.throws(() => assertNoComponentCaptureInCi(directRoot), /CI must not capture/);
 });
 
-test('schema and runner accept only the installed ordered Bundle 2 fixture state', () => {
-  const schema = readJson(SCHEMA_PATH);
+test('schema and runner preserve only the ten ordered plan states', () => {
   const baseline = readJson(BASELINE_PATH);
-  const ajv = new Ajv2020({ allErrors: true, strict: false });
-  addFormats(ajv);
-  const validate = ajv.compile(schema);
+  const validate = schemaValidator();
 
-  assert.equal(validate(baseline), true, ajv.errorsText(validate.errors));
+  assert.equal(validate(baseline), true);
   assert.doesNotThrow(() =>
     assertComponentPerformanceFixtureIds(baseline.budgets.map(({ id }) => id)),
   );
@@ -168,11 +203,11 @@ test('schema and runner accept only the installed ordered Bundle 2 fixture state
   assert.throws(
     () =>
       assertComponentPerformanceFixtureIds(['timestamp-1000-tick', 'markdown-100k-adversarial']),
-    /exactly match the installed ordered fixtures/,
+    /normal state is not permitted/,
   );
   assert.throws(
     () => assertComponentPerformanceFixtureIds(['timestamp-1000-tick']),
-    /exactly match the installed ordered fixtures/,
+    /normal state is not permitted/,
   );
 
   const invalidPolicy = structuredClone(baseline);
@@ -182,6 +217,166 @@ test('schema and runner accept only the installed ordered Bundle 2 fixture state
   const arbitrarySubset = structuredClone(baseline);
   arbitrarySubset.budgets.pop();
   assert.equal(validate(arbitrarySubset), false);
+
+  for (const ids of COMPONENT_PERFORMANCE_NORMAL_STATES) {
+    const document = baselineForState(baseline, ids);
+    assert.equal(validate(document), true, `Schema rejected normal state ${ids.join(', ')}`);
+    assert.doesNotThrow(() =>
+      assertComponentPerformanceBaselineContract(document, {
+        expectedFixtureIds: ids,
+      }),
+    );
+  }
+  for (const ids of COMPONENT_PERFORMANCE_ROLLBACK_STATES) {
+    const document = baselineForState(baseline, ids, { rollback: true });
+    assert.equal(validate(document), true, `Schema rejected rollback state ${ids.join(', ')}`);
+    assert.doesNotThrow(() =>
+      assertComponentPerformanceBaselineContract(document, {
+        rollback: true,
+        expectedFixtureIds: ids,
+      }),
+    );
+  }
+
+  const implicitRollback = baselineForState(baseline, COMPONENT_PERFORMANCE_ROLLBACK_FIXTURE_IDS);
+  assert.equal(validate(implicitRollback), false);
+  assert.throws(
+    () =>
+      assertComponentPerformanceBaselineContract(implicitRollback, {
+        rollback: true,
+        expectedFixtureIds: COMPONENT_PERFORMANCE_ROLLBACK_FIXTURE_IDS,
+      }),
+    /explicit mode: rollback/,
+  );
+
+  const unapprovedRollback = baselineForState(
+    baseline,
+    ['markdown-100k-adversarial', 'resizable-1000-updates'],
+    { rollback: true },
+  );
+  assert.equal(validate(unapprovedRollback), false);
+  assert.throws(
+    () =>
+      assertComponentPerformanceBaselineContract(unapprovedRollback, {
+        rollback: true,
+      }),
+    /rollback state is not permitted/,
+  );
+});
+
+test('selects exactly one unreachable capture or check operation', async () => {
+  assert.equal(selectComponentPerformanceOperation([]), 'check');
+  assert.equal(selectComponentPerformanceOperation(['--rollback']), 'check');
+  assert.equal(selectComponentPerformanceOperation(['--capture']), 'capture');
+  assert.throws(
+    () => selectComponentPerformanceOperation(['--capture', '--capture']),
+    /at most once/,
+  );
+
+  let checks = 0;
+  await executeComponentPerformanceOperation('check', {
+    capture: () => assert.fail('capture must be unreachable in check mode'),
+    check: () => {
+      checks += 1;
+    },
+  });
+  assert.equal(checks, 1);
+});
+
+test('capture validates a complete temporary sibling before atomic replacement', (t) => {
+  const root = mkdtempSync(join(tmpdir(), 'tale-component-capture-'));
+  t.after(() => rmSync(root, { force: true, recursive: true }));
+  const targetPath = join(root, 'component-performance-budgets.json');
+  writeFileSync(targetPath, '{"previous":true}\n');
+  const candidate = readJson(BASELINE_PATH);
+  const validateSchema = schemaValidator();
+  let observedTemporaryPath = '';
+
+  replaceComponentPerformanceBaseline({
+    targetPath,
+    candidate,
+    validate: (document) => {
+      assert.equal(validateSchema(document), true);
+      assertComponentPerformanceBaselineContract(document, {
+        expectedFixtureIds: COMPONENT_PERFORMANCE_FIXTURE_IDS,
+      });
+    },
+    rename: (temporaryPath, destinationPath) => {
+      observedTemporaryPath = temporaryPath;
+      assert.equal(dirname(temporaryPath), dirname(targetPath));
+      assert.equal(destinationPath, targetPath);
+      assert.deepEqual(readJson(temporaryPath), candidate);
+      renameSync(temporaryPath, destinationPath);
+    },
+  });
+
+  assert.match(observedTemporaryPath, /\.component-performance-budgets\.json\..+\.tmp$/);
+  assert.deepEqual(readJson(targetPath), candidate);
+  assert.deepEqual(readdirSync(root), ['component-performance-budgets.json']);
+});
+
+test('an invalid capture candidate never replaces the baseline', (t) => {
+  const root = mkdtempSync(join(tmpdir(), 'tale-component-invalid-capture-'));
+  t.after(() => rmSync(root, { force: true, recursive: true }));
+  const targetPath = join(root, 'component-performance-budgets.json');
+  const previous = '{"previous":true}\n';
+  writeFileSync(targetPath, previous);
+  const candidate = readJson(BASELINE_PATH);
+  candidate.budgets[0].warnAt += 1;
+  const validateSchema = schemaValidator();
+
+  assert.throws(
+    () =>
+      replaceComponentPerformanceBaseline({
+        targetPath,
+        candidate,
+        validate: (document) => {
+          assert.equal(validateSchema(document), true);
+          assertComponentPerformanceBaselineContract(document, {
+            expectedFixtureIds: COMPONENT_PERFORMANCE_FIXTURE_IDS,
+          });
+        },
+      }),
+    /thresholds must be derived/,
+  );
+  assert.equal(readFileSync(targetPath, 'utf8'), previous);
+  assert.deepEqual(readdirSync(root), ['component-performance-budgets.json']);
+});
+
+test('read-only checks hash before and after and fail on mutation', async (t) => {
+  const root = mkdtempSync(join(tmpdir(), 'tale-component-read-only-'));
+  t.after(() => rmSync(root, { force: true, recursive: true }));
+  const targetPath = join(root, 'component-performance-budgets.json');
+  const baseline = readFileSync(BASELINE_PATH, 'utf8');
+  writeFileSync(targetPath, baseline);
+
+  await assert.doesNotReject(() =>
+    withReadOnlyComponentPerformanceBaseline(targetPath, () => readJson(targetPath)),
+  );
+  await assert.rejects(
+    () =>
+      withReadOnlyComponentPerformanceBaseline(targetPath, () => {
+        writeFileSync(targetPath, '{"mutated":true}\n');
+      }),
+    /check mutated its baseline/,
+  );
+});
+
+test('the runner wires capture and check through their guarded operations', () => {
+  const runner = readFileSync(
+    join(REPOSITORY_ROOT, 'tools/benchmark-component-performance.tsx'),
+    'utf8',
+  );
+  assert.match(
+    runner,
+    /executeComponentPerformanceOperation\(OPERATION,\s*\{\s*capture: \(\) => captureBaseline\(fixtures\),\s*check: \(\) =>\s*withReadOnlyComponentPerformanceBaseline/,
+  );
+  assert.match(
+    runner,
+    /replaceComponentPerformanceBaseline\(\{\s*targetPath: BASELINE_PATH,\s*candidate: baseline,\s*validate: \(candidate\) => validateBaseline/,
+  );
+  assert.match(runner, /assert\.equal\(budget\.fixture, fixture\.path\)/);
+  assert.match(runner, /assert\.equal\(budget\.setup, fixture\.setup\)/);
 });
 
 test('freezes exact vectors, fixture bytes, metadata, and postconditions', () => {
