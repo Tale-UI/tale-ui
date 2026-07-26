@@ -36,6 +36,7 @@ restoration.
 | `onSelectionChange`  | `(key: React.Key \| null, item: T \| null) => void`            | —          | Receives selection proposals                          |
 | `loop`               | `boolean`                                                      | `false`    | Wrap navigation at the collection boundaries          |
 | `swipeNavigation`    | `boolean`                                                      | `true`     | Enable physical horizontal swipe navigation           |
+| `children`           | `React.ReactNode`                                              | —          | Triggers and one Backdrop/Popup composition           |
 
 ```ts
 interface LightboxRenderContext {
