@@ -455,14 +455,10 @@ const Root = React.forwardRef(function LightboxRoot<T>(
 
   const openBranchValid =
     !(isOpen !== undefined && defaultOpen !== undefined) &&
-    (isOpen === undefined || typeof isOpen === 'boolean') &&
-    (defaultOpen === undefined || typeof defaultOpen === 'boolean');
+    (isOpen === undefined || typeof isOpen === 'boolean');
   const selectionBranchValid =
     !(selectedKey !== undefined && defaultSelectedKey !== undefined) &&
-    (selectedKey === undefined || selectedKey === null || isSupportedKey(selectedKey)) &&
-    (defaultSelectedKey === undefined ||
-      defaultSelectedKey === null ||
-      isSupportedKey(defaultSelectedKey));
+    (selectedKey === undefined || selectedKey === null || isSupportedKey(selectedKey));
   const callbacksValid =
     (onOpenChange === undefined || typeof onOpenChange === 'function') &&
     (onSelectionChange === undefined || typeof onSelectionChange === 'function');

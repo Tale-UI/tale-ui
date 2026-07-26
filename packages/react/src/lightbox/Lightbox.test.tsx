@@ -337,6 +337,11 @@ describe('<Lightbox />', () => {
       { name: 'non-array items', rootProps: { items: { 0: items[0], length: 1 } } },
       { name: 'invalid callback', rootProps: { onOpenChange: 'not callable' } },
       { name: 'invalid option', rootProps: { swipeNavigation: 'yes' } },
+      { name: 'invalid controlled open', rootProps: { defaultOpen: undefined, isOpen: 'yes' } },
+      {
+        name: 'invalid controlled selection',
+        rootProps: { defaultOpen: undefined, selectedKey: { bad: true } },
+      },
     ];
 
     for (const testCase of cases) {
@@ -370,6 +375,44 @@ describe('<Lightbox />', () => {
       expect(renderContent.mock.calls.length, testCase.name).to.equal(0);
       view.unmount();
     }
+  });
+
+  it('normalizes malformed uncontrolled defaults without invalidating the Root', async () => {
+    const base = {
+      items,
+      getKey: (item: (typeof items)[number]) => item.id,
+      getLabel: (item: (typeof items)[number]) => item.label,
+      renderContent: (item: (typeof items)[number]) => item.label,
+    };
+    const view = await render(
+      <Lightbox.Root
+        {...({ ...base, defaultOpen: true, defaultSelectedKey: { invalid: true } } as any)}
+      >
+        <Lightbox.Trigger itemKey="two">Open second</Lightbox.Trigger>
+        <Lightbox.Backdrop>
+          <Lightbox.Popup>
+            <Lightbox.Content />
+          </Lightbox.Popup>
+        </Lightbox.Backdrop>
+      </Lightbox.Root>,
+    );
+    expect(screen.getByRole('dialog', { name: 'First image' })).to.exist;
+    view.unmount();
+
+    await render(
+      <Lightbox.Root {...({ ...base, defaultOpen: 'yes', defaultSelectedKey: 'two' } as any)}>
+        <Lightbox.Trigger itemKey="two">Open normalized</Lightbox.Trigger>
+        <Lightbox.Backdrop>
+          <Lightbox.Popup>
+            <Lightbox.Content />
+          </Lightbox.Popup>
+        </Lightbox.Backdrop>
+      </Lightbox.Root>,
+    );
+    expect(screen.queryByRole('dialog')).to.equal(null);
+    expect(screen.getByRole('button', { name: 'Open normalized' })).not.to.have.attribute(
+      'disabled',
+    );
   });
 
   it('keeps invalid and stale triggers inert without disabling valid triggers', async () => {
