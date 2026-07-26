@@ -15,6 +15,14 @@ export const COMPONENT_PERFORMANCE_SAMPLE_POLICY = Object.freeze({
   clock: 'node:perf_hooks.performance',
 });
 
+export function assertComponentPerformanceFixtureIds(ids) {
+  assert.deepEqual(
+    ids,
+    COMPONENT_PERFORMANCE_FIXTURE_IDS,
+    'Component performance fixture state must exactly match the installed ordered fixtures',
+  );
+}
+
 export function sha256(value) {
   return createHash('sha256').update(value).digest('hex');
 }
@@ -27,9 +35,7 @@ export function median(values) {
   assert.ok(values.length > 0, 'Median requires at least one sample');
   const sorted = [...values].sort((left, right) => left - right);
   const middle = Math.floor(sorted.length / 2);
-  return sorted.length % 2 === 0
-    ? (sorted[middle - 1] + sorted[middle]) / 2
-    : sorted[middle];
+  return sorted.length % 2 === 0 ? (sorted[middle - 1] + sorted[middle]) / 2 : sorted[middle];
 }
 
 export function componentThresholds(baseline) {

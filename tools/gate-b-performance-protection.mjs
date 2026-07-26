@@ -22,11 +22,14 @@ export const BUNDLE_2_COMPONENT_PERFORMANCE_PATHS = Object.freeze([
   'tools/performance-fixtures/component-expansion',
 ]);
 
-const BUNDLE_2_SCRIPT_NAMES = new Set([
-  'performance:roadmap:check',
-  'performance:components:capture',
-  'performance:components:check',
-]);
+export const LEGACY_PERFORMANCE_CHECK = 'tsx tools/benchmark-roadmap-performance.tsx';
+
+export const BUNDLE_2_COMPONENT_PERFORMANCE_SCRIPTS = Object.freeze({
+  'performance:roadmap:check': LEGACY_PERFORMANCE_CHECK,
+  'performance:components:capture': 'tsx tools/benchmark-component-performance.tsx --capture',
+  'performance:components:check': 'tsx tools/benchmark-component-performance.tsx',
+  'performance:check': 'pnpm performance:roadmap:check && pnpm performance:components:check',
+});
 
 function sha256(path) {
   return createHash('sha256').update(readFileSync(path)).digest('hex');
@@ -51,24 +54,42 @@ export function assertGateBPerformanceProtection(root) {
     );
   }
 
-  for (const path of BUNDLE_2_COMPONENT_PERFORMANCE_PATHS) {
-    assert.ok(
-      !existsSync(join(root, path)),
-      `Component-performance bootstrap is forbidden before Bundle 2: ${path}`,
-    );
-  }
-
   const manifest = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
-  assert.equal(
-    manifest.scripts?.['performance:check'],
-    'tsx tools/benchmark-roadmap-performance.tsx',
-    'Gate B performance:check must remain the legacy read-only runner',
+  const scripts = manifest.scripts ?? {};
+  const presentBootstrapPaths = BUNDLE_2_COMPONENT_PERFORMANCE_PATHS.filter((path) =>
+    existsSync(join(root, path)),
   );
-  for (const scriptName of BUNDLE_2_SCRIPT_NAMES) {
-    assert.ok(
-      !(scriptName in (manifest.scripts ?? {})),
-      `Component-performance script is forbidden before Bundle 2: ${scriptName}`,
+
+  if (presentBootstrapPaths.length === 0) {
+    assert.equal(
+      scripts['performance:check'],
+      LEGACY_PERFORMANCE_CHECK,
+      'Gate B performance:check must remain the legacy read-only runner before Bundle 2',
     );
+    for (const scriptName of Object.keys(BUNDLE_2_COMPONENT_PERFORMANCE_SCRIPTS)) {
+      if (scriptName === 'performance:check') {
+        continue;
+      }
+      assert.ok(
+        !(scriptName in scripts),
+        `Component-performance script is forbidden before Bundle 2: ${scriptName}`,
+      );
+    }
+  } else {
+    assert.deepEqual(
+      presentBootstrapPaths,
+      BUNDLE_2_COMPONENT_PERFORMANCE_PATHS,
+      'Bundle 2 component-performance bootstrap paths must appear atomically',
+    );
+    for (const [scriptName, expectedCommand] of Object.entries(
+      BUNDLE_2_COMPONENT_PERFORMANCE_SCRIPTS,
+    )) {
+      assert.equal(
+        scripts[scriptName],
+        expectedCommand,
+        `Bundle 2 component-performance script must be exact: ${scriptName}`,
+      );
+    }
   }
 
   const captureCommand =
@@ -87,6 +108,6 @@ const isMain =
 if (isMain) {
   assertGateBPerformanceProtection(resolve(import.meta.dirname, '..'));
   console.log(
-    'OK: Gate B preserves legacy performance files and has no component-performance bootstrap',
+    'OK: Gate B preserves legacy performance files and permits only atomic component-performance states',
   );
 }

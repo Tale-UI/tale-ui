@@ -11,28 +11,31 @@ import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import {
   assertCaptureEnvironment,
+  assertComponentPerformanceFixtureIds,
   assertNoComponentCaptureInCi,
-  COMPONENT_PERFORMANCE_FIXTURE_IDS,
   COMPONENT_PERFORMANCE_SAMPLE_POLICY,
   componentThresholds,
   median,
   roundMilliseconds,
   sha256,
+  // eslint-disable-next-line import/extensions
 } from './component-performance-contract.mjs';
+// Runtime TypeScript execution requires the source extension.
+// eslint-disable-next-line import/extensions
 import { markdown100kAdversarialFixture } from './performance-fixtures/component-expansion/markdown-100k-adversarial.tsx';
+// Runtime TypeScript execution requires the source extension.
+// eslint-disable-next-line import/extensions
 import { timestamp1000TickFixture } from './performance-fixtures/component-expansion/timestamp-1000-tick.tsx';
 import type {
   ComponentPerformanceFixture,
   ComponentPerformanceSample,
+  // eslint-disable-next-line import/extensions
 } from './performance-fixtures/component-expansion/types.ts';
 
 const ROOT = resolve(process.cwd());
 const args = process.argv.slice(2);
 const CAPTURE = args.includes('--capture');
-const BASELINE_PATH = join(
-  ROOT,
-  'test/baselines/roadmap/component-performance-budgets.json',
-);
+const BASELINE_PATH = join(ROOT, 'test/baselines/roadmap/component-performance-budgets.json');
 const outputIndex = args.indexOf('--output');
 const OUTPUT =
   outputIndex === -1
@@ -113,10 +116,7 @@ async function main() {
     markdown100kAdversarialFixture,
     timestamp1000TickFixture,
   ];
-  assert.deepEqual(
-    fixtures.map(({ id }) => id),
-    COMPONENT_PERFORMANCE_FIXTURE_IDS,
-  );
+  assertComponentPerformanceFixtureIds(fixtures.map(({ id }) => id));
 
   const measurements = [];
   for (const fixture of fixtures) {
@@ -175,10 +175,7 @@ async function main() {
   addFormats(ajv);
   const validator = ajv.compile(schema);
   assert.ok(validator(baseline), ajv.errorsText(validator.errors, { separator: '\n' }));
-  assert.deepEqual(
-    baseline.budgets.map(({ id }: { id: string }) => id),
-    COMPONENT_PERFORMANCE_FIXTURE_IDS,
-  );
+  assertComponentPerformanceFixtureIds(baseline.budgets.map(({ id }: { id: string }) => id));
   for (const exception of baseline.exceptions) {
     assert.ok(exception.expiresOn >= TODAY, `Expired performance exception ${exception.id}`);
     assert.ok(
@@ -188,9 +185,7 @@ async function main() {
   }
 
   const comparisons = measurements.map(({ fixture, value, samples }) => {
-    const budget = baseline.budgets.find(
-      ({ id }: { id: string }) => id === fixture.id,
-    );
+    const budget = baseline.budgets.find(({ id }: { id: string }) => id === fixture.id);
     assert.ok(budget, `Missing component performance budget ${fixture.id}`);
     assert.equal(budget.fixtureSha256, sha256(readFileSync(join(ROOT, fixture.path))));
     assert.equal(budget.sourceSha256, fixture.sourceDigest);
@@ -201,8 +196,12 @@ async function main() {
       ({ budgetId }: { budgetId: string }) => budgetId === fixture.id,
     );
     const limit = exception?.maximum ?? budget.blockAt;
-    const status =
-      value > limit ? 'blocked' : value > budget.warnAt ? 'warning' : 'passed';
+    let status = 'passed';
+    if (value > limit) {
+      status = 'blocked';
+    } else if (value > budget.warnAt) {
+      status = 'warning';
+    }
     return {
       id: fixture.id,
       value,
