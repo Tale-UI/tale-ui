@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAnimationFrame } from '@tale-ui/utils/useAnimationFrame';
 import { useIsoLayoutEffect } from '@tale-ui/utils/useIsoLayoutEffect';
 import { useMergedRefs } from '@tale-ui/utils/useMergedRefs';
+import { useStableCallback } from '@tale-ui/utils/useStableCallback';
 import { Button, type ButtonProps } from '../button';
 import {
   Dialog,
@@ -259,19 +260,24 @@ const ACTION_TARGET_PROPS = [
   'onDrop',
 ] as const;
 
-const ACTION_PROPS = new Set<string>([
-  ...ACTION_TARGET_PROPS,
-  ...ACTION_TARGET_PROPS.map((name) => `${name}Capture`),
-  'onPress',
-  'onPressStart',
-  'onPressEnd',
-  'onPressChange',
-  'onPressUp',
-]);
-
-const CAPTURE_PROPS = new Set<string>(ACTION_TARGET_PROPS.map((name) => `${name}Capture`));
 const popupStacks = new WeakMap<Document, HTMLElement[]>();
 const handledArrowEvents = new WeakSet<Event>();
+
+function isOwnedAction(key: string, captureOnly = false) {
+  const capture = key.endsWith('Capture');
+  const target = capture ? key.slice(0, -7) : key;
+  return (
+    (capture || !captureOnly) &&
+    (ACTION_TARGET_PROPS.includes(target as (typeof ACTION_TARGET_PROPS)[number]) ||
+      (!captureOnly &&
+        !capture &&
+        (target === 'onPress' ||
+          target === 'onPressStart' ||
+          target === 'onPressEnd' ||
+          target === 'onPressChange' ||
+          target === 'onPressUp')))
+  );
+}
 
 function isSupportedKey(value: unknown): value is SupportedKey {
   return (
@@ -347,7 +353,7 @@ function removeKeys(
 }
 
 function sanitizeControlProps(props: Record<string, unknown>) {
-  return removeKeys(props, (key) => key === 'dangerouslySetInnerHTML' || ACTION_PROPS.has(key));
+  return removeKeys(props, (key) => key === 'dangerouslySetInnerHTML' || isOwnedAction(key));
 }
 
 function sanitizeDomProps(props: Record<string, unknown>) {
@@ -382,13 +388,12 @@ function getNamedControlProps(
 }
 
 function getStack(doc: Document): HTMLElement[] {
-  const existing = popupStacks.get(doc);
-  if (existing) {
-    return existing;
+  let stack = popupStacks.get(doc);
+  if (!stack) {
+    stack = [];
+    popupStacks.set(doc, stack);
   }
-  const created: HTMLElement[] = [];
-  popupStacks.set(doc, created);
-  return created;
+  return stack;
 }
 
 function canReceiveFocus(element: HTMLElement): boolean {
@@ -551,63 +556,57 @@ const Root = React.forwardRef(function LightboxRoot<T>(
   selectedKeyRef.current = candidateSelection;
   collectionRef.current = collection;
 
-  const requestOpen = React.useCallback(
-    (nextOpen: boolean) => {
-      if (!validRef.current || nextOpen === openRef.current) {
+  const requestOpen = useStableCallback((nextOpen: boolean) => {
+    if (!validRef.current || nextOpen === openRef.current) {
+      return;
+    }
+    if (modesRef.current.open === 'uncontrolled') {
+      uncontrolledOpenRef.current = nextOpen;
+      openRef.current = nextOpen;
+      rerender();
+    } else {
+      if (lastOpenProposalRef.current === nextOpen) {
         return;
       }
-      if (modesRef.current.open === 'uncontrolled') {
-        uncontrolledOpenRef.current = nextOpen;
-        openRef.current = nextOpen;
-        rerender();
-      } else {
-        if (lastOpenProposalRef.current === nextOpen) {
-          return;
-        }
-        lastOpenProposalRef.current = nextOpen;
-      }
-      (onOpenChange as ((open: boolean) => void) | undefined)?.(nextOpen);
-    },
-    [onOpenChange],
-  );
+      lastOpenProposalRef.current = nextOpen;
+    }
+    (onOpenChange as ((open: boolean) => void) | undefined)?.(nextOpen);
+  });
 
-  const requestSelection = React.useCallback(
-    (record: CollectionRecord<T> | null) => {
-      if (!validRef.current) {
+  const requestSelection = useStableCallback((record: CollectionRecord<T> | null) => {
+    if (!validRef.current) {
+      return;
+    }
+    const nextKey = record?.key ?? null;
+    const currentKey = selectedKeyRef.current;
+    if (
+      nextKey === currentKey ||
+      (typeof nextKey === 'number' &&
+        typeof currentKey === 'number' &&
+        nextKey === 0 &&
+        currentKey === 0)
+    ) {
+      return;
+    }
+    if (modesRef.current.selection === 'uncontrolled') {
+      uncontrolledSelectionRef.current = nextKey;
+      selectedKeyRef.current = nextKey;
+      currentRef.current = record;
+      rerender();
+    } else {
+      const proposalToken = nextKey === null ? 'null' : keyToken(nextKey);
+      if (lastSelectionProposalRef.current === proposalToken) {
         return;
       }
-      const nextKey = record?.key ?? null;
-      const currentKey = selectedKeyRef.current;
-      if (
-        nextKey === currentKey ||
-        (typeof nextKey === 'number' &&
-          typeof currentKey === 'number' &&
-          nextKey === 0 &&
-          currentKey === 0)
-      ) {
-        return;
-      }
-      if (modesRef.current.selection === 'uncontrolled') {
-        uncontrolledSelectionRef.current = nextKey;
-        selectedKeyRef.current = nextKey;
-        currentRef.current = record;
-        rerender();
-      } else {
-        const proposalToken = nextKey === null ? 'null' : keyToken(nextKey);
-        if (lastSelectionProposalRef.current === proposalToken) {
-          return;
-        }
-        lastSelectionProposalRef.current = proposalToken;
-      }
-      (onSelectionChange as ((key: React.Key | null, item: T | null) => void) | undefined)?.(
-        nextKey,
-        record?.item ?? null,
-      );
-    },
-    [onSelectionChange],
-  );
+      lastSelectionProposalRef.current = proposalToken;
+    }
+    (onSelectionChange as ((key: React.Key | null, item: T | null) => void) | undefined)?.(
+      nextKey,
+      record?.item ?? null,
+    );
+  });
 
-  const registerTrigger = React.useCallback((element: HTMLButtonElement, token: string) => {
+  const registerTrigger = useStableCallback((element: HTMLButtonElement, token: string) => {
     const registration = { element, token };
     triggerRegistrationsRef.current.push(registration);
     return () => {
@@ -616,9 +615,9 @@ const Root = React.forwardRef(function LightboxRoot<T>(
         triggerRegistrationsRef.current.splice(index, 1);
       }
     };
-  }, []);
+  });
 
-  const openFromTrigger = React.useCallback(
+  const openFromTrigger = useStableCallback(
     (record: CollectionRecord<unknown>, element: HTMLButtonElement) => {
       if (!validRef.current) {
         return;
@@ -628,10 +627,9 @@ const Root = React.forwardRef(function LightboxRoot<T>(
       requestSelection(record as CollectionRecord<T>);
       requestOpen(true);
     },
-    [requestOpen, requestSelection],
   );
 
-  const isTopmostFocused = React.useCallback(() => {
+  const isTopmostFocused = useStableCallback(() => {
     const popup = popupRef.current;
     if (!popup || !openRef.current || !validRef.current) {
       return false;
@@ -639,31 +637,28 @@ const Root = React.forwardRef(function LightboxRoot<T>(
     const doc = popup.ownerDocument;
     const stack = getStack(doc);
     return stack[stack.length - 1] === popup && popup.contains(doc.activeElement);
-  }, []);
+  });
 
-  const navigate = React.useCallback(
-    (direction: -1 | 1) => {
-      if (!validRef.current || !openRef.current || !isTopmostFocused()) {
+  const navigate = useStableCallback((direction: -1 | 1) => {
+    if (!validRef.current || !openRef.current || !isTopmostFocused()) {
+      return;
+    }
+    const snapshot = collectionRef.current;
+    const active = currentRef.current as CollectionRecord<T> | null;
+    if (!active || snapshot.records.length <= 1) {
+      return;
+    }
+    let nextIndex = active.index + direction;
+    if (nextIndex < 0 || nextIndex >= snapshot.records.length) {
+      if (!loop) {
         return;
       }
-      const snapshot = collectionRef.current;
-      const active = currentRef.current as CollectionRecord<T> | null;
-      if (!active || snapshot.records.length <= 1) {
-        return;
-      }
-      let nextIndex = active.index + direction;
-      if (nextIndex < 0 || nextIndex >= snapshot.records.length) {
-        if (!loop) {
-          return;
-        }
-        nextIndex = nextIndex < 0 ? snapshot.records.length - 1 : 0;
-      }
-      requestSelection(snapshot.records[nextIndex] ?? null);
-    },
-    [isTopmostFocused, loop, requestSelection],
-  );
+      nextIndex = nextIndex < 0 ? snapshot.records.length - 1 : 0;
+    }
+    requestSelection(snapshot.records[nextIndex] ?? null);
+  });
 
-  const requestClose = React.useCallback(() => requestOpen(false), [requestOpen]);
+  const requestClose = useStableCallback(() => requestOpen(false));
 
   useIsoLayoutEffect(() => {
     if (!valid || !modesEstablished || current) {
@@ -784,7 +779,7 @@ const Root = React.forwardRef(function LightboxRoot<T>(
 
   const sanitizedRootProps = removeKeys(
     domProps as Record<string, unknown>,
-    (key) => key === 'dangerouslySetInnerHTML' || CAPTURE_PROPS.has(key),
+    (key) => key === 'dangerouslySetInnerHTML' || isOwnedAction(key, true),
   );
 
   return (
@@ -887,6 +882,22 @@ function chainEventHandlers<E extends { defaultPrevented: boolean }>(
   };
 }
 
+function mergeOwnedHandlers(
+  consumer: Record<string, unknown>,
+  ...ownedGroups: Record<string, unknown>[]
+) {
+  const merged: Record<string, unknown> = {};
+  for (const owned of ownedGroups) {
+    for (const key of Object.keys(owned)) {
+      merged[key] = chainEventHandlers(
+        consumer[key] as ((event: { defaultPrevented: boolean }) => void) | undefined,
+        owned[key] as ((event: { defaultPrevented: boolean }) => void) | undefined,
+      );
+    }
+  }
+  return merged;
+}
+
 const Popup = React.forwardRef<HTMLElement, LightboxPopupProps>(
   ({ className, modalProps, ...props }, forwardedRef) => {
     const context = React.useContext(LightboxContext);
@@ -894,18 +905,14 @@ const Popup = React.forwardRef<HTMLElement, LightboxPopupProps>(
     const mergedRef = useMergedRefs(localRef, context?.popupRef, forwardedRef);
     const currentToken = context?.current?.token;
 
-    const navigateFromSwipe = React.useCallback(
-      (direction: SwipeDirection) => {
-        const element = localRef.current;
-        if (!context || !element || !context.isTopmostFocused()) {
-          return;
-        }
-        const rtl = getPopupDirection(element) === 'rtl';
-        const logicalDirection: -1 | 1 = direction === 'left' ? (rtl ? -1 : 1) : rtl ? 1 : -1;
-        context.navigate(logicalDirection);
-      },
-      [context],
-    );
+    const navigateFromSwipe = useStableCallback((direction: SwipeDirection) => {
+      const element = localRef.current;
+      if (!context || !element || !context.isTopmostFocused()) {
+        return;
+      }
+      const rtl = getPopupDirection(element) === 'rtl';
+      context.navigate(direction === 'left' ? (rtl ? -1 : 1) : rtl ? 1 : -1);
+    });
 
     const swipe = useSwipeDismiss({
       enabled: Boolean(
@@ -947,27 +954,24 @@ const Popup = React.forwardRef<HTMLElement, LightboxPopupProps>(
       resetSwipe();
     }, [context?.open, context?.valid, currentToken, resetSwipe]);
 
-    const handleKeyDown = React.useCallback(
-      (event: KeyboardEvent) => {
-        if (
-          !context ||
-          !context.isTopmostFocused() ||
-          (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') ||
-          handledArrowEvents.has(event)
-        ) {
-          return;
-        }
-        handledArrowEvents.add(event);
-        const element = localRef.current;
-        if (!element) {
-          return;
-        }
-        event.preventDefault();
-        const rtl = getPopupDirection(element) === 'rtl';
-        context.navigate(event.key === 'ArrowLeft' ? (rtl ? 1 : -1) : rtl ? -1 : 1);
-      },
-      [context],
-    );
+    const handleKeyDown = useStableCallback((event: KeyboardEvent) => {
+      if (
+        !context ||
+        !context.isTopmostFocused() ||
+        (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') ||
+        handledArrowEvents.has(event)
+      ) {
+        return;
+      }
+      handledArrowEvents.add(event);
+      const element = localRef.current;
+      if (!element) {
+        return;
+      }
+      event.preventDefault();
+      const rtl = getPopupDirection(element) === 'rtl';
+      context.navigate(event.key === 'ArrowLeft' ? (rtl ? 1 : -1) : rtl ? -1 : 1);
+    });
 
     useIsoLayoutEffect(() => {
       const popup = localRef.current;
@@ -987,6 +991,11 @@ const Popup = React.forwardRef<HTMLElement, LightboxPopupProps>(
         )
       : undefined;
     const sanitized = sanitizeDomProps(props as Record<string, unknown>);
+    const eventProps = mergeOwnedHandlers(
+      props as Record<string, unknown>,
+      pointerProps as Record<string, unknown>,
+      touchProps as Record<string, unknown>,
+    );
 
     return (
       <Dialog.Popup
@@ -995,38 +1004,7 @@ const Popup = React.forwardRef<HTMLElement, LightboxPopupProps>(
         className={cx('tale-lightbox__popup', className)}
         aria-label={context?.popupLabel ?? 'Lightbox'}
         modalProps={sanitizedModalProps as LightboxPopupModalProps | undefined}
-        onPointerDown={chainEventHandlers(
-          props.onPointerDown as React.PointerEventHandler<HTMLElement> | undefined,
-          pointerProps.onPointerDown,
-        )}
-        onPointerMove={chainEventHandlers(
-          props.onPointerMove as React.PointerEventHandler<HTMLElement> | undefined,
-          pointerProps.onPointerMove,
-        )}
-        onPointerUp={chainEventHandlers(
-          props.onPointerUp as React.PointerEventHandler<HTMLElement> | undefined,
-          pointerProps.onPointerUp,
-        )}
-        onPointerCancel={chainEventHandlers(
-          props.onPointerCancel as React.PointerEventHandler<HTMLElement> | undefined,
-          pointerProps.onPointerCancel,
-        )}
-        onTouchStart={chainEventHandlers(
-          props.onTouchStart as React.TouchEventHandler<HTMLElement> | undefined,
-          touchProps.onTouchStart,
-        )}
-        onTouchMove={chainEventHandlers(
-          props.onTouchMove as React.TouchEventHandler<HTMLElement> | undefined,
-          touchProps.onTouchMove,
-        )}
-        onTouchEnd={chainEventHandlers(
-          props.onTouchEnd as React.TouchEventHandler<HTMLElement> | undefined,
-          touchProps.onTouchEnd,
-        )}
-        onTouchCancel={chainEventHandlers(
-          props.onTouchCancel as React.TouchEventHandler<HTMLElement> | undefined,
-          touchProps.onTouchCancel,
-        )}
+        {...eventProps}
       />
     );
   },
@@ -1080,63 +1058,49 @@ function useNavigationState(direction: -1 | 1) {
   };
 }
 
-const Previous = React.forwardRef<HTMLButtonElement, LightboxPreviousProps>(
-  ({ className, children, ...props }, ref) => {
-    const { formatMessage } = useTaleI18n();
-    const { context, disabled } = useNavigationState(-1);
-    const sanitized = removeKeys(
-      sanitizeControlProps(props as Record<string, unknown>),
-      (key) => key === 'aria-label' || key === 'aria-labelledby',
-    );
-    const name = getNamedControlProps(
-      props as Record<string, unknown>,
-      formatMessage('lightbox.previous'),
-    );
-    return (
-      <Button
-        {...(sanitized as ButtonProps)}
-        {...name}
-        ref={ref}
-        variant="ghost"
-        className={cx('tale-lightbox__previous', className)}
-        isDisabled={disabled || Boolean(props.isDisabled) || Boolean(props.disabled)}
-        onPress={() => context?.navigate(-1)}
-      >
-        {children === undefined ? <Icon icon={ChevronLeft} size="md" /> : children}
-      </Button>
-    );
-  },
-);
-Previous.displayName = 'Lightbox.Previous';
+function createNavigation(direction: -1 | 1) {
+  const Navigation = React.forwardRef<HTMLButtonElement, LightboxPreviousProps>(
+    ({ className, children, ...props }, ref) => {
+      const { formatMessage } = useTaleI18n();
+      const { context, disabled } = useNavigationState(direction);
+      const sanitized = removeKeys(
+        sanitizeControlProps(props as Record<string, unknown>),
+        (key) => key === 'aria-label' || key === 'aria-labelledby',
+      );
+      const name = getNamedControlProps(
+        props as Record<string, unknown>,
+        formatMessage(direction < 0 ? 'lightbox.previous' : 'lightbox.next'),
+      );
+      return (
+        <Button
+          {...(sanitized as ButtonProps)}
+          {...name}
+          ref={ref}
+          variant="ghost"
+          className={cx(
+            direction < 0 ? 'tale-lightbox__previous' : 'tale-lightbox__next',
+            className,
+          )}
+          isDisabled={disabled || Boolean(props.isDisabled) || Boolean(props.disabled)}
+          onPress={() => context?.navigate(direction)}
+        >
+          {children === undefined ? (
+            <Icon icon={direction < 0 ? ChevronLeft : ChevronRight} size="md" />
+          ) : (
+            children
+          )}
+        </Button>
+      );
+    },
+  );
+  Navigation.displayName = direction < 0 ? 'Lightbox.Previous' : 'Lightbox.Next';
+  return Navigation;
+}
 
-const Next = React.forwardRef<HTMLButtonElement, LightboxNextProps>(
-  ({ className, children, ...props }, ref) => {
-    const { formatMessage } = useTaleI18n();
-    const { context, disabled } = useNavigationState(1);
-    const sanitized = removeKeys(
-      sanitizeControlProps(props as Record<string, unknown>),
-      (key) => key === 'aria-label' || key === 'aria-labelledby',
-    );
-    const name = getNamedControlProps(
-      props as Record<string, unknown>,
-      formatMessage('lightbox.next'),
-    );
-    return (
-      <Button
-        {...(sanitized as ButtonProps)}
-        {...name}
-        ref={ref}
-        variant="ghost"
-        className={cx('tale-lightbox__next', className)}
-        isDisabled={disabled || Boolean(props.isDisabled) || Boolean(props.disabled)}
-        onPress={() => context?.navigate(1)}
-      >
-        {children === undefined ? <Icon icon={ChevronRight} size="md" /> : children}
-      </Button>
-    );
-  },
-);
-Next.displayName = 'Lightbox.Next';
+const Previous = createNavigation(-1);
+const Next: React.ForwardRefExoticComponent<
+  LightboxNextProps & React.RefAttributes<HTMLButtonElement>
+> = createNavigation(1);
 
 const Close = React.forwardRef<HTMLButtonElement, LightboxCloseProps>(
   ({ className, children, ...props }, ref) => {
