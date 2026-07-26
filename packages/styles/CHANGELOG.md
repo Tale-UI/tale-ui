@@ -10,6 +10,7 @@ All notable changes to the component styles package are documented in this file.
   Skeleton.
 - Added standalone styles and package exports for Citation, Markdown, Outline, and Timestamp.
 - Added standalone styles and package exports for OverflowList, Resizable, and Lightbox.
+- Added standalone styles and a package export for Toast.
 
 ### Changed
 

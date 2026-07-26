@@ -85,6 +85,13 @@ const STORIES: { id: string; label: string; variant?: string; fullViewport?: boo
   { id: 'components-skeleton--default', label: 'Skeleton' },
   { id: 'components-spinner--default', label: 'Spinner' },
   { id: 'components-banner--default', label: 'Banner' },
+  { id: 'components-toast--default', label: 'Toast' },
+  {
+    id: 'components-toast--visible',
+    label: 'Toast',
+    variant: 'Visible',
+    fullViewport: true,
+  },
   // Display
   { id: 'components-avatar--default', label: 'Avatar' },
   { id: 'components-badge--default', label: 'Badge' },

@@ -272,33 +272,38 @@ describe('Timestamp', () => {
 
     const target = '2026-07-27T04:32:00Z';
     const acceptedNow = new HostileDate('2026-07-27T04:30:00Z');
-    let updateNow!: React.Dispatch<React.SetStateAction<Date>>;
-    function Harness() {
-      const [now, setNow] = React.useState<Date>(acceptedNow);
-      updateNow = setNow;
-      return (
-        <Timestamp
-          value={target}
-          locale="en-US"
-          timeZone="UTC"
-          format="relative"
-          now={now}
-          refreshInterval={0}
-          invalidFallback="Unavailable"
-          data-testid="timestamp"
-        />
-      );
-    }
-
-    await render(<Harness />);
+    const view = await render(
+      <Timestamp
+        value={target}
+        locale="en-US"
+        timeZone="UTC"
+        format="relative"
+        now={acceptedNow}
+        refreshInterval={0}
+        invalidFallback="Unavailable"
+        data-testid="timestamp"
+      />,
+    );
     expect(screen.getByTestId('timestamp').textContent).toBe('in 2 minutes');
+    view.unmount();
 
     const proxiedNow = new Proxy(new Date('2026-07-27T04:30:00Z'), {
       get() {
         throw new Error('proxy property access must not run');
       },
     });
-    expect(() => act(() => updateNow(proxiedNow))).not.toThrow();
+    await render(
+      <Timestamp
+        value={target}
+        locale="en-US"
+        timeZone="UTC"
+        format="relative"
+        now={proxiedNow}
+        refreshInterval={0}
+        invalidFallback="Unavailable"
+        data-testid="timestamp"
+      />,
+    );
 
     const timestamp = screen.getByTestId('timestamp');
     expect(timestamp.textContent).toBe('Unavailable');

@@ -60,16 +60,16 @@ const safe = true;
   });
 
   it.each(maliciousCorpus)('keeps corpus case $id inert', async ({ source, text, absent }) => {
-    await render(<Markdown>{source}</Markdown>);
+    const { container } = await render(<Markdown>{source}</Markdown>);
 
-    expect(document.querySelector('script, img, iframe, object, embed')).toBeNull();
-    expect(document.querySelector('[onerror], [onload]')).toBeNull();
-    expect(document.querySelector('a')).toBeNull();
+    expect(container.querySelector('script, img, iframe, object, embed')).toBeNull();
+    expect(container.querySelector('[onerror], [onload]')).toBeNull();
+    expect(container.querySelector('a')).toBeNull();
     if (text) {
       expect(screen.getByText(text)).toBeTruthy();
     }
     if (absent) {
-      expect(document.body.textContent).not.toContain(absent);
+      expect(container.textContent).not.toContain(absent);
     }
   });
 

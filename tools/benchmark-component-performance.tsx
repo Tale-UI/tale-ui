@@ -39,6 +39,9 @@ import { resizable1000UpdatesFixture } from './performance-fixtures/component-ex
 // Runtime TypeScript execution requires the source extension.
 // eslint-disable-next-line import/extensions
 import { timestamp1000TickFixture } from './performance-fixtures/component-expansion/timestamp-1000-tick.tsx';
+// Runtime TypeScript execution requires the source extension.
+// eslint-disable-next-line import/extensions
+import { toast100OperationsFixture } from './performance-fixtures/component-expansion/toast-100-operations.tsx';
 import type {
   ComponentPerformanceFixture,
   ComponentPerformanceSample,
@@ -293,6 +296,7 @@ async function main() {
     timestamp1000TickFixture,
     overflowList100RecomputeFixture,
     resizable1000UpdatesFixture,
+    toast100OperationsFixture,
   ];
   assertComponentPerformanceFixtureIds(installedFixtures.map(({ id }) => id));
   const fixtures = ROLLBACK

@@ -19,7 +19,7 @@ Use **only** components from `@tale-ui/react` for all UI. Never invent new impor
 
 **Namespace** (use `.Root`): Accordion, AlertDialog, AppShell, Autocomplete, Avatar, BadgeGroup, Banner, Blockquote, Breadcrumbs, Calendar, Card, Carousel, Chat, CheckboxField, Citation, ColorArea, ColorField, ColorPicker, ColorSlider, ColorSwatchPicker, ColorWheel, Combobox, CommandPalette, ContextMenu, CreditCard, DateField, DatePicker, DateRangePicker, Dialog, Disclosure, Drawer, EmptyState, Field, Fieldset, FileUpload, GridList, HeaderNav, ImageCropper, Input, InputGroup, InputTags, KeyValuePairs, Lightbox, List, ListBox, Menu, Menubar, Meter, MultiSelect, NavigationMenu, NumberField, Pagination, PaymentInput, PinInput, Popover, PreviewCard, ProgressBar, ProgressCircle, QRCode, RadioField, RangeCalendar, Resizable, ScrollArea, SearchField, Select, Sidebar, Slider, SwitchField, Table, Tabs, TagGroup, TagSelect, TextArea, TextEditor, TextField, TimeField, Toolbar, Tooltip, Tree, VideoPlayer.
 
-**Simple** (direct use): AppStoreButton, AspectRatio, BackgroundPattern, Badge, Button, ButtonGroup, CSPProvider, CheckboxGroup, Code, CodeBlock, ColorModeToggle, ColorSwatch, Column, Container, DotIcon, DropZone, FeaturedIcon, FileTrigger, Form, I18nProvider, Icon, IconButton, Illustration, Image, IphoneMockup, Kbd, Link, Markdown, Outline, OverflowList, PaginationDot, PaginationLine, RadioGroup, RatingBadge, RatingStars, Row, SectionDivider, SelectNative, Separator, Skeleton, SocialButton, SocialButtonGroup, Spinner, Text, Timestamp, ToggleButton, ToggleButtonGroup, Virtualizer, mergeProps.
+**Simple** (direct use): AppStoreButton, AspectRatio, BackgroundPattern, Badge, Button, ButtonGroup, CSPProvider, CheckboxGroup, Code, CodeBlock, ColorModeToggle, ColorSwatch, Column, Container, DotIcon, DropZone, FeaturedIcon, FileTrigger, Form, I18nProvider, Icon, IconButton, Illustration, Image, IphoneMockup, Kbd, Link, Markdown, Outline, OverflowList, PaginationDot, PaginationLine, RadioGroup, RatingBadge, RatingStars, Row, SectionDivider, SelectNative, Separator, Skeleton, SocialButton, SocialButtonGroup, Spinner, Text, Timestamp, Toast, ToggleButton, ToggleButtonGroup, Virtualizer, mergeProps.
 
 **Deprecated** (still functional; avoid in new code): Checkbox (use CheckboxField), Radio (use RadioField), Switch (use SwitchField).
 
@@ -347,6 +347,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [TimeField] No extra sub-parts: TimeField.Group, TimeField.Trigger, TimeField.Input, TimeField.Popover, TimeField.Dialog do not exist
 - [TimeField] The input sub-part is TimeField.DateInput, not TimeField.Input
 - [TimeField] Property is hour (singular), not hours
+- [Toast] Keep the Toast queue identity stable
 - [ToggleButton] Uses isSelected/defaultSelected for toggle state, not pressed
 - [ToggleButton] Does NOT accept a value prop.
 - [ToggleButton] Use <ToggleButton> for any prompt that asks for a toggle button or formatting toggle

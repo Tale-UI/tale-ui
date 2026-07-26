@@ -46,6 +46,8 @@ const MARKDOWN_FIXTURE_PATH =
   'tools/performance-fixtures/component-expansion/markdown-100k-adversarial.tsx';
 const TIMESTAMP_FIXTURE_PATH =
   'tools/performance-fixtures/component-expansion/timestamp-1000-tick.tsx';
+const TOAST_FIXTURE_PATH =
+  'tools/performance-fixtures/component-expansion/toast-100-operations.tsx';
 
 const EXPECTED_FIXTURES = Object.freeze([
   {
@@ -67,6 +69,16 @@ const EXPECTED_FIXTURES = Object.freeze([
     vectorDigest: '6f4e730ff3c1f8c3c43399d6ba33ea681ff31624e469fa4b419de9926882f933',
     markupDigest: '59f3237bf030a5c6e162abc25b30c829ab121de100dd40d5800fc93bf58e79a6',
     expectedPostconditionDigest: 'a0bf75533ca8c28973fd3aa24978e1ff5cd3e085661c5322bfafd45e4e7a4dc7',
+  },
+  {
+    id: 'toast-100-operations',
+    path: TOAST_FIXTURE_PATH,
+    operationCount: 100,
+    fixtureSha256: '6a8ca34dfc4e597b08c99247c22d3ded5bf14609bdfae8f2b18f93f94952a7bc',
+    sourceDigest: 'cbaef274f85cb613137189ff1bbb15d81c3ab2d8cd3ab4f2e0641e2629b9f6a9',
+    vectorDigest: '0d14fc9703bc916b77415258c181e310c61d27e27461031d7bb57a92bd4a28b1',
+    markupDigest: 'd53f84ce9de36fabcb469c9a36616c38ca0f5f5c410dd2fd85118a8145f22e34',
+    expectedPostconditionDigest: 'f78c6f75eac0926a4f8c5e3a2cfc1665b988a3891f203e1a677b11a19740ffda',
   },
 ]);
 
@@ -121,7 +133,8 @@ function fixtureMetadata() {
   const program = `
     import { markdown100kAdversarialFixture as markdown } from './tools/performance-fixtures/component-expansion/markdown-100k-adversarial.tsx';
     import { timestamp1000TickFixture as timestamp } from './tools/performance-fixtures/component-expansion/timestamp-1000-tick.tsx';
-    const fixtures = [markdown, timestamp];
+    import { toast100OperationsFixture as toast } from './tools/performance-fixtures/component-expansion/toast-100-operations.tsx';
+    const fixtures = [markdown, timestamp, toast];
     const samples = fixtures.map((fixture) => fixture.runSample());
     process.stdout.write(JSON.stringify({
       fixtures: fixtures.map(({ runSample, description, setup, ...metadata }) => metadata),
@@ -214,11 +227,17 @@ test('schema and runner preserve only the ten ordered plan states', () => {
   assert.doesNotThrow(() =>
     assertComponentPerformanceFixtureIds(baseline.budgets.map(({ id }) => id)),
   );
+  assert.doesNotThrow(() =>
+    assertComponentPerformanceBaselineContract(baseline, {
+      expectedFixtureIds: COMPONENT_PERFORMANCE_FIXTURE_IDS,
+    }),
+  );
   assert.deepEqual(COMPONENT_PERFORMANCE_FIXTURE_IDS, [
     'markdown-100k-adversarial',
     'timestamp-1000-tick',
     'overflow-list-100-recompute',
     'resizable-1000-updates',
+    'toast-100-operations',
   ]);
   assert.throws(
     () =>
@@ -235,7 +254,7 @@ test('schema and runner preserve only the ten ordered plan states', () => {
   assert.equal(validate(invalidPolicy), false);
 
   const arbitrarySubset = structuredClone(baseline);
-  arbitrarySubset.budgets.pop();
+  arbitrarySubset.budgets.splice(2, 1);
   assert.equal(validate(arbitrarySubset), false);
 
   for (const ids of COMPONENT_PERFORMANCE_NORMAL_STATES) {
@@ -318,7 +337,7 @@ test('capture validates a complete temporary sibling before atomic replacement',
     validate: (document) => {
       assert.equal(validateSchema(document), true);
       assertComponentPerformanceBaselineContract(document, {
-        expectedFixtureIds: COMPONENT_PERFORMANCE_FIXTURE_IDS,
+        expectedFixtureIds: candidate.budgets.map(({ id }) => id),
       });
     },
     rename: (temporaryPath, destinationPath) => {
@@ -353,7 +372,7 @@ test('an invalid capture candidate never replaces the baseline', (t) => {
         validate: (document) => {
           assert.equal(validateSchema(document), true);
           assertComponentPerformanceBaselineContract(document, {
-            expectedFixtureIds: COMPONENT_PERFORMANCE_FIXTURE_IDS,
+            expectedFixtureIds: candidate.budgets.map(({ id }) => id),
           });
         },
       }),
@@ -425,6 +444,38 @@ test('freezes exact vectors, fixture bytes, metadata, and postconditions', () =>
     sha256(JSON.stringify(timestampKeys.map((key, index) => [key, timestampValues[index]]))),
     EXPECTED_FIXTURES[1].vectorDigest,
   );
+  const toastVariants = ['neutral', 'success', 'warning', 'danger'];
+  const toastMessages = Array.from({ length: 50 }, (_, index) => ({
+    title: `Toast ${index.toString().padStart(2, '0')}`,
+    ...(index % 2 === 0 ? { description: `Description ${index}` } : {}),
+    variant: toastVariants[index % toastVariants.length],
+  }));
+  const toastOperations = [
+    ...toastMessages.map((message, index) => ({ type: 'add', index, message, timeout: 0 })),
+    ...Array.from({ length: 12 }, (_, index) => [
+      { type: 'pause', pair: index },
+      { type: 'resume', pair: index },
+    ]).flat(),
+    ...Array.from({ length: 25 }, (_, index) => ({ type: 'close', index: index * 2 })),
+    { type: 'clear' },
+  ];
+  assert.equal(toastOperations.length, 100);
+  assert.equal(
+    sha256(
+      JSON.stringify({
+        queueSetup: {
+          maxVisibleToasts: 5,
+          defaultTimeout: 0,
+          placement: 'bottom-end',
+          regionLabel: 'Notifications',
+          dismissLabel: 'Dismiss notification',
+        },
+        messages: toastMessages,
+      }),
+    ),
+    EXPECTED_FIXTURES[2].sourceDigest,
+  );
+  assert.equal(sha256(JSON.stringify(toastOperations)), EXPECTED_FIXTURES[2].vectorDigest);
 
   const observed = fixtureMetadata();
   assert.deepEqual(
@@ -483,4 +534,38 @@ test('freezes the intended performance and synchronous act boundaries', () => {
   assert.match(timestampSample, /assert\.equal\(updateCommits, 1\)/);
   assert.match(timestampSample, /assert\.deepEqual\(dateTimes, initialDateTimes\)/);
   assert.match(timestampSample, /assert\.equal\(scheduler\.activeIntervalCount, 0\)/);
+
+  const toast = readFileSync(join(REPOSITORY_ROOT, TOAST_FIXTURE_PATH), 'utf8');
+  const toastSample = toast.slice(
+    toast.indexOf('function runSample()'),
+    toast.indexOf('export const toast100OperationsFixture'),
+  );
+  const toastStarted = toastSample.indexOf('const started = performance.now()');
+  const adds = toastSample.indexOf('for (let index = 0; index < TOAST_COUNT; index += 1)');
+  const pauseResume = toastSample.indexOf(
+    'for (let index = 0; index < PAUSE_RESUME_PAIRS; index += 1)',
+  );
+  const closes = toastSample.indexOf('for (let index = 0; index < TOAST_COUNT; index += 2)');
+  const clear = toastSample.indexOf("invoke('clear'");
+  const toastStopped = toastSample.indexOf('const duration = performance.now() - started');
+  assert.ok(
+    toastStarted >= 0 &&
+      toastStarted < adds &&
+      adds < pauseResume &&
+      pauseResume < closes &&
+      closes < clear &&
+      clear < toastStopped,
+  );
+  assert.match(
+    toastSample,
+    /const invoke = \(label: string, operation: \(\) => void\) => \{[\s\S]*React\.act\(\(\) => \{[\s\S]*acts \+= 1;[\s\S]*operation\(\);/,
+  );
+  assert.match(toastSample, /assert\.equal\(acts, 100\)/);
+  assert.match(toastSample, /assert\.deepEqual\(announcements, expectedOpaqueKeys\)/);
+  assert.match(
+    toastSample,
+    /assert\.deepEqual\(subscriberSnapshots, expectedSubscriberSnapshots\)/,
+  );
+  assert.match(toastSample, /assert\.equal\(finalDebug\.manualPauseDepth, 0\)/);
+  assert.match(toastSample, /assert\.equal\(finalDebug\.adapter\.subscriptionCount, 0\)/);
 });

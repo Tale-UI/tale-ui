@@ -138,6 +138,7 @@
     "docs/components/text.md",
     "docs/components/time-field.md",
     "docs/components/timestamp.md",
+    "docs/components/toast.md",
     "docs/components/toggle-button.md",
     "docs/components/toggle-group.md",
     "docs/components/toolbar.md",
@@ -160,6 +161,7 @@
     "docs/react-aria-deviations.md",
     "docs/react-setup.md",
     "docs/recipes/app-header-navigation.md",
+    "docs/recipes/async-feedback.md",
     "docs/recipes/chat-artifact-panel.md",
     "docs/recipes/chat-mobile.md",
     "docs/recipes/command-palette-async.md",
@@ -293,7 +295,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:a65099b522c7a136146bf1eab719d133a5a1781bad59b0c8c656a49a2d2ca025",
+  "sourceRevision": "sha256:54cd21b443a0773814cd4b11e35a5bdb079989f1427080abe8a0e36ef05903f0",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -16226,6 +16228,64 @@
       }
     },
     {
+      "id": "tale:component:toast",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "toast",
+      "name": "Toast",
+      "description": "Queued viewport feedback with Tale-owned timers, announcements, and recovery",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "3.0.0",
+      "aliases": [
+        "Toast"
+      ],
+      "keywords": [
+        "and",
+        "announcements",
+        "feedback",
+        "owned",
+        "queued",
+        "recovery",
+        "tale",
+        "timers",
+        "toast",
+        "viewport",
+        "with"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=toast]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/toast"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/toast/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Feedback",
+        "componentKind": "simple"
+      }
+    },
+    {
       "id": "tale:component:toggle-button",
       "namespace": "tale",
       "kind": "component",
@@ -21852,6 +21912,44 @@
       ],
       "provenance": {
         "source": "docs/components/timestamp.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:doc:docs-components-toast",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-toast",
+      "name": "Toast",
+      "description": "Public Tale UI documentation: Toast",
+      "lifecycle": "stable",
+      "keywords": [
+        "components",
+        "docs",
+        "md",
+        "toast"
+      ],
+      "related": [
+        "tale:component:toast"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/toast.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/toast.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -49275,6 +49373,95 @@
       }
     },
     {
+      "id": "tale:pitfall:toast--toast-stable-queue-identity",
+      "namespace": "tale",
+      "kind": "pitfall",
+      "slug": "toast--toast-stable-queue-identity",
+      "name": "Keep the Toast queue identity stable",
+      "description": "Recreating the queue during render discards its Tale-owned records, timers, announcements, and active Region lease.\n- Treat returned keys as opaque and queue-local.\n- Use `timeout: 0` only when the user has another clear way to dismiss or act\n  on the feedback.\n- Balance every explicit `pauseAll()` call with one `resumeAll()` call.",
+      "lifecycle": "stable",
+      "keywords": [
+        "act",
+        "active",
+        "and",
+        "announcements",
+        "another",
+        "as",
+        "balance",
+        "call",
+        "clear",
+        "discards",
+        "dismiss",
+        "during",
+        "every",
+        "explicit",
+        "feedback",
+        "has",
+        "identity",
+        "its",
+        "keep",
+        "keys",
+        "lease",
+        "local",
+        "on",
+        "one",
+        "only",
+        "opaque",
+        "or",
+        "owned",
+        "pauseall",
+        "queue",
+        "records",
+        "recreating",
+        "region",
+        "render",
+        "resumeall",
+        "returned",
+        "stable",
+        "tale",
+        "the",
+        "timeout",
+        "timers",
+        "to",
+        "toast",
+        "treat",
+        "use",
+        "user",
+        "way",
+        "when",
+        "with"
+      ],
+      "related": [
+        "tale:component:toast"
+      ],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=toast].pitfalls[id=toast-stable-queue-identity]"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/toast.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "ruleId": "toast-stable-queue-identity",
+        "category": "component",
+        "component": "Toast"
+      }
+    },
+    {
       "id": "tale:pitfall:toggle-button--toggle-button-isselected-not-pressed",
       "namespace": "tale",
       "kind": "pitfall",
@@ -50913,6 +51100,44 @@
       ],
       "provenance": {
         "source": "docs/recipes/app-header-navigation.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:recipe:async-feedback",
+      "namespace": "tale",
+      "kind": "recipe",
+      "slug": "async-feedback",
+      "name": "Async Feedback",
+      "description": "Canonical Tale UI recipe: Async Feedback",
+      "lifecycle": "stable",
+      "keywords": [
+        "async",
+        "feedback"
+      ],
+      "related": [
+        "tale:component:button",
+        "tale:component:toast"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/recipes/async-feedback.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "recipe.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/recipes/async-feedback.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -53646,5 +53871,5 @@
       }
     }
   ],
-  "digest": "sha256:eb29f406fb07f24bb44114de51b24577071bb446c588c883ab0287d604d1ebc9"
+  "digest": "sha256:2b73d0e251740a590a2921cfed005564cfdad2dca9b60b890b1124750c7c03a4"
 }

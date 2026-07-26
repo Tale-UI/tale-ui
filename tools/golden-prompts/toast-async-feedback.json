@@ -1,0 +1,7 @@
+{
+  "slug": "toast-async-feedback",
+  "difficulty": "complex",
+  "prompt": "Build a Tale UI save button that reports asynchronous success or failure in a queued Toast Region.",
+  "reference": "import { useState } from 'react';\nimport { Button } from '@tale-ui/react/button';\nimport { createToastQueue, ToastRegion } from '@tale-ui/react/toast';\n\nexport function AsyncFeedback({ save }: { save: () => Promise<void> }) {\n  const [isSaving, setIsSaving] = useState(false);\n  const [queue] = useState(() => createToastQueue({ maxVisibleToasts: 3 }));\n\n  async function handleSave() {\n    setIsSaving(true);\n\n    try {\n      await save();\n      queue.add({\n        title: 'Changes saved',\n        description: 'Your preferences are up to date.',\n        variant: 'success',\n      });\n    } catch {\n      queue.add(\n        {\n          title: 'Changes not saved',\n          description: 'Check your connection and try again.',\n          variant: 'danger',\n        },\n        { timeout: 0 },\n      );\n    } finally {\n      setIsSaving(false);\n    }\n  }\n\n  return (\n    <>\n      <Button isPending={isSaving} onPress={() => void handleSave()}>\n        Save changes\n      </Button>\n      <ToastRegion queue={queue} />\n    </>\n  );\n}",
+  "tags": ["Button", "ToastRegion"]
+}

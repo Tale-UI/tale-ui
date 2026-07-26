@@ -40,14 +40,33 @@ function SwipeProgressBox({ onProgress }: { onProgress: (progress: number) => vo
 
 function createTouch(target: EventTarget, point: { clientX: number; clientY: number }) {
   if (typeof Touch === 'function') {
-    return new Touch({
-      identifier: 1,
-      target,
-      ...point,
-    });
+    try {
+      return new Touch({
+        identifier: 1,
+        target,
+        ...point,
+      });
+    } catch {
+      // WebKit exposes Touch but does not construct it outside native touch dispatch.
+    }
   }
 
   return point;
+}
+
+function fireTouchEvent(
+  target: Element,
+  type: 'touchstart' | 'touchmove' | 'touchend',
+  init: {
+    changedTouches?: ReadonlyArray<ReturnType<typeof createTouch>>;
+    touches?: ReadonlyArray<ReturnType<typeof createTouch>>;
+  },
+) {
+  const event = new Event(type, { bubbles: true, cancelable: true });
+  for (const [property, value] of Object.entries(init)) {
+    Object.defineProperty(event, property, { configurable: true, value });
+  }
+  fireEvent(target, event);
 }
 
 describe('useSwipeDismiss', () => {
@@ -654,7 +673,7 @@ describe('useSwipeDismiss', () => {
       Object.defineProperty(scroll, 'clientHeight', { value: 40, configurable: true });
     }
 
-    fireEvent.touchStart(root, {
+    fireTouchEvent(root, 'touchstart', {
       touches: [
         createTouch(root, {
           clientX: 0,
@@ -665,7 +684,7 @@ describe('useSwipeDismiss', () => {
 
     await flushMicrotasks();
 
-    fireEvent.touchMove(root, {
+    fireTouchEvent(root, 'touchmove', {
       touches: [
         createTouch(root, {
           clientX: 0,
@@ -676,7 +695,7 @@ describe('useSwipeDismiss', () => {
 
     await flushMicrotasks();
 
-    fireEvent.touchEnd(scroll, {
+    fireTouchEvent(scroll, 'touchend', {
       changedTouches: [
         createTouch(scroll, {
           clientX: 0,

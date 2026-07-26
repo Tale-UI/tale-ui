@@ -6,8 +6,8 @@
     {
       "major": 3,
       "source": "working-tree-public-docs",
-      "sourceRevision": "sha256:a65099b522c7a136146bf1eab719d133a5a1781bad59b0c8c656a49a2d2ca025",
-      "contentDigest": "sha256:2a29c00477948853eeb244af9e4a329cd4311d7b1e931f54328f5afdc576b22a",
+      "sourceRevision": "sha256:54cd21b443a0773814cd4b11e35a5bdb079989f1427080abe8a0e36ef05903f0",
+      "contentDigest": "sha256:9ecd43ee75a36489ce76827830dff99be1bc1df1b8369ec47b2bb7dcbf962647",
       "packageVersions": {
         "@tale-ui/a2ui": "0.1.5",
         "@tale-ui/charts": "0.1.5",
@@ -159,6 +159,7 @@
         "docs/components/text.md",
         "docs/components/time-field.md",
         "docs/components/timestamp.md",
+        "docs/components/toast.md",
         "docs/components/toggle-button.md",
         "docs/components/toggle-group.md",
         "docs/components/toolbar.md",
@@ -183,6 +184,7 @@
         "docs/react-aria-deviations.md",
         "docs/react-setup.md",
         "docs/recipes/app-header-navigation.md",
+        "docs/recipes/async-feedback.md",
         "docs/recipes/chat-artifact-panel.md",
         "docs/recipes/chat-mobile.md",
         "docs/recipes/command-palette-async.md",

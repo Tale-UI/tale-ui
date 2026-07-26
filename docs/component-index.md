@@ -1,6 +1,6 @@
 # Component Index
 
-Quick-reference table for all 132 `@tale-ui/react` components plus 6 `@tale-ui/charts` components.
+Quick-reference table for all 133 `@tale-ui/react` components plus 6 `@tale-ui/charts` components.
 For detailed usage, see the per-component docs in [docs/components/](components/index.md).
 
 ## Form Controls (28)
@@ -110,7 +110,7 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | Tabs         | Tabbed content with indicator                                                | `@tale-ui/react/tabs`          | Root, List, Tab, Panel, Indicator                                        |
 | Toolbar      | Horizontal bar of buttons, toggles, or controls for a related set of actions | `@tale-ui/react/toolbar`       | Root, Group, Button, Link, Input, Separator                              |
 
-## Feedback (6)
+## Feedback (7)
 
 | Component      | Description                                                                        | Import                           | Parts                                                |
 | -------------- | ---------------------------------------------------------------------------------- | -------------------------------- | ---------------------------------------------------- |
@@ -120,6 +120,7 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | Meter          | Gauge showing a known-range value such as storage used, battery level, or capacity | `@tale-ui/react/meter`           | Root, Header, Label, Value, Track, Indicator         |
 | Skeleton       | Decorative placeholder for content that is still loading                           | `@tale-ui/react/skeleton`        | --                                                   |
 | Spinner        | Indeterminate loading indicator                                                    | `@tale-ui/react/spinner`         | --                                                   |
+| Toast          | Queued viewport feedback with Tale-owned timers, announcements, and recovery       | `@tale-ui/react/toast`           | --                                                   |
 
 ## Display (17)
 

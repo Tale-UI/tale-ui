@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "sourceDigest": "sha256:6cedd89877d343fedf0e0f45c22a0392d83b76c1c9595625cc269ba19fe5b737",
+  "sourceDigest": "sha256:bc1f087907eff2378c6d357f04aa7d541a4a770b9832fc1b40da8bcb7e4b3df5",
   "mappingKind": "code-connect-equivalent",
   "mappings": [
     {
@@ -1521,6 +1521,20 @@
       "source": "packages/react/src/timestamp/index.ts",
       "properties": {
         "format": ["date", "time", "datetime", "relative"]
+      },
+      "ownership": {
+        "design": "design-systems",
+        "code": "design-systems"
+      }
+    },
+    {
+      "registryId": "tale:component:toast",
+      "componentName": "Toast",
+      "package": "@tale-ui/react/toast",
+      "source": "packages/react/src/toast/index.ts",
+      "properties": {
+        "variant": ["neutral", "success", "warning", "danger"],
+        "placement": ["top-start", "top-end", "bottom-start", "bottom-end"]
       },
       "ownership": {
         "design": "design-systems",

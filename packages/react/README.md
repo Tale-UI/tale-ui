@@ -117,7 +117,7 @@ Accordion · App Shell · Aspect Ratio · Card · Carousel · Chat · Column · 
 
 ### Feedback
 
-Banner · Meter · Progress Bar · Progress Circle · Skeleton · Spinner
+Banner · Meter · Progress Bar · Progress Circle · Skeleton · Spinner · Toast
 
 ### Display
 
@@ -215,7 +215,7 @@ https://raw.githubusercontent.com/Tale-UI/tale-ui/main/docs/components/{name}.md
 
 For example: `app-shell.md`, `aspect-ratio.md`, `blockquote.md`, `button-group.md`,
 `chat.md`, `citation.md`, `code.md`, `code-block.md`, `kbd.md`, `markdown.md`,
-`outline.md`, `skeleton.md`, `timestamp.md`, `button.md`, `dialog.md`, `select.md`,
+`outline.md`, `skeleton.md`, `timestamp.md`, `toast.md`, `button.md`, `dialog.md`, `select.md`,
 `checkbox.md`, `tabs.md`, `table.md`, `date-picker.md`.
 
 ## License

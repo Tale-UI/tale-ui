@@ -3,6 +3,11 @@ import { screen } from '@tale-ui/monorepo-tests/test-utils';
 import { createRenderer } from '#test-utils';
 import { AspectRatio, type AspectRatioProps } from './index';
 
+function readAspectRatio(value: string) {
+  const [inline, block = '1'] = value.split('/');
+  return Number(inline) / Number(block);
+}
+
 describe('AspectRatio', () => {
   const { render, renderToString } = createRenderer();
 
@@ -33,7 +38,7 @@ describe('AspectRatio', () => {
     );
 
     const root = screen.getByTestId('ratio');
-    expect(root.style.aspectRatio).toBe(String(4 / 3));
+    expect(readAspectRatio(root.style.aspectRatio)).toBeCloseTo(4 / 3, 5);
     expect(root.style.maxWidth).toBe('640px');
   });
 
@@ -45,7 +50,7 @@ describe('AspectRatio', () => {
           Media
         </AspectRatio>,
       );
-      expect(screen.getByTestId('ratio').style.aspectRatio).toBe('1');
+      expect(readAspectRatio(screen.getByTestId('ratio').style.aspectRatio)).toBe(1);
     },
   );
 

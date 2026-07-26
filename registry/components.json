@@ -11243,6 +11243,72 @@
       "crossPitfallRefs": null
     },
     {
+      "name": "Toast",
+      "slug": "toast",
+      "import": "@tale-ui/react/toast",
+      "category": "Feedback",
+      "description": "Queued viewport feedback with Tale-owned timers, announcements, and recovery",
+      "kind": "simple",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "variant",
+          "type": "ToastVariant",
+          "required": false,
+          "description": "Announcement and visual treatment.",
+          "default": null,
+          "allowedValues": [
+            "neutral",
+            "success",
+            "warning",
+            "danger"
+          ]
+        },
+        {
+          "name": "placement",
+          "type": "'top-start' | 'top-end' | 'bottom-start' | 'bottom-end'",
+          "required": false,
+          "description": null,
+          "default": null,
+          "allowedValues": [
+            "top-start",
+            "top-end",
+            "bottom-start",
+            "bottom-end"
+          ]
+        }
+      ],
+      "parts": null,
+      "examples": [
+        "import { useState } from 'react';\nimport { Button } from '@tale-ui/react/button';\nimport { createToastQueue, ToastRegion } from '@tale-ui/react/toast';\n\nexport function SavedFeedback() {\n  const [queue] = useState(() =>\n    createToastQueue({\n      maxVisibleToasts: 3,\n    }),\n  );\n\n  return (\n    <>\n      <Button\n        onPress={() => {\n          queue.add({\n            title: 'Changes saved',\n            description: 'Your preferences are up to date.',\n            variant: 'success',\n          });\n        }}\n      >\n        Save changes\n      </Button>\n      <ToastRegion queue={queue} />\n    </>\n  );\n}",
+        "const key = queue.add(\n  {\n    title: 'Upload in progress',\n    variant: 'neutral',\n  },\n  {\n    timeout: 0,\n    onClose() {\n      console.log('Upload notification closed');\n    },\n  },\n);\n\nqueue.close(key);"
+      ],
+      "cssClasses": [
+        "tale-toast",
+        "tale-toast-list",
+        "tale-toast-region",
+        "tale-toast__announcer",
+        "tale-toast__content",
+        "tale-toast__description",
+        "tale-toast__dismiss",
+        "tale-toast__title"
+      ],
+      "pitfalls": [
+        {
+          "id": "toast-stable-queue-identity",
+          "summary": "Keep the Toast queue identity stable",
+          "detail": "Recreating the queue during render discards its Tale-owned records, timers, announcements, and active Region lease.\n- Treat returned keys as opaque and queue-local.\n- Use `timeout: 0` only when the user has another clear way to dismiss or act\n  on the feedback.\n- Balance every explicit `pauseAll()` call with one `resumeAll()` call.",
+          "antiPatterns": [
+            "<ToastRegion queue={createToastQueue()} />"
+          ],
+          "fixes": [
+            "const [queue] = useState(() => createToastQueue()); return <ToastRegion queue={queue} />;"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
       "name": "ToggleButton",
       "slug": "toggle-button",
       "import": "@tale-ui/react/toggle-button",

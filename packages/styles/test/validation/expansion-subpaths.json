@@ -13,6 +13,6 @@
     { "subpath": "./resizable", "enabled": true },
     { "subpath": "./skeleton", "enabled": true },
     { "subpath": "./timestamp", "enabled": true },
-    { "subpath": "./toast", "enabled": false }
+    { "subpath": "./toast", "enabled": true }
   ]
 }

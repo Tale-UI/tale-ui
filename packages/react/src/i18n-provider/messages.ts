@@ -13,6 +13,8 @@ export const taleEnglishMessages = {
   'table.empty': 'No rows',
   'table.loading': 'Loading rows',
   'table.page': 'Page {page} of {pageCount}',
+  'toast.dismiss': 'Dismiss notification',
+  'toast.region': 'Notifications',
 } as const;
 
 export type TaleMessageId = keyof typeof taleEnglishMessages;

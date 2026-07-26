@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { fireEvent, screen } from '@tale-ui/monorepo-tests/test-utils';
+import { fireEvent, screen, waitFor } from '@tale-ui/monorepo-tests/test-utils';
 import { expect, vi } from 'vitest';
 import { CommandPalette } from '@tale-ui/react/command-palette';
 import {
@@ -365,7 +365,7 @@ describe('<CommandPalette />', () => {
     expect(screen.getByRole('dialog')).toBeTruthy();
 
     await user.click(screen.getByRole('button', { name: 'Close palette' }));
-    expect(screen.queryByRole('dialog')).toBeNull();
+    await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
   });
 
   it.skipIf(isJSDOM)('closes when pressing outside the popup', async () => {
