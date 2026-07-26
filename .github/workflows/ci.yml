@@ -188,7 +188,7 @@ jobs:
       - name: Locate React tarball
         shell: bash
         run: |
-          REACT_TARBALL="$(find "$GITHUB_WORKSPACE/.artifacts/packed-consumers" -name 'tale-ui-react-*.tgz' -print -quit)"
+          REACT_TARBALL="$(find "$GITHUB_WORKSPACE/.artifacts/packed-consumers" -name 'tale-ui-react-[0-9]*.tgz' -print -quit)"
           test -n "$REACT_TARBALL"
           echo "TALE_REACT_TARBALL=$REACT_TARBALL" >> "$GITHUB_ENV"
       - name: Verify Node 16 engine-strict rejection
