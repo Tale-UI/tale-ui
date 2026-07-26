@@ -189,6 +189,7 @@
     "@tale-ui/css": "workspace:*",
     "@tale-ui/react-styles": "workspace:*",
     "@tale-ui/utils": "workspace:*",
+    "marked": "13.0.3",
     "react-aria": "3.50.0",
     "react-aria-components": "1.19.0",
     "zod": "^3.25.76"

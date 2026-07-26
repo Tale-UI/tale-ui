@@ -20,11 +20,12 @@ messages, persistence, retries, draft state, scroll-follow policy, and
 artifact-panel visibility.
 
 Separately, approve a standalone, bounded `Markdown` component under the
-component-equivalence expansion plan. Its export remains gated on Gate A
-selecting and proving a parser that satisfies the frozen source, line, depth,
-node, raw-HTML, URL, resource-fetching, packaging, and performance boundaries.
-This decision does not change `Chat`: Chat continues to accept React children
-and plain text and does not parse Markdown.
+component-equivalence expansion plan. Gate A selected exact `marked@13.0.3`
+behind a Tale-owned token adapter and proved the frozen source, line, depth,
+node, raw-HTML, URL, resource-fetching, packaging, and performance boundaries
+in [ADR 005](adr-005-bounded-markdown-parser.md). This decision does not change
+`Chat`: Chat continues to accept React children and plain text and does not
+parse Markdown.
 
 ## Streaming contract
 
@@ -60,8 +61,9 @@ Markdown parser or parser dependency, syntax highlighter, tool executor, URL
 fetcher, executable-content extension, or A2UI renderer. The separately
 approved standalone Markdown component omits raw HTML, prevents resource
 fetching, filters executable and credential-bearing URLs, and fails atomically
-within fixed limits; Gate A must prove those boundaries before it is exported.
-A2UI mapping is a separate adapter and cannot broaden either boundary.
+within fixed limits. Gate A proved those boundaries without adding parser
+behavior to Chat. A2UI mapping is a separate adapter and cannot broaden either
+boundary.
 
 ## Templates and promotion
 

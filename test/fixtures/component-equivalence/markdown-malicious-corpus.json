@@ -1,0 +1,42 @@
+[
+  {
+    "id": "raw-script",
+    "source": "<script>globalThis.taleCompromised = true</script>",
+    "absent": "globalThis.taleCompromised"
+  },
+  {
+    "id": "nested-raw-html",
+    "source": "<div><img src=\"https://attacker.invalid/pixel\" onerror=\"globalThis.taleCompromised = true\">secret</div>",
+    "absent": "attacker.invalid"
+  },
+  {
+    "id": "javascript-link",
+    "source": "[Do not run](javascript:alert(1))",
+    "text": "Do not run"
+  },
+  {
+    "id": "credential-link",
+    "source": "[Private](https://user:secret@example.com/path)",
+    "text": "Private"
+  },
+  {
+    "id": "data-image",
+    "source": "![Non-fetching fallback](data:image/png;base64,QQ==)",
+    "text": "Non-fetching fallback"
+  },
+  {
+    "id": "remote-image",
+    "source": "![Diagram](https://attacker.invalid/pixel.png)",
+    "text": "Diagram"
+  },
+  {
+    "id": "malformed-link",
+    "source": "[Malformed](https://[invalid)",
+    "text": "Malformed"
+  },
+  {
+    "id": "protocol-relative-without-base",
+    "source": "[No implicit origin](//example.com/path)",
+    "text": "No implicit origin"
+  }
+]
