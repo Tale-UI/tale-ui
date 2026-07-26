@@ -1031,7 +1031,7 @@ Export `createToastQueue`, `ToastRegion`, and every named public type from `@tal
 Runtime domains and errors are frozen:
 
 - Queue/add/message options must be `undefined` or non-null, non-array objects; otherwise throw `TypeError` prefixed `Tale UI: ` and identify Toast as the failing subsystem.
-- Every Toast validation and recovery error follows the public-error convention: state what happened, why the queue cannot continue, and the corrective action without exposing message values.
+- Every Toast validation error follows the public-error convention without exposing message values: identify the rejected operation, identify the violated input domain, and direct the consumer to correct the input before retrying. Recoverable transaction errors state that the operation failed and the previous queue state was restored.
 - `maxVisibleToasts` must be a number; wrong type throws `TypeError`; non-finite, non-integer, or `<= 0` throws `RangeError`.
 - Default/per-toast timeout must be a number; wrong type throws `TypeError`; non-finite or negative throws `RangeError`; zero is persistent.
 - Message title must be a string; wrong type throws `TypeError`; empty/whitespace-only throws `RangeError`.
@@ -1162,7 +1162,7 @@ Poison-reset is the last-resort recovery when a damaged raw generation and its p
 4. Discard every damaged raw generation.
 5. Publish one consistent empty stable-adapter snapshot, invoking all subscribers despite errors.
 6. Invoke callbacks for records discarded by the reset exactly once, oldest first.
-7. Reject later public mutations with deterministic `Tale UI: Toast queue poisoned` errors; consumers must create a new public queue.
+7. Reject later public mutations with the deterministic error `Tale UI: Toast queue is poisoned after unrecoverable state corruption; create a new queue.`.
 8. Throw an ordered aggregate containing the original raw error, rebuild error, publication errors, and callback errors.
 9. Never leave a visible Toast whose reverse mapping has been removed.
 
