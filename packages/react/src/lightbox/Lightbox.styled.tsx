@@ -405,7 +405,28 @@ function canReceiveFocus(element: HTMLElement): boolean {
  * A collection-driven modal image viewer with controlled navigation, focus restoration,
  * localized controls, keyboard support, and optional swipe navigation.
  */
-/** A controlled or uncontrolled media viewer with owned navigation and focus restoration. @status experimental */
+/**
+ * A controlled or uncontrolled media viewer with owned navigation and focus restoration.
+ *
+ * @example
+ * ```tsx
+ * <Lightbox.Root
+ *   items={photos}
+ *   getKey={(photo) => photo.id}
+ *   getLabel={(photo) => photo.label}
+ *   renderContent={(photo) => <Image src={photo.src} alt={photo.label} />}
+ * >
+ *   <Lightbox.Backdrop>
+ *     <Lightbox.Popup>
+ *       <Lightbox.Content />
+ *       <Lightbox.Close />
+ *     </Lightbox.Popup>
+ *   </Lightbox.Backdrop>
+ * </Lightbox.Root>
+ * ```
+ *
+ * @status experimental
+ */
 const Root = React.forwardRef(function LightboxRoot<T>(
   props: LightboxRootProps<T>,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,

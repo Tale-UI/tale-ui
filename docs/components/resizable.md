@@ -35,6 +35,14 @@ import '@tale-ui/react-styles/resizable';
 The direct-child grammar is `Panel (Handle Panel)+`. Fragments and arrays are flattened, and
 nullish or boolean children are ignored. Each Handle must name its exact adjacent Panels.
 
+## Parts
+
+| Part               | Description                                                                  |
+| ------------------ | ---------------------------------------------------------------------------- |
+| `Resizable.Root`   | Owns topology, size state, bounds, orientation, and mutation callbacks       |
+| `Resizable.Panel`  | Declares one root-local panel ID and its optional minimum and maximum size   |
+| `Resizable.Handle` | Controls its exact adjacent panels through pointer and keyboard interactions |
+
 ## Controlled sizes
 
 Use `sizes` when the application owns the committed record. A controlled Root proposes changes
@@ -131,7 +139,7 @@ An active pointer gesture is cancelled without a commit when topology or bounds 
 acknowledgement diverges, the Root resizes, input becomes invalid, disabled/read-only state changes,
 pointer capture is lost, the browser cancels the pointer, or the Root unmounts.
 
-## CSS classes
+## CSS Classes
 
 | Class                         | Purpose                                  |
 | ----------------------------- | ---------------------------------------- |

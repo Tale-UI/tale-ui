@@ -293,7 +293,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:791b4a61fd7a18e5e2ed7f5a53e71de75b5590f9335f1ab9cb340a5f7d35de28",
+  "sourceRevision": "sha256:ebc737cc5faf69da1cd4a16ce6fa0af02fdfa36d7a6fe455b702956abe408040",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -12853,7 +12853,7 @@
       "kind": "component",
       "slug": "lightbox",
       "name": "Lightbox",
-      "description": "",
+      "description": "Collection-driven modal media viewer with owned navigation and focus restoration",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
       "version": "3.0.0",
@@ -12861,7 +12861,19 @@
         "Lightbox"
       ],
       "keywords": [
-        "lightbox"
+        "and",
+        "collection",
+        "driven",
+        "focus",
+        "lightbox",
+        "media",
+        "modal",
+        "navigation",
+        "overlay",
+        "owned",
+        "restoration",
+        "viewer",
+        "with"
       ],
       "related": [],
       "retrieval": [
@@ -12891,7 +12903,7 @@
       },
       "trust": "first-party",
       "metadata": {
-        "category": null,
+        "category": "Overlay",
         "componentKind": "compound"
       }
     },
@@ -13615,7 +13627,7 @@
       "kind": "component",
       "slug": "overflow-list",
       "name": "OverflowList",
-      "description": "",
+      "description": "Measured list that collapses items into one deterministic overflow control",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
       "version": "3.0.0",
@@ -13623,7 +13635,18 @@
         "OverflowList"
       ],
       "keywords": [
-        "overflowlist"
+        "collapses",
+        "control",
+        "deterministic",
+        "into",
+        "items",
+        "layout",
+        "list",
+        "measured",
+        "one",
+        "overflow",
+        "overflowlist",
+        "that"
       ],
       "related": [],
       "retrieval": [
@@ -13653,7 +13676,7 @@
       },
       "trust": "first-party",
       "metadata": {
-        "category": null,
+        "category": "Layout",
         "componentKind": "simple"
       }
     },
@@ -14746,7 +14769,7 @@
       "kind": "component",
       "slug": "resizable",
       "name": "Resizable",
-      "description": "",
+      "description": "Adjacent flex panels with owned sizing, bounds, and accessible handles",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
       "version": "3.0.0",
@@ -14754,7 +14777,18 @@
         "Resizable"
       ],
       "keywords": [
-        "resizable"
+        "accessible",
+        "adjacent",
+        "and",
+        "bounds",
+        "flex",
+        "handles",
+        "layout",
+        "owned",
+        "panels",
+        "resizable",
+        "sizing",
+        "with"
       ],
       "related": [],
       "retrieval": [
@@ -14784,7 +14818,7 @@
       },
       "trust": "first-party",
       "metadata": {
-        "category": null,
+        "category": "Layout",
         "componentKind": "compound"
       }
     },
@@ -53612,5 +53646,5 @@
       }
     }
   ],
-  "digest": "sha256:752c67388c4ebb0fecea3e11f1faa4f32fac8b00ea066ad4c586e89e914aaa57"
+  "digest": "sha256:4aa1f6490a4015d02b24b5df371b36daffe475ecbeec487bd261e220c13cd562"
 }
