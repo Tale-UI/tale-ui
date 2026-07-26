@@ -32,6 +32,12 @@ import {
 import { markdown100kAdversarialFixture } from './performance-fixtures/component-expansion/markdown-100k-adversarial.tsx';
 // Runtime TypeScript execution requires the source extension.
 // eslint-disable-next-line import/extensions
+import { overflowList100RecomputeFixture } from './performance-fixtures/component-expansion/overflow-list-100-recompute.tsx';
+// Runtime TypeScript execution requires the source extension.
+// eslint-disable-next-line import/extensions
+import { resizable1000UpdatesFixture } from './performance-fixtures/component-expansion/resizable-1000-updates.tsx';
+// Runtime TypeScript execution requires the source extension.
+// eslint-disable-next-line import/extensions
 import { timestamp1000TickFixture } from './performance-fixtures/component-expansion/timestamp-1000-tick.tsx';
 import type {
   ComponentPerformanceFixture,
@@ -285,6 +291,8 @@ async function main() {
   const installedFixtures: ComponentPerformanceFixture[] = [
     markdown100kAdversarialFixture,
     timestamp1000TickFixture,
+    overflowList100RecomputeFixture,
+    resizable1000UpdatesFixture,
   ];
   assertComponentPerformanceFixtureIds(installedFixtures.map(({ id }) => id));
   const fixtures = ROLLBACK

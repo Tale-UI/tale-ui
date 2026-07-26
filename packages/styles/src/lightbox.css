@@ -1,0 +1,124 @@
+/*
+ * Lightbox — @tale-ui/react
+ *
+ * Collection-driven modal media viewer. React Aria supplies focus containment,
+ * dismissal, transition state attributes, and modal stacking semantics.
+ */
+
+.tale-lightbox__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-s);
+  background-color: var(--modal-backdrop-bg);
+  transition: opacity var(--popup-transition-duration) var(--popup-transition-easing);
+}
+
+.tale-lightbox__backdrop[data-entering],
+.tale-lightbox__backdrop[data-exiting] {
+  opacity: 0;
+}
+
+.tale-lightbox__popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 101;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  width: min(94vw, 72rem);
+  height: min(90vh, 52rem);
+  overflow: hidden;
+  color: var(--neutral-90);
+  background-color: var(--popup-bg);
+  border: 1px solid var(--popup-border-color);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--elevation-modal);
+  outline: none;
+  transform: translate(-50%, -50%) scale(1);
+  transition:
+    opacity var(--popup-transition-duration) var(--popup-transition-easing),
+    transform var(--popup-transition-duration) var(--popup-transition-easing);
+}
+
+.tale-lightbox__popup[data-entering],
+.tale-lightbox__popup[data-exiting] {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(var(--popup-enter-scale));
+}
+
+.tale-lightbox__content {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  place-items: center;
+  overflow: auto;
+  padding: var(--space-s);
+  overscroll-behavior: contain;
+}
+
+.tale-lightbox__content > img,
+.tale-lightbox__content > picture,
+.tale-lightbox__content > video,
+.tale-lightbox__content > svg {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.tale-lightbox__caption {
+  min-width: 0;
+  margin: 0;
+  padding: var(--space-xs) var(--space-2xl);
+  overflow: hidden;
+  color: var(--modal-description-color);
+  font-family: var(--text-font-family);
+  font-size: var(--modal-description-font-size);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tale-lightbox__previous,
+.tale-lightbox__next,
+.tale-lightbox__close {
+  position: absolute;
+  z-index: 1;
+  border-radius: var(--radius-full);
+  background-color: var(--neutral-10);
+  box-shadow: var(--shadow-s);
+}
+
+.tale-lightbox__previous,
+.tale-lightbox__next {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tale-lightbox__previous {
+  left: var(--space-xs);
+}
+
+.tale-lightbox__next {
+  right: var(--space-xs);
+}
+
+.tale-lightbox__close {
+  top: var(--space-xs);
+  right: var(--space-xs);
+}
+
+.tale-lightbox__trigger {
+  cursor: zoom-in;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tale-lightbox__backdrop,
+  .tale-lightbox__popup {
+    transition-duration: 0s;
+  }
+}

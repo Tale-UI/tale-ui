@@ -13,6 +13,8 @@ import { basename, dirname, join } from 'node:path';
 export const COMPONENT_PERFORMANCE_FIXTURE_IDS = Object.freeze([
   'markdown-100k-adversarial',
   'timestamp-1000-tick',
+  'overflow-list-100-recompute',
+  'resizable-1000-updates',
 ]);
 
 export const COMPONENT_PERFORMANCE_ROLLBACK_FIXTURE_IDS = Object.freeze(['timestamp-1000-tick']);

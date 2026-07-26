@@ -217,6 +217,8 @@ test('schema and runner preserve only the ten ordered plan states', () => {
   assert.deepEqual(COMPONENT_PERFORMANCE_FIXTURE_IDS, [
     'markdown-100k-adversarial',
     'timestamp-1000-tick',
+    'overflow-list-100-recompute',
+    'resizable-1000-updates',
   ]);
   assert.throws(
     () =>
