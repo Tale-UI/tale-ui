@@ -122,7 +122,7 @@
     "figma:live": "node tools/check-figma-live.mjs",
     "native:conformance:generate": "node tools/generate-native-conformance.mjs",
     "native:conformance:check": "node tools/generate-native-conformance.mjs --check",
-    "react:test:package": "pnpm --filter @tale-ui/react test:package",
+    "react:test:package": "pnpm --filter @tale-ui/utils build && pnpm --filter @tale-ui/react test:package",
     "tooling:test:package": "pnpm --filter @tale-ui/tooling test:package",
     "pitfalls:generate": "node tools/generate-pitfalls-registry.js",
     "pitfalls:check": "node tools/generate-pitfalls-registry.js --check",
