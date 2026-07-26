@@ -1,0 +1,63 @@
+{
+  "$schema": "../../../schemas/component-performance-budget.schema.json",
+  "schemaVersion": "1.0.0",
+  "capturedOn": "2026-07-26",
+  "revision": "8bd21e1689facf5a6b477be57bfcefa71ec1f2cb",
+  "environment": {
+    "os": "Ubuntu 24.04",
+    "node": "22.18.0",
+    "react": "19.2.4",
+    "reactDom": "19.2.4",
+    "jsdom": "27.4.0",
+    "playwright": "1.58.2",
+    "chromium": "chromium-1208",
+    "lockfileSha256": "9617f8c0298b5602cf3ff5e65db2e74cf2ba04e830dd4110c1aea23579689f8d"
+  },
+  "budgets": [
+    {
+      "id": "markdown-100k-adversarial",
+      "description": "One bounded validate, parse, filter, and static-render operation for the exact 100k adversarial Markdown vector.",
+      "fixture": "tools/performance-fixtures/component-expansion/markdown-100k-adversarial.tsx",
+      "fixtureSha256": "7c0ceaee3d889fb62fc78c06656b98629fc49cdaeca4308bf697af49bdb95a32",
+      "sourceSha256": "983c1532ecf23a7e906f25239871757a6a0136f4556e51dab3f4a559fbc9b4ea",
+      "vectorSha256": "f58a5f46502868f31adae14ba0bf6233cffb5ccba901e7922868352d650aec6a",
+      "markupSha256": "070c2262df9f0f1a685d1617a8dc70f27f349f340608ce48e33dfab46e222de4",
+      "postconditionSha256": "bac5d97f14bf3c9f0dbb535beae5e5dd921975ba66b903260c1c1e891d3f1c60",
+      "setup": "Construct and digest the exact 100,000-unit vector outside timing; each sample performs one fresh renderToStaticMarkup call.",
+      "operationCount": 1,
+      "warmups": 5,
+      "samples": 15,
+      "statistic": "median",
+      "clock": "node:perf_hooks.performance",
+      "unit": "milliseconds",
+      "baseline": 15.647,
+      "warnAt": 31.294,
+      "blockAt": 46.941,
+      "owner": "Design Systems",
+      "evidence": "Exact vector and postcondition digests are reasserted for every fresh-state sample."
+    },
+    {
+      "id": "timestamp-1000-tick",
+      "description": "One shared scheduler tick across 1,000 relative Timestamp instances with exact recomputation and commit postconditions.",
+      "fixture": "tools/performance-fixtures/component-expansion/timestamp-1000-tick.tsx",
+      "fixtureSha256": "24340b01456d408c8aca55d0e043f8e531d4a22b33be4fd4e5b21114ad5f3134",
+      "sourceSha256": "92df15ade85d4e436d952e903ab5b6d94ed66dd627ac57c16f84744c6523cae1",
+      "vectorSha256": "6f4e730ff3c1f8c3c43399d6ba33ea681ff31624e469fa4b419de9926882f933",
+      "markupSha256": "59f3237bf030a5c6e162abc25b30c829ab121de100dd40d5800fc93bf58e79a6",
+      "postconditionSha256": "a0bf75533ca8c28973fd3aa24978e1ff5cd3e085661c5322bfafd45e4e7a4dc7",
+      "setup": "Mount 1,000 keyed relative timestamps in fresh JSDOM state, settle effects, and reset counters outside timing.",
+      "operationCount": 1,
+      "warmups": 5,
+      "samples": 15,
+      "statistic": "median",
+      "clock": "node:perf_hooks.performance",
+      "unit": "milliseconds",
+      "baseline": 17.782,
+      "warnAt": 35.564,
+      "blockAt": 53.346,
+      "owner": "Design Systems",
+      "evidence": "Exact vector and postcondition digests are reasserted for every fresh-state sample."
+    }
+  ],
+  "exceptions": []
+}

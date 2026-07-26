@@ -9,6 +9,9 @@ All notable changes to the React component library are documented in this file.
 - Added experimental `AspectRatio`, `Blockquote`, `ButtonGroup`, `Code`, and `Skeleton` public
   subpaths with runtime validation, safe DOM ownership, SSR/hydration coverage, and public type
   contracts.
+- Added experimental `Citation`, `Markdown`, `Outline`, and `Timestamp` public subpaths with
+  bounded parsing, normalized source identity, deterministic observer/state ownership, explicit
+  localization, shared scheduling, and public type contracts.
 
 ### Changed
 

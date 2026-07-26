@@ -1,0 +1,9 @@
+/*
+ * Timestamp — @tale-ui/react
+ *
+ * Native time semantics with stable-width localized numerals.
+ */
+
+.tale-timestamp {
+  font-variant-numeric: tabular-nums;
+}

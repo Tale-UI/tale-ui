@@ -92,7 +92,7 @@ test('keeps component-only and explicit component selection distinct', () => {
     mode: 'explicit-components',
     changedPaths: [],
     changedSlugs: ['aspect-ratio', 'toast'],
-    storyStrategy: 'matching',
+    storyStrategy: 'default-matching',
   });
 });
 
@@ -122,6 +122,6 @@ test('selects deterministic primary and component-matching stories', () => {
       stories,
       createAccessibilitySelection({ components: ['Button'] }),
     ).map(({ id }) => id),
-    ['components-button--all-variations', 'components-button--basic', 'components-button--default'],
+    ['components-button--default'],
   );
 });

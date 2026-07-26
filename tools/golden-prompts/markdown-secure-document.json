@@ -1,0 +1,7 @@
+{
+  "slug": "markdown-secure-document",
+  "difficulty": "simple",
+  "prompt": "Render bounded Markdown with a safe relative documentation link and an atomic invalid fallback.",
+  "reference": "import { Markdown } from '@tale-ui/react/markdown';\n\nexport function SecureDocument() {\n  return (\n    <Markdown\n      baseUrl=\"https://docs.example.com/\"\n      invalidFallback=\"Document unavailable\"\n    >\n      {'## Security\\n\\nRead the [trust guide](./trust-guide).'}\n    </Markdown>\n  );\n}",
+  "tags": ["Markdown"]
+}

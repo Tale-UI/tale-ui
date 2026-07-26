@@ -508,6 +508,9 @@ importers:
       '@tale-ui/utils':
         specifier: workspace:*
         version: link:../utils/build
+      marked:
+        specifier: 13.0.3
+        version: 13.0.3
       react-aria:
         specifier: 3.50.0
         version: 3.50.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)

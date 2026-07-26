@@ -1,0 +1,7 @@
+{
+  "slug": "timestamp-relative",
+  "difficulty": "simple",
+  "prompt": "Show that an update at 12:05 UTC happened relative to a server render time of 12:00 UTC, using a non-refreshing Tale UI Timestamp.",
+  "reference": "import { Timestamp } from '@tale-ui/react/timestamp';\n\nexport function UpdateTime() {\n  return (\n    <Timestamp\n      value=\"2026-07-27T12:05:00Z\"\n      locale=\"en-AU\"\n      timeZone=\"Australia/Melbourne\"\n      format=\"relative\"\n      now=\"2026-07-27T12:00:00Z\"\n      refreshInterval={0}\n    />\n  );\n}",
+  "tags": ["Timestamp"]
+}

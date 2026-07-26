@@ -8,6 +8,7 @@ All notable changes to the component styles package are documented in this file.
 
 - Added standalone styles and package exports for AspectRatio, Blockquote, ButtonGroup, Code, and
   Skeleton.
+- Added standalone styles and package exports for Citation, Markdown, Outline, and Timestamp.
 
 ### Changed
 

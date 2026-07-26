@@ -9,6 +9,9 @@ All notable changes to the Tale UI monorepo are documented in this file.
 - **Component-equivalence Bundle 1**: Added experimental AspectRatio, Blockquote, ButtonGroup,
   Code, and Skeleton components with complete package, documentation, accessibility, visual,
   registry, Figma, and golden-guidance coverage.
+- **Component-equivalence Bundle 2**: Added experimental Citation, Markdown, Outline, and
+  Timestamp components, the bounded Markdown parser contract, shared timestamp scheduling, the
+  `document-sources` recipe, and maintained component-performance evidence.
 
 ### Changed
 

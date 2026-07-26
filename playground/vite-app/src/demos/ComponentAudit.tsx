@@ -41,6 +41,7 @@ import { ContextMenu } from '@tale-ui/react/context-menu';
 import { CommandPalette } from '@tale-ui/react/command-palette';
 import { NavigationMenu } from '@tale-ui/react/navigation-menu';
 import { Menubar } from '@tale-ui/react/menubar';
+import { Outline } from '@tale-ui/react/outline';
 
 // Layout
 import { Carousel } from '@tale-ui/react/carousel';
@@ -116,6 +117,7 @@ import { DatePicker } from '@tale-ui/react/date-picker';
 import { DateRangePicker } from '@tale-ui/react/date-range-picker';
 import { TimeField } from '@tale-ui/react/time-field';
 import { RangeCalendar } from '@tale-ui/react/range-calendar';
+import { Timestamp } from '@tale-ui/react/timestamp';
 
 // Color
 import { ColorArea } from '@tale-ui/react/color-area';
@@ -165,8 +167,10 @@ import { PaymentInput } from '@tale-ui/react/payment-input';
 import { Text } from '@tale-ui/react/text';
 import { Kbd } from '@tale-ui/react/kbd';
 import { Blockquote } from '@tale-ui/react/blockquote';
+import { Citation } from '@tale-ui/react/citation';
 import { Code } from '@tale-ui/react/code';
 import { CodeBlock } from '@tale-ui/react/code-block';
+import { Markdown } from '@tale-ui/react/markdown';
 import { QRCode } from '@tale-ui/react/qr-code';
 import { ImageCropper } from '@tale-ui/react/image-cropper';
 import { VideoPlayer } from '@tale-ui/react/video-player';
@@ -338,6 +342,7 @@ const TOC = [
       { id: 'date-picker', label: 'DatePicker' },
       { id: 'date-range-picker', label: 'DateRangePicker' },
       { id: 'range-calendar', label: 'RangeCalendar' },
+      { id: 'timestamp', label: 'Timestamp' },
     ],
   },
   {
@@ -373,6 +378,7 @@ const TOC = [
       { id: 'menubar', label: 'Menubar' },
       { id: 'breadcrumbs', label: 'Breadcrumbs' },
       { id: 'link', label: 'Link' },
+      { id: 'outline', label: 'Outline' },
       { id: 'pagination', label: 'Pagination' },
       { id: 'pagination-dot', label: 'PaginationDot' },
       { id: 'pagination-line', label: 'PaginationLine' },
@@ -453,9 +459,11 @@ const TOC = [
     category: 'Typography',
     items: [
       { id: 'blockquote', label: 'Blockquote' },
+      { id: 'citation', label: 'Citation' },
       { id: 'code', label: 'Code' },
       { id: 'code-block', label: 'CodeBlock' },
       { id: 'kbd', label: 'Kbd' },
+      { id: 'markdown', label: 'Markdown' },
       { id: 'text', label: 'Text' },
     ],
   },
@@ -6245,6 +6253,26 @@ export default function ComponentAudit() {
           </RangeCalendar.Root>
         </Section>
 
+        <Section id="timestamp" title="Timestamp" classes={['tale-timestamp']}>
+          <SubHeading>Absolute and relative</SubHeading>
+          <LayoutRow gap="m">
+            <Timestamp
+              value="2026-07-27T04:30:00Z"
+              locale="en-AU"
+              timeZone="Australia/Melbourne"
+              format="datetime"
+            />
+            <Timestamp
+              value="2026-07-27T04:35:00Z"
+              locale="en-AU"
+              timeZone="Australia/Melbourne"
+              format="relative"
+              now="2026-07-27T04:30:00Z"
+              refreshInterval={0}
+            />
+          </LayoutRow>
+        </Section>
+
         {/* ============================================================= */}
         {/* COLOR                                                          */}
         {/* ============================================================= */}
@@ -6898,6 +6926,30 @@ export default function ComponentAudit() {
           </div>
         </Section>
 
+        <Section
+          id="outline"
+          title="Outline"
+          classes={[
+            'tale-outline',
+            'tale-outline__list',
+            'tale-outline__list--nested',
+            'tale-outline__item',
+            'tale-outline__link',
+          ]}
+        >
+          <SubHeading>Nested document navigation</SubHeading>
+          <Outline
+            aria-label="On this page"
+            observeTargets={false}
+            defaultActiveId="overview"
+            items={[
+              { id: 'overview', targetId: 'audit-outline-overview', label: 'Overview', level: 1 },
+              { id: 'setup', targetId: 'audit-outline-setup', label: 'Setup', level: 2 },
+              { id: 'api', targetId: 'audit-outline-api', label: 'API', level: 1 },
+            ]}
+          />
+        </Section>
+
         {/* ============================================================= */}
         {/* TYPOGRAPHY                                                     */}
         {/* ============================================================= */}
@@ -6913,6 +6965,39 @@ export default function ComponentAudit() {
             </Blockquote.Content>
             <Blockquote.Attribution>Tale UI</Blockquote.Attribution>
           </Blockquote.Root>
+        </Section>
+
+        <Section
+          id="citation"
+          title="Citation"
+          classes={[
+            'tale-citation',
+            'tale-citation__reference',
+            'tale-citation__reference-link',
+            'tale-citation__list',
+            'tale-citation__source',
+            'tale-citation__title',
+            'tale-citation__metadata',
+          ]}
+        >
+          <Citation.Root
+            id="component-audit-note"
+            baseUrl="https://www.w3.org/"
+            sources={[
+              {
+                id: 'aria-apg',
+                title: 'WAI-ARIA Authoring Practices Guide',
+                href: '/WAI/ARIA/apg/',
+                publisher: 'W3C',
+              },
+            ]}
+          >
+            <Text>
+              Use established interaction patterns
+              <Citation.Reference sourceId="aria-apg" />.
+            </Text>
+            <Citation.List />
+          </Citation.Root>
         </Section>
 
         <Section id="code" title="Code" classes={['tale-code']}>
@@ -6947,6 +7032,14 @@ export default function ComponentAudit() {
             <Kbd size="sm">Esc</Kbd>
             <Kbd size="md">Enter</Kbd>
           </div>
+        </Section>
+
+        <Section id="markdown" title="Markdown" classes={['tale-markdown']}>
+          <Markdown baseUrl="https://docs.example.com/">
+            {
+              '## Bounded content\n\nUse **semantic output** and a [safe relative link](./trust-guide).\n\n> Raw HTML remains outside the trust boundary.'
+            }
+          </Markdown>
         </Section>
 
         <Section

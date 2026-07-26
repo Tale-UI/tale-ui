@@ -8,10 +8,27 @@ import {
 } from '@tale-ui/react/blockquote';
 import { Button, type ButtonProps } from '@tale-ui/react/button';
 import { ButtonGroup, type ButtonGroupProps } from '@tale-ui/react/button-group';
+import {
+  Citation,
+  type CitationListProps,
+  type CitationReferenceProps,
+  type CitationRootProps,
+  type CitationSource,
+} from '@tale-ui/react/citation';
 import { Code, type CodeProps } from '@tale-ui/react/code';
 import type { DialogRootProps } from '@tale-ui/react/dialog';
+import { Markdown, type MarkdownProps } from '@tale-ui/react/markdown';
+import { Outline, type OutlineItem, type OutlineProps } from '@tale-ui/react/outline';
 import { Skeleton, type SkeletonProps } from '@tale-ui/react/skeleton';
 import type { TableControllerQuery } from '@tale-ui/react/table';
+import {
+  Timestamp,
+  type AbsoluteTimestampProps,
+  type RelativeTimestampProps,
+  type TimestampFormatOptions,
+  type TimestampProps,
+  type TimestampValue,
+} from '@tale-ui/react/timestamp';
 
 const buttonProps = {
   children: 'Save',
@@ -92,6 +109,85 @@ export const skeletonPropsContract = {
 } satisfies SkeletonProps;
 
 export const skeletonContract = <Skeleton {...skeletonPropsContract} />;
+
+const citationSources = [
+  {
+    id: 'aria-apg',
+    title: 'WAI-ARIA Authoring Practices Guide',
+    href: '/WAI/ARIA/apg/',
+  },
+] satisfies readonly CitationSource[];
+
+export const citationRootPropsContract = {
+  id: 'research-note',
+  sources: citationSources,
+  baseUrl: 'https://www.w3.org/',
+  children: null,
+} satisfies CitationRootProps;
+
+export const citationReferencePropsContract = {
+  sourceId: 'aria-apg',
+} satisfies CitationReferenceProps;
+
+export const citationListPropsContract = {
+  emptyFallback: 'No sources',
+} satisfies CitationListProps;
+
+export const citationContract = (
+  <Citation.Root {...citationRootPropsContract}>
+    <Citation.Reference {...citationReferencePropsContract} />
+    <Citation.List {...citationListPropsContract} />
+  </Citation.Root>
+);
+
+export const markdownPropsContract = {
+  children: 'Read the [guide](./guide).',
+  baseUrl: 'https://docs.example.com/',
+  invalidFallback: 'Document unavailable',
+} satisfies MarkdownProps;
+
+export const markdownContract = <Markdown {...markdownPropsContract} />;
+
+const outlineItems = [
+  { id: 'overview', targetId: 'overview', label: 'Overview', level: 1 },
+  { id: 'setup', targetId: 'setup', label: 'Setup', level: 2 },
+] satisfies readonly OutlineItem[];
+
+export const outlinePropsContract = {
+  'aria-label': 'On this page',
+  items: outlineItems,
+  defaultActiveId: 'overview',
+} satisfies OutlineProps;
+
+export const outlineContract = <Outline {...outlinePropsContract} />;
+
+export const timestampValueContract: TimestampValue = '2026-07-27T12:05:00Z';
+
+export const timestampFormatOptionsContract = {
+  month: 'long',
+  day: 'numeric',
+} satisfies TimestampFormatOptions;
+
+export const absoluteTimestampPropsContract = {
+  value: timestampValueContract,
+  locale: 'en-AU',
+  timeZone: 'Australia/Melbourne',
+  format: 'date',
+  formatOptions: timestampFormatOptionsContract,
+} satisfies AbsoluteTimestampProps;
+
+export const relativeTimestampPropsContract = {
+  value: timestampValueContract,
+  locale: 'en-AU',
+  timeZone: 'Australia/Melbourne',
+  format: 'relative',
+  now: '2026-07-27T12:00:00Z',
+  refreshInterval: 0,
+} satisfies RelativeTimestampProps;
+
+export const timestampPropsContract: TimestampProps = relativeTimestampPropsContract;
+export const absoluteTimestampContract = <Timestamp {...absoluteTimestampPropsContract} />;
+export const relativeTimestampContract = <Timestamp {...relativeTimestampPropsContract} />;
 
 export const dialogContract = {
   defaultOpen: false,
@@ -192,3 +288,66 @@ export const childSkeletonContract = (
   // @ts-expect-error Skeleton always renders an empty span.
   <Skeleton>Loading</Skeleton>
 );
+
+export const unsafeCitationHtmlContract = {
+  id: 'research-note',
+  sources: citationSources,
+  children: null,
+  // @ts-expect-error Citation does not expose raw HTML injection.
+  dangerouslySetInnerHTML: { __html: '<img src=x>' },
+} satisfies CitationRootProps;
+
+export const numberedCitationListContract = {
+  // @ts-expect-error Citation owns decimal list numbering from one.
+  start: 2,
+} satisfies CitationListProps;
+
+export const unsafeMarkdownHtmlContract = {
+  children: '# Safe content',
+  // @ts-expect-error Markdown never exposes raw HTML injection.
+  dangerouslySetInnerHTML: { __html: '<img src=x>' },
+} satisfies MarkdownProps;
+
+export const invalidMarkdownChildrenContract = (
+  // @ts-expect-error Markdown accepts string source only.
+  <Markdown>{['# Heading']}</Markdown>
+);
+
+export const unnamedOutlineContract = (
+  // @ts-expect-error Outline requires exactly one accessible-name branch.
+  <Outline items={outlineItems} />
+);
+
+export const conflictingOutlineNameContract = (
+  // @ts-expect-error Outline cannot receive both accessible-name properties.
+  <Outline aria-label="On this page" aria-labelledby="outline-heading" items={outlineItems} />
+);
+
+export const conflictingOutlineStateContract = (
+  // @ts-expect-error Outline cannot be controlled and uncontrolled simultaneously.
+  <Outline
+    aria-label="On this page"
+    items={outlineItems}
+    activeId="overview"
+    defaultActiveId="overview"
+  />
+);
+
+// @ts-expect-error Absolute Timestamp does not accept a relative clock.
+export const absoluteTimestampNowContract: TimestampProps = {
+  value: timestampValueContract,
+  locale: 'en-AU',
+  timeZone: 'Australia/Melbourne',
+  format: 'date',
+  now: '2026-07-27T12:00:00Z',
+};
+
+export const relativeTimestampOptionsContract = {
+  value: timestampValueContract,
+  locale: 'en-AU',
+  timeZone: 'Australia/Melbourne',
+  format: 'relative',
+  now: '2026-07-27T12:00:00Z',
+  // @ts-expect-error Relative Timestamp does not accept absolute format options.
+  formatOptions: { year: 'numeric' },
+} satisfies TimestampProps;

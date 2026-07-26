@@ -30,7 +30,7 @@ Unified monorepo managed with **pnpm workspaces**. This repository is the single
 | [docs/authoring-components.md](docs/authoring-components.md)                     | Contributor guide: adding new `@tale-ui/react` components                                         |
 | [docs/react-aria-deviations.md](docs/react-aria-deviations.md)                   | Every difference between Tale UI and vanilla React Aria Components                                |
 | [docs/upstream/react-aria-components.md](docs/upstream/react-aria-components.md) | Maintainer log for how Tale UI adopts, defers, or rejects upstream React Aria Components releases |
-| [docs/component-index.md](docs/component-index.md)                               | All 125 React components plus 6 chart components at a glance: description, import path, sub-parts |
+| [docs/component-index.md](docs/component-index.md)                               | All 129 React components plus 6 chart components at a glance: description, import path, sub-parts |
 | [registry/components.json](registry/components.json)                             | Machine-readable component registry: props, parts, examples, CSS classes                          |
 | [docs/components/](docs/components/index.md)                                     | Per-component usage guide: imports, parts, examples, CSS classes                                  |
 | [docs/recipes/](docs/recipes/index.md)                                           | Copy-paste multi-component patterns (forms, tables, navigation, search, settings)                 |
@@ -274,15 +274,15 @@ Format:
 
 ## Component Artifact Audit
 
-Status of required artifacts for all 125 components. When adding or updating a component, update the relevant row below.
+Status of required artifacts for all 129 components. When adding or updating a component, update the relevant row below.
 
 **Legend:** styled = `{Component}.styled.tsx` | index = `index.ts` | test = `{Component}.test.tsx` (non-trivial logic only) | css = `{component}.css` in styles/src | prim = `_primitives.css` entry (if shared declarations apply) | doc = `docs/components/{name}.md` | snip = consumer-claude-md-snippet.md | rdme = react/README.md | idx = `docs/component-index.md` entry | story = Storybook story | audit = ComponentAudit.tsx entry | a2ui = A2UI catalog adapter in `packages/a2ui/src/catalog.ts` | status = `@status` JSDoc tag in `{Component}.styled.tsx` (`stable` \| `experimental` \| `deprecated`)
 
 **✓** = present | **✗** = missing | **n/a** = not applicable
 
-**Non-trivial components requiring tests:** Drawer (custom state/swipe), Meter (percentage calc), ProgressBar (percentage calc + indeterminate), ColorModeToggle (localStorage/OS preference), Tabs (MutationObserver/ResizeObserver indicator), KeyValuePairs (ResizeObserver column calculation)
+**Non-trivial components requiring tests:** Drawer (custom state/swipe), Meter (percentage calc), ProgressBar (percentage calc + indeterminate), ColorModeToggle (localStorage/OS preference), Tabs (MutationObserver/ResizeObserver indicator), KeyValuePairs (ResizeObserver column calculation), Citation (normalization/source identity), Markdown (bounded parsing/filtering), Outline (observer/state reconciliation), Timestamp (formatting/shared scheduler)
 
-**Total:** 125 components | **Fully complete:** 125 | **Missing artifacts:** 0
+**Total:** 129 components | **Fully complete:** 129 | **Missing artifacts:** 0
 
 ### Form Controls
 
@@ -320,14 +320,15 @@ Status of required artifacts for all 125 components. When adding or updating a c
 
 ### Date & Time
 
-| Component       | styled | index | test | css | prim | doc | snip | rdme | idx | story | audit | a2ui | status |
-| --------------- | ------ | ----- | ---- | --- | ---- | --- | ---- | ---- | --- | ----- | ----- | ---- | ------ |
-| Calendar        | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| RangeCalendar   | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| DateField       | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| DatePicker      | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| DateRangePicker | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| TimeField       | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
+| Component       | styled | index | test | css | prim | doc | snip | rdme | idx | story | audit | a2ui | status       |
+| --------------- | ------ | ----- | ---- | --- | ---- | --- | ---- | ---- | --- | ----- | ----- | ---- | ------------ |
+| Calendar        | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| RangeCalendar   | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| DateField       | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| DatePicker      | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| DateRangePicker | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| TimeField       | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Timestamp       | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
 
 ### Color
 
@@ -354,20 +355,21 @@ Status of required artifacts for all 125 components. When adding or updating a c
 
 ### Navigation
 
-| Component      | styled | index | test | css | prim | doc | snip | rdme | idx | story | audit | a2ui | status |
-| -------------- | ------ | ----- | ---- | --- | ---- | --- | ---- | ---- | --- | ----- | ----- | ---- | ------ |
-| Menu           | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| ContextMenu    | ✓      | ✓     | n/a  | n/a | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| CommandPalette | ✓      | ✓     | ✓    | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | stable |
-| NavigationMenu | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| Menubar        | ✓      | ✓     | n/a  | n/a | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | stable |
-| Breadcrumbs    | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| Link           | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| Pagination     | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable |
-| PaginationDot  | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | stable |
-| PaginationLine | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | stable |
-| Sidebar        | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | stable |
-| HeaderNav      | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | stable |
+| Component      | styled | index | test | css | prim | doc | snip | rdme | idx | story | audit | a2ui | status       |
+| -------------- | ------ | ----- | ---- | --- | ---- | --- | ---- | ---- | --- | ----- | ----- | ---- | ------------ |
+| Menu           | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| ContextMenu    | ✓      | ✓     | n/a  | n/a | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| CommandPalette | ✓      | ✓     | ✓    | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | stable       |
+| NavigationMenu | ✓      | ✓     | n/a  | ✓   | ✓    | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Menubar        | ✓      | ✓     | n/a  | n/a | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | stable       |
+| Breadcrumbs    | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Link           | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| Outline        | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
+| Pagination     | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
+| PaginationDot  | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | stable       |
+| PaginationLine | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | stable       |
+| Sidebar        | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | stable       |
+| HeaderNav      | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | stable       |
 
 ### Layout
 
@@ -456,9 +458,11 @@ Status of required artifacts for all 125 components. When adding or updating a c
 | Component  | styled | index | test | css | prim | doc | snip | rdme | idx | story | audit | a2ui | status       |
 | ---------- | ------ | ----- | ---- | --- | ---- | --- | ---- | ---- | --- | ----- | ----- | ---- | ------------ |
 | Blockquote | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
+| Citation   | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
 | Code       | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
 | CodeBlock  | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | experimental |
 | Kbd        | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | experimental |
+| Markdown   | ✓      | ✓     | ✓    | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | n/a  | experimental |
 | Text       | ✓      | ✓     | n/a  | ✓   | n/a  | ✓   | ✓    | ✓    | ✓   | ✓     | ✓     | ✓    | stable       |
 
 ### Utility

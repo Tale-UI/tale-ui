@@ -1,0 +1,7 @@
+{
+  "slug": "citation-research-note",
+  "difficulty": "medium",
+  "prompt": "Render a Tale UI research note that references one source twice and includes its generated source list.",
+  "reference": "import { Citation } from '@tale-ui/react/citation';\n\nconst sources = [\n  {\n    id: 'aria-apg',\n    title: 'WAI-ARIA Authoring Practices Guide',\n    href: '/WAI/ARIA/apg/',\n    publisher: 'W3C',\n  },\n] as const;\n\nexport function ResearchNote() {\n  return (\n    <Citation.Root id=\"research-note\" sources={sources} baseUrl=\"https://www.w3.org/\">\n      Use native semantics<Citation.Reference sourceId=\"aria-apg\" /> and established patterns<Citation.Reference sourceId=\"aria-apg\" />.\n      <Citation.List />\n    </Citation.Root>\n  );\n}",
+  "tags": ["Citation"]
+}

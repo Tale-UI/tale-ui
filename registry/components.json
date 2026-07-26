@@ -2280,6 +2280,69 @@
       ]
     },
     {
+      "name": "Citation",
+      "slug": "citation",
+      "import": "@tale-ui/react/citation",
+      "category": "Typography",
+      "description": "Normalized document sources with shared reference ordinals",
+      "kind": "compound",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "sources",
+          "type": "readonly CitationSource[]",
+          "required": true,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "baseUrl",
+          "type": "string",
+          "required": false,
+          "description": null,
+          "default": null
+        }
+      ],
+      "parts": [
+        "Root",
+        "Reference",
+        "List"
+      ],
+      "examples": [
+        "import { Citation } from '@tale-ui/react/citation';\n\nconst sources = [\n  {\n    id: 'wai-aria',\n    title: 'WAI-ARIA Authoring Practices Guide',\n    href: '/WAI/ARIA/apg/',\n    publisher: 'W3C',\n    publishedAt: '2025-12-16T09:30:00+00:00',\n  },\n] as const;\n\nexport function AccessibleResearchNote() {\n  return (\n    <Citation.Root id=\"accessibility-note\" sources={sources} baseUrl=\"https://www.w3.org/\">\n      Follow established interaction patterns\n      <Citation.Reference sourceId=\"wai-aria\" />.\n      <Citation.List />\n    </Citation.Root>\n  );\n}"
+      ],
+      "cssClasses": [
+        "tale-citation",
+        "tale-citation__list",
+        "tale-citation__metadata",
+        "tale-citation__reference",
+        "tale-citation__reference-link",
+        "tale-citation__source",
+        "tale-citation__title"
+      ],
+      "pitfalls": [
+        {
+          "id": "citation-numbering-is-owned",
+          "summary": "Let Citation own source numbering",
+          "detail": "ordinals come from normalized source order, repeated references share the same target, and `Citation.List` always uses decimal numbering from one.",
+          "antiPatterns": [
+            "<Citation.List start={0} type=\"a\" />"
+          ],
+          "fixes": [
+            "<Citation.List />"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
       "name": "Code",
       "slug": "code",
       "import": "@tale-ui/react/code",
@@ -6539,6 +6602,55 @@
       "crossPitfallRefs": null
     },
     {
+      "name": "Markdown",
+      "slug": "markdown",
+      "import": "@tale-ui/react/markdown",
+      "category": "Typography",
+      "description": "Bounded Markdown rendered through Tale semantic primitives",
+      "kind": "simple",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "baseUrl",
+          "type": "string",
+          "required": false,
+          "description": "Absolute credential-free HTTP(S) base used only to resolve relative links.",
+          "default": null
+        },
+        {
+          "name": "invalidFallback",
+          "type": "React.ReactNode",
+          "required": false,
+          "description": "Content shown when parsing or filtering fails. @default \"Content unavailable\"",
+          "default": null
+        }
+      ],
+      "parts": null,
+      "examples": [
+        "import { Markdown } from '@tale-ui/react/markdown';\nimport '@tale-ui/react-styles/markdown';",
+        "<Markdown baseUrl=\"https://docs.example.com/\">\n  {'## Security\\n\\nRead the [trust guide](/trust-guide).'}\n</Markdown>"
+      ],
+      "cssClasses": [
+        "tale-blockquote",
+        "tale-code-block",
+        "tale-markdown"
+      ],
+      "pitfalls": [
+        {
+          "id": "markdown-fixed-trust-boundary",
+          "summary": "Keep Markdown inside its fixed trust boundary",
+          "detail": "Markdown exposes no plugin, raw HTML, AST, renderer, URL transformer, highlighter, or executable extension API.",
+          "antiPatterns": [
+            "<Markdown plugins={[unsafeHtmlPlugin]}>{source}</Markdown>"
+          ],
+          "fixes": [
+            "<Markdown baseUrl=\"https://docs.example.com/\" invalidFallback=\"Document unavailable\">{source}</Markdown>"
+          ]
+        }
+      ],
+      "crossPitfallRefs": null
+    },
+    {
       "name": "Menu",
       "slug": "menu",
       "import": "@tale-ui/react/menu",
@@ -7234,6 +7346,107 @@
       "crossPitfallRefs": [
         "minvalue-maxvalue-not-min-max"
       ]
+    },
+    {
+      "name": "Outline",
+      "slug": "outline",
+      "import": "@tale-ui/react/outline",
+      "category": "Navigation",
+      "description": "Document outline navigation with active-heading observation",
+      "kind": "simple",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "activeId",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "defaultActiveId",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "dangerouslySetInnerHTML",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "getObserverRoot",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "items",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "observeTargets",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "observerRootMargin",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "observerThreshold",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "onAction",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "onActiveChange",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "role",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        }
+      ],
+      "parts": null,
+      "examples": [
+        "import { Outline } from '@tale-ui/react/outline';\n\nconst items = [\n  { id: 'overview', targetId: 'overview', label: 'Overview', level: 1 },\n  { id: 'setup', targetId: 'setup', label: 'Setup', level: 2 },\n  { id: 'api', targetId: 'api', label: 'API', level: 1 },\n] as const;\n\nexport function ArticleOutline() {\n  return <Outline aria-label=\"On this page\" items={items} />;\n}"
+      ],
+      "cssClasses": [
+        "tale-outline",
+        "tale-outline__item",
+        "tale-outline__link",
+        "tale-outline__list",
+        "tale-outline__list--nested"
+      ],
+      "pitfalls": null,
+      "crossPitfallRefs": null
     },
     {
       "name": "Pagination",
@@ -10715,6 +10928,103 @@
         "no-native-date",
         "derive-date-type-from-props"
       ]
+    },
+    {
+      "name": "Timestamp",
+      "slug": "timestamp",
+      "import": "@tale-ui/react/timestamp",
+      "category": "Date & Time",
+      "description": "Locale- and timezone-explicit absolute or relative time",
+      "kind": "simple",
+      "status": "experimental",
+      "props": [
+        {
+          "name": "dangerouslySetInnerHTML",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "dateTime",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "format",
+          "type": "'date' | 'time' | 'datetime' | 'relative'",
+          "required": false,
+          "description": null,
+          "default": null,
+          "allowedValues": [
+            "date",
+            "time",
+            "datetime",
+            "relative"
+          ]
+        },
+        {
+          "name": "formatOptions",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "invalidFallback",
+          "type": "React.ReactNode",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "locale",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "now",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "refreshInterval",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "timeZone",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        },
+        {
+          "name": "value",
+          "type": "unknown",
+          "required": false,
+          "description": null,
+          "default": null
+        }
+      ],
+      "parts": null,
+      "examples": [
+        "import { Timestamp } from '@tale-ui/react/timestamp';\n\nexport function PublishedAt() {\n  return (\n    <Timestamp\n      value=\"2026-07-27T04:30:00+00:00\"\n      locale=\"en-AU\"\n      timeZone=\"Australia/Melbourne\"\n      format=\"datetime\"\n    />\n  );\n}",
+        "import { Timestamp } from '@tale-ui/react/timestamp';\n\nconst renderedAt = Date.parse('2026-07-27T04:00:00Z');\n\nexport function RecentActivity() {\n  return (\n    <Timestamp\n      value=\"2026-07-27T04:05:00Z\"\n      locale=\"en-AU\"\n      timeZone=\"Australia/Melbourne\"\n      format=\"relative\"\n      now={renderedAt}\n      refreshInterval={60_000}\n    />\n  );\n}"
+      ],
+      "cssClasses": [
+        "tale-timestamp"
+      ],
+      "pitfalls": null,
+      "crossPitfallRefs": null
     },
     {
       "name": "ToggleButton",

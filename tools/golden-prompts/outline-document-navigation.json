@@ -1,0 +1,7 @@
+{
+  "slug": "outline-document-navigation",
+  "difficulty": "medium",
+  "prompt": "Add a Tale UI on-this-page outline with nested Installation and Configuration links beneath Overview.",
+  "reference": "import { Outline } from '@tale-ui/react/outline';\n\nconst items = [\n  { id: 'overview', targetId: 'overview', label: 'Overview', level: 1 },\n  { id: 'installation', targetId: 'installation', label: 'Installation', level: 2 },\n  { id: 'configuration', targetId: 'configuration', label: 'Configuration', level: 2 },\n] as const;\n\nexport function DocumentationOutline() {\n  return <Outline aria-label=\"On this page\" items={items} />;\n}",
+  "tags": ["Outline"]
+}

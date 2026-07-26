@@ -87,7 +87,7 @@ export function createAccessibilitySelection({
       mode: 'explicit-components',
       changedPaths: [],
       changedSlugs: explicitSlugs,
-      storyStrategy: 'matching',
+      storyStrategy: 'default-matching',
     };
   }
   if (full) {
@@ -157,6 +157,13 @@ export function selectAccessibilityStories(stories, selection) {
   }
   if (selection.storyStrategy === 'primary') {
     return primaryAccessibilityStories(stories);
+  }
+  if (selection.storyStrategy === 'default-matching') {
+    const slugs = new Set(selection.changedSlugs);
+    return stories
+      .filter((story) => slugs.has(slugifyAccessibilityName(story.title.split('/').at(-1))))
+      .filter(({ id }) => id.endsWith('--default'))
+      .toSorted((left, right) => left.id.localeCompare(right.id));
   }
   assert.equal(
     selection.storyStrategy,

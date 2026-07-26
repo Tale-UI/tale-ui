@@ -97,7 +97,7 @@ Autocomplete · Button · Button Group · Checkbox Field · Checkbox Group · Co
 
 ### Date & Time
 
-Calendar · Date Field · Date Picker · Date Range Picker · Range Calendar · Time Field
+Calendar · Date Field · Date Picker · Date Range Picker · Range Calendar · Time Field · Timestamp
 
 ### Color
 
@@ -109,7 +109,7 @@ Alert Dialog · Dialog · Drawer · Popover · Preview Card · Tooltip
 
 ### Navigation
 
-Breadcrumbs · Command Palette · Context Menu · Header Nav · Link · Menu · Menubar · Navigation Menu · Pagination · Pagination Dot · Pagination Line · Sidebar
+Breadcrumbs · Command Palette · Context Menu · Header Nav · Link · Menu · Menubar · Navigation Menu · Outline · Pagination · Pagination Dot · Pagination Line · Sidebar
 
 ### Layout
 
@@ -137,7 +137,7 @@ App Store Button · Social Button · Social Button Group · Badge Group · Secti
 
 ### Typography
 
-Blockquote · Code · Code Block · Kbd · Text
+Blockquote · Citation · Code · Code Block · Kbd · Markdown · Text
 
 ### Utilities
 
@@ -214,7 +214,8 @@ https://raw.githubusercontent.com/Tale-UI/tale-ui/main/docs/components/{name}.md
 ```
 
 For example: `app-shell.md`, `aspect-ratio.md`, `blockquote.md`, `button-group.md`,
-`chat.md`, `code.md`, `code-block.md`, `kbd.md`, `skeleton.md`, `button.md`, `dialog.md`, `select.md`,
+`chat.md`, `citation.md`, `code.md`, `code-block.md`, `kbd.md`, `markdown.md`,
+`outline.md`, `skeleton.md`, `timestamp.md`, `button.md`, `dialog.md`, `select.md`,
 `checkbox.md`, `tabs.md`, `table.md`, `date-picker.md`.
 
 ## License

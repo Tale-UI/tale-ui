@@ -384,6 +384,15 @@ export default defineConfig(
     },
   },
   {
+    name: 'Deterministic component performance fixtures',
+    files: ['tools/performance-fixtures/component-expansion/**/*.{ts,tsx}'],
+    rules: {
+      'import/extensions': 'off',
+      'import/no-relative-packages': 'off',
+      'prefer-template': 'off',
+    },
+  },
+  {
     name: 'CommonJS tooling',
     files: ['tools/**/*.js', 'scripts/**/*.js', 'packages/*/bin/**/*.js'],
     rules: {
