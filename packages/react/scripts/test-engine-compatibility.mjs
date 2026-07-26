@@ -2,7 +2,7 @@
 
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -50,9 +50,26 @@ try {
     join(fixtureRoot, 'package.json'),
     `${JSON.stringify({ name: 'tale-node16-rejection', private: true }, null, 2)}\n`,
   );
+  const packedDirectory = dirname(tarball);
+  const internalTarballs = (await readdir(packedDirectory))
+    .filter((name) => /^tale-ui-(?:css|react-styles|utils)-3\.0\.0\.tgz$/.test(name))
+    .sort()
+    .map((name) => join(packedDirectory, name));
+  assert.equal(
+    internalTarballs.length,
+    3,
+    'The Node 16 probe requires packed CSS, Styles, and Utils siblings so it never consults unpublished React 3 dependencies.',
+  );
   const result = spawnSync(
     npm,
-    ['install', '--engine-strict', '--ignore-scripts', '--no-package-lock', tarball],
+    [
+      'install',
+      '--engine-strict',
+      '--ignore-scripts',
+      '--no-package-lock',
+      ...internalTarballs,
+      tarball,
+    ],
     {
       cwd: fixtureRoot,
       encoding: 'utf8',
