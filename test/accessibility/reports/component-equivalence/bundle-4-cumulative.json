@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "runner": {
+    "name": "axe-core",
+    "version": "4.11.1"
+  },
+  "selection": {
+    "base": "origin/main",
+    "mode": "explicit-components",
+    "changedPaths": [],
+    "changedSlugs": [
+      "aspect-ratio",
+      "blockquote",
+      "button-group",
+      "citation",
+      "code",
+      "lightbox",
+      "markdown",
+      "outline",
+      "overflow-list",
+      "resizable",
+      "skeleton",
+      "timestamp",
+      "toast"
+    ],
+    "storyCount": 13,
+    "stories": [
+      "components-aspectratio--default",
+      "components-blockquote--default",
+      "components-buttongroup--default",
+      "components-citation--default",
+      "components-code--default",
+      "components-lightbox--default",
+      "components-markdown--default",
+      "components-outline--default",
+      "components-overflowlist--default",
+      "components-resizable--default",
+      "components-skeleton--default",
+      "components-timestamp--default",
+      "components-toast--default"
+    ]
+  },
+  "totals": {
+    "violations": 0,
+    "newViolations": 0,
+    "resolvedBaselineViolations": 0,
+    "activeExceptions": 0
+  },
+  "violations": [],
+  "newViolations": [],
+  "resolvedBaselineViolations": []
+}
