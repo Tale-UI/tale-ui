@@ -151,6 +151,7 @@
     "./text-editor": "./src/text-editor/index.ts",
     "./text-field": "./src/text-field/index.ts",
     "./timestamp": "./src/timestamp/index.ts",
+    "./toast": "./src/toast/index.ts",
     "./time-field": "./src/time-field/index.ts",
     "./toggle-button": "./src/toggle-button/index.ts",
     "./toggle-group": "./src/toggle-group/index.ts",

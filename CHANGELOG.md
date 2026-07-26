@@ -15,6 +15,9 @@ All notable changes to the Tale UI monorepo are documented in this file.
 - **Component-equivalence Bundle 3**: Added experimental OverflowList, Resizable, and Lightbox
   components with responsive action, split-workspace, and media-viewing recipes plus maintained
   Chromium performance evidence.
+- **Component-equivalence Bundle 4**: Added experimental Toast with a Tale-owned stable queue
+  adapter, deterministic recovery, timers, announcements, Region leases, async-feedback guidance,
+  and maintained component-performance evidence.
 
 ### Changed
 

@@ -20,6 +20,8 @@
     "pagination.previous",
     "table.empty",
     "table.loading",
-    "table.page"
+    "table.page",
+    "toast.dismiss",
+    "toast.region"
   ]
 }

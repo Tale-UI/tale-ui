@@ -176,9 +176,9 @@
         "asOf": "2026-07-25T00:00:00.000Z"
       },
       "value": {
-        "artifacts": 928,
-        "components": 132,
-        "componentDocs": 132,
+        "artifacts": 931,
+        "components": 133,
+        "componentDocs": 133,
         "templates": 12,
         "migrationGroups": 4
       },
@@ -205,7 +205,7 @@
         "asOf": "2026-07-25T00:00:00.000Z"
       },
       "value": {
-        "goldenPrompts": 159,
+        "goldenPrompts": 160,
         "knownLegacyAxeViolations": 213,
         "changedComponentAxeGate": true,
         "maintainedPerformanceBudgets": 8
@@ -277,5 +277,5 @@
       "decisionUse": false
     }
   ],
-  "digest": "sha256:3ad02d86368f2f8a2c6963d8c0ef450cdca22acbc2d860b9f9755684461d9833"
+  "digest": "sha256:535af9fb9668a4cc0bc9bdd82f15e745eef4f2b814085cc54a20c43bfdafb930"
 }

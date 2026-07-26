@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "reportType": "ownership",
-  "sourceRevision": "sha256:df6322fd5008b70e65fb814edc87f20ec8f3c6f17552d04bbd8106cf993d74f6",
-  "artifactCount": 928,
+  "sourceRevision": "sha256:dfcd892d80810cc08ae277aa212dd8b3c3c5b5e74ad2f090e82e6f07e0ffe1d9",
+  "artifactCount": 931,
   "owners": [
     {
       "id": "design-systems",
       "name": "Design Systems",
       "contact": "@tale-ui/design-systems",
-      "artifactCount": 314,
+      "artifactCount": 316,
       "artifacts": [
         "tale:component:accordion",
         "tale:component:alert-dialog",
@@ -135,6 +135,7 @@
         "tale:component:text-field",
         "tale:component:time-field",
         "tale:component:timestamp",
+        "tale:component:toast",
         "tale:component:toggle-button",
         "tale:component:toggle-group",
         "tale:component:toolbar",
@@ -276,6 +277,7 @@
         "tale:doc:docs-components-text-field",
         "tale:doc:docs-components-time-field",
         "tale:doc:docs-components-timestamp",
+        "tale:doc:docs-components-toast",
         "tale:doc:docs-components-toggle-button",
         "tale:doc:docs-components-toggle-group",
         "tale:doc:docs-components-toolbar",
@@ -354,7 +356,7 @@
       "id": "ai-experience",
       "name": "AI Experience",
       "contact": "@tale-ui/ai-experience",
-      "artifactCount": 592,
+      "artifactCount": 593,
       "artifacts": [
         "tale:a2ui-type:accordion",
         "tale:a2ui-type:accordion-header",
@@ -900,6 +902,7 @@
         "tale:pitfall:virtualizer--virtualizer-stable-item-size",
         "tale:pitfall:when-a-prompt-asks-for",
         "tale:recipe:app-header-navigation",
+        "tale:recipe:async-feedback",
         "tale:recipe:chat-artifact-panel",
         "tale:recipe:chat-mobile",
         "tale:recipe:command-palette-async",

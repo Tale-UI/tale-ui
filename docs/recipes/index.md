@@ -120,6 +120,7 @@ Copy-paste multi-component patterns for common real-world scenarios. Each recipe
 
 | Recipe                                  | Components Used              | Description                                                   |
 | --------------------------------------- | ---------------------------- | ------------------------------------------------------------- |
+| [Async Feedback](async-feedback.md)     | Button, Toast                | Queued success and failure feedback for async actions         |
 | [Loading Patterns](loading-patterns.md) | Spinner, ProgressBar, Button | Spinner, determinate/indeterminate progress, Button isPending |
 
 ## Utilities

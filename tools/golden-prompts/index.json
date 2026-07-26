@@ -635,6 +635,10 @@
     {
       "slug": "lightbox-media-viewer",
       "difficulty": "complex"
+    },
+    {
+      "slug": "toast-async-feedback",
+      "difficulty": "complex"
     }
   ]
 }

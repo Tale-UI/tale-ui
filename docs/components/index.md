@@ -97,6 +97,7 @@ Per-component documentation for `@tale-ui/react`. Each page covers imports, part
 | [ProgressBar](progress-bar.md) | Determinate/indeterminate progress                |
 | [Meter](meter.md)              | Scalar measurement display                        |
 | [Spinner](spinner.md)          | Indeterminate loading indicator                   |
+| [Toast](toast.md)              | Queued viewport feedback and announcements        |
 
 ## Display
 

@@ -1,6 +1,6 @@
 # Component Index
 
-Quick-reference table for all 132 `@tale-ui/react` components plus 6 `@tale-ui/charts` components.
+Quick-reference table for all 133 `@tale-ui/react` components plus 6 `@tale-ui/charts` components.
 For detailed usage, see the per-component docs in [docs/components/](components/index.md).
 
 ## Form Controls (28)
@@ -110,7 +110,7 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | Tabs         | Tabbed content with indicator                                                | `@tale-ui/react/tabs`          | Root, List, Tab, Panel, Indicator                                        |
 | Toolbar      | Horizontal bar of buttons, toggles, or controls for a related set of actions | `@tale-ui/react/toolbar`       | Root, Group, Button, Link, Input, Separator                              |
 
-## Feedback (6)
+## Feedback (7)
 
 | Component      | Description                                                                        | Import                           | Parts                                                |
 | -------------- | ---------------------------------------------------------------------------------- | -------------------------------- | ---------------------------------------------------- |
@@ -140,6 +140,7 @@ For detailed usage, see the per-component docs in [docs/components/](components/
 | RatingStars   | Read-only star rating display                                                                         | `@tale-ui/react/rating-stars`    | --                                                                                                                                                  |
 | Table         | Data table with sorting, expandable rows, and footer                                                  | `@tale-ui/react/table`           | Root, Header, Column, Body, Footer, Row, Cell                                                                                                       |
 | TagGroup      | Tag list with optional removal                                                                        | `@tale-ui/react/tag-group`       | Root, Label, List, Tag, Description, ErrorMessage                                                                                                   |
+| Toast         | Queued viewport feedback with Tale-owned timers, announcements, and recovery                          | `@tale-ui/react/toast`           | --                                                                                                                                                  |
 | Tree          | Hierarchical tree view                                                                                | `@tale-ui/react/tree`            | Root, Item, ItemContent                                                                                                                             |
 | VideoPlayer   | Native video player with custom controls, keyboard shortcuts, and trickplay                           | `@tale-ui/react/video-player`    | Root                                                                                                                                                |
 

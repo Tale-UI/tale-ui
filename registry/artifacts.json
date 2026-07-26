@@ -138,6 +138,7 @@
     "docs/components/text.md",
     "docs/components/time-field.md",
     "docs/components/timestamp.md",
+    "docs/components/toast.md",
     "docs/components/toggle-button.md",
     "docs/components/toggle-group.md",
     "docs/components/toolbar.md",
@@ -160,6 +161,7 @@
     "docs/react-aria-deviations.md",
     "docs/react-setup.md",
     "docs/recipes/app-header-navigation.md",
+    "docs/recipes/async-feedback.md",
     "docs/recipes/chat-artifact-panel.md",
     "docs/recipes/chat-mobile.md",
     "docs/recipes/command-palette-async.md",
@@ -293,7 +295,7 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:a65099b522c7a136146bf1eab719d133a5a1781bad59b0c8c656a49a2d2ca025",
+  "sourceRevision": "sha256:6bb89734f1b344c59ed9e953295794470a19a107ac7be13e3f9c3248cbdd8569",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
@@ -16226,6 +16228,65 @@
       }
     },
     {
+      "id": "tale:component:toast",
+      "namespace": "tale",
+      "kind": "component",
+      "slug": "toast",
+      "name": "Toast",
+      "description": "Queued viewport feedback with Tale-owned timers, announcements, and recovery",
+      "lifecycle": "experimental",
+      "package": "@tale-ui/react",
+      "version": "3.0.0",
+      "aliases": [
+        "Toast"
+      ],
+      "keywords": [
+        "and",
+        "announcements",
+        "display",
+        "feedback",
+        "owned",
+        "queued",
+        "recovery",
+        "tale",
+        "timers",
+        "toast",
+        "viewport",
+        "with"
+      ],
+      "related": [],
+      "retrieval": [
+        {
+          "type": "registry",
+          "path": "registry/components.json",
+          "selector": "components[slug=toast]"
+        },
+        {
+          "type": "package-export",
+          "path": "@tale-ui/react/toast"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "component.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "packages/react/src/toast/index.ts",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party",
+      "metadata": {
+        "category": "Display",
+        "componentKind": "simple"
+      }
+    },
+    {
       "id": "tale:component:toggle-button",
       "namespace": "tale",
       "kind": "component",
@@ -21852,6 +21913,44 @@
       ],
       "provenance": {
         "source": "docs/components/timestamp.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
+      "id": "tale:doc:docs-components-toast",
+      "namespace": "tale",
+      "kind": "doc",
+      "slug": "docs-components-toast",
+      "name": "Toast",
+      "description": "Public Tale UI documentation: Toast",
+      "lifecycle": "stable",
+      "keywords": [
+        "components",
+        "docs",
+        "md",
+        "toast"
+      ],
+      "related": [
+        "tale:component:toast"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/components/toast.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/components/toast.md",
         "firstParty": true,
         "license": "MIT"
       },
@@ -50919,6 +51018,44 @@
       "trust": "first-party"
     },
     {
+      "id": "tale:recipe:async-feedback",
+      "namespace": "tale",
+      "kind": "recipe",
+      "slug": "async-feedback",
+      "name": "Async Feedback",
+      "description": "Canonical Tale UI recipe: Async Feedback",
+      "lifecycle": "stable",
+      "keywords": [
+        "async",
+        "feedback"
+      ],
+      "related": [
+        "tale:component:button",
+        "tale:component:toast"
+      ],
+      "retrieval": [
+        {
+          "type": "file",
+          "path": "docs/recipes/async-feedback.md"
+        }
+      ],
+      "capabilities": [
+        "artifact.get",
+        "artifact.search",
+        "recipe.get"
+      ],
+      "platforms": [
+        "agent",
+        "web"
+      ],
+      "provenance": {
+        "source": "docs/recipes/async-feedback.md",
+        "firstParty": true,
+        "license": "MIT"
+      },
+      "trust": "first-party"
+    },
+    {
       "id": "tale:recipe:chat-artifact-panel",
       "namespace": "tale",
       "kind": "recipe",
@@ -53646,5 +53783,5 @@
       }
     }
   ],
-  "digest": "sha256:eb29f406fb07f24bb44114de51b24577071bb446c588c883ab0287d604d1ebc9"
+  "digest": "sha256:daa6084b1deb201bbdd3899e253d43f6ec9732d0a56d6985e05e8cde7e034f22"
 }

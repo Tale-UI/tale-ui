@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0.0",
   "reportType": "status",
-  "sourceRevision": "sha256:df6322fd5008b70e65fb814edc87f20ec8f3c6f17552d04bbd8106cf993d74f6",
+  "sourceRevision": "sha256:dfcd892d80810cc08ae277aa212dd8b3c3c5b5e74ad2f090e82e6f07e0ffe1d9",
   "states": [
     {
       "state": "experimental",
-      "artifactCount": 17,
+      "artifactCount": 18,
       "artifacts": [
         "tale:component:app-shell",
         "tale:component:aspect-ratio",
@@ -23,12 +23,13 @@
         "tale:component:resizable",
         "tale:component:skeleton",
         "tale:component:text-editor",
-        "tale:component:timestamp"
+        "tale:component:timestamp",
+        "tale:component:toast"
       ]
     },
     {
       "state": "stable",
-      "artifactCount": 904,
+      "artifactCount": 906,
       "artifacts": [
         "tale:a2ui-type:accordion",
         "tale:a2ui-type:accordion-header",
@@ -433,6 +434,7 @@
         "tale:doc:docs-components-text-field",
         "tale:doc:docs-components-time-field",
         "tale:doc:docs-components-timestamp",
+        "tale:doc:docs-components-toast",
         "tale:doc:docs-components-toggle-button",
         "tale:doc:docs-components-toggle-group",
         "tale:doc:docs-components-toolbar",
@@ -874,6 +876,7 @@
         "tale:pitfall:virtualizer--virtualizer-stable-item-size",
         "tale:pitfall:when-a-prompt-asks-for",
         "tale:recipe:app-header-navigation",
+        "tale:recipe:async-feedback",
         "tale:recipe:chat-artifact-panel",
         "tale:recipe:chat-mobile",
         "tale:recipe:command-palette-async",

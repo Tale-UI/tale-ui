@@ -123,6 +123,7 @@ export * from './text-area';
 export * from './text-editor';
 export * from './text-field';
 export * from './timestamp';
+export * from './toast';
 // TODO Temporal: enable before public release
 // export * from './localization-provider';
 export * from './toggle-button';

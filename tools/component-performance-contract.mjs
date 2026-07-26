@@ -15,6 +15,7 @@ export const COMPONENT_PERFORMANCE_FIXTURE_IDS = Object.freeze([
   'timestamp-1000-tick',
   'overflow-list-100-recompute',
   'resizable-1000-updates',
+  'toast-100-operations',
 ]);
 
 export const COMPONENT_PERFORMANCE_ROLLBACK_FIXTURE_IDS = Object.freeze(['timestamp-1000-tick']);

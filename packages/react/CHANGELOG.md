@@ -15,6 +15,9 @@ All notable changes to the React component library are documented in this file.
 - Added experimental `OverflowList`, `Resizable`, and `Lightbox` public subpaths with measured
   partitioning, bounded gesture ownership, localized overlay navigation, and public type
   contracts.
+- Added experimental `Toast` with a stable Tale queue facade, private React Aria adaptation,
+  atomic mirror recovery, Tale-owned timers and announcements, Region leases, and public type
+  contracts.
 
 ### Changed
 

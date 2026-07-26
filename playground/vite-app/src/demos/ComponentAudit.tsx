@@ -67,6 +67,7 @@ import { ProgressCircle } from '@tale-ui/react/progress-circle';
 import { Meter } from '@tale-ui/react/meter';
 import { Spinner } from '@tale-ui/react/spinner';
 import { Skeleton } from '@tale-ui/react/skeleton';
+import { createToastQueue, ToastRegion } from '@tale-ui/react/toast';
 // Display
 import { Avatar } from '@tale-ui/react/avatar';
 import { EmptyState } from '@tale-ui/react/empty-state';
@@ -203,6 +204,34 @@ const auditLightboxItems = [
   { id: 'coast', label: 'Rocky coast', color: 'var(--neutral-30)' },
   { id: 'forest', label: 'Forest trail', color: 'var(--neutral-50)' },
 ] as const;
+
+function ToastAuditDemo() {
+  const [queue] = React.useState(() => {
+    const nextQueue = createToastQueue({ maxVisibleToasts: 2, defaultTimeout: 0 });
+    nextQueue.add({
+      title: 'Changes saved',
+      description: 'Your component audit preferences are up to date.',
+      variant: 'success',
+    });
+    return nextQueue;
+  });
+
+  return (
+    <React.Fragment>
+      <Button
+        onPress={() =>
+          queue.add({
+            title: 'Background task complete',
+            variant: 'neutral',
+          })
+        }
+      >
+        Show notification
+      </Button>
+      <ToastRegion queue={queue} />
+    </React.Fragment>
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Layout helpers
@@ -431,6 +460,7 @@ const TOC = [
       { id: 'meter', label: 'Meter' },
       { id: 'skeleton', label: 'Skeleton' },
       { id: 'spinner', label: 'Spinner' },
+      { id: 'toast', label: 'Toast' },
     ],
   },
   {
@@ -4855,6 +4885,22 @@ export default function ComponentAudit() {
           <div className="audit__demo-wide">
             <Spinner variant="line" />
           </div>
+        </Section>
+
+        <Section
+          id="toast"
+          title="Toast"
+          classes={[
+            'tale-toast-region',
+            'tale-toast',
+            'tale-toast__content',
+            'tale-toast__title',
+            'tale-toast__description',
+            'tale-toast__dismiss',
+          ]}
+        >
+          <SubHeading>Persistent queued feedback</SubHeading>
+          <ToastAuditDemo />
         </Section>
 
         {/* ============================================================= */}

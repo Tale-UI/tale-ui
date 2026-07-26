@@ -56,6 +56,15 @@ import {
   type TimestampProps,
   type TimestampValue,
 } from '@tale-ui/react/timestamp';
+import {
+  createToastQueue,
+  ToastRegion,
+  type CreateToastQueueOptions,
+  type ToastAddOptions,
+  type ToastMessage,
+  type ToastQueue,
+  type ToastRegionProps,
+} from '@tale-ui/react/toast';
 
 const buttonProps = {
   children: 'Save',
@@ -352,6 +361,32 @@ export const timestampPropsContract: TimestampProps = relativeTimestampPropsCont
 export const absoluteTimestampContract = <Timestamp {...absoluteTimestampPropsContract} />;
 export const relativeTimestampContract = <Timestamp {...relativeTimestampPropsContract} />;
 
+export const toastQueueOptionsContract = {
+  maxVisibleToasts: 3,
+  defaultTimeout: 5000,
+} satisfies CreateToastQueueOptions;
+export const toastMessageContract = {
+  title: 'Changes saved',
+  description: 'Your preferences are up to date.',
+  variant: 'success',
+} satisfies ToastMessage;
+export const toastAddOptionsContract = {
+  timeout: 0,
+  onClose() {},
+} satisfies ToastAddOptions;
+export const toastQueueContract: ToastQueue = createToastQueue(toastQueueOptionsContract);
+export const toastKeyContract: string = toastQueueContract.add(
+  toastMessageContract,
+  toastAddOptionsContract,
+);
+export const toastRegionPropsContract = {
+  queue: toastQueueContract,
+  'aria-label': 'Notifications',
+  placement: 'bottom-end',
+  dismissLabel: 'Dismiss notification',
+} satisfies ToastRegionProps;
+export const toastRegionContract = <ToastRegion {...toastRegionPropsContract} />;
+
 export const dialogContract = {
   defaultOpen: false,
   children: null,
@@ -532,20 +567,12 @@ export const unnamedResizableHandleContract = (
 
 export const conflictingLightboxOpenStateContract = (
   // @ts-expect-error Lightbox cannot be controlled and uncontrolled simultaneously.
-  <Lightbox.Root
-    {...lightboxRootPropsContract}
-    isOpen
-    defaultOpen
-  />
+  <Lightbox.Root {...lightboxRootPropsContract} isOpen defaultOpen />
 );
 
 export const conflictingLightboxSelectionStateContract = (
   // @ts-expect-error Lightbox selection cannot be controlled and uncontrolled simultaneously.
-  <Lightbox.Root
-    {...lightboxRootPropsContract}
-    selectedKey="coast"
-    defaultSelectedKey="forest"
-  />
+  <Lightbox.Root {...lightboxRootPropsContract} selectedKey="coast" defaultSelectedKey="forest" />
 );
 
 export const unsafeLightboxContentHtmlContract = {
@@ -571,3 +598,24 @@ export const relativeTimestampOptionsContract = {
   // @ts-expect-error Relative Timestamp does not accept absolute format options.
   formatOptions: { year: 'numeric' },
 } satisfies TimestampProps;
+
+// @ts-expect-error Toast messages require a title.
+export const missingToastTitleContract: ToastMessage = {
+  variant: 'neutral',
+};
+
+export const invalidToastVariantContract = {
+  title: 'Saved',
+  // @ts-expect-error Toast variants are closed.
+  variant: 'positive',
+} satisfies ToastMessage;
+
+export const invalidToastPlacementContract = (
+  // @ts-expect-error Toast Region placements are closed.
+  <ToastRegion queue={toastQueueContract} placement="center" />
+);
+
+export const unsafeToastRegionHandlerContract = (
+  // @ts-expect-error Toast Region owns its interaction handlers.
+  <ToastRegion queue={toastQueueContract} onClick={() => {}} />
+);

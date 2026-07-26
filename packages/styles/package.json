@@ -134,6 +134,7 @@
     "./text-field": "./src/text-field.css",
     "./timestamp": "./src/timestamp.css",
     "./time-field": "./src/time-field.css",
+    "./toast": "./src/toast.css",
     "./toggle-button": "./src/toggle-button.css",
     "./toolbar": "./src/toolbar.css",
     "./header-nav": "./src/header-nav.css",
