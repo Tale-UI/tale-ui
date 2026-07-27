@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { act, fireEvent, screen, waitFor } from '@tale-ui/monorepo-tests/test-utils';
-import { createRenderer } from '#test-utils';
+import { createRenderer, isJSDOM } from '#test-utils';
 import { I18nProvider } from '../i18n-provider';
+import '../styles.css';
 import {
   createToastQueue,
   ToastRegion,
@@ -218,6 +219,26 @@ describe('Toast', () => {
     expect(screen.getByText('Complete')).toBeTruthy();
     expect(screen.getAllByRole('button', { name: 'Dismiss notification' })).toHaveLength(2);
   });
+
+  it.skipIf(isJSDOM).each(['top-end', 'bottom-end'] as const)(
+    'keeps %s Toasts within the viewport edge',
+    async (placement) => {
+      const queue = createToastQueue({ defaultTimeout: 0 });
+      queue.add({ title: 'Saved', description: 'Complete', variant: 'success' });
+
+      await render(<ToastRegion queue={queue} placement={placement} />);
+
+      const region = await screen.findByRole('region', { name: 'Notifications' });
+      const toast = await screen.findByRole('alertdialog');
+      const regionRect = region.getBoundingClientRect();
+      const toastRect = toast.getBoundingClientRect();
+
+      expect(getComputedStyle(toast).boxSizing).toBe('border-box');
+      expect(toastRect.width).toBeLessThanOrEqual(regionRect.width);
+      expect(toastRect.right).toBeLessThanOrEqual(regionRect.right + 1);
+      expect(toastRect.right).toBeLessThanOrEqual(window.innerWidth);
+    },
+  );
 
   it('uses explicit valid labels and normalizes invalid Region rendering props without mutating the queue', async () => {
     const queue = createToastQueue({ defaultTimeout: 0 });

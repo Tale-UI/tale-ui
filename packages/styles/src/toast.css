@@ -53,6 +53,7 @@
 }
 
 .tale-toast {
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--space-xs);

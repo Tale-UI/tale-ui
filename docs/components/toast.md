@@ -40,7 +40,7 @@ compatible with React Aria's unstable queue.
 | `queue`        | `ToastQueue`                                                 | —              | Queue whose visible Toasts this Region owns |
 | `aria-label`   | `string`                                                     | localized      | Accessible name for the notification Region |
 | `className`    | `string`                                                     | —              | Additional class name for the Region        |
-| `placement`    | `'top-start' \| 'top-end' \| 'bottom-start' \| 'bottom-end'` | `'bottom-end'` | Logical viewport placement                  |
+| `placement`    | `'top-start' \| 'top-end' \| 'bottom-start' \| 'bottom-end'` | `'bottom-end'` | Logical placement within the viewport inset |
 | `dismissLabel` | `string`                                                     | localized      | Accessible label for each dismiss button    |
 
 `ToastRegion` forwards its ref to the Region `HTMLDivElement`. Invalid queue
