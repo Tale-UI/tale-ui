@@ -206,6 +206,7 @@ const auditLightboxItems = [
 ] as const;
 
 function ToastAuditDemo() {
+  const toastCount = React.useRef(0);
   const [queue] = React.useState(() => {
     const nextQueue = createToastQueue({ maxVisibleToasts: 2, defaultTimeout: 0 });
     nextQueue.add({
@@ -219,12 +220,13 @@ function ToastAuditDemo() {
   return (
     <React.Fragment>
       <Button
-        onPress={() =>
+        onPress={() => {
+          toastCount.current += 1;
           queue.add({
-            title: 'Background task complete',
+            title: `Background task ${toastCount.current} complete`,
             variant: 'neutral',
-          })
-        }
+          });
+        }}
       >
         Show notification
       </Button>
@@ -250,12 +252,14 @@ function Section({
 }) {
   const meta = getComponentAuditMeta(id);
   const isDeprecated = meta?.status === 'deprecated';
+  const isNew = meta?.status === 'new';
 
   return (
     <section id={id} className="audit__section">
       <div className="audit__heading-row">
         <h2 className="audit__heading">{title}</h2>
         {isDeprecated && <span className="audit__status-badge">Deprecated</span>}
+        {isNew && <span className="audit__status-badge audit__status-badge--new">New</span>}
       </div>
       {isDeprecated && (
         <p className="audit__status-note">
@@ -321,6 +325,59 @@ const COLOR_SHADES = [5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100] as const;
 const NEUTRAL_SHADES = [5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100] as const;
 
 const COMPONENT_AUDIT_META = {
+  // Component-equivalence expansion (Bundles 1–4).
+  'aspect-ratio': {
+    status: 'new',
+    note: 'Added in the component-equivalence expansion.',
+  },
+  blockquote: {
+    status: 'new',
+    note: 'Added in the component-equivalence expansion.',
+  },
+  'button-group': {
+    status: 'new',
+    note: 'Added in the component-equivalence expansion.',
+  },
+  code: {
+    status: 'new',
+    note: 'Added in the component-equivalence expansion.',
+  },
+  skeleton: {
+    status: 'new',
+    note: 'Added in the component-equivalence expansion.',
+  },
+  citation: {
+    status: 'new',
+    note: 'Added in the component-equivalence expansion.',
+  },
+  markdown: {
+    status: 'new',
+    note: 'Added in the component-equivalence expansion.',
+  },
+  timestamp: {
+    status: 'new',
+    note: 'Added in the component-equivalence expansion.',
+  },
+  outline: {
+    status: 'new',
+    note: 'Added in the component-equivalence expansion.',
+  },
+  'overflow-list': {
+    status: 'new',
+    note: 'Added in the component-equivalence expansion.',
+  },
+  resizable: {
+    status: 'new',
+    note: 'Added in the component-equivalence expansion.',
+  },
+  lightbox: {
+    status: 'new',
+    note: 'Added in the component-equivalence expansion.',
+  },
+  toast: {
+    status: 'new',
+    note: 'Added in the component-equivalence expansion.',
+  },
   checkbox: {
     status: 'deprecated',
     note: 'Use CheckboxField for new code. Checkbox remains functional for existing code.',
@@ -1378,16 +1435,18 @@ export default function ComponentAudit() {
         {TOC_ITEMS.map(({ id, label }) => {
           const meta = getComponentAuditMeta(id);
           const isDeprecated = meta?.status === 'deprecated';
+          const isNew = meta?.status === 'new';
 
           return (
             <a
               key={id}
               href={`#${id}`}
-              className={`audit__toc-link${isDeprecated ? ' audit__toc-link--deprecated' : ''}`}
-              aria-label={isDeprecated ? `${label}, deprecated` : label}
+              className={`audit__toc-link${isDeprecated ? ' audit__toc-link--deprecated' : ''}${isNew ? ' audit__toc-link--new' : ''}`}
+              aria-label={isDeprecated ? `${label}, deprecated` : isNew ? `${label}, new` : label}
             >
               <span>{label}</span>
               {isDeprecated && <span className="audit__toc-status">Deprecated</span>}
+              {isNew && <span className="audit__toc-status audit__toc-status--new">New</span>}
             </a>
           );
         })}

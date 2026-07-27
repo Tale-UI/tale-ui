@@ -1,8 +1,8 @@
 'use client';
 
 import * as React from 'react';
+import { X } from 'lucide-react';
 import {
-  Button as AriaButton,
   Text as AriaText,
   UNSTABLE_Toast as AriaToast,
   UNSTABLE_ToastList as AriaToastList,
@@ -10,6 +10,8 @@ import {
   UNSTABLE_ToastRegion as AriaToastRegion,
 } from 'react-aria-components';
 import { useTaleI18n } from '../i18n-provider';
+import { Icon } from '../icon';
+import { IconButton } from '../icon-button';
 import { cx } from '../_cx';
 
 type ToastVariant = 'neutral' | 'success' | 'warning' | 'danger';
@@ -1237,9 +1239,15 @@ function RawToastView({ toast, dismissLabel }: { toast: RawQueuedToast; dismissL
           </AriaText>
         )}
       </div>
-      <AriaButton slot="close" className="tale-toast__dismiss" aria-label={dismissLabel}>
-        ×
-      </AriaButton>
+      <IconButton
+        slot="close"
+        size="sm"
+        variant="ghost"
+        className="tale-toast__dismiss"
+        aria-label={dismissLabel}
+      >
+        <Icon icon={X} size="sm" />
+      </IconButton>
     </AriaToast>
   );
 }

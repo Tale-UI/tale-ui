@@ -45,6 +45,11 @@
   font-weight: 500;
 }
 
+.audit__toc-link--new {
+  color: var(--color-70);
+  font-weight: 500;
+}
+
 .audit__toc-status {
   padding: 0.0625rem 0.25rem;
   border-radius: 0.25rem;
@@ -54,6 +59,11 @@
   font-weight: 600;
   text-transform: uppercase;
   white-space: nowrap;
+}
+
+.audit__toc-status--new {
+  background: var(--color-10);
+  color: var(--color-10-fg);
 }
 
 .audit__floating-mode-toggle {
@@ -111,6 +121,11 @@
   font-size: 0.625rem;
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.audit__status-badge--new {
+  background: var(--color-10);
+  color: var(--color-10-fg);
 }
 
 .audit__status-note {
@@ -239,8 +254,12 @@
   .audit__palette-grid {
     grid-template-columns: repeat(auto-fill, minmax(4.375rem, 1fr));
   }
-  .audit__palette-swatch { height: 3.75rem; }
-  .audit__palette-ag { font-size: var(--title-s-font-size); }
+  .audit__palette-swatch {
+    height: 3.75rem;
+  }
+  .audit__palette-ag {
+    font-size: var(--title-s-font-size);
+  }
 }
 
 /* ─── Component-specific demo ─────────────────────────────────────────────── */

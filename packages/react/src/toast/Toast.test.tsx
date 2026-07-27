@@ -347,9 +347,19 @@ describe('Toast', () => {
     const queue = createToastQueue({ defaultTimeout: 0 });
     queue.add({ title: 'Dismiss me' }, { onClose });
     const { user } = await render(<ToastRegion queue={queue} dismissLabel="Close saved notice" />);
-    await screen.findByRole('button', { name: 'Close saved notice' });
+    const dismissButton = await screen.findByRole('button', { name: 'Close saved notice' });
+    for (const className of [
+      'tale-icon-button',
+      'tale-icon-button--sm',
+      'tale-button',
+      'tale-button--ghost',
+      'tale-toast__dismiss',
+    ]) {
+      expect(dismissButton.classList.contains(className)).toBe(true);
+    }
+    expect(dismissButton.querySelector('.tale-icon--sm')).not.toBeNull();
 
-    await user.click(screen.getByRole('button', { name: 'Close saved notice' }));
+    await user.click(dismissButton);
 
     expect(onClose).toHaveBeenCalledTimes(1);
     expect(screen.queryByRole('region')).toBeNull();
