@@ -106,7 +106,11 @@ queue.close(key);
 Hover, focus, and Region interaction pause the relevant timeout without
 discarding its remaining duration. `pauseAll` and `resumeAll` are balanced:
 each programmatic pause requires its matching resume. Closing or clearing runs
-each Toast's `onClose` once.
+each Toast's `onClose` once. When multiple Toasts are visible, newer feedback
+stacks above older feedback so its surface is not obscured by an older shadow.
+When more than two Toasts are visible, the Region shows a localized
+**Close all** button on the inward edge of the stack. Activating it closes the
+entire queue, including Toasts waiting behind the visible limit.
 
 ## Accessibility
 
@@ -118,14 +122,16 @@ each Toast's `onClose` once.
   conditions that need attention.
 - Keep the localized default Region and dismiss labels unless product-specific
   wording is clearer.
+- The localized **Close all** action appears automatically when at least three
+  Toasts are visible; it does not require application wiring.
 - Do not use Toasts for content that must remain available. Put durable status
   and recovery instructions in the page as well.
 
 ## Parts
 
 `ToastRegion` owns the list, individual Toast surface, content, title,
-description, dismiss button, and visually hidden announcement node. Style
-these parts through the maintained package classes:
+description, dismiss button, close-all action, and visually hidden announcement
+node. Style these parts through the maintained package classes:
 
 ## CSS Classes
 
@@ -136,6 +142,7 @@ these parts through the maintained package classes:
 - `.tale-toast__title`
 - `.tale-toast__description`
 - `.tale-toast__dismiss`
+- `.tale-toast__close-all`
 - `.tale-toast__announcer`
 
 ## Pitfalls

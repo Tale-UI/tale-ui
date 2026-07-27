@@ -294,15 +294,62 @@ describe('Toast', () => {
       expect.stringContaining('Third'),
       expect.stringContaining('Second'),
     ]);
+    expect(screen.getAllByRole('alertdialog').map((node) => node.style.zIndex)).toEqual(['2', '1']);
 
     act(() => queue.close(keys[2]!));
     expect(screen.getAllByRole('alertdialog').map((node) => node.textContent)).toEqual([
       expect.stringContaining('Second'),
       expect.stringContaining('First'),
     ]);
+    expect(screen.getAllByRole('alertdialog').map((node) => node.style.zIndex)).toEqual(['2', '1']);
     expect(document.querySelector('[data-toast-announcer="polite"]')?.textContent).not.toContain(
       'First',
     );
+  });
+
+  it.skipIf(isJSDOM)(
+    'positions visible Toasts so their explicit stack levels control shadow painting',
+    async () => {
+      const queue = createToastQueue({ maxVisibleToasts: 3, defaultTimeout: 0 });
+      queue.add({ title: 'First' });
+      queue.add({ title: 'Second' });
+      queue.add({ title: 'Third' });
+
+      await render(<ToastRegion queue={queue} />);
+
+      const toasts = await screen.findAllByRole('alertdialog');
+      expect(toasts.map((toast) => getComputedStyle(toast).position)).toEqual([
+        'relative',
+        'relative',
+        'relative',
+      ]);
+      expect(toasts.map((toast) => getComputedStyle(toast).zIndex)).toEqual(['3', '2', '1']);
+    },
+  );
+
+  it('shows Close all only above two visible Toasts and clears the entire queue', async () => {
+    const queue = createToastQueue({ maxVisibleToasts: 3, defaultTimeout: 0 });
+    const onClose = vi.fn();
+    queue.add({ title: 'First' }, { onClose });
+    queue.add({ title: 'Second' }, { onClose });
+
+    const { user } = await render(<ToastRegion queue={queue} />);
+    await waitFor(() => expect(screen.getAllByRole('alertdialog')).toHaveLength(2));
+    expect(screen.queryByRole('button', { name: 'Close all' })).toBeNull();
+
+    act(() => {
+      queue.add({ title: 'Third' }, { onClose });
+      queue.add({ title: 'Queued fourth' }, { onClose });
+    });
+    const closeAll = await screen.findByRole('button', { name: 'Close all' });
+    expect(screen.getAllByRole('alertdialog')).toHaveLength(3);
+
+    await user.click(closeAll);
+
+    expect(screen.queryAllByRole('alertdialog')).toHaveLength(0);
+    expect(screen.queryByRole('button', { name: 'Close all' })).toBeNull();
+    expect(__toastTestHooks.get(queue)!.records).toHaveLength(0);
+    expect(onClose).toHaveBeenCalledTimes(4);
   });
 
   it('retains every unconsumed announcement in add order before the Region mounts', async () => {
@@ -906,8 +953,10 @@ describe('Toast', () => {
   });
 
   it('uses Tale localization overrides, pseudo-localization, and RTL direction', async () => {
-    const queue = createToastQueue({ defaultTimeout: 0 });
+    const queue = createToastQueue({ maxVisibleToasts: 3, defaultTimeout: 0 });
     queue.add({ title: 'Localized' });
+    queue.add({ title: 'Localized again' });
+    queue.add({ title: 'Localized once more' });
 
     await render(
       <I18nProvider
@@ -916,13 +965,15 @@ describe('Toast', () => {
         messages={{
           'toast.region': 'Alertes',
           'toast.dismiss': 'Fermer',
+          'toast.closeAll': 'Tout fermer',
         }}
       >
         <ToastRegion queue={queue} />
       </I18nProvider>,
     );
     await screen.findByRole('region', { name: 'Alertes' });
-    expect(screen.getByRole('button', { name: 'Fermer' })).toBeTruthy();
+    expect(screen.getAllByRole('button', { name: 'Fermer' })).toHaveLength(3);
+    expect(screen.getByRole('button', { name: 'Tout fermer' })).toBeTruthy();
     expect(screen.getByRole('region', { name: 'Alertes' }).getAttribute('dir')).toBe('rtl');
   });
 

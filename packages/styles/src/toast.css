@@ -53,6 +53,7 @@
 }
 
 .tale-toast {
+  position: relative;
   box-sizing: border-box;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -117,6 +118,11 @@
 
 .tale-toast__dismiss {
   flex: none;
+}
+
+.tale-toast__close-all {
+  align-self: flex-end;
+  pointer-events: auto;
 }
 
 @media (max-width: 30rem) {

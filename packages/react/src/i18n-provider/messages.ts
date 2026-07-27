@@ -13,6 +13,7 @@ export const taleEnglishMessages = {
   'table.empty': 'No rows',
   'table.loading': 'Loading rows',
   'table.page': 'Page {page} of {pageCount}',
+  'toast.closeAll': 'Close all',
   'toast.dismiss': 'Dismiss notification',
   'toast.region': 'Notifications',
 } as const;

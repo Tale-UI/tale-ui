@@ -11288,6 +11288,7 @@
         "tale-toast-list",
         "tale-toast-region",
         "tale-toast__announcer",
+        "tale-toast__close-all",
         "tale-toast__content",
         "tale-toast__description",
         "tale-toast__dismiss",

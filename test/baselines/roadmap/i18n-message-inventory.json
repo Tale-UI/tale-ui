@@ -21,6 +21,7 @@
     "table.empty",
     "table.loading",
     "table.page",
+    "toast.closeAll",
     "toast.dismiss",
     "toast.region"
   ]

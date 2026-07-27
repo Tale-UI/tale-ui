@@ -53,10 +53,17 @@ function DefaultToast({ variant, placement }: Args) {
 
 function VisibleToast({ variant, placement }: Args) {
   const [queue] = React.useState(() => {
-    const nextQueue = createToastQueue({ defaultTimeout: 0 });
+    const nextQueue = createToastQueue({ maxVisibleToasts: 3, defaultTimeout: 0 });
     nextQueue.add({
-      title: 'Changes saved',
-      description: 'Your preferences are up to date.',
+      title: 'Background task 1 complete',
+      variant,
+    });
+    nextQueue.add({
+      title: 'Background task 2 complete',
+      variant,
+    });
+    nextQueue.add({
+      title: 'Background task 3 complete',
       variant,
     });
     return nextQueue;

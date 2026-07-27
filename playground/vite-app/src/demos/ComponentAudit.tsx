@@ -206,13 +206,21 @@ const auditLightboxItems = [
 ] as const;
 
 function ToastAuditDemo() {
-  const toastCount = React.useRef(0);
+  const toastCount = React.useRef(3);
   const [queue] = React.useState(() => {
-    const nextQueue = createToastQueue({ maxVisibleToasts: 2, defaultTimeout: 0 });
+    const nextQueue = createToastQueue({ maxVisibleToasts: 3, defaultTimeout: 0 });
     nextQueue.add({
       title: 'Changes saved',
       description: 'Your component audit preferences are up to date.',
       variant: 'success',
+    });
+    nextQueue.add({
+      title: 'Background task 2 complete',
+      variant: 'neutral',
+    });
+    nextQueue.add({
+      title: 'Background task 3 complete',
+      variant: 'neutral',
     });
     return nextQueue;
   });
@@ -4957,6 +4965,7 @@ export default function ComponentAudit() {
             'tale-toast__title',
             'tale-toast__description',
             'tale-toast__dismiss',
+            'tale-toast__close-all',
             'tale-toast__announcer',
           ]}
         >

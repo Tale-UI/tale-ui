@@ -9,6 +9,7 @@ import {
   UNSTABLE_ToastQueue as AriaToastQueue,
   UNSTABLE_ToastRegion as AriaToastRegion,
 } from 'react-aria-components';
+import { Button } from '../button';
 import { useTaleI18n } from '../i18n-provider';
 import { Icon } from '../icon';
 import { IconButton } from '../icon-button';
@@ -1226,9 +1227,22 @@ function ToastAnnouncement({
   );
 }
 
-function RawToastView({ toast, dismissLabel }: { toast: RawQueuedToast; dismissLabel: string }) {
+function RawToastView({
+  toast,
+  dismissLabel,
+  stackLevel,
+}: {
+  toast: RawQueuedToast;
+  dismissLabel: string;
+  stackLevel: number;
+}) {
   return (
-    <AriaToast toast={toast} className="tale-toast" data-variant={toast.content.message.variant}>
+    <AriaToast
+      toast={toast}
+      className="tale-toast"
+      data-variant={toast.content.message.variant}
+      style={{ zIndex: stackLevel }}
+    >
       <div className="tale-toast__content">
         <AriaText slot="title" className="tale-toast__title">
           {toast.content.message.title}
@@ -1257,6 +1271,7 @@ function OwnedToastRegion({
   leaseId,
   regionLabel,
   dismissLabel,
+  closeAllLabel,
   placement,
   className,
   forwardedRef,
@@ -1265,6 +1280,7 @@ function OwnedToastRegion({
   leaseId: symbol;
   regionLabel: string;
   dismissLabel: string;
+  closeAllLabel: string;
   placement: ToastPlacement;
   className?: string;
   forwardedRef: React.ForwardedRef<HTMLDivElement>;
@@ -1285,6 +1301,11 @@ function OwnedToastRegion({
     }
     controller.consumeAnnouncements(announcements.version);
   }, [announcements.version, controller, presentAnnouncements]);
+
+  const visibleToasts = controller.adapter.visibleToasts;
+  const stackLevels = new Map(
+    visibleToasts.map((toast, index) => [toast, visibleToasts.length - index]),
+  );
 
   if (!controller.isOwner(leaseId)) {
     return null;
@@ -1307,10 +1328,27 @@ function OwnedToastRegion({
         politeness="assertive"
       />
       <AriaToastList className="tale-toast-list">
-        {({ toast }) => (
-          <RawToastView toast={toast as RawQueuedToast} dismissLabel={dismissLabel} />
-        )}
+        {({ toast }) => {
+          const rawToast = toast as RawQueuedToast;
+          return (
+            <RawToastView
+              toast={rawToast}
+              dismissLabel={dismissLabel}
+              stackLevel={stackLevels.get(rawToast) ?? 0}
+            />
+          );
+        }}
       </AriaToastList>
+      {visibleToasts.length > 2 ? (
+        <Button
+          size="sm"
+          variant="neutral"
+          className="tale-toast__close-all"
+          onPress={() => controller.clear()}
+        >
+          {closeAllLabel}
+        </Button>
+      ) : null}
     </AriaToastRegion>
   );
 }
@@ -1367,6 +1405,7 @@ export const ToastRegion = React.forwardRef<HTMLDivElement, ToastRegionProps>(
     const dismissLabel = isValidLabel(runtimeDismissLabel)
       ? runtimeDismissLabel
       : formatMessage('toast.dismiss');
+    const closeAllLabel = formatMessage('toast.closeAll');
     const className = typeof runtimeClassName === 'string' ? runtimeClassName : undefined;
 
     return (
@@ -1375,6 +1414,7 @@ export const ToastRegion = React.forwardRef<HTMLDivElement, ToastRegionProps>(
         leaseId={leaseId}
         regionLabel={regionLabel}
         dismissLabel={dismissLabel}
+        closeAllLabel={closeAllLabel}
         placement={normalizePlacement(runtimePlacement)}
         className={className}
         forwardedRef={ref}
