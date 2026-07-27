@@ -4,6 +4,9 @@ import { Table, useTableController, type Key } from '@tale-ui/react/table';
 
 type Args = {
   selectionMode?: 'none' | 'single' | 'multiple';
+  label: string;
+  treeColumn: string;
+  defaultExpandedKeys: string[];
 };
 
 const rows = [
@@ -32,9 +35,15 @@ const meta: Meta<Args> = {
       control: 'select',
       options: ['none', 'single', 'multiple'],
     },
+    label: { control: 'text' },
+    treeColumn: { control: 'text' },
+    defaultExpandedKeys: { control: 'object' },
   },
   args: {
     selectionMode: 'none',
+    label: 'People',
+    treeColumn: 'name',
+    defaultExpandedKeys: [],
   },
 };
 
@@ -45,7 +54,12 @@ type Story = StoryObj<Args>;
 export const Default: Story = {
   render(args) {
     return (
-      <Table.Root aria-label="People" selectionMode={args.selectionMode}>
+      <Table.Root
+        aria-label={args.label}
+        selectionMode={args.selectionMode}
+        treeColumn={args.treeColumn}
+        defaultExpandedKeys={args.defaultExpandedKeys}
+      >
         <Table.Header>
           <Table.Column isRowHeader>Name</Table.Column>
           <Table.Column>Email</Table.Column>

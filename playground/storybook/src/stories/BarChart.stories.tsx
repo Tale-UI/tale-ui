@@ -11,23 +11,53 @@ const monthlyData = [
   { month: 'Jun', revenue: 5500, profit: 3500, expenses: 2000 },
 ];
 
-const meta: Meta = {
+type Args = {
+  data: Record<string, unknown>[];
+  width: number;
+  height: number;
+  palette: string[];
+  dataKey: string;
+  maxBarSize: number;
+};
+
+const meta: Meta<Args> = {
   title: 'Charts/BarChart',
   parameters: { layout: 'centered' },
+  argTypes: {
+    data: { control: 'object' },
+    width: { control: { type: 'number', min: 240, step: 20 } },
+    height: { control: { type: 'number', min: 160, step: 20 } },
+    palette: { control: 'object' },
+    dataKey: { control: 'select', options: ['revenue', 'profit', 'expenses'] },
+    maxBarSize: { control: { type: 'number', min: 4, max: 120, step: 4 } },
+  },
+  args: {
+    data: monthlyData,
+    width: 600,
+    height: 300,
+    palette: ['#087e8b', '#ff5a5f', '#f5b700'],
+    dataKey: 'revenue',
+    maxBarSize: 48,
+  },
 };
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<Args>;
 
 export const Default: Story = {
-  render() {
+  render(args) {
     return (
-      <BarChart.Root data={monthlyData} width={600} height={300}>
+      <BarChart.Root
+        data={args.data}
+        width={args.width}
+        height={args.height}
+        palette={args.palette}
+      >
         <BarChart.Grid />
         <BarChart.XAxis dataKey="month" />
         <BarChart.YAxis />
         <BarChart.Tooltip />
-        <BarChart.Bar dataKey="revenue" />
+        <BarChart.Bar dataKey={args.dataKey} maxBarSize={args.maxBarSize} />
       </BarChart.Root>
     );
   },
@@ -53,7 +83,12 @@ export const MultipleSeries: Story = {
 export const CustomPalette: Story = {
   render() {
     return (
-      <BarChart.Root data={monthlyData} width={600} height={300} palette={['#3b82f6', '#10b981', '#f59e0b']}>
+      <BarChart.Root
+        data={monthlyData}
+        width={600}
+        height={300}
+        palette={['#3b82f6', '#10b981', '#f59e0b']}
+      >
         <BarChart.Grid />
         <BarChart.XAxis dataKey="month" />
         <BarChart.YAxis />
@@ -97,7 +132,12 @@ export const AllVariations: Story = {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <span className="story-label">Custom Palette</span>
-          <BarChart.Root data={monthlyData} width={600} height={250} palette={['#3b82f6', '#10b981', '#f59e0b']}>
+          <BarChart.Root
+            data={monthlyData}
+            width={600}
+            height={250}
+            palette={['#3b82f6', '#10b981', '#f59e0b']}
+          >
             <BarChart.Grid />
             <BarChart.XAxis dataKey="month" />
             <BarChart.YAxis />

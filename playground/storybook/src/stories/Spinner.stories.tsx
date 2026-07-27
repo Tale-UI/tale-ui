@@ -5,6 +5,7 @@ import { Spinner } from '@tale-ui/react/spinner';
 type Args = {
   variant: 'circle' | 'line' | 'dots';
   size: 'sm' | 'md' | 'lg';
+  label: string;
 };
 
 const meta: Meta<Args> = {
@@ -19,10 +20,12 @@ const meta: Meta<Args> = {
       control: 'select',
       options: ['sm', 'md', 'lg'],
     },
+    label: { control: 'text' },
   },
   args: {
     variant: 'circle',
     size: 'md',
+    label: 'Loading',
   },
 };
 
@@ -32,7 +35,7 @@ type Story = StoryObj<Args>;
 
 export const Default: Story = {
   render(args) {
-    return <Spinner variant={args.variant} size={args.size} />;
+    return <Spinner variant={args.variant} size={args.size} label={args.label} />;
   },
 };
 
@@ -80,12 +83,25 @@ export const AllVariations: Story = {
     const variants = ['circle', 'dots', 'line'] as const;
     const sizes = ['sm', 'md', 'lg'] as const;
     return (
-      <div style={{ display: 'grid', gridTemplateColumns: 'auto repeat(3, 1fr)', gap: '1rem', alignItems: 'center' }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'auto repeat(3, 1fr)',
+          gap: '1rem',
+          alignItems: 'center',
+        }}
+      >
         <div />
-        {sizes.map((s) => <div key={s} className="story-label">{s}</div>)}
+        {sizes.map((s) => (
+          <div key={s} className="story-label">
+            {s}
+          </div>
+        ))}
         {variants.map((v) => (
           <React.Fragment>
-            <div key={`label-${v}`} className="story-label">{v}</div>
+            <div key={`label-${v}`} className="story-label">
+              {v}
+            </div>
             {sizes.map((s) => (
               <div key={`${v}-${s}`} style={{ width: v === 'line' ? 200 : 'auto' }}>
                 <Spinner variant={v} size={s} />

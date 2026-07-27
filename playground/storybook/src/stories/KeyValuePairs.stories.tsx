@@ -9,6 +9,7 @@ type Args = {
   minColumnWidth: number;
   variant: 'plain' | 'divided';
   density: 'compact' | 'default' | 'spacious';
+  label: string;
 };
 
 const meta: Meta<Args> = {
@@ -19,12 +20,14 @@ const meta: Meta<Args> = {
     minColumnWidth: { control: 'number' },
     variant: { control: 'select', options: ['plain', 'divided'] },
     density: { control: 'select', options: ['compact', 'default', 'spacious'] },
+    label: { control: 'text' },
   },
   args: {
     columns: 1,
     minColumnWidth: 150,
     variant: 'plain',
     density: 'default',
+    label: 'Service metadata',
   },
 };
 
@@ -34,7 +37,7 @@ type Story = StoryObj<Args>;
 function ServicePairs(args: Args) {
   return (
     <KeyValuePairs.Root
-      aria-label="Service metadata"
+      aria-label={args.label}
       columns={args.columns}
       minColumnWidth={args.minColumnWidth}
       variant={args.variant}
@@ -43,7 +46,9 @@ function ServicePairs(args: Args) {
     >
       <KeyValuePairs.Item>
         <KeyValuePairs.Term>Status</KeyValuePairs.Term>
-        <KeyValuePairs.Details><Badge variant="success">Active</Badge></KeyValuePairs.Details>
+        <KeyValuePairs.Details>
+          <Badge variant="success">Active</Badge>
+        </KeyValuePairs.Details>
       </KeyValuePairs.Item>
       <KeyValuePairs.Item>
         <KeyValuePairs.Term>Owner</KeyValuePairs.Term>
@@ -78,7 +83,12 @@ export const ResponsiveColumns: Story = {
 export const Grouped: Story = {
   render() {
     return (
-      <KeyValuePairs.Root aria-label="Infrastructure summary" columns={2} minColumnWidth={220} style={{ width: '26.25rem' }}>
+      <KeyValuePairs.Root
+        aria-label="Infrastructure summary"
+        columns={2}
+        minColumnWidth={220}
+        style={{ width: '26.25rem' }}
+      >
         <KeyValuePairs.Group>
           <KeyValuePairs.GroupTitle>Network</KeyValuePairs.GroupTitle>
           <KeyValuePairs.GroupList>
@@ -97,7 +107,9 @@ export const Grouped: Story = {
           <KeyValuePairs.GroupList>
             <KeyValuePairs.Item>
               <KeyValuePairs.Term>Endpoint</KeyValuePairs.Term>
-              <KeyValuePairs.Details><Link href="https://api.example.com">api.example.com</Link></KeyValuePairs.Details>
+              <KeyValuePairs.Details>
+                <Link href="https://api.example.com">api.example.com</Link>
+              </KeyValuePairs.Details>
             </KeyValuePairs.Item>
             <KeyValuePairs.Item>
               <KeyValuePairs.Term>Instances</KeyValuePairs.Term>
@@ -119,7 +131,9 @@ export const WithInfo: Story = {
             Region
             <KeyValuePairs.Info>
               <Tooltip.Root>
-                <Tooltip.Trigger className="tale-button tale-button--ghost tale-button--sm">?</Tooltip.Trigger>
+                <Tooltip.Trigger className="tale-button tale-button--ghost tale-button--sm">
+                  ?
+                </Tooltip.Trigger>
                 <Tooltip.Popup>Primary deployment region.</Tooltip.Popup>
               </Tooltip.Root>
             </KeyValuePairs.Info>

@@ -5,6 +5,8 @@ import { Disclosure } from '@tale-ui/react/disclosure';
 type Args = {
   defaultExpanded?: boolean;
   isDisabled?: boolean;
+  useControlledState: boolean;
+  isExpanded: boolean;
 };
 
 const meta: Meta<Args> = {
@@ -12,10 +14,17 @@ const meta: Meta<Args> = {
   argTypes: {
     defaultExpanded: { control: 'boolean' },
     isDisabled: { control: 'boolean' },
+    useControlledState: { control: 'boolean' },
+    isExpanded: {
+      control: 'boolean',
+      if: { arg: 'useControlledState' },
+    },
   },
   args: {
     defaultExpanded: false,
     isDisabled: false,
+    useControlledState: false,
+    isExpanded: false,
   },
   parameters: { layout: 'fullscreen' },
   decorators: [
@@ -35,7 +44,13 @@ type Story = StoryObj<Args>;
 
 export const Default: Story = {
   render: (args) => (
-    <Disclosure.Root defaultExpanded={args.defaultExpanded} isDisabled={args.isDisabled}>
+    <Disclosure.Root
+      key={`${args.defaultExpanded}-${args.useControlledState}`}
+      defaultExpanded={args.defaultExpanded}
+      isExpanded={args.useControlledState ? args.isExpanded : undefined}
+      onExpandedChange={() => {}}
+      isDisabled={args.isDisabled}
+    >
       <Disclosure.Trigger>Show more</Disclosure.Trigger>
       <Disclosure.Panel>
         <p className="story-disclosure-content">
@@ -70,9 +85,7 @@ export const Controlled: Story = {
     const [isExpanded, setIsExpanded] = React.useState(false);
     return (
       <div>
-        <p className="story-disclosure-status">
-          Expanded: {String(isExpanded)}
-        </p>
+        <p className="story-disclosure-status">Expanded: {String(isExpanded)}</p>
         <Disclosure.Root isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
           <Disclosure.Trigger>{isExpanded ? 'Collapse' : 'Expand'}</Disclosure.Trigger>
           <Disclosure.Panel>

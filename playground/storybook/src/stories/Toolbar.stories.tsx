@@ -1,11 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Toolbar } from '@tale-ui/react/toolbar';
 
-type Args = Record<string, never>;
+type Args = {
+  label: string;
+};
 
 const meta: Meta<Args> = {
   title: 'Components/Toolbar',
   parameters: { layout: 'centered' },
+  argTypes: {
+    label: { control: 'text' },
+  },
+  args: {
+    label: 'Formatting',
+  },
 };
 
 export default meta;
@@ -13,9 +21,9 @@ export default meta;
 type Story = StoryObj<Args>;
 
 export const Default: Story = {
-  render() {
+  render(args) {
     return (
-      <Toolbar.Root aria-label="Formatting">
+      <Toolbar.Root aria-label={args.label}>
         <Toolbar.Group>
           <Toolbar.Button>Bold</Toolbar.Button>
           <Toolbar.Button>Italic</Toolbar.Button>
@@ -52,7 +60,6 @@ export const WithInput: Story = {
     );
   },
 };
-
 
 export const AllVariations: Story = {
   parameters: { controls: { disable: true } },

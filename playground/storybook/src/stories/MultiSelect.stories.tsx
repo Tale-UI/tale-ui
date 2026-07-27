@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { Selection } from 'react-aria-components';
 import { MultiSelect } from '@tale-ui/react/multi-select';
 
@@ -25,6 +25,20 @@ const meta: Meta<typeof MultiSelect.Root> = {
     isRequired: { control: 'boolean' },
     showSearch: { control: 'boolean' },
     showFooter: { control: 'boolean' },
+    label: { control: 'text' },
+    placeholder: { control: 'text' },
+    description: { control: 'text' },
+    errorMessage: { control: 'text' },
+    supportingText: { control: 'text' },
+    emptyStateTitle: { control: 'text' },
+    emptyStateDescription: { control: 'text' },
+    items: { control: false },
+    selectedKeys: { control: false },
+    defaultSelectedKeys: { control: false },
+    selectedCountFormatter: { control: false },
+    onSelectionChange: { control: false },
+    onReset: { control: false },
+    onSelectAll: { control: false },
   },
 };
 export default meta;
@@ -57,7 +71,21 @@ function MultiSelectDemo(args: Partial<React.ComponentProps<typeof MultiSelect.R
 
 export const Default: Story = {
   render: (args) => <MultiSelectDemo {...args} />,
-  args: { size: 'md', showSearch: true, showFooter: true },
+  args: {
+    size: 'md',
+    label: 'Frameworks',
+    placeholder: 'Select frameworks',
+    description: 'Choose the frameworks used by this project.',
+    errorMessage: 'Select at least one framework.',
+    supportingText: 'frameworks',
+    emptyStateTitle: 'No frameworks found',
+    emptyStateDescription: 'Try a different search.',
+    showSearch: true,
+    showFooter: true,
+    isDisabled: false,
+    isInvalid: false,
+    isRequired: false,
+  },
 };
 
 export const NoSearch: Story = {

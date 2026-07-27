@@ -9,6 +9,11 @@ const meta = {
   title: 'Components/CodeBlock',
   component: CodeBlock,
   args: { children: source, language: 'tsx', wrap: false },
+  argTypes: {
+    children: { control: 'text' },
+    language: { control: 'text' },
+    wrap: { control: 'boolean' },
+  },
 } satisfies Meta<typeof CodeBlock>;
 
 export default meta;

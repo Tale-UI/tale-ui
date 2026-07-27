@@ -2,8 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Select } from '@tale-ui/react/select';
 
 type Args = {
+  label: string;
   isDisabled?: boolean;
   size: 'sm' | 'md' | 'lg';
+  placeholder: string;
+  defaultSelectedKey: string | null;
 };
 
 const meta: Meta<Args> = {
@@ -16,15 +19,24 @@ const meta: Meta<Args> = {
     ),
   ],
   argTypes: {
+    label: { control: 'text' },
     isDisabled: { control: 'boolean' },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
     },
+    placeholder: { control: 'text' },
+    defaultSelectedKey: {
+      control: 'select',
+      options: [null, 'apple', 'banana', 'cherry', 'grape', 'orange'],
+    },
   },
   args: {
+    label: 'Favorite fruit',
     isDisabled: false,
     size: 'md',
+    placeholder: 'Select a fruit…',
+    defaultSelectedKey: 'apple',
   },
 };
 
@@ -34,18 +46,35 @@ type Story = StoryObj<Args>;
 
 export const Default: Story = {
   render: (args) => (
-    <Select.Root isDisabled={args.isDisabled} size={args.size} placeholder="Select a fruit…">
+    <Select.Root
+      key={String(args.defaultSelectedKey)}
+      isDisabled={args.isDisabled}
+      size={args.size}
+      placeholder={args.placeholder}
+      defaultSelectedKey={args.defaultSelectedKey}
+    >
+      <Select.Label>{args.label}</Select.Label>
       <Select.Trigger>
         <Select.Value />
         <Select.Icon />
       </Select.Trigger>
       <Select.Popover>
         <Select.ListBox>
-          <Select.Item id="apple" textValue="Apple">Apple</Select.Item>
-          <Select.Item id="banana" textValue="Banana">Banana</Select.Item>
-          <Select.Item id="cherry" textValue="Cherry">Cherry</Select.Item>
-          <Select.Item id="grape" textValue="Grape">Grape</Select.Item>
-          <Select.Item id="orange" textValue="Orange">Orange</Select.Item>
+          <Select.Item id="apple" textValue="Apple">
+            Apple
+          </Select.Item>
+          <Select.Item id="banana" textValue="Banana">
+            Banana
+          </Select.Item>
+          <Select.Item id="cherry" textValue="Cherry">
+            Cherry
+          </Select.Item>
+          <Select.Item id="grape" textValue="Grape">
+            Grape
+          </Select.Item>
+          <Select.Item id="orange" textValue="Orange">
+            Orange
+          </Select.Item>
         </Select.ListBox>
       </Select.Popover>
     </Select.Root>
@@ -62,9 +91,15 @@ export const WithLabel: Story = {
       </Select.Trigger>
       <Select.Popover>
         <Select.ListBox>
-          <Select.Item id="apple" textValue="Apple">Apple</Select.Item>
-          <Select.Item id="banana" textValue="Banana">Banana</Select.Item>
-          <Select.Item id="cherry" textValue="Cherry">Cherry</Select.Item>
+          <Select.Item id="apple" textValue="Apple">
+            Apple
+          </Select.Item>
+          <Select.Item id="banana" textValue="Banana">
+            Banana
+          </Select.Item>
+          <Select.Item id="cherry" textValue="Cherry">
+            Cherry
+          </Select.Item>
         </Select.ListBox>
       </Select.Popover>
     </Select.Root>
@@ -83,15 +118,27 @@ export const WithGroups: Story = {
         <Select.ListBox>
           <Select.Section>
             <Select.Header>Fruits</Select.Header>
-            <Select.Item id="apple" textValue="Apple">Apple</Select.Item>
-            <Select.Item id="banana" textValue="Banana">Banana</Select.Item>
-            <Select.Item id="cherry" textValue="Cherry">Cherry</Select.Item>
+            <Select.Item id="apple" textValue="Apple">
+              Apple
+            </Select.Item>
+            <Select.Item id="banana" textValue="Banana">
+              Banana
+            </Select.Item>
+            <Select.Item id="cherry" textValue="Cherry">
+              Cherry
+            </Select.Item>
           </Select.Section>
           <Select.Section>
             <Select.Header>Vegetables</Select.Header>
-            <Select.Item id="carrot" textValue="Carrot">Carrot</Select.Item>
-            <Select.Item id="broccoli" textValue="Broccoli">Broccoli</Select.Item>
-            <Select.Item id="spinach" textValue="Spinach">Spinach</Select.Item>
+            <Select.Item id="carrot" textValue="Carrot">
+              Carrot
+            </Select.Item>
+            <Select.Item id="broccoli" textValue="Broccoli">
+              Broccoli
+            </Select.Item>
+            <Select.Item id="spinach" textValue="Spinach">
+              Spinach
+            </Select.Item>
           </Select.Section>
         </Select.ListBox>
       </Select.Popover>
@@ -109,11 +156,21 @@ export const WithDisabledItems: Story = {
       </Select.Trigger>
       <Select.Popover>
         <Select.ListBox>
-          <Select.Item id="apple" textValue="Apple">Apple</Select.Item>
-          <Select.Item id="banana" textValue="Banana" isDisabled>Banana (sold out)</Select.Item>
-          <Select.Item id="cherry" textValue="Cherry">Cherry</Select.Item>
-          <Select.Item id="grape" textValue="Grape" isDisabled>Grape (sold out)</Select.Item>
-          <Select.Item id="orange" textValue="Orange">Orange</Select.Item>
+          <Select.Item id="apple" textValue="Apple">
+            Apple
+          </Select.Item>
+          <Select.Item id="banana" textValue="Banana" isDisabled>
+            Banana (sold out)
+          </Select.Item>
+          <Select.Item id="cherry" textValue="Cherry">
+            Cherry
+          </Select.Item>
+          <Select.Item id="grape" textValue="Grape" isDisabled>
+            Grape (sold out)
+          </Select.Item>
+          <Select.Item id="orange" textValue="Orange">
+            Orange
+          </Select.Item>
         </Select.ListBox>
       </Select.Popover>
     </Select.Root>
@@ -133,7 +190,9 @@ export const Disabled: Story = {
       </Select.Trigger>
       <Select.Popover>
         <Select.ListBox>
-          <Select.Item id="apple" textValue="Apple">Apple</Select.Item>
+          <Select.Item id="apple" textValue="Apple">
+            Apple
+          </Select.Item>
         </Select.ListBox>
       </Select.Popover>
     </Select.Root>
@@ -147,7 +206,12 @@ export const AllSizes: Story = {
   render: (args) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
       {(['sm', 'md', 'lg'] as const).map((size) => (
-        <Select.Root key={size} size={size} isDisabled={args.isDisabled} placeholder={`Size: ${size}`}>
+        <Select.Root
+          key={size}
+          size={size}
+          isDisabled={args.isDisabled}
+          placeholder={`Size: ${size}`}
+        >
           <Select.Label>{size.toUpperCase()}</Select.Label>
           <Select.Trigger>
             <Select.Value />
@@ -155,9 +219,15 @@ export const AllSizes: Story = {
           </Select.Trigger>
           <Select.Popover>
             <Select.ListBox>
-              <Select.Item id={`${size}-apple`} textValue="Apple">Apple</Select.Item>
-              <Select.Item id={`${size}-banana`} textValue="Banana">Banana</Select.Item>
-              <Select.Item id={`${size}-cherry`} textValue="Cherry">Cherry</Select.Item>
+              <Select.Item id={`${size}-apple`} textValue="Apple">
+                Apple
+              </Select.Item>
+              <Select.Item id={`${size}-banana`} textValue="Banana">
+                Banana
+              </Select.Item>
+              <Select.Item id={`${size}-cherry`} textValue="Cherry">
+                Cherry
+              </Select.Item>
             </Select.ListBox>
           </Select.Popover>
         </Select.Root>
@@ -172,10 +242,7 @@ export const LongSelectedValue: Story = {
   },
   render: () => (
     <div style={{ width: '13.75rem' }}>
-      <Select.Root
-        defaultSelectedKey="enterprise"
-        placeholder="Select a plan…"
-      >
+      <Select.Root defaultSelectedKey="enterprise" placeholder="Select a plan…">
         <Select.Label>Plan</Select.Label>
         <Select.Trigger>
           <Select.Value />
@@ -183,7 +250,9 @@ export const LongSelectedValue: Story = {
         </Select.Trigger>
         <Select.Popover>
           <Select.ListBox>
-            <Select.Item id="basic" textValue="Basic">Basic</Select.Item>
+            <Select.Item id="basic" textValue="Basic">
+              Basic
+            </Select.Item>
             <Select.Item
               id="enterprise"
               textValue="Enterprise compliance plan with dedicated support"
@@ -215,8 +284,12 @@ export const AllVariations: Story = {
                 </Select.Trigger>
                 <Select.Popover>
                   <Select.ListBox>
-                    <Select.Item id={`${size}-a`} textValue="Apple">Apple</Select.Item>
-                    <Select.Item id={`${size}-b`} textValue="Banana">Banana</Select.Item>
+                    <Select.Item id={`${size}-a`} textValue="Apple">
+                      Apple
+                    </Select.Item>
+                    <Select.Item id={`${size}-b`} textValue="Banana">
+                      Banana
+                    </Select.Item>
                   </Select.ListBox>
                 </Select.Popover>
               </Select.Root>
@@ -233,7 +306,9 @@ export const AllVariations: Story = {
             </Select.Trigger>
             <Select.Popover>
               <Select.ListBox>
-                <Select.Item id="dis-a" textValue="Apple">Apple</Select.Item>
+                <Select.Item id="dis-a" textValue="Apple">
+                  Apple
+                </Select.Item>
               </Select.ListBox>
             </Select.Popover>
           </Select.Root>
@@ -250,13 +325,21 @@ export const AllVariations: Story = {
               <Select.ListBox>
                 <Select.Section>
                   <Select.Header>Fruits</Select.Header>
-                  <Select.Item id="sec-apple" textValue="Apple">Apple</Select.Item>
-                  <Select.Item id="sec-banana" textValue="Banana">Banana</Select.Item>
+                  <Select.Item id="sec-apple" textValue="Apple">
+                    Apple
+                  </Select.Item>
+                  <Select.Item id="sec-banana" textValue="Banana">
+                    Banana
+                  </Select.Item>
                 </Select.Section>
                 <Select.Section>
                   <Select.Header>Vegetables</Select.Header>
-                  <Select.Item id="sec-carrot" textValue="Carrot">Carrot</Select.Item>
-                  <Select.Item id="sec-broccoli" textValue="Broccoli">Broccoli</Select.Item>
+                  <Select.Item id="sec-carrot" textValue="Carrot">
+                    Carrot
+                  </Select.Item>
+                  <Select.Item id="sec-broccoli" textValue="Broccoli">
+                    Broccoli
+                  </Select.Item>
                 </Select.Section>
               </Select.ListBox>
             </Select.Popover>

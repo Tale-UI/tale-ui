@@ -1,19 +1,38 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { PaymentInput } from '@tale-ui/react/payment-input';
 
-const meta: Meta = {
+type Args = {
+  isRequired: boolean;
+  isInvalid: boolean;
+  isDisabled: boolean;
+  isReadOnly: boolean;
+};
+
+const meta: Meta<Args> = {
   title: 'Components/PaymentInput',
   parameters: { layout: 'centered' },
+  argTypes: {
+    isRequired: { control: 'boolean' },
+    isInvalid: { control: 'boolean' },
+    isDisabled: { control: 'boolean' },
+    isReadOnly: { control: 'boolean' },
+  },
+  args: {
+    isRequired: false,
+    isInvalid: false,
+    isDisabled: false,
+    isReadOnly: false,
+  },
 };
 
 export default meta;
 
-type Story = StoryObj;
+type Story = StoryObj<Args>;
 
 export const Default: Story = {
-  render() {
+  render(args) {
     return (
-      <PaymentInput.Root>
+      <PaymentInput.Root {...args}>
         <PaymentInput.Group>
           <PaymentInput.Input placeholder="1234 5678 9012 3456" />
           <PaymentInput.CardIcon />
@@ -32,7 +51,9 @@ export const WithLabel: Story = {
           <PaymentInput.Input placeholder="1234 5678 9012 3456" />
           <PaymentInput.CardIcon />
         </PaymentInput.Group>
-        <PaymentInput.Description>We accept Visa, Mastercard, Amex, and Discover.</PaymentInput.Description>
+        <PaymentInput.Description>
+          We accept Visa, Mastercard, Amex, and Discover.
+        </PaymentInput.Description>
       </PaymentInput.Root>
     );
   },
@@ -59,7 +80,9 @@ export const AllVariations: Story = {
     return (
       <div className="story-cards">
         <div style={{ width: 280 }}>
-          <div className="story-label" style={{ marginBottom: '0.25rem' }}>Default</div>
+          <div className="story-label" style={{ marginBottom: '0.25rem' }}>
+            Default
+          </div>
           <PaymentInput.Root>
             <PaymentInput.Label>Card number</PaymentInput.Label>
             <PaymentInput.Group>
@@ -69,7 +92,9 @@ export const AllVariations: Story = {
           </PaymentInput.Root>
         </div>
         <div style={{ width: 280 }}>
-          <div className="story-label" style={{ marginBottom: '0.25rem' }}>With description</div>
+          <div className="story-label" style={{ marginBottom: '0.25rem' }}>
+            With description
+          </div>
           <PaymentInput.Root>
             <PaymentInput.Label>Card number</PaymentInput.Label>
             <PaymentInput.Group>
@@ -80,7 +105,9 @@ export const AllVariations: Story = {
           </PaymentInput.Root>
         </div>
         <div style={{ width: 280 }}>
-          <div className="story-label" style={{ marginBottom: '0.25rem' }}>Invalid</div>
+          <div className="story-label" style={{ marginBottom: '0.25rem' }}>
+            Invalid
+          </div>
           <PaymentInput.Root isInvalid>
             <PaymentInput.Label>Card number</PaymentInput.Label>
             <PaymentInput.Group>

@@ -11,23 +11,60 @@ const monthlyData = [
   { month: 'Jun', revenue: 5500, profit: 3500 },
 ];
 
-const meta: Meta = {
+type Args = {
+  data: Record<string, unknown>[];
+  width: number;
+  height: number;
+  palette: string[];
+  dataKey: string;
+  fillOpacity: number;
+  strokeWidth: number;
+};
+
+const meta: Meta<Args> = {
   title: 'Charts/AreaChart',
   parameters: { layout: 'centered' },
+  argTypes: {
+    data: { control: 'object' },
+    width: { control: { type: 'number', min: 240, step: 20 } },
+    height: { control: { type: 'number', min: 160, step: 20 } },
+    palette: { control: 'object' },
+    dataKey: { control: 'select', options: ['revenue', 'profit'] },
+    fillOpacity: { control: { type: 'range', min: 0, max: 1, step: 0.05 } },
+    strokeWidth: { control: { type: 'range', min: 1, max: 8, step: 1 } },
+  },
+  args: {
+    data: monthlyData,
+    width: 600,
+    height: 300,
+    palette: ['#087e8b', '#ff5a5f'],
+    dataKey: 'revenue',
+    fillOpacity: 0.15,
+    strokeWidth: 2,
+  },
 };
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<Args>;
 
 export const Default: Story = {
-  render() {
+  render(args) {
     return (
-      <AreaChart.Root data={monthlyData} width={600} height={300}>
+      <AreaChart.Root
+        data={args.data}
+        width={args.width}
+        height={args.height}
+        palette={args.palette}
+      >
         <AreaChart.Grid />
         <AreaChart.XAxis dataKey="month" />
         <AreaChart.YAxis />
         <AreaChart.Tooltip />
-        <AreaChart.Area dataKey="revenue" />
+        <AreaChart.Area
+          dataKey={args.dataKey}
+          fillOpacity={args.fillOpacity}
+          strokeWidth={args.strokeWidth}
+        />
       </AreaChart.Root>
     );
   },

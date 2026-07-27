@@ -15,11 +15,16 @@ const meta = {
     isAttached: {
       control: 'boolean',
     },
+    role: {
+      control: 'select',
+      options: ['group', 'region', 'presentation'],
+    },
   },
   args: {
     'aria-label': 'Document actions',
     orientation: 'horizontal',
     isAttached: false,
+    role: 'group',
   },
 } satisfies Meta<typeof ButtonGroup>;
 

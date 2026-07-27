@@ -31,27 +31,56 @@ const gallery: readonly GalleryItem[] = [
   },
 ];
 
-type Args = Record<string, never>;
+type Args = {
+  defaultOpen: boolean;
+  defaultSelectedKey: string;
+  loop: boolean;
+  swipeNavigation: boolean;
+  fit: 'cover' | 'contain' | 'fill' | 'none';
+};
 
 const meta: Meta<Args> = {
   title: 'Components/Lightbox',
   parameters: { layout: 'centered' },
+  argTypes: {
+    defaultOpen: { control: 'boolean' },
+    defaultSelectedKey: {
+      control: 'select',
+      options: gallery.map((item) => item.id),
+    },
+    loop: { control: 'boolean' },
+    swipeNavigation: { control: 'boolean' },
+    fit: {
+      control: 'inline-radio',
+      options: ['cover', 'contain', 'fill', 'none'],
+    },
+  },
+  args: {
+    defaultOpen: false,
+    defaultSelectedKey: 'forest',
+    loop: true,
+    swipeNavigation: true,
+    fit: 'contain',
+  },
 };
 
 export default meta;
 type Story = StoryObj<Args>;
 
-function Gallery({ defaultOpen = false }: { defaultOpen?: boolean }) {
+function Gallery({ defaultOpen, defaultSelectedKey, loop, swipeNavigation, fit }: Args) {
   return (
     <Lightbox.Root
+      key={`${defaultOpen}-${defaultSelectedKey}-${loop}-${swipeNavigation}`}
       items={gallery}
       getKey={(item) => item.id}
       getLabel={(item) => item.label}
       renderContent={(item) => (
-        <Image src={item.src} alt={item.label} fit="contain" width={1200} height={800} />
+        <Image src={item.src} alt={item.label} fit={fit} width={1200} height={800} />
       )}
       defaultOpen={defaultOpen}
-      defaultSelectedKey="forest"
+      defaultSelectedKey={defaultSelectedKey}
+      loop={loop}
+      swipeNavigation={swipeNavigation}
     >
       <div
         style={{
@@ -82,10 +111,12 @@ function Gallery({ defaultOpen = false }: { defaultOpen?: boolean }) {
 }
 
 export const Default: Story = {
-  render: () => <Gallery />,
+  render: (args) => <Gallery {...args} />,
 };
 
 export const Open: Story = {
   parameters: { controls: { disable: true } },
-  render: () => <Gallery defaultOpen />,
+  render: () => (
+    <Gallery defaultOpen defaultSelectedKey="forest" loop swipeNavigation fit="contain" />
+  ),
 };

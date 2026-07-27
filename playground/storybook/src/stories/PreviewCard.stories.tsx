@@ -4,6 +4,8 @@ import { PreviewCard } from '@tale-ui/react/preview-card';
 type Args = {
   placement?: 'top' | 'bottom' | 'left' | 'right';
   offset?: number;
+  delay: number;
+  closeDelay: number;
 };
 
 const meta: Meta<Args> = {
@@ -15,10 +17,14 @@ const meta: Meta<Args> = {
       options: ['top', 'bottom', 'left', 'right'],
     },
     offset: { control: 'number' },
+    delay: { control: { type: 'number', min: 0, step: 50 } },
+    closeDelay: { control: { type: 'number', min: 0, step: 50 } },
   },
   args: {
     placement: 'bottom',
     offset: 8,
+    delay: 700,
+    closeDelay: 300,
   },
 };
 
@@ -28,7 +34,7 @@ type Story = StoryObj<Args>;
 
 export const Default: Story = {
   render: (args) => (
-    <PreviewCard.Root>
+    <PreviewCard.Root delay={args.delay} closeDelay={args.closeDelay}>
       <PreviewCard.Trigger>Hover to preview</PreviewCard.Trigger>
       <PreviewCard.Popup placement={args.placement} offset={args.offset}>
         <PreviewCard.Content aria-label="Preview">
@@ -70,9 +76,7 @@ export const WithImage: Story = {
       <PreviewCard.Popup placement="bottom" offset={8}>
         <PreviewCard.Content aria-label="Image preview">
           <div className="story-preview-image-wrap">
-            <div className="story-image-placeholder">
-              Image placeholder
-            </div>
+            <div className="story-image-placeholder">Image placeholder</div>
             <div className="story-preview-body">
               <h4 className="story-preview-title">Card with Image</h4>
               <p className="story-preview-text">
@@ -89,13 +93,27 @@ export const WithImage: Story = {
 export const AllVariations: Story = {
   parameters: { controls: { disable: true } },
   render() {
-
     const placements = ['top', 'bottom', 'left', 'right'] as const;
 
     return (
-      <div style={{ display: 'flex', gap: 'var(--space-l)', alignItems: 'flex-start', padding: 'var(--space-3xl)' }}>
+      <div
+        style={{
+          display: 'flex',
+          gap: 'var(--space-l)',
+          alignItems: 'flex-start',
+          padding: 'var(--space-3xl)',
+        }}
+      >
         {placements.map((placement) => (
-          <div key={placement} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2xs)', alignItems: 'center' }}>
+          <div
+            key={placement}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 'var(--space-2xs)',
+              alignItems: 'center',
+            }}
+          >
             <span className="story-label">placement="{placement}"</span>
             <PreviewCard.Root>
               <PreviewCard.Trigger>Hover ({placement})</PreviewCard.Trigger>
@@ -104,9 +122,7 @@ export const AllVariations: Story = {
                 <PreviewCard.Content aria-label={`Preview ${placement}`}>
                   <div className="story-preview-content">
                     <h4 className="story-preview-title">Preview: {placement}</h4>
-                    <p className="story-preview-text">
-                      This card is placed on the {placement}.
-                    </p>
+                    <p className="story-preview-text">This card is placed on the {placement}.</p>
                   </div>
                 </PreviewCard.Content>
               </PreviewCard.Popup>

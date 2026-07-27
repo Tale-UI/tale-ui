@@ -5,6 +5,7 @@ type Args = {
   isSelected: boolean;
   isDisabled: boolean;
   isInvalid: boolean;
+  isRequired: boolean;
 };
 
 const meta: Meta<Args> = {
@@ -13,11 +14,13 @@ const meta: Meta<Args> = {
     isSelected: false,
     isDisabled: false,
     isInvalid: false,
+    isRequired: false,
   },
   argTypes: {
     isSelected: { control: 'boolean' },
     isDisabled: { control: 'boolean' },
     isInvalid: { control: 'boolean' },
+    isRequired: { control: 'boolean' },
   },
 };
 
@@ -32,6 +35,7 @@ export const Default: Story = {
       defaultSelected={args.isSelected}
       isDisabled={args.isDisabled}
       isInvalid={args.isInvalid}
+      isRequired={args.isRequired}
     >
       <SwitchField.Button>
         <SwitchField.Thumb />

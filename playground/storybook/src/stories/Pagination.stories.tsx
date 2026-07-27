@@ -3,11 +3,19 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Icon } from '@tale-ui/react/icon';
 import { Pagination } from '@tale-ui/react/pagination';
 
-type Args = Record<string, never>;
+type Args = {
+  label: string;
+};
 
 const meta: Meta<Args> = {
   title: 'Components/Pagination',
   parameters: { layout: 'centered' },
+  argTypes: {
+    label: { control: 'text' },
+  },
+  args: {
+    label: 'Pagination',
+  },
 };
 
 export default meta;
@@ -15,9 +23,9 @@ export default meta;
 type Story = StoryObj<Args>;
 
 export const Default: Story = {
-  render() {
+  render(args) {
     return (
-      <Pagination.Root aria-label="Pagination">
+      <Pagination.Root aria-label={args.label}>
         <Pagination.PreviousTrigger />
         <Pagination.Item page={1} />
         <Pagination.Item page={2} current />
@@ -78,11 +86,15 @@ export const CustomLabels: Story = {
   render() {
     return (
       <Pagination.Root aria-label="Pagination">
-        <Pagination.PreviousTrigger><Icon icon={ChevronLeft} size="sm" /> Prev</Pagination.PreviousTrigger>
+        <Pagination.PreviousTrigger>
+          <Icon icon={ChevronLeft} size="sm" /> Prev
+        </Pagination.PreviousTrigger>
         <Pagination.Item page={1} />
         <Pagination.Item page={2} current />
         <Pagination.Item page={3} />
-        <Pagination.NextTrigger>Next <Icon icon={ChevronRight} size="sm" /></Pagination.NextTrigger>
+        <Pagination.NextTrigger>
+          Next <Icon icon={ChevronRight} size="sm" />
+        </Pagination.NextTrigger>
       </Pagination.Root>
     );
   },
@@ -155,11 +167,15 @@ export const AllVariations: Story = {
         <div>
           <div className="story-heading">With custom labels</div>
           <Pagination.Root aria-label="Custom pagination">
-            <Pagination.PreviousTrigger><Icon icon={ChevronLeft} size="sm" /> Prev</Pagination.PreviousTrigger>
+            <Pagination.PreviousTrigger>
+              <Icon icon={ChevronLeft} size="sm" /> Prev
+            </Pagination.PreviousTrigger>
             <Pagination.Item page={1} />
             <Pagination.Item page={2} current />
             <Pagination.Item page={3} />
-            <Pagination.NextTrigger>Next <Icon icon={ChevronRight} size="sm" /></Pagination.NextTrigger>
+            <Pagination.NextTrigger>
+              Next <Icon icon={ChevronRight} size="sm" />
+            </Pagination.NextTrigger>
           </Pagination.Root>
         </div>
         <div>

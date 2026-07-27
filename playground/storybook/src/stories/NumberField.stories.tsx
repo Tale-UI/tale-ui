@@ -3,11 +3,13 @@ import * as React from 'react';
 import { NumberField } from '@tale-ui/react/number-field';
 
 type Args = {
-  value?: number;
+  label: string;
+  defaultValue?: number;
   minValue?: number;
   maxValue?: number;
   step?: number;
   isDisabled?: boolean;
+  isReadOnly?: boolean;
 };
 
 type NumberFieldStyle = React.CSSProperties & {
@@ -25,15 +27,19 @@ const meta: Meta<Args> = {
     ),
   ],
   argTypes: {
-    value: { control: 'number' },
+    label: { control: 'text' },
+    defaultValue: { control: 'number' },
     minValue: { control: 'number' },
     maxValue: { control: 'number' },
     step: { control: 'number' },
     isDisabled: { control: 'boolean' },
+    isReadOnly: { control: 'boolean' },
   },
   args: {
-    value: 0,
+    label: 'Quantity',
+    defaultValue: 0,
     isDisabled: false,
+    isReadOnly: false,
   },
   parameters: { layout: 'centered' },
 };
@@ -45,13 +51,15 @@ type Story = StoryObj<Args>;
 export const Default: Story = {
   render: (args) => (
     <NumberField.Root
-      key={`${args.value}-${args.minValue}-${args.maxValue}-${args.step}`}
-      defaultValue={args.value}
+      key={`${args.defaultValue}-${args.minValue}-${args.maxValue}-${args.step}`}
+      defaultValue={args.defaultValue}
       minValue={args.minValue}
       maxValue={args.maxValue}
       step={args.step}
       isDisabled={args.isDisabled}
+      isReadOnly={args.isReadOnly}
     >
+      <NumberField.Label>{args.label}</NumberField.Label>
       <NumberField.Group>
         <NumberField.Decrement />
         <NumberField.Input />
@@ -130,10 +138,7 @@ export const WithFormat: Story = {
     controls: { disable: true },
   },
   render: () => (
-    <NumberField.Root
-      defaultValue={99.99}
-      formatOptions={{ style: 'currency', currency: 'USD' }}
-    >
+    <NumberField.Root defaultValue={99.99} formatOptions={{ style: 'currency', currency: 'USD' }}>
       <NumberField.Label>Price</NumberField.Label>
       <NumberField.Group>
         <NumberField.Decrement />
@@ -162,9 +167,7 @@ export const CustomControlWidth: Story = {
           <NumberField.Input />
           <NumberField.Increment />
         </NumberField.Group>
-        <NumberField.Description>
-          Width applied to newly opened panels.
-        </NumberField.Description>
+        <NumberField.Description>Width applied to newly opened panels.</NumberField.Description>
       </NumberField.Root>
     );
   },
@@ -176,7 +179,9 @@ export const AllVariations: Story = {
     return (
       <div className="story-cards">
         <div style={{ width: 200 }}>
-          <div className="story-label" style={{ marginBottom: '0.25rem' }}>Default</div>
+          <div className="story-label" style={{ marginBottom: '0.25rem' }}>
+            Default
+          </div>
           <NumberField.Root defaultValue={0}>
             <NumberField.Label>Quantity</NumberField.Label>
             <NumberField.Group>
@@ -187,7 +192,9 @@ export const AllVariations: Story = {
           </NumberField.Root>
         </div>
         <div style={{ width: 200 }}>
-          <div className="story-label" style={{ marginBottom: '0.25rem' }}>Min/Max (0-10)</div>
+          <div className="story-label" style={{ marginBottom: '0.25rem' }}>
+            Min/Max (0-10)
+          </div>
           <NumberField.Root defaultValue={5} minValue={0} maxValue={10}>
             <NumberField.Label>Rating</NumberField.Label>
             <NumberField.Group>
@@ -198,7 +205,9 @@ export const AllVariations: Story = {
           </NumberField.Root>
         </div>
         <div style={{ width: 200 }}>
-          <div className="story-label" style={{ marginBottom: '0.25rem' }}>Step by 5</div>
+          <div className="story-label" style={{ marginBottom: '0.25rem' }}>
+            Step by 5
+          </div>
           <NumberField.Root defaultValue={0} step={5}>
             <NumberField.Label>Amount</NumberField.Label>
             <NumberField.Group>
@@ -209,8 +218,13 @@ export const AllVariations: Story = {
           </NumberField.Root>
         </div>
         <div style={{ width: 200 }}>
-          <div className="story-label" style={{ marginBottom: '0.25rem' }}>Currency</div>
-          <NumberField.Root defaultValue={99.99} formatOptions={{ style: 'currency', currency: 'USD' }}>
+          <div className="story-label" style={{ marginBottom: '0.25rem' }}>
+            Currency
+          </div>
+          <NumberField.Root
+            defaultValue={99.99}
+            formatOptions={{ style: 'currency', currency: 'USD' }}
+          >
             <NumberField.Label>Price</NumberField.Label>
             <NumberField.Group>
               <NumberField.Decrement />
@@ -220,7 +234,9 @@ export const AllVariations: Story = {
           </NumberField.Root>
         </div>
         <div style={{ width: 200 }}>
-          <div className="story-label" style={{ marginBottom: '0.25rem' }}>Disabled</div>
+          <div className="story-label" style={{ marginBottom: '0.25rem' }}>
+            Disabled
+          </div>
           <NumberField.Root defaultValue={42} isDisabled>
             <NumberField.Label>Disabled</NumberField.Label>
             <NumberField.Group>

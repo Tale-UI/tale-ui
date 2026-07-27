@@ -31,17 +31,19 @@ export const ColorAreaStory: Story = {
       control: 'select',
       options: ['red', 'green', 'blue', 'hue', 'saturation', 'lightness', 'brightness'],
     },
+    defaultValue: { control: 'color' },
     isDisabled: { control: 'boolean' },
   },
   args: {
     xChannel: 'saturation',
     yChannel: 'lightness',
+    defaultValue: '#ff0000',
     isDisabled: false,
   },
   render(args) {
     return (
       <ColorArea.Root
-        defaultValue={parseColor('hsl(0, 100%, 50%)')}
+        defaultValue={parseColor(args.defaultValue as string)}
         xChannel={args.xChannel as 'saturation'}
         yChannel={args.yChannel as 'lightness'}
         isDisabled={args.isDisabled as boolean}
@@ -61,6 +63,7 @@ export const ColorSliderStory: Story = {
       control: 'select',
       options: ['hue', 'saturation', 'lightness', 'brightness', 'alpha', 'red', 'green', 'blue'],
     },
+    defaultValue: { control: 'color' },
     orientation: {
       control: 'inline-radio',
       options: ['horizontal', 'vertical'],
@@ -70,6 +73,7 @@ export const ColorSliderStory: Story = {
   },
   args: {
     channel: 'hue',
+    defaultValue: '#ff0000',
     orientation: 'horizontal',
     isDisabled: false,
     showOutput: true,
@@ -79,7 +83,7 @@ export const ColorSliderStory: Story = {
     return (
       <ColorSlider.Root
         channel={channel}
-        defaultValue={parseColor('hsl(0, 100%, 50%)')}
+        defaultValue={parseColor(args.defaultValue as string)}
         orientation={args.orientation as 'horizontal'}
         isDisabled={args.isDisabled as boolean}
       >
@@ -100,17 +104,19 @@ export const ColorWheelStory: Story = {
   argTypes: {
     outerRadius: { control: { type: 'range', min: 40, max: 200, step: 5 } },
     innerRadius: { control: { type: 'range', min: 20, max: 180, step: 5 } },
+    defaultValue: { control: 'color' },
     isDisabled: { control: 'boolean' },
   },
   args: {
     outerRadius: 100,
     innerRadius: 70,
+    defaultValue: '#ff0000',
     isDisabled: false,
   },
   render(args) {
     return (
       <ColorWheel.Root
-        defaultValue={parseColor('hsl(0, 100%, 50%)')}
+        defaultValue={parseColor(args.defaultValue as string)}
         outerRadius={args.outerRadius as number}
         innerRadius={args.innerRadius as number}
         isDisabled={args.isDisabled as boolean}
@@ -165,12 +171,14 @@ export const ColorSwatchStory: Story = {
   argTypes: {
     color: { control: 'color' },
     shape: { control: 'inline-radio', options: ['square', 'circle'] },
+    defaultValue: { control: 'color' },
     enableSecondary: { control: 'boolean' },
     secondaryColor: { control: 'color', if: { arg: 'enableSecondary' } },
   },
   args: {
     color: '#ff0000',
     shape: 'square',
+    defaultValue: '#ff0000',
     enableSecondary: false,
     secondaryColor: '#e0e0e0',
   },
@@ -179,7 +187,9 @@ export const ColorSwatchStory: Story = {
       <ColorSwatch
         color={args.color as string}
         shape={args.shape as 'square' | 'circle'}
-        secondaryColor={(args.enableSecondary as boolean) ? (args.secondaryColor as string) : undefined}
+        secondaryColor={
+          (args.enableSecondary as boolean) ? (args.secondaryColor as string) : undefined
+        }
         style={{ width: '2.5rem', height: '2.5rem' }}
       />
     );
@@ -216,7 +226,7 @@ export const ColorSwatchPickerStory: Story = {
   render(args) {
     return (
       <ColorSwatchPicker.Root
-        defaultValue={parseColor('#ff0000')}
+        defaultValue={parseColor(args.defaultValue as string)}
         shape={args.shape as 'square' | 'circle'}
         isDisabled={args.isDisabled as boolean}
       >
@@ -243,20 +253,14 @@ export const CombinedPicker: Story = {
         <ColorArea.Root defaultValue={parseColor('hsl(0, 100%, 50%)')}>
           <ColorArea.Thumb />
         </ColorArea.Root>
-        <ColorSlider.Root
-          channel="hue"
-          defaultValue={parseColor('hsl(0, 100%, 50%)')}
-        >
+        <ColorSlider.Root channel="hue" defaultValue={parseColor('hsl(0, 100%, 50%)')}>
           <ColorSlider.Label>Hue</ColorSlider.Label>
           <ColorSlider.Output />
           <ColorSlider.Track>
             <ColorSlider.Thumb />
           </ColorSlider.Track>
         </ColorSlider.Root>
-        <ColorSlider.Root
-          channel="saturation"
-          defaultValue={parseColor('hsl(0, 100%, 50%)')}
-        >
+        <ColorSlider.Root channel="saturation" defaultValue={parseColor('hsl(0, 100%, 50%)')}>
           <ColorSlider.Label>Saturation</ColorSlider.Label>
           <ColorSlider.Output />
           <ColorSlider.Track>
@@ -274,7 +278,15 @@ export const AllVariations: Story = {
   parameters: { controls: { disable: true } },
   render() {
     return (
-      <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', padding: 16, alignItems: 'flex-start' }}>
+      <div
+        style={{
+          display: 'flex',
+          gap: 32,
+          flexWrap: 'wrap',
+          padding: 16,
+          alignItems: 'flex-start',
+        }}
+      >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <span className="story-label">Color Area</span>
           <ColorArea.Root defaultValue={parseColor('hsl(0, 100%, 50%)')}>
@@ -293,7 +305,11 @@ export const AllVariations: Story = {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <span className="story-label">Color Wheel</span>
-          <ColorWheel.Root defaultValue={parseColor('hsl(0, 100%, 50%)')} outerRadius={100} innerRadius={70}>
+          <ColorWheel.Root
+            defaultValue={parseColor('hsl(0, 100%, 50%)')}
+            outerRadius={100}
+            innerRadius={70}
+          >
             <ColorWheel.Track />
             <ColorWheel.Thumb />
           </ColorWheel.Root>
@@ -321,7 +337,12 @@ export const AllVariations: Story = {
               <ColorSwatch key={c} color={c} secondaryColor={NEUTRAL_PAIRS[c]} />
             ))}
             {SWATCH_PALETTE.map((c) => (
-              <ColorSwatch key={`${c}-circle`} color={c} shape="circle" secondaryColor={NEUTRAL_PAIRS[c]} />
+              <ColorSwatch
+                key={`${c}-circle`}
+                color={c}
+                shape="circle"
+                secondaryColor={NEUTRAL_PAIRS[c]}
+              />
             ))}
           </div>
         </div>
@@ -329,7 +350,9 @@ export const AllVariations: Story = {
           <span className="story-label">Color Swatch Picker (square)</span>
           <ColorSwatchPicker.Root defaultValue={parseColor('#ff0000')}>
             {SWATCH_PALETTE.map((c) => (
-              <ColorSwatchPicker.Item key={c} color={c}><ColorSwatch /></ColorSwatchPicker.Item>
+              <ColorSwatchPicker.Item key={c} color={c}>
+                <ColorSwatch />
+              </ColorSwatchPicker.Item>
             ))}
           </ColorSwatchPicker.Root>
         </div>
@@ -337,7 +360,9 @@ export const AllVariations: Story = {
           <span className="story-label">Color Swatch Picker (circle)</span>
           <ColorSwatchPicker.Root defaultValue={parseColor('#ff0000')} shape="circle">
             {SWATCH_PALETTE.map((c) => (
-              <ColorSwatchPicker.Item key={c} color={c}><ColorSwatch /></ColorSwatchPicker.Item>
+              <ColorSwatchPicker.Item key={c} color={c}>
+                <ColorSwatch />
+              </ColorSwatchPicker.Item>
             ))}
           </ColorSwatchPicker.Root>
         </div>

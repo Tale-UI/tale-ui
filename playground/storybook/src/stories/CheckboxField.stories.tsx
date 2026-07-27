@@ -7,6 +7,7 @@ type Args = {
   isSelected: boolean;
   isDisabled: boolean;
   isInvalid: boolean;
+  isRequired: boolean;
   size: 'sm' | 'md';
 };
 
@@ -16,12 +17,14 @@ const meta: Meta<Args> = {
     isSelected: false,
     isDisabled: false,
     isInvalid: false,
+    isRequired: false,
     size: 'md',
   },
   argTypes: {
     isSelected: { control: 'boolean' },
     isDisabled: { control: 'boolean' },
     isInvalid: { control: 'boolean' },
+    isRequired: { control: 'boolean' },
     size: { control: 'select', options: ['sm', 'md'] },
   },
 };
@@ -37,6 +40,7 @@ export const Default: Story = {
       defaultSelected={args.isSelected}
       isDisabled={args.isDisabled}
       isInvalid={args.isInvalid}
+      isRequired={args.isRequired}
       size={args.size}
     >
       <CheckboxField.Button>

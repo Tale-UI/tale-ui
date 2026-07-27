@@ -29,11 +29,27 @@ export default meta;
 
 type Story = StoryObj<Args>;
 
+export const Default: Story = {
+  render: (args) => (
+    <SocialButton provider={args.provider} size={args.size}>
+      Continue with {args.provider}
+    </SocialButton>
+  ),
+};
+
 export const AllProviders: Story = {
   parameters: { controls: { disable: true } },
   render() {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'stretch', width: 280 }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.5rem',
+          alignItems: 'stretch',
+          width: 280,
+        }}
+      >
         <SocialButton provider="google">Sign in with Google</SocialButton>
         <SocialButton provider="github">Continue with GitHub</SocialButton>
         <SocialButton provider="apple">Sign in with Apple</SocialButton>
@@ -48,9 +64,21 @@ export const Sizes: Story = {
   parameters: { controls: { disable: true } },
   render() {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'stretch', width: 280 }}>
-        <SocialButton provider="google" size="sm">Sign in with Google</SocialButton>
-        <SocialButton provider="google" size="md">Sign in with Google</SocialButton>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.5rem',
+          alignItems: 'stretch',
+          width: 280,
+        }}
+      >
+        <SocialButton provider="google" size="sm">
+          Sign in with Google
+        </SocialButton>
+        <SocialButton provider="google" size="md">
+          Sign in with Google
+        </SocialButton>
       </div>
     );
   },
@@ -98,10 +126,16 @@ export const AllVariations: Story = {
     const sizes = ['sm', 'md'] as const;
     return (
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 280px)', gap: '0.75rem' }}>
-        {sizes.map((s) => <div key={s} className="story-label">{s}</div>)}
+        {sizes.map((s) => (
+          <div key={s} className="story-label">
+            {s}
+          </div>
+        ))}
         {providers.map((p) =>
           sizes.map((s) => (
-            <SocialButton key={`${p}-${s}`} provider={p} size={s}>Sign in with {p}</SocialButton>
+            <SocialButton key={`${p}-${s}`} provider={p} size={s}>
+              Sign in with {p}
+            </SocialButton>
           )),
         )}
       </div>

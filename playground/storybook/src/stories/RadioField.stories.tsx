@@ -6,6 +6,7 @@ type Args = {
   isDisabled: boolean;
   isInvalid: boolean;
   size: 'sm' | 'md';
+  value: string;
 };
 
 const meta: Meta<Args> = {
@@ -14,11 +15,13 @@ const meta: Meta<Args> = {
     isDisabled: false,
     isInvalid: false,
     size: 'md',
+    value: 'free',
   },
   argTypes: {
     isDisabled: { control: 'boolean' },
     isInvalid: { control: 'boolean' },
     size: { control: 'select', options: ['sm', 'md'] },
+    value: { control: 'text' },
   },
 };
 
@@ -34,7 +37,7 @@ export const Default: Story = {
       isInvalid={args.isInvalid}
       size={args.size}
     >
-      <RadioField.Root value="free">
+      <RadioField.Root value={args.value}>
         <RadioField.Button>
           <RadioField.Indicator>
             <RadioField.Dot />

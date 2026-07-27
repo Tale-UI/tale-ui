@@ -3,23 +3,45 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ImageCropper, makeAspectCrop, centerCrop } from '@tale-ui/react/image-cropper';
 import type { Crop, PixelCrop } from '@tale-ui/react/image-cropper';
 
-const meta: Meta = {
+type Args = {
+  aspect: number | undefined;
+  circularCrop: boolean;
+  ruleOfThirds: boolean;
+  disabled: boolean;
+  locked: boolean;
+};
+
+const meta: Meta<Args> = {
   title: 'Components/ImageCropper',
   parameters: { layout: 'centered' },
+  argTypes: {
+    aspect: { control: { type: 'number', min: 0.1, step: 0.1 } },
+    circularCrop: { control: 'boolean' },
+    ruleOfThirds: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    locked: { control: 'boolean' },
+  },
+  args: {
+    aspect: 16 / 9,
+    circularCrop: false,
+    ruleOfThirds: false,
+    disabled: false,
+    locked: false,
+  },
 };
 
 export default meta;
 
-type Story = StoryObj;
+type Story = StoryObj<Args>;
 
 const DEMO_IMG = 'https://placehold.co/600x400/6366f1/ffffff?text=Crop+Me';
 
 export const Default: Story = {
-  render: () => {
+  render: (args) => {
     const [crop, setCrop] = React.useState<Crop>();
     return (
       <div style={{ maxWidth: 480 }}>
-        <ImageCropper.Root crop={crop} onChange={setCrop}>
+        <ImageCropper.Root crop={crop} onChange={setCrop} {...args}>
           <ImageCropper.Img src={DEMO_IMG} alt="Demo image" />
         </ImageCropper.Root>
       </div>
@@ -53,11 +75,7 @@ export const CircularCrop: Story = {
             alt="Avatar crop"
             onLoad={(entry) => {
               const { naturalWidth: w, naturalHeight: h } = entry.currentTarget;
-              const initial = centerCrop(
-                makeAspectCrop({ unit: '%', width: 80 }, 1, w, h),
-                w,
-                h,
-              );
+              const initial = centerCrop(makeAspectCrop({ unit: '%', width: 80 }, 1, w, h), w, h);
               setCrop(initial);
             }}
           />

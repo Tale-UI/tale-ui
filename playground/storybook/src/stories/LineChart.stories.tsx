@@ -11,23 +11,56 @@ const monthlyData = [
   { month: 'Jun', revenue: 5500, profit: 3500 },
 ];
 
-const meta: Meta = {
+type Args = {
+  data: Record<string, unknown>[];
+  width: number;
+  height: number;
+  palette: string[];
+  dataKey: string;
+  type: 'basis' | 'linear' | 'monotone' | 'step';
+  strokeWidth: number;
+};
+
+const meta: Meta<Args> = {
   title: 'Charts/LineChart',
   parameters: { layout: 'centered' },
+  argTypes: {
+    data: { control: 'object' },
+    width: { control: { type: 'number', min: 240, step: 20 } },
+    height: { control: { type: 'number', min: 160, step: 20 } },
+    palette: { control: 'object' },
+    dataKey: { control: 'select', options: ['revenue', 'profit'] },
+    type: { control: 'select', options: ['basis', 'linear', 'monotone', 'step'] },
+    strokeWidth: { control: { type: 'range', min: 1, max: 8, step: 1 } },
+  },
+  args: {
+    data: monthlyData,
+    width: 600,
+    height: 300,
+    palette: ['#087e8b', '#ff5a5f'],
+    dataKey: 'revenue',
+    type: 'monotone',
+    strokeWidth: 2,
+  },
 };
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<Args>;
 
 export const Default: Story = {
-  render() {
+  render(args) {
     return (
-      <LineChart.Root data={monthlyData} width={600} height={300}>
+      <LineChart.Root
+        data={args.data}
+        width={args.width}
+        height={args.height}
+        palette={args.palette}
+      >
         <LineChart.Grid />
         <LineChart.XAxis dataKey="month" />
         <LineChart.YAxis />
         <LineChart.Tooltip />
-        <LineChart.Line dataKey="revenue" />
+        <LineChart.Line dataKey={args.dataKey} type={args.type} strokeWidth={args.strokeWidth} />
       </LineChart.Root>
     );
   },

@@ -3,25 +3,45 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Dialog } from '@tale-ui/react/dialog';
 import { Button } from '@tale-ui/react/button';
 
-type Args = Record<string, never>;
+type Args = {
+  isOpen: boolean;
+};
 
 const meta: Meta<Args> = {
   title: 'Components/Dialog',
   parameters: { layout: 'centered' },
+  argTypes: {
+    isOpen: { control: 'boolean' },
+  },
+  args: {
+    isOpen: false,
+  },
 };
 
 export default meta;
 type Story = StoryObj<Args>;
 
-
-function DialogDemo({ triggerLabel, triggerVariant = 'primary', title, description, children }: {
+function DialogDemo({
+  triggerLabel,
+  triggerVariant = 'primary',
+  title,
+  description,
+  children,
+  controlledOpen,
+}: {
   triggerLabel: string;
   triggerVariant?: 'primary' | 'neutral' | 'danger';
   title: string;
   description: string;
   children?: React.ReactNode;
+  controlledOpen?: boolean;
 }) {
   const [open, setOpen] = React.useState(false);
+  React.useEffect(() => {
+    if (controlledOpen !== undefined) {
+      setOpen(controlledOpen);
+    }
+  }, [controlledOpen]);
   return (
     <Dialog.Root isOpen={open} onOpenChange={setOpen}>
       <Dialog.Trigger className={`tale-button--${triggerVariant}`}>{triggerLabel}</Dialog.Trigger>
@@ -32,8 +52,12 @@ function DialogDemo({ triggerLabel, triggerVariant = 'primary', title, descripti
           <Dialog.Description>{description}</Dialog.Description>
           {children ?? (
             <Dialog.Actions>
-              <Button variant="neutral" onPress={() => setOpen(false)}>Cancel</Button>
-              <Button variant="primary" onPress={() => setOpen(false)}>Confirm</Button>
+              <Button variant="neutral" onPress={() => setOpen(false)}>
+                Cancel
+              </Button>
+              <Button variant="primary" onPress={() => setOpen(false)}>
+                Confirm
+              </Button>
             </Dialog.Actions>
           )}
         </Dialog.Popup>
@@ -43,8 +67,9 @@ function DialogDemo({ triggerLabel, triggerVariant = 'primary', title, descripti
 }
 
 export const Default: Story = {
-  render: () => (
+  render: (args) => (
     <DialogDemo
+      controlledOpen={args.isOpen}
       triggerLabel="Open Dialog"
       title="Confirm action"
       description="Are you sure you want to proceed? This action can be undone later."
@@ -66,8 +91,12 @@ export const Destructive: Story = {
               This action is permanent and cannot be undone. All your data will be lost.
             </Dialog.Description>
             <Dialog.Actions>
-              <Button variant="neutral" onPress={() => setOpen(false)}>Cancel</Button>
-              <Button variant="danger" onPress={() => setOpen(false)}>Delete</Button>
+              <Button variant="neutral" onPress={() => setOpen(false)}>
+                Cancel
+              </Button>
+              <Button variant="danger" onPress={() => setOpen(false)}>
+                Delete
+              </Button>
             </Dialog.Actions>
           </Dialog.Popup>
         </Dialog.Backdrop>
@@ -98,8 +127,12 @@ export const ScrollableContent: Story = {
               ))}
             </div>
             <Dialog.Actions>
-              <Button variant="neutral" onPress={() => setOpen(false)}>Decline</Button>
-              <Button variant="primary" onPress={() => setOpen(false)}>Accept</Button>
+              <Button variant="neutral" onPress={() => setOpen(false)}>
+                Decline
+              </Button>
+              <Button variant="primary" onPress={() => setOpen(false)}>
+                Accept
+              </Button>
             </Dialog.Actions>
           </Dialog.Popup>
         </Dialog.Backdrop>
@@ -123,7 +156,9 @@ export const Dismissable: Story = {
               Click the backdrop or press Escape to dismiss this dialog.
             </Dialog.Description>
             <Dialog.Actions>
-              <Button variant="neutral" onPress={() => setOpen(false)}>Dismiss</Button>
+              <Button variant="neutral" onPress={() => setOpen(false)}>
+                Dismiss
+              </Button>
             </Dialog.Actions>
           </Dialog.Popup>
         </Dialog.Backdrop>
@@ -137,7 +172,14 @@ export const AllVariations: Story = {
   render() {
     return (
       <div style={{ display: 'flex', gap: 'var(--space-m)', alignItems: 'flex-start' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2xs)', alignItems: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'var(--space-2xs)',
+            alignItems: 'center',
+          }}
+        >
           <span className="story-label">Default</span>
           <DialogDemo
             triggerLabel="Open Default"
@@ -146,7 +188,14 @@ export const AllVariations: Story = {
             description="Are you sure you want to proceed? This action can be undone later."
           />
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2xs)', alignItems: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'var(--space-2xs)',
+            alignItems: 'center',
+          }}
+        >
           <span className="story-label">Scrollable</span>
           <DialogDemo
             triggerLabel="Open Scrollable"
@@ -164,7 +213,14 @@ export const AllVariations: Story = {
             </div>
           </DialogDemo>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2xs)', alignItems: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'var(--space-2xs)',
+            alignItems: 'center',
+          }}
+        >
           <span className="story-label">Alert-style</span>
           <DialogDemo
             triggerLabel="Delete Account"

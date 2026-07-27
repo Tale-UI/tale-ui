@@ -4,24 +4,46 @@ import { Button } from '@tale-ui/react/button';
 import { TextArea } from '@tale-ui/react/text-area';
 import { Text } from '@tale-ui/react/text';
 
-const meta = {
+type Args = {
+  label: string;
+  artifactPanelLabel: string;
+  isBusy: boolean;
+  showArtifactPanel: boolean;
+};
+
+const meta: Meta<Args> = {
   title: 'Components/Chat',
-  component: Chat.Root,
   parameters: { layout: 'fullscreen' },
-} satisfies Meta<typeof Chat.Root>;
+  argTypes: {
+    label: { control: 'text' },
+    artifactPanelLabel: { control: 'text' },
+    isBusy: { control: 'boolean' },
+    showArtifactPanel: { control: 'boolean' },
+    artifactPanel: { control: false },
+  },
+  args: {
+    label: 'Project conversation',
+    artifactPanelLabel: 'Generated artifact',
+    isBusy: false,
+    showArtifactPanel: true,
+  },
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const WithArtifactPanel: Story = {
-  render() {
+  render(args) {
     return (
       <Chat.Root
-        aria-label="Project conversation"
+        aria-label={args.label}
+        artifactPanelLabel={args.artifactPanelLabel}
         artifactPanel={
-          <Text as="div" variant="mono" size="s">
-            {'export const status = "ready";'}
-          </Text>
+          args.showArtifactPanel ? (
+            <Text as="div" variant="mono" size="s">
+              {'export const status = "ready";'}
+            </Text>
+          ) : undefined
         }
         style={{ minHeight: '32rem' }}
       >
@@ -32,7 +54,7 @@ export const WithArtifactPanel: Story = {
           </Chat.Message>
           <Chat.Message speaker="assistant" aria-label="Assistant message">
             <Chat.Bubble>The project is ready.</Chat.Bubble>
-            <Chat.ToolCall state="success" label="Read project" statusLabel="Complete" open>
+            <Chat.ToolCall state="success" label={args.label} statusLabel="Complete" open>
               Read one status file.
             </Chat.ToolCall>
           </Chat.Message>
@@ -40,7 +62,11 @@ export const WithArtifactPanel: Story = {
             <Chat.Bubble>Conversation resumed.</Chat.Bubble>
           </Chat.Message>
         </Chat.List>
-        <Chat.Composer aria-label="Message composer" onSubmit={(event) => event.preventDefault()}>
+        <Chat.Composer
+          aria-label="Message composer"
+          isBusy={args.isBusy}
+          onSubmit={(event) => event.preventDefault()}
+        >
           <TextArea.Root>
             <TextArea.TextArea aria-label="Message" />
           </TextArea.Root>

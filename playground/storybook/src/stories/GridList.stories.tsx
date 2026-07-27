@@ -5,6 +5,8 @@ import { Star, Heart, Bell, Settings, Mail } from 'lucide-react';
 
 type Args = {
   selectionMode?: 'none' | 'single' | 'multiple';
+  label: string;
+  orientation: 'horizontal' | 'vertical';
 };
 
 const items = [
@@ -23,9 +25,16 @@ const meta: Meta<Args> = {
       control: 'select',
       options: ['none', 'single', 'multiple'],
     },
+    label: { control: 'text' },
+    orientation: {
+      control: 'inline-radio',
+      options: ['horizontal', 'vertical'],
+    },
   },
   args: {
     selectionMode: 'none',
+    label: 'Items',
+    orientation: 'vertical',
   },
 };
 
@@ -36,7 +45,11 @@ type Story = StoryObj<Args>;
 export const Default: Story = {
   render(args) {
     return (
-      <GridList.Root aria-label="Items" selectionMode={args.selectionMode}>
+      <GridList.Root
+        aria-label={args.label}
+        selectionMode={args.selectionMode}
+        orientation={args.orientation}
+      >
         {items.map((item) => (
           <GridList.Item key={item.id} id={item.id} textValue={item.name}>
             {item.name}

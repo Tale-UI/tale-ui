@@ -8,6 +8,9 @@ import { Check } from 'lucide-react';
 type Args = {
   isDisabled?: boolean;
   size?: 'sm' | 'md';
+  label: string;
+  description: string;
+  orientation: 'horizontal' | 'vertical';
 };
 
 const meta: Meta<Args> = {
@@ -15,10 +18,19 @@ const meta: Meta<Args> = {
   argTypes: {
     isDisabled: { control: 'boolean' },
     size: { control: 'select', options: ['sm', 'md'] },
+    label: { control: 'text' },
+    description: { control: 'text' },
+    orientation: {
+      control: 'inline-radio',
+      options: ['horizontal', 'vertical'],
+    },
   },
   args: {
     isDisabled: false,
     size: 'md',
+    label: 'Favorite fruits',
+    description: 'Choose one or more fruits.',
+    orientation: 'vertical',
   },
 };
 
@@ -26,10 +38,15 @@ export default meta;
 
 type Story = StoryObj<Args>;
 
-
 export const Default: Story = {
   render: (args) => (
-    <CheckboxGroup label="Favorite fruits" isDisabled={args.isDisabled} size={args.size}>
+    <CheckboxGroup
+      label={args.label}
+      description={args.description}
+      orientation={args.orientation}
+      isDisabled={args.isDisabled}
+      size={args.size}
+    >
       <Checkbox.Root value="apple">
         <Checkbox.Indicator>
           <Icon icon={Check} size="sm" />
@@ -82,11 +99,7 @@ export const Disabled: Story = {
 
 export const WithDescription: Story = {
   render: (args) => (
-    <CheckboxGroup
-      label="Notification preferences"
-      isDisabled={args.isDisabled}
-      size={args.size}
-    >
+    <CheckboxGroup label="Notification preferences" isDisabled={args.isDisabled} size={args.size}>
       <Field.Description>Select how you would like to be notified.</Field.Description>
       <Checkbox.Root value="email">
         <Checkbox.Indicator>
@@ -151,17 +164,47 @@ export const AllVariations: Story = {
             <div className="story-heading">Size: {size}</div>
             <div style={{ display: 'flex', gap: '1.25rem' }}>
               <CheckboxGroup label="Default" size={size}>
-                <Checkbox.Root value="a"><Checkbox.Indicator><Icon icon={Check} size="sm" /></Checkbox.Indicator>Apple</Checkbox.Root>
-                <Checkbox.Root value="b"><Checkbox.Indicator><Icon icon={Check} size="sm" /></Checkbox.Indicator>Banana</Checkbox.Root>
+                <Checkbox.Root value="a">
+                  <Checkbox.Indicator>
+                    <Icon icon={Check} size="sm" />
+                  </Checkbox.Indicator>
+                  Apple
+                </Checkbox.Root>
+                <Checkbox.Root value="b">
+                  <Checkbox.Indicator>
+                    <Icon icon={Check} size="sm" />
+                  </Checkbox.Indicator>
+                  Banana
+                </Checkbox.Root>
               </CheckboxGroup>
               <CheckboxGroup label="Disabled" size={size} isDisabled>
-                <Checkbox.Root value="a"><Checkbox.Indicator><Icon icon={Check} size="sm" /></Checkbox.Indicator>Apple</Checkbox.Root>
-                <Checkbox.Root value="b"><Checkbox.Indicator><Icon icon={Check} size="sm" /></Checkbox.Indicator>Banana</Checkbox.Root>
+                <Checkbox.Root value="a">
+                  <Checkbox.Indicator>
+                    <Icon icon={Check} size="sm" />
+                  </Checkbox.Indicator>
+                  Apple
+                </Checkbox.Root>
+                <Checkbox.Root value="b">
+                  <Checkbox.Indicator>
+                    <Icon icon={Check} size="sm" />
+                  </Checkbox.Indicator>
+                  Banana
+                </Checkbox.Root>
               </CheckboxGroup>
               <CheckboxGroup label="With description" size={size}>
                 <Field.Description>Pick your favorites.</Field.Description>
-                <Checkbox.Root value="a"><Checkbox.Indicator><Icon icon={Check} size="sm" /></Checkbox.Indicator>Apple</Checkbox.Root>
-                <Checkbox.Root value="b"><Checkbox.Indicator><Icon icon={Check} size="sm" /></Checkbox.Indicator>Banana</Checkbox.Root>
+                <Checkbox.Root value="a">
+                  <Checkbox.Indicator>
+                    <Icon icon={Check} size="sm" />
+                  </Checkbox.Indicator>
+                  Apple
+                </Checkbox.Root>
+                <Checkbox.Root value="b">
+                  <Checkbox.Indicator>
+                    <Icon icon={Check} size="sm" />
+                  </Checkbox.Indicator>
+                  Banana
+                </Checkbox.Root>
               </CheckboxGroup>
             </div>
           </div>

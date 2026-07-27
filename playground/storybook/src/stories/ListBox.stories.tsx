@@ -4,6 +4,8 @@ import { GridLayout, Size, Virtualizer } from '@tale-ui/react/virtualizer';
 
 type Args = {
   selectionMode?: 'none' | 'single' | 'multiple';
+  label: string;
+  layout: 'stack' | 'grid';
 };
 
 const items = [
@@ -21,9 +23,16 @@ const meta: Meta<Args> = {
       control: 'select',
       options: ['none', 'single', 'multiple'],
     },
+    label: { control: 'text' },
+    layout: {
+      control: 'inline-radio',
+      options: ['stack', 'grid'],
+    },
   },
   args: {
     selectionMode: 'single',
+    label: 'Project status',
+    layout: 'stack',
   },
 };
 
@@ -34,7 +43,7 @@ type Story = StoryObj<Args>;
 export const Default: Story = {
   render(args) {
     return (
-      <ListBox.Root aria-label="Project status" selectionMode={args.selectionMode}>
+      <ListBox.Root aria-label={args.label} selectionMode={args.selectionMode} layout={args.layout}>
         {items.map((item) => (
           <ListBox.Item key={item.id} id={item.id} textValue={item.label}>
             {item.label}

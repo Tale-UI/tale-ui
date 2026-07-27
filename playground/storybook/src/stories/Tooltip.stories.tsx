@@ -4,6 +4,7 @@ import { Tooltip } from '@tale-ui/react/tooltip';
 type Args = {
   placement?: 'top' | 'bottom' | 'left' | 'right';
   offset?: number;
+  delay: number;
 };
 
 const meta: Meta<Args> = {
@@ -12,10 +13,12 @@ const meta: Meta<Args> = {
   argTypes: {
     placement: { control: 'select', options: ['top', 'bottom', 'left', 'right'] },
     offset: { control: { type: 'number', min: 0, max: 20 } },
+    delay: { control: { type: 'number', min: 0, step: 50 } },
   },
   args: {
     placement: 'top',
     offset: 8,
+    delay: 700,
   },
 };
 
@@ -25,7 +28,7 @@ type Story = StoryObj<Args>;
 export const Default: Story = {
   render: (args) => (
     <div className="story-padded">
-      <Tooltip.Root>
+      <Tooltip.Root delay={args.delay}>
         <Tooltip.Trigger>Hover me</Tooltip.Trigger>
         <Tooltip.Popup placement={args.placement} offset={args.offset}>
           <Tooltip.Arrow />
@@ -64,8 +67,8 @@ export const LongText: Story = {
         <Tooltip.Trigger>Long tooltip</Tooltip.Trigger>
         <Tooltip.Popup placement={args.placement} offset={args.offset}>
           <Tooltip.Arrow />
-          This is a tooltip with a longer description that wraps across multiple
-          lines to demonstrate how the tooltip handles extended content gracefully.
+          This is a tooltip with a longer description that wraps across multiple lines to
+          demonstrate how the tooltip handles extended content gracefully.
         </Tooltip.Popup>
       </Tooltip.Root>
     </div>
@@ -148,12 +151,26 @@ export const WithDelay: Story = {
 export const AllVariations: Story = {
   parameters: { controls: { disable: true } },
   render() {
-
     const placements = ['top', 'bottom', 'left', 'right'] as const;
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)', alignItems: 'center', padding: 'var(--space-3xl)' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)', alignItems: 'center' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--space-xl)',
+          alignItems: 'center',
+          padding: 'var(--space-3xl)',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'var(--space-xs)',
+            alignItems: 'center',
+          }}
+        >
           <span className="story-label">Simple tooltip — all placements</span>
           <div style={{ display: 'flex', gap: 'var(--space-l)' }}>
             {placements.map((placement) => (
@@ -167,7 +184,14 @@ export const AllVariations: Story = {
             ))}
           </div>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)', alignItems: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'var(--space-xs)',
+            alignItems: 'center',
+          }}
+        >
           <span className="story-label">With title + description — all placements</span>
           <div style={{ display: 'flex', gap: 'var(--space-l)' }}>
             {placements.map((placement) => (

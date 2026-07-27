@@ -1,17 +1,39 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TextEditor } from '@tale-ui/react/text-editor';
 
-const meta: Meta = {
+type Args = {
+  'aria-label': string;
+  isDisabled: boolean;
+  limit: number;
+  placeholder: string;
+  isInvalid: boolean;
+};
+
+const meta: Meta<Args> = {
   title: 'Components/TextEditor',
   parameters: { layout: 'padded' },
+  argTypes: {
+    'aria-label': { control: 'text' },
+    isDisabled: { control: 'boolean' },
+    limit: { control: { type: 'number', min: 1, step: 1 } },
+    placeholder: { control: 'text' },
+    isInvalid: { control: 'boolean' },
+  },
+  args: {
+    'aria-label': 'Rich text editor',
+    isDisabled: false,
+    limit: 500,
+    placeholder: 'Start writing…',
+    isInvalid: false,
+  },
 };
 
 export default meta;
 
-export const Default: StoryObj = {
-  render() {
+export const Default: StoryObj<Args> = {
+  render(args) {
     return (
-      <TextEditor.Root placeholder="Start writing…">
+      <TextEditor.Root {...args}>
         <TextEditor.Label>Body</TextEditor.Label>
         <TextEditor.Toolbar type="simple" />
         <TextEditor.Content />

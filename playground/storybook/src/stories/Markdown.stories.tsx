@@ -5,6 +5,12 @@ const meta = {
   title: 'Components/Markdown',
   component: Markdown,
   parameters: { layout: 'centered' },
+  argTypes: {
+    baseUrl: { control: 'text' },
+    invalidFallback: { control: 'text' },
+    children: { control: 'text' },
+    style: { control: 'object' },
+  },
 } satisfies Meta<typeof Markdown>;
 
 export default meta;

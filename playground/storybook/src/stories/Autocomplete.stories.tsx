@@ -5,6 +5,7 @@ import { useFilter } from 'react-aria-components';
 type Args = {
   isDisabled?: boolean;
   size?: 'sm' | 'md';
+  defaultInputValue?: string;
 };
 
 const panelStyle: React.CSSProperties = {
@@ -35,10 +36,12 @@ const meta: Meta<Args> = {
       control: 'select',
       options: ['sm', 'md'],
     },
+    defaultInputValue: { control: 'text' },
   },
   args: {
     isDisabled: false,
     size: 'md',
+    defaultInputValue: '',
   },
 };
 
@@ -63,21 +66,24 @@ export const Default: Story = {
     const { contains } = useFilter({ sensitivity: 'base' });
     return (
       <div style={panelStyle}>
-        <Autocomplete.Root filter={contains} size={args.size}>
+        <Autocomplete.Root
+          key={args.defaultInputValue}
+          filter={contains}
+          size={args.size}
+          defaultInputValue={args.defaultInputValue}
+        >
           <div style={searchStyle}>
             <Autocomplete.SearchField aria-label="Search fruits" isDisabled={args.isDisabled}>
               <Autocomplete.Input placeholder="Search fruits..." />
             </Autocomplete.SearchField>
           </div>
-          <div style={listStyle}>
-            <Autocomplete.ListBox aria-label="Fruits">
-              {fruits.map((fruit) => (
-                <Autocomplete.Item key={fruit.id} id={fruit.id} textValue={fruit.name}>
-                  {fruit.name}
-                </Autocomplete.Item>
-              ))}
-            </Autocomplete.ListBox>
-          </div>
+          <Autocomplete.ListBox aria-label="Fruits">
+            {fruits.map((fruit) => (
+              <Autocomplete.Item key={fruit.id} id={fruit.id} textValue={fruit.name}>
+                {fruit.name}
+              </Autocomplete.Item>
+            ))}
+          </Autocomplete.ListBox>
         </Autocomplete.Root>
       </div>
     );
@@ -99,15 +105,27 @@ export const WithSections: Story = {
             <Autocomplete.ListBox aria-label="Produce">
               <Autocomplete.Section>
                 <Autocomplete.Header>Fruits</Autocomplete.Header>
-                <Autocomplete.Item id="apple" textValue="Apple">Apple</Autocomplete.Item>
-                <Autocomplete.Item id="banana" textValue="Banana">Banana</Autocomplete.Item>
-                <Autocomplete.Item id="cherry" textValue="Cherry">Cherry</Autocomplete.Item>
+                <Autocomplete.Item id="apple" textValue="Apple">
+                  Apple
+                </Autocomplete.Item>
+                <Autocomplete.Item id="banana" textValue="Banana">
+                  Banana
+                </Autocomplete.Item>
+                <Autocomplete.Item id="cherry" textValue="Cherry">
+                  Cherry
+                </Autocomplete.Item>
               </Autocomplete.Section>
               <Autocomplete.Section>
                 <Autocomplete.Header>Vegetables</Autocomplete.Header>
-                <Autocomplete.Item id="carrot" textValue="Carrot">Carrot</Autocomplete.Item>
-                <Autocomplete.Item id="broccoli" textValue="Broccoli">Broccoli</Autocomplete.Item>
-                <Autocomplete.Item id="spinach" textValue="Spinach">Spinach</Autocomplete.Item>
+                <Autocomplete.Item id="carrot" textValue="Carrot">
+                  Carrot
+                </Autocomplete.Item>
+                <Autocomplete.Item id="broccoli" textValue="Broccoli">
+                  Broccoli
+                </Autocomplete.Item>
+                <Autocomplete.Item id="spinach" textValue="Spinach">
+                  Spinach
+                </Autocomplete.Item>
               </Autocomplete.Section>
             </Autocomplete.ListBox>
           </div>
@@ -124,7 +142,9 @@ export const AllVariations: Story = {
     return (
       <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
         <div>
-          <div className="story-label" style={{ marginBottom: '0.25rem' }}>Default</div>
+          <div className="story-label" style={{ marginBottom: '0.25rem' }}>
+            Default
+          </div>
           <div style={panelStyle}>
             <Autocomplete.Root filter={contains}>
               <div style={searchStyle}>
@@ -134,14 +154,20 @@ export const AllVariations: Story = {
               </div>
               <div style={listStyle}>
                 <Autocomplete.ListBox aria-label="Fruits">
-                  {fruits.map((f) => <Autocomplete.Item key={`av-${f.id}`} id={`av-${f.id}`} textValue={f.name}>{f.name}</Autocomplete.Item>)}
+                  {fruits.map((f) => (
+                    <Autocomplete.Item key={`av-${f.id}`} id={`av-${f.id}`} textValue={f.name}>
+                      {f.name}
+                    </Autocomplete.Item>
+                  ))}
                 </Autocomplete.ListBox>
               </div>
             </Autocomplete.Root>
           </div>
         </div>
         <div>
-          <div className="story-label" style={{ marginBottom: '0.25rem' }}>Disabled</div>
+          <div className="story-label" style={{ marginBottom: '0.25rem' }}>
+            Disabled
+          </div>
           <div style={panelStyle}>
             <Autocomplete.Root filter={contains}>
               <div style={searchStyle}>
@@ -151,14 +177,20 @@ export const AllVariations: Story = {
               </div>
               <div style={listStyle}>
                 <Autocomplete.ListBox aria-label="Fruits">
-                  {fruits.slice(0, 3).map((f) => <Autocomplete.Item key={`avd-${f.id}`} id={`avd-${f.id}`} textValue={f.name}>{f.name}</Autocomplete.Item>)}
+                  {fruits.slice(0, 3).map((f) => (
+                    <Autocomplete.Item key={`avd-${f.id}`} id={`avd-${f.id}`} textValue={f.name}>
+                      {f.name}
+                    </Autocomplete.Item>
+                  ))}
                 </Autocomplete.ListBox>
               </div>
             </Autocomplete.Root>
           </div>
         </div>
         <div>
-          <div className="story-label" style={{ marginBottom: '0.25rem' }}>With sections</div>
+          <div className="story-label" style={{ marginBottom: '0.25rem' }}>
+            With sections
+          </div>
           <div style={panelStyle}>
             <Autocomplete.Root filter={contains}>
               <div style={searchStyle}>
@@ -170,13 +202,21 @@ export const AllVariations: Story = {
                 <Autocomplete.ListBox aria-label="Produce">
                   <Autocomplete.Section>
                     <Autocomplete.Header>Fruits</Autocomplete.Header>
-                    <Autocomplete.Item id="avs-apple" textValue="Apple">Apple</Autocomplete.Item>
-                    <Autocomplete.Item id="avs-banana" textValue="Banana">Banana</Autocomplete.Item>
+                    <Autocomplete.Item id="avs-apple" textValue="Apple">
+                      Apple
+                    </Autocomplete.Item>
+                    <Autocomplete.Item id="avs-banana" textValue="Banana">
+                      Banana
+                    </Autocomplete.Item>
                   </Autocomplete.Section>
                   <Autocomplete.Section>
                     <Autocomplete.Header>Vegetables</Autocomplete.Header>
-                    <Autocomplete.Item id="avs-carrot" textValue="Carrot">Carrot</Autocomplete.Item>
-                    <Autocomplete.Item id="avs-broccoli" textValue="Broccoli">Broccoli</Autocomplete.Item>
+                    <Autocomplete.Item id="avs-carrot" textValue="Carrot">
+                      Carrot
+                    </Autocomplete.Item>
+                    <Autocomplete.Item id="avs-broccoli" textValue="Broccoli">
+                      Broccoli
+                    </Autocomplete.Item>
                   </Autocomplete.Section>
                 </Autocomplete.ListBox>
               </div>

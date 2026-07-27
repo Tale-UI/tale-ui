@@ -7,6 +7,9 @@ import { Text } from '@tale-ui/react/text';
 type Args = {
   variant: 'outlined' | 'elevated' | 'filled';
   padding: 'sm' | 'md' | 'lg';
+  isSelected: boolean;
+  isDisabled: boolean;
+  isPending: boolean;
 };
 
 const meta: Meta<Args> = {
@@ -15,8 +18,17 @@ const meta: Meta<Args> = {
   argTypes: {
     variant: { control: 'select', options: ['outlined', 'elevated', 'filled'] },
     padding: { control: 'select', options: ['sm', 'md', 'lg'] },
+    isSelected: { control: 'boolean' },
+    isDisabled: { control: 'boolean' },
+    isPending: { control: 'boolean' },
   },
-  args: { variant: 'outlined', padding: 'md' },
+  args: {
+    variant: 'outlined',
+    padding: 'md',
+    isSelected: false,
+    isDisabled: false,
+    isPending: false,
+  },
 };
 
 export default meta;
@@ -71,6 +83,28 @@ export const Default: Story = {
           </Button>
         </Card.Footer>
       </Card.Root>
+    );
+  },
+};
+
+export const InteractiveProperties: Story = {
+  render(args) {
+    return (
+      <Card.Button
+        variant={args.variant}
+        padding={args.padding}
+        isSelected={args.isSelected}
+        isDisabled={args.isDisabled}
+        isPending={args.isPending}
+        style={{ maxWidth: '22.5rem' }}
+      >
+        <Text as="span" variant="label" size="m">
+          Interactive card
+        </Text>
+        <Text as="span" variant="text" size="s" color="muted">
+          This story exposes the complete Card.Button state surface.
+        </Text>
+      </Card.Button>
     );
   },
 };

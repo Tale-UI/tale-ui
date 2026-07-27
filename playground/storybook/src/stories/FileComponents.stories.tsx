@@ -4,11 +4,20 @@ import { DropZone } from '@tale-ui/react/drop-zone';
 import { FileTrigger } from '@tale-ui/react/file-trigger';
 import { Button } from '@tale-ui/react/button';
 
-type Args = Record<string, never>;
+type Args = {
+  isDisabled: boolean;
+  allowsMultiple: boolean;
+  acceptedFileTypes: string[];
+};
 
 const meta: Meta<Args> = {
   title: 'Components/File Components',
   parameters: { layout: 'centered' },
+  args: {
+    isDisabled: false,
+    allowsMultiple: false,
+    acceptedFileTypes: ['image/*', '.pdf'],
+  },
 };
 
 export default meta;
@@ -17,11 +26,17 @@ type Story = StoryObj<Args>;
 
 export const DropZoneStory: Story = {
   name: 'Drop Zone',
-  render() {
+  argTypes: {
+    isDisabled: { control: 'boolean' },
+    allowsMultiple: { control: false },
+    acceptedFileTypes: { control: false },
+  },
+  render(args) {
     const [dropped, setDropped] = React.useState(false);
 
     return (
       <DropZone
+        isDisabled={args.isDisabled}
         onDrop={() => setDropped(true)}
         className="story-dropzone-basic"
       >
@@ -33,15 +48,26 @@ export const DropZoneStory: Story = {
 
 export const FileTriggerStory: Story = {
   name: 'File Trigger',
-  render() {
+  argTypes: {
+    isDisabled: { control: false },
+    allowsMultiple: { control: 'boolean' },
+    acceptedFileTypes: { control: 'object' },
+  },
+  render(args) {
     const [fileName, setFileName] = React.useState<string | null>(null);
 
     return (
       <div className="story-file-trigger">
         <FileTrigger
+          allowsMultiple={args.allowsMultiple}
+          acceptedFileTypes={args.acceptedFileTypes}
           onSelect={(fileList) => {
             if (fileList) {
-              setFileName(Array.from(fileList).map((f) => f.name).join(', '));
+              setFileName(
+                Array.from(fileList)
+                  .map((f) => f.name)
+                  .join(', '),
+              );
             }
           }}
         >
@@ -58,8 +84,7 @@ export const Combined: Story = {
   render() {
     const [files, setFiles] = React.useState<string[]>([]);
 
-    const addFiles = (names: string[]) =>
-      setFiles((prev) => [...prev, ...names]);
+    const addFiles = (names: string[]) => setFiles((prev) => [...prev, ...names]);
 
     return (
       <DropZone
@@ -73,14 +98,14 @@ export const Combined: Story = {
       >
         <FileTrigger
           onSelect={(fileList) => {
-            if (fileList) {addFiles(Array.from(fileList).map((f) => f.name));}
+            if (fileList) {
+              addFiles(Array.from(fileList).map((f) => f.name));
+            }
           }}
         >
           <Button variant="neutral">Click or drag files here</Button>
         </FileTrigger>
-        {files.length > 0 && (
-          <p className="story-dropzone-files">Files: {files.join(', ')}</p>
-        )}
+        {files.length > 0 && <p className="story-dropzone-files">Files: {files.join(', ')}</p>}
       </DropZone>
     );
   },

@@ -5,7 +5,7 @@ import { Icon } from '@tale-ui/react/icon';
 import { Check, Minus } from 'lucide-react';
 
 type Args = {
-  isSelected: boolean;
+  defaultSelected: boolean;
   isDisabled: boolean;
   isIndeterminate: boolean;
   size: 'sm' | 'md';
@@ -14,13 +14,13 @@ type Args = {
 const meta: Meta<Args> = {
   title: 'Components/Checkbox',
   args: {
-    isSelected: false,
+    defaultSelected: false,
     isDisabled: false,
     isIndeterminate: false,
     size: 'md',
   },
   argTypes: {
-    isSelected: { control: 'boolean' },
+    defaultSelected: { control: 'boolean' },
     isDisabled: { control: 'boolean' },
     isIndeterminate: { control: 'boolean' },
     size: { control: 'select', options: ['sm', 'md'] },
@@ -31,12 +31,11 @@ export default meta;
 
 type Story = StoryObj<Args>;
 
-
 export const Default: Story = {
   render: (args) => (
     <Checkbox.Root
-      key={`${args.isSelected}-${args.isIndeterminate}`}
-      defaultSelected={args.isSelected}
+      key={`${args.defaultSelected}-${args.isIndeterminate}`}
+      defaultSelected={args.defaultSelected}
       isDisabled={args.isDisabled}
       isIndeterminate={args.isIndeterminate}
       size={args.size}
@@ -51,14 +50,14 @@ export const Default: Story = {
 
 export const Checked: Story = {
   args: {
-    isSelected: true,
+    defaultSelected: true,
     isDisabled: false,
     isIndeterminate: false,
   },
   render: (args) => (
     <Checkbox.Root
-      key={`${args.isSelected}-${args.isIndeterminate}`}
-      defaultSelected={args.isSelected}
+      key={`${args.defaultSelected}-${args.isIndeterminate}`}
+      defaultSelected={args.defaultSelected}
       isDisabled={args.isDisabled}
       isIndeterminate={args.isIndeterminate}
       size={args.size}
@@ -73,14 +72,14 @@ export const Checked: Story = {
 
 export const Disabled: Story = {
   args: {
-    isSelected: false,
+    defaultSelected: false,
     isDisabled: true,
     isIndeterminate: false,
   },
   render: (args) => (
     <Checkbox.Root
-      key={`${args.isSelected}-${args.isIndeterminate}`}
-      defaultSelected={args.isSelected}
+      key={`${args.defaultSelected}-${args.isIndeterminate}`}
+      defaultSelected={args.defaultSelected}
       isDisabled={args.isDisabled}
       isIndeterminate={args.isIndeterminate}
       size={args.size}
@@ -95,14 +94,14 @@ export const Disabled: Story = {
 
 export const DisabledChecked: Story = {
   args: {
-    isSelected: true,
+    defaultSelected: true,
     isDisabled: true,
     isIndeterminate: false,
   },
   render: (args) => (
     <Checkbox.Root
-      key={`${args.isSelected}-${args.isIndeterminate}`}
-      defaultSelected={args.isSelected}
+      key={`${args.defaultSelected}-${args.isIndeterminate}`}
+      defaultSelected={args.defaultSelected}
       isDisabled={args.isDisabled}
       isIndeterminate={args.isIndeterminate}
       size={args.size}
@@ -117,14 +116,14 @@ export const DisabledChecked: Story = {
 
 export const Indeterminate: Story = {
   args: {
-    isSelected: false,
+    defaultSelected: false,
     isDisabled: false,
     isIndeterminate: true,
   },
   render: (args) => (
     <Checkbox.Root
-      key={`${args.isSelected}-${args.isIndeterminate}`}
-      defaultSelected={args.isSelected}
+      key={`${args.defaultSelected}-${args.isIndeterminate}`}
+      defaultSelected={args.defaultSelected}
       isDisabled={args.isDisabled}
       isIndeterminate={args.isIndeterminate}
       size={args.size}
@@ -156,7 +155,6 @@ export const AllSizes: Story = {
         </Checkbox.Indicator>
         Medium (default)
       </Checkbox.Root>
-
     </div>
   ),
 };
@@ -225,12 +223,25 @@ export const AllVariations: Story = {
       { label: 'Disabled + Indeterminate', props: { isDisabled: true, isIndeterminate: true } },
     ] as const;
     return (
-      <div style={{ display: 'grid', gridTemplateColumns: `auto repeat(${sizes.length}, auto)`, gap: '0.5rem 1rem', alignItems: 'center' }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: `auto repeat(${sizes.length}, auto)`,
+          gap: '0.5rem 1rem',
+          alignItems: 'center',
+        }}
+      >
         <div />
-        {sizes.map((s) => <div key={s} className="story-label">{s}</div>)}
+        {sizes.map((s) => (
+          <div key={s} className="story-label">
+            {s}
+          </div>
+        ))}
         {states.map((state) => (
           <React.Fragment>
-            <div key={`label-${state.label}`} className="story-label">{state.label}</div>
+            <div key={`label-${state.label}`} className="story-label">
+              {state.label}
+            </div>
             {sizes.map((s) => (
               <Checkbox.Root key={`${state.label}-${s}`} size={s} {...state.props}>
                 <Checkbox.Indicator>

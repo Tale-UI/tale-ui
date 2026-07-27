@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { Key } from 'react-aria-components';
 import { TagSelect } from '@tale-ui/react/tag-select';
 
@@ -23,6 +23,15 @@ const meta: Meta<typeof TagSelect.Root> = {
     isDisabled: { control: 'boolean' },
     isInvalid: { control: 'boolean' },
     isRequired: { control: 'boolean' },
+    label: { control: 'text' },
+    placeholder: { control: 'text' },
+    description: { control: 'text' },
+    errorMessage: { control: 'text' },
+    items: { control: false },
+    selectedKeys: { control: false },
+    defaultSelectedKeys: { control: false },
+    getItemLabel: { control: false },
+    onSelectionChange: { control: false },
   },
 };
 export default meta;
@@ -53,7 +62,16 @@ function TagSelectDemo(args: Partial<React.ComponentProps<typeof TagSelect.Root>
 
 export const Default: Story = {
   render: (args) => <TagSelectDemo {...args} />,
-  args: { size: 'md' },
+  args: {
+    size: 'md',
+    label: 'Team members',
+    placeholder: 'Search members…',
+    description: 'Select everyone who should have access.',
+    errorMessage: 'Select at least one team member.',
+    isDisabled: false,
+    isInvalid: false,
+    isRequired: false,
+  },
 };
 
 export const Empty: Story = {

@@ -8,15 +8,21 @@ const meta = {
   title: 'Components/AppShell',
   component: AppShell.Root,
   parameters: { layout: 'fullscreen' },
+  argTypes: {
+    hasSidebar: { control: 'boolean' },
+  },
+  args: {
+    hasSidebar: true,
+  },
 } satisfies Meta<typeof AppShell.Root>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const SidebarLayout: Story = {
-  render() {
+  render(args) {
     return (
-      <AppShell.Root>
+      <AppShell.Root {...args}>
         <AppShell.SkipLink />
         <AppShell.Header>
           <HeaderNav.Root aria-label="Application header">

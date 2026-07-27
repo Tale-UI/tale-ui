@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { InputTags } from '@tale-ui/react/input-tags';
 
 const meta: Meta<typeof InputTags.Root> = {
@@ -13,6 +13,25 @@ const meta: Meta<typeof InputTags.Root> = {
     isInvalid: { control: 'boolean' },
     isRequired: { control: 'boolean' },
     allowDuplicates: { control: 'boolean' },
+    label: { control: 'text' },
+    placeholder: { control: 'text' },
+    description: { control: 'text' },
+    errorMessage: { control: 'text' },
+    defaultValue: { control: 'object' },
+    maxTags: { control: { type: 'number', min: 1, step: 1 } },
+    value: { control: false },
+    validate: { control: false },
+    onChange: { control: false },
+    onTagAdded: { control: false },
+    onTagRemoved: { control: false },
+  },
+  args: {
+    tagPlacement: 'inline',
+    size: 'md',
+    isDisabled: false,
+    isInvalid: false,
+    isRequired: false,
+    allowDuplicates: false,
   },
 };
 export default meta;

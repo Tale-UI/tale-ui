@@ -5,6 +5,7 @@ import { ProgressCircle } from '@tale-ui/react/progress-circle';
 type Args = {
   value?: number;
   size: 'sm' | 'md' | 'lg';
+  label: string;
 };
 
 const meta: Meta<Args> = {
@@ -13,10 +14,12 @@ const meta: Meta<Args> = {
   argTypes: {
     value: { control: { type: 'range', min: 0, max: 100, step: 1 } },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    label: { control: 'text' },
   },
   args: {
     value: 60,
     size: 'md',
+    label: 'Upload progress',
   },
 };
 
@@ -27,7 +30,7 @@ type Story = StoryObj<Args>;
 export const Default: Story = {
   render(args) {
     return (
-      <ProgressCircle.Root value={args.value} size={args.size}>
+      <ProgressCircle.Root value={args.value} size={args.size} aria-label={args.label}>
         <ProgressCircle.Track />
       </ProgressCircle.Root>
     );
@@ -51,9 +54,15 @@ export const AllSizes: Story = {
   render() {
     return (
       <div style={{ display: 'flex', alignItems: 'end', gap: '1rem' }}>
-        <ProgressCircle.Root value={60} size="sm"><ProgressCircle.Track /></ProgressCircle.Root>
-        <ProgressCircle.Root value={60} size="md"><ProgressCircle.Track /></ProgressCircle.Root>
-        <ProgressCircle.Root value={60} size="lg"><ProgressCircle.Track /></ProgressCircle.Root>
+        <ProgressCircle.Root value={60} size="sm">
+          <ProgressCircle.Track />
+        </ProgressCircle.Root>
+        <ProgressCircle.Root value={60} size="md">
+          <ProgressCircle.Track />
+        </ProgressCircle.Root>
+        <ProgressCircle.Root value={60} size="lg">
+          <ProgressCircle.Track />
+        </ProgressCircle.Root>
       </div>
     );
   },
@@ -88,9 +97,20 @@ export const AllVariations: Story = {
     const sizes = ['sm', 'md', 'lg'] as const;
     const values = [0, 25, 50, 75, 100, undefined] as const;
     return (
-      <div style={{ display: 'grid', gridTemplateColumns: `auto repeat(${values.length}, auto)`, gap: '1rem', alignItems: 'end' }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: `auto repeat(${values.length}, auto)`,
+          gap: '1rem',
+          alignItems: 'end',
+        }}
+      >
         <div />
-        {values.map((v) => <div key={String(v)} className="story-label" style={{ textAlign: 'center' }}>{v == null ? 'indeterminate' : `${v}%`}</div>)}
+        {values.map((v) => (
+          <div key={String(v)} className="story-label" style={{ textAlign: 'center' }}>
+            {v == null ? 'indeterminate' : `${v}%`}
+          </div>
+        ))}
         {sizes.map((s) => (
           <React.Fragment key={`row-${s}`}>
             <div className="story-label">{s}</div>

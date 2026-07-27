@@ -4,6 +4,7 @@ import { Radio } from '@tale-ui/react/radio';
 type Args = {
   isDisabled?: boolean;
   size: 'sm' | 'md';
+  value: string;
 };
 
 const meta: Meta<Args> = {
@@ -14,10 +15,12 @@ const meta: Meta<Args> = {
       control: 'select',
       options: ['sm', 'md'],
     },
+    value: { control: 'text' },
   },
   args: {
     isDisabled: false,
     size: 'md',
+    value: 'red',
   },
 };
 
@@ -28,7 +31,7 @@ type Story = StoryObj<Args>;
 export const Default: Story = {
   render: (args) => (
     <Radio.Group label="Favorite color" isDisabled={args.isDisabled} size={args.size}>
-      <Radio.Root value="red">
+      <Radio.Root value={args.value}>
         <Radio.Indicator />
         Red
       </Radio.Root>
@@ -68,7 +71,12 @@ export const Disabled: Story = {
 
 export const Horizontal: Story = {
   render: (args) => (
-    <Radio.Group label="Plan" orientation="horizontal" isDisabled={args.isDisabled} size={args.size}>
+    <Radio.Group
+      label="Plan"
+      orientation="horizontal"
+      isDisabled={args.isDisabled}
+      size={args.size}
+    >
       <Radio.Root value="free">
         <Radio.Indicator />
         Free
@@ -112,7 +120,6 @@ export const AllSizes: Story = {
           Medium option B
         </Radio.Root>
       </Radio.Group>
-
     </div>
   ),
 };
@@ -128,16 +135,34 @@ export const AllVariations: Story = {
             <div className="story-heading">Size: {size}</div>
             <div style={{ display: 'flex', gap: '1.25rem' }}>
               <Radio.Group label="Default" size={size}>
-                <Radio.Root value="a"><Radio.Indicator />Option A</Radio.Root>
-                <Radio.Root value="b"><Radio.Indicator />Option B</Radio.Root>
+                <Radio.Root value="a">
+                  <Radio.Indicator />
+                  Option A
+                </Radio.Root>
+                <Radio.Root value="b">
+                  <Radio.Indicator />
+                  Option B
+                </Radio.Root>
               </Radio.Group>
               <Radio.Group label="Disabled" size={size} isDisabled>
-                <Radio.Root value="a"><Radio.Indicator />Option A</Radio.Root>
-                <Radio.Root value="b"><Radio.Indicator />Option B</Radio.Root>
+                <Radio.Root value="a">
+                  <Radio.Indicator />
+                  Option A
+                </Radio.Root>
+                <Radio.Root value="b">
+                  <Radio.Indicator />
+                  Option B
+                </Radio.Root>
               </Radio.Group>
               <Radio.Group label="Horizontal" size={size} orientation="horizontal">
-                <Radio.Root value="a"><Radio.Indicator />Option A</Radio.Root>
-                <Radio.Root value="b"><Radio.Indicator />Option B</Radio.Root>
+                <Radio.Root value="a">
+                  <Radio.Indicator />
+                  Option A
+                </Radio.Root>
+                <Radio.Root value="b">
+                  <Radio.Indicator />
+                  Option B
+                </Radio.Root>
               </Radio.Group>
             </div>
           </div>

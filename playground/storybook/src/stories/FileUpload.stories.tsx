@@ -2,17 +2,39 @@ import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FileUpload } from '@tale-ui/react/file-upload';
 
-const meta: Meta = {
+type Args = {
+  isDisabled: boolean;
+  allowsMultiple: boolean;
+  accept: string;
+  maxSize: number;
+  hint: string;
+};
+
+const meta: Meta<Args> = {
   title: 'Components/FileUpload',
   parameters: { layout: 'padded' },
+  argTypes: {
+    isDisabled: { control: 'boolean' },
+    allowsMultiple: { control: 'boolean' },
+    accept: { control: 'text' },
+    maxSize: { control: { type: 'number', min: 0, step: 1024 } },
+    hint: { control: 'text' },
+  },
+  args: {
+    isDisabled: false,
+    allowsMultiple: true,
+    accept: 'image/*,.pdf',
+    maxSize: 5 * 1024 * 1024,
+    hint: 'PNG, JPG, PDF (max 5 MB)',
+  },
 };
 
 export default meta;
 
-type Story = StoryObj;
+type Story = StoryObj<Args>;
 
 export const Default: Story = {
-  render: () => {
+  render: (args) => {
     const [files, setFiles] = React.useState<File[]>([]);
     const [progress, setProgress] = React.useState<Record<number, number>>({});
 
@@ -27,7 +49,9 @@ export const Default: Story = {
           const interval = setInterval(() => {
             pct += 10;
             setProgress((prev) => ({ ...prev, [idx]: pct }));
-            if (pct >= 100) {clearInterval(interval);}
+            if (pct >= 100) {
+              clearInterval(interval);
+            }
           }, 200);
         });
         return newFiles;
@@ -38,9 +62,11 @@ export const Default: Story = {
       <div style={{ width: '100%', maxWidth: 480 }}>
         <FileUpload.Root>
           <FileUpload.DropZone
-            hint="PNG, JPG, PDF (max 5 MB)"
-            accept="image/*,.pdf"
-            maxSize={5 * 1024 * 1024}
+            hint={args.hint}
+            accept={args.accept}
+            maxSize={args.maxSize}
+            isDisabled={args.isDisabled}
+            allowsMultiple={args.allowsMultiple}
             onDropFiles={addFiles}
           />
           {files.length > 0 && (
@@ -128,10 +154,7 @@ export const DisabledDropZone: Story = {
   render: () => (
     <div style={{ width: '100%', maxWidth: 480 }}>
       <FileUpload.Root>
-        <FileUpload.DropZone
-          hint="Uploads are disabled"
-          isDisabled
-        />
+        <FileUpload.DropZone hint="Uploads are disabled" isDisabled />
       </FileUpload.Root>
     </div>
   ),

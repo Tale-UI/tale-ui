@@ -2,11 +2,22 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { LayoutDashboard, Settings, Users } from 'lucide-react';
 import { Sidebar } from '@tale-ui/react/sidebar';
 
-type Args = Record<string, never>;
+type Args = {
+  hideBorder: boolean;
+  placeholder: string;
+};
 
 const meta: Meta<Args> = {
   title: 'Components/Sidebar',
   parameters: { layout: 'fullscreen' },
+  argTypes: {
+    hideBorder: { control: 'boolean' },
+    placeholder: { control: 'text' },
+  },
+  args: {
+    hideBorder: false,
+    placeholder: 'Search navigation…',
+  },
 };
 
 export default meta;
@@ -20,15 +31,21 @@ const navItems = [
 ];
 
 export const Default: Story = {
-  render: () => (
+  render: (args) => (
     <div style={{ height: '100vh', display: 'flex' }}>
-      <Sidebar.Root>
+      <Sidebar.Root hideBorder={args.hideBorder}>
         <Sidebar.Header>
           <strong>MyApp</strong>
+          <Sidebar.Search placeholder={args.placeholder} />
         </Sidebar.Header>
         <Sidebar.NavList>
           {navItems.map((item) => (
-            <Sidebar.NavItem key={item.href} href={item.href} icon={item.icon} current={item.current}>
+            <Sidebar.NavItem
+              key={item.href}
+              href={item.href}
+              icon={item.icon}
+              current={item.current}
+            >
               {item.label}
             </Sidebar.NavItem>
           ))}
@@ -49,7 +66,12 @@ export const WithSearch: Story = {
         </Sidebar.Header>
         <Sidebar.NavList>
           {navItems.map((item) => (
-            <Sidebar.NavItem key={item.href} href={item.href} icon={item.icon} current={item.current}>
+            <Sidebar.NavItem
+              key={item.href}
+              href={item.href}
+              icon={item.icon}
+              current={item.current}
+            >
               {item.label}
             </Sidebar.NavItem>
           ))}
@@ -99,7 +121,12 @@ export const WithFeatureCard: Story = {
         </Sidebar.Header>
         <Sidebar.NavList>
           {navItems.map((item) => (
-            <Sidebar.NavItem key={item.href} href={item.href} icon={item.icon} current={item.current}>
+            <Sidebar.NavItem
+              key={item.href}
+              href={item.href}
+              icon={item.icon}
+              current={item.current}
+            >
               {item.label}
             </Sidebar.NavItem>
           ))}

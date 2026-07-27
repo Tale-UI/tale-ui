@@ -6,6 +6,8 @@ import { X } from 'lucide-react';
 type Args = {
   isDisabled?: boolean;
   placeholder?: string;
+  variant: 'default' | 'inline';
+  defaultValue: string;
 };
 
 const meta: Meta<Args> = {
@@ -21,10 +23,17 @@ const meta: Meta<Args> = {
   argTypes: {
     isDisabled: { control: 'boolean' },
     placeholder: { control: 'text' },
+    variant: {
+      control: 'inline-radio',
+      options: ['default', 'inline'],
+    },
+    defaultValue: { control: 'text' },
   },
   args: {
     isDisabled: false,
     placeholder: 'Search...',
+    variant: 'default',
+    defaultValue: '',
   },
 };
 
@@ -34,7 +43,12 @@ type Story = StoryObj<Args>;
 
 export const Default: Story = {
   render: (args) => (
-    <SearchField.Root isDisabled={args.isDisabled}>
+    <SearchField.Root
+      key={args.defaultValue}
+      isDisabled={args.isDisabled}
+      variant={args.variant}
+      defaultValue={args.defaultValue}
+    >
       <SearchField.Input placeholder={args.placeholder} />
     </SearchField.Root>
   ),
@@ -54,7 +68,9 @@ export const WithClearButton: Story = {
     <SearchField.Root defaultValue="React" {...args}>
       <SearchField.Label>Search</SearchField.Label>
       <SearchField.Input placeholder={args.placeholder} />
-      <SearchField.ClearButton><Icon icon={X} size="sm" /></SearchField.ClearButton>
+      <SearchField.ClearButton>
+        <Icon icon={X} size="sm" />
+      </SearchField.ClearButton>
     </SearchField.Root>
   ),
 };
@@ -85,7 +101,9 @@ export const AllVariations: Story = {
           <SearchField.Root defaultValue="React">
             <SearchField.Label>Search</SearchField.Label>
             <SearchField.Input placeholder="Search..." />
-            <SearchField.ClearButton><Icon icon={X} size="sm" /></SearchField.ClearButton>
+            <SearchField.ClearButton>
+              <Icon icon={X} size="sm" />
+            </SearchField.ClearButton>
           </SearchField.Root>
         </div>
         <div style={{ width: 240 }}>
@@ -93,7 +111,9 @@ export const AllVariations: Story = {
           <SearchField.Root variant="inline" defaultValue="Keyboard">
             <SearchField.Label>Search documentation</SearchField.Label>
             <SearchField.Input placeholder="Search..." />
-            <SearchField.ClearButton><Icon icon={X} size="sm" /></SearchField.ClearButton>
+            <SearchField.ClearButton>
+              <Icon icon={X} size="sm" />
+            </SearchField.ClearButton>
           </SearchField.Root>
         </div>
         <div style={{ width: 240 }}>

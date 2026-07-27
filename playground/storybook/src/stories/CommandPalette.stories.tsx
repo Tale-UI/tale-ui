@@ -11,6 +11,8 @@ import { FileText, LayoutDashboard, LifeBuoy, Moon, Settings, UserPlus } from 'l
 type Args = {
   defaultOpen?: boolean;
   size?: 'sm' | 'md' | 'lg';
+  open: boolean;
+  closeOnSelect: boolean;
 };
 
 const meta: Meta<Args> = {
@@ -21,10 +23,14 @@ const meta: Meta<Args> = {
       control: 'select',
       options: ['sm', 'md', 'lg'],
     },
+    open: { control: 'boolean' },
+    closeOnSelect: { control: 'boolean' },
   },
   args: {
     defaultOpen: true,
     size: 'md',
+    open: false,
+    closeOnSelect: true,
   },
 };
 
@@ -127,7 +133,13 @@ export const Default: Story = {
   render(args) {
     return (
       <div className="story-padded">
-        <CommandPalette.Root defaultOpen={args.defaultOpen} size={args.size}>
+        <CommandPalette.Root
+          key={String(args.defaultOpen)}
+          open={args.open || undefined}
+          defaultOpen={args.defaultOpen}
+          closeOnSelect={args.closeOnSelect}
+          size={args.size}
+        >
           <CommandPalette.Trigger>Open command palette</CommandPalette.Trigger>
           <CommandPalette.Backdrop>
             <CommandPalette.Popup aria-label="Command palette">

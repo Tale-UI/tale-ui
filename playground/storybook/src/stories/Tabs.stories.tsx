@@ -9,6 +9,7 @@ type Args = {
   isDisabled?: boolean;
   size: 'sm' | 'md';
   variant: 'underline' | 'pills' | 'enclosed';
+  defaultSelectedKey: string;
 };
 
 const meta: Meta<Args> = {
@@ -27,12 +28,17 @@ const meta: Meta<Args> = {
       control: 'select',
       options: ['underline', 'pills', 'enclosed'],
     },
+    defaultSelectedKey: {
+      control: 'select',
+      options: ['tab1', 'tab2', 'tab3'],
+    },
   },
   args: {
     orientation: 'horizontal',
     isDisabled: false,
     size: 'md',
     variant: 'underline',
+    defaultSelectedKey: 'tab1',
   },
 };
 
@@ -43,7 +49,8 @@ type Story = StoryObj<Args>;
 export const Default: Story = {
   render: (args) => (
     <Tabs.Root
-      defaultSelectedKey="tab1"
+      key={args.defaultSelectedKey}
+      defaultSelectedKey={args.defaultSelectedKey}
       orientation={args.orientation}
       isDisabled={args.isDisabled}
     >

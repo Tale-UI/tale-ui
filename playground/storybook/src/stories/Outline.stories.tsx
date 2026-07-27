@@ -22,6 +22,23 @@ const meta = {
     defaultActiveId: 'introduction',
     items,
     observeTargets: false,
+    observerRootMargin: '0px 0px -70% 0px',
+    observerThreshold: [0, 0.25, 0.5, 0.75, 1],
+  },
+  argTypes: {
+    'aria-label': { control: 'text' },
+    defaultActiveId: {
+      control: 'select',
+      options: [null, ...items.map((item) => item.id)],
+    },
+    items: { control: 'object' },
+    observeTargets: { control: 'boolean' },
+    observerRootMargin: { control: 'text' },
+    observerThreshold: { control: 'object' },
+    activeId: { control: false },
+    getObserverRoot: { control: false },
+    onAction: { control: false },
+    onActiveChange: { control: false },
   },
 } satisfies Meta<typeof Outline>;
 

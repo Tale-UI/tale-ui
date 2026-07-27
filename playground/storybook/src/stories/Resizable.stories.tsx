@@ -8,6 +8,15 @@ const meta = {
   parameters: {
     layout: 'padded',
   },
+  argTypes: {
+    defaultSizes: { control: 'object' },
+    orientation: {
+      control: 'inline-radio',
+      options: ['horizontal', 'vertical'],
+    },
+    children: { control: false },
+    style: { control: 'object' },
+  },
 } satisfies Meta<typeof Resizable.Root>;
 
 export default meta;

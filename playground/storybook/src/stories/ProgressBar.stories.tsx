@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ProgressBar } from '@tale-ui/react/progress-bar';
 
 type Args = {
+  'aria-label': string;
   value?: number;
   minValue?: number;
   maxValue?: number;
@@ -14,7 +15,10 @@ const meta: Meta<Args> = {
   title: 'Components/ProgressBar',
   parameters: { layout: 'centered' },
   argTypes: {
+    'aria-label': { control: 'text' },
     value: { control: { type: 'number', min: 0, max: 100 } },
+    minValue: { control: 'number' },
+    maxValue: { control: 'number' },
     isIndeterminate: { control: 'boolean' },
     labelPosition: {
       control: 'select',
@@ -22,7 +26,10 @@ const meta: Meta<Args> = {
     },
   },
   args: {
+    'aria-label': 'Upload progress',
     value: 60,
+    minValue: 0,
+    maxValue: 100,
     isIndeterminate: false,
     labelPosition: 'top',
   },
@@ -37,9 +44,10 @@ export const Default: Story = {
     <div className="story-progress">
       <ProgressBar.Root
         {...(args.isIndeterminate ? { isIndeterminate: true } : { value: args.value })}
-        minValue={0}
-        maxValue={100}
+        minValue={args.minValue}
+        maxValue={args.maxValue}
         labelPosition={args.labelPosition}
+        aria-label={args['aria-label']}
       >
         <ProgressBar.Track>
           <ProgressBar.Indicator {...(args.isIndeterminate ? {} : { value: args.value })} />
@@ -113,7 +121,13 @@ export const LabelRight: Story = {
   render: () => (
     <div className="story-progress story-col story-col--m">
       {[20, 60, 100].map((value) => (
-        <ProgressBar.Root key={value} value={value} minValue={0} maxValue={100} labelPosition="right">
+        <ProgressBar.Root
+          key={value}
+          value={value}
+          minValue={0}
+          maxValue={100}
+          labelPosition="right"
+        >
           <ProgressBar.Header>
             <ProgressBar.Value>{value}%</ProgressBar.Value>
           </ProgressBar.Header>
@@ -134,7 +148,13 @@ export const LabelBottom: Story = {
   render: () => (
     <div className="story-progress story-col story-col--m">
       {[20, 60, 100].map((value) => (
-        <ProgressBar.Root key={value} value={value} minValue={0} maxValue={100} labelPosition="bottom">
+        <ProgressBar.Root
+          key={value}
+          value={value}
+          minValue={0}
+          maxValue={100}
+          labelPosition="bottom"
+        >
           <ProgressBar.Header>
             <ProgressBar.Label>Uploading</ProgressBar.Label>
             <ProgressBar.Value>{value}%</ProgressBar.Value>
@@ -156,7 +176,13 @@ export const LabelTopFloating: Story = {
   render: () => (
     <div className="story-progress story-col story-col--m">
       {[20, 60, 100].map((value) => (
-        <ProgressBar.Root key={value} value={value} minValue={0} maxValue={100} labelPosition="top-floating">
+        <ProgressBar.Root
+          key={value}
+          value={value}
+          minValue={0}
+          maxValue={100}
+          labelPosition="top-floating"
+        >
           <ProgressBar.Header>
             <ProgressBar.Value>{value}%</ProgressBar.Value>
           </ProgressBar.Header>
@@ -177,7 +203,13 @@ export const LabelBottomFloating: Story = {
   render: () => (
     <div className="story-progress story-col story-col--m">
       {[20, 60, 100].map((value) => (
-        <ProgressBar.Root key={value} value={value} minValue={0} maxValue={100} labelPosition="bottom-floating">
+        <ProgressBar.Root
+          key={value}
+          value={value}
+          minValue={0}
+          maxValue={100}
+          labelPosition="bottom-floating"
+        >
           <ProgressBar.Header>
             <ProgressBar.Value>{value}%</ProgressBar.Value>
           </ProgressBar.Header>
@@ -190,7 +222,11 @@ export const LabelBottomFloating: Story = {
   ),
 };
 
-function AnimatedFloatingBar({ labelPosition }: { labelPosition: 'top-floating' | 'bottom-floating' }) {
+function AnimatedFloatingBar({
+  labelPosition,
+}: {
+  labelPosition: 'top-floating' | 'bottom-floating';
+}) {
   const [value, setValue] = React.useState(0);
 
   React.useEffect(() => {
@@ -243,8 +279,6 @@ export const AnimatedBottomFloating: Story = {
   ),
 };
 
-
-
 export const AllVariations: Story = {
   parameters: { controls: { disable: true } },
   render() {
@@ -254,7 +288,10 @@ export const AllVariations: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)', width: 400 }}>
         {positions.map((pos) => (
-          <div key={pos} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-s)' }}>
+          <div
+            key={pos}
+            style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-s)' }}
+          >
             <span className="story-label">labelPosition="{pos}"</span>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-m)' }}>
               {values.map((v) => (

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Slider } from '@tale-ui/react/slider';
 
 type Args = {
-  value?: number;
+  defaultValue?: number;
   minValue?: number;
   maxValue?: number;
   step?: number;
@@ -13,7 +13,7 @@ type Args = {
 const meta: Meta<Args> = {
   title: 'Components/Slider',
   argTypes: {
-    value: { control: 'number' },
+    defaultValue: { control: 'number' },
     minValue: { control: 'number' },
     maxValue: { control: 'number' },
     step: { control: 'number' },
@@ -24,7 +24,7 @@ const meta: Meta<Args> = {
     isDisabled: { control: 'boolean' },
   },
   args: {
-    value: 50,
+    defaultValue: 50,
     minValue: 0,
     maxValue: 100,
     step: 1,
@@ -41,8 +41,8 @@ export const Default: Story = {
   render: (args) => (
     <div className="story-slider-wide">
       <Slider.Root
-        key={`${args.value}-${args.minValue}-${args.maxValue}-${args.step}-${args.orientation}`}
-        defaultValue={args.value}
+        key={`${args.defaultValue}-${args.minValue}-${args.maxValue}-${args.step}-${args.orientation}`}
+        defaultValue={args.defaultValue}
         minValue={args.minValue}
         maxValue={args.maxValue}
         step={args.step}
@@ -237,7 +237,6 @@ export const Vertical: Story = {
     </div>
   ),
 };
-
 
 export const AllVariations: Story = {
   parameters: { controls: { disable: true } },

@@ -5,6 +5,12 @@ const meta = {
   title: 'Components/Citation',
   component: Citation.Root,
   parameters: { layout: 'centered' },
+  argTypes: {
+    id: { control: 'text' },
+    sources: { control: 'object' },
+    baseUrl: { control: 'text' },
+    children: { control: false },
+  },
 } satisfies Meta<typeof Citation.Root>;
 
 export default meta;

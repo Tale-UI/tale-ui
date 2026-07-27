@@ -2,18 +2,18 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Switch } from '@tale-ui/react/switch';
 
 type Args = {
-  isSelected?: boolean;
+  defaultSelected?: boolean;
   isDisabled?: boolean;
 };
 
 const meta: Meta<Args> = {
   title: 'Components/Switch',
   argTypes: {
-    isSelected: { control: 'boolean' },
+    defaultSelected: { control: 'boolean' },
     isDisabled: { control: 'boolean' },
   },
   args: {
-    isSelected: false,
+    defaultSelected: false,
     isDisabled: false,
   },
 };
@@ -24,7 +24,11 @@ type Story = StoryObj<Args>;
 
 export const Default: Story = {
   render: (args) => (
-    <Switch.Root key={String(args.isSelected)} defaultSelected={args.isSelected} isDisabled={args.isDisabled}>
+    <Switch.Root
+      key={String(args.defaultSelected)}
+      defaultSelected={args.defaultSelected}
+      isDisabled={args.isDisabled}
+    >
       <Switch.Thumb />
       Enable notifications
     </Switch.Root>
@@ -33,11 +37,15 @@ export const Default: Story = {
 
 export const Selected: Story = {
   args: {
-    isSelected: true,
+    defaultSelected: true,
     isDisabled: false,
   },
   render: (args) => (
-    <Switch.Root key={String(args.isSelected)} defaultSelected={args.isSelected} isDisabled={args.isDisabled}>
+    <Switch.Root
+      key={String(args.defaultSelected)}
+      defaultSelected={args.defaultSelected}
+      isDisabled={args.isDisabled}
+    >
       <Switch.Thumb />
       Dark mode
     </Switch.Root>
@@ -46,11 +54,15 @@ export const Selected: Story = {
 
 export const Disabled: Story = {
   args: {
-    isSelected: false,
+    defaultSelected: false,
     isDisabled: true,
   },
   render: (args) => (
-    <Switch.Root key={String(args.isSelected)} defaultSelected={args.isSelected} isDisabled={args.isDisabled}>
+    <Switch.Root
+      key={String(args.defaultSelected)}
+      defaultSelected={args.defaultSelected}
+      isDisabled={args.isDisabled}
+    >
       <Switch.Thumb />
       Disabled switch
     </Switch.Root>
@@ -59,11 +71,15 @@ export const Disabled: Story = {
 
 export const DisabledSelected: Story = {
   args: {
-    isSelected: true,
+    defaultSelected: true,
     isDisabled: true,
   },
   render: (args) => (
-    <Switch.Root key={String(args.isSelected)} defaultSelected={args.isSelected} isDisabled={args.isDisabled}>
+    <Switch.Root
+      key={String(args.defaultSelected)}
+      defaultSelected={args.defaultSelected}
+      isDisabled={args.isDisabled}
+    >
       <Switch.Thumb />
       Disabled and on
     </Switch.Root>
@@ -109,7 +125,14 @@ export const AllVariations: Story = {
       { label: 'Disabled on', props: { isDisabled: true, defaultSelected: true } },
     ] as const;
     return (
-      <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', gap: '0.5rem 1rem', alignItems: 'center' }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'auto auto',
+          gap: '0.5rem 1rem',
+          alignItems: 'center',
+        }}
+      >
         {states.map((state) => (
           <div key={state.label} style={{ display: 'contents' }}>
             <div className="story-label">{state.label}</div>

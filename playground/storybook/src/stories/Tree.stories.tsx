@@ -3,6 +3,8 @@ import { Tree } from '@tale-ui/react/tree';
 
 type Args = {
   selectionMode?: 'none' | 'single' | 'multiple';
+  label: string;
+  defaultExpandedKeys: string[];
 };
 
 const meta: Meta<Args> = {
@@ -13,9 +15,13 @@ const meta: Meta<Args> = {
       control: 'select',
       options: ['none', 'single', 'multiple'],
     },
+    label: { control: 'text' },
+    defaultExpandedKeys: { control: 'object' },
   },
   args: {
     selectionMode: 'none',
+    label: 'Files',
+    defaultExpandedKeys: [],
   },
 };
 
@@ -26,7 +32,12 @@ type Story = StoryObj<Args>;
 export const Default: Story = {
   render(args) {
     return (
-      <Tree.Root aria-label="Files" selectionMode={args.selectionMode}>
+      <Tree.Root
+        key={args.defaultExpandedKeys.join(',')}
+        aria-label={args.label}
+        selectionMode={args.selectionMode}
+        defaultExpandedKeys={args.defaultExpandedKeys}
+      >
         <Tree.Item id="1" textValue="Documents">
           <Tree.ItemContent>Documents</Tree.ItemContent>
           <Tree.Item id="1.1" textValue="report.pdf">
@@ -56,10 +67,7 @@ export const WithExpanded: Story = {
   },
   render() {
     return (
-      <Tree.Root
-        aria-label="Files"
-        defaultExpandedKeys={new Set(['1', '2'])}
-      >
+      <Tree.Root aria-label="Files" defaultExpandedKeys={new Set(['1', '2'])}>
         <Tree.Item id="1" textValue="Documents">
           <Tree.ItemContent>Documents</Tree.ItemContent>
           <Tree.Item id="1.1" textValue="report.pdf">
@@ -89,7 +97,6 @@ export const WithExpanded: Story = {
   },
 };
 
-
 export const AllVariations: Story = {
   parameters: { controls: { disable: true } },
   render() {
@@ -97,7 +104,11 @@ export const AllVariations: Story = {
       <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
         <div style={{ flex: '1 1 250px' }}>
           <p className="story-label">Single select</p>
-          <Tree.Root aria-label="Files — single" selectionMode="single" defaultExpandedKeys={new Set(['1'])}>
+          <Tree.Root
+            aria-label="Files — single"
+            selectionMode="single"
+            defaultExpandedKeys={new Set(['1'])}
+          >
             <Tree.Item id="1" textValue="Documents">
               <Tree.ItemContent>Documents</Tree.ItemContent>
               <Tree.Item id="1.1" textValue="report.pdf">
@@ -117,7 +128,11 @@ export const AllVariations: Story = {
         </div>
         <div style={{ flex: '1 1 250px' }}>
           <p className="story-label">Multiple select</p>
-          <Tree.Root aria-label="Files — multi" selectionMode="multiple" defaultExpandedKeys={new Set(['1'])}>
+          <Tree.Root
+            aria-label="Files — multi"
+            selectionMode="multiple"
+            defaultExpandedKeys={new Set(['1'])}
+          >
             <Tree.Item id="1" textValue="Documents">
               <Tree.ItemContent>Documents</Tree.ItemContent>
               <Tree.Item id="1.1" textValue="report.pdf">

@@ -1,11 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Drawer } from '@tale-ui/react/drawer';
 
-type Args = Record<string, never>;
+type Args = {
+  defaultOpen: boolean;
+};
 
 const meta: Meta<Args> = {
   title: 'Components/Drawer',
   parameters: { layout: 'centered' },
+  argTypes: {
+    defaultOpen: { control: 'boolean' },
+  },
+  args: {
+    defaultOpen: false,
+  },
 };
 
 export default meta;
@@ -13,8 +21,8 @@ export default meta;
 type Story = StoryObj<Args>;
 
 export const Default: Story = {
-  render: () => (
-    <Drawer.Root>
+  render: (args) => (
+    <Drawer.Root key={String(args.defaultOpen)} defaultOpen={args.defaultOpen}>
       <Drawer.Trigger className="tale-button tale-button--neutral">Open Drawer</Drawer.Trigger>
       <Drawer.Popup>
         <p>Drawer content goes here.</p>
@@ -31,9 +39,7 @@ export const WithTitle: Story = {
       <Drawer.Popup>
         <Drawer.Title>Drawer Title</Drawer.Title>
         <Drawer.Description>This is a description of the drawer content.</Drawer.Description>
-        <p className="story-drawer-content">
-          Additional content can go here.
-        </p>
+        <p className="story-drawer-content">Additional content can go here.</p>
         <Drawer.Close className="tale-button tale-button--neutral">Close</Drawer.Close>
       </Drawer.Popup>
     </Drawer.Root>
@@ -77,9 +83,7 @@ export const WithActions: Story = {
       <Drawer.Popup>
         <Drawer.Handle />
         <Drawer.Title>Confirm Action</Drawer.Title>
-        <Drawer.Description>
-          Are you sure you want to proceed?
-        </Drawer.Description>
+        <Drawer.Description>Are you sure you want to proceed?</Drawer.Description>
         <div className="story-row story-row--s" style={{ marginTop: 'var(--space-m)' }}>
           <Drawer.Close className="tale-button tale-button--neutral">Cancel</Drawer.Close>
           <Drawer.Close className="tale-button tale-button--primary">Confirm</Drawer.Close>
@@ -94,7 +98,14 @@ export const AllVariations: Story = {
   render() {
     return (
       <div style={{ display: 'flex', gap: 'var(--space-l)', alignItems: 'flex-start' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2xs)', alignItems: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'var(--space-2xs)',
+            alignItems: 'center',
+          }}
+        >
           <span className="story-label">Basic</span>
           <Drawer.Root>
             <Drawer.Trigger className="tale-button tale-button--neutral">Basic</Drawer.Trigger>
@@ -104,7 +115,14 @@ export const AllVariations: Story = {
             </Drawer.Popup>
           </Drawer.Root>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2xs)', alignItems: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'var(--space-2xs)',
+            alignItems: 'center',
+          }}
+        >
           <span className="story-label">With title</span>
           <Drawer.Root>
             <Drawer.Trigger className="tale-button tale-button--neutral">Title</Drawer.Trigger>
@@ -115,7 +133,14 @@ export const AllVariations: Story = {
             </Drawer.Popup>
           </Drawer.Root>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2xs)', alignItems: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'var(--space-2xs)',
+            alignItems: 'center',
+          }}
+        >
           <span className="story-label">With backdrop</span>
           <Drawer.Root>
             <Drawer.Trigger className="tale-button tale-button--neutral">Backdrop</Drawer.Trigger>
@@ -127,7 +152,14 @@ export const AllVariations: Story = {
             </Drawer.Popup>
           </Drawer.Root>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2xs)', alignItems: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'var(--space-2xs)',
+            alignItems: 'center',
+          }}
+        >
           <span className="story-label">With handle</span>
           <Drawer.Root>
             <Drawer.Trigger className="tale-button tale-button--neutral">Handle</Drawer.Trigger>
