@@ -1,0 +1,1116 @@
+{
+  "accordion": {
+    "component": "Accordion",
+    "category": "Layout",
+    "title": "Components/Layout/Accordion",
+    "properties": [
+      {
+        "name": "items",
+        "description": "Accordion items. String content is adapted to native Text in the playground.",
+        "control": "object"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["items"],
+    "excludedProperties": {}
+  },
+  "alert-dialog": {
+    "component": "AlertDialog",
+    "category": "Overlay",
+    "title": "Components/Overlay/AlertDialog",
+    "properties": [
+      {
+        "name": "isOpen",
+        "description": "Whether the alert dialog is presented.",
+        "control": "boolean"
+      },
+      {
+        "name": "title",
+        "description": "Accessible dialog heading.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Dialog body copy.",
+        "control": "text"
+      }
+    ],
+    "actions": [
+      {
+        "name": "onOpenChange",
+        "description": "Reports open and close requests."
+      }
+    ],
+    "adapterProperties": ["children", "isOpen", "title", "onOpenChange"],
+    "excludedProperties": {}
+  },
+  "badge": {
+    "component": "Badge",
+    "category": "Display",
+    "title": "Components/Display/Badge",
+    "properties": [
+      {
+        "name": "children",
+        "description": "Badge label.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["children"],
+    "excludedProperties": {}
+  },
+  "banner": {
+    "component": "Banner",
+    "category": "Feedback",
+    "title": "Components/Feedback/Banner",
+    "properties": [
+      {
+        "name": "title",
+        "description": "Banner heading.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Banner message.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["children", "title"],
+    "excludedProperties": {}
+  },
+  "breadcrumbs": {
+    "component": "Breadcrumbs",
+    "category": "Navigation",
+    "title": "Components/Navigation/Breadcrumbs",
+    "properties": [
+      {
+        "name": "accessibilityLabel",
+        "description": "Accessible navigation label.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Breadcrumb preview content.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": [],
+    "excludedProperties": {}
+  },
+  "button": {
+    "component": "Button",
+    "category": "Form Controls",
+    "title": "Components/Form Controls/Button",
+    "properties": [
+      {
+        "name": "children",
+        "description": "Visible button label.",
+        "control": "text"
+      },
+      {
+        "name": "accessibilityLabel",
+        "description": "Explicit accessible name.",
+        "control": "text"
+      },
+      {
+        "name": "isDisabled",
+        "description": "Disables activation.",
+        "control": "boolean"
+      },
+      {
+        "name": "isPending",
+        "description": "Shows pending state and disables activation.",
+        "control": "boolean"
+      }
+    ],
+    "actions": [
+      {
+        "name": "onPress",
+        "description": "Reports button activation."
+      }
+    ],
+    "adapterProperties": ["children", "isDisabled", "isPending", "style"],
+    "excludedProperties": {
+      "style": "React Native style objects are non-portable; visual states live in All Variations."
+    }
+  },
+  "card": {
+    "component": "Card",
+    "category": "Layout",
+    "title": "Components/Layout/Card",
+    "properties": [
+      {
+        "name": "accessibilityLabel",
+        "description": "Accessible card label.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Card preview content.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": [],
+    "excludedProperties": {}
+  },
+  "checkbox-field": {
+    "component": "CheckboxField",
+    "category": "Form Controls",
+    "title": "Components/Form Controls/CheckboxField",
+    "properties": [
+      {
+        "name": "children",
+        "description": "Checkbox label.",
+        "control": "text"
+      },
+      {
+        "name": "accessibilityLabel",
+        "description": "Explicit accessible name.",
+        "control": "text"
+      },
+      {
+        "name": "isSelected",
+        "description": "Controlled selected state.",
+        "control": "boolean"
+      },
+      {
+        "name": "isDisabled",
+        "description": "Disables selection.",
+        "control": "boolean"
+      }
+    ],
+    "actions": [
+      {
+        "name": "onSelectionChange",
+        "description": "Reports selection changes."
+      }
+    ],
+    "adapterProperties": [
+      "children",
+      "accessibilityLabel",
+      "isSelected",
+      "defaultSelected",
+      "isDisabled",
+      "onSelectionChange"
+    ],
+    "excludedProperties": {
+      "defaultSelected": "Playground uses the controlled isSelected property."
+    }
+  },
+  "checkbox-group": {
+    "component": "CheckboxGroup",
+    "category": "Form Controls",
+    "title": "Components/Form Controls/CheckboxGroup",
+    "properties": [
+      {
+        "name": "accessibilityLabel",
+        "description": "Accessible group label.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Comma-separated checkbox labels.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": [],
+    "excludedProperties": {}
+  },
+  "column": {
+    "component": "Column",
+    "category": "Layout",
+    "title": "Components/Layout/Column",
+    "properties": [
+      {
+        "name": "accessibilityLabel",
+        "description": "Accessible layout label.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Comma-separated child labels.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": [],
+    "excludedProperties": {}
+  },
+  "dialog": {
+    "component": "Dialog",
+    "category": "Overlay",
+    "title": "Components/Overlay/Dialog",
+    "properties": [
+      {
+        "name": "isOpen",
+        "description": "Whether the dialog is presented.",
+        "control": "boolean"
+      },
+      {
+        "name": "title",
+        "description": "Accessible dialog heading.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Dialog body copy.",
+        "control": "text"
+      }
+    ],
+    "actions": [
+      {
+        "name": "onOpenChange",
+        "description": "Reports open and close requests."
+      }
+    ],
+    "adapterProperties": ["children", "isOpen", "title", "onOpenChange"],
+    "excludedProperties": {}
+  },
+  "disclosure": {
+    "component": "Disclosure",
+    "category": "Layout",
+    "title": "Components/Layout/Disclosure",
+    "properties": [
+      {
+        "name": "title",
+        "description": "Disclosure trigger label.",
+        "control": "text"
+      },
+      {
+        "name": "isExpanded",
+        "description": "Controlled expanded state.",
+        "control": "boolean"
+      },
+      {
+        "name": "children",
+        "description": "Disclosure panel content.",
+        "control": "text"
+      }
+    ],
+    "actions": [
+      {
+        "name": "onExpandedChange",
+        "description": "Reports expansion changes."
+      }
+    ],
+    "adapterProperties": ["children", "title", "isExpanded", "defaultExpanded", "onExpandedChange"],
+    "excludedProperties": {
+      "defaultExpanded": "Playground uses the controlled isExpanded property."
+    }
+  },
+  "drawer": {
+    "component": "Drawer",
+    "category": "Overlay",
+    "title": "Components/Overlay/Drawer",
+    "properties": [
+      {
+        "name": "isOpen",
+        "description": "Whether the drawer is presented.",
+        "control": "boolean"
+      },
+      {
+        "name": "label",
+        "description": "Accessible drawer label.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Drawer body copy.",
+        "control": "text"
+      }
+    ],
+    "actions": [
+      {
+        "name": "onOpenChange",
+        "description": "Reports open and close requests."
+      }
+    ],
+    "adapterProperties": ["children", "isOpen", "label", "onOpenChange"],
+    "excludedProperties": {}
+  },
+  "field": {
+    "component": "Field",
+    "category": "Form Structure",
+    "title": "Components/Form Structure/Field",
+    "properties": [
+      {
+        "name": "label",
+        "description": "Field label.",
+        "control": "text"
+      },
+      {
+        "name": "description",
+        "description": "Supporting description.",
+        "control": "text"
+      },
+      {
+        "name": "errorMessage",
+        "description": "Validation message; leave empty for a valid field.",
+        "control": "text"
+      },
+      {
+        "name": "isRequired",
+        "description": "Marks the field as required.",
+        "control": "boolean"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["children", "label", "description", "errorMessage", "isRequired"],
+    "excludedProperties": {
+      "children": "ReactNode composition is represented by a fixed native Input fixture."
+    }
+  },
+  "fieldset": {
+    "component": "Fieldset",
+    "category": "Form Structure",
+    "title": "Components/Form Structure/Fieldset",
+    "properties": [
+      {
+        "name": "legend",
+        "description": "Accessible fieldset legend.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["children", "legend"],
+    "excludedProperties": {
+      "children": "ReactNode composition is represented by a fixed CheckboxField fixture."
+    }
+  },
+  "form": {
+    "component": "Form",
+    "category": "Form Structure",
+    "title": "Components/Form Structure/Form",
+    "properties": [
+      {
+        "name": "accessibilityLabel",
+        "description": "Accessible form label.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["children"],
+    "excludedProperties": {
+      "children": "ReactNode composition is represented by a fixed form fixture."
+    }
+  },
+  "grid-list": {
+    "component": "GridList",
+    "category": "Display",
+    "title": "Components/Display/GridList",
+    "properties": [
+      {
+        "name": "label",
+        "description": "Accessible grid label.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Comma-separated grid item labels.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["children", "label"],
+    "excludedProperties": {}
+  },
+  "icon": {
+    "component": "Icon",
+    "category": "Utility",
+    "title": "Components/Utility/Icon",
+    "properties": [
+      {
+        "name": "label",
+        "description": "Accessible label; empty makes it decorative.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["label"],
+    "excludedProperties": {}
+  },
+  "icon-button": {
+    "component": "IconButton",
+    "category": "Utility",
+    "title": "Components/Utility/IconButton",
+    "properties": [
+      {
+        "name": "children",
+        "description": "Visible icon glyph.",
+        "control": "text"
+      },
+      {
+        "name": "accessibilityLabel",
+        "description": "Required accessible name.",
+        "control": "text"
+      },
+      {
+        "name": "isDisabled",
+        "description": "Disables activation.",
+        "control": "boolean"
+      },
+      {
+        "name": "isPending",
+        "description": "Shows pending state and disables activation.",
+        "control": "boolean"
+      }
+    ],
+    "actions": [
+      {
+        "name": "onPress",
+        "description": "Reports button activation."
+      }
+    ],
+    "adapterProperties": ["accessibilityLabel", "children", "isDisabled", "isPending", "style"],
+    "excludedProperties": {
+      "style": "React Native style objects are non-portable; visual states live in All Variations."
+    }
+  },
+  "input": {
+    "component": "Input",
+    "category": "Form Controls",
+    "title": "Components/Form Controls/Input",
+    "properties": [
+      {
+        "name": "accessibilityLabel",
+        "description": "Accessible input name.",
+        "control": "text"
+      },
+      {
+        "name": "placeholder",
+        "description": "Placeholder text.",
+        "control": "text"
+      },
+      {
+        "name": "value",
+        "description": "Controlled input value.",
+        "control": "text"
+      },
+      {
+        "name": "isDisabled",
+        "description": "Disables editing.",
+        "control": "boolean"
+      },
+      {
+        "name": "isInvalid",
+        "description": "Applies invalid styling.",
+        "control": "boolean"
+      },
+      {
+        "name": "secureTextEntry",
+        "description": "Masks entered text.",
+        "control": "boolean"
+      },
+      {
+        "name": "keyboardType",
+        "description": "Native keyboard layout.",
+        "control": "select",
+        "options": ["default", "email-address", "numeric", "phone-pad"]
+      }
+    ],
+    "actions": [
+      {
+        "name": "onChangeText",
+        "description": "Reports text changes."
+      }
+    ],
+    "adapterProperties": ["isDisabled", "isInvalid"],
+    "excludedProperties": {}
+  },
+  "list": {
+    "component": "List",
+    "category": "Display",
+    "title": "Components/Display/List",
+    "properties": [
+      {
+        "name": "label",
+        "description": "Accessible list label.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Comma-separated item labels.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["children", "label"],
+    "excludedProperties": {}
+  },
+  "list-box": {
+    "component": "ListBox",
+    "category": "Display",
+    "title": "Components/Display/ListBox",
+    "properties": [
+      {
+        "name": "label",
+        "description": "Accessible list-box label.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Comma-separated option labels.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["children", "label"],
+    "excludedProperties": {}
+  },
+  "pagination": {
+    "component": "Pagination",
+    "category": "Navigation",
+    "title": "Components/Navigation/Pagination",
+    "properties": [
+      {
+        "name": "page",
+        "description": "Current page.",
+        "control": {
+          "type": "number",
+          "min": 1,
+          "max": 20,
+          "step": 1
+        }
+      },
+      {
+        "name": "totalPages",
+        "description": "Total page count.",
+        "control": {
+          "type": "number",
+          "min": 1,
+          "max": 20,
+          "step": 1
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "onPageChange",
+        "description": "Reports requested page changes."
+      }
+    ],
+    "adapterProperties": ["page", "totalPages", "onPageChange"],
+    "excludedProperties": {}
+  },
+  "progress-bar": {
+    "component": "ProgressBar",
+    "category": "Feedback",
+    "title": "Components/Feedback/ProgressBar",
+    "properties": [
+      {
+        "name": "label",
+        "description": "Accessible progress label.",
+        "control": "text"
+      },
+      {
+        "name": "value",
+        "description": "Current value.",
+        "control": {
+          "type": "number",
+          "min": 0,
+          "max": 100,
+          "step": 1
+        }
+      },
+      {
+        "name": "minValue",
+        "description": "Minimum value.",
+        "control": {
+          "type": "number",
+          "min": 0,
+          "max": 100,
+          "step": 1
+        }
+      },
+      {
+        "name": "maxValue",
+        "description": "Maximum value.",
+        "control": {
+          "type": "number",
+          "min": 1,
+          "max": 100,
+          "step": 1
+        }
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["value", "minValue", "maxValue", "label"],
+    "excludedProperties": {}
+  },
+  "radio-field": {
+    "component": "RadioField",
+    "category": "Form Controls",
+    "title": "Components/Form Controls/RadioField",
+    "properties": [
+      {
+        "name": "label",
+        "description": "Accessible radio-field label.",
+        "control": "text"
+      },
+      {
+        "name": "value",
+        "description": "Controlled selected value.",
+        "control": "select",
+        "options": ["standard", "express"]
+      },
+      {
+        "name": "items",
+        "description": "Radio choices.",
+        "control": "object"
+      }
+    ],
+    "actions": [
+      {
+        "name": "onValueChange",
+        "description": "Reports selected values."
+      }
+    ],
+    "adapterProperties": ["label", "items", "value", "defaultValue", "onValueChange"],
+    "excludedProperties": {
+      "defaultValue": "Playground uses the controlled value property."
+    }
+  },
+  "radio-group": {
+    "component": "RadioGroup",
+    "category": "Form Controls",
+    "title": "Components/Form Controls/RadioGroup",
+    "properties": [
+      {
+        "name": "label",
+        "description": "Accessible radio-group label.",
+        "control": "text"
+      },
+      {
+        "name": "value",
+        "description": "Controlled selected value.",
+        "control": "select",
+        "options": ["standard", "express"]
+      },
+      {
+        "name": "items",
+        "description": "Radio choices.",
+        "control": "object"
+      }
+    ],
+    "actions": [
+      {
+        "name": "onValueChange",
+        "description": "Reports selected values."
+      }
+    ],
+    "adapterProperties": ["label", "items", "value", "defaultValue", "onValueChange"],
+    "excludedProperties": {
+      "defaultValue": "Playground uses the controlled value property."
+    }
+  },
+  "row": {
+    "component": "Row",
+    "category": "Layout",
+    "title": "Components/Layout/Row",
+    "properties": [
+      {
+        "name": "accessibilityLabel",
+        "description": "Accessible layout label.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Comma-separated child labels.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": [],
+    "excludedProperties": {}
+  },
+  "search-field": {
+    "component": "SearchField",
+    "category": "Form Controls",
+    "title": "Components/Form Controls/SearchField",
+    "properties": [
+      {
+        "name": "accessibilityLabel",
+        "description": "Accessible search name.",
+        "control": "text"
+      },
+      {
+        "name": "placeholder",
+        "description": "Placeholder text.",
+        "control": "text"
+      },
+      {
+        "name": "value",
+        "description": "Controlled search value.",
+        "control": "text"
+      },
+      {
+        "name": "isDisabled",
+        "description": "Disables editing.",
+        "control": "boolean"
+      },
+      {
+        "name": "isInvalid",
+        "description": "Applies invalid styling.",
+        "control": "boolean"
+      }
+    ],
+    "actions": [
+      {
+        "name": "onChangeText",
+        "description": "Reports query changes."
+      }
+    ],
+    "adapterProperties": ["isDisabled", "isInvalid"],
+    "excludedProperties": {}
+  },
+  "separator": {
+    "component": "Separator",
+    "category": "Layout",
+    "title": "Components/Layout/Separator",
+    "properties": [
+      {
+        "name": "accessibilityLabel",
+        "description": "Optional accessible description.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": [],
+    "excludedProperties": {}
+  },
+  "slider": {
+    "component": "Slider",
+    "category": "Form Controls",
+    "title": "Components/Form Controls/Slider",
+    "properties": [
+      {
+        "name": "label",
+        "description": "Accessible slider label.",
+        "control": "text"
+      },
+      {
+        "name": "value",
+        "description": "Current value.",
+        "control": {
+          "type": "number",
+          "min": 0,
+          "max": 100,
+          "step": 1
+        }
+      },
+      {
+        "name": "minValue",
+        "description": "Minimum value.",
+        "control": {
+          "type": "number",
+          "min": 0,
+          "max": 100,
+          "step": 1
+        }
+      },
+      {
+        "name": "maxValue",
+        "description": "Maximum value.",
+        "control": {
+          "type": "number",
+          "min": 1,
+          "max": 100,
+          "step": 1
+        }
+      },
+      {
+        "name": "step",
+        "description": "Accessibility action increment.",
+        "control": {
+          "type": "number",
+          "min": 1,
+          "max": 20,
+          "step": 1
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "onValueChange",
+        "description": "Reports value changes."
+      }
+    ],
+    "adapterProperties": ["label", "value", "minValue", "maxValue", "step", "onValueChange"],
+    "excludedProperties": {}
+  },
+  "spinner": {
+    "component": "Spinner",
+    "category": "Feedback",
+    "title": "Components/Feedback/Spinner",
+    "properties": [
+      {
+        "name": "animating",
+        "description": "Whether the spinner animates.",
+        "control": "boolean"
+      },
+      {
+        "name": "size",
+        "description": "Native spinner size.",
+        "control": "select",
+        "options": ["small", "large"]
+      },
+      {
+        "name": "color",
+        "description": "Spinner color.",
+        "control": "color"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": [],
+    "excludedProperties": {}
+  },
+  "switch-field": {
+    "component": "SwitchField",
+    "category": "Form Controls",
+    "title": "Components/Form Controls/SwitchField",
+    "properties": [
+      {
+        "name": "label",
+        "description": "Visible and accessible switch label.",
+        "control": "text"
+      },
+      {
+        "name": "value",
+        "description": "Controlled switch state.",
+        "control": "boolean"
+      },
+      {
+        "name": "disabled",
+        "description": "Disables interaction.",
+        "control": "boolean"
+      }
+    ],
+    "actions": [
+      {
+        "name": "onValueChange",
+        "description": "Reports switch state changes."
+      }
+    ],
+    "adapterProperties": ["label"],
+    "excludedProperties": {}
+  },
+  "tabs": {
+    "component": "Tabs",
+    "category": "Layout",
+    "title": "Components/Layout/Tabs",
+    "properties": [
+      {
+        "name": "selectedKey",
+        "description": "Controlled selected tab.",
+        "control": "select",
+        "options": ["one", "two"]
+      },
+      {
+        "name": "items",
+        "description": "Tab labels and panel content.",
+        "control": "object"
+      }
+    ],
+    "actions": [
+      {
+        "name": "onSelectionChange",
+        "description": "Reports selected tab keys."
+      }
+    ],
+    "adapterProperties": ["items", "selectedKey", "onSelectionChange"],
+    "excludedProperties": {}
+  },
+  "tag-group": {
+    "component": "TagGroup",
+    "category": "Display",
+    "title": "Components/Display/TagGroup",
+    "properties": [
+      {
+        "name": "label",
+        "description": "Accessible tag-group label.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Comma-separated tag labels.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["children", "label"],
+    "excludedProperties": {}
+  },
+  "text": {
+    "component": "Text",
+    "category": "Typography",
+    "title": "Components/Typography/Text",
+    "properties": [
+      {
+        "name": "children",
+        "description": "Displayed text.",
+        "control": "text"
+      },
+      {
+        "name": "selectable",
+        "description": "Allows native text selection.",
+        "control": "boolean"
+      },
+      {
+        "name": "numberOfLines",
+        "description": "Maximum lines; zero means unlimited.",
+        "control": {
+          "type": "number",
+          "min": 0,
+          "max": 8,
+          "step": 1
+        }
+      }
+    ],
+    "actions": [],
+    "adapterProperties": [],
+    "excludedProperties": {}
+  },
+  "text-area": {
+    "component": "TextArea",
+    "category": "Form Controls",
+    "title": "Components/Form Controls/TextArea",
+    "properties": [
+      {
+        "name": "accessibilityLabel",
+        "description": "Accessible text-area name.",
+        "control": "text"
+      },
+      {
+        "name": "placeholder",
+        "description": "Placeholder text.",
+        "control": "text"
+      },
+      {
+        "name": "value",
+        "description": "Controlled text-area value.",
+        "control": "text"
+      },
+      {
+        "name": "isDisabled",
+        "description": "Disables editing.",
+        "control": "boolean"
+      },
+      {
+        "name": "isInvalid",
+        "description": "Applies invalid styling.",
+        "control": "boolean"
+      }
+    ],
+    "actions": [
+      {
+        "name": "onChangeText",
+        "description": "Reports text changes."
+      }
+    ],
+    "adapterProperties": ["isDisabled", "isInvalid"],
+    "excludedProperties": {}
+  },
+  "toast": {
+    "component": "Toast",
+    "category": "Feedback",
+    "title": "Components/Feedback/Toast",
+    "properties": [
+      {
+        "name": "label",
+        "description": "Accessible notification label.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Notification message.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["children", "label"],
+    "excludedProperties": {}
+  },
+  "toggle-button": {
+    "component": "ToggleButton",
+    "category": "Form Controls",
+    "title": "Components/Form Controls/ToggleButton",
+    "properties": [
+      {
+        "name": "children",
+        "description": "Visible toggle label.",
+        "control": "text"
+      },
+      {
+        "name": "isSelected",
+        "description": "Controlled selected state.",
+        "control": "boolean"
+      },
+      {
+        "name": "isDisabled",
+        "description": "Disables activation.",
+        "control": "boolean"
+      },
+      {
+        "name": "isPending",
+        "description": "Shows pending state and disables activation.",
+        "control": "boolean"
+      }
+    ],
+    "actions": [
+      {
+        "name": "onSelectionChange",
+        "description": "Reports selection changes."
+      }
+    ],
+    "adapterProperties": [
+      "children",
+      "isDisabled",
+      "isPending",
+      "style",
+      "isSelected",
+      "onSelectionChange"
+    ],
+    "excludedProperties": {
+      "style": "React Native style objects are non-portable; visual states live in All Variations."
+    }
+  },
+  "toggle-group": {
+    "component": "ToggleButtonGroup",
+    "category": "Form Controls",
+    "title": "Components/Form Controls/ToggleButtonGroup",
+    "properties": [
+      {
+        "name": "children",
+        "description": "Comma-separated toggle labels.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["children"],
+    "excludedProperties": {}
+  },
+  "toolbar": {
+    "component": "Toolbar",
+    "category": "Layout",
+    "title": "Components/Layout/Toolbar",
+    "properties": [
+      {
+        "name": "accessibilityLabel",
+        "description": "Accessible toolbar label.",
+        "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Comma-separated toolbar action labels.",
+        "control": "text"
+      }
+    ],
+    "actions": [],
+    "adapterProperties": [],
+    "excludedProperties": {}
+  }
+}

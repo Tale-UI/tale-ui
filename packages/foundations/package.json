@@ -1,0 +1,34 @@
+{
+  "name": "@tale-ui/foundations",
+  "version": "0.1.0",
+  "description": "Renderer-neutral Tale UI themes, contracts, state, and style recipes.",
+  "license": "MIT",
+  "type": "commonjs",
+  "exports": {
+    ".": "./src/index.ts",
+    "./theme": "./src/theme.ts",
+    "./theme-presets": "./src/theme-presets.ts",
+    "./contracts": "./src/contracts.ts",
+    "./state": "./src/state.ts",
+    "./recipes": "./src/recipes.ts"
+  },
+  "scripts": {
+    "prebuild": "rimraf --glob build build-tests \"*.tsbuildinfo\"",
+    "build": "node ../../tools/build-package.mjs --minimal && node scripts/finalize-build.mjs",
+    "test": "vitest run --config vitest.config.mts",
+    "test:package": "pnpm build && publint run ./build --pack pnpm && attw --pack ./build",
+    "typescript": "tsc -b tsconfig.json"
+  },
+  "dependencies": {
+    "@tale-ui/tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "@tale-ui/monorepo-tests": "workspace:*",
+    "typescript": "5.9.3"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public",
+    "directory": "build"
+  }
+}

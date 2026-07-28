@@ -26,8 +26,10 @@ tale-ui/
 ├── pnpm-workspace.yaml    # Declares packages/*, apps/*, tools/*, etc.
 ├── packages/
 │   ├── tokens/            # @tale-ui/tokens — canonical web/native token source
+│   ├── foundations/       # @tale-ui/foundations — renderer-neutral contracts
 │   ├── css/               # @tale-ui/css — generated CSS tokens & utilities
 │   ├── react/             # @tale-ui/react — styled React components
+│   ├── react-native/      # @tale-ui/react-native — native components
 │   ├── styles/            # @tale-ui/react-styles — per-component CSS
 │   ├── themes/            # @tale-ui/themes — optional standard and monochrome themes
 │   ├── charts/            # @tale-ui/charts — Recharts-based chart components
@@ -43,6 +45,7 @@ tale-ui/
 ├── docs/                  # source docs, Next.js site, and versioned public snapshots
 ├── playground/
 │   ├── storybook/         # Component Storybook (stories, visual reference)
+│   ├── react-native-storybook/ # Expo/on-device native Storybook
 │   ├── vite-app/          # Minimal Vite + React sandbox
 │   └── scale/             # Tonal palette generator tool
 ├── scripts/               # Release, changelog, API docs scripts
@@ -52,17 +55,19 @@ tale-ui/
 
 ## Packages
 
-| Package                 | Path                | Description                                            |
-| ----------------------- | ------------------- | ------------------------------------------------------ |
-| `@tale-ui/tokens`       | `packages/tokens/`  | Canonical token source and generated native objects    |
-| `@tale-ui/css`          | `packages/css/`     | CSS tokens, foundations, layout utilities, themes      |
-| `@tale-ui/react`        | `packages/react/`   | Styled React components (BEM class names auto-applied) |
-| `@tale-ui/react-styles` | `packages/styles/`  | Per-component CSS rules built on `@tale-ui/css` tokens |
-| `@tale-ui/themes`       | `packages/themes/`  | Optional standard and monochrome theme presets         |
-| `@tale-ui/charts`       | `packages/charts/`  | Recharts-based chart components                        |
-| `@tale-ui/a2ui`         | `packages/a2ui/`    | A2UI protocol renderer and Tale UI catalog             |
-| `@tale-ui/tooling`      | `packages/tooling/` | Registry API, CLI, validation, and project operations  |
-| `@tale-ui/utils`        | `packages/utils/`   | Shared hooks, colour utilities, DOM helpers            |
+| Package                 | Path                     | Description                                            |
+| ----------------------- | ------------------------ | ------------------------------------------------------ |
+| `@tale-ui/tokens`       | `packages/tokens/`       | Canonical token source and generated native objects    |
+| `@tale-ui/foundations`  | `packages/foundations/`  | Renderer-neutral themes, contracts, state, recipes     |
+| `@tale-ui/css`          | `packages/css/`          | CSS tokens, foundations, layout utilities, themes      |
+| `@tale-ui/react`        | `packages/react/`        | Styled React components (BEM class names auto-applied) |
+| `@tale-ui/react-native` | `packages/react-native/` | Native components and behavior adapters                |
+| `@tale-ui/react-styles` | `packages/styles/`       | Per-component CSS rules built on `@tale-ui/css` tokens |
+| `@tale-ui/themes`       | `packages/themes/`       | Optional standard and monochrome theme presets         |
+| `@tale-ui/charts`       | `packages/charts/`       | Recharts-based chart components                        |
+| `@tale-ui/a2ui`         | `packages/a2ui/`         | A2UI protocol renderer and Tale UI catalog             |
+| `@tale-ui/tooling`      | `packages/tooling/`      | Registry API, CLI, validation, and project operations  |
+| `@tale-ui/utils`        | `packages/utils/`        | Shared hooks, colour utilities, DOM helpers            |
 
 ## Workspace CLI Commands
 

@@ -1,0 +1,3766 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedFrom": "registry/components.json",
+  "compatibility": {
+    "reactNative": "0.86.x",
+    "expo": "57.x",
+    "react": "19.2.x"
+  },
+  "counts": {
+    "total": 133,
+    "stable": 112,
+    "proposed": 20
+  },
+  "components": [
+    {
+      "id": "Accordion",
+      "slug": "accordion",
+      "category": "Layout",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "accordion",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#accordion",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/accordion.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "AlertDialog",
+      "slug": "alert-dialog",
+      "category": "Overlay",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "alertdialog",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#alert-dialog",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/alert-dialog.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "AppShell",
+      "slug": "app-shell",
+      "category": "Layout",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "AppStoreButton",
+      "slug": "app-store-button",
+      "category": "Marketing",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#app-store-button",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native AppStoreButton pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "AspectRatio",
+      "slug": "aspect-ratio",
+      "category": "Layout",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "Autocomplete",
+      "slug": "autocomplete",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#autocomplete",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Autocomplete pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Avatar",
+      "slug": "avatar",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#avatar",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Avatar pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "BackgroundPattern",
+      "slug": "background-pattern",
+      "category": "Marketing",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#background-pattern",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native BackgroundPattern pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Badge",
+      "slug": "badge",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "badge",
+      "recipeId": "badge",
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#badge",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/badge.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "BadgeGroup",
+      "slug": "badge-group",
+      "category": "Marketing",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#badge-group",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native BadgeGroup pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Banner",
+      "slug": "banner",
+      "category": "Feedback",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "banner",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#banner",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/banner.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "Blockquote",
+      "slug": "blockquote",
+      "category": "Typography",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "Breadcrumbs",
+      "slug": "breadcrumbs",
+      "category": "Navigation",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "breadcrumbs",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#breadcrumbs",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/breadcrumbs.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "Button",
+      "slug": "button",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "button",
+      "recipeId": "button",
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#button",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/button.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "ButtonGroup",
+      "slug": "button-group",
+      "category": "Form Controls",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "Calendar",
+      "slug": "calendar",
+      "category": "Date & Time",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#calendar",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Calendar pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Card",
+      "slug": "card",
+      "category": "Layout",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "card",
+      "recipeId": "card",
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#card",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/card.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "Carousel",
+      "slug": "carousel",
+      "category": "Layout",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#carousel",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Carousel pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Chat",
+      "slug": "chat",
+      "category": "Layout",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "Checkbox",
+      "slug": "checkbox",
+      "category": "Form Controls",
+      "webLifecycle": "deprecated",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "CheckboxField",
+      "slug": "checkbox-field",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "checkboxfield",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#checkbox-field",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/checkbox-field.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "CheckboxGroup",
+      "slug": "checkbox-group",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "checkboxgroup",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#checkbox-group",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/checkbox-group.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "Citation",
+      "slug": "citation",
+      "category": "Typography",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "Code",
+      "slug": "code",
+      "category": "Typography",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "CodeBlock",
+      "slug": "code-block",
+      "category": "Typography",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "ColorArea",
+      "slug": "color-area",
+      "category": "Color",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#color-area",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native ColorArea pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "ColorField",
+      "slug": "color-field",
+      "category": "Color",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#color-field",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native ColorField pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "ColorModeToggle",
+      "slug": "color-mode-toggle",
+      "category": "Utility",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#color-mode-toggle",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native ColorModeToggle pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "ColorPicker",
+      "slug": "color-picker",
+      "category": "Color",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#color-picker",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native ColorPicker pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "ColorSlider",
+      "slug": "color-slider",
+      "category": "Color",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#color-slider",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native ColorSlider pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "ColorSwatch",
+      "slug": "color-swatch",
+      "category": "Color",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#color-swatch",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native ColorSwatch pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "ColorSwatchPicker",
+      "slug": "color-swatch-picker",
+      "category": "Color",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#color-swatch-picker",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native ColorSwatchPicker pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "ColorWheel",
+      "slug": "color-wheel",
+      "category": "Color",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#color-wheel",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native ColorWheel pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Column",
+      "slug": "column",
+      "category": "Layout",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "column",
+      "recipeId": "column",
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#column",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/column.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "Combobox",
+      "slug": "combobox",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#combobox",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Combobox pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "CommandPalette",
+      "slug": "command-palette",
+      "category": "Navigation",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#command-palette",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native CommandPalette pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Container",
+      "slug": "container",
+      "category": "Utility",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#container",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Container pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "ContextMenu",
+      "slug": "context-menu",
+      "category": "Navigation",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#context-menu",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native ContextMenu pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "CreditCard",
+      "slug": "credit-card",
+      "category": "Marketing",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#credit-card",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native CreditCard pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "CSPProvider",
+      "slug": "csp-provider",
+      "category": "Utility",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#csp-provider",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native CSPProvider pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "DateField",
+      "slug": "date-field",
+      "category": "Date & Time",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#date-field",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native DateField pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "DatePicker",
+      "slug": "date-picker",
+      "category": "Date & Time",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#date-picker",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native DatePicker pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "DateRangePicker",
+      "slug": "date-range-picker",
+      "category": "Date & Time",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#date-range-picker",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native DateRangePicker pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Dialog",
+      "slug": "dialog",
+      "category": "Overlay",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "dialog",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#dialog",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/dialog.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "Disclosure",
+      "slug": "disclosure",
+      "category": "Layout",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "disclosure",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#disclosure",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/disclosure.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "DotIcon",
+      "slug": "dot-icon",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#dot-icon",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native DotIcon pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Drawer",
+      "slug": "drawer",
+      "category": "Overlay",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "drawer",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#drawer",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/drawer.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "DropZone",
+      "slug": "drop-zone",
+      "category": "Interaction",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#drop-zone",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native DropZone pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "EmptyState",
+      "slug": "empty-state",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#empty-state",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native EmptyState pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "FeaturedIcon",
+      "slug": "featured-icon",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#featured-icon",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native FeaturedIcon pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Field",
+      "slug": "field",
+      "category": "Form Structure",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "field",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#field",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/field.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "Fieldset",
+      "slug": "fieldset",
+      "category": "Form Structure",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "fieldset",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#fieldset",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/fieldset.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "FileTrigger",
+      "slug": "file-trigger",
+      "category": "Interaction",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#file-trigger",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native FileTrigger pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "FileUpload",
+      "slug": "file-upload",
+      "category": "Interaction",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#file-upload",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native FileUpload pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Form",
+      "slug": "form",
+      "category": "Form Structure",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "form",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#form",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/form.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "GridList",
+      "slug": "grid-list",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "gridlist",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#grid-list",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/grid-list.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "HeaderNav",
+      "slug": "header-nav",
+      "category": "Navigation",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#header-nav",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native HeaderNav pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "I18nProvider",
+      "slug": "i18n-provider",
+      "category": "Utility",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#i18n-provider",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native I18nProvider pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Icon",
+      "slug": "icon",
+      "category": "Utility",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "icon",
+      "recipeId": "icon",
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#icon",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/icon.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "IconButton",
+      "slug": "icon-button",
+      "category": "Utility",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "iconbutton",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#icon-button",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/icon-button.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "Illustration",
+      "slug": "illustration",
+      "category": "Marketing",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#illustration",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Illustration pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Image",
+      "slug": "image",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#image",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Image pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "ImageCropper",
+      "slug": "image-cropper",
+      "category": "Interaction",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#image-cropper",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native ImageCropper pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Input",
+      "slug": "input",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "input",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#input",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/input.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "InputGroup",
+      "slug": "input-group",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#input-group",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native InputGroup pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "InputTags",
+      "slug": "input-tags",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#input-tags",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native InputTags pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "IphoneMockup",
+      "slug": "iphone-mockup",
+      "category": null,
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#iphone-mockup",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native IphoneMockup pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Kbd",
+      "slug": "kbd",
+      "category": "Typography",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "KeyValuePairs",
+      "slug": "key-value-pairs",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#key-value-pairs",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native KeyValuePairs pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Lightbox",
+      "slug": "lightbox",
+      "category": "Overlay",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "Link",
+      "slug": "link",
+      "category": "Navigation",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#link",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Link pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "List",
+      "slug": "list",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "list",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#list",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/list.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "ListBox",
+      "slug": "list-box",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "listbox",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#list-box",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/list-box.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "Markdown",
+      "slug": "markdown",
+      "category": "Typography",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "Menu",
+      "slug": "menu",
+      "category": "Navigation",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#menu",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Menu pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Menubar",
+      "slug": "menubar",
+      "category": "Navigation",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#menubar",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Menubar pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "mergeProps",
+      "slug": "merge-props",
+      "category": "Utility",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#merge-props",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native mergeProps pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Meter",
+      "slug": "meter",
+      "category": "Feedback",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#meter",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Meter pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "MultiSelect",
+      "slug": "multi-select",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#multi-select",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native MultiSelect pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "NavigationMenu",
+      "slug": "navigation-menu",
+      "category": "Navigation",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#navigation-menu",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native NavigationMenu pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "NumberField",
+      "slug": "number-field",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#number-field",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native NumberField pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Outline",
+      "slug": "outline",
+      "category": "Navigation",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "OverflowList",
+      "slug": "overflow-list",
+      "category": "Layout",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "Pagination",
+      "slug": "pagination",
+      "category": "Navigation",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "pagination",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#pagination",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/pagination.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "PaginationDot",
+      "slug": "pagination-dot",
+      "category": "Navigation",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#pagination-dot",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native PaginationDot pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "PaginationLine",
+      "slug": "pagination-line",
+      "category": "Navigation",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#pagination-line",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native PaginationLine pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "PaymentInput",
+      "slug": "payment-input",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#payment-input",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native PaymentInput pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "PinInput",
+      "slug": "pin-input",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#pin-input",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native PinInput pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Popover",
+      "slug": "popover",
+      "category": "Overlay",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#popover",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Popover pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "PreviewCard",
+      "slug": "preview-card",
+      "category": "Overlay",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#preview-card",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native PreviewCard pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "ProgressBar",
+      "slug": "progress-bar",
+      "category": "Feedback",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "progressbar",
+      "recipeId": "progressbar",
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#progress-bar",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/progress-bar.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "ProgressCircle",
+      "slug": "progress-circle",
+      "category": "Feedback",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#progress-circle",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native ProgressCircle pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "QRCode",
+      "slug": "qr-code",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#qr-code",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native QRCode pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Radio",
+      "slug": "radio",
+      "category": "Form Controls",
+      "webLifecycle": "deprecated",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "RadioField",
+      "slug": "radio-field",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "radiofield",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#radio-field",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/radio-field.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "RadioGroup",
+      "slug": "radio-group",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "radiogroup",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#radio-group",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/radio-group.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "RangeCalendar",
+      "slug": "range-calendar",
+      "category": "Date & Time",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#range-calendar",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native RangeCalendar pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "RatingBadge",
+      "slug": "rating-badge",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#rating-badge",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native RatingBadge pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "RatingStars",
+      "slug": "rating-stars",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#rating-stars",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native RatingStars pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Resizable",
+      "slug": "resizable",
+      "category": "Layout",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "Row",
+      "slug": "row",
+      "category": "Layout",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "row",
+      "recipeId": "row",
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#row",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/row.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "ScrollArea",
+      "slug": "scroll-area",
+      "category": "Layout",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#scroll-area",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native ScrollArea pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "SearchField",
+      "slug": "search-field",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "searchfield",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#search-field",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/search-field.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "SectionDivider",
+      "slug": "section-divider",
+      "category": "Marketing",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#section-divider",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native SectionDivider pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Select",
+      "slug": "select",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#select",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Select pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "SelectNative",
+      "slug": "select-native",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#select-native",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native SelectNative pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Separator",
+      "slug": "separator",
+      "category": "Layout",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "separator",
+      "recipeId": "separator",
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#separator",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/separator.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "Sidebar",
+      "slug": "sidebar",
+      "category": "Navigation",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#sidebar",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Sidebar pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Skeleton",
+      "slug": "skeleton",
+      "category": "Feedback",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "Slider",
+      "slug": "slider",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "slider",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#slider",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/slider.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "SocialButton",
+      "slug": "social-button",
+      "category": "Marketing",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#social-button",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native SocialButton pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "SocialButtonGroup",
+      "slug": "social-button-group",
+      "category": "Marketing",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#social-button-group",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native SocialButtonGroup pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Spinner",
+      "slug": "spinner",
+      "category": "Feedback",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "spinner",
+      "recipeId": "spinner",
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#spinner",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/spinner.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "Switch",
+      "slug": "switch",
+      "category": "Form Controls",
+      "webLifecycle": "deprecated",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "SwitchField",
+      "slug": "switch-field",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "switchfield",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#switch-field",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/switch-field.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "Table",
+      "slug": "table",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#table",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Table pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Tabs",
+      "slug": "tabs",
+      "category": "Layout",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "tabs",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#tabs",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/tabs.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "TagGroup",
+      "slug": "tag-group",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "taggroup",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#tag-group",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/tag-group.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "TagSelect",
+      "slug": "tag-select",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#tag-select",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native TagSelect pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Text",
+      "slug": "text",
+      "category": "Typography",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "text",
+      "recipeId": "text",
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#text",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/text.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "TextArea",
+      "slug": "text-area",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "textarea",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#text-area",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/text-area.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "TextEditor",
+      "slug": "text-editor",
+      "category": "Interaction",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "TextField",
+      "slug": "text-field",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#text-field",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native TextField pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "TimeField",
+      "slug": "time-field",
+      "category": "Date & Time",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#time-field",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native TimeField pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Timestamp",
+      "slug": "timestamp",
+      "category": "Date & Time",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "proposed",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": []
+    },
+    {
+      "id": "Toast",
+      "slug": "toast",
+      "category": "Feedback",
+      "webLifecycle": "experimental",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "toast",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#toast",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/toast.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "ToggleButton",
+      "slug": "toggle-button",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "togglebutton",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#toggle-button",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/toggle-button.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "ToggleButtonGroup",
+      "slug": "toggle-group",
+      "category": "Form Controls",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "togglebuttongroup",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#toggle-group",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/toggle-group.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "Toolbar",
+      "slug": "toolbar",
+      "category": "Layout",
+      "webLifecycle": "stable",
+      "strategy": "adapted",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android",
+        "web"
+      ],
+      "contractId": "toolbar",
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#toolbar",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/toolbar.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
+    },
+    {
+      "id": "Tooltip",
+      "slug": "tooltip",
+      "category": "Overlay",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#tooltip",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Tooltip pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Tree",
+      "slug": "tree",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#tree",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Tree pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "VideoPlayer",
+      "slug": "video-player",
+      "category": "Display",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#video-player",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native VideoPlayer pattern and retain Tale UI tokens for visual alignment."
+      }
+    },
+    {
+      "id": "Virtualizer",
+      "slug": "virtualizer",
+      "category": "Utility",
+      "webLifecycle": "stable",
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": [
+        "ios",
+        "android"
+      ],
+      "contractId": null,
+      "recipeId": null,
+      "owner": "Tale UI maintainers",
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Use the platform-native control or navigation pattern instead of imitating DOM behavior.",
+        "webContract": "registry/components.json#virtualizer",
+        "nativeBehavior": "Delegated to the application platform or navigation framework.",
+        "accessibility": "The platform-native alternative owns accessibility behavior.",
+        "deviations": "No DOM event, ARIA, or portal API is reproduced.",
+        "implementationPlan": "No package implementation; application integrates the documented native alternative.",
+        "testPlan": "Consumer migration review.",
+        "storybookPlan": "Migration guidance only.",
+        "performancePlan": "Owned by the selected native alternative.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Use the platform-native Virtualizer pattern and retain Tale UI tokens for visual alignment."
+      }
+    }
+  ]
+}

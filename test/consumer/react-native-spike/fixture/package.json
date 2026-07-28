@@ -1,0 +1,24 @@
+{
+  "name": "@tale-ui/react-native-spike-fixture",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "react-native": "./src/index.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./button": {
+      "react-native": "./src/button.ts",
+      "import": "./dist/button.js",
+      "require": "./dist/button.cjs",
+      "types": "./dist/button.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "sideEffects": false
+}

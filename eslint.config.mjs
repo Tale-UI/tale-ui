@@ -280,6 +280,7 @@ export default defineConfig(
     './playground/vite-app/dist',
     './apps/mcp-studio/*.js',
     './apps/mcp-studio/*.d.ts',
+    './playground/react-native-storybook/.rnstorybook/storybook.requires.ts',
   ]),
   includeIgnoreIfExists(path.join(dirname, '.gitignore'), 'Ignore rules from .gitignore'),
   includeIgnoreIfExists(path.join(dirname, '.lintignore'), 'Ignore rules from .lintignore'),

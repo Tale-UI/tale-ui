@@ -35,3 +35,7 @@ export type {
 } from './themes.js';
 
 export { generateMonochromePalette } from './monochrome.js';
+export {
+  MONOCHROME_THEME_DEFINITIONS,
+  STANDARD_THEME_DEFINITIONS,
+} from '@tale-ui/foundations/theme-presets';

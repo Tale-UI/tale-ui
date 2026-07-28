@@ -6,8 +6,8 @@
     {
       "major": 3,
       "source": "working-tree-public-docs",
-      "sourceRevision": "sha256:33efe5d72e7ffc6e397133d00895cdaebd4902f5ebda5dc5998b579ba4eabe13",
-      "contentDigest": "sha256:4ac086ab5bab4a0c209dfb4ed3d8a338656cb0442c2e2fb2bdecf6ee7da25e99",
+      "sourceRevision": "sha256:02a525e6f8799acecbc1af62fc1c5a3d8101727c52a49d84b5f8cc060498b910",
+      "contentDigest": "sha256:aaee1483f552be5adcfca9770fea07b437ad544073541744e84d9895ce52952e",
       "packageVersions": {
         "@tale-ui/a2ui": "0.1.5",
         "@tale-ui/charts": "0.1.5",
@@ -25,6 +25,7 @@
         "docs/a2ui-integration.md",
         "docs/agent-cold-start-benchmark.md",
         "docs/authoring-components.md",
+        "docs/authoring-react-native-components.md",
         "docs/compatibility.md",
         "docs/component-index.md",
         "docs/components/accordion.md",
@@ -182,6 +183,9 @@
         "docs/package-dependencies.md",
         "docs/pitfalls.md",
         "docs/react-aria-deviations.md",
+        "docs/react-native-accessibility.md",
+        "docs/react-native-component-parity.md",
+        "docs/react-native-setup.md",
         "docs/react-setup.md",
         "docs/recipes/app-header-navigation.md",
         "docs/recipes/async-feedback.md",

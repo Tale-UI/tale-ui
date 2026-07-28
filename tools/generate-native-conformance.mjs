@@ -71,8 +71,30 @@ const workspacePackages = [
 ]
   .filter((directory) => existsSync(join(directory, 'package.json')))
   .map((directory) => readJson(`${directory.slice(ROOT.length + 1)}/package.json`));
-if (workspacePackages.some(({ name }) => /react-native|native-components/.test(name))) {
-  throw new Error('P3-C must not introduce a native component package.');
+const nativePackage = workspacePackages.find(({ name }) => name === '@tale-ui/react-native');
+if (!nativePackage) {
+  throw new Error('Tale UI native conformance requires @tale-ui/react-native.');
+}
+for (const requiredExport of [
+  './provider',
+  './button',
+  './icon-button',
+  './text',
+  './progress-bar',
+]) {
+  if (!nativePackage.exports?.[requiredExport]) {
+    throw new Error(`@tale-ui/react-native is missing ${requiredExport}.`);
+  }
+}
+for (const requiredPath of [
+  'registry/platforms/react-native.json',
+  'registry/platforms/react-native-recipe-candidates.json',
+  'playground/react-native-storybook/src/Foundation.stories.tsx',
+  'analysis/react-native-layer/React Native Compatibility Matrix.md',
+]) {
+  if (!existsSync(join(ROOT, requiredPath))) {
+    throw new Error(`Native conformance requires ${requiredPath}.`);
+  }
 }
 
 const example = readFileSync(join(ROOT, 'examples/react-native/TokenCard.tsx'), 'utf8');
@@ -110,7 +132,9 @@ const summary = {
   unsupportedTokens: native.unsupportedTokenNames.length,
   highContrastGuidance: 'docs/native-token-conformance.md',
   reactNativeExample: 'examples/react-native/TokenCard.tsx',
-  nativeComponentLibrary: false,
+  nativeComponentLibrary: true,
+  nativeRegistry: 'registry/platforms/react-native.json',
+  storybook: 'playground/react-native-storybook',
 };
 for (const [path, value] of [
   ['registry/conformance/react-native-light.json', reports.light],
@@ -128,5 +152,5 @@ for (const [path, value] of [
   }
 }
 console.log(
-  `${CHECK ? 'OK' : 'Generated'}: ${summary.portableTokens} portable tokens, ${summary.unsupportedTokens} matched exceptions, no native component library`,
+  `${CHECK ? 'OK' : 'Generated'}: ${summary.portableTokens} portable tokens, ${summary.unsupportedTokens} matched exceptions, native component library verified`,
 );

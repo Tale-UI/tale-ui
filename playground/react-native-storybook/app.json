@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "Tale UI Native Storybook",
+    "slug": "tale-ui-native-storybook",
+    "version": "0.1.0",
+    "newArchEnabled": true,
+    "ios": {
+      "deploymentTarget": "16.4",
+      "bundleIdentifier": "dev.taleui.storybook"
+    },
+    "android": {
+      "minSdkVersion": 24,
+      "package": "dev.taleui.storybook"
+    }
+  }
+}

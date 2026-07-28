@@ -4,18 +4,20 @@ Unified monorepo managed with **pnpm workspaces**. This repository is the single
 
 ## Packages
 
-| Path                                           | Package                 | Description                                                                                      |
-| ---------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------ |
-| [packages/tokens](packages/tokens/CLAUDE.md)   | `@tale-ui/tokens`       | Canonical platform-neutral tokens; generates CSS and native objects                              |
-| [packages/css](packages/css/CLAUDE.md)         | `@tale-ui/css`          | CSS foundations, utilities, and themes generated from the shared tokens                          |
-| [packages/react](packages/react/)              | `@tale-ui/react`        | Styled React components — BEM class names applied automatically (built on React Aria Components) |
-| [packages/styles](packages/styles/)            | `@tale-ui/react-styles` | CSS per component (uses `@tale-ui/css` tokens)                                                   |
-| [packages/themes](packages/themes/CLAUDE.md)   | `@tale-ui/themes`       | Optional standard and monochrome theme presets                                                   |
-| [packages/utils](packages/utils/)              | `@tale-ui/utils`        | Shared utilities                                                                                 |
-| [packages/charts](packages/charts/CLAUDE.md)   | `@tale-ui/charts`       | Recharts-based chart components themed with design tokens                                        |
-| [packages/a2ui](packages/a2ui/)                | `@tale-ui/a2ui`         | A2UI protocol renderer — maps agent messages to Tale UI components                               |
-| [packages/tooling](packages/tooling/CLAUDE.md) | `@tale-ui/tooling`      | Public-beta registry API, CLI, validation, and safe project tooling                              |
-| [apps/mcp-studio](apps/mcp-studio/)            | `@tale-ui/mcp-studio`   | Visual maintainer tool: prompt → plan_ui → rendered preview → pitfall authoring                  |
+| Path                                                     | Package                 | Description                                                                                      |
+| -------------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------ |
+| [packages/tokens](packages/tokens/CLAUDE.md)             | `@tale-ui/tokens`       | Canonical platform-neutral tokens; generates CSS and native objects                              |
+| [packages/foundations](packages/foundations/CLAUDE.md)   | `@tale-ui/foundations`  | Renderer-neutral themes, contracts, state, and portable recipes                                  |
+| [packages/css](packages/css/CLAUDE.md)                   | `@tale-ui/css`          | CSS foundations, utilities, and themes generated from the shared tokens                          |
+| [packages/react](packages/react/)                        | `@tale-ui/react`        | Styled React components — BEM class names applied automatically (built on React Aria Components) |
+| [packages/react-native](packages/react-native/CLAUDE.md) | `@tale-ui/react-native` | Native components for iOS, Android, and declared React Native Web surfaces                       |
+| [packages/styles](packages/styles/)                      | `@tale-ui/react-styles` | CSS per component (uses `@tale-ui/css` tokens)                                                   |
+| [packages/themes](packages/themes/CLAUDE.md)             | `@tale-ui/themes`       | Optional standard and monochrome theme presets                                                   |
+| [packages/utils](packages/utils/)                        | `@tale-ui/utils`        | Shared utilities                                                                                 |
+| [packages/charts](packages/charts/CLAUDE.md)             | `@tale-ui/charts`       | Recharts-based chart components themed with design tokens                                        |
+| [packages/a2ui](packages/a2ui/)                          | `@tale-ui/a2ui`         | A2UI protocol renderer — maps agent messages to Tale UI components                               |
+| [packages/tooling](packages/tooling/CLAUDE.md)           | `@tale-ui/tooling`      | Public-beta registry API, CLI, validation, and safe project tooling                              |
+| [apps/mcp-studio](apps/mcp-studio/)                      | `@tale-ui/mcp-studio`   | Visual maintainer tool: prompt → plan_ui → rendered preview → pitfall authoring                  |
 
 ## Documentation
 

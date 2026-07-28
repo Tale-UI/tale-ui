@@ -83,6 +83,14 @@ jobs:
         run: pnpm --filter @tale-ui/react-styles test:package
       - name: Verify packed tooling API and CLI
         run: pnpm tooling:test:package
+      - name: Verify renderer-neutral foundations
+        run: pnpm foundations:test && pnpm foundations:test:package
+      - name: Verify React Native registry and recipes
+        run: pnpm native:registry:check && pnpm native:recipes:check
+      - name: Verify React Native package and conformance
+        run: pnpm native:test && pnpm native:test:package && pnpm native:test:consumers && pnpm native:conformance:check && pnpm native:coverage:check
+      - name: Verify React Native Storybook registry
+        run: pnpm native:storybook:build
       - name: Unit tests (jsdom)
         run: pnpm test:jsdom
 
