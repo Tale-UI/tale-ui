@@ -104,7 +104,7 @@ jobs:
       - name: Verify React Native documentation semantics
         run: pnpm native:docs:check
       - name: Verify general documentation and generated provenance
-        run: pnpm docs:versions:check && pnpm markdownlint && pnpm generate-docs:check
+        run: pnpm docs:versions:check && pnpm markdownlint && pnpm eval-context:generate && pnpm generate-docs:check
       - name: Unit tests (jsdom)
         run: pnpm test:jsdom
 
