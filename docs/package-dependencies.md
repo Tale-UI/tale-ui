@@ -27,6 +27,9 @@ The native dependency direction is:
 `@tale-ui/themes`, React DOM, Expo, or Storybook. Expo and Storybook are host
 dependencies of `playground/react-native-storybook`.
 
+Foundations and React Native are workspace-supported experimental packages.
+The current repository publication workflow omits both.
+
 From the CLI:
 
 ```bash

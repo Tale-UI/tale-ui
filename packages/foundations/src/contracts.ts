@@ -52,6 +52,10 @@ const foundationalIds = [
   'TextArea',
 ] as const;
 
+const recipeIdByComponent = new Map<string, string>(
+  foundationalRecipes.map((recipe) => [recipe.component, recipe.id] as const),
+);
+
 export const foundationalContracts = Object.freeze(
   foundationalIds.map((id) =>
     defineComponentContract({
@@ -69,7 +73,8 @@ export const foundationalContracts = Object.freeze(
         reactNative: 'supported',
         reactNativeWeb: 'supported',
       },
-      recipeId: id.toLowerCase(),
+      ...(recipeIdByComponent.has(id) ? { recipeId: recipeIdByComponent.get(id) } : {}),
     }),
   ),
 );
+import { foundationalRecipes } from './recipes';

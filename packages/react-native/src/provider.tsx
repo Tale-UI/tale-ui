@@ -1,7 +1,7 @@
 import { harbourTheme } from '@tale-ui/foundations/theme-presets';
 import { resolveTheme, type ResolvedTheme, type ThemeDefinition } from '@tale-ui/foundations/theme';
 import * as React from 'react';
-import { Appearance, type ColorSchemeName } from 'react-native';
+import { type ColorSchemeName, useColorScheme } from 'react-native';
 
 export type TaleDirection = 'ltr' | 'rtl';
 export type TaleDensity = 'compact' | 'regular' | 'comfortable';
@@ -29,11 +29,16 @@ const TaleContext = React.createContext<TaleContextValue>({
 export type TaleProviderProps = React.PropsWithChildren<{
   theme?: ThemeDefinition;
   appearance?: TaleAppearance;
+  /** @deprecated Metadata only; Tale UI does not apply locale behavior. */
   locale?: string;
+  /** @deprecated Metadata only; Tale UI does not apply layout direction. */
   direction?: TaleDirection;
+  /** @deprecated Metadata only; Tale UI does not apply provider-level density. */
   density?: TaleDensity;
   reducedMotion?: boolean;
+  /** Manual multiplier consumed by Tale Text; this does not subscribe to OS Dynamic Type. */
   textScale?: number;
+  /** Deterministic system-mode override, primarily for tests and previews. */
   colorScheme?: ColorSchemeName;
 }>;
 
@@ -48,14 +53,15 @@ export function TaleProvider({
   textScale = 1,
   colorScheme,
 }: TaleProviderProps) {
-  const systemScheme = Appearance.getColorScheme();
-  const requestedScheme = colorScheme ?? systemScheme;
-  let resolvedAppearance: 'light' | 'dark';
-  if (appearance === 'system') {
-    resolvedAppearance = requestedScheme === 'dark' ? 'dark' : 'light';
-  } else {
-    resolvedAppearance = appearance;
-  }
+  const subscribedSystemScheme = useColorScheme();
+  const resolvedAppearance =
+    appearance === 'light' || appearance === 'dark'
+      ? appearance
+      : colorScheme === 'light' || colorScheme === 'dark'
+        ? colorScheme
+        : subscribedSystemScheme === 'dark'
+          ? 'dark'
+          : 'light';
   const resolved = React.useMemo(
     () => resolveTheme(theme, resolvedAppearance),
     [resolvedAppearance, theme],

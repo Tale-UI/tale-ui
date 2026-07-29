@@ -33,7 +33,6 @@
     "./fieldset": "./src/fieldset.ts",
     "./form": "./src/form.ts",
     "./checkbox-group": "./src/checkbox-group.ts",
-    "./radio-field": "./src/radio-field.ts",
     "./radio-group": "./src/radio-group.tsx",
     "./slider": "./src/slider.tsx",
     "./list": "./src/list.tsx",

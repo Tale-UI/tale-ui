@@ -45,31 +45,21 @@ const preview: Preview = {
       description: 'Manual dynamic-type review target',
       toolbar: { icon: 'grow', items: ['1x', '1.5x', '2x'] },
     },
-    locale: {
-      description: 'Locale',
-      toolbar: { icon: 'globe', items: ['en', 'ar', 'de'] },
-    },
-    direction: {
-      description: 'Layout direction',
-      toolbar: { icon: 'transfer', items: ['ltr', 'rtl'] },
+    systemScheme: {
+      description: 'Deterministic system-mode colour scheme',
+      toolbar: { icon: 'contrast', items: ['device', 'light', 'dark'] },
     },
     reducedMotion: {
       description: 'Reduced motion',
       toolbar: { icon: 'stop', items: [false, true] },
-    },
-    density: {
-      description: 'Component density',
-      toolbar: { icon: 'component', items: ['compact', 'regular', 'comfortable'] },
     },
   },
   initialGlobals: {
     appearance: 'light',
     theme: 'standard',
     textScale: '1x',
-    locale: 'en',
-    direction: 'ltr',
+    systemScheme: 'device',
     reducedMotion: false,
-    density: 'regular',
   },
   decorators: [
     (Story, context) => {
@@ -96,9 +86,9 @@ const preview: Preview = {
       return (
         <TaleProvider
           appearance={context.globals.appearance}
-          density={context.globals.density}
-          direction={context.globals.direction}
-          locale={context.globals.locale}
+          colorScheme={
+            context.globals.systemScheme === 'device' ? undefined : context.globals.systemScheme
+          }
           reducedMotion={context.globals.reducedMotion}
           textScale={Number.parseFloat(String(context.globals.textScale))}
           theme={selectedTheme}

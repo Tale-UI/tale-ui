@@ -18,11 +18,12 @@ export type DrawerProps = React.PropsWithChildren<{
 
 export function Drawer({ children, isOpen, label, onOpenChange }: DrawerProps) {
   const { tokens } = useTaleTheme();
+  const requestClose = React.useCallback(() => onOpenChange(false), [onOpenChange]);
   return (
     <Modal
       accessibilityViewIsModal
       animationType="slide"
-      onRequestClose={() => onOpenChange(false)}
+      onRequestClose={requestClose}
       transparent
       visible={isOpen}
     >
@@ -34,8 +35,6 @@ export function Drawer({ children, isOpen, label, onOpenChange }: DrawerProps) {
         }}
       >
         <View
-          accessible
-          accessibilityLabel={label}
           style={{
             backgroundColor: tokens.neutral10,
             borderColor: tokens.neutral20,
@@ -74,7 +73,7 @@ export function Drawer({ children, isOpen, label, onOpenChange }: DrawerProps) {
           <Pressable
             accessibilityLabel="Close drawer"
             accessibilityRole="button"
-            onPress={() => onOpenChange(false)}
+            onPress={requestClose}
             style={{ alignSelf: 'flex-end', padding: tokens.space2xs }}
           >
             <Text size="s" variant="label" style={{ color: tokens.neutral70 }}>

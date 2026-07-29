@@ -3,6 +3,8 @@
 ## Status
 
 Draft; not approved for public Tooling, CLI, MCP, Studio, or hosted rollout.
+This standalone proposal is not a requirement for the React Native correction,
+merge, or later package promotion.
 
 ## Compatibility invariant
 

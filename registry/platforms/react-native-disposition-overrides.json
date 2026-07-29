@@ -1,4 +1,29 @@
 {
   "schemaVersion": "1.0.0",
-  "overrides": {}
+  "overrides": {
+    "RadioField": {
+      "strategy": "native-alternative",
+      "delivery": "stable",
+      "targets": ["ios", "android"],
+      "contractId": null,
+      "recipeId": null,
+      "deviations": [
+        "The removed native subpath only renamed RadioGroup and did not implement the web RadioField compound contract."
+      ],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "The web RadioField compound contract has no responsible one-to-one native implementation.",
+        "webContract": "registry/components.json#radio-field",
+        "nativeBehavior": "No package implementation. Applications compose native radio choices with their own field structure.",
+        "accessibility": "Applications own accessible description, validation, option structure, naming, state, and physical-device verification.",
+        "deviations": "The removed ./radio-field subpath only renamed RadioGroup and did not implement the web compound contract.",
+        "implementationPlan": "No native package implementation or Storybook story.",
+        "testPlan": "Package, inventory, Storybook, and packed-consumer checks prove the false alias is absent.",
+        "storybookPlan": "No implementation story; migration guidance only.",
+        "performancePlan": "Owned by the application composition.",
+        "approval": "Approved removal path after the PR #19 compatibility preflight proved the package unpublished at the configured registry.",
+        "migrationGuidance": "Use RadioGroup for native option selection, then let the application provide description, validation, field structure, accessibility, and physical verification."
+      }
+    }
+  }
 }

@@ -22,7 +22,6 @@ import { List } from '@tale-ui/react-native/list';
 import { ListBox } from '@tale-ui/react-native/list-box';
 import { Pagination } from '@tale-ui/react-native/pagination';
 import { ProgressBar } from '@tale-ui/react-native/progress-bar';
-import { RadioGroup as RadioField } from '@tale-ui/react-native/radio-field';
 import { RadioGroup } from '@tale-ui/react-native/radio-group';
 import { Row } from '@tale-ui/react-native/row';
 import { SearchField } from '@tale-ui/react-native/search-field';
@@ -75,7 +74,6 @@ const components = {
   'list-box': ListBox,
   pagination: Pagination,
   'progress-bar': ProgressBar,
-  'radio-field': RadioField,
   'radio-group': RadioGroup,
   row: Row,
   'search-field': SearchField,
@@ -245,12 +243,6 @@ export function NativePlayground({ component, args }: NativePlaygroundProps) {
       onPageChange: (page: number) => {
         setInteractiveArgs((current) => ({ ...current, page }));
         report('onPageChange', page);
-      },
-    },
-    'radio-field': {
-      onValueChange: (value: string) => {
-        setInteractiveArgs((current) => ({ ...current, value }));
-        report('onValueChange', value);
       },
     },
     'radio-group': {

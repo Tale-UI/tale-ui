@@ -1,5 +1,6 @@
 module.exports = {
   preset: '@react-native/jest-preset',
+  watchman: false,
   modulePathIgnorePatterns: ['<rootDir>/build/'],
   testMatch: ['<rootDir>/test/**/*.test.ts?(x)'],
   transformIgnorePatterns: [

@@ -885,56 +885,6 @@ export const nativeStoryControls = {
     properties: ['label', 'value', 'minValue', 'maxValue', 'labelPosition', 'isIndeterminate'],
     actions: [],
   },
-  'radio-field': {
-    args: {
-      label: 'Delivery method',
-      value: 'standard',
-      items: [
-        {
-          value: 'standard',
-          label: 'Standard',
-        },
-        {
-          value: 'express',
-          label: 'Express',
-        },
-      ],
-      size: 'md',
-      orientation: 'vertical',
-    },
-    argTypes: {
-      label: {
-        control: 'text',
-        description: 'Accessible radio-field label.',
-      },
-      value: {
-        control: 'select',
-        description: 'Controlled selected value.',
-        options: ['standard', 'express'],
-      },
-      items: {
-        control: 'object',
-        description: 'Radio choices.',
-      },
-      size: {
-        control: 'select',
-        description: 'Radio indicator size.',
-        options: ['sm', 'md'],
-      },
-      orientation: {
-        control: 'select',
-        description: 'Choice layout direction.',
-        options: ['vertical', 'horizontal'],
-      },
-      onValueChange: {
-        action: 'onValueChange',
-        description: 'Reports selected values.',
-        control: false,
-      },
-    },
-    properties: ['label', 'value', 'items', 'size', 'orientation'],
-    actions: ['onValueChange'],
-  },
   'radio-group': {
     args: {
       label: 'Delivery method',

@@ -17,6 +17,12 @@ import { fileURLToPath } from 'node:url';
 
 const fixtureRoot = dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = resolve(fixtureRoot, '../../..');
+const inventory = JSON.parse(
+  readFileSync(
+    join(repositoryRoot, 'registry/platforms/react-native-implementations.json'),
+    'utf8',
+  ),
+).implementations;
 const pnpm = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm';
 const platformIndex = process.argv.indexOf('--platform');
 const requestedPlatform = platformIndex >= 0 ? process.argv[platformIndex + 1] : 'all';
@@ -57,7 +63,9 @@ function writeJson(path, value) {
 function createConsumer(name, dependencies) {
   const root = join(temporaryRoot, name);
   mkdirSync(root);
-  copyFileSync(join(fixtureRoot, 'App.tsx'), join(root, 'App.tsx'));
+  for (const fixture of readdirSync(fixtureRoot).filter((name) => /\.tsx?$/u.test(name))) {
+    copyFileSync(join(fixtureRoot, fixture), join(root, fixture));
+  }
   writeJson(join(root, 'package.json'), {
     name: `tale-ui-${name}`,
     private: true,
@@ -89,7 +97,7 @@ function createConsumer(name, dependencies) {
       target: 'ES2022',
       types: ['react'],
     },
-    include: ['App.tsx'],
+    include: ['*.ts', '*.tsx'],
   });
   return root;
 }
@@ -193,6 +201,36 @@ try {
       ],
       { cwd: plainRoot },
     );
+
+    const sourceMap = JSON.parse(
+      readFileSync(join(plainRoot, `dist-${platform}/index.bundle.map`), 'utf8'),
+    );
+    assert.ok(Array.isArray(sourceMap.sources), `${platform} Metro source map lacks sources.`);
+    const normalizedSources = new Set(
+      sourceMap.sources.map((source) => {
+        let normalized = String(source).replaceAll('\\', '/');
+        try {
+          normalized = decodeURIComponent(normalized);
+        } catch {
+          // Keep malformed external paths unchanged; package paths are asserted below.
+        }
+        const marker = normalized.lastIndexOf('@tale-ui/react-native/');
+        return marker === -1 ? normalized : normalized.slice(marker);
+      }),
+    );
+    const expectedOwnerModules = new Set([
+      'esm/provider.js',
+      ...inventory.map(({ ownerModule }) =>
+        ownerModule.replace(/^src\//u, 'esm/').replace(/\.tsx?$/u, '.js'),
+      ),
+    ]);
+    assert.equal(expectedOwnerModules.size, 31);
+    for (const ownerModule of expectedOwnerModules) {
+      assert.ok(
+        normalizedSources.has(`@tale-ui/react-native/${ownerModule}`),
+        `${platform} Metro source map lacks ${ownerModule}.`,
+      );
+    }
   }
 
   const packedManifest = JSON.parse(
@@ -205,8 +243,14 @@ try {
       `Packed native package must not depend on ${forbidden}.`,
     );
   }
+  assert.deepEqual(
+    Object.keys(packedManifest.exports)
+      .filter((subpath) => subpath !== '.' && subpath !== './provider')
+      .sort(),
+    inventory.map(({ publicSubpath }) => publicSubpath).sort(),
+  );
   assert.ok(packedManifest.exports['./provider']);
-  assert.ok(packedManifest.exports['./button']);
+  assert.equal(packedManifest.exports['./radio-field'], undefined);
 
   process.stdout.write(
     `Packed Expo and plain React Native consumers passed for ${platforms.join(', ')}.\n`,

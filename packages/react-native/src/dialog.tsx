@@ -13,11 +13,12 @@ export type DialogProps = React.PropsWithChildren<{
 
 export function Dialog({ children, isOpen, title, onOpenChange, type = 'dialog' }: DialogProps) {
   const { tokens } = useTaleTheme();
+  const requestClose = React.useCallback(() => onOpenChange(false), [onOpenChange]);
   return (
     <Modal
       accessibilityViewIsModal
       animationType="fade"
-      onRequestClose={() => onOpenChange(false)}
+      onRequestClose={requestClose}
       transparent
       visible={isOpen}
     >
@@ -31,8 +32,6 @@ export function Dialog({ children, isOpen, title, onOpenChange, type = 'dialog' 
         }}
       >
         <View
-          accessible
-          accessibilityLabel={title}
           style={{
             backgroundColor: tokens.neutral10,
             borderColor: tokens.neutral20,
@@ -62,7 +61,7 @@ export function Dialog({ children, isOpen, title, onOpenChange, type = 'dialog' 
           <Pressable
             accessibilityLabel="Close"
             accessibilityRole="button"
-            onPress={() => onOpenChange(false)}
+            onPress={requestClose}
             style={({ pressed }) => ({
               alignSelf: 'flex-end',
               // The resting close action intentionally has no painted surface.

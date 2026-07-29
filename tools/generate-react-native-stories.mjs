@@ -5,11 +5,13 @@ import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { format, resolveConfig } from 'prettier';
+import { loadAndValidateNativeInventory } from './lib/react-native-implementation-inventory.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const registry = JSON.parse(
   readFileSync(path.join(root, 'registry/platforms/react-native.json'), 'utf8'),
 );
+const inventory = loadAndValidateNativeInventory({ root });
 const outputRoot = path.join(root, 'playground/react-native-storybook/src/components');
 const metadataPath = path.join(root, 'registry/platforms/react-native-story-controls.json');
 const controlsPath = path.join(
@@ -343,23 +345,6 @@ const definitions = {
     ],
     actions: [],
   },
-  'radio-field': {
-    properties: [
-      text('label', 'Delivery method', 'Accessible radio-field label.'),
-      select('value', 'standard', ['standard', 'express'], 'Controlled selected value.'),
-      object(
-        'items',
-        [
-          { value: 'standard', label: 'Standard' },
-          { value: 'express', label: 'Express' },
-        ],
-        'Radio choices.',
-      ),
-      select('size', 'md', ['sm', 'md'], 'Radio indicator size.'),
-      select('orientation', 'vertical', ['vertical', 'horizontal'], 'Choice layout direction.'),
-    ],
-    actions: [action('onValueChange', 'Reports selected values.')],
-  },
   'radio-group': {
     properties: [
       text('label', 'Delivery method', 'Accessible radio-group label.'),
@@ -603,15 +588,6 @@ const adapterContracts = {
   'list-box': ['children', 'label', 'frameless', 'layout'],
   pagination: ['page', 'totalPages', 'label', 'onPageChange'],
   'progress-bar': ['value', 'minValue', 'maxValue', 'label', 'labelPosition', 'isIndeterminate'],
-  'radio-field': [
-    'label',
-    'items',
-    'size',
-    'orientation',
-    'value',
-    'defaultValue',
-    'onValueChange',
-  ],
   'radio-group': [
     'label',
     'items',
@@ -664,9 +640,6 @@ const controlExclusions = {
   'icon-button': {
     style: 'React Native style objects are non-portable; visual states live in All Variations.',
   },
-  'radio-field': {
-    defaultValue: 'Playground uses the controlled value property.',
-  },
   'radio-group': {
     defaultValue: 'Playground uses the controlled value property.',
   },
@@ -675,18 +648,17 @@ const controlExclusions = {
   },
 };
 
-const implemented = registry.components.filter(
-  ({ delivery, strategy }) => delivery === 'stable' && strategy === 'adapted',
-);
+const registryById = new Map(registry.components.map((component) => [component.id, component]));
+const implemented = inventory.implementations.map((implementation) => {
+  const disposition = registryById.get(implementation.id);
+  assert.ok(disposition, `${implementation.id} lacks a native disposition.`);
+  return { ...disposition, ...implementation };
+});
 assert.equal(
   Object.keys(definitions).length,
   implemented.length,
   'Control definitions must match implemented native component count.',
 );
-
-const exportAliases = {
-  'radio-field': 'RadioGroup as RadioField',
-};
 
 const categorySlug = (category) => category.toLowerCase().replaceAll(' ', '-');
 const serialize = (value) => JSON.stringify(value, null, 2);
@@ -712,12 +684,12 @@ for (const component of implemented) {
     );
   }
   const relativePath = path.join(categorySlug(component.category), `${component.slug}.stories.tsx`);
-  const publicExport = exportAliases[component.slug] ?? component.id;
+  const publicExport = component.expectedSymbol;
   const controlAccessor = /^[A-Za-z_$][\w$]*$/u.test(component.slug)
     ? `.${component.slug}`
     : `['${component.slug}']`;
   const source = `${generatedHeader}
-import { ${publicExport} } from '@tale-ui/react-native/${component.slug}';
+import { ${publicExport} } from '@tale-ui/react-native/${component.publicSubpath.slice(2)}';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type * as React from 'react';
 import { NativePlayground } from '../../NativePlayground';

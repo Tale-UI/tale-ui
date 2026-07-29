@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadAndValidateNativeInventory } from './lib/react-native-implementation-inventory.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const check = process.argv.includes('--check');
@@ -13,52 +14,11 @@ const canonical = (value) => `${JSON.stringify(value, null, 2)}\n`;
 const web = readJson('registry/components.json');
 const overrideSource = readJson('registry/platforms/react-native-disposition-overrides.json');
 const overrides = new Map(Object.entries(overrideSource.overrides));
-const recipeComponents = new Set([
-  'Button',
-  'Text',
-  'Icon',
-  'Row',
-  'Column',
-  'Card',
-  'Separator',
-  'Badge',
-  'Spinner',
-  'ProgressBar',
-]);
-const implementedComponents = new Set([
-  ...recipeComponents,
-  'Accordion',
-  'AlertDialog',
-  'Banner',
-  'Breadcrumbs',
-  'CheckboxField',
-  'CheckboxGroup',
-  'Dialog',
-  'Disclosure',
-  'Drawer',
-  'Field',
-  'Fieldset',
-  'Form',
-  'GridList',
-  'IconButton',
-  'Input',
-  'List',
-  'ListBox',
-  'Pagination',
-  'RadioField',
-  'RadioGroup',
-  'SearchField',
-  'Skeleton',
-  'Slider',
-  'SwitchField',
-  'Tabs',
-  'TagGroup',
-  'TextArea',
-  'Toast',
-  'ToggleButton',
-  'ToggleButtonGroup',
-  'Toolbar',
-]);
+const inventory = loadAndValidateNativeInventory({ root });
+const implementationById = new Map(
+  inventory.implementations.map((implementation) => [implementation.id, implementation]),
+);
+const recipeImplementations = inventory.implementations.filter(({ recipeId }) => recipeId);
 
 const requireAcceptedEvidence = (record) => {
   if (record.delivery === 'proposed') {
@@ -93,7 +53,8 @@ const requireAcceptedEvidence = (record) => {
 const generate = () => {
   const components = web.components
     .map((component) => {
-      const isImplemented = implementedComponents.has(component.name);
+      const implementation = implementationById.get(component.name);
+      const isImplemented = Boolean(implementation);
       const hasCompletedStableOutcome = component.status === 'stable' && !isImplemented;
       const evidence =
         component.status === 'stable' || isImplemented
@@ -113,7 +74,7 @@ const generate = () => {
                 ? 'See native public API.'
                 : 'No DOM event, ARIA, or portal API is reproduced.',
               implementationPlan: isImplemented
-                ? `packages/react-native/src/${component.slug}.tsx`
+                ? `packages/react-native/${implementation.entrypoint}`
                 : 'No package implementation; application integrates the documented native alternative.',
               testPlan: isImplemented
                 ? 'Type, package, contract, and device checklist.'
@@ -143,8 +104,8 @@ const generate = () => {
             : 'adapted',
         delivery: isImplemented || hasCompletedStableOutcome ? 'stable' : 'proposed',
         targets: isImplemented ? ['ios', 'android', 'web'] : ['ios', 'android'],
-        contractId: isImplemented ? component.name.toLowerCase() : null,
-        recipeId: recipeComponents.has(component.name) ? component.name.toLowerCase() : null,
+        contractId: implementation?.contractId ?? null,
+        recipeId: implementation?.recipeId ?? null,
         owner: 'Tale UI maintainers',
         deviations: [],
         evidence,
@@ -173,8 +134,10 @@ const generate = () => {
     },
     counts: {
       total: components.length,
-      stable: stableCount,
+      webStable: stableCount,
+      completed: components.filter(({ delivery }) => delivery === 'stable').length,
       proposed: components.filter(({ delivery }) => delivery === 'proposed').length,
+      implementations: inventory.implementations.length,
     },
     components,
   };
@@ -182,12 +145,14 @@ const generate = () => {
     schemaVersion: '1.0.0',
     adoption: 'shadow',
     warning: 'Candidate declarations are not reachable from public web CSS.',
-    recipes: [...recipeComponents].sort().map((component) => ({
-      id: component.toLowerCase(),
-      component,
-      webCandidate: `.tale-${component.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`).replace(/^-/, '')} { color: var(--text-color); opacity: 1; }`,
-      native: { root: { color: { token: 'textColor' }, opacity: 1 } },
-    })),
+    recipes: recipeImplementations
+      .toSorted((a, b) => a.id.localeCompare(b.id))
+      .map((implementation) => ({
+        id: implementation.recipeId,
+        component: implementation.id,
+        webCandidate: `.tale-${implementation.id.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`).replace(/^-/, '')} { color: var(--text-color); opacity: 1; }`,
+        native: { root: { color: { token: 'textColor' }, opacity: 1 } },
+      })),
   };
   const parity = [
     '# React Native component parity',

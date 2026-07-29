@@ -13,18 +13,20 @@ pnpm storybook:web:build
 The root `dev:all` command serves the React Native Web Storybook at
 `http://localhost:6007`.
 
-The sidebar groups every implemented native component under
+The sidebar groups all 40 experimental native implementations under
 `Components / {category} / {component}`. Each component includes:
 
 - a `Playground` story with documented controls for its meaningful Tale UI
   props and action logging for its event callbacks; and
 - an `All Variations` story for visual state coverage.
 
-The control contracts and story files are generated from the governed native
-registry. `pnpm native:storybook:check` rejects missing component navigation,
+Eligibility comes from
+`registry/platforms/react-native-implementations.json`; the control contracts
+and story files project that inventory. `pnpm native:storybook:check` rejects
+missing component navigation,
 properties, actions, descriptions, control types, or stale generated stories.
-Toolbar globals cover appearance, theme, text scale review targets, locale,
-direction, reduced motion, and density.
+Toolbar globals cover appearance, deterministic device/light/dark system-scheme
+selection, theme, manual text-scale review targets, and reduced motion.
 
 Native project builds are reproducible through Expo prebuild:
 

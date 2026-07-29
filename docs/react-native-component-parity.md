@@ -98,7 +98,7 @@ Generated from the live React registry and governed native dispositions.
 | ProgressCircle | stable | native-alternative | stable |
 | QRCode | stable | native-alternative | stable |
 | Radio | deprecated | adapted | proposed |
-| RadioField | stable | adapted | stable |
+| RadioField | stable | native-alternative | stable |
 | RadioGroup | stable | adapted | stable |
 | RangeCalendar | stable | native-alternative | stable |
 | RatingBadge | stable | native-alternative | stable |

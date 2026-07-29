@@ -3,6 +3,8 @@
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { performance } from 'node:perf_hooks';
+import { fileURLToPath } from 'node:url';
+import { loadAndValidateNativeInventory } from './lib/react-native-implementation-inventory.mjs';
 
 const root = new URL('../', import.meta.url);
 const mode = process.argv[2] ?? 'all';
@@ -10,6 +12,7 @@ const readJson = (path) => JSON.parse(readFileSync(new URL(path, root), 'utf8'))
 const registry = readJson('registry/platforms/react-native.json');
 const storyControlMetadata = readJson('registry/platforms/react-native-story-controls.json');
 const manifest = readJson('packages/react-native/package.json');
+const inventory = loadAndValidateNativeInventory();
 const storyDirectory = new URL('playground/react-native-storybook/src/', root);
 const storySources = [];
 const collectStories = (directory) => {
@@ -18,14 +21,24 @@ const collectStories = (directory) => {
     if (entry.isDirectory()) {
       collectStories(target);
     } else if (entry.name.endsWith('.stories.tsx')) {
-      storySources.push(readFileSync(target, 'utf8'));
+      storySources.push({ target, source: readFileSync(target, 'utf8') });
     }
   }
 };
 collectStories(storyDirectory);
-const stories = storySources.join('\n');
-const implemented = registry.components.filter(
-  ({ delivery, strategy }) => delivery === 'stable' && strategy === 'adapted',
+const stories = storySources.map(({ source }) => source).join('\n');
+const registryById = new Map(registry.components.map((component) => [component.id, component]));
+const implemented = inventory.implementations.map((implementation) => ({
+  ...registryById.get(implementation.id),
+  ...implementation,
+}));
+const fixtureSource = readFileSync(
+  new URL('playground/react-native-storybook/src/Registry.fixtures.tsx', root),
+  'utf8',
+);
+const playgroundSource = readFileSync(
+  new URL('playground/react-native-storybook/src/NativePlayground.tsx', root),
+  'utf8',
 );
 
 const checkAccessibility = () => {
@@ -54,10 +67,31 @@ const checkPerformance = async () => {
 const checkCoverage = () => {
   const stable = registry.components.filter(({ webLifecycle }) => webLifecycle === 'stable');
   assert.equal(stable.filter(({ delivery }) => delivery !== 'stable').length, 0);
+  assert.equal(registry.counts.total, 133);
+  assert.equal(registry.counts.webStable, 112);
+  assert.equal(registry.counts.completed, 114);
+  assert.equal(registry.counts.proposed, 19);
+  assert.equal(registry.counts.implementations, 40);
+  const componentStories = storySources.filter(({ target }) =>
+    fileURLToPath(target).includes('/src/components/'),
+  );
+  assert.equal(componentStories.length, 40);
+  assert.equal(
+    componentStories.reduce(
+      (count, { source }) =>
+        count + (source.match(/export const (?:Playground|AllVariations)/gu)?.length ?? 0),
+      0,
+    ),
+    80,
+  );
+  assert.deepEqual(
+    Object.keys(storyControlMetadata).sort(),
+    implemented.map(({ slug }) => slug).sort(),
+  );
   for (const component of implemented) {
-    assert.ok(manifest.exports[`./${component.slug}`], `${component.id} lacks a public export`);
+    assert.ok(manifest.exports[component.publicSubpath], `${component.id} lacks a public export`);
     assert.ok(
-      stories.includes(`from '@tale-ui/react-native/${component.slug}'`),
+      stories.includes(`from '@tale-ui/react-native/${component.publicSubpath.slice(2)}'`),
       `${component.id} lacks a public Storybook import`,
     );
     assert.ok(
@@ -71,6 +105,14 @@ const checkCoverage = () => {
     assert.ok(
       stories.includes(`nativeComponent: '${component.slug}'`),
       `${component.id} lacks registry-linked Storybook metadata`,
+    );
+    assert.ok(
+      fixtureSource.includes(`nativeComponent: '${component.slug}'`),
+      `${component.id} lacks an All Variations fixture`,
+    );
+    assert.ok(
+      playgroundSource.includes(`from '@tale-ui/react-native/${component.publicSubpath.slice(2)}'`),
+      `${component.id} lacks a playground runtime import`,
     );
     const controls = storyControlMetadata[component.slug];
     assert.ok(controls, `${component.id} lacks a Storybook control contract`);
@@ -112,8 +154,19 @@ const checkCoverage = () => {
   for (const forbidden of ['expo', 'react-dom', '@tale-ui/themes', 'storybook']) {
     assert.equal(manifest.dependencies?.[forbidden], undefined);
   }
+  assert.equal(manifest.exports['./radio-field'], undefined);
+  assert.equal(
+    inventory.implementations.some(({ id }) => id === 'RadioField'),
+    false,
+  );
+  assert.equal(stories.includes('@tale-ui/react-native/radio-field'), false);
+  assert.equal(fixtureSource.includes('RadioField'), false);
+  assert.equal(playgroundSource.includes('RadioField'), false);
+  const radioField = registryById.get('RadioField');
+  assert.equal(radioField.delivery, 'stable');
+  assert.equal(radioField.strategy, 'native-alternative');
   console.log(
-    `OK: ${stable.length} stable outcomes and ${implemented.length} implemented exports/stories/control contracts.`,
+    `OK: ${stable.length} web-stable outcomes, ${registry.counts.completed} completed dispositions, and ${implemented.length} experimental implementations.`,
   );
 };
 

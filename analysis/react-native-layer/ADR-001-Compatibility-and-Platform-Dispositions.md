@@ -2,8 +2,9 @@
 
 ## Status
 
-Accepted for package-local implementation on 2026-07-28. Device verification
-remains pending on a provisioned host.
+Accepted for package-local implementation on 2026-07-28. All native
+implementations remain experimental; post-merge physical-device promotion
+verification remains manual.
 
 ## Decisions
 
@@ -14,13 +15,14 @@ remains pending on a provisioned host.
   disposition.
 - Use one `@tale-ui/react-native` package and platform files when behavior
   diverges.
-- Treat responsible platform-native alternatives as completed stable
-  dispositions for web components whose DOM semantics should not be imitated.
+- Treat `delivery: "stable"` as a completed disposition, not a stable native
+  implementation. Responsible native alternatives may therefore be completed
+  without a package implementation.
 - Keep artifact v1 unchanged. Package-local native registry and documentation
   do not imply public MCP/Tooling platform routing.
 
 ## Evidence
 
-The compatibility spike, npm metadata, official documentation links, generated
-native registry, packed-package checks, and exact environment constraints are
-retained beside this ADR.
+The compatibility preflight, official documentation links, generated native
+registry, packed-package checks, and exact environment constraints support this
+ADR. The current publication workflow omits foundations and React Native.

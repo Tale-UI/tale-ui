@@ -22,7 +22,6 @@ import { List } from '@tale-ui/react-native/list';
 import { ListBox } from '@tale-ui/react-native/list-box';
 import { Pagination } from '@tale-ui/react-native/pagination';
 import { ProgressBar } from '@tale-ui/react-native/progress-bar';
-import { RadioGroup as RadioField } from '@tale-ui/react-native/radio-field';
 import { RadioGroup } from '@tale-ui/react-native/radio-group';
 import { Row } from '@tale-ui/react-native/row';
 import { SearchField } from '@tale-ui/react-native/search-field';
@@ -402,11 +401,6 @@ export const ProgressBarAllVariations: Story = {
       <ProgressBar isIndeterminate label="Indeterminate" />
     </Column>
   ),
-};
-export const RadioFieldAllVariations: Story = {
-  name: 'RadioField / All Variations',
-  parameters: { nativeComponent: 'radio-field' },
-  render: () => <RadioField defaultValue="one" items={radioItems} label="Radio field" />,
 };
 export const RadioGroupAllVariations: Story = {
   name: 'RadioGroup / All Variations',

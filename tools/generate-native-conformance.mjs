@@ -5,9 +5,11 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
+import { loadAndValidateNativeInventory } from './lib/react-native-implementation-inventory.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const CHECK = process.argv.includes('--check');
+const inventory = loadAndValidateNativeInventory({ root: ROOT });
 const now = new Date();
 const TODAY = now.toISOString().slice(0, 10);
 const MAX_EXPIRY = new Date(now.getTime() + 180 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
@@ -77,10 +79,7 @@ if (!nativePackage) {
 }
 for (const requiredExport of [
   './provider',
-  './button',
-  './icon-button',
-  './text',
-  './progress-bar',
+  ...inventory.implementations.map(({ publicSubpath }) => publicSubpath),
 ]) {
   if (!nativePackage.exports?.[requiredExport]) {
     throw new Error(`@tale-ui/react-native is missing ${requiredExport}.`);

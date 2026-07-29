@@ -8,8 +8,10 @@
   },
   "counts": {
     "total": 133,
-    "stable": 112,
-    "proposed": 19
+    "webStable": 112,
+    "completed": 114,
+    "proposed": 19,
+    "implementations": 40
   },
   "components": [
     {
@@ -24,7 +26,7 @@
         "android",
         "web"
       ],
-      "contractId": "accordion",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -55,7 +57,7 @@
         "android",
         "web"
       ],
-      "contractId": "alertdialog",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -66,7 +68,7 @@
         "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
         "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
         "deviations": "See native public API.",
-        "implementationPlan": "packages/react-native/src/alert-dialog.tsx",
+        "implementationPlan": "packages/react-native/src/alert-dialog.ts",
         "testPlan": "Type, package, contract, and device checklist.",
         "storybookPlan": "All Variations native Storybook coverage.",
         "performancePlan": "Native primitive render budget.",
@@ -238,7 +240,7 @@
         "android",
         "web"
       ],
-      "contractId": "badge",
+      "contractId": "Badge",
       "recipeId": "badge",
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -299,7 +301,7 @@
         "android",
         "web"
       ],
-      "contractId": "banner",
+      "contractId": "Banner",
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -346,7 +348,7 @@
         "android",
         "web"
       ],
-      "contractId": "breadcrumbs",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -357,7 +359,7 @@
         "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
         "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
         "deviations": "See native public API.",
-        "implementationPlan": "packages/react-native/src/breadcrumbs.tsx",
+        "implementationPlan": "packages/react-native/src/breadcrumbs.ts",
         "testPlan": "Type, package, contract, and device checklist.",
         "storybookPlan": "All Variations native Storybook coverage.",
         "performancePlan": "Native primitive render budget.",
@@ -377,7 +379,7 @@
         "android",
         "web"
       ],
-      "contractId": "button",
+      "contractId": "Button",
       "recipeId": "button",
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -454,7 +456,7 @@
         "android",
         "web"
       ],
-      "contractId": "card",
+      "contractId": "Card",
       "recipeId": "card",
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -547,7 +549,7 @@
         "android",
         "web"
       ],
-      "contractId": "checkboxfield",
+      "contractId": "CheckboxField",
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -578,7 +580,7 @@
         "android",
         "web"
       ],
-      "contractId": "checkboxgroup",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -589,7 +591,7 @@
         "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
         "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
         "deviations": "See native public API.",
-        "implementationPlan": "packages/react-native/src/checkbox-group.tsx",
+        "implementationPlan": "packages/react-native/src/checkbox-group.ts",
         "testPlan": "Type, package, contract, and device checklist.",
         "storybookPlan": "All Variations native Storybook coverage.",
         "performancePlan": "Native primitive render budget.",
@@ -897,7 +899,7 @@
         "android",
         "web"
       ],
-      "contractId": "column",
+      "contractId": "Column",
       "recipeId": "column",
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -1198,7 +1200,7 @@
         "android",
         "web"
       ],
-      "contractId": "dialog",
+      "contractId": "Dialog",
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -1229,7 +1231,7 @@
         "android",
         "web"
       ],
-      "contractId": "disclosure",
+      "contractId": "Disclosure",
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -1290,7 +1292,7 @@
         "android",
         "web"
       ],
-      "contractId": "drawer",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -1301,7 +1303,7 @@
         "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
         "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
         "deviations": "See native public API.",
-        "implementationPlan": "packages/react-native/src/drawer.tsx",
+        "implementationPlan": "packages/react-native/src/drawer.ts",
         "testPlan": "Type, package, contract, and device checklist.",
         "storybookPlan": "All Variations native Storybook coverage.",
         "performancePlan": "Native primitive render budget.",
@@ -1411,7 +1413,7 @@
         "android",
         "web"
       ],
-      "contractId": "field",
+      "contractId": "Field",
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -1442,7 +1444,7 @@
         "android",
         "web"
       ],
-      "contractId": "fieldset",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -1453,7 +1455,7 @@
         "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
         "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
         "deviations": "See native public API.",
-        "implementationPlan": "packages/react-native/src/fieldset.tsx",
+        "implementationPlan": "packages/react-native/src/fieldset.ts",
         "testPlan": "Type, package, contract, and device checklist.",
         "storybookPlan": "All Variations native Storybook coverage.",
         "performancePlan": "Native primitive render budget.",
@@ -1533,7 +1535,7 @@
         "android",
         "web"
       ],
-      "contractId": "form",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -1544,7 +1546,7 @@
         "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
         "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
         "deviations": "See native public API.",
-        "implementationPlan": "packages/react-native/src/form.tsx",
+        "implementationPlan": "packages/react-native/src/form.ts",
         "testPlan": "Type, package, contract, and device checklist.",
         "storybookPlan": "All Variations native Storybook coverage.",
         "performancePlan": "Native primitive render budget.",
@@ -1564,7 +1566,7 @@
         "android",
         "web"
       ],
-      "contractId": "gridlist",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -1575,7 +1577,7 @@
         "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
         "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
         "deviations": "See native public API.",
-        "implementationPlan": "packages/react-native/src/grid-list.tsx",
+        "implementationPlan": "packages/react-native/src/grid-list.ts",
         "testPlan": "Type, package, contract, and device checklist.",
         "storybookPlan": "All Variations native Storybook coverage.",
         "performancePlan": "Native primitive render budget.",
@@ -1655,7 +1657,7 @@
         "android",
         "web"
       ],
-      "contractId": "icon",
+      "contractId": "Icon",
       "recipeId": "icon",
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -1686,7 +1688,7 @@
         "android",
         "web"
       ],
-      "contractId": "iconbutton",
+      "contractId": "IconButton",
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -1807,7 +1809,7 @@
         "android",
         "web"
       ],
-      "contractId": "input",
+      "contractId": "Input",
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -2020,7 +2022,7 @@
         "android",
         "web"
       ],
-      "contractId": "list",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -2051,7 +2053,7 @@
         "android",
         "web"
       ],
-      "contractId": "listbox",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -2062,7 +2064,7 @@
         "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
         "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
         "deviations": "See native public API.",
-        "implementationPlan": "packages/react-native/src/list-box.tsx",
+        "implementationPlan": "packages/react-native/src/list-box.ts",
         "testPlan": "Type, package, contract, and device checklist.",
         "storybookPlan": "All Variations native Storybook coverage.",
         "performancePlan": "Native primitive render budget.",
@@ -2340,7 +2342,7 @@
         "android",
         "web"
       ],
-      "contractId": "pagination",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -2351,7 +2353,7 @@
         "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
         "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
         "deviations": "See native public API.",
-        "implementationPlan": "packages/react-native/src/pagination.tsx",
+        "implementationPlan": "packages/react-native/src/pagination.ts",
         "testPlan": "Type, package, contract, and device checklist.",
         "storybookPlan": "All Variations native Storybook coverage.",
         "performancePlan": "Native primitive render budget.",
@@ -2551,7 +2553,7 @@
         "android",
         "web"
       ],
-      "contractId": "progressbar",
+      "contractId": "ProgressBar",
       "recipeId": "progressbar",
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -2651,30 +2653,31 @@
       "slug": "radio-field",
       "category": "Form Controls",
       "webLifecycle": "stable",
-      "strategy": "adapted",
+      "strategy": "native-alternative",
       "delivery": "stable",
       "targets": [
         "ios",
-        "android",
-        "web"
+        "android"
       ],
-      "contractId": "radiofield",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
-      "deviations": [],
+      "deviations": [
+        "The removed native subpath only renamed RadioGroup and did not implement the web RadioField compound contract."
+      ],
       "evidence": {
         "owner": "Tale UI maintainers",
-        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "rationale": "The web RadioField compound contract has no responsible one-to-one native implementation.",
         "webContract": "registry/components.json#radio-field",
-        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
-        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
-        "deviations": "See native public API.",
-        "implementationPlan": "packages/react-native/src/radio-field.tsx",
-        "testPlan": "Type, package, contract, and device checklist.",
-        "storybookPlan": "All Variations native Storybook coverage.",
-        "performancePlan": "Native primitive render budget.",
-        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
-        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+        "nativeBehavior": "No package implementation. Applications compose native radio choices with their own field structure.",
+        "accessibility": "Applications own accessible description, validation, option structure, naming, state, and physical-device verification.",
+        "deviations": "The removed ./radio-field subpath only renamed RadioGroup and did not implement the web compound contract.",
+        "implementationPlan": "No native package implementation or Storybook story.",
+        "testPlan": "Package, inventory, Storybook, and packed-consumer checks prove the false alias is absent.",
+        "storybookPlan": "No implementation story; migration guidance only.",
+        "performancePlan": "Owned by the application composition.",
+        "approval": "Approved removal path after the PR #19 compatibility preflight proved the package unpublished at the configured registry.",
+        "migrationGuidance": "Use RadioGroup for native option selection, then let the application provide description, validation, field structure, accessibility, and physical verification."
       }
     },
     {
@@ -2689,7 +2692,7 @@
         "android",
         "web"
       ],
-      "contractId": "radiogroup",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -2826,7 +2829,7 @@
         "android",
         "web"
       ],
-      "contractId": "row",
+      "contractId": "Row",
       "recipeId": "row",
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -2887,7 +2890,7 @@
         "android",
         "web"
       ],
-      "contractId": "searchfield",
+      "contractId": "SearchField",
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -3008,7 +3011,7 @@
         "android",
         "web"
       ],
-      "contractId": "separator",
+      "contractId": "Separator",
       "recipeId": "separator",
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -3069,7 +3072,7 @@
         "android",
         "web"
       ],
-      "contractId": "skeleton",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -3100,7 +3103,7 @@
         "android",
         "web"
       ],
-      "contractId": "slider",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -3191,7 +3194,7 @@
         "android",
         "web"
       ],
-      "contractId": "spinner",
+      "contractId": "Spinner",
       "recipeId": "spinner",
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -3238,7 +3241,7 @@
         "android",
         "web"
       ],
-      "contractId": "switchfield",
+      "contractId": "SwitchField",
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -3299,7 +3302,7 @@
         "android",
         "web"
       ],
-      "contractId": "tabs",
+      "contractId": "Tabs",
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -3330,7 +3333,7 @@
         "android",
         "web"
       ],
-      "contractId": "taggroup",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -3341,7 +3344,7 @@
         "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
         "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
         "deviations": "See native public API.",
-        "implementationPlan": "packages/react-native/src/tag-group.tsx",
+        "implementationPlan": "packages/react-native/src/tag-group.ts",
         "testPlan": "Type, package, contract, and device checklist.",
         "storybookPlan": "All Variations native Storybook coverage.",
         "performancePlan": "Native primitive render budget.",
@@ -3391,7 +3394,7 @@
         "android",
         "web"
       ],
-      "contractId": "text",
+      "contractId": "Text",
       "recipeId": "text",
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -3422,7 +3425,7 @@
         "android",
         "web"
       ],
-      "contractId": "textarea",
+      "contractId": "TextArea",
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -3545,7 +3548,7 @@
         "android",
         "web"
       ],
-      "contractId": "toast",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -3556,7 +3559,7 @@
         "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
         "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
         "deviations": "See native public API.",
-        "implementationPlan": "packages/react-native/src/toast.tsx",
+        "implementationPlan": "packages/react-native/src/toast.ts",
         "testPlan": "Type, package, contract, and device checklist.",
         "storybookPlan": "All Variations native Storybook coverage.",
         "performancePlan": "Native primitive render budget.",
@@ -3576,7 +3579,7 @@
         "android",
         "web"
       ],
-      "contractId": "togglebutton",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -3607,7 +3610,7 @@
         "android",
         "web"
       ],
-      "contractId": "togglebuttongroup",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -3618,7 +3621,7 @@
         "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
         "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
         "deviations": "See native public API.",
-        "implementationPlan": "packages/react-native/src/toggle-group.tsx",
+        "implementationPlan": "packages/react-native/src/toggle-group.ts",
         "testPlan": "Type, package, contract, and device checklist.",
         "storybookPlan": "All Variations native Storybook coverage.",
         "performancePlan": "Native primitive render budget.",
@@ -3638,7 +3641,7 @@
         "android",
         "web"
       ],
-      "contractId": "toolbar",
+      "contractId": null,
       "recipeId": null,
       "owner": "Tale UI maintainers",
       "deviations": [],
@@ -3649,7 +3652,7 @@
         "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
         "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
         "deviations": "See native public API.",
-        "implementationPlan": "packages/react-native/src/toolbar.tsx",
+        "implementationPlan": "packages/react-native/src/toolbar.ts",
         "testPlan": "Type, package, contract, and device checklist.",
         "storybookPlan": "All Variations native Storybook coverage.",
         "performancePlan": "Native primitive render budget.",

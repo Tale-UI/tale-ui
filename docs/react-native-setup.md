@@ -1,12 +1,11 @@
 # React Native setup
 
-Install the native package, foundations, tokens, and compatible peers:
+`@tale-ui/foundations` and `@tale-ui/react-native` are workspace-supported
+experimental packages. The current repository publication workflow does not
+publish them, so use workspace links or the clean packed-consumer fixture
+rather than a registry installation command.
 
-```bash
-pnpm add @tale-ui/react-native @tale-ui/foundations @tale-ui/tokens react react-native
-```
-
-Wrap the application once:
+Within the workspace or packed fixture, wrap the application once:
 
 ```tsx
 import { harbourTheme } from '@tale-ui/foundations/theme-presets';
@@ -26,5 +25,11 @@ Native New Architecture and does not require Expo. iOS and Android are primary
 targets. React Native Web support is component-specific; use
 `@tale-ui/react` for DOM-first applications.
 
-See `React Native Compatibility Matrix.md` in the implementation evidence for
-the current compatibility line.
+The package currently has 40 experimental implementation subpaths. `RadioField`
+is a completed native-alternative disposition with no native implementation;
+use `RadioGroup` only for native option selection and let the application own
+the surrounding field contract.
+
+See the tracked
+[`React Native Compatibility Matrix`](../analysis/react-native-layer/React%20Native%20Compatibility%20Matrix.md)
+for the current compatibility line.

@@ -12,7 +12,7 @@ This monorepo is managed with **pnpm workspaces**.
 | `docs/upstream/`            | Maintainer adoption logs for upstream dependency releases                       | No                                    |
 | `registry/sources/roadmap/` | Canonical roadmap inventories and disposition evidence                          | No                                    |
 | `test/baselines/roadmap/`   | Maintained benchmark and repository-gate baselines                              | No                                    |
-| `analysis/`                 | Ignored local development and research notes                                    | No                                    |
+| `analysis/`                 | Mostly ignored research plus explicitly tracked active decision records         | No                                    |
 | `playground/`               | Storybook, Vite component playground, and colour-scale playground               | No                                    |
 | `scripts/`                  | Release and repository automation                                               | No                                    |
 | `tools/`                    | Audit, generation, evaluation, build, and release scripts                       | No                                    |
@@ -58,10 +58,10 @@ tale-ui/
 | Package                 | Path                     | Description                                            |
 | ----------------------- | ------------------------ | ------------------------------------------------------ |
 | `@tale-ui/tokens`       | `packages/tokens/`       | Canonical token source and generated native objects    |
-| `@tale-ui/foundations`  | `packages/foundations/`  | Renderer-neutral themes, contracts, state, recipes     |
+| `@tale-ui/foundations`  | `packages/foundations/`  | Experimental renderer-neutral contracts and recipes    |
 | `@tale-ui/css`          | `packages/css/`          | CSS tokens, foundations, layout utilities, themes      |
 | `@tale-ui/react`        | `packages/react/`        | Styled React components (BEM class names auto-applied) |
-| `@tale-ui/react-native` | `packages/react-native/` | Native components and behavior adapters                |
+| `@tale-ui/react-native` | `packages/react-native/` | Experimental native components and behavior adapters   |
 | `@tale-ui/react-styles` | `packages/styles/`       | Per-component CSS rules built on `@tale-ui/css` tokens |
 | `@tale-ui/themes`       | `packages/themes/`       | Optional standard and monochrome theme presets         |
 | `@tale-ui/charts`       | `packages/charts/`       | Recharts-based chart components                        |

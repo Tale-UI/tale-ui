@@ -38,7 +38,6 @@ const meta = {
       '@tale-ui/react-native/list',
       '@tale-ui/react-native/list-box',
       '@tale-ui/react-native/pagination',
-      '@tale-ui/react-native/radio-field',
       '@tale-ui/react-native/radio-group',
       '@tale-ui/react-native/slider',
       '@tale-ui/react-native/tag-group',

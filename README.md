@@ -7,10 +7,10 @@ Unified monorepo for the Tale UI design system and React component library.
 | Package                                           | Description                                                                                            | Release channel                                                                                                   |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
 | [`@tale-ui/tokens`](packages/tokens/)             | Canonical design tokens and native token objects                                                       | [![npm](https://img.shields.io/npm/v/@tale-ui/tokens)](https://www.npmjs.com/package/@tale-ui/tokens)             |
-| [`@tale-ui/foundations`](packages/foundations/)   | Renderer-neutral themes, contracts, state, and portable recipes                                        | Prerelease                                                                                                        |
+| [`@tale-ui/foundations`](packages/foundations/)   | Renderer-neutral themes, contracts, state, and portable recipes                                        | Workspace-supported experimental                                                                                  |
 | [`@tale-ui/css`](packages/css/)                   | CSS foundations and utilities generated from the shared tokens                                         | [![npm](https://img.shields.io/npm/v/@tale-ui/css)](https://www.npmjs.com/package/@tale-ui/css)                   |
 | [`@tale-ui/react`](packages/react/)               | Styled React components built on [React Aria Components](https://react-spectrum.adobe.com/react-aria/) | [![npm](https://img.shields.io/npm/v/@tale-ui/react)](https://www.npmjs.com/package/@tale-ui/react)               |
-| [`@tale-ui/react-native`](packages/react-native/) | Accessible components for iOS, Android, and declared React Native Web surfaces                         | Prerelease                                                                                                        |
+| [`@tale-ui/react-native`](packages/react-native/) | Accessible components for iOS, Android, and declared React Native Web surfaces                         | Workspace-supported experimental                                                                                  |
 | [`@tale-ui/react-styles`](packages/styles/)       | Component CSS using `@tale-ui/css` design tokens                                                       | [![npm](https://img.shields.io/npm/v/@tale-ui/react-styles)](https://www.npmjs.com/package/@tale-ui/react-styles) |
 | [`@tale-ui/themes`](packages/themes/)             | Optional standard and monochrome theme suites                                                          | [![npm](https://img.shields.io/npm/v/@tale-ui/themes)](https://www.npmjs.com/package/@tale-ui/themes)             |
 | [`@tale-ui/utils`](packages/utils/)               | Public shared hooks, colour utilities, and DOM helpers                                                 | [![npm](https://img.shields.io/npm/v/@tale-ui/utils)](https://www.npmjs.com/package/@tale-ui/utils)               |
@@ -32,10 +32,12 @@ npm install @tale-ui/react @tale-ui/react-styles
 
 # Optional standard themes
 npm install @tale-ui/themes
-
-# React Native
-npm install @tale-ui/react-native @tale-ui/foundations @tale-ui/tokens
 ```
+
+The foundations and React Native packages are workspace-supported experimental
+packages. The current publication workflow does not publish either package.
+Use workspace links or the clean packed-consumer fixture while they remain
+experimental.
 
 **Consumer requirements:** React 17, 18, or 19. React 3 requires Node 18+.
 Repository development requires Node 22+ and pnpm 10+.
@@ -120,6 +122,8 @@ pnpm lint:css                # lint CSS design system
 ## Publishing
 
 Publishing is automated via [.github/workflows/publish.yml](.github/workflows/publish.yml).
+That workflow currently omits `@tale-ui/foundations` and
+`@tale-ui/react-native`.
 
 - **Coordinated release:** Tag with `release-v*.*.*` to publish Tokens, CSS, React, Styles,
   Themes, and Utils together

@@ -929,59 +929,6 @@
     ],
     "excludedProperties": {}
   },
-  "radio-field": {
-    "component": "RadioField",
-    "category": "Form Controls",
-    "title": "Components/Form Controls/RadioField",
-    "properties": [
-      {
-        "name": "label",
-        "description": "Accessible radio-field label.",
-        "control": "text"
-      },
-      {
-        "name": "value",
-        "description": "Controlled selected value.",
-        "control": "select",
-        "options": ["standard", "express"]
-      },
-      {
-        "name": "items",
-        "description": "Radio choices.",
-        "control": "object"
-      },
-      {
-        "name": "size",
-        "description": "Radio indicator size.",
-        "control": "select",
-        "options": ["sm", "md"]
-      },
-      {
-        "name": "orientation",
-        "description": "Choice layout direction.",
-        "control": "select",
-        "options": ["vertical", "horizontal"]
-      }
-    ],
-    "actions": [
-      {
-        "name": "onValueChange",
-        "description": "Reports selected values."
-      }
-    ],
-    "adapterProperties": [
-      "label",
-      "items",
-      "size",
-      "orientation",
-      "value",
-      "defaultValue",
-      "onValueChange"
-    ],
-    "excludedProperties": {
-      "defaultValue": "Playground uses the controlled value property."
-    }
-  },
   "radio-group": {
     "component": "RadioGroup",
     "category": "Form Controls",
