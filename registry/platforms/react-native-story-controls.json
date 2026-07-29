@@ -8,10 +8,20 @@
         "name": "items",
         "description": "Accordion items. String content is adapted to native Text in the playground.",
         "control": "object"
+      },
+      {
+        "name": "allowsMultipleExpanded",
+        "description": "Allows more than one item to stay expanded.",
+        "control": "boolean"
+      },
+      {
+        "name": "isDisabled",
+        "description": "Disables every accordion trigger.",
+        "control": "boolean"
       }
     ],
     "actions": [],
-    "adapterProperties": ["items"],
+    "adapterProperties": ["items", "allowsMultipleExpanded", "isDisabled"],
     "excludedProperties": {}
   },
   "alert-dialog": {
@@ -53,10 +63,50 @@
         "name": "children",
         "description": "Badge label.",
         "control": "text"
+      },
+      {
+        "name": "variant",
+        "description": "Badge colour treatment.",
+        "control": "select",
+        "options": [
+          "neutral",
+          "brand",
+          "error",
+          "warning",
+          "success",
+          "red",
+          "orange",
+          "amber",
+          "yellow",
+          "lime",
+          "green",
+          "emerald",
+          "teal",
+          "cyan",
+          "sky",
+          "indigo",
+          "violet",
+          "purple",
+          "fuchsia",
+          "pink",
+          "rose"
+        ]
+      },
+      {
+        "name": "size",
+        "description": "Badge size.",
+        "control": "select",
+        "options": ["sm", "md", "lg"]
+      },
+      {
+        "name": "type",
+        "description": "Badge shape treatment.",
+        "control": "select",
+        "options": ["pill", "rounded", "modern"]
       }
     ],
     "actions": [],
-    "adapterProperties": ["children"],
+    "adapterProperties": ["children", "variant", "size", "type"],
     "excludedProperties": {}
   },
   "banner": {
@@ -73,10 +123,22 @@
         "name": "children",
         "description": "Banner message.",
         "control": "text"
+      },
+      {
+        "name": "variant",
+        "description": "Semantic colour treatment.",
+        "control": "select",
+        "options": ["info", "success", "warning", "error"]
+      },
+      {
+        "name": "size",
+        "description": "Banner density.",
+        "control": "select",
+        "options": ["sm", "md"]
       }
     ],
     "actions": [],
-    "adapterProperties": ["children", "title"],
+    "adapterProperties": ["children", "title", "variant", "size"],
     "excludedProperties": {}
   },
   "breadcrumbs": {
@@ -123,6 +185,31 @@
         "name": "isPending",
         "description": "Shows pending state and disables activation.",
         "control": "boolean"
+      },
+      {
+        "name": "variant",
+        "description": "Button visual treatment.",
+        "control": "select",
+        "options": [
+          "primary",
+          "neutral",
+          "ghost",
+          "danger",
+          "danger-neutral",
+          "danger-ghost",
+          "inverse"
+        ]
+      },
+      {
+        "name": "size",
+        "description": "Button size.",
+        "control": "select",
+        "options": ["sm", "md", "lg"]
+      },
+      {
+        "name": "showTextWhileLoading",
+        "description": "Keeps the label beside the pending spinner.",
+        "control": "boolean"
       }
     ],
     "actions": [
@@ -131,7 +218,15 @@
         "description": "Reports button activation."
       }
     ],
-    "adapterProperties": ["children", "isDisabled", "isPending", "style"],
+    "adapterProperties": [
+      "children",
+      "variant",
+      "size",
+      "isDisabled",
+      "isPending",
+      "showTextWhileLoading",
+      "style"
+    ],
     "excludedProperties": {
       "style": "React Native style objects are non-portable; visual states live in All Variations."
     }
@@ -150,9 +245,41 @@
         "name": "children",
         "description": "Card preview content.",
         "control": "text"
+      },
+      {
+        "name": "variant",
+        "description": "Card surface treatment.",
+        "control": "select",
+        "options": ["outlined", "elevated", "filled"]
+      },
+      {
+        "name": "padding",
+        "description": "Card inner padding.",
+        "control": "select",
+        "options": ["sm", "md", "lg"]
+      },
+      {
+        "name": "isSelected",
+        "description": "Applies the selected ring.",
+        "control": "boolean"
+      },
+      {
+        "name": "isDisabled",
+        "description": "Applies disabled styling.",
+        "control": "boolean"
+      },
+      {
+        "name": "isPending",
+        "description": "Applies pending styling.",
+        "control": "boolean"
       }
     ],
-    "actions": [],
+    "actions": [
+      {
+        "name": "onPress",
+        "description": "Reports card activation."
+      }
+    ],
     "adapterProperties": [],
     "excludedProperties": {}
   },
@@ -180,6 +307,22 @@
         "name": "isDisabled",
         "description": "Disables selection.",
         "control": "boolean"
+      },
+      {
+        "name": "size",
+        "description": "Checkbox indicator size.",
+        "control": "select",
+        "options": ["sm", "md"]
+      },
+      {
+        "name": "isInvalid",
+        "description": "Applies invalid styling.",
+        "control": "boolean"
+      },
+      {
+        "name": "isRequired",
+        "description": "Marks the checkbox as required.",
+        "control": "boolean"
       }
     ],
     "actions": [
@@ -194,6 +337,9 @@
       "isSelected",
       "defaultSelected",
       "isDisabled",
+      "isInvalid",
+      "isRequired",
+      "size",
       "onSelectionChange"
     ],
     "excludedProperties": {
@@ -214,6 +360,12 @@
         "name": "children",
         "description": "Comma-separated checkbox labels.",
         "control": "text"
+      },
+      {
+        "name": "orientation",
+        "description": "Choice layout direction.",
+        "control": "select",
+        "options": ["vertical", "horizontal"]
       }
     ],
     "actions": [],
@@ -234,6 +386,24 @@
         "name": "children",
         "description": "Comma-separated child labels.",
         "control": "text"
+      },
+      {
+        "name": "gap",
+        "description": "Token gap between children.",
+        "control": "select",
+        "options": ["4xs", "3xs", "2xs", "xs", "s", "m", "l", "xl", "2xl"]
+      },
+      {
+        "name": "align",
+        "description": "Cross-axis alignment.",
+        "control": "select",
+        "options": ["start", "center", "end", "stretch", "baseline"]
+      },
+      {
+        "name": "justify",
+        "description": "Main-axis distribution.",
+        "control": "select",
+        "options": ["start", "center", "end", "between"]
       }
     ],
     "actions": [],
@@ -289,6 +459,17 @@
         "name": "children",
         "description": "Disclosure panel content.",
         "control": "text"
+      },
+      {
+        "name": "isDisabled",
+        "description": "Disables the disclosure trigger.",
+        "control": "boolean"
+      },
+      {
+        "name": "align",
+        "description": "Trigger alignment.",
+        "control": "select",
+        "options": ["start", "end"]
       }
     ],
     "actions": [
@@ -297,7 +478,15 @@
         "description": "Reports expansion changes."
       }
     ],
-    "adapterProperties": ["children", "title", "isExpanded", "defaultExpanded", "onExpandedChange"],
+    "adapterProperties": [
+      "children",
+      "title",
+      "isExpanded",
+      "defaultExpanded",
+      "isDisabled",
+      "align",
+      "onExpandedChange"
+    ],
     "excludedProperties": {
       "defaultExpanded": "Playground uses the controlled isExpanded property."
     }
@@ -373,10 +562,15 @@
         "name": "legend",
         "description": "Accessible fieldset legend.",
         "control": "text"
+      },
+      {
+        "name": "disabled",
+        "description": "Applies disabled styling to the group.",
+        "control": "boolean"
       }
     ],
     "actions": [],
-    "adapterProperties": ["children", "legend"],
+    "adapterProperties": ["children", "legend", "disabled"],
     "excludedProperties": {
       "children": "ReactNode composition is represented by a fixed CheckboxField fixture."
     }
@@ -412,10 +606,16 @@
         "name": "children",
         "description": "Comma-separated grid item labels.",
         "control": "text"
+      },
+      {
+        "name": "layout",
+        "description": "Native item layout.",
+        "control": "select",
+        "options": ["list", "grid"]
       }
     ],
     "actions": [],
-    "adapterProperties": ["children", "label"],
+    "adapterProperties": ["children", "label", "layout"],
     "excludedProperties": {}
   },
   "icon": {
@@ -427,10 +627,21 @@
         "name": "label",
         "description": "Accessible label; empty makes it decorative.",
         "control": "text"
+      },
+      {
+        "name": "children",
+        "description": "Visible native glyph or icon content.",
+        "control": "text"
+      },
+      {
+        "name": "size",
+        "description": "Icon wrapper size.",
+        "control": "select",
+        "options": ["sm", "md", "lg", "xl"]
       }
     ],
     "actions": [],
-    "adapterProperties": ["label"],
+    "adapterProperties": ["children", "label", "size"],
     "excludedProperties": {}
   },
   "icon-button": {
@@ -457,6 +668,18 @@
         "name": "isPending",
         "description": "Shows pending state and disables activation.",
         "control": "boolean"
+      },
+      {
+        "name": "variant",
+        "description": "Button visual treatment.",
+        "control": "select",
+        "options": ["primary", "neutral", "ghost", "danger", "inverse"]
+      },
+      {
+        "name": "size",
+        "description": "Icon button size.",
+        "control": "select",
+        "options": ["sm", "md", "lg"]
       }
     ],
     "actions": [
@@ -465,7 +688,15 @@
         "description": "Reports button activation."
       }
     ],
-    "adapterProperties": ["accessibilityLabel", "children", "isDisabled", "isPending", "style"],
+    "adapterProperties": [
+      "accessibilityLabel",
+      "children",
+      "variant",
+      "size",
+      "isDisabled",
+      "isPending",
+      "style"
+    ],
     "excludedProperties": {
       "style": "React Native style objects are non-portable; visual states live in All Variations."
     }
@@ -501,6 +732,17 @@
         "control": "boolean"
       },
       {
+        "name": "isReadOnly",
+        "description": "Prevents editing without disabled opacity.",
+        "control": "boolean"
+      },
+      {
+        "name": "size",
+        "description": "Field size.",
+        "control": "select",
+        "options": ["sm", "md", "lg"]
+      },
+      {
         "name": "secureTextEntry",
         "description": "Masks entered text.",
         "control": "boolean"
@@ -518,7 +760,7 @@
         "description": "Reports text changes."
       }
     ],
-    "adapterProperties": ["isDisabled", "isInvalid"],
+    "adapterProperties": ["isDisabled", "isInvalid", "isReadOnly", "size"],
     "excludedProperties": {}
   },
   "list": {
@@ -535,10 +777,22 @@
         "name": "children",
         "description": "Comma-separated item labels.",
         "control": "text"
+      },
+      {
+        "name": "variant",
+        "description": "List divider treatment.",
+        "control": "select",
+        "options": ["plain", "divided"]
+      },
+      {
+        "name": "density",
+        "description": "List item spacing.",
+        "control": "select",
+        "options": ["compact", "default", "spacious"]
       }
     ],
     "actions": [],
-    "adapterProperties": ["children", "label"],
+    "adapterProperties": ["children", "label", "variant", "density"],
     "excludedProperties": {}
   },
   "list-box": {
@@ -555,10 +809,21 @@
         "name": "children",
         "description": "Comma-separated option labels.",
         "control": "text"
+      },
+      {
+        "name": "frameless",
+        "description": "Removes popup surface styling.",
+        "control": "boolean"
+      },
+      {
+        "name": "layout",
+        "description": "List or grid layout.",
+        "control": "select",
+        "options": ["list", "grid"]
       }
     ],
     "actions": [],
-    "adapterProperties": ["children", "label"],
+    "adapterProperties": ["children", "label", "frameless", "layout"],
     "excludedProperties": {}
   },
   "pagination": {
@@ -566,6 +831,11 @@
     "category": "Navigation",
     "title": "Components/Navigation/Pagination",
     "properties": [
+      {
+        "name": "label",
+        "description": "Accessible pagination label.",
+        "control": "text"
+      },
       {
         "name": "page",
         "description": "Current page.",
@@ -593,7 +863,7 @@
         "description": "Reports requested page changes."
       }
     ],
-    "adapterProperties": ["page", "totalPages", "onPageChange"],
+    "adapterProperties": ["page", "totalPages", "label", "onPageChange"],
     "excludedProperties": {}
   },
   "progress-bar": {
@@ -635,10 +905,28 @@
           "max": 100,
           "step": 1
         }
+      },
+      {
+        "name": "labelPosition",
+        "description": "Label and value position.",
+        "control": "select",
+        "options": ["top", "right", "bottom", "top-floating", "bottom-floating"]
+      },
+      {
+        "name": "isIndeterminate",
+        "description": "Shows indeterminate progress.",
+        "control": "boolean"
       }
     ],
     "actions": [],
-    "adapterProperties": ["value", "minValue", "maxValue", "label"],
+    "adapterProperties": [
+      "value",
+      "minValue",
+      "maxValue",
+      "label",
+      "labelPosition",
+      "isIndeterminate"
+    ],
     "excludedProperties": {}
   },
   "radio-field": {
@@ -661,6 +949,18 @@
         "name": "items",
         "description": "Radio choices.",
         "control": "object"
+      },
+      {
+        "name": "size",
+        "description": "Radio indicator size.",
+        "control": "select",
+        "options": ["sm", "md"]
+      },
+      {
+        "name": "orientation",
+        "description": "Choice layout direction.",
+        "control": "select",
+        "options": ["vertical", "horizontal"]
       }
     ],
     "actions": [
@@ -669,7 +969,15 @@
         "description": "Reports selected values."
       }
     ],
-    "adapterProperties": ["label", "items", "value", "defaultValue", "onValueChange"],
+    "adapterProperties": [
+      "label",
+      "items",
+      "size",
+      "orientation",
+      "value",
+      "defaultValue",
+      "onValueChange"
+    ],
     "excludedProperties": {
       "defaultValue": "Playground uses the controlled value property."
     }
@@ -694,6 +1002,18 @@
         "name": "items",
         "description": "Radio choices.",
         "control": "object"
+      },
+      {
+        "name": "size",
+        "description": "Radio indicator size.",
+        "control": "select",
+        "options": ["sm", "md"]
+      },
+      {
+        "name": "orientation",
+        "description": "Choice layout direction.",
+        "control": "select",
+        "options": ["vertical", "horizontal"]
       }
     ],
     "actions": [
@@ -702,7 +1022,15 @@
         "description": "Reports selected values."
       }
     ],
-    "adapterProperties": ["label", "items", "value", "defaultValue", "onValueChange"],
+    "adapterProperties": [
+      "label",
+      "items",
+      "size",
+      "orientation",
+      "value",
+      "defaultValue",
+      "onValueChange"
+    ],
     "excludedProperties": {
       "defaultValue": "Playground uses the controlled value property."
     }
@@ -721,6 +1049,29 @@
         "name": "children",
         "description": "Comma-separated child labels.",
         "control": "text"
+      },
+      {
+        "name": "gap",
+        "description": "Token gap between children.",
+        "control": "select",
+        "options": ["4xs", "3xs", "2xs", "xs", "s", "m", "l", "xl", "2xl"]
+      },
+      {
+        "name": "align",
+        "description": "Cross-axis alignment.",
+        "control": "select",
+        "options": ["start", "center", "end", "stretch", "baseline"]
+      },
+      {
+        "name": "justify",
+        "description": "Main-axis distribution.",
+        "control": "select",
+        "options": ["start", "center", "end", "between"]
+      },
+      {
+        "name": "wrap",
+        "description": "Allows children to wrap.",
+        "control": "boolean"
       }
     ],
     "actions": [],
@@ -756,6 +1107,12 @@
         "name": "isInvalid",
         "description": "Applies invalid styling.",
         "control": "boolean"
+      },
+      {
+        "name": "variant",
+        "description": "Search field visual treatment.",
+        "control": "select",
+        "options": ["default", "inline"]
       }
     ],
     "actions": [
@@ -764,7 +1121,7 @@
         "description": "Reports query changes."
       }
     ],
-    "adapterProperties": ["isDisabled", "isInvalid"],
+    "adapterProperties": ["isDisabled", "isInvalid", "variant"],
     "excludedProperties": {}
   },
   "separator": {
@@ -776,10 +1133,38 @@
         "name": "accessibilityLabel",
         "description": "Optional accessible description.",
         "control": "text"
+      },
+      {
+        "name": "orientation",
+        "description": "Separator orientation.",
+        "control": "select",
+        "options": ["horizontal", "vertical"]
       }
     ],
     "actions": [],
     "adapterProperties": [],
+    "excludedProperties": {}
+  },
+  "skeleton": {
+    "component": "Skeleton",
+    "category": "Feedback",
+    "title": "Components/Feedback/Skeleton",
+    "properties": [
+      {
+        "name": "variant",
+        "description": "Skeleton shape.",
+        "control": "select",
+        "options": ["text", "rectangular", "circular"]
+      },
+      {
+        "name": "animation",
+        "description": "Skeleton animation treatment.",
+        "control": "select",
+        "options": ["pulse", "none"]
+      }
+    ],
+    "actions": [],
+    "adapterProperties": ["variant", "animation"],
     "excludedProperties": {}
   },
   "slider": {
@@ -831,6 +1216,17 @@
           "max": 20,
           "step": 1
         }
+      },
+      {
+        "name": "isDisabled",
+        "description": "Disables adjustment.",
+        "control": "boolean"
+      },
+      {
+        "name": "orientation",
+        "description": "Slider orientation.",
+        "control": "select",
+        "options": ["horizontal", "vertical"]
       }
     ],
     "actions": [
@@ -839,7 +1235,16 @@
         "description": "Reports value changes."
       }
     ],
-    "adapterProperties": ["label", "value", "minValue", "maxValue", "step", "onValueChange"],
+    "adapterProperties": [
+      "label",
+      "value",
+      "minValue",
+      "maxValue",
+      "step",
+      "isDisabled",
+      "orientation",
+      "onValueChange"
+    ],
     "excludedProperties": {}
   },
   "spinner": {
@@ -853,10 +1258,21 @@
         "control": "boolean"
       },
       {
-        "name": "size",
-        "description": "Native spinner size.",
+        "name": "variant",
+        "description": "Spinner animation style.",
         "control": "select",
-        "options": ["small", "large"]
+        "options": ["circle", "line", "dots"]
+      },
+      {
+        "name": "size",
+        "description": "Spinner size.",
+        "control": "select",
+        "options": ["sm", "md", "lg"]
+      },
+      {
+        "name": "label",
+        "description": "Accessible loading label.",
+        "control": "text"
       },
       {
         "name": "color",
@@ -887,6 +1303,16 @@
         "name": "disabled",
         "description": "Disables interaction.",
         "control": "boolean"
+      },
+      {
+        "name": "isInvalid",
+        "description": "Applies invalid styling.",
+        "control": "boolean"
+      },
+      {
+        "name": "isRequired",
+        "description": "Marks the switch as required.",
+        "control": "boolean"
       }
     ],
     "actions": [
@@ -895,7 +1321,7 @@
         "description": "Reports switch state changes."
       }
     ],
-    "adapterProperties": ["label"],
+    "adapterProperties": ["label", "isInvalid", "isRequired"],
     "excludedProperties": {}
   },
   "tabs": {
@@ -913,6 +1339,24 @@
         "name": "items",
         "description": "Tab labels and panel content.",
         "control": "object"
+      },
+      {
+        "name": "variant",
+        "description": "Tab visual treatment.",
+        "control": "select",
+        "options": ["underline", "pills", "enclosed"]
+      },
+      {
+        "name": "size",
+        "description": "Tab size.",
+        "control": "select",
+        "options": ["sm", "md"]
+      },
+      {
+        "name": "orientation",
+        "description": "Tab orientation.",
+        "control": "select",
+        "options": ["horizontal", "vertical"]
       }
     ],
     "actions": [
@@ -921,7 +1365,14 @@
         "description": "Reports selected tab keys."
       }
     ],
-    "adapterProperties": ["items", "selectedKey", "onSelectionChange"],
+    "adapterProperties": [
+      "items",
+      "variant",
+      "size",
+      "orientation",
+      "selectedKey",
+      "onSelectionChange"
+    ],
     "excludedProperties": {}
   },
   "tag-group": {
@@ -968,6 +1419,24 @@
           "max": 8,
           "step": 1
         }
+      },
+      {
+        "name": "variant",
+        "description": "Typography role.",
+        "control": "select",
+        "options": ["display", "heading", "title", "label", "text", "mono"]
+      },
+      {
+        "name": "size",
+        "description": "Typography size.",
+        "control": "select",
+        "options": ["xs", "s", "m", "l"]
+      },
+      {
+        "name": "color",
+        "description": "Semantic text colour.",
+        "control": "select",
+        "options": ["default", "muted", "accent"]
       }
     ],
     "actions": [],
@@ -1028,10 +1497,16 @@
         "name": "children",
         "description": "Notification message.",
         "control": "text"
+      },
+      {
+        "name": "variant",
+        "description": "Notification accent.",
+        "control": "select",
+        "options": ["neutral", "success", "warning", "danger"]
       }
     ],
     "actions": [],
-    "adapterProperties": ["children", "label"],
+    "adapterProperties": ["children", "label", "variant"],
     "excludedProperties": {}
   },
   "toggle-button": {
@@ -1055,9 +1530,10 @@
         "control": "boolean"
       },
       {
-        "name": "isPending",
-        "description": "Shows pending state and disables activation.",
-        "control": "boolean"
+        "name": "size",
+        "description": "Toggle button size.",
+        "control": "select",
+        "options": ["sm", "md", "lg"]
       }
     ],
     "actions": [
@@ -1069,7 +1545,7 @@
     "adapterProperties": [
       "children",
       "isDisabled",
-      "isPending",
+      "size",
       "style",
       "isSelected",
       "onSelectionChange"
@@ -1087,10 +1563,15 @@
         "name": "children",
         "description": "Comma-separated toggle labels.",
         "control": "text"
+      },
+      {
+        "name": "accessibilityLabel",
+        "description": "Accessible group label.",
+        "control": "text"
       }
     ],
     "actions": [],
-    "adapterProperties": ["children"],
+    "adapterProperties": ["children", "accessibilityLabel"],
     "excludedProperties": {}
   },
   "toolbar": {

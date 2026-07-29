@@ -13,6 +13,7 @@ type TaleContextValue = Readonly<{
   direction: TaleDirection;
   density: TaleDensity;
   reducedMotion: boolean;
+  textScale: number;
 }>;
 
 const defaultTheme = resolveTheme(harbourTheme, 'light');
@@ -22,6 +23,7 @@ const TaleContext = React.createContext<TaleContextValue>({
   direction: 'ltr',
   density: 'regular',
   reducedMotion: false,
+  textScale: 1,
 });
 
 export type TaleProviderProps = React.PropsWithChildren<{
@@ -31,6 +33,7 @@ export type TaleProviderProps = React.PropsWithChildren<{
   direction?: TaleDirection;
   density?: TaleDensity;
   reducedMotion?: boolean;
+  textScale?: number;
   colorScheme?: ColorSchemeName;
 }>;
 
@@ -42,6 +45,7 @@ export function TaleProvider({
   direction = 'ltr',
   density = 'regular',
   reducedMotion = false,
+  textScale = 1,
   colorScheme,
 }: TaleProviderProps) {
   const systemScheme = Appearance.getColorScheme();
@@ -57,8 +61,8 @@ export function TaleProvider({
     [resolvedAppearance, theme],
   );
   const value = React.useMemo(
-    () => ({ theme: resolved, locale, direction, density, reducedMotion }),
-    [density, direction, locale, reducedMotion, resolved],
+    () => ({ theme: resolved, locale, direction, density, reducedMotion, textScale }),
+    [density, direction, locale, reducedMotion, resolved, textScale],
   );
   return <TaleContext.Provider value={value}>{children}</TaleContext.Provider>;
 }

@@ -52,7 +52,7 @@
   "scripts": {
     "prebuild": "rimraf --glob build build-tests \"*.tsbuildinfo\"",
     "build": "node ../../tools/build-package.mjs --minimal && node scripts/finalize-build.mjs",
-    "test": "node --test scripts/package-contract.test.mjs && jest --runInBand",
+    "test": "node --test scripts/package-contract.test.mjs scripts/token-provenance.test.mjs && jest --runInBand",
     "test:package": "pnpm build && publint run ./build --pack pnpm && attw --pack ./build",
     "typescript": "tsc -b tsconfig.json"
   },

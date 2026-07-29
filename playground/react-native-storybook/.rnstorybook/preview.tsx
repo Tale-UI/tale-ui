@@ -1,8 +1,35 @@
+import { resolveTheme } from '@tale-ui/foundations/theme';
 import { harbourTheme } from '@tale-ui/foundations/theme-presets';
-import { TaleProvider } from '@tale-ui/react-native/provider';
+import { TaleProvider, useTaleTheme } from '@tale-ui/react-native/provider';
 import type { Preview } from '@storybook/react-native';
+import * as React from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+function StorySurface({ children }: React.PropsWithChildren) {
+  const { tokens } = useTaleTheme();
+  return (
+    <SafeAreaView style={{ backgroundColor: tokens.neutral5, flex: 1 }}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{ flex: 1 }}
+      >
+        <ScrollView
+          contentContainerStyle={{
+            alignItems: 'center',
+            flexGrow: 1,
+            justifyContent: 'center',
+            padding: tokens.spaceS,
+          }}
+        >
+          {children}
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  );
+}
+
+const lightTokens = resolveTheme(harbourTheme, 'light').tokens;
 
 const preview: Preview = {
   globalTypes: {
@@ -36,7 +63,7 @@ const preview: Preview = {
     },
   },
   initialGlobals: {
-    appearance: 'system',
+    appearance: 'light',
     theme: 'standard',
     textScale: '1x',
     locale: 'en',
@@ -51,13 +78,19 @@ const preview: Preview = {
         selectedTheme = {
           id: 'storybook-monochrome',
           name: 'Storybook monochrome',
-          tokens: { color60: '#555555', color60Fg: '#ffffff' },
+          tokens: {
+            color60: lightTokens.neutral60,
+            color60Fg: lightTokens.neutral60Fg,
+          },
         };
       } else if (context.globals.theme === 'custom') {
         selectedTheme = {
           id: 'storybook-custom',
           name: 'Storybook custom',
-          tokens: { color60: '#6b3fc6', color60Fg: '#ffffff' },
+          tokens: {
+            color60: lightTokens.purple60,
+            color60Fg: lightTokens.purple60Fg,
+          },
         };
       }
       return (
@@ -67,18 +100,12 @@ const preview: Preview = {
           direction={context.globals.direction}
           locale={context.globals.locale}
           reducedMotion={context.globals.reducedMotion}
+          textScale={Number.parseFloat(String(context.globals.textScale))}
           theme={selectedTheme}
         >
-          <SafeAreaView style={{ flex: 1, padding: 16 }}>
-            <KeyboardAvoidingView
-              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-              style={{ flex: 1 }}
-            >
-              <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                <Story />
-              </ScrollView>
-            </KeyboardAvoidingView>
-          </SafeAreaView>
+          <StorySurface>
+            <Story />
+          </StorySurface>
         </TaleProvider>
       );
     },

@@ -112,7 +112,7 @@ Generated from the live React registry and governed native dispositions.
 | SelectNative | stable | native-alternative | stable |
 | Separator | stable | adapted | stable |
 | Sidebar | stable | native-alternative | stable |
-| Skeleton | experimental | adapted | proposed |
+| Skeleton | experimental | adapted | stable |
 | Slider | stable | adapted | stable |
 | SocialButton | stable | native-alternative | stable |
 | SocialButtonGroup | stable | native-alternative | stable |

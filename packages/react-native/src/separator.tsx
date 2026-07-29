@@ -1,13 +1,24 @@
 import { View, type ViewProps } from 'react-native';
 import { useTaleTheme } from './provider';
 
-export function Separator({ style, ...props }: ViewProps) {
+export type SeparatorProps = ViewProps & { orientation?: 'horizontal' | 'vertical' };
+
+export function Separator({ orientation = 'horizontal', style, ...props }: SeparatorProps) {
   const { tokens } = useTaleTheme();
   return (
     <View
       accessibilityRole="none"
       {...props}
-      style={[{ backgroundColor: tokens.neutral30, height: 1, alignSelf: 'stretch' }, style]}
+      style={[
+        {
+          alignSelf: 'stretch',
+          backgroundColor: tokens.neutral20,
+          flexShrink: 0,
+          height: orientation === 'horizontal' ? 1 : undefined,
+          width: orientation === 'vertical' ? 1 : '100%',
+        },
+        style,
+      ]}
     />
   );
 }

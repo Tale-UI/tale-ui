@@ -9,7 +9,7 @@
   "counts": {
     "total": 133,
     "stable": 112,
-    "proposed": 20
+    "proposed": 19
   },
   "components": [
     {
@@ -3063,15 +3063,30 @@
       "category": "Feedback",
       "webLifecycle": "experimental",
       "strategy": "adapted",
-      "delivery": "proposed",
+      "delivery": "stable",
       "targets": [
         "ios",
-        "android"
+        "android",
+        "web"
       ],
-      "contractId": null,
+      "contractId": "skeleton",
       "recipeId": null,
       "owner": "Tale UI maintainers",
-      "deviations": []
+      "deviations": [],
+      "evidence": {
+        "owner": "Tale UI maintainers",
+        "rationale": "Native primitives provide a responsible implementation of this design-system role.",
+        "webContract": "registry/components.json#skeleton",
+        "nativeBehavior": "Implemented with React Native primitives and component-scoped state.",
+        "accessibility": "Maps intent to React Native role, state, value, and live-region props.",
+        "deviations": "See native public API.",
+        "implementationPlan": "packages/react-native/src/skeleton.tsx",
+        "testPlan": "Type, package, contract, and device checklist.",
+        "storybookPlan": "All Variations native Storybook coverage.",
+        "performancePlan": "Native primitive render budget.",
+        "approval": "Authorized by the repository React Native architecture and implementation-owner prompt.",
+        "migrationGuidance": "Import the matching @tale-ui/react-native subpath."
+      }
     },
     {
       "id": "Slider",

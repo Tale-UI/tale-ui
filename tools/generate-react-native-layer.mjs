@@ -48,6 +48,7 @@ const implementedComponents = new Set([
   'RadioField',
   'RadioGroup',
   'SearchField',
+  'Skeleton',
   'Slider',
   'SwitchField',
   'Tabs',

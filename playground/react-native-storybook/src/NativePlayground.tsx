@@ -27,6 +27,7 @@ import { RadioGroup } from '@tale-ui/react-native/radio-group';
 import { Row } from '@tale-ui/react-native/row';
 import { SearchField } from '@tale-ui/react-native/search-field';
 import { Separator } from '@tale-ui/react-native/separator';
+import { Skeleton } from '@tale-ui/react-native/skeleton';
 import { Slider } from '@tale-ui/react-native/slider';
 import { Spinner } from '@tale-ui/react-native/spinner';
 import { SwitchField } from '@tale-ui/react-native/switch-field';
@@ -79,6 +80,7 @@ const components = {
   row: Row,
   'search-field': SearchField,
   separator: Separator,
+  skeleton: Skeleton,
   slider: Slider,
   spinner: Spinner,
   'switch-field': SwitchField,
@@ -91,22 +93,6 @@ const components = {
   'toggle-group': ToggleButtonGroup,
   toolbar: Toolbar,
 } as const;
-
-const callbacks: Record<string, DynamicProps> = {
-  'alert-dialog': { onOpenChange: noop },
-  button: { onPress: noop },
-  'checkbox-field': { onSelectionChange: noop },
-  dialog: { onOpenChange: noop },
-  disclosure: { onExpandedChange: noop },
-  drawer: { onOpenChange: noop },
-  'icon-button': { onPress: noop },
-  pagination: { onPageChange: noop },
-  'radio-field': { onValueChange: noop },
-  'radio-group': { onValueChange: noop },
-  slider: { onValueChange: noop },
-  tabs: { onSelectionChange: noop },
-  'toggle-button': { onSelectionChange: noop },
-};
 
 const commaSeparated = (value: unknown, fallback: string): string[] =>
   String(value ?? fallback)
@@ -167,6 +153,8 @@ function getStructuredChildren(component: string, children: unknown): React.Reac
     case 'list-box':
     case 'row':
       return textItems(children, 'First, Second, Third');
+    case 'icon':
+      return <Text>{String(children ?? '★')}</Text>;
     case 'field':
       return <Input accessibilityLabel="Field value" placeholder="Enter a value" />;
     case 'fieldset':
@@ -201,15 +189,118 @@ function getStructuredChildren(component: string, children: unknown): React.Reac
 
 export function NativePlayground({ component, args }: NativePlaygroundProps) {
   const selected = components[component as keyof typeof components];
+  const suppliedArgs = args as DynamicProps;
+  const [interactiveArgs, setInteractiveArgs] = React.useState<DynamicProps>(suppliedArgs);
+  React.useEffect(() => setInteractiveArgs(suppliedArgs), [selected, suppliedArgs]);
   if (!selected) {
     return <Text>{`Unknown native story component: ${component}`}</Text>;
   }
-
-  const rawArgs = args as DynamicProps;
+  const report = (name: string, value?: unknown) => {
+    const callback = suppliedArgs[name];
+    if (typeof callback === 'function') {
+      callback(value);
+    }
+  };
+  const statefulCallbacks: Record<string, DynamicProps> = {
+    'alert-dialog': {
+      onOpenChange: (isOpen: boolean) => {
+        setInteractiveArgs((current) => ({ ...current, isOpen }));
+        report('onOpenChange', isOpen);
+      },
+    },
+    button: { onPress: () => report('onPress') },
+    card: { onPress: () => report('onPress') },
+    'checkbox-field': {
+      onSelectionChange: (isSelected: boolean) => {
+        setInteractiveArgs((current) => ({ ...current, isSelected }));
+        report('onSelectionChange', isSelected);
+      },
+    },
+    dialog: {
+      onOpenChange: (isOpen: boolean) => {
+        setInteractiveArgs((current) => ({ ...current, isOpen }));
+        report('onOpenChange', isOpen);
+      },
+    },
+    disclosure: {
+      onExpandedChange: (isExpanded: boolean) => {
+        setInteractiveArgs((current) => ({ ...current, isExpanded }));
+        report('onExpandedChange', isExpanded);
+      },
+    },
+    drawer: {
+      onOpenChange: (isOpen: boolean) => {
+        setInteractiveArgs((current) => ({ ...current, isOpen }));
+        report('onOpenChange', isOpen);
+      },
+    },
+    'icon-button': { onPress: () => report('onPress') },
+    input: {
+      onChangeText: (value: string) => {
+        setInteractiveArgs((current) => ({ ...current, value }));
+        report('onChangeText', value);
+      },
+    },
+    pagination: {
+      onPageChange: (page: number) => {
+        setInteractiveArgs((current) => ({ ...current, page }));
+        report('onPageChange', page);
+      },
+    },
+    'radio-field': {
+      onValueChange: (value: string) => {
+        setInteractiveArgs((current) => ({ ...current, value }));
+        report('onValueChange', value);
+      },
+    },
+    'radio-group': {
+      onValueChange: (value: string) => {
+        setInteractiveArgs((current) => ({ ...current, value }));
+        report('onValueChange', value);
+      },
+    },
+    'search-field': {
+      onChangeText: (value: string) => {
+        setInteractiveArgs((current) => ({ ...current, value }));
+        report('onChangeText', value);
+      },
+    },
+    slider: {
+      onValueChange: (value: number) => {
+        setInteractiveArgs((current) => ({ ...current, value }));
+        report('onValueChange', value);
+      },
+    },
+    'switch-field': {
+      onValueChange: (value: boolean) => {
+        setInteractiveArgs((current) => ({ ...current, value }));
+        report('onValueChange', value);
+      },
+    },
+    tabs: {
+      onSelectionChange: (selectedKey: string) => {
+        setInteractiveArgs((current) => ({ ...current, selectedKey }));
+        report('onSelectionChange', selectedKey);
+      },
+    },
+    'text-area': {
+      onChangeText: (value: string) => {
+        setInteractiveArgs((current) => ({ ...current, value }));
+        report('onChangeText', value);
+      },
+    },
+    'toggle-button': {
+      onSelectionChange: (isSelected: boolean) => {
+        setInteractiveArgs((current) => ({ ...current, isSelected }));
+        report('onSelectionChange', isSelected);
+      },
+    },
+  };
+  const rawArgs = interactiveArgs;
   const { children, ...propsWithoutChildren } = rawArgs;
   const props = getStructuredProps(component, {
-    ...(callbacks[component] ?? {}),
     ...propsWithoutChildren,
+    ...(statefulCallbacks[component] ?? {}),
   });
   const structuredChildren = getStructuredChildren(component, children);
   const Component = selected as unknown as DynamicComponent;

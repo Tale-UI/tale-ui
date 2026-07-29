@@ -51,6 +51,7 @@ const object = (name, defaultValue, description) => ({
   description,
   control: 'object',
 });
+const nativeToken = (name) => ({ __nativeToken: name });
 const action = (name, description) => ({ name, description });
 
 const definitions = {
@@ -64,6 +65,8 @@ const definitions = {
         ],
         'Accordion items. String content is adapted to native Text in the playground.',
       ),
+      boolean('allowsMultipleExpanded', false, 'Allows more than one item to stay expanded.'),
+      boolean('isDisabled', false, 'Disables every accordion trigger.'),
     ],
     actions: [],
   },
@@ -76,13 +79,52 @@ const definitions = {
     actions: [action('onOpenChange', 'Reports open and close requests.')],
   },
   badge: {
-    properties: [text('children', 'New', 'Badge label.')],
+    properties: [
+      text('children', 'New', 'Badge label.'),
+      select(
+        'variant',
+        'neutral',
+        [
+          'neutral',
+          'brand',
+          'error',
+          'warning',
+          'success',
+          'red',
+          'orange',
+          'amber',
+          'yellow',
+          'lime',
+          'green',
+          'emerald',
+          'teal',
+          'cyan',
+          'sky',
+          'indigo',
+          'violet',
+          'purple',
+          'fuchsia',
+          'pink',
+          'rose',
+        ],
+        'Badge colour treatment.',
+      ),
+      select('size', 'md', ['sm', 'md', 'lg'], 'Badge size.'),
+      select('type', 'pill', ['pill', 'rounded', 'modern'], 'Badge shape treatment.'),
+    ],
     actions: [],
   },
   banner: {
     properties: [
       text('title', 'Saved', 'Banner heading.'),
       text('children', 'Available offline.', 'Banner message.'),
+      select(
+        'variant',
+        'info',
+        ['info', 'success', 'warning', 'error'],
+        'Semantic colour treatment.',
+      ),
+      select('size', 'md', ['sm', 'md'], 'Banner density.'),
     ],
     actions: [],
   },
@@ -99,6 +141,14 @@ const definitions = {
       text('accessibilityLabel', 'Continue', 'Explicit accessible name.'),
       boolean('isDisabled', false, 'Disables activation.'),
       boolean('isPending', false, 'Shows pending state and disables activation.'),
+      select(
+        'variant',
+        'primary',
+        ['primary', 'neutral', 'ghost', 'danger', 'danger-neutral', 'danger-ghost', 'inverse'],
+        'Button visual treatment.',
+      ),
+      select('size', 'md', ['sm', 'md', 'lg'], 'Button size.'),
+      boolean('showTextWhileLoading', false, 'Keeps the label beside the pending spinner.'),
     ],
     actions: [action('onPress', 'Reports button activation.')],
   },
@@ -106,8 +156,13 @@ const definitions = {
     properties: [
       text('accessibilityLabel', 'Summary card', 'Accessible card label.'),
       text('children', 'Card content', 'Card preview content.'),
+      select('variant', 'outlined', ['outlined', 'elevated', 'filled'], 'Card surface treatment.'),
+      select('padding', 'md', ['sm', 'md', 'lg'], 'Card inner padding.'),
+      boolean('isSelected', false, 'Applies the selected ring.'),
+      boolean('isDisabled', false, 'Applies disabled styling.'),
+      boolean('isPending', false, 'Applies pending styling.'),
     ],
-    actions: [],
+    actions: [action('onPress', 'Reports card activation.')],
   },
   'checkbox-field': {
     properties: [
@@ -115,6 +170,9 @@ const definitions = {
       text('accessibilityLabel', 'Send updates', 'Explicit accessible name.'),
       boolean('isSelected', false, 'Controlled selected state.'),
       boolean('isDisabled', false, 'Disables selection.'),
+      select('size', 'md', ['sm', 'md'], 'Checkbox indicator size.'),
+      boolean('isInvalid', false, 'Applies invalid styling.'),
+      boolean('isRequired', false, 'Marks the checkbox as required.'),
     ],
     actions: [action('onSelectionChange', 'Reports selection changes.')],
   },
@@ -122,6 +180,7 @@ const definitions = {
     properties: [
       text('accessibilityLabel', 'Notification choices', 'Accessible group label.'),
       text('children', 'Email, Push, SMS', 'Comma-separated checkbox labels.'),
+      select('orientation', 'vertical', ['vertical', 'horizontal'], 'Choice layout direction.'),
     ],
     actions: [],
   },
@@ -129,6 +188,19 @@ const definitions = {
     properties: [
       text('accessibilityLabel', 'Vertical stack', 'Accessible layout label.'),
       text('children', 'First, Second, Third', 'Comma-separated child labels.'),
+      select(
+        'gap',
+        'm',
+        ['4xs', '3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl'],
+        'Token gap between children.',
+      ),
+      select(
+        'align',
+        'stretch',
+        ['start', 'center', 'end', 'stretch', 'baseline'],
+        'Cross-axis alignment.',
+      ),
+      select('justify', 'start', ['start', 'center', 'end', 'between'], 'Main-axis distribution.'),
     ],
     actions: [],
   },
@@ -145,6 +217,8 @@ const definitions = {
       text('title', 'More information', 'Disclosure trigger label.'),
       boolean('isExpanded', false, 'Controlled expanded state.'),
       text('children', 'Additional native content.', 'Disclosure panel content.'),
+      boolean('isDisabled', false, 'Disables the disclosure trigger.'),
+      select('align', 'start', ['start', 'end'], 'Trigger alignment.'),
     ],
     actions: [action('onExpandedChange', 'Reports expansion changes.')],
   },
@@ -166,7 +240,10 @@ const definitions = {
     actions: [],
   },
   fieldset: {
-    properties: [text('legend', 'Contact preferences', 'Accessible fieldset legend.')],
+    properties: [
+      text('legend', 'Contact preferences', 'Accessible fieldset legend.'),
+      boolean('disabled', false, 'Applies disabled styling to the group.'),
+    ],
     actions: [],
   },
   form: {
@@ -177,11 +254,16 @@ const definitions = {
     properties: [
       text('label', 'Photo grid', 'Accessible grid label.'),
       text('children', 'One, Two, Three, Four', 'Comma-separated grid item labels.'),
+      select('layout', 'list', ['list', 'grid'], 'Native item layout.'),
     ],
     actions: [],
   },
   icon: {
-    properties: [text('label', 'Favourite', 'Accessible label; empty makes it decorative.')],
+    properties: [
+      text('label', 'Favourite', 'Accessible label; empty makes it decorative.'),
+      text('children', '★', 'Visible native glyph or icon content.'),
+      select('size', 'md', ['sm', 'md', 'lg', 'xl'], 'Icon wrapper size.'),
+    ],
     actions: [],
   },
   'icon-button': {
@@ -190,6 +272,13 @@ const definitions = {
       text('accessibilityLabel', 'Add item', 'Required accessible name.'),
       boolean('isDisabled', false, 'Disables activation.'),
       boolean('isPending', false, 'Shows pending state and disables activation.'),
+      select(
+        'variant',
+        'ghost',
+        ['primary', 'neutral', 'ghost', 'danger', 'inverse'],
+        'Button visual treatment.',
+      ),
+      select('size', 'md', ['sm', 'md', 'lg'], 'Icon button size.'),
     ],
     actions: [action('onPress', 'Reports button activation.')],
   },
@@ -200,6 +289,8 @@ const definitions = {
       text('value', '', 'Controlled input value.'),
       boolean('isDisabled', false, 'Disables editing.'),
       boolean('isInvalid', false, 'Applies invalid styling.'),
+      boolean('isReadOnly', false, 'Prevents editing without disabled opacity.'),
+      select('size', 'md', ['sm', 'md', 'lg'], 'Field size.'),
       boolean('secureTextEntry', false, 'Masks entered text.'),
       select(
         'keyboardType',
@@ -214,6 +305,8 @@ const definitions = {
     properties: [
       text('label', 'Messages', 'Accessible list label.'),
       text('children', 'First message, Second message', 'Comma-separated item labels.'),
+      select('variant', 'plain', ['plain', 'divided'], 'List divider treatment.'),
+      select('density', 'default', ['compact', 'default', 'spacious'], 'List item spacing.'),
     ],
     actions: [],
   },
@@ -221,11 +314,14 @@ const definitions = {
     properties: [
       text('label', 'Options', 'Accessible list-box label.'),
       text('children', 'Selected option, Disabled option', 'Comma-separated option labels.'),
+      boolean('frameless', false, 'Removes popup surface styling.'),
+      select('layout', 'list', ['list', 'grid'], 'List or grid layout.'),
     ],
     actions: [],
   },
   pagination: {
     properties: [
+      text('label', 'Pagination', 'Accessible pagination label.'),
       number('page', 2, 'Current page.', 1, 20),
       number('totalPages', 8, 'Total page count.', 1, 20),
     ],
@@ -237,6 +333,13 @@ const definitions = {
       number('value', 64, 'Current value.', 0, 100),
       number('minValue', 0, 'Minimum value.', 0, 100),
       number('maxValue', 100, 'Maximum value.', 1, 100),
+      select(
+        'labelPosition',
+        'top',
+        ['top', 'right', 'bottom', 'top-floating', 'bottom-floating'],
+        'Label and value position.',
+      ),
+      boolean('isIndeterminate', false, 'Shows indeterminate progress.'),
     ],
     actions: [],
   },
@@ -252,6 +355,8 @@ const definitions = {
         ],
         'Radio choices.',
       ),
+      select('size', 'md', ['sm', 'md'], 'Radio indicator size.'),
+      select('orientation', 'vertical', ['vertical', 'horizontal'], 'Choice layout direction.'),
     ],
     actions: [action('onValueChange', 'Reports selected values.')],
   },
@@ -267,6 +372,8 @@ const definitions = {
         ],
         'Radio choices.',
       ),
+      select('size', 'md', ['sm', 'md'], 'Radio indicator size.'),
+      select('orientation', 'vertical', ['vertical', 'horizontal'], 'Choice layout direction.'),
     ],
     actions: [action('onValueChange', 'Reports selected values.')],
   },
@@ -274,6 +381,20 @@ const definitions = {
     properties: [
       text('accessibilityLabel', 'Horizontal stack', 'Accessible layout label.'),
       text('children', 'First, Second, Third', 'Comma-separated child labels.'),
+      select(
+        'gap',
+        'm',
+        ['4xs', '3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl'],
+        'Token gap between children.',
+      ),
+      select(
+        'align',
+        'center',
+        ['start', 'center', 'end', 'stretch', 'baseline'],
+        'Cross-axis alignment.',
+      ),
+      select('justify', 'start', ['start', 'center', 'end', 'between'], 'Main-axis distribution.'),
+      boolean('wrap', false, 'Allows children to wrap.'),
     ],
     actions: [],
   },
@@ -284,12 +405,21 @@ const definitions = {
       text('value', '', 'Controlled search value.'),
       boolean('isDisabled', false, 'Disables editing.'),
       boolean('isInvalid', false, 'Applies invalid styling.'),
+      select('variant', 'default', ['default', 'inline'], 'Search field visual treatment.'),
     ],
     actions: [action('onChangeText', 'Reports query changes.')],
   },
   separator: {
     properties: [
       text('accessibilityLabel', 'Section separator', 'Optional accessible description.'),
+      select('orientation', 'horizontal', ['horizontal', 'vertical'], 'Separator orientation.'),
+    ],
+    actions: [],
+  },
+  skeleton: {
+    properties: [
+      select('variant', 'text', ['text', 'rectangular', 'circular'], 'Skeleton shape.'),
+      select('animation', 'pulse', ['pulse', 'none'], 'Skeleton animation treatment.'),
     ],
     actions: [],
   },
@@ -300,14 +430,23 @@ const definitions = {
       number('minValue', 0, 'Minimum value.', 0, 100),
       number('maxValue', 100, 'Maximum value.', 1, 100),
       number('step', 5, 'Accessibility action increment.', 1, 20),
+      boolean('isDisabled', false, 'Disables adjustment.'),
+      select('orientation', 'horizontal', ['horizontal', 'vertical'], 'Slider orientation.'),
     ],
     actions: [action('onValueChange', 'Reports value changes.')],
   },
   spinner: {
     properties: [
       boolean('animating', true, 'Whether the spinner animates.'),
-      select('size', 'small', ['small', 'large'], 'Native spinner size.'),
-      { name: 'color', defaultValue: '#025768', description: 'Spinner color.', control: 'color' },
+      select('variant', 'circle', ['circle', 'line', 'dots'], 'Spinner animation style.'),
+      select('size', 'md', ['sm', 'md', 'lg'], 'Spinner size.'),
+      text('label', 'Loading', 'Accessible loading label.'),
+      {
+        name: 'color',
+        defaultValue: nativeToken('color60'),
+        description: 'Spinner color.',
+        control: 'color',
+      },
     ],
     actions: [],
   },
@@ -316,6 +455,8 @@ const definitions = {
       text('label', 'Reduce notifications', 'Visible and accessible switch label.'),
       boolean('value', false, 'Controlled switch state.'),
       boolean('disabled', false, 'Disables interaction.'),
+      boolean('isInvalid', false, 'Applies invalid styling.'),
+      boolean('isRequired', false, 'Marks the switch as required.'),
     ],
     actions: [action('onValueChange', 'Reports switch state changes.')],
   },
@@ -330,6 +471,9 @@ const definitions = {
         ],
         'Tab labels and panel content.',
       ),
+      select('variant', 'underline', ['underline', 'pills', 'enclosed'], 'Tab visual treatment.'),
+      select('size', 'md', ['sm', 'md'], 'Tab size.'),
+      select('orientation', 'horizontal', ['horizontal', 'vertical'], 'Tab orientation.'),
     ],
     actions: [action('onSelectionChange', 'Reports selected tab keys.')],
   },
@@ -345,6 +489,14 @@ const definitions = {
       text('children', 'Text with dynamic type support', 'Displayed text.'),
       boolean('selectable', false, 'Allows native text selection.'),
       number('numberOfLines', 0, 'Maximum lines; zero means unlimited.', 0, 8),
+      select(
+        'variant',
+        'text',
+        ['display', 'heading', 'title', 'label', 'text', 'mono'],
+        'Typography role.',
+      ),
+      select('size', 'm', ['xs', 's', 'm', 'l'], 'Typography size.'),
+      select('color', 'default', ['default', 'muted', 'accent'], 'Semantic text colour.'),
     ],
     actions: [],
   },
@@ -362,6 +514,12 @@ const definitions = {
     properties: [
       text('label', 'Saved notification', 'Accessible notification label.'),
       text('children', 'Changes saved.', 'Notification message.'),
+      select(
+        'variant',
+        'neutral',
+        ['neutral', 'success', 'warning', 'danger'],
+        'Notification accent.',
+      ),
     ],
     actions: [],
   },
@@ -370,12 +528,15 @@ const definitions = {
       text('children', 'Bold', 'Visible toggle label.'),
       boolean('isSelected', false, 'Controlled selected state.'),
       boolean('isDisabled', false, 'Disables activation.'),
-      boolean('isPending', false, 'Shows pending state and disables activation.'),
+      select('size', 'md', ['sm', 'md', 'lg'], 'Toggle button size.'),
     ],
     actions: [action('onSelectionChange', 'Reports selection changes.')],
   },
   'toggle-group': {
-    properties: [text('children', 'Bold, Italic, Underline', 'Comma-separated toggle labels.')],
+    properties: [
+      text('children', 'Bold, Italic, Underline', 'Comma-separated toggle labels.'),
+      text('accessibilityLabel', 'Text formatting', 'Accessible group label.'),
+    ],
     actions: [],
   },
   toolbar: {
@@ -388,51 +549,97 @@ const definitions = {
 };
 
 const adapterContracts = {
-  accordion: ['items'],
+  accordion: ['items', 'allowsMultipleExpanded', 'isDisabled'],
   'alert-dialog': ['children', 'isOpen', 'title', 'onOpenChange'],
-  badge: ['children'],
-  banner: ['children', 'title'],
-  button: ['children', 'isDisabled', 'isPending', 'style'],
+  badge: ['children', 'variant', 'size', 'type'],
+  banner: ['children', 'title', 'variant', 'size'],
+  button: [
+    'children',
+    'variant',
+    'size',
+    'isDisabled',
+    'isPending',
+    'showTextWhileLoading',
+    'style',
+  ],
   'checkbox-field': [
     'children',
     'accessibilityLabel',
     'isSelected',
     'defaultSelected',
     'isDisabled',
+    'isInvalid',
+    'isRequired',
+    'size',
     'onSelectionChange',
   ],
   dialog: ['children', 'isOpen', 'title', 'onOpenChange'],
-  disclosure: ['children', 'title', 'isExpanded', 'defaultExpanded', 'onExpandedChange'],
+  disclosure: [
+    'children',
+    'title',
+    'isExpanded',
+    'defaultExpanded',
+    'isDisabled',
+    'align',
+    'onExpandedChange',
+  ],
   drawer: ['children', 'isOpen', 'label', 'onOpenChange'],
   field: ['children', 'label', 'description', 'errorMessage', 'isRequired'],
-  fieldset: ['children', 'legend'],
+  fieldset: ['children', 'legend', 'disabled'],
   form: ['children'],
-  'grid-list': ['children', 'label'],
-  icon: ['label'],
-  'icon-button': ['accessibilityLabel', 'children', 'isDisabled', 'isPending', 'style'],
-  input: ['isDisabled', 'isInvalid'],
-  list: ['children', 'label'],
-  'list-box': ['children', 'label'],
-  pagination: ['page', 'totalPages', 'onPageChange'],
-  'progress-bar': ['value', 'minValue', 'maxValue', 'label'],
-  'radio-field': ['label', 'items', 'value', 'defaultValue', 'onValueChange'],
-  'radio-group': ['label', 'items', 'value', 'defaultValue', 'onValueChange'],
-  'search-field': ['isDisabled', 'isInvalid'],
-  slider: ['label', 'value', 'minValue', 'maxValue', 'step', 'onValueChange'],
-  'switch-field': ['label'],
-  tabs: ['items', 'selectedKey', 'onSelectionChange'],
-  'tag-group': ['children', 'label'],
-  'text-area': ['isDisabled', 'isInvalid'],
-  toast: ['children', 'label'],
-  'toggle-button': [
+  'grid-list': ['children', 'label', 'layout'],
+  icon: ['children', 'label', 'size'],
+  'icon-button': [
+    'accessibilityLabel',
     'children',
+    'variant',
+    'size',
     'isDisabled',
     'isPending',
     'style',
-    'isSelected',
-    'onSelectionChange',
   ],
-  'toggle-group': ['children'],
+  input: ['isDisabled', 'isInvalid', 'isReadOnly', 'size'],
+  list: ['children', 'label', 'variant', 'density'],
+  'list-box': ['children', 'label', 'frameless', 'layout'],
+  pagination: ['page', 'totalPages', 'label', 'onPageChange'],
+  'progress-bar': ['value', 'minValue', 'maxValue', 'label', 'labelPosition', 'isIndeterminate'],
+  'radio-field': [
+    'label',
+    'items',
+    'size',
+    'orientation',
+    'value',
+    'defaultValue',
+    'onValueChange',
+  ],
+  'radio-group': [
+    'label',
+    'items',
+    'size',
+    'orientation',
+    'value',
+    'defaultValue',
+    'onValueChange',
+  ],
+  'search-field': ['isDisabled', 'isInvalid', 'variant'],
+  skeleton: ['variant', 'animation'],
+  slider: [
+    'label',
+    'value',
+    'minValue',
+    'maxValue',
+    'step',
+    'isDisabled',
+    'orientation',
+    'onValueChange',
+  ],
+  'switch-field': ['label', 'isInvalid', 'isRequired'],
+  tabs: ['items', 'variant', 'size', 'orientation', 'selectedKey', 'onSelectionChange'],
+  'tag-group': ['children', 'label'],
+  'text-area': ['isDisabled', 'isInvalid'],
+  toast: ['children', 'label', 'variant'],
+  'toggle-button': ['children', 'isDisabled', 'size', 'style', 'isSelected', 'onSelectionChange'],
+  'toggle-group': ['children', 'accessibilityLabel'],
 };
 
 const controlExclusions = {
@@ -587,8 +794,15 @@ for (const component of implemented) {
   };
 }
 
+const serializedControls = serialize(generatedControls).replace(
+  /\{\s*"__nativeToken": "color60"\s*\}/u,
+  'storybookTokens.color60',
+);
 const controlsSource = await formatGenerated(
   `${generatedHeader}
+import { resolveTheme } from '@tale-ui/foundations/theme';
+import { harbourTheme } from '@tale-ui/foundations/theme-presets';
+
 export type NativeStoryControlDefinition = Readonly<{
   args: Readonly<Record<string, unknown>>;
   argTypes: Readonly<Record<string, unknown>>;
@@ -596,7 +810,9 @@ export type NativeStoryControlDefinition = Readonly<{
   actions: readonly string[];
 }>;
 
-export const nativeStoryControls = ${serialize(generatedControls)} as const satisfies Record<
+const storybookTokens = resolveTheme(harbourTheme, 'light').tokens;
+
+export const nativeStoryControls = ${serializedControls} as const satisfies Record<
   string,
   NativeStoryControlDefinition
 >;

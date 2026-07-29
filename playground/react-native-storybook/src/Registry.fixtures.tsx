@@ -27,6 +27,7 @@ import { RadioGroup } from '@tale-ui/react-native/radio-group';
 import { Row } from '@tale-ui/react-native/row';
 import { SearchField } from '@tale-ui/react-native/search-field';
 import { Separator } from '@tale-ui/react-native/separator';
+import { Skeleton } from '@tale-ui/react-native/skeleton';
 import { Slider } from '@tale-ui/react-native/slider';
 import { Spinner } from '@tale-ui/react-native/spinner';
 import { SwitchField } from '@tale-ui/react-native/switch-field';
@@ -39,6 +40,7 @@ import { ToggleButton } from '@tale-ui/react-native/toggle-button';
 import { ToggleButtonGroup } from '@tale-ui/react-native/toggle-group';
 import { Toolbar } from '@tale-ui/react-native/toolbar';
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { useState } from 'react';
 
 const meta = {
   title: 'Registry fixtures',
@@ -48,6 +50,33 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const noop = () => {};
+function AlertDialogFixture() {
+  const [isOpen, setOpen] = useState(true);
+  return (
+    <AlertDialog isOpen={isOpen} onOpenChange={setOpen} title="Delete draft">
+      <Text>This cannot be undone.</Text>
+    </AlertDialog>
+  );
+}
+
+function DialogFixture() {
+  const [isOpen, setOpen] = useState(true);
+  return (
+    <Dialog isOpen={isOpen} onOpenChange={setOpen} title="Account settings">
+      <Text>Dialog content</Text>
+    </Dialog>
+  );
+}
+
+function DrawerFixture() {
+  const [isOpen, setOpen] = useState(true);
+  return (
+    <Drawer isOpen={isOpen} label="Navigation drawer" onOpenChange={setOpen}>
+      <Text>Drawer content</Text>
+    </Drawer>
+  );
+}
+
 const radioItems = [
   { value: 'one', label: 'One' },
   { value: 'two', label: 'Two', isDisabled: true },
@@ -72,26 +101,49 @@ export const AccordionAllVariations: Story = {
 export const AlertDialogAllVariations: Story = {
   name: 'AlertDialog / All Variations',
   parameters: { nativeComponent: 'alert-dialog' },
-  render: () => (
-    <AlertDialog isOpen={false} onOpenChange={noop} title="Delete draft">
-      <Text>This cannot be undone.</Text>
-    </AlertDialog>
-  ),
+  render: () => <AlertDialogFixture />,
 };
 export const BadgeAllVariations: Story = {
   name: 'Badge / All Variations',
   parameters: { nativeComponent: 'badge' },
   render: () => (
-    <Row style={{ gap: 8 }}>
-      <Badge>New</Badge>
-      <Badge>Long badge label</Badge>
-    </Row>
+    <Column gap="3xs">
+      <Row gap="3xs" wrap>
+        <Badge size="sm">Small</Badge>
+        <Badge>Medium</Badge>
+        <Badge size="lg">Large</Badge>
+      </Row>
+      <Row gap="3xs" wrap>
+        <Badge variant="brand">Brand pill</Badge>
+        <Badge type="rounded" variant="brand">
+          Colour rounded
+        </Badge>
+        <Badge variant="success">Success</Badge>
+        <Badge variant="warning">Warning</Badge>
+        <Badge variant="error">Error</Badge>
+        <Badge variant="violet">Violet</Badge>
+        <Badge type="modern">Modern</Badge>
+      </Row>
+    </Column>
   ),
 };
 export const BannerAllVariations: Story = {
   name: 'Banner / All Variations',
   parameters: { nativeComponent: 'banner' },
-  render: () => <Banner title="Saved">Available offline.</Banner>,
+  render: () => (
+    <Column gap="3xs">
+      <Banner title="Information">Available offline.</Banner>
+      <Banner title="Saved" variant="success">
+        Changes were saved.
+      </Banner>
+      <Banner title="Check this" variant="warning">
+        Review this setting.
+      </Banner>
+      <Banner size="sm" title="Error" variant="error">
+        Could not save.
+      </Banner>
+    </Column>
+  ),
 };
 export const BreadcrumbsAllVariations: Story = {
   name: 'Breadcrumbs / All Variations',
@@ -107,11 +159,43 @@ export const ButtonAllVariations: Story = {
   name: 'Button / All Variations',
   parameters: { nativeComponent: 'button' },
   render: () => (
-    <Column style={{ gap: 8 }}>
-      <Button onPress={noop}>Default</Button>
-      <Button isDisabled>Disabled</Button>
-      <Button isPending>Pending</Button>
-      <Button onPress={noop}>A button with a deliberately long label</Button>
+    <Column gap="3xs">
+      <Row gap="3xs" wrap>
+        <Button onPress={noop} variant="primary">
+          Primary
+        </Button>
+        <Button onPress={noop} variant="neutral">
+          Neutral
+        </Button>
+        <Button onPress={noop} variant="ghost">
+          Ghost
+        </Button>
+        <Button onPress={noop} variant="inverse">
+          Inverse
+        </Button>
+      </Row>
+      <Row gap="3xs" wrap>
+        <Button onPress={noop} variant="danger">
+          Danger
+        </Button>
+        <Button onPress={noop} variant="danger-neutral">
+          Danger neutral
+        </Button>
+        <Button onPress={noop} variant="danger-ghost">
+          Danger ghost
+        </Button>
+      </Row>
+      <Row gap="3xs" wrap>
+        <Button onPress={noop} size="sm">
+          Small
+        </Button>
+        <Button onPress={noop}>Medium</Button>
+        <Button onPress={noop} size="lg">
+          Large
+        </Button>
+        <Button isDisabled>Disabled</Button>
+        <Button isPending>Pending</Button>
+      </Row>
     </Column>
   ),
 };
@@ -119,9 +203,20 @@ export const CardAllVariations: Story = {
   name: 'Card / All Variations',
   parameters: { nativeComponent: 'card' },
   render: () => (
-    <Card>
-      <Text>Card content</Text>
-    </Card>
+    <Column gap="3xs">
+      <Card variant="outlined">
+        <Text>Outlined card</Text>
+      </Card>
+      <Card variant="elevated">
+        <Text>Elevated card</Text>
+      </Card>
+      <Card variant="filled">
+        <Text>Filled card</Text>
+      </Card>
+      <Card isSelected onPress={noop}>
+        <Text>Selected interactive card</Text>
+      </Card>
+    </Column>
   ),
 };
 export const CheckboxFieldAllVariations: Story = {
@@ -131,6 +226,8 @@ export const CheckboxFieldAllVariations: Story = {
     <Column>
       <CheckboxField>Unchecked</CheckboxField>
       <CheckboxField isSelected>Checked</CheckboxField>
+      <CheckboxField isInvalid>Invalid</CheckboxField>
+      <CheckboxField size="sm">Small</CheckboxField>
       <CheckboxField isDisabled>Disabled</CheckboxField>
     </Column>
   ),
@@ -158,11 +255,7 @@ export const ColumnAllVariations: Story = {
 export const DialogAllVariations: Story = {
   name: 'Dialog / All Variations',
   parameters: { nativeComponent: 'dialog' },
-  render: () => (
-    <Dialog isOpen={false} onOpenChange={noop} title="Account settings">
-      <Text>Dialog content</Text>
-    </Dialog>
-  ),
+  render: () => <DialogFixture />,
 };
 export const DisclosureAllVariations: Story = {
   name: 'Disclosure / All Variations',
@@ -181,11 +274,7 @@ export const DisclosureAllVariations: Story = {
 export const DrawerAllVariations: Story = {
   name: 'Drawer / All Variations',
   parameters: { nativeComponent: 'drawer' },
-  render: () => (
-    <Drawer isOpen={false} label="Navigation drawer" onOpenChange={noop}>
-      <Text>Drawer content</Text>
-    </Drawer>
-  ),
+  render: () => <DrawerFixture />,
 };
 export const FieldAllVariations: Story = {
   name: 'Field / All Variations',
@@ -235,8 +324,18 @@ export const IconAllVariations: Story = {
   parameters: { nativeComponent: 'icon' },
   render: () => (
     <Row>
-      <Icon label="Favourite" />
-      <Icon />
+      <Icon label="Favourite" size="sm">
+        <Text>★</Text>
+      </Icon>
+      <Icon label="Favourite" size="md">
+        <Text>★</Text>
+      </Icon>
+      <Icon label="Favourite" size="lg">
+        <Text>★</Text>
+      </Icon>
+      <Icon label="Favourite" size="xl">
+        <Text>★</Text>
+      </Icon>
     </Row>
   ),
 };
@@ -257,7 +356,9 @@ export const InputAllVariations: Story = {
   parameters: { nativeComponent: 'input' },
   render: () => (
     <Column>
+      <Input accessibilityLabel="Small input" placeholder="Small" size="sm" />
       <Input accessibilityLabel="Default input" placeholder="Type here" />
+      <Input accessibilityLabel="Large input" placeholder="Large" size="lg" />
       <Input accessibilityLabel="Invalid input" isInvalid value="Invalid" />
       <Input accessibilityLabel="Disabled input" isDisabled value="Disabled" />
     </Column>
@@ -296,6 +397,9 @@ export const ProgressBarAllVariations: Story = {
       <ProgressBar label="Empty progress" value={0} />
       <ProgressBar label="Upload progress" value={64} />
       <ProgressBar label="Complete progress" value={100} />
+      <ProgressBar label="Right value" labelPosition="right" value={42} />
+      <ProgressBar label="Floating value" labelPosition="top-floating" value={72} />
+      <ProgressBar isIndeterminate label="Indeterminate" />
     </Column>
   ),
 };
@@ -322,12 +426,33 @@ export const RowAllVariations: Story = {
 export const SearchFieldAllVariations: Story = {
   name: 'SearchField / All Variations',
   parameters: { nativeComponent: 'search-field' },
-  render: () => <SearchField accessibilityLabel="Search" placeholder="Search" />,
+  render: () => (
+    <Column gap="3xs">
+      <SearchField accessibilityLabel="Search" placeholder="Search" />
+      <SearchField
+        accessibilityLabel="Inline search"
+        placeholder="Inline search"
+        variant="inline"
+      />
+    </Column>
+  ),
 };
 export const SeparatorAllVariations: Story = {
   name: 'Separator / All Variations',
   parameters: { nativeComponent: 'separator' },
   render: () => <Separator />,
+};
+export const SkeletonAllVariations: Story = {
+  name: 'Skeleton / All Variations',
+  parameters: { nativeComponent: 'skeleton' },
+  render: () => (
+    <Column gap="3xs">
+      <Skeleton variant="text" />
+      <Skeleton variant="rectangular" />
+      <Skeleton variant="circular" />
+      <Skeleton animation="none" variant="rectangular" />
+    </Column>
+  ),
 };
 export const SliderAllVariations: Story = {
   name: 'Slider / All Variations',
@@ -337,7 +462,17 @@ export const SliderAllVariations: Story = {
 export const SpinnerAllVariations: Story = {
   name: 'Spinner / All Variations',
   parameters: { nativeComponent: 'spinner' },
-  render: () => <Spinner />,
+  render: () => (
+    <Column gap="3xs">
+      <Row gap="3xs">
+        <Spinner size="sm" />
+        <Spinner />
+        <Spinner size="lg" />
+      </Row>
+      <Spinner variant="line" />
+      <Spinner variant="dots" />
+    </Column>
+  ),
 };
 export const SwitchFieldAllVariations: Story = {
   name: 'SwitchField / All Variations',
@@ -345,6 +480,8 @@ export const SwitchFieldAllVariations: Story = {
   render: () => (
     <Column>
       <SwitchField label="Enabled switch" value />
+      <SwitchField label="Off switch" value={false} />
+      <SwitchField isInvalid label="Invalid switch" />
       <SwitchField disabled label="Disabled switch" />
     </Column>
   ),
@@ -352,7 +489,13 @@ export const SwitchFieldAllVariations: Story = {
 export const TabsAllVariations: Story = {
   name: 'Tabs / All Variations',
   parameters: { nativeComponent: 'tabs' },
-  render: () => <Tabs items={tabItems} onSelectionChange={noop} selectedKey="one" />,
+  render: () => (
+    <Column gap="s">
+      <Tabs defaultSelectedKey="one" items={tabItems} variant="underline" />
+      <Tabs defaultSelectedKey="one" items={tabItems} variant="pills" />
+      <Tabs defaultSelectedKey="one" items={tabItems} variant="enclosed" />
+    </Column>
+  ),
 };
 export const TagGroupAllVariations: Story = {
   name: 'TagGroup / All Variations',
@@ -369,8 +512,20 @@ export const TextAllVariations: Story = {
   parameters: { nativeComponent: 'text' },
   render: () => (
     <Column>
-      <Text>Default text</Text>
-      <Text>Long text wraps while respecting the device text scale and locale.</Text>
+      <Text size="l" variant="display">
+        Display
+      </Text>
+      <Text size="l" variant="heading">
+        Heading
+      </Text>
+      <Text size="l" variant="title">
+        Title
+      </Text>
+      <Text variant="label">Label</Text>
+      <Text>Body text</Text>
+      <Text variant="mono">Monospace text</Text>
+      <Text color="muted">Muted text</Text>
+      <Text color="accent">Accent text</Text>
     </Column>
   ),
 };
@@ -382,19 +537,25 @@ export const TextAreaAllVariations: Story = {
 export const ToastAllVariations: Story = {
   name: 'Toast / All Variations',
   parameters: { nativeComponent: 'toast' },
-  render: () => <Toast label="Saved notification">Changes saved.</Toast>,
+  render: () => (
+    <Column gap="3xs">
+      <Toast>Neutral notification</Toast>
+      <Toast variant="success">Changes saved.</Toast>
+      <Toast variant="warning">Review this setting.</Toast>
+      <Toast variant="danger">Could not save.</Toast>
+    </Column>
+  ),
 };
 export const ToggleButtonAllVariations: Story = {
   name: 'ToggleButton / All Variations',
   parameters: { nativeComponent: 'toggle-button' },
   render: () => (
     <Column>
-      <ToggleButton isSelected onSelectionChange={noop}>
+      <ToggleButton defaultSelected onSelectionChange={noop}>
         Selected
       </ToggleButton>
-      <ToggleButton isSelected={false} onSelectionChange={noop}>
-        Not selected
-      </ToggleButton>
+      <ToggleButton onSelectionChange={noop}>Not selected</ToggleButton>
+      <ToggleButton isDisabled>Disabled</ToggleButton>
     </Column>
   ),
 };
