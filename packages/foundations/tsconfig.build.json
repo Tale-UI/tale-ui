@@ -7,6 +7,9 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "noEmit": false,
+    "paths": {
+      "@tale-ui/tokens/native": ["../tokens/src/native.ts"]
+    },
     "rootDir": "./src",
     "outDir": "build/esm",
     "lib": ["ES2022"]
