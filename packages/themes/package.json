@@ -37,6 +37,7 @@
   "dependencies": {
     "@babel/runtime": "^7.28.6",
     "@tale-ui/css": "workspace:*",
+    "@tale-ui/foundations": "workspace:*",
     "@tale-ui/utils": "workspace:*",
     "culori": "^4.0.2"
   },

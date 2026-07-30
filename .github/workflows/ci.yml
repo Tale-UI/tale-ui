@@ -67,6 +67,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
       - name: Use Node.js 22.x
@@ -83,6 +85,26 @@ jobs:
         run: pnpm --filter @tale-ui/react-styles test:package
       - name: Verify packed tooling API and CLI
         run: pnpm tooling:test:package
+      - name: Verify renderer-neutral foundations
+        run: pnpm foundations:test && pnpm foundations:test:package && pnpm --filter @tale-ui/themes generate:check && pnpm --filter @tale-ui/themes test && pnpm --filter @tale-ui/themes build && pnpm --filter @tale-ui/themes test:package
+      - name: Verify React Native provider and overlays
+        run: pnpm native:test:provider-overlays
+      - name: Verify PR preflight logic and native implementation inventory
+        run: pnpm native:pr19:preflight:test && pnpm native:surface:check
+      - name: Verify React Native registry generation and identity
+        run: pnpm native:registry:check
+      - name: Verify React Native unit and package contracts
+        run: pnpm native:test && pnpm native:test:package
+      - name: Verify React Native conformance and coverage
+        run: pnpm native:conformance:check && pnpm native:coverage:check
+      - name: Verify React Native Storybook source, loader, types, and web build
+        run: pnpm native:storybook:build
+      - name: Verify packed Expo and plain React Native consumers
+        run: pnpm native:test:consumers
+      - name: Verify React Native documentation semantics
+        run: pnpm native:docs:check
+      - name: Verify general documentation and generated provenance
+        run: pnpm docs:versions:check && pnpm markdownlint && pnpm eval-context:generate && pnpm generate-docs:check
       - name: Unit tests (jsdom)
         run: pnpm test:jsdom
 

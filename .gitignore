@@ -62,7 +62,13 @@ storybook-static/
 /docs/out/
 
 # Analysis (local development and research only)
-/analysis/
+/analysis/*
+!/analysis/react-native-layer/
+/analysis/react-native-layer/*
+!/analysis/react-native-layer/React Native Compatibility Matrix.md
+!/analysis/react-native-layer/React Native Layer Implementation Progress.md
+!/analysis/react-native-layer/ADR-001-Compatibility-and-Platform-Dispositions.md
+!/analysis/react-native-layer/Artifact V2 RFC.md
 /.agentic-loop/
 /.agentic-loops/
 /plans/

@@ -1,0 +1,7 @@
+{
+  "slug": "native-button-pending",
+  "difficulty": "simple",
+  "prompt": "Create a Tale UI React Native submit button with a pending state.",
+  "reference": "import { Button } from '@tale-ui/react-native/button';\n\nexport function SubmitButton() {\n  return <Button isPending accessibilityLabel=\"Submitting\">Submit</Button>;\n}",
+  "tags": ["Button", "react-native"]
+}

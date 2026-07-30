@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "paths": {
+      "@tale-ui/tokens/native": ["../tokens/src/native.ts"]
+    },
+    "types": ["vitest/globals"]
+  },
+  "include": ["src/**/*.test.ts"],
+  "references": [
+    {
+      "path": "./tsconfig.build.json"
+    }
+  ]
+}

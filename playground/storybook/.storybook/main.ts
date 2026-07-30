@@ -83,6 +83,7 @@ button[data-testid="context-menu"][data-testid="context-menu"]:focus-visible {
     const taleAliasKeys = new Set([
       '@tale-ui/react',
       '@tale-ui/charts',
+      '@tale-ui/foundations',
       '@tale-ui/utils',
       '@tale-ui/themes',
       '@tale-ui/react-styles',
@@ -107,6 +108,10 @@ button[data-testid="context-menu"][data-testid="context-menu"]:focus-visible {
       {
         find: '@tale-ui/charts',
         replacement: path.resolve(__dirname, '../../../packages/charts/src'),
+      },
+      {
+        find: '@tale-ui/foundations',
+        replacement: path.resolve(__dirname, '../../../packages/foundations/src'),
       },
       {
         find: /^@tale-ui\/utils\/(.+)$/u,

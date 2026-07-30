@@ -14,6 +14,11 @@ assert.equal(
   '>=18',
   'The React 3 consumer Node floor must remain >=18.',
 );
+assert.equal(
+  packageJson.dependencies?.['@modelcontextprotocol/sdk'],
+  '1.28.0',
+  'The React 3 MCP dependency must remain on its Node 18-compatible release.',
+);
 
 if (!process.argv.includes('--expect-node-16-rejection')) {
   process.stdout.write(

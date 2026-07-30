@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "Tale UI React Native Spike",
+    "slug": "tale-ui-react-native-spike",
+    "version": "0.0.0",
+    "newArchEnabled": true,
+    "ios": {
+      "deploymentTarget": "16.4"
+    },
+    "android": {
+      "minSdkVersion": 24
+    }
+  }
+}

@@ -14,5 +14,7 @@
   "unsupportedTokens": 30,
   "highContrastGuidance": "docs/native-token-conformance.md",
   "reactNativeExample": "examples/react-native/TokenCard.tsx",
-  "nativeComponentLibrary": false
+  "nativeComponentLibrary": true,
+  "nativeRegistry": "registry/platforms/react-native.json",
+  "storybook": "playground/react-native-storybook"
 }
