@@ -9,6 +9,13 @@ type Args = {
   selectionMode: 'single' | 'multiple';
 };
 
+const defaultArgs = {
+  isDisabled: false,
+  isReadOnly: false,
+  defaultValue: '2026-07-27',
+  selectionMode: 'single',
+} satisfies Args;
+
 const meta: Meta<Args> = {
   title: 'Components/Calendar',
   parameters: { layout: 'centered' },
@@ -21,23 +28,21 @@ const meta: Meta<Args> = {
       options: ['single', 'multiple'],
     },
   },
-  args: {
-    isDisabled: false,
-    isReadOnly: false,
-    defaultValue: '2026-07-27',
-    selectionMode: 'single',
-  },
+  args: defaultArgs,
 };
 
 export default meta;
 
 type Story = StoryObj<Args>;
 
+function parseDefaultValue(args: Args) {
+  return args.selectionMode === 'multiple'
+    ? [parseDate(args.defaultValue)]
+    : parseDate(args.defaultValue);
+}
+
 function CalendarTemplate(args: Args) {
-  const defaultValue =
-    args.selectionMode === 'multiple'
-      ? [parseDate(args.defaultValue)]
-      : parseDate(args.defaultValue);
+  const defaultValue = parseDefaultValue(args);
   return (
     <Calendar.Root
       key={`${args.defaultValue}-${args.selectionMode}`}
@@ -62,8 +67,15 @@ function CalendarTemplate(args: Args) {
 }
 
 function MonthYearPickerCalendarTemplate(args: Args) {
+  const defaultValue = parseDefaultValue(args);
   return (
-    <Calendar.Root {...args}>
+    <Calendar.Root
+      key={`${args.defaultValue}-${args.selectionMode}`}
+      isDisabled={args.isDisabled}
+      isReadOnly={args.isReadOnly}
+      selectionMode={args.selectionMode}
+      defaultValue={defaultValue}
+    >
       <Calendar.Header>
         <Calendar.PreviousButton />
         <Calendar.MonthPicker format="short" />
@@ -123,11 +135,11 @@ export const AllVariations: Story = {
       <div className="story-sections">
         <div>
           <p className="story-label">Default calendar</p>
-          <CalendarTemplate />
+          <CalendarTemplate {...defaultArgs} />
         </div>
         <div>
           <p className="story-label">Month and year pickers</p>
-          <MonthYearPickerCalendarTemplate />
+          <MonthYearPickerCalendarTemplate {...defaultArgs} />
         </div>
       </div>
     );
