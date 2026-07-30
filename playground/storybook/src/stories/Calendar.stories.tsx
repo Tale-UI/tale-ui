@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Calendar } from '@tale-ui/react/calendar';
-import { today, getLocalTimeZone, parseDate } from '@internationalized/date';
+import { parseDate } from '@internationalized/date';
 
 type Args = {
   isDisabled?: boolean;
@@ -107,21 +107,7 @@ export const ReadOnly: Story = {
   args: {
     isReadOnly: true,
   },
-  render: (args) => (
-    <Calendar.Root defaultValue={today(getLocalTimeZone())} {...args}>
-      <Calendar.Header>
-        <Calendar.PreviousButton />
-        <Calendar.Heading />
-        <Calendar.NextButton />
-      </Calendar.Header>
-      <Calendar.Grid>
-        <Calendar.GridHeader>
-          {(day) => <Calendar.GridHeaderCell>{day}</Calendar.GridHeaderCell>}
-        </Calendar.GridHeader>
-        <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
-      </Calendar.Grid>
-    </Calendar.Root>
-  ),
+  render: (args) => <CalendarTemplate {...args} />,
 };
 
 export const WithMonthYearPickers: Story = {
