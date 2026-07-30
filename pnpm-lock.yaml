@@ -510,7 +510,7 @@ importers:
         specifier: ^3.12.2
         version: 3.12.2
       '@modelcontextprotocol/sdk':
-        specifier: ^1.28.0
+        specifier: 1.28.0
         version: 1.28.0(zod@3.25.76)
       '@tale-ui/css':
         specifier: workspace:*

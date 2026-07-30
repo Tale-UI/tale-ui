@@ -193,7 +193,7 @@
   "dependencies": {
     "@babel/runtime": "^7.28.6",
     "@internationalized/date": "^3.12.2",
-    "@modelcontextprotocol/sdk": "^1.28.0",
+    "@modelcontextprotocol/sdk": "1.28.0",
     "@tale-ui/css": "workspace:*",
     "@tale-ui/react-styles": "workspace:*",
     "@tale-ui/utils": "workspace:*",
