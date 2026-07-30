@@ -6,7 +6,7 @@
     {
       "major": 3,
       "source": "working-tree-public-docs",
-      "sourceRevision": "sha256:c0fcf30fce89376f303194333c122df8c837bb73281d3bab435200a24e1e3a1e",
+      "sourceRevision": "sha256:dca629ac0189f3aec157e56c69e15c59533a4a301dda34393536004fdcb20d69",
       "contentDigest": "sha256:a7b8d8b6474221843bf5379d5c91c79fad92ec800cdc206107cd06d80cc9d61e",
       "packageVersions": {
         "@tale-ui/a2ui": "0.1.5",
