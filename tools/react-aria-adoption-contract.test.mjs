@@ -21,6 +21,8 @@ const workspaceRacManifests = [
 
 const decisionIds = [
   'component-equivalence:button-group',
+  'component-equivalence:preview-card',
+  'component-equivalence:context-menu',
   'component-equivalence:toast',
   'component-equivalence:resizable',
   'component-equivalence:resizable-table-container',
@@ -32,8 +34,8 @@ function occurrences(haystack, needle) {
 }
 
 test('the React package owns an exact, non-duplicated React Aria stack', () => {
-  assert.equal(reactManifest.dependencies['react-aria-components'], '1.19.0');
-  assert.equal(reactManifest.dependencies['react-aria'], '3.50.0');
+  assert.equal(reactManifest.dependencies['react-aria-components'], '1.20.0');
+  assert.equal(reactManifest.dependencies['react-aria'], '3.51.0');
   assert.equal(reactManifest.dependencies['react-stately'], undefined);
 
   for (const path of workspaceRacManifests) {
@@ -41,7 +43,7 @@ test('the React package owns an exact, non-duplicated React Aria stack', () => {
     assert.equal(
       manifest.dependencies?.['react-aria-components'] ??
         manifest.devDependencies?.['react-aria-components'],
-      '1.19.0',
+      '1.20.0',
       `${path} must use the exact RAC pin`,
     );
   }
@@ -52,8 +54,8 @@ test('both maintained documents declare the exact target and one current decisio
     ['docs/upstream/react-aria-components.md', adoption],
     ['docs/react-aria-deviations.md', deviations],
   ]) {
-    assert.match(document, /exact [`*]*react-aria-components[`*]*(?: version)? [`*]*1\.19\.0/i);
-    assert.doesNotMatch(document, /currently targets [`*]*react-aria-components \^1\.19\.0/i);
+    assert.match(document, /exact [`*]*react-aria-components[`*]*(?: version)? [`*]*1\.20\.0/i);
+    assert.doesNotMatch(document, /currently targets [`*]*react-aria-components \^1\.20\.0/i);
     for (const decisionId of decisionIds) {
       assert.equal(
         occurrences(document, `\`${decisionId}\``),
@@ -72,8 +74,13 @@ test('upgrade review freezes the three upstream coupling surfaces', () => {
   }
 });
 
-test('the five adoption boundaries cannot be reversed by documentation drift', () => {
+test('the seven adoption boundaries cannot be reversed by documentation drift', () => {
   assert.match(adoption, /ButtonGroup[\s\S]{0,240}restricted render props/i);
+  assert.match(adoption, /PreviewCard[\s\S]{0,240}PreviewTrigger[\s\S]{0,240}delay defaults/i);
+  assert.match(
+    adoption,
+    /ContextMenu[\s\S]{0,240}MenuTrigger trigger="contextMenu"[\s\S]{0,240}size context/i,
+  );
   assert.match(adoption, /Toast[\s\S]{0,240}privately[\s\S]{0,160}experimental lifecycle/i);
   assert.match(adoption, /Resizable[\s\S]{0,320}`useMove`[\s\S]{0,240}Tale owns topology/i);
   assert.match(adoption, /ResizableTableContainer[\s\S]{0,240}table-column-specific/i);
@@ -82,6 +89,14 @@ test('the five adoption boundaries cannot be reversed by documentation drift', (
   assert.match(
     deviations,
     /ButtonGroup[\s\S]{0,320}excludes render-function `children`, `className`, and `style`/i,
+  );
+  assert.match(
+    deviations,
+    /PreviewCard[\s\S]{0,320}PreviewTrigger[\s\S]{0,320}400 ms open\/300 ms close defaults/i,
+  );
+  assert.match(
+    deviations,
+    /ContextMenu[\s\S]{0,320}MenuTrigger trigger="contextMenu"[\s\S]{0,320}mouse, keyboard, touch/i,
   );
   assert.match(
     deviations,

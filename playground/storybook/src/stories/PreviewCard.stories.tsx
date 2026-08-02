@@ -35,13 +35,13 @@ type Story = StoryObj<Args>;
 export const Default: Story = {
   render: (args) => (
     <PreviewCard.Root delay={args.delay} closeDelay={args.closeDelay}>
-      <PreviewCard.Trigger>Hover to preview</PreviewCard.Trigger>
+      <PreviewCard.Trigger>Hover or focus to preview</PreviewCard.Trigger>
       <PreviewCard.Popup placement={args.placement} offset={args.offset}>
         <PreviewCard.Content aria-label="Preview">
           <div className="story-preview-content">
             <h4 className="story-preview-title">Preview Title</h4>
             <p className="story-preview-text">
-              This is a preview card with some descriptive text content that appears on hover.
+              This preview opens on hover, keyboard focus, or long press.
             </p>
           </div>
         </PreviewCard.Content>
@@ -53,7 +53,7 @@ export const Default: Story = {
 export const WithArrow: Story = {
   render: (args) => (
     <PreviewCard.Root>
-      <PreviewCard.Trigger>Hover to preview</PreviewCard.Trigger>
+      <PreviewCard.Trigger>Hover or focus to preview</PreviewCard.Trigger>
       <PreviewCard.Popup placement={args.placement} offset={args.offset}>
         <PreviewCard.Arrow />
         <PreviewCard.Content aria-label="Preview">

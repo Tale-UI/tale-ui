@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ProgressBar } from 'react-aria-components';
 import type { ProgressBarProps as AriaProgressBarProps } from 'react-aria-components';
 import { cx } from '../_cx';
+import { getPercentage } from '../utils/getPercentage';
 
 // ── Context ─────────────────────────────────────────────────────────────────
 
@@ -50,7 +51,7 @@ export const Root = React.forwardRef<HTMLDivElement, RootProps>(
   ({ size = 'md', className, value, minValue = 0, maxValue = 100, children, ...props }, ref) => {
     const percentage =
       value != null && Number.isFinite(value as number)
-        ? (((value as number) - minValue) / (maxValue - minValue)) * 100
+        ? getPercentage(value as number, minValue, maxValue)
         : null;
     const sizeClass = size !== 'md' ? ` tale-progress-circle--${size}` : '';
     const isComplete = percentage != null && percentage >= 100;
@@ -80,44 +81,42 @@ export interface TrackProps extends Omit<React.SVGAttributes<SVGSVGElement>, 'cl
   className?: string | undefined;
 }
 
-export const Track = React.forwardRef<SVGSVGElement, TrackProps>(
-  ({ className, ...props }, ref) => {
-    const { percentage, size } = React.useContext(ProgressCircleContext);
-    const dim = SIZE_MAP[size];
-    const stroke = STROKE_MAP[size];
-    const radius = (dim - stroke) / 2;
-    return (
-      <svg
-        ref={ref}
-        className={cx('tale-progress-circle__track', className)}
-        viewBox={`0 0 ${dim} ${dim}`}
-        fill="none"
-        aria-hidden="true"
-        {...props}
-      >
-        <circle
-          className="tale-progress-circle__rail"
-          cx={dim / 2}
-          cy={dim / 2}
-          r={radius}
-          strokeWidth={stroke}
-        />
-        <circle
-          className="tale-progress-circle__indicator"
-          cx={dim / 2}
-          cy={dim / 2}
-          r={radius}
-          strokeWidth={stroke}
-          strokeLinecap="round"
-          pathLength={100}
-          strokeDasharray={100}
-          strokeDashoffset={percentage != null ? 100 - percentage : undefined}
-          data-indeterminate={percentage == null ? '' : undefined}
-        />
-      </svg>
-    );
-  },
-);
+export const Track = React.forwardRef<SVGSVGElement, TrackProps>(({ className, ...props }, ref) => {
+  const { percentage, size } = React.useContext(ProgressCircleContext);
+  const dim = SIZE_MAP[size];
+  const stroke = STROKE_MAP[size];
+  const radius = (dim - stroke) / 2;
+  return (
+    <svg
+      ref={ref}
+      className={cx('tale-progress-circle__track', className)}
+      viewBox={`0 0 ${dim} ${dim}`}
+      fill="none"
+      aria-hidden="true"
+      {...props}
+    >
+      <circle
+        className="tale-progress-circle__rail"
+        cx={dim / 2}
+        cy={dim / 2}
+        r={radius}
+        strokeWidth={stroke}
+      />
+      <circle
+        className="tale-progress-circle__indicator"
+        cx={dim / 2}
+        cy={dim / 2}
+        r={radius}
+        strokeWidth={stroke}
+        strokeLinecap="round"
+        pathLength={100}
+        strokeDasharray={100}
+        strokeDashoffset={percentage != null ? 100 - percentage : undefined}
+        data-indeterminate={percentage == null ? '' : undefined}
+      />
+    </svg>
+  );
+});
 Track.displayName = 'ProgressCircle.Track';
 
 // ── Label ──────────────────────────────────────────────────────────────────

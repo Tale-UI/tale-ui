@@ -1,5 +1,16 @@
 {
   "$schema": "../../schemas/accessibility-exceptions.schema.json",
   "schemaVersion": "1.0.0",
-  "exceptions": []
+  "exceptions": [
+    {
+      "id": "A11Y-0001",
+      "storyId": "components-meter--default",
+      "rule": "aria-allowed-attr",
+      "targetContains": "react-aria",
+      "owner": "Tale UI maintainers",
+      "rationale": "axe-core 4.11 treats React Aria's standards-valid `role=\"meter progressbar\"` fallback token list as having no range role and incorrectly rejects the meter value attributes.",
+      "expiresOn": "2026-12-31",
+      "trackingIssue": "https://github.com/adobe/react-spectrum/blob/main/packages/react-aria/src/meter/useMeter.ts"
+    }
+  ]
 }

@@ -2,6 +2,24 @@
 
 All notable changes to the React component library are documented in this file.
 
+## Unreleased
+
+### Changed
+
+- Upgraded the exact React Aria stack to `react-aria-components` 1.20.0 and
+  `react-aria` 3.51.0.
+- Replaced PreviewCard's custom timer adapter with stable React Aria
+  `PreviewTrigger`, adding keyboard-focus and long-press activation while preserving
+  Tale's compound API and delay defaults.
+- Replaced ContextMenu's custom virtual trigger with React Aria's context-menu
+  `MenuTrigger`, adding platform keyboard, touch, and controlled open-state behavior.
+- Documented and demonstrated tab navigation for interactive Table cells.
+
+### Fixed
+
+- Prevented Meter, ProgressBar, and ProgressCircle from producing `NaN` styles when
+  `minValue` equals `maxValue`.
+
 ## v3.0.0 — 2026-07-27
 
 ### Added

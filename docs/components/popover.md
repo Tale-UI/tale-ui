@@ -20,6 +20,10 @@ A positioned overlay anchored to a trigger button, with optional arrow and close
 
 Accepts all React Aria `DialogTrigger` props plus an optional `className`. See the `@example` JSDoc on the component export for usage.
 
+`Popover.Popup` passes through React Aria's `getTargetRect` positioning prop.
+Use it when an overlay must anchor to a sub-range within a trigger, such as an
+inline mention completion, rather than to the trigger's full bounding box.
+
 ## Basic Usage
 
 ```tsx

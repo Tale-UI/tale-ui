@@ -1,5 +1,6 @@
 import { screen } from '@tale-ui/monorepo-tests/test-utils';
 import { expect } from 'chai';
+import { expect as vitestExpect } from 'vitest';
 import { ProgressBar } from '@tale-ui/react/progress-bar';
 import { createRenderer } from '#test-utils';
 
@@ -15,7 +16,13 @@ describe('<ProgressBar />', () => {
     it('forwards ref to HTMLDivElement', async () => {
       let refEl: HTMLDivElement | null = null;
       await render(
-        <ProgressBar.Root value={50} aria-label="Loading" ref={(el) => { refEl = el; }} />,
+        <ProgressBar.Root
+          value={50}
+          aria-label="Loading"
+          ref={(el) => {
+            refEl = el;
+          }}
+        />,
       );
       expect(refEl).to.be.instanceof(window.HTMLDivElement);
     });
@@ -32,7 +39,9 @@ describe('<ProgressBar />', () => {
     });
 
     it('sets aria-valuenow, aria-valuemin, aria-valuemax', async () => {
-      await render(<ProgressBar.Root value={30} minValue={0} maxValue={100} aria-label="Loading" />);
+      await render(
+        <ProgressBar.Root value={30} minValue={0} maxValue={100} aria-label="Loading" />,
+      );
       const progressbar = screen.getByRole('progressbar');
       expect(progressbar).to.have.attribute('aria-valuenow', '30');
       expect(progressbar).to.have.attribute('aria-valuemin', '0');
@@ -62,7 +71,11 @@ describe('<ProgressBar />', () => {
       let refEl: HTMLDivElement | null = null;
       await render(
         <ProgressBar.Root value={50} aria-label="Loading">
-          <ProgressBar.Track ref={(el) => { refEl = el; }} />
+          <ProgressBar.Track
+            ref={(el) => {
+              refEl = el;
+            }}
+          />
         </ProgressBar.Root>,
       );
       expect(refEl).to.be.instanceof(window.HTMLDivElement);
@@ -85,7 +98,12 @@ describe('<ProgressBar />', () => {
       let refEl: HTMLDivElement | null = null;
       await render(
         <ProgressBar.Root value={50} aria-label="Loading">
-          <ProgressBar.Indicator ref={(el) => { refEl = el; }} value={50} />
+          <ProgressBar.Indicator
+            ref={(el) => {
+              refEl = el;
+            }}
+            value={50}
+          />
         </ProgressBar.Root>,
       );
       expect(refEl).to.be.instanceof(window.HTMLDivElement);
@@ -110,6 +128,16 @@ describe('<ProgressBar />', () => {
       const indicator = screen.getByTestId('indicator');
       expect(indicator.style.width).to.equal('');
     });
+
+    it('uses 0% width when min and max are equal', async () => {
+      await render(
+        <ProgressBar.Root value={5} minValue={5} maxValue={5} aria-label="Loading">
+          <ProgressBar.Indicator data-testid="indicator" value={5} min={5} max={5} />
+        </ProgressBar.Root>,
+      );
+
+      vitestExpect(screen.getByTestId('indicator').style.width).toBe('0%');
+    });
   });
 
   describe('ProgressBar.Label', () => {
@@ -128,7 +156,13 @@ describe('<ProgressBar />', () => {
       let refEl: HTMLSpanElement | null = null;
       await render(
         <ProgressBar.Root value={50} aria-label="Loading">
-          <ProgressBar.Label ref={(el) => { refEl = el; }}>Loading</ProgressBar.Label>
+          <ProgressBar.Label
+            ref={(el) => {
+              refEl = el;
+            }}
+          >
+            Loading
+          </ProgressBar.Label>
         </ProgressBar.Root>,
       );
       expect(refEl).to.be.instanceof(window.HTMLSpanElement);
@@ -160,7 +194,13 @@ describe('<ProgressBar />', () => {
       let refEl: HTMLSpanElement | null = null;
       await render(
         <ProgressBar.Root value={50} aria-label="Loading">
-          <ProgressBar.Value ref={(el) => { refEl = el; }}>50%</ProgressBar.Value>
+          <ProgressBar.Value
+            ref={(el) => {
+              refEl = el;
+            }}
+          >
+            50%
+          </ProgressBar.Value>
         </ProgressBar.Root>,
       );
       expect(refEl).to.be.instanceof(window.HTMLSpanElement);
@@ -168,7 +208,13 @@ describe('<ProgressBar />', () => {
 
     it('applies left style for top-floating labelPosition', async () => {
       await render(
-        <ProgressBar.Root value={60} minValue={0} maxValue={100} aria-label="Loading" labelPosition="top-floating">
+        <ProgressBar.Root
+          value={60}
+          minValue={0}
+          maxValue={100}
+          aria-label="Loading"
+          labelPosition="top-floating"
+        >
           <ProgressBar.Value data-testid="value">60%</ProgressBar.Value>
         </ProgressBar.Root>,
       );
@@ -177,7 +223,13 @@ describe('<ProgressBar />', () => {
 
     it('applies left style for bottom-floating labelPosition', async () => {
       await render(
-        <ProgressBar.Root value={25} minValue={0} maxValue={100} aria-label="Loading" labelPosition="bottom-floating">
+        <ProgressBar.Root
+          value={25}
+          minValue={0}
+          maxValue={100}
+          aria-label="Loading"
+          labelPosition="bottom-floating"
+        >
           <ProgressBar.Value data-testid="value">25%</ProgressBar.Value>
         </ProgressBar.Root>,
       );
@@ -216,13 +268,23 @@ describe('<ProgressBar />', () => {
     });
 
     it('sets data-label-position="top-floating" correctly', async () => {
-      await render(<ProgressBar.Root value={50} aria-label="Loading" labelPosition="top-floating" />);
-      expect(screen.getByRole('progressbar')).to.have.attribute('data-label-position', 'top-floating');
+      await render(
+        <ProgressBar.Root value={50} aria-label="Loading" labelPosition="top-floating" />,
+      );
+      expect(screen.getByRole('progressbar')).to.have.attribute(
+        'data-label-position',
+        'top-floating',
+      );
     });
 
     it('sets data-label-position="bottom-floating" correctly', async () => {
-      await render(<ProgressBar.Root value={50} aria-label="Loading" labelPosition="bottom-floating" />);
-      expect(screen.getByRole('progressbar')).to.have.attribute('data-label-position', 'bottom-floating');
+      await render(
+        <ProgressBar.Root value={50} aria-label="Loading" labelPosition="bottom-floating" />,
+      );
+      expect(screen.getByRole('progressbar')).to.have.attribute(
+        'data-label-position',
+        'bottom-floating',
+      );
     });
   });
 });

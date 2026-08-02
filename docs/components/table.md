@@ -22,6 +22,10 @@ and React Aria virtualization plugins coordinated by one controller.
 
 Accepts all React Aria `Table` props plus an optional `className`. See the `@example` JSDoc on the component export for usage.
 
+| Prop                         | Type               | Default   | Description                                                                  |
+| ---------------------------- | ------------------ | --------- | ---------------------------------------------------------------------------- |
+| `keyboardNavigationBehavior` | `'arrow' \| 'tab'` | `'arrow'` | Use `'tab'` when rows contain text fields, buttons, or other interactive UI. |
+
 ## Table controller
 
 `useTableController` is additive: existing direct Table props continue to
@@ -66,6 +70,34 @@ client data. Every plugin change publishes one combined query through
 ```
 
 ## Examples
+
+### Interactive cells
+
+Use `keyboardNavigationBehavior="tab"` when a row contains interactive
+components. Tab moves through the controls while arrow-key table navigation
+remains available outside them.
+
+```tsx
+import { Table } from '@tale-ui/react/table';
+import { TextField } from '@tale-ui/react/text-field';
+
+<Table.Root aria-label="Editable people" keyboardNavigationBehavior="tab">
+  <Table.Header>
+    <Table.Column isRowHeader>Name</Table.Column>
+    <Table.Column>Email</Table.Column>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row id="alice">
+      <Table.Cell>Alice</Table.Cell>
+      <Table.Cell>
+        <TextField.Root aria-label="Alice email" defaultValue="alice@example.com">
+          <TextField.Input />
+        </TextField.Root>
+      </Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table.Root>;
+```
 
 ### With Selection
 
@@ -379,6 +411,8 @@ Nested rows are declared by nesting `Table.Row` children inside a parent `Table.
 - Set `allowsSorting` on individual columns.
 - Spread `controller.tableProps` on `Table.Root`.
 - Direct React Aria sorting and selection props remain supported.
+- Keep the default `keyboardNavigationBehavior="arrow"` for read-only tables;
+  opt into `"tab"` only when cells contain interactive controls.
 - Use stable row and column IDs for every plugin and across SSR/hydration.
 - Do not infer server freshness from response order; commit through `request.accept`.
 - Virtualization requires dynamic collections and does not replace pagination.

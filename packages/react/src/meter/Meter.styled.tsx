@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Meter } from 'react-aria-components';
 import type { MeterProps as AriaMeterProps } from 'react-aria-components';
 import { cx } from '../_cx';
+import { getPercentage } from '../utils/getPercentage';
 
 // ── Root ───────────────────────────────────────────────────────────────────
 
@@ -27,11 +28,9 @@ export interface RootProps extends Omit<AriaMeterProps, 'className'> {
  * </Meter.Root>
  * ```
  */
-export const Root = React.forwardRef<HTMLDivElement, RootProps>(
-  ({ className, ...props }, ref) => (
-    <Meter ref={ref} className={cx('tale-meter', className)} {...props} />
-  ),
-);
+export const Root = React.forwardRef<HTMLDivElement, RootProps>(({ className, ...props }, ref) => (
+  <Meter ref={ref} className={cx('tale-meter', className)} {...props} />
+));
 Root.displayName = 'Meter.Root';
 
 // ── Header (label + value row) ─────────────────────────────────────────────
@@ -78,7 +77,7 @@ export interface IndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Indicator = React.forwardRef<HTMLDivElement, IndicatorProps>(
   ({ className, value = 0, min = 0, max = 100, style, ...props }, ref) => {
-    const percentage = ((value - min) / (max - min)) * 100;
+    const percentage = getPercentage(value, min, max);
     const indicatorStyle: React.CSSProperties = {
       insetInlineStart: 0,
       height: 'inherit',

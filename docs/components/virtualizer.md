@@ -8,6 +8,11 @@ First-class Tale UI exports for React Aria virtualization utilities. This is not
 
 Tale UI adds no custom props. `Virtualizer` and the layout classes use the upstream React Aria and React Stately types re-exported from `@tale-ui/react/virtualizer`.
 
+React Aria 1.20 adds `shouldObserveItemSize`. Set it when virtualized items can
+change size after rendering so `ResizeObserver` remeasures and relays out the
+collection. Leave it off for fixed-size collections to avoid unnecessary
+observation work.
+
 ## Basic Usage
 
 ```tsx

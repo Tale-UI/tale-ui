@@ -6,14 +6,14 @@ A horizontal bar representing a scalar measurement within a known range (e.g. st
 
 ## Parts
 
-| Part | Description |
-|------|-------------|
-| `Meter.Root` | Wrapper managing value and ARIA semantics |
-| `Meter.Header` | Flex row wrapper for Label + Value |
-| `Meter.Label` | Accessible text label |
-| `Meter.Value` | Displays the current value (e.g. "60%"); `aria-hidden` |
-| `Meter.Track` | Background rail |
-| `Meter.Indicator` | Filled portion sized by `value`, `min`, and `max` |
+| Part              | Description                                            |
+| ----------------- | ------------------------------------------------------ |
+| `Meter.Root`      | Wrapper managing value and ARIA semantics              |
+| `Meter.Header`    | Flex row wrapper for Label + Value                     |
+| `Meter.Label`     | Accessible text label                                  |
+| `Meter.Value`     | Displays the current value (e.g. "60%"); `aria-hidden` |
+| `Meter.Track`     | Background rail                                        |
+| `Meter.Indicator` | Filled portion sized by `value`, `min`, and `max`      |
 
 ## Props
 
@@ -25,11 +25,11 @@ Also accepts all React Aria `Meter` props.
 
 ### Indicator
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `number` | `0` | The current value |
-| `min` | `number` | `0` | The minimum value |
-| `max` | `number` | `100` | The maximum value |
+| Prop    | Type     | Default | Description       |
+| ------- | -------- | ------- | ----------------- |
+| `value` | `number` | `0`     | The current value |
+| `min`   | `number` | `0`     | The minimum value |
+| `max`   | `number` | `100`   | The maximum value |
 
 Also accepts all standard `<div>` HTML attributes.
 
@@ -97,4 +97,5 @@ Also accepts all standard `<div>` HTML attributes.
 
 - Built on React Aria `Meter`.
 - `Meter.Indicator` computes width from its own `value`, `min`, and `max` props rather than reading those values from `Meter.Root`.
+- When `min` equals `max`, the indicator uses `0%` rather than producing an invalid `NaN%` width.
 - Meter differs from ProgressBar semantically: use Meter for measurements within a known range (disk usage, battery level), and ProgressBar for task completion.
