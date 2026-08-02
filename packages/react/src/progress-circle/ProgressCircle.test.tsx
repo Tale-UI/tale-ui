@@ -6,6 +6,17 @@ import { createRenderer } from '#test-utils';
 describe('<ProgressCircle />', () => {
   const { render } = createRenderer();
 
+  it('uses ProgressCircle.Label as its accessible name', async () => {
+    await render(
+      <ProgressCircle.Root value={60}>
+        <ProgressCircle.Track />
+        <ProgressCircle.Label>Upload progress</ProgressCircle.Label>
+      </ProgressCircle.Root>,
+    );
+
+    expect(screen.getByRole('progressbar', { name: 'Upload progress' })).toBeVisible();
+  });
+
   it('uses a zero percentage when min and max are equal', async () => {
     await render(
       <ProgressCircle.Root value={5} minValue={5} maxValue={5} aria-label="Upload progress">

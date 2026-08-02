@@ -14,12 +14,12 @@ const packageJson = JSON.parse(await readFile(join(packageRoot, 'package.json'),
 
 assert.equal(
   packageJson.dependencies['react-aria-components'],
-  '1.19.0',
+  '1.20.0',
   'React Aria Components must remain exactly pinned for Group and unstable Toast coupling.',
 );
 assert.equal(
   packageJson.dependencies['react-aria'],
-  '3.50.0',
+  '3.51.0',
   'react-aria must remain exactly pinned for useMove coupling.',
 );
 

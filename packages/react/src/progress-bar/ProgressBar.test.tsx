@@ -141,15 +141,16 @@ describe('<ProgressBar />', () => {
   });
 
   describe('ProgressBar.Label', () => {
-    it('renders a span with tale-progress-bar__label class', async () => {
+    it('provides the progressbar accessible name', async () => {
       await render(
-        <ProgressBar.Root value={50} aria-label="Loading">
+        <ProgressBar.Root value={50}>
           <ProgressBar.Label data-testid="label">Loading</ProgressBar.Label>
         </ProgressBar.Root>,
       );
       const label = screen.getByTestId('label');
       expect(label.tagName).to.equal('SPAN');
       expect(label).to.have.class('tale-progress-bar__label');
+      vitestExpect(screen.getByRole('progressbar', { name: 'Loading' })).toBeVisible();
     });
 
     it('forwards ref to HTMLSpanElement', async () => {

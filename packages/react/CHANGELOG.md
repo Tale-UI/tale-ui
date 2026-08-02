@@ -19,6 +19,8 @@ All notable changes to the React component library are documented in this file.
 
 - Prevented Meter, ProgressBar, and ProgressCircle from producing `NaN` styles when
   `minValue` equals `maxValue`.
+- Connected Meter, ProgressBar, and ProgressCircle visual labels to React Aria's
+  accessible-name context while preserving their existing span DOM and ref contract.
 
 ## v3.0.0 — 2026-07-27
 

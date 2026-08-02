@@ -206,7 +206,7 @@
       },
       "value": {
         "goldenPrompts": 161,
-        "knownLegacyAxeViolations": 213,
+        "knownLegacyAxeViolations": 179,
         "changedComponentAxeGate": true,
         "maintainedPerformanceBudgets": 8
       },
@@ -277,5 +277,5 @@
       "decisionUse": false
     }
   ],
-  "digest": "sha256:895cbceff46f6a98272f11777d8d0df62e18ffa5a09a3112423d41850dd1c5b5"
+  "digest": "sha256:720f7016cdfb8612db36e643a0dcb7d9d83e48c5e7a9e5db7fde9a2f4029a557"
 }

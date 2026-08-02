@@ -134,15 +134,16 @@ describe('<Meter />', () => {
   });
 
   describe('Meter.Label', () => {
-    it('renders a span with tale-meter__label class', async () => {
+    it('provides the meter accessible name', async () => {
       await render(
-        <Meter.Root value={50} aria-label="Battery level">
+        <Meter.Root value={50}>
           <Meter.Label data-testid="label">Battery</Meter.Label>
         </Meter.Root>,
       );
       const label = screen.getByTestId('label');
       expect(label.tagName).to.equal('SPAN');
       expect(label).to.have.class('tale-meter__label');
+      vitestExpect(screen.getByRole('meter', { name: 'Battery' })).toBeVisible();
     });
 
     it('forwards ref to HTMLSpanElement', async () => {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Meter } from 'react-aria-components';
+import { Label as AriaLabel, Meter } from 'react-aria-components';
 import type { MeterProps as AriaMeterProps } from 'react-aria-components';
 import { cx } from '../_cx';
 import { getPercentage } from '../utils/getPercentage';
@@ -105,7 +105,12 @@ export interface LabelProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 export const Label = React.forwardRef<HTMLSpanElement, LabelProps>(
   ({ className, ...props }, ref) => (
-    <span ref={ref} className={cx('tale-meter__label', className)} {...props} />
+    <AriaLabel
+      // Meter's LabelContext renders this as a span despite AriaLabel's static ref type.
+      ref={ref as React.Ref<HTMLLabelElement>}
+      className={cx('tale-meter__label', className)}
+      {...props}
+    />
   ),
 );
 Label.displayName = 'Meter.Label';

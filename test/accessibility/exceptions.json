@@ -11,6 +11,26 @@
       "rationale": "axe-core 4.11 treats React Aria's standards-valid `role=\"meter progressbar\"` fallback token list as having no range role and incorrectly rejects the meter value attributes.",
       "expiresOn": "2026-12-31",
       "trackingIssue": "https://github.com/adobe/react-spectrum/blob/main/packages/react-aria/src/meter/useMeter.ts"
+    },
+    {
+      "id": "A11Y-0002",
+      "storyId": "components-meter--with-label",
+      "rule": "aria-allowed-attr",
+      "targetContains": "react-aria",
+      "owner": "Tale UI maintainers",
+      "rationale": "axe-core 4.11 treats React Aria's standards-valid `role=\"meter progressbar\"` fallback token list as having no range role and incorrectly rejects the meter value attributes.",
+      "expiresOn": "2026-12-31",
+      "trackingIssue": "https://github.com/adobe/react-spectrum/blob/main/packages/react-aria/src/meter/useMeter.ts"
+    },
+    {
+      "id": "A11Y-0003",
+      "storyId": "components-meter--all-values",
+      "rule": "aria-allowed-attr",
+      "targetContains": "react-aria",
+      "owner": "Tale UI maintainers",
+      "rationale": "axe-core 4.11 treats React Aria's standards-valid `role=\"meter progressbar\"` fallback token list as having no range role and incorrectly rejects the meter value attributes.",
+      "expiresOn": "2026-12-31",
+      "trackingIssue": "https://github.com/adobe/react-spectrum/blob/main/packages/react-aria/src/meter/useMeter.ts"
     }
   ]
 }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ProgressBar } from 'react-aria-components';
+import { Label as AriaLabel, ProgressBar } from 'react-aria-components';
 import type { ProgressBarProps as AriaProgressBarProps } from 'react-aria-components';
 import { cx } from '../_cx';
 import { getPercentage } from '../utils/getPercentage';
@@ -127,7 +127,12 @@ export interface LabelProps extends Omit<React.ComponentPropsWithoutRef<'span'>,
 
 export const Label = React.forwardRef<HTMLSpanElement, LabelProps>(
   ({ className, ...props }, ref) => (
-    <span ref={ref} className={cx('tale-progress-circle__label', className)} {...props} />
+    <AriaLabel
+      // ProgressBar's LabelContext renders this as a span despite AriaLabel's static ref type.
+      ref={ref as React.Ref<HTMLLabelElement>}
+      className={cx('tale-progress-circle__label', className)}
+      {...props}
+    />
   ),
 );
 Label.displayName = 'ProgressCircle.Label';

@@ -54,13 +54,13 @@ export const AllSizes: Story = {
   render() {
     return (
       <div style={{ display: 'flex', alignItems: 'end', gap: '1rem' }}>
-        <ProgressCircle.Root value={60} size="sm">
+        <ProgressCircle.Root value={60} size="sm" aria-label="Small upload progress">
           <ProgressCircle.Track />
         </ProgressCircle.Root>
-        <ProgressCircle.Root value={60} size="md">
+        <ProgressCircle.Root value={60} size="md" aria-label="Medium upload progress">
           <ProgressCircle.Track />
         </ProgressCircle.Root>
-        <ProgressCircle.Root value={60} size="lg">
+        <ProgressCircle.Root value={60} size="lg" aria-label="Large upload progress">
           <ProgressCircle.Track />
         </ProgressCircle.Root>
       </div>
@@ -72,7 +72,7 @@ export const Indeterminate: Story = {
   argTypes: { value: { control: false } },
   render(args) {
     return (
-      <ProgressCircle.Root size={args.size}>
+      <ProgressCircle.Root size={args.size} aria-label={args.label}>
         <ProgressCircle.Track />
       </ProgressCircle.Root>
     );
@@ -83,7 +83,7 @@ export const Complete: Story = {
   args: { value: 100 },
   render(args) {
     return (
-      <ProgressCircle.Root value={100} size={args.size}>
+      <ProgressCircle.Root value={100} size={args.size} aria-label={args.label}>
         <ProgressCircle.Track />
         <ProgressCircle.Value />
       </ProgressCircle.Root>
@@ -115,7 +115,12 @@ export const AllVariations: Story = {
           <React.Fragment key={`row-${s}`}>
             <div className="story-label">{s}</div>
             {values.map((v) => (
-              <ProgressCircle.Root key={`${s}-${String(v)}`} value={v} size={s}>
+              <ProgressCircle.Root
+                key={`${s}-${String(v)}`}
+                value={v}
+                size={s}
+                aria-label={`${s} ${v == null ? 'indeterminate' : `${v}%`} progress`}
+              >
                 <ProgressCircle.Track />
                 {v != null && <ProgressCircle.Value />}
               </ProgressCircle.Root>
