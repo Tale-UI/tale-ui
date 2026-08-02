@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Calendar } from '@tale-ui/react/calendar';
-import { today, getLocalTimeZone, parseDate } from '@internationalized/date';
+import { parseDate } from '@internationalized/date';
 
 type Args = {
   isDisabled?: boolean;
@@ -8,6 +8,13 @@ type Args = {
   defaultValue: string;
   selectionMode: 'single' | 'multiple';
 };
+
+const defaultArgs = {
+  isDisabled: false,
+  isReadOnly: false,
+  defaultValue: '2026-07-27',
+  selectionMode: 'single',
+} satisfies Args;
 
 const meta: Meta<Args> = {
   title: 'Components/Calendar',
@@ -21,23 +28,21 @@ const meta: Meta<Args> = {
       options: ['single', 'multiple'],
     },
   },
-  args: {
-    isDisabled: false,
-    isReadOnly: false,
-    defaultValue: '2026-07-27',
-    selectionMode: 'single',
-  },
+  args: defaultArgs,
 };
 
 export default meta;
 
 type Story = StoryObj<Args>;
 
+function parseDefaultValue(args: Args) {
+  return args.selectionMode === 'multiple'
+    ? [parseDate(args.defaultValue)]
+    : parseDate(args.defaultValue);
+}
+
 function CalendarTemplate(args: Args) {
-  const defaultValue =
-    args.selectionMode === 'multiple'
-      ? [parseDate(args.defaultValue)]
-      : parseDate(args.defaultValue);
+  const defaultValue = parseDefaultValue(args);
   return (
     <Calendar.Root
       key={`${args.defaultValue}-${args.selectionMode}`}
@@ -62,8 +67,15 @@ function CalendarTemplate(args: Args) {
 }
 
 function MonthYearPickerCalendarTemplate(args: Args) {
+  const defaultValue = parseDefaultValue(args);
   return (
-    <Calendar.Root {...args}>
+    <Calendar.Root
+      key={`${args.defaultValue}-${args.selectionMode}`}
+      isDisabled={args.isDisabled}
+      isReadOnly={args.isReadOnly}
+      selectionMode={args.selectionMode}
+      defaultValue={defaultValue}
+    >
       <Calendar.Header>
         <Calendar.PreviousButton />
         <Calendar.MonthPicker format="short" />
@@ -95,21 +107,7 @@ export const ReadOnly: Story = {
   args: {
     isReadOnly: true,
   },
-  render: (args) => (
-    <Calendar.Root defaultValue={today(getLocalTimeZone())} {...args}>
-      <Calendar.Header>
-        <Calendar.PreviousButton />
-        <Calendar.Heading />
-        <Calendar.NextButton />
-      </Calendar.Header>
-      <Calendar.Grid>
-        <Calendar.GridHeader>
-          {(day) => <Calendar.GridHeaderCell>{day}</Calendar.GridHeaderCell>}
-        </Calendar.GridHeader>
-        <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
-      </Calendar.Grid>
-    </Calendar.Root>
-  ),
+  render: (args) => <CalendarTemplate {...args} />,
 };
 
 export const WithMonthYearPickers: Story = {
@@ -123,11 +121,11 @@ export const AllVariations: Story = {
       <div className="story-sections">
         <div>
           <p className="story-label">Default calendar</p>
-          <CalendarTemplate />
+          <CalendarTemplate {...defaultArgs} />
         </div>
         <div>
           <p className="story-label">Month and year pickers</p>
-          <MonthYearPickerCalendarTemplate />
+          <MonthYearPickerCalendarTemplate {...defaultArgs} />
         </div>
       </div>
     );

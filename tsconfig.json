@@ -7,6 +7,12 @@
       "path": "packages/tokens/tsconfig.json"
     },
     {
+      "path": "packages/foundations/tsconfig.json"
+    },
+    {
+      "path": "packages/react-native/tsconfig.json"
+    },
+    {
       "path": "packages/react/tsconfig.json"
     },
     {

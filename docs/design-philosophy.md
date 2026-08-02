@@ -56,7 +56,9 @@ Tale UI wraps [React Aria Components](https://react-spectrum.adobe.com/react-ari
 
 @tale-ui/themes          ← Optional standard and monochrome themes
 
-@tale-ui/react-native    ← Native components (planned)
+@tale-ui/foundations     ← Experimental renderer-neutral contracts and recipes
+      ↓
+@tale-ui/react-native    ← Experimental native components
 ```
 
 ### `@tale-ui/tokens` — Shared design decisions
@@ -99,6 +101,14 @@ Internal helpers (colour generation, React hooks, DOM utilities) are isolated so
 Standard themes pair distinct brand and neutral colours. Monochrome themes derive both palettes from
 one named colour. Both are distributed separately from the foundational token layer so consumers can
 opt into stable generated CSS without adding presets to every Tale UI build.
+
+### Experimental native packages
+
+`@tale-ui/foundations` and `@tale-ui/react-native` are implemented,
+workspace-supported experimental packages. Foundations remains renderer
+neutral; the native package uses React Native primitives and explicit public
+subpaths. The current repository publication workflow does not publish either
+package.
 
 **Why not a single package?** Separation enables:
 

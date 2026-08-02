@@ -1,0 +1,1 @@
+export { getFixtureButtonLabel } from './button';

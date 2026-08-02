@@ -2,7 +2,8 @@
 
 `@tale-ui/tokens/native` exports typed light and dark token objects generated
 from the same `tokens.json` source as web CSS. Native examples consume those
-objects directly; this roadmap does not add a native component package.
+objects directly. The experimental native component package consumes the same
+generated objects through renderer-neutral foundations.
 
 ## Appearance and high contrast
 
@@ -41,5 +42,5 @@ reported as platform exceptions.
 ## Example
 
 See `examples/react-native/TokenCard.tsx`. It demonstrates appearance
-selection, spacing, radius, colors, and typography without introducing a
-native component abstraction.
+selection, spacing, radius, colors, and typography independently of the native
+component package.

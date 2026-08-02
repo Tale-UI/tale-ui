@@ -1,0 +1,24 @@
+{
+  "name": "@tale-ui/react-native-compatibility-spike",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "expo:start": "expo start",
+    "expo:ios": "STORYBOOK_ENABLED=true expo start --ios",
+    "expo:android": "STORYBOOK_ENABLED=true expo start --android"
+  },
+  "dependencies": {
+    "@tale-ui/react-native-spike-fixture": "file:./tale-ui-react-native-spike-fixture-0.0.0.tgz",
+    "expo": "57.0.8",
+    "react": "19.2.3",
+    "react-native": "0.86.0",
+    "react-native-web": "0.21.2"
+  },
+  "devDependencies": {
+    "@expo/metro-config": "57.0.7",
+    "@types/react": "19.2.14",
+    "typescript": "~6.0.3"
+  }
+}

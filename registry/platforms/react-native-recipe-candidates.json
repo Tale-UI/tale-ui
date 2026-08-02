@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "1.0.0",
+  "adoption": "shadow",
+  "warning": "Candidate declarations are not reachable from public web CSS.",
+  "recipes": [
+    {
+      "id": "badge",
+      "component": "Badge",
+      "webCandidate": ".tale-badge { color: var(--text-color); opacity: 1; }",
+      "native": {
+        "root": {
+          "color": {
+            "token": "textColor"
+          },
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "button",
+      "component": "Button",
+      "webCandidate": ".tale-button { color: var(--text-color); opacity: 1; }",
+      "native": {
+        "root": {
+          "color": {
+            "token": "textColor"
+          },
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "card",
+      "component": "Card",
+      "webCandidate": ".tale-card { color: var(--text-color); opacity: 1; }",
+      "native": {
+        "root": {
+          "color": {
+            "token": "textColor"
+          },
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "column",
+      "component": "Column",
+      "webCandidate": ".tale-column { color: var(--text-color); opacity: 1; }",
+      "native": {
+        "root": {
+          "color": {
+            "token": "textColor"
+          },
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "icon",
+      "component": "Icon",
+      "webCandidate": ".tale-icon { color: var(--text-color); opacity: 1; }",
+      "native": {
+        "root": {
+          "color": {
+            "token": "textColor"
+          },
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "progressbar",
+      "component": "ProgressBar",
+      "webCandidate": ".tale-progress-bar { color: var(--text-color); opacity: 1; }",
+      "native": {
+        "root": {
+          "color": {
+            "token": "textColor"
+          },
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "row",
+      "component": "Row",
+      "webCandidate": ".tale-row { color: var(--text-color); opacity: 1; }",
+      "native": {
+        "root": {
+          "color": {
+            "token": "textColor"
+          },
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "separator",
+      "component": "Separator",
+      "webCandidate": ".tale-separator { color: var(--text-color); opacity: 1; }",
+      "native": {
+        "root": {
+          "color": {
+            "token": "textColor"
+          },
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "spinner",
+      "component": "Spinner",
+      "webCandidate": ".tale-spinner { color: var(--text-color); opacity: 1; }",
+      "native": {
+        "root": {
+          "color": {
+            "token": "textColor"
+          },
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "text",
+      "component": "Text",
+      "webCandidate": ".tale-text { color: var(--text-color); opacity: 1; }",
+      "native": {
+        "root": {
+          "color": {
+            "token": "textColor"
+          },
+          "opacity": 1
+        }
+      }
+    }
+  ]
+}

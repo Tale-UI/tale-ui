@@ -14,6 +14,7 @@ export default mergeConfig(
     },
     resolve: {
       alias: {
+        '@tale-ui/foundations': resolve(currentDirectory, '../foundations/src'),
         '@tale-ui/utils': resolve(currentDirectory, '../utils/src'),
       },
     },

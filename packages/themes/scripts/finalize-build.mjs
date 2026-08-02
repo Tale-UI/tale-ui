@@ -11,6 +11,9 @@ const getWorkspaceVersion = async (relativeManifestPath) => {
 
 const manifest = JSON.parse(await readFile(buildPackageUrl, 'utf8'));
 manifest.dependencies['@tale-ui/css'] = await getWorkspaceVersion('../css/package.json');
+manifest.dependencies['@tale-ui/foundations'] = await getWorkspaceVersion(
+  '../foundations/package.json',
+);
 manifest.dependencies['@tale-ui/utils'] = await getWorkspaceVersion('../utils/package.json');
 
 await writeFile(buildPackageUrl, `${JSON.stringify(manifest, null, 2)}\n`);

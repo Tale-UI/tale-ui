@@ -13,5 +13,8 @@
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/*.test.ts"],
-  "references": [{ "path": "../utils/tsconfig.build.json" }]
+  "references": [
+    { "path": "../foundations/tsconfig.build.json" },
+    { "path": "../utils/tsconfig.build.json" }
+  ]
 }
