@@ -2,6 +2,15 @@
 
 All notable changes to the component styles package are documented in this file.
 
+## v2.1.0 — 2026-08-03
+
+### Changed
+
+- **Coordinated release**: Aligned `@tale-ui/react-styles` with the `2.1.0` release of the
+  Tokens, CSS, Utils, React, and Themes packages.
+- **Style compatibility**: Preserved the existing component selectors and custom-property
+  contracts; no stylesheet API changes are included.
+
 ## v3.0.0 — 2026-07-27
 
 ### Added

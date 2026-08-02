@@ -2,6 +2,15 @@
 
 All notable changes to the CSS design system are documented in this file.
 
+## v2.1.0 — 2026-08-03
+
+### Changed
+
+- **Coordinated release**: Aligned `@tale-ui/css` with the `2.1.0` release of the Tokens,
+  Utils, React, React Styles, and Themes packages.
+- **Compatibility**: Retained the existing token, utility, theme, and dark-mode contracts;
+  no CSS selector or custom-property APIs changed.
+
 ## v3.0.0 — 2026-07-27
 
 ### Changed

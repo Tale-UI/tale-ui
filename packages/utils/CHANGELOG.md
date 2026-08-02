@@ -2,6 +2,15 @@
 
 All notable changes to the utility library are documented in this file.
 
+## v2.1.0 — 2026-08-03
+
+### Changed
+
+- **Coordinated release**: Aligned `@tale-ui/utils` with the `2.1.0` release of the Tokens,
+  CSS, React, React Styles, and Themes packages.
+- **API stability**: Preserved the existing utility APIs while refreshing the coordinated release
+  metadata.
+
 ## v3.0.0 — 2026-07-27
 
 ### Fixed

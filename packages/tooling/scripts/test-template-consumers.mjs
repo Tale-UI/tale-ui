@@ -148,8 +148,8 @@ try {
   );
   assert.equal(
     packedReactManifest.version,
-    '3.0.0',
-    'Template consumers must compile against packed @tale-ui/react 3.0.0.',
+    '2.1.0',
+    'Template consumers must compile against packed @tale-ui/react 2.1.0.',
   );
 
   const frameworkRoots = Object.fromEntries(

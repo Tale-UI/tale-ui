@@ -1,5 +1,14 @@
 # Changelog — @tale-ui/themes
 
+## v2.1.0 — 2026-08-03
+
+### Changed
+
+- **Coordinated release**: Aligned `@tale-ui/themes` with the `2.1.0` release of the Tokens,
+  CSS, Utils, React, and React Styles packages.
+- **Theme stability**: Preserved all published theme identifiers, palettes, selectors, and
+  application APIs.
+
 ## v3.0.0 — 2026-07-27
 
 ### Changed

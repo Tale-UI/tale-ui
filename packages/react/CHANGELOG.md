@@ -2,7 +2,7 @@
 
 All notable changes to the React component library are documented in this file.
 
-## Unreleased
+## v2.1.0 — 2026-08-03
 
 ### Changed
 
