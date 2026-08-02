@@ -2,6 +2,15 @@
 
 All notable changes to the CSS design system are documented in this file.
 
+## v2.2.0 — 2026-08-03
+
+### Changed
+
+- **Release continuity**: Advanced `@tale-ui/css` to the coordinated immutable version `2.2.0`
+  after `2.1.0` was published.
+- **Compatibility**: Preserved the `2.1.0` token, utility, theme, selector, and custom-property
+  contracts.
+
 ## v2.1.0 — 2026-08-03
 
 ### Changed

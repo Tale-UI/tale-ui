@@ -45,7 +45,7 @@ try {
   assert.equal(packedManifestResult.status, 0, 'Could not inspect the packed React manifest.');
   const packedManifest = JSON.parse(packedManifestResult.stdout);
   assert.equal(packedManifest.name, '@tale-ui/react');
-  assert.equal(packedManifest.version, '2.1.0');
+  assert.equal(packedManifest.version, '2.2.0');
   assert.equal(
     packedManifest.engines?.node,
     '>=18',
@@ -57,7 +57,7 @@ try {
   );
   const packedDirectory = dirname(tarball);
   const internalTarballs = (await readdir(packedDirectory))
-    .filter((name) => /^tale-ui-(?:css|react-styles|utils)-2\.1\.0\.tgz$/.test(name))
+    .filter((name) => /^tale-ui-(?:css|react-styles|utils)-2\.2\.0\.tgz$/.test(name))
     .sort()
     .map((name) => join(packedDirectory, name));
   assert.equal(
@@ -83,7 +83,7 @@ try {
   assert.notEqual(result.status, 0, 'Node 16 engine-strict installation unexpectedly succeeded.');
   assert.match(
     `${result.stdout}\n${result.stderr}`,
-    /@tale-ui\/react@2\.1\.0[\s\S]*(?:not compatible|Unsupported engine|>=18)|(?:not compatible|Unsupported engine|>=18)[\s\S]*@tale-ui\/react@2\.1\.0/i,
+    /@tale-ui\/react@2\.2\.0[\s\S]*(?:not compatible|Unsupported engine|>=18)|(?:not compatible|Unsupported engine|>=18)[\s\S]*@tale-ui\/react@2\.2\.0/i,
     'Node 16 rejection output must identify the packed React 3 Node >=18 contract.',
   );
   process.stdout.write('React Node 16 engine-strict rejection passed.\n');

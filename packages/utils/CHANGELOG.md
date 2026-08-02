@@ -2,6 +2,14 @@
 
 All notable changes to the utility library are documented in this file.
 
+## v2.2.0 — 2026-08-03
+
+### Changed
+
+- **Release continuity**: Advanced `@tale-ui/utils` to the coordinated immutable version `2.2.0`
+  after `2.1.0` was published.
+- **API stability**: Preserved the utility APIs and runtime behavior from `2.1.0`.
+
 ## v2.1.0 — 2026-08-03
 
 ### Changed

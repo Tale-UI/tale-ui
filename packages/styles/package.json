@@ -1,6 +1,6 @@
 {
   "name": "@tale-ui/react-styles",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "CSS styles for @tale-ui/react components, built on @tale-ui/css design tokens.",
   "repository": {
     "type": "git",

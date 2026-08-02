@@ -6,18 +6,18 @@
     {
       "major": 3,
       "source": "working-tree-public-docs",
-      "sourceRevision": "sha256:810d45417b374409206de2431ce911a133ac0d4665ed1d63dda05123d18cb1f3",
+      "sourceRevision": "sha256:4aa5fd0a78404c6b82a34b0d0618aebfaea799931a1aff19a834ca01d2b35c1d",
       "contentDigest": "sha256:c40c7ff2d13c61619c8a78cb1076fded6f5ed2c4ade9de5e57d9e51be9b905a1",
       "packageVersions": {
         "@tale-ui/a2ui": "0.1.5",
         "@tale-ui/charts": "0.1.5",
-        "@tale-ui/css": "2.1.0",
-        "@tale-ui/react": "2.1.0",
-        "@tale-ui/react-styles": "2.1.0",
-        "@tale-ui/themes": "2.1.0",
-        "@tale-ui/tokens": "2.1.0",
+        "@tale-ui/css": "2.2.0",
+        "@tale-ui/react": "2.2.0",
+        "@tale-ui/react-styles": "2.2.0",
+        "@tale-ui/themes": "2.2.0",
+        "@tale-ui/tokens": "2.2.0",
         "@tale-ui/tooling": "0.2.0",
-        "@tale-ui/utils": "2.1.0"
+        "@tale-ui/utils": "2.2.0"
       },
       "registryVersion": "1.0.0",
       "publicAllowlist": [

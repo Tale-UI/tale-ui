@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "reportType": "migrations",
-  "sourceRevision": "sha256:9d654212e55c9685f923f3d5b555bc8bc2a63262c59d5064eb53cdee53b4f0bb",
+  "sourceRevision": "sha256:97bfbf10f27dfbf2c833e3754dfb82441d510796cf5e6a518cb80025910ecdf4",
   "migrations": [
     {
       "id": "v1-to-v2-package-rename",

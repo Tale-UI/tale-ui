@@ -1,5 +1,14 @@
 # Changelog — @tale-ui/themes
 
+## v2.2.0 — 2026-08-03
+
+### Changed
+
+- **Release continuity**: Advanced `@tale-ui/themes` to the coordinated immutable version
+  `2.2.0` after `2.1.0` was published.
+- **Theme stability**: Preserved all theme identifiers, palettes, selectors, and application APIs
+  from `2.1.0`.
+
 ## v2.1.0 — 2026-08-03
 
 ### Changed
