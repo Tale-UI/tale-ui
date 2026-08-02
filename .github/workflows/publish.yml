@@ -294,7 +294,9 @@ jobs:
           pnpm --filter @tale-ui/react test:packed-consumers
 
       - name: Build and validate @tale-ui/themes
-        run: pnpm --filter @tale-ui/themes test:package
+        run: |
+          pnpm --filter @tale-ui/foundations build
+          pnpm --filter @tale-ui/themes test:package
 
       - name: Publish @tale-ui/tokens
         if: needs.resolve.outputs.dry_run != 'true'
