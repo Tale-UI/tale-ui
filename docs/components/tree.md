@@ -6,15 +6,21 @@ A hierarchical tree view with expandable/collapsible nodes and optional selectio
 
 ## Parts
 
-| Part | Description |
-|------|-------------|
-| `Tree.Root` | Container. Accepts `aria-label`, `selectionMode`, and `defaultExpandedKeys`. |
-| `Tree.Item` | A tree node. Requires `id` and `textValue`. Nest items for sub-trees. |
+| Part               | Description                                                                                          |
+| ------------------ | ---------------------------------------------------------------------------------------------------- |
+| `Tree.Root`        | Container. Accepts `aria-label`, `selectionMode`, and `defaultExpandedKeys`.                         |
+| `Tree.Item`        | A tree node. Requires `id` and `textValue`. Nest items for sub-trees.                                |
 | `Tree.ItemContent` | Renders the visible label content of a tree item. Wraps children in a `div.tale-tree__item-content`. |
 
 ## Props
 
 Accepts all React Aria `Tree` props plus an optional `className`. See the `@example` JSDoc on the component export for usage.
+
+Use `keyboardNavigationBehavior="tab"` only when tree items contain interactive
+controls. The default `"arrow"` behavior remains appropriate for ordinary tree
+navigation. React Aria 1.20 also exports upstream `TreeSectionProps` and
+`TreeHeaderProps`; Tale UI's current public namespace intentionally remains
+`Root`, `Item`, and `ItemContent`.
 
 ## Basic Usage
 
@@ -66,13 +72,15 @@ Accepts all React Aria `Tree` props plus an optional `className`. See the `@exam
 
 <!-- pitfall: tree-sub-parts-only -->
 <!-- multi-idea-ok -->
+
 - **Sub-parts are Root, Item, and ItemContent only** — there is no `Tree.Node`, `Tree.Header`, or `Tree.ExpandTrigger`.
   - anti-pattern: `<Tree.Node>...</Tree.Node>`
   - fix: `<Tree.Item id="node-1" textValue="Node"><Tree.ItemContent>Node</Tree.ItemContent></Tree.Item>`
   - complete example:
+
     ```tsx
     import { Tree } from '@tale-ui/react/tree';
-    
+
     export function Example() {
       return (
         <Tree.Root aria-label="Files">
@@ -92,10 +100,12 @@ Accepts all React Aria `Tree` props plus an optional `className`. See the `@exam
 
 <!-- pitfall: tree-root-requires-aria-label -->
 <!-- prose-only -->
+
 - **`Tree.Root` requires `aria-label`** — omitting it leaves the tree without an accessible name.
 
 <!-- pitfall: tree-item-requires-id-and-text-value -->
 <!-- multi-idea-ok -->
+
 - **Each `Tree.Item` requires both `id` and `textValue`** — `id` identifies the node, `textValue` provides the screen reader label.
   - anti-pattern: `<Tree.Item><Tree.ItemContent>Node</Tree.ItemContent></Tree.Item>`
   - fix: `<Tree.Item id="node-1" textValue="Node"><Tree.ItemContent>Node</Tree.ItemContent></Tree.Item>`

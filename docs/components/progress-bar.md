@@ -6,32 +6,32 @@ A horizontal bar indicating progress toward completion, with support for determi
 
 ## Parts
 
-| Part | Description |
-|------|-------------|
-| `ProgressBar.Root` | Wrapper managing value and ARIA semantics |
-| `ProgressBar.Header` | Flex row wrapper for Label + Value |
-| `ProgressBar.Label` | Accessible text label |
-| `ProgressBar.Value` | Displays the current value (e.g. "60%"); `aria-hidden` |
-| `ProgressBar.Track` | Background rail |
+| Part                    | Description                                                               |
+| ----------------------- | ------------------------------------------------------------------------- |
+| `ProgressBar.Root`      | Wrapper managing value and ARIA semantics                                 |
+| `ProgressBar.Header`    | Flex row wrapper for Label + Value                                        |
+| `ProgressBar.Label`     | Accessible text label                                                     |
+| `ProgressBar.Value`     | Displays the current value (e.g. "60%"); `aria-hidden`                    |
+| `ProgressBar.Track`     | Background rail                                                           |
 | `ProgressBar.Indicator` | Filled portion; set `value` for determinate width, omit for indeterminate |
 
 ## Props
 
 ### Root
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
+| Prop            | Type                                                                  | Default | Description                                             |
+| --------------- | --------------------------------------------------------------------- | ------- | ------------------------------------------------------- |
 | `labelPosition` | `'top' \| 'right' \| 'bottom' \| 'top-floating' \| 'bottom-floating'` | `'top'` | Where to position the label/value relative to the track |
 
 Also accepts all React Aria `ProgressBar` props (`value`, `minValue`, `maxValue`, `isIndeterminate`, etc.).
 
 ### Indicator
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `number \| null` | — | The current value (0--max). When `null` or omitted the bar is indeterminate |
-| `min` | `number` | `0` | The minimum value |
-| `max` | `number` | `100` | The maximum value |
+| Prop    | Type             | Default | Description                                                                 |
+| ------- | ---------------- | ------- | --------------------------------------------------------------------------- |
+| `value` | `number \| null` | —       | The current value (0--max). When `null` or omitted the bar is indeterminate |
+| `min`   | `number`         | `0`     | The minimum value                                                           |
+| `max`   | `number`         | `100`   | The maximum value                                                           |
 
 Also accepts all standard `<div>` HTML attributes.
 
@@ -171,5 +171,6 @@ A floating tooltip appears below the bar, anchored to the fill point.
 
 - Built on React Aria `ProgressBar`.
 - `ProgressBar.Indicator` computes width as a percentage from its own `value`, `min`, and `max` props.
+- When the minimum equals the maximum, determinate indicators and floating values use `0%` rather than an invalid `NaN%` position.
 - For indeterminate state, pass `isIndeterminate` on `Root` and omit `value` on `Indicator`. The indicator receives a `data-indeterminate` attribute for CSS animation targeting.
 - For floating label positions (`top-floating`, `bottom-floating`), the `Value` is positioned absolutely relative to `Root` using the fill percentage. Floating tooltips are hidden when the bar is indeterminate. The `Header` wrapper uses `display: contents` in non-top layouts so Label and Value participate directly in Root's flex flow.

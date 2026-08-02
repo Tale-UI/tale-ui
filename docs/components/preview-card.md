@@ -2,28 +2,34 @@
 
 `import { PreviewCard } from '@tale-ui/react/preview-card';`
 
-A hover-triggered popover card for previewing content linked to a trigger element.
+A non-modal preview popover that opens on hover, keyboard focus, or long press.
+It uses React Aria's `PreviewTrigger` for accessible cross-device interaction,
+safe-area handling, and coordinated entry/exit timing.
 
 ## Parts
 
-| Part | Description |
-|------|-------------|
-| `PreviewCard.Root` | Manages open/close state on hover. |
-| `PreviewCard.Trigger` | Element that triggers the preview on hover. |
-| `PreviewCard.Popup` | Positioned popover container. Accepts `placement` and `offset`. |
-| `PreviewCard.Content` | Dialog content inside the popover. Requires `aria-label`. |
-| `PreviewCard.Arrow` | Arrow pointing to the trigger. Place inside `Popup`. |
+| Part                  | Description                                                      |
+| --------------------- | ---------------------------------------------------------------- |
+| `PreviewCard.Root`    | Manages hover, focus, and long-press open state.                 |
+| `PreviewCard.Trigger` | Focusable preview target or wrapper for a nested Tale UI `Link`. |
+| `PreviewCard.Popup`   | Positioned popover container. Accepts `placement` and `offset`.  |
+| `PreviewCard.Content` | Dialog content inside the popover. Requires `aria-label`.        |
+| `PreviewCard.Arrow`   | Arrow pointing to the trigger. Place inside `Popup`.             |
 
 ## Props
 
 ### Root
 
-| Prop         | Type     | Default | Description                                  |
-|--------------|----------|---------|----------------------------------------------|
-| `delay`      | `number` | `400`   | Delay in ms before opening on hover          |
-| `closeDelay` | `number` | `300`   | Delay in ms before closing after hover ends  |
+| Prop         | Type              | Default | Description                                 |
+| ------------ | ----------------- | ------- | ------------------------------------------- |
+| `children`   | `React.ReactNode` | —       | Trigger and popup compound parts.           |
+| `delay`      | `number`          | `400`   | Delay in ms before opening on hover         |
+| `closeDelay` | `number`          | `300`   | Delay in ms before closing after hover ends |
 
-All other parts accept standard HTML attributes plus an optional `className`. `Popup` accepts React Aria `Popover` props (`placement`, `offset`, etc.).
+All other parts accept standard HTML attributes plus an optional `className`.
+`Popup` accepts React Aria `Popover` props (`placement`, `offset`, etc.). A
+text-only `Trigger` becomes a focusable button-like target; for link previews,
+nest a Tale UI `Link` so the link remains the focusable target.
 
 ## Basic Usage
 
@@ -42,7 +48,7 @@ import { PreviewCard } from '@tale-ui/react/preview-card';
       </div>
     </PreviewCard.Content>
   </PreviewCard.Popup>
-</PreviewCard.Root>
+</PreviewCard.Root>;
 ```
 
 ## Examples
@@ -100,13 +106,15 @@ import { PreviewCard } from '@tale-ui/react/preview-card';
 
 <!-- pitfall: preview-card-content-in-popup -->
 <!-- multi-idea-ok -->
+
 - **`PreviewCard.Content` must be inside `PreviewCard.Popup` and requires `aria-label`** — do not place content directly inside `Popup`; always supply `aria-label` on `Content` since there is no built-in Title part.
   - anti-pattern: `<PreviewCard.Popup><p>Preview text</p></PreviewCard.Popup>`
   - fix: `<PreviewCard.Popup><PreviewCard.Content aria-label="Preview">...</PreviewCard.Content></PreviewCard.Popup>`
   - complete example:
+
     ```tsx
     import { PreviewCard } from '@tale-ui/react/preview-card';
-    
+
     export function Example() {
       return (
         <PreviewCard.Root>
@@ -123,16 +131,18 @@ import { PreviewCard } from '@tale-ui/react/preview-card';
 
 <!-- cross-pitfall-ref: no-asChild-on-triggers -->
 <!-- pitfall: preview-card-trigger-no-href -->
-- **PreviewCard.Trigger does not accept href or className — nest a Link inside it** — PreviewCard.Trigger renders an inline span (its props type is TriggerProps & RefAttributes<HTMLSpanElement>), so passing href or className causes 'Type ... is not assignable to type IntrinsicAttributes & TriggerProps & RefAttributes<HTMLSpanElement>'. To make a link that shows a preview on hover, place a <Link> from @tale-ui/react/link as a child of PreviewCard.Trigger rather than turning the trigger itself into the anchor.
-  - anti-pattern: `<PreviewCard.Trigger href="https://tale-ui.com" className="tale-link">Tale UI</PreviewCard.Trigger>`
+
+- **PreviewCard.Trigger does not accept `href` — nest a Link inside it** — `PreviewCard.Trigger` renders an inline span. It accepts `className`, but navigation props belong on a nested `Link` from `@tale-ui/react/link`.
+  - anti-pattern: `<PreviewCard.Trigger href="https://tale-ui.com">Tale UI</PreviewCard.Trigger>`
   - fix: `<PreviewCard.Trigger><Link href="https://tale-ui.com">Tale UI</Link></PreviewCard.Trigger>`
   - complete example:
+
     ```tsx
     import { PreviewCard } from '@tale-ui/react/preview-card';
     import { Link } from '@tale-ui/react/link';
     import { Column } from '@tale-ui/react/column';
     import { Text } from '@tale-ui/react/text';
-    
+
     export function LinkPreviewCard() {
       return (
         <PreviewCard.Root>
@@ -144,7 +154,8 @@ import { PreviewCard } from '@tale-ui/react/preview-card';
               <Column gap="xs">
                 <Text variant="label">Tale UI</Text>
                 <Text size="s" color="muted">
-                  An accessible, themeable React component library built on React Aria for building production-ready interfaces.
+                  An accessible, themeable React component library built on React Aria for building
+                  production-ready interfaces.
                 </Text>
               </Column>
             </PreviewCard.Content>
@@ -156,7 +167,7 @@ import { PreviewCard } from '@tale-ui/react/preview-card';
 
 ## Notes
 
-- **Trigger needs explicit styling.** `PreviewCard.Trigger` applies `tale-preview-card__trigger` (no visual styling). Add `className="tale-button tale-button--{variant}"` for button styling, or style it as a link.
-- The card opens on hover, not on click. Use `Popover` if you need click-to-open behavior.
+- **Trigger needs explicit styling.** `PreviewCard.Trigger` applies `tale-preview-card__trigger` (no visual styling). Add `className="tale-button tale-button--{variant}"` for button styling, or nest a Tale UI `Link`.
+- The card opens on hover, keyboard focus, or long press, not click. Use `Popover` if you need click-to-open behavior.
 - `PreviewCard.Content` requires an `aria-label` since there is no built-in Title part.
 - `PreviewCard.Arrow` can be placed anywhere inside `Popup` — it renders the pointer towards the trigger.

@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { ProgressBar } from 'react-aria-components';
+import { Label as AriaLabel, ProgressBar } from 'react-aria-components';
 import type { ProgressBarProps as AriaProgressBarProps } from 'react-aria-components';
 import { cx } from '../_cx';
+import { getPercentage } from '../utils/getPercentage';
 
 // ── Context ─────────────────────────────────────────────────────────────────
 
@@ -52,10 +53,13 @@ export interface RootProps extends Omit<AriaProgressBarProps, 'className'> {
  * ```
  */
 export const Root = React.forwardRef<HTMLDivElement, RootProps>(
-  ({ className, labelPosition = 'top', value, minValue = 0, maxValue = 100, children, ...props }, ref) => {
+  (
+    { className, labelPosition = 'top', value, minValue = 0, maxValue = 100, children, ...props },
+    ref,
+  ) => {
     const percentage =
       value != null && Number.isFinite(value as number)
-        ? (((value as number) - minValue) / (maxValue - minValue)) * 100
+        ? getPercentage(value as number, minValue, maxValue)
         : null;
 
     return (
@@ -122,7 +126,7 @@ export interface IndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Indicator = React.forwardRef<HTMLDivElement, IndicatorProps>(
   ({ className, value, min = 0, max = 100, style, ...props }, ref) => {
     const percentage =
-      value != null && Number.isFinite(value) ? ((value - min) / (max - min)) * 100 : null;
+      value != null && Number.isFinite(value) ? getPercentage(value, min, max) : null;
 
     const indicatorStyle: React.CSSProperties =
       percentage != null
@@ -150,7 +154,12 @@ export interface LabelProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 export const Label = React.forwardRef<HTMLSpanElement, LabelProps>(
   ({ className, ...props }, ref) => (
-    <span ref={ref} className={cx('tale-progress-bar__label', className)} {...props} />
+    <AriaLabel
+      // ProgressBar's LabelContext renders this as a span despite AriaLabel's static ref type.
+      ref={ref as React.Ref<HTMLLabelElement>}
+      className={cx('tale-progress-bar__label', className)}
+      {...props}
+    />
   ),
 );
 Label.displayName = 'ProgressBar.Label';

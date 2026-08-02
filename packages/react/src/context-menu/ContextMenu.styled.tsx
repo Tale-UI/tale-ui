@@ -1,16 +1,19 @@
 import * as React from 'react';
 import {
-  Menu,
-  MenuItem,
-  MenuSection,
-  Popover,
+  Menu as AriaMenu,
+  MenuItem as AriaMenuItem,
+  MenuSection as AriaMenuSection,
+  MenuTrigger as AriaMenuTrigger,
+  Popover as AriaPopover,
+  Pressable,
   Separator as AriaSeparator,
 } from 'react-aria-components';
 import type {
-  MenuProps,
-  MenuItemProps,
-  MenuSectionProps,
-  PopoverProps,
+  MenuProps as AriaMenuProps,
+  MenuItemProps as AriaMenuItemProps,
+  MenuSectionProps as AriaMenuSectionProps,
+  MenuTriggerProps as AriaMenuTriggerProps,
+  PopoverProps as AriaPopoverProps,
   SeparatorProps as AriaSeparatorProps,
 } from 'react-aria-components';
 import { cx } from '../_cx';
@@ -19,23 +22,16 @@ import { cx } from '../_cx';
 
 type Size = 'sm' | 'md';
 
-export interface RootProps {
+export interface RootProps extends Omit<AriaMenuTriggerProps, 'children' | 'trigger'> {
   children: React.ReactNode;
   /** Size of context menu items. @default 'md' */
   size?: Size | undefined;
 }
 
-interface ContextMenuState {
-  isOpen: boolean;
-  x: number;
-  y: number;
-}
-
 /**
- * A menu that appears on right-click (context menu event).
- * ContextMenu intentionally uses React Aria menu primitives directly instead
- * of composing Menu.Root, because it opens from a cursor-positioned virtual trigger.
- * Its popup and item classes are grouped with Menu in the shared CSS primitives.
+ * A context menu that opens through mouse, keyboard, or touch input.
+ * It uses React Aria's context-menu MenuTrigger while retaining Tale UI's
+ * public namespace and shared menu styling.
  *
  * @example
  * ```tsx
@@ -54,40 +50,22 @@ interface ContextMenuState {
  * </ContextMenu.Root>
  * ```
  */
-export function Root({ children, size = 'md' }: RootProps) {
-  const [state, setState] = React.useState<ContextMenuState>({
-    isOpen: false,
-    x: 0,
-    y: 0,
-  });
-
-  const open = React.useCallback((x: number, y: number) => {
-    setState({ isOpen: true, x, y });
-  }, []);
-
-  const close = React.useCallback(() => {
-    setState((prev) => ({ ...prev, isOpen: false }));
-  }, []);
-
+export function Root({ children, size = 'md', ...props }: RootProps) {
   return (
-    <ContextMenuContext.Provider value={{ ...state, open, close, size }}>
-      {children}
+    <ContextMenuContext.Provider value={{ size }}>
+      <AriaMenuTrigger trigger="contextMenu" {...props}>
+        {children}
+      </AriaMenuTrigger>
     </ContextMenuContext.Provider>
   );
 }
+Root.displayName = 'ContextMenu.Root';
 
-interface ContextMenuContextValue extends ContextMenuState {
-  open: (x: number, y: number) => void;
-  close: () => void;
+interface ContextMenuContextValue {
   size: Size;
 }
 
 const ContextMenuContext = React.createContext<ContextMenuContextValue>({
-  isOpen: false,
-  x: 0,
-  y: 0,
-  open: () => {},
-  close: () => {},
   size: 'md',
 });
 
@@ -96,96 +74,41 @@ const ContextMenuContext = React.createContext<ContextMenuContextValue>({
 export type TriggerProps = React.HTMLAttributes<HTMLDivElement> & { className?: string };
 
 export const Trigger = React.forwardRef<HTMLDivElement, TriggerProps>(
-  ({ className, onContextMenu, ...props }, ref) => {
-    const { open } = React.useContext(ContextMenuContext);
-
-    const handleContextMenu = React.useCallback(
-      (event: React.MouseEvent<HTMLDivElement>) => {
-        event.preventDefault();
-        open(event.clientX, event.clientY);
-        onContextMenu?.(event);
-      },
-      [open, onContextMenu],
-    );
-
-    return (
+  ({ className, ...props }, ref) => (
+    <Pressable ref={ref}>
       <div
-        ref={ref}
         className={cx('tale-context-menu__trigger', className)}
-        onContextMenu={handleContextMenu}
+        role="button"
+        tabIndex={0}
         {...props}
       />
-    );
-  },
+    </Pressable>
+  ),
 );
 Trigger.displayName = 'ContextMenu.Trigger';
 
 /* ─── Popup (positioned at cursor) ───────────────────────────────────────── */
 
-export type PopupProps = Omit<PopoverProps, 'className' | 'isOpen' | 'triggerRef' | 'style'> & {
+export type PopupProps = Omit<AriaPopoverProps, 'className' | 'isOpen' | 'triggerRef' | 'style'> & {
   className?: string;
 };
 
 export const Popup = React.forwardRef<HTMLDivElement, PopupProps>(
-  ({ className, children, ...props }, ref) => {
-    const { isOpen, x, y, close } = React.useContext(ContextMenuContext);
-
-    // Virtual trigger element positioned at cursor
-    const triggerRef = React.useRef<HTMLSpanElement>(null);
-
-    if (!isOpen) {
-      return null;
-    }
-
-    return (
-      <React.Fragment>
-        <span
-          ref={triggerRef}
-          style={{
-            position: 'fixed',
-            left: x,
-            top: y,
-            width: 0,
-            height: 0,
-            pointerEvents: 'none',
-          }}
-        />
-        <Popover
-          ref={ref}
-          triggerRef={triggerRef}
-          isOpen={isOpen}
-          onOpenChange={(open) => {
-            if (!open) {
-              close();
-            }
-          }}
-          placement="bottom start"
-          className={cx('tale-context-menu', className)}
-          {...props}
-        >
-          {children}
-        </Popover>
-      </React.Fragment>
-    );
-  },
+  ({ className, ...props }, ref) => (
+    <AriaPopover ref={ref} className={cx('tale-context-menu', className)} {...props} />
+  ),
 );
 Popup.displayName = 'ContextMenu.Popup';
 
 /* ─── MenuList ───────────────────────────────────────────────────────────── */
 
 export function MenuList<T extends object>(
-  props: Omit<MenuProps<T>, 'className'> & { className?: string },
+  props: Omit<AriaMenuProps<T>, 'className'> & { className?: string },
 ) {
   const { className, ...rest } = props;
-  const { close, size } = React.useContext(ContextMenuContext);
+  const { size } = React.useContext(ContextMenuContext);
   const sizeClass = size !== 'md' ? ` tale-context-menu__list--${size}` : '';
-  return (
-    <Menu
-      className={cx(`tale-context-menu__list${sizeClass}`, className)}
-      onAction={() => close()}
-      {...rest}
-    />
-  );
+  return <AriaMenu className={cx(`tale-context-menu__list${sizeClass}`, className)} {...rest} />;
 }
 MenuList.displayName = 'ContextMenu.MenuList';
 
@@ -193,19 +116,19 @@ MenuList.displayName = 'ContextMenu.MenuList';
 
 export const Item = React.forwardRef<
   HTMLDivElement,
-  Omit<MenuItemProps, 'className'> & { className?: string }
+  Omit<AriaMenuItemProps, 'className'> & { className?: string }
 >(({ className, ...props }, ref) => (
-  <MenuItem ref={ref} className={cx('tale-context-menu__item', className)} {...props} />
+  <AriaMenuItem ref={ref} className={cx('tale-context-menu__item', className)} {...props} />
 ));
 Item.displayName = 'ContextMenu.Item';
 
 /* ─── Group ──────────────────────────────────────────────────────────────── */
 
 export function Group<T extends object>(
-  props: Omit<MenuSectionProps<T>, 'className'> & { className?: string },
+  props: Omit<AriaMenuSectionProps<T>, 'className'> & { className?: string },
 ) {
   const { className, ...rest } = props;
-  return <MenuSection className={cx('tale-context-menu__group', className)} {...rest} />;
+  return <AriaMenuSection className={cx('tale-context-menu__group', className)} {...rest} />;
 }
 Group.displayName = 'ContextMenu.Group';
 

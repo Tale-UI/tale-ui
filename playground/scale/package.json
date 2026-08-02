@@ -27,7 +27,7 @@
     "culori": "^4.0.2",
     "lucide-react": "^1.6.0",
     "react": "*",
-    "react-aria-components": "1.19.0",
+    "react-aria-components": "1.20.0",
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "*",
     "styled-components": "^6.1.18"

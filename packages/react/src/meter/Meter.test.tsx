@@ -1,5 +1,6 @@
 import { screen } from '@tale-ui/monorepo-tests/test-utils';
 import { expect } from 'chai';
+import { expect as vitestExpect } from 'vitest';
 import { Meter } from '@tale-ui/react/meter';
 import { createRenderer } from '#test-utils';
 
@@ -15,7 +16,13 @@ describe('<Meter />', () => {
     it('forwards ref to HTMLDivElement', async () => {
       let refEl: HTMLDivElement | null = null;
       await render(
-        <Meter.Root value={50} aria-label="Battery level" ref={(el) => { refEl = el; }} />,
+        <Meter.Root
+          value={50}
+          aria-label="Battery level"
+          ref={(el) => {
+            refEl = el;
+          }}
+        />,
       );
       expect(refEl).to.be.instanceof(window.HTMLDivElement);
     });
@@ -58,7 +65,11 @@ describe('<Meter />', () => {
       let refEl: HTMLDivElement | null = null;
       await render(
         <Meter.Root value={50} aria-label="Battery level">
-          <Meter.Track ref={(el) => { refEl = el; }} />
+          <Meter.Track
+            ref={(el) => {
+              refEl = el;
+            }}
+          />
         </Meter.Root>,
       );
       expect(refEl).to.be.instanceof(window.HTMLDivElement);
@@ -81,7 +92,11 @@ describe('<Meter />', () => {
       let refEl: HTMLDivElement | null = null;
       await render(
         <Meter.Root value={50} aria-label="Battery level">
-          <Meter.Indicator ref={(el) => { refEl = el; }} />
+          <Meter.Indicator
+            ref={(el) => {
+              refEl = el;
+            }}
+          />
         </Meter.Root>,
       );
       expect(refEl).to.be.instanceof(window.HTMLDivElement);
@@ -106,25 +121,42 @@ describe('<Meter />', () => {
       const indicator = screen.getByTestId('indicator');
       expect(indicator.style.width).to.equal('0%');
     });
+
+    it('uses 0% width when min and max are equal', async () => {
+      await render(
+        <Meter.Root value={5} minValue={5} maxValue={5} aria-label="Battery level">
+          <Meter.Indicator data-testid="indicator" value={5} min={5} max={5} />
+        </Meter.Root>,
+      );
+
+      vitestExpect(screen.getByTestId('indicator').style.width).toBe('0%');
+    });
   });
 
   describe('Meter.Label', () => {
-    it('renders a span with tale-meter__label class', async () => {
+    it('provides the meter accessible name', async () => {
       await render(
-        <Meter.Root value={50} aria-label="Battery level">
+        <Meter.Root value={50}>
           <Meter.Label data-testid="label">Battery</Meter.Label>
         </Meter.Root>,
       );
       const label = screen.getByTestId('label');
       expect(label.tagName).to.equal('SPAN');
       expect(label).to.have.class('tale-meter__label');
+      vitestExpect(screen.getByRole('meter', { name: 'Battery' })).toBeVisible();
     });
 
     it('forwards ref to HTMLSpanElement', async () => {
       let refEl: HTMLSpanElement | null = null;
       await render(
         <Meter.Root value={50} aria-label="Battery level">
-          <Meter.Label ref={(el) => { refEl = el; }}>Battery</Meter.Label>
+          <Meter.Label
+            ref={(el) => {
+              refEl = el;
+            }}
+          >
+            Battery
+          </Meter.Label>
         </Meter.Root>,
       );
       expect(refEl).to.be.instanceof(window.HTMLSpanElement);
@@ -156,7 +188,13 @@ describe('<Meter />', () => {
       let refEl: HTMLSpanElement | null = null;
       await render(
         <Meter.Root value={50} aria-label="Battery level">
-          <Meter.Value ref={(el) => { refEl = el; }}>50%</Meter.Value>
+          <Meter.Value
+            ref={(el) => {
+              refEl = el;
+            }}
+          >
+            50%
+          </Meter.Value>
         </Meter.Root>,
       );
       expect(refEl).to.be.instanceof(window.HTMLSpanElement);

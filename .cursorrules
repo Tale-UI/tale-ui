@@ -149,7 +149,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [CommandPalette] Keep dialog, search, and listbox labels accessible
 - [CommandPalette] Use useCommandPaletteShortcut with controlled open state
 - [CommandPalette] Use one command action handler
-- [ContextMenu] No controlled state props on ContextMenu.Root
+- [ContextMenu] Pair controlled isOpen with onOpenChange
 - [ContextMenu] No rightClick prop on ContextMenu.Trigger
 - [ContextMenu] Use ContextMenu.Popup, not ContextMenu.Popover
 - [ContextMenu] ContextMenu.MenuList is required between ContextMenu.Popup and ContextMenu.Item
@@ -276,7 +276,7 @@ For new checkbox/radio/switch UI, use `CheckboxField`, `RadioField` inside `Radi
 - [PinInput] When labeling a PinInput with Text, use variant="label" — Text has no weight prop
 - [Popover] Use Popover for any prompt that asks for an info button, help popover, tooltip-like overlay, or button-triggered explanatory overlay
 - [PreviewCard] PreviewCard.Content must be inside PreviewCard.Popup and requires aria-label
-- [PreviewCard] PreviewCard.Trigger does not accept href or className — nest a Link inside it
+- [PreviewCard] PreviewCard.Trigger does not accept href — nest a Link inside it
 - [ProgressCircle] Do NOT place <Text> inside ProgressCircle.Root
 - [ProgressCircle] size only accepts 'sm', 'md', 'lg'
 - [ProgressCircle] Column/Text props around ProgressCircle use shorthand tokens — gap="s", size="s", color="muted"

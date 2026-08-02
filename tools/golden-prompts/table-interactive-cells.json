@@ -1,0 +1,7 @@
+{
+  "slug": "table-interactive-cells",
+  "difficulty": "medium",
+  "prompt": "Show an editable table with a text field in each email cell and accessible tab navigation.",
+  "reference": "import { Table } from '@tale-ui/react/table';\nimport { TextField } from '@tale-ui/react/text-field';\n\nconst people = [\n  { id: 'alice', name: 'Alice', email: 'alice@example.com' },\n  { id: 'bob', name: 'Bob', email: 'bob@example.com' },\n];\n\nexport function EditablePeopleTable() {\n  return (\n    <Table.Root aria-label=\"Editable people\" keyboardNavigationBehavior=\"tab\">\n      <Table.Header>\n        <Table.Column isRowHeader>Name</Table.Column>\n        <Table.Column>Email</Table.Column>\n      </Table.Header>\n      <Table.Body>\n        {people.map((person) => (\n          <Table.Row key={person.id} id={person.id}>\n            <Table.Cell>{person.name}</Table.Cell>\n            <Table.Cell>\n              <TextField.Root aria-label={`${person.name} email`} defaultValue={person.email}>\n                <TextField.Input />\n              </TextField.Root>\n            </Table.Cell>\n          </Table.Row>\n        ))}\n      </Table.Body>\n    </Table.Root>\n  );\n}",
+  "tags": ["Table", "TextField"]
+}

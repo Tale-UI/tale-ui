@@ -205,8 +205,8 @@
         "asOf": "2026-07-25T00:00:00.000Z"
       },
       "value": {
-        "goldenPrompts": 160,
-        "knownLegacyAxeViolations": 213,
+        "goldenPrompts": 161,
+        "knownLegacyAxeViolations": 179,
         "changedComponentAxeGate": true,
         "maintainedPerformanceBudgets": 8
       },
@@ -277,5 +277,5 @@
       "decisionUse": false
     }
   ],
-  "digest": "sha256:4444dcdcb47e4a3c464c3e5debf6f327d69191c7f83ac76c8e060ed61befc655"
+  "digest": "sha256:720f7016cdfb8612db36e643a0dcb7d9d83e48c5e7a9e5db7fde9a2f4029a557"
 }

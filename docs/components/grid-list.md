@@ -21,6 +21,10 @@ Accepts all React Aria `GridList` props plus an optional `className`. See the `@
 | ------------- | ---------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout direction of the list. `'horizontal'` enables horizontal lists with matching arrow-key navigation. The rendered list exposes a `[data-orientation]` attribute for styling. Lives on the React Aria layer; flows through `GridList.Root` untouched. |
 
+React Aria 1.20's resolved types also expose
+`keyboardNavigationBehavior="tab"` for GridLists containing interactive
+controls. Keep the default `"arrow"` behavior for ordinary selectable items.
+
 ## Basic Usage
 
 ```tsx
@@ -167,6 +171,7 @@ import { Star, Heart, Bell } from 'lucide-react';
 - **Never apply non-layout inline styles (listStyle, padding, margin) to GridList.Root** — `GridList.Root` resets list chrome (listStyle, padding, margin) internally; passing them via `style` is redundant and triggers a validation error. Only layout properties (`display`, `gridTemplateColumns`, `gap`) belong on the `style` prop.
   - anti-pattern: `<GridList.Root style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-m)', listStyle: 'none', padding: 0, margin: 0 }}>`
   - fix: `<GridList.Root style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-m)' }}>`
+
 <!-- pitfall: use-grid-list-for-selectable-grid-prompts -->
 - **Use GridList for any prompt that asks for a selectable grid list, image card grid, or multi-select card grid** — When the prompt asks to display a grid of cards where the user can select one or more items, render GridList.Root with selectionMode='multiple' (or 'single') and place card content inside GridList.Item children. Use the style prop on GridList.Root with display: 'grid' and gridTemplateColumns to achieve the grid layout. Derive the selection state type from GridList.Root's onSelectionChange prop via React.ComponentProps. Never leave the file empty or substitute a plain div grid with manual selection state.
   - anti-pattern: `// empty file`

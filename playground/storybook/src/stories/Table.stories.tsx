@@ -1,6 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Table, useTableController, type Key } from '@tale-ui/react/table';
+import { TextField } from '@tale-ui/react/text-field';
 
 type Args = {
   selectionMode?: 'none' | 'single' | 'multiple';
@@ -97,6 +98,34 @@ export const WithSelection: Story = {
               <Table.Cell>{row.name}</Table.Cell>
               <Table.Cell>{row.email}</Table.Cell>
               <Table.Cell>{row.role}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Root>
+    );
+  },
+};
+
+export const WithInteractiveCells: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
+  render() {
+    return (
+      <Table.Root aria-label="Editable people" keyboardNavigationBehavior="tab">
+        <Table.Header>
+          <Table.Column isRowHeader>Name</Table.Column>
+          <Table.Column>Email</Table.Column>
+        </Table.Header>
+        <Table.Body>
+          {rows.slice(0, 3).map((row) => (
+            <Table.Row key={row.id} id={`editable-${row.id}`}>
+              <Table.Cell>{row.name}</Table.Cell>
+              <Table.Cell>
+                <TextField.Root aria-label={`${row.name} email`} defaultValue={row.email}>
+                  <TextField.Input />
+                </TextField.Root>
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

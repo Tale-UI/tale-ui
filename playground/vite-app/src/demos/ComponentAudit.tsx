@@ -3103,13 +3103,13 @@ export default function ComponentAudit() {
           <SubHeading>Default</SubHeading>
           <Row>
             <PreviewCard.Root>
-              <PreviewCard.Trigger>Hover to preview</PreviewCard.Trigger>
+              <PreviewCard.Trigger>Hover or focus to preview</PreviewCard.Trigger>
               <PreviewCard.Popup>
                 <PreviewCard.Content aria-label="Preview">
                   <div className="audit__preview-content">
                     <strong className="audit__preview-title">Preview Card</strong>
                     <p className="audit__preview-description">
-                      A card that appears on hover to show a preview of linked content.
+                      A card that appears on hover, keyboard focus, or long press.
                     </p>
                   </div>
                 </PreviewCard.Content>
@@ -3119,7 +3119,7 @@ export default function ComponentAudit() {
           <SubHeading>With Arrow</SubHeading>
           <Row>
             <PreviewCard.Root>
-              <PreviewCard.Trigger>Hover to preview</PreviewCard.Trigger>
+              <PreviewCard.Trigger>Hover or focus to preview</PreviewCard.Trigger>
               <PreviewCard.Popup>
                 <PreviewCard.Arrow />
                 <PreviewCard.Content aria-label="Preview">
@@ -6028,6 +6028,27 @@ export default function ComponentAudit() {
                 <Table.Cell>Charlie</Table.Cell>
                 <Table.Cell>Manager</Table.Cell>
                 <Table.Cell>Active</Table.Cell>
+              </Table.Row>
+            </Table.Body>
+          </Table.Root>
+          <SubHeading>Interactive Cells</SubHeading>
+          <Table.Root
+            aria-label="Editable people"
+            keyboardNavigationBehavior="tab"
+            className="audit__demo-extra-wide"
+          >
+            <Table.Header>
+              <Table.Column isRowHeader>Name</Table.Column>
+              <Table.Column>Email</Table.Column>
+            </Table.Header>
+            <Table.Body>
+              <Table.Row id="alice-editable">
+                <Table.Cell>Alice</Table.Cell>
+                <Table.Cell>
+                  <TextField.Root aria-label="Alice email" defaultValue="alice@example.com">
+                    <TextField.Input />
+                  </TextField.Root>
+                </Table.Cell>
               </Table.Row>
             </Table.Body>
           </Table.Root>

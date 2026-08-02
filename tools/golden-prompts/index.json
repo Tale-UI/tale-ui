@@ -393,6 +393,10 @@
       "difficulty": "complex"
     },
     {
+      "slug": "table-interactive-cells",
+      "difficulty": "medium"
+    },
+    {
       "slug": "table-virtualized",
       "difficulty": "complex"
     },

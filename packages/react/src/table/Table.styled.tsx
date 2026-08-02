@@ -28,7 +28,8 @@ export type RootProps = Omit<AriaTableProps, 'className'> & {
 };
 
 /**
- * A data table with sortable columns and selectable rows.
+ * A data table with sortable columns, selectable rows, and optional tab
+ * navigation for interactive controls inside cells.
  *
  * @example
  * ```tsx

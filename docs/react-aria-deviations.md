@@ -5,7 +5,7 @@ behaviour in several places. This document records maintained cross-cutting
 deviations; each component guide remains authoritative for that component's
 parts and props.
 
-Tale UI targets the exact **react-aria-components 1.19.0** release. The pin
+Tale UI targets the exact **react-aria-components 1.20.0** release. The pin
 protects wrapper behavior that depends on `Group`, unstable Toast declarations
 and runtime objects, and the resolved `react-aria` stack.
 
@@ -26,6 +26,8 @@ Each deviation below includes the rationale for the Tale UI choice. When a devia
 | AlertDialog should NOT have a Close button    | **Medium** — defeats acknowledgement UX                         | Alert dialogs should force an explicit safe/destructive choice                                        | [AlertDialog vs Dialog](#alertdialog-vs-dialog-semantics)                               |
 | Checkbox/Radio/Switch deprecated upstream     | **Low** — still functional                                      | Mirrors React Aria Components 1.18.0 deprecations                                                     | [Deprecated form controls](#deprecated-form-controls-checkbox-radio-switch)             |
 | ButtonGroup restricts RAC `Group`             | **Medium** — RAC render-function escape hatches are unavailable | Tale owns naming recovery, orientation, and attached visual topology                                  | [Component-equivalence boundaries](#component-equivalence-boundaries)                   |
+| PreviewCard preserves Tale composition        | **Medium** — Tale parts wrap RAC `PreviewTrigger`               | Existing compound API and delay defaults remain stable while RAC owns trigger behavior                | [Component-equivalence boundaries](#component-equivalence-boundaries)                   |
+| ContextMenu preserves Tale composition        | **Medium** — Tale parts wrap RAC context-menu triggering        | Existing namespace and size context remain stable while RAC owns mouse, keyboard, and touch behavior  | [Component-equivalence boundaries](#component-equivalence-boundaries)                   |
 | Toast isolates unstable RAC primitives        | **High** — upstream queue objects are not public Tale API       | Tale owns snapshot identity, raw-generation replacement, and lifecycle                                | [Component-equivalence boundaries](#component-equivalence-boundaries)                   |
 | Resizable is a Tale state model               | **High** — not a `ResizableTableContainer` wrapper              | Table-column resizing is not a general panel topology                                                 | [Component-equivalence boundaries](#component-equivalence-boundaries)                   |
 | Skeleton is decorative                        | **Medium** — loading announcements remain consumer-owned        | React Spectrum Skeleton is not a RAC primitive                                                        | [Component-equivalence boundaries](#component-equivalence-boundaries)                   |
@@ -36,9 +38,11 @@ Each deviation below includes the rationale for the Tale UI choice. When a devia
 
 | Decision ID                                       | Consumer-visible boundary                                                                                                                                                                                                                       |
 | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `component-equivalence:button-group`              | ButtonGroup wraps RAC 1.19.0 `Group` but excludes render-function `children`, `className`, and `style`; Tale owns accessible-name recovery, orientation, and attached styling.                                                                  |
+| `component-equivalence:button-group`              | ButtonGroup wraps RAC 1.20.0 `Group` but excludes render-function `children`, `className`, and `style`; Tale owns accessible-name recovery, orientation, and attached styling.                                                                  |
+| `component-equivalence:preview-card`              | PreviewCard wraps RAC 1.20.0 `PreviewTrigger` but preserves Tale's Root/Trigger/Popup/Content/Arrow composition, arrow hoisting, BEM classes, and 400 ms open/300 ms close defaults.                                                            |
+| `component-equivalence:context-menu`              | ContextMenu wraps RAC 1.20.0 `MenuTrigger trigger="contextMenu"` while preserving Tale's Root/Trigger/Popup/MenuList namespace and inherited size styling. RAC owns mouse, keyboard, touch, and controlled open-state behavior.                 |
 | `component-equivalence:toast`                     | Toast privately adapts `UNSTABLE_Toast` and `UNSTABLE_ToastRegion`. Its public queue is intentionally not structurally compatible with the upstream queue class, and Tale owns stable snapshots and replaceable raw generations.                |
-| `component-equivalence:resizable`                 | Resizable is a Tale state model that uses exact `react-aria@3.50.0` `useMove` for pointer movement. It is not a wrapper around table-only `ResizableTableContainer`; Tale owns topology, keyboard behavior, projection, ARIA, and cancellation. |
+| `component-equivalence:resizable`                 | Resizable is a Tale state model that uses exact `react-aria@3.51.0` `useMove` for pointer movement. It is not a wrapper around table-only `ResizableTableContainer`; Tale owns topology, keyboard behavior, projection, ARIA, and cancellation. |
 | `component-equivalence:resizable-table-container` | `ResizableTableContainer` remains rejected for general panel resizing because its contract is table-column-specific.                                                                                                                            |
 | `component-equivalence:skeleton`                  | Skeleton is a Tale-owned decorative primitive. React Spectrum Skeleton is not a React Aria Components primitive, and consumers remain responsible for announcing loading state when an announcement is needed.                                  |
 
@@ -198,7 +202,7 @@ Rationale: the clear button may be rendered as text, an icon, or a compound labe
 
 ## Trigger button styling differences
 
-In RAC, triggers are plain unstyled buttons. Tale UI auto-applies BEM classes, but **inconsistently** across components:
+RAC trigger components connect an unstyled interactive target to an overlay. Tale UI auto-applies BEM classes, but **inconsistently** across components:
 
 Rationale: triggers must preserve RAC's trigger semantics and avoid nested interactive elements. Some older Tale UI wrappers auto-apply button classes for convenience; others leave styling explicit to support link-like or custom trigger appearances.
 
@@ -212,7 +216,9 @@ Rationale: triggers must preserve RAC's trigger semantics and avoid nested inter
 | `Tooltip.Trigger`                 |             No              | Base + variant + size                                                       | Tooltips often attach to existing controls or inline content   |
 | `PreviewCard.Trigger`             |             No              | Base + variant, or style as link                                            | Preview cards commonly attach to text links or custom previews |
 
-Never nest `<Button>` inside a trigger — triggers render their own `<button>`.
+Never nest `<Button>` inside trigger parts that render their own button. PreviewCard is the
+exception: place a Tale `Link` inside `PreviewCard.Trigger` when the preview target is a link;
+text-only children receive a focusable button-like target from the wrapper.
 
 ---
 
@@ -266,6 +272,8 @@ Rationale: Tale UI exposes `Track` and `Indicator` as stable design-system parts
 Omitting `value` on `Indicator` defaults to 0 — the bar will appear empty.
 
 `ProgressBar.Indicator` also supports `value={null}` for indeterminate state (sets `data-indeterminate`).
+When `minValue` equals `maxValue`, Meter, ProgressBar, and ProgressCircle resolve the
+percentage to 0 rather than emitting `NaN` styles.
 
 ---
 

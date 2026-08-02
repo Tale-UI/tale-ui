@@ -1,39 +1,22 @@
 import * as React from 'react';
 import {
+  PreviewTrigger as AriaPreviewTrigger,
+  Pressable,
   Popover,
   Dialog,
   OverlayArrow,
 } from 'react-aria-components';
 import type {
+  PreviewTriggerProps as AriaPreviewTriggerProps,
   PopoverProps,
   DialogProps,
   OverlayArrowProps,
 } from 'react-aria-components';
 import { cx } from '../_cx';
 
-// ── Context ──────────────────────────────────────────────────────────────────
-
-interface PreviewCardContextValue {
-  triggerRef: React.RefObject<HTMLSpanElement | null>;
-  isOpen: boolean;
-  onHoverOpen: () => void;
-  onHoverClose: () => void;
-  onHoverKeepOpen: () => void;
-  close: () => void;
-}
-
-const PreviewCardContext = React.createContext<PreviewCardContextValue>({
-  triggerRef: { current: null },
-  isOpen: false,
-  onHoverOpen: () => {},
-  onHoverClose: () => {},
-  onHoverKeepOpen: () => {},
-  close: () => {},
-});
-
 // ── Root ─────────────────────────────────────────────────────────────────────
 
-export interface RootProps {
+export interface RootProps extends Omit<AriaPreviewTriggerProps, 'children'> {
   children: React.ReactNode;
   /** Delay in ms before opening on hover. @default 400 */
   delay?: number;
@@ -42,7 +25,7 @@ export interface RootProps {
 }
 
 /**
- * A hover-triggered card that shows a preview of linked content.
+ * A non-modal preview card that opens on hover, keyboard focus, or long press.
  *
  * @example
  * ```tsx
@@ -58,49 +41,9 @@ export interface RootProps {
  * </PreviewCard.Root>
  * ```
  */
-export const Root: React.FC<RootProps> = ({ children, delay = 400, closeDelay = 300 }) => {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const triggerRef = React.useRef<HTMLSpanElement>(null);
-  const openTimer = React.useRef<ReturnType<typeof setTimeout>>(undefined);
-  const closeTimer = React.useRef<ReturnType<typeof setTimeout>>(undefined);
-
-  const onHoverOpen = React.useCallback(() => {
-    clearTimeout(closeTimer.current);
-    openTimer.current = setTimeout(() => setIsOpen(true), delay);
-  }, [delay]);
-
-  const onHoverClose = React.useCallback(() => {
-    clearTimeout(openTimer.current);
-    closeTimer.current = setTimeout(() => setIsOpen(false), closeDelay);
-  }, [closeDelay]);
-
-  const onHoverKeepOpen = React.useCallback(() => {
-    clearTimeout(closeTimer.current);
-    clearTimeout(openTimer.current);
-  }, []);
-
-  const close = React.useCallback(() => {
-    clearTimeout(openTimer.current);
-    clearTimeout(closeTimer.current);
-    setIsOpen(false);
-  }, []);
-
-  React.useEffect(() => () => {
-    clearTimeout(openTimer.current);
-    clearTimeout(closeTimer.current);
-  }, []);
-
-  const ctx = React.useMemo(
-    () => ({ triggerRef, isOpen, onHoverOpen, onHoverClose, onHoverKeepOpen, close }),
-    [isOpen, onHoverOpen, onHoverClose, onHoverKeepOpen, close],
-  );
-
-  return (
-    <PreviewCardContext.Provider value={ctx}>
-      {children}
-    </PreviewCardContext.Provider>
-  );
-};
+export const Root: React.FC<RootProps> = ({ delay = 400, closeDelay = 300, ...props }) => (
+  <AriaPreviewTrigger delay={delay} closeDelay={closeDelay} {...props} />
+);
 Root.displayName = 'PreviewCard.Root';
 
 // ── Trigger ──────────────────────────────────────────────────────────────────
@@ -109,28 +52,26 @@ export interface TriggerProps extends React.HTMLAttributes<HTMLSpanElement> {
   className?: string;
 }
 
+/**
+ * The preview target. Text-only children become a focusable button-like target.
+ * A nested Tale UI Link remains the focusable target for link previews.
+ */
 export const Trigger = React.forwardRef<HTMLSpanElement, TriggerProps>(
-  ({ className, ...props }, ref) => {
-    const { triggerRef, onHoverOpen, onHoverClose } = React.useContext(PreviewCardContext);
-
-    const mergedRef = React.useCallback(
-      (node: HTMLSpanElement | null) => {
-        (triggerRef as React.MutableRefObject<HTMLSpanElement | null>).current = node;
-        if (typeof ref === 'function') {ref(node);}
-        else if (ref) {(ref as React.MutableRefObject<HTMLSpanElement | null>).current = node;}
-      },
-      [ref, triggerRef],
-    );
-
-    return (
+  ({ className, children, ...props }, ref) => {
+    const hasElementChild = React.Children.toArray(children).some(React.isValidElement);
+    const trigger = (
       <span
-        ref={mergedRef}
+        ref={ref}
         className={cx('tale-preview-card__trigger', className)}
-        onPointerEnter={onHoverOpen}
-        onPointerLeave={onHoverClose}
+        role={hasElementChild ? undefined : 'button'}
+        tabIndex={hasElementChild ? undefined : 0}
         {...props}
-      />
+      >
+        {children}
+      </span>
     );
+
+    return hasElementChild ? trigger : <Pressable>{trigger}</Pressable>;
   },
 );
 Trigger.displayName = 'PreviewCard.Trigger';
@@ -163,29 +104,6 @@ export const Popup = React.forwardRef<
   HTMLDivElement,
   Omit<PopoverProps, 'className' | 'isOpen' | 'triggerRef'> & { className?: string }
 >(({ className, children, ...props }, ref) => {
-  const { triggerRef, isOpen, onHoverClose, onHoverKeepOpen, close } = React.useContext(PreviewCardContext);
-  const popoverRef = React.useRef<HTMLDivElement>(null);
-
-  const mergedRef = React.useCallback(
-    (node: HTMLDivElement | null) => {
-      (popoverRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
-      if (typeof ref === 'function') {ref(node);}
-      else if (ref) {(ref as React.MutableRefObject<HTMLDivElement | null>).current = node;}
-    },
-    [ref],
-  );
-
-  React.useEffect(() => {
-    const el = popoverRef.current;
-    if (!el) {return;}
-    el.addEventListener('pointerenter', onHoverKeepOpen);
-    el.addEventListener('pointerleave', onHoverClose);
-    return () => {
-      el.removeEventListener('pointerenter', onHoverKeepOpen);
-      el.removeEventListener('pointerleave', onHoverClose);
-    };
-  }, [onHoverKeepOpen, onHoverClose]);
-
   const arrowChildren: React.ReactNode[] = [];
   const otherChildren: React.ReactNode[] = [];
 
@@ -198,15 +116,7 @@ export const Popup = React.forwardRef<
   });
 
   return (
-    <Popover
-      ref={mergedRef}
-      triggerRef={triggerRef}
-      isOpen={isOpen}
-      onOpenChange={(open) => { if (!open) {close();} }}
-      isNonModal
-      className={cx('tale-preview-card__popup', className)}
-      {...props}
-    >
+    <Popover ref={ref} className={cx('tale-preview-card__popup', className)} {...props}>
       {arrowChildren}
       {otherChildren}
     </Popover>

@@ -127,6 +127,7 @@ export const LabelRight: Story = {
           minValue={0}
           maxValue={100}
           labelPosition="right"
+          aria-label="Upload progress"
         >
           <ProgressBar.Header>
             <ProgressBar.Value>{value}%</ProgressBar.Value>
@@ -182,6 +183,7 @@ export const LabelTopFloating: Story = {
           minValue={0}
           maxValue={100}
           labelPosition="top-floating"
+          aria-label="Upload progress"
         >
           <ProgressBar.Header>
             <ProgressBar.Value>{value}%</ProgressBar.Value>
@@ -209,6 +211,7 @@ export const LabelBottomFloating: Story = {
           minValue={0}
           maxValue={100}
           labelPosition="bottom-floating"
+          aria-label="Upload progress"
         >
           <ProgressBar.Header>
             <ProgressBar.Value>{value}%</ProgressBar.Value>
@@ -244,7 +247,13 @@ function AnimatedFloatingBar({
   }, [labelPosition]);
 
   return (
-    <ProgressBar.Root value={value} minValue={0} maxValue={100} labelPosition={labelPosition}>
+    <ProgressBar.Root
+      value={value}
+      minValue={0}
+      maxValue={100}
+      labelPosition={labelPosition}
+      aria-label="Upload progress"
+    >
       <ProgressBar.Header>
         <ProgressBar.Value>{value}%</ProgressBar.Value>
       </ProgressBar.Header>

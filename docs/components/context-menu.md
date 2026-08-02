@@ -2,28 +2,34 @@
 
 `import { ContextMenu } from '@tale-ui/react/context-menu';`
 
-A right-click context menu that appears at the cursor position.
+A context menu that opens at the pointer position and supports mouse, keyboard,
+screen reader, and touch interactions through React Aria.
 
-`ContextMenu` is intentionally separate from `Menu.Root` because it opens from
-a cursor-positioned virtual trigger instead of a button trigger. It still uses
-React Aria `Menu`, `MenuItem`, `MenuSection`, and `Popover` primitives directly,
-and its popup/item styles are grouped with `Menu` in the shared CSS primitives.
+`ContextMenu` is intentionally separate from `Menu.Root`, but now uses React
+Aria's `MenuTrigger` with `trigger="contextMenu"`. Its popup and item styles
+remain grouped with `Menu` in the shared CSS primitives.
 
 ## Parts
 
-| Part                    | Description                                   |
-| ----------------------- | --------------------------------------------- |
-| `ContextMenu.Root`      | Manages open/close state and cursor position. |
-| `ContextMenu.Trigger`   | The right-click target area.                  |
-| `ContextMenu.Popup`     | Positioned popover at cursor location.        |
-| `ContextMenu.MenuList`  | The menu list. Auto-closes on item action.    |
-| `ContextMenu.Item`      | A menu item. Accepts `id` and `onAction`.     |
-| `ContextMenu.Group`     | Groups items into a section.                  |
-| `ContextMenu.Separator` | Visual separator between items or groups.     |
+| Part                    | Description                                     |
+| ----------------------- | ----------------------------------------------- |
+| `ContextMenu.Root`      | React Aria context-menu trigger and open state. |
+| `ContextMenu.Trigger`   | Focusable context-menu target area.             |
+| `ContextMenu.Popup`     | Positioned popover at cursor location.          |
+| `ContextMenu.MenuList`  | The menu list. Auto-closes on item action.      |
+| `ContextMenu.Item`      | A menu item. Accepts `id` and `onAction`.       |
+| `ContextMenu.Group`     | Groups items into a section.                    |
+| `ContextMenu.Separator` | Visual separator between items or groups.       |
 
 ## Props
 
-Accepts all React Aria `Menu` props plus an optional `className`. See the `@example` JSDoc on the component export for usage.
+`ContextMenu.Root` accepts React Aria `MenuTrigger` state props plus `size`
+(`'sm' | 'md'`). `ContextMenu.MenuList` accepts React Aria `Menu` props.
+
+| Prop       | Type              | Default | Description                            |
+| ---------- | ----------------- | ------- | -------------------------------------- |
+| `children` | `React.ReactNode` | —       | Trigger and popup compound parts.      |
+| `size`     | `'sm' \| 'md'`    | `'md'`  | Inherited size for context-menu items. |
 
 ## Basic Usage
 
@@ -93,32 +99,10 @@ import { ContextMenu } from '@tale-ui/react/context-menu';
 
 ## Pitfalls
 
-<!-- pitfall: context-menu-no-controlled-state -->
+<!-- pitfall: context-menu-controlled-state-pair -->
+<!-- prose-only -->
 
-- **No controlled state props on `ContextMenu.Root`** — open/close is managed internally by right-click interaction.
-  - anti-pattern: `<ContextMenu.Root isOpen={open}>`
-  - fix: `<ContextMenu.Root>`
-  - complete example:
-
-    ```tsx
-    import { ContextMenu } from '@tale-ui/react/context-menu';
-
-    export function Example() {
-      return (
-        <ContextMenu.Root>
-          <ContextMenu.Trigger>Right-click here</ContextMenu.Trigger>
-          <ContextMenu.Popup>
-            <ContextMenu.MenuList>
-              <ContextMenu.Item id="cut">Cut</ContextMenu.Item>
-              <ContextMenu.Item id="copy">Copy</ContextMenu.Item>
-              <ContextMenu.Separator />
-              <ContextMenu.Item id="paste">Paste</ContextMenu.Item>
-            </ContextMenu.MenuList>
-          </ContextMenu.Popup>
-        </ContextMenu.Root>
-      );
-    }
-    ```
+- **Pair controlled `isOpen` with `onOpenChange`** — omitting the callback prevents context-menu interactions from updating controlled state.
 
 <!-- pitfall: context-menu-no-right-click-prop -->
 <!-- prose-only -->
@@ -147,8 +131,11 @@ import { ContextMenu } from '@tale-ui/react/context-menu';
 
 ## Notes
 
-- The menu appears at the cursor position using a virtual trigger element.
+- React Aria positions the menu from the pointer or keyboard context-menu event.
+- The target is focusable so platform context-menu shortcuts work (for example,
+  Shift+F10 on Windows/Linux and the platform equivalent on macOS).
+- Long press opens the menu on supported touch devices.
 - `ContextMenu` shares popup, item, separator, and motion styling with `Menu`, but keeps its own public parts for right-click interaction.
 - `ContextMenu.MenuList` automatically closes the menu when any item action fires.
-- The `Trigger` renders a `<div>` (not a button), so any content can be a right-click target.
+- The `Trigger` renders a focusable `<div role="button">`; keep nested content non-interactive.
 - Clicking outside the menu closes it.

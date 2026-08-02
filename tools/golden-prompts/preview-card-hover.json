@@ -1,7 +1,7 @@
 {
   "slug": "preview-card-hover",
   "difficulty": "medium",
-  "prompt": "Show a link that displays a preview card popup with a title and description on hover.",
-  "reference": "import { PreviewCard } from '@tale-ui/react/preview-card';\n\nexport function LinkWithPreviewCard() {\n  return (\n    <PreviewCard.Root>\n      <PreviewCard.Trigger className=\"tale-button tale-button--neutral tale-button--md\">Hover to preview</PreviewCard.Trigger>\n      <PreviewCard.Popup placement=\"bottom\" offset={8}>\n        <PreviewCard.Arrow />\n        <PreviewCard.Content aria-label=\"Preview\">\n          <div style={{ maxWidth: '280px' }}>\n            <h4 style={{ margin: '0 0 var(--space-xs) 0' }}>Preview Title</h4>\n            <p style={{ margin: 0, fontSize: 'var(--text-s-font-size)' }}>\n              A quick summary of this linked page or resource.\n            </p>\n          </div>\n        </PreviewCard.Content>\n      </PreviewCard.Popup>\n    </PreviewCard.Root>\n  );\n}",
-  "tags": ["PreviewCard"]
+  "prompt": "Show a link that displays an interactive preview card with a title and description on hover or keyboard focus.",
+  "reference": "import { Column } from '@tale-ui/react/column';\nimport { Link } from '@tale-ui/react/link';\nimport { PreviewCard } from '@tale-ui/react/preview-card';\nimport { Text } from '@tale-ui/react/text';\n\nexport function LinkWithPreviewCard() {\n  return (\n    <PreviewCard.Root>\n      <PreviewCard.Trigger>\n        <Link href=\"/release-notes\">Release notes</Link>\n      </PreviewCard.Trigger>\n      <PreviewCard.Popup placement=\"bottom\" offset={8}>\n        <PreviewCard.Arrow />\n        <PreviewCard.Content aria-label=\"Release notes preview\">\n          <Column gap=\"s\" style={{ maxWidth: '18rem' }}>\n            <Text variant=\"heading\">Latest release</Text>\n            <Text color=\"muted\">A quick summary of the linked release notes.</Text>\n          </Column>\n        </PreviewCard.Content>\n      </PreviewCard.Popup>\n    </PreviewCard.Root>\n  );\n}",
+  "tags": ["PreviewCard", "Link"]
 }

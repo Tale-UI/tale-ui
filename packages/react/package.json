@@ -192,14 +192,14 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.28.6",
-    "@internationalized/date": "^3.12.2",
+    "@internationalized/date": "^3.12.3",
     "@modelcontextprotocol/sdk": "1.28.0",
     "@tale-ui/css": "workspace:*",
     "@tale-ui/react-styles": "workspace:*",
     "@tale-ui/utils": "workspace:*",
     "marked": "13.0.3",
-    "react-aria": "3.50.0",
-    "react-aria-components": "1.19.0",
+    "react-aria": "3.51.0",
+    "react-aria-components": "1.20.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {
