@@ -2,6 +2,38 @@
 
 All notable changes to the Tale UI monorepo are documented in this file.
 
+## v2.2.0 — 2026-08-03
+
+### Changed
+
+- **Release continuity**: Advanced the six coordinated public packages to `2.2.0` because
+  `2.1.0` is already immutable on npm, while retaining the published `2.1.0` history below.
+- **Publish workflow**: Build `@tale-ui/foundations` before validating `@tale-ui/themes` so
+  composite TypeScript declarations exist in clean release runners, and stop retrying the legacy
+  `@tale-ui/core` deprecation during every coordinated release.
+
+### Notes
+
+- No additional public API, runtime, stylesheet, token, or theme changes are included beyond
+  `2.1.0`. Tooling, A2UI, and Charts remain on their independent release lines.
+
+## v2.1.0 — 2026-08-03
+
+### Changed
+
+- **React Aria**: Upgraded the React package stack to `react-aria-components` `1.20.0` and
+  `react-aria` `3.51.0`; updated PreviewCard and ContextMenu adapters and documented interactive
+  Table cell navigation.
+- **Coordinated release**: Prepared the six public design-system packages at `2.1.0` and
+  refreshed versioned generated contracts. Tooling, A2UI, and Charts remain on their independent
+  release lines.
+
+### Fixed
+
+- **Progress feedback**: Prevented Meter, ProgressBar, and ProgressCircle from producing `NaN`
+  styles when `minValue` equals `maxValue`, and connected visual labels to accessible-name
+  context without changing their span/ref contract.
+
 ## v3.0.0 — 2026-07-27
 
 ### Added

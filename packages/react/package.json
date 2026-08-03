@@ -1,6 +1,6 @@
 {
   "name": "@tale-ui/react",
-  "version": "3.0.0",
+  "version": "2.2.0",
   "author": "Tale UI",
   "description": "Styled React component library built on React Aria Components, themed with @tale-ui/css design tokens.",
   "keywords": [

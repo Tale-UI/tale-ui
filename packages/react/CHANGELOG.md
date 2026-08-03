@@ -2,7 +2,16 @@
 
 All notable changes to the React component library are documented in this file.
 
-## Unreleased
+## v2.2.0 — 2026-08-03
+
+### Changed
+
+- Advanced the coordinated React package version to `2.2.0` because `2.1.0` is already
+  immutable on npm.
+- Preserved the public APIs and runtime behavior published in `2.1.0`; those user-facing changes
+  remain documented below.
+
+## v2.1.0 — 2026-08-03
 
 ### Changed
 

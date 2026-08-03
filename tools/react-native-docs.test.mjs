@@ -171,8 +171,12 @@ test('keeps the manual promotion checklist private, post-merge, and non-overridi
 
 test('matches the current publication workflow and schema-1 native authorities', () => {
   const publication = read('.github/workflows/publish.yml');
-  assert.doesNotMatch(publication, /@tale-ui\/foundations/u);
-  assert.doesNotMatch(publication, /@tale-ui\/react-native/u);
+  const publicationLines = publication
+    .split('\n')
+    .filter((line) => /\bpublish\b/iu.test(line))
+    .join('\n');
+  assert.doesNotMatch(publicationLines, /@tale-ui\/foundations/u);
+  assert.doesNotMatch(publicationLines, /@tale-ui\/react-native/u);
   for (const path of [
     'registry/platforms/react-native-implementations.json',
     'registry/platforms/react-native-disposition-overrides.json',

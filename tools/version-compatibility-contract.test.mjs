@@ -28,8 +28,8 @@ test('release preparation keeps coordinated and independent versions exact', () 
   for (const packageDirectory of coordinated) {
     assert.equal(
       json(`packages/${packageDirectory}/package.json`).version,
-      '3.0.0',
-      `${packageDirectory} must be coordinated at 3.0.0`,
+      '2.2.0',
+      `${packageDirectory} must be coordinated at 2.2.0`,
     );
   }
   assert.equal(json('packages/tooling/package.json').version, '0.2.0');

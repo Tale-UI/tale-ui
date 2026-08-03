@@ -295,17 +295,17 @@
     "registry/sources/foundations.json",
     "registry/sources/hooks.json"
   ],
-  "sourceRevision": "sha256:1abe561e6fb5829dbc3ff3245f8ea24121281856d47079b0a47eb047b6f9eebe",
+  "sourceRevision": "sha256:4aa5fd0a78404c6b82a34b0d0618aebfaea799931a1aff19a834ca01d2b35c1d",
   "packageVersions": {
     "@tale-ui/a2ui": "0.1.5",
     "@tale-ui/charts": "0.1.5",
-    "@tale-ui/css": "3.0.0",
-    "@tale-ui/react": "3.0.0",
-    "@tale-ui/react-styles": "3.0.0",
-    "@tale-ui/themes": "3.0.0",
-    "@tale-ui/tokens": "3.0.0",
+    "@tale-ui/css": "2.2.0",
+    "@tale-ui/react": "2.2.0",
+    "@tale-ui/react-styles": "2.2.0",
+    "@tale-ui/themes": "2.2.0",
+    "@tale-ui/tokens": "2.2.0",
     "@tale-ui/tooling": "0.2.0",
-    "@tale-ui/utils": "3.0.0"
+    "@tale-ui/utils": "2.2.0"
   },
   "capabilityManifestId": "tale:capability-manifest:core",
   "artifacts": [
@@ -8919,7 +8919,7 @@
       "description": "Collapsible content sections",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Accordion"
       ],
@@ -8971,7 +8971,7 @@
       "description": "Blocking dialog for destructive or irreversible actions requiring explicit user confirmation",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "AlertDialog"
       ],
@@ -9031,7 +9031,7 @@
       "description": "Experimental structural application layout slots",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "AppShell"
       ],
@@ -9084,7 +9084,7 @@
       "description": "App store download button (Apple/Google)",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "AppStoreButton"
       ],
@@ -9199,7 +9199,7 @@
       "description": "Media container that preserves a positive width-to-height ratio",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "AspectRatio"
       ],
@@ -9257,7 +9257,7 @@
       "description": "Inline search with filterable listbox",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Autocomplete"
       ],
@@ -9312,7 +9312,7 @@
       "description": "User avatar with image, fallback, group, count, indicator, and label group",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Avatar"
       ],
@@ -9370,7 +9370,7 @@
       "description": "Decorative SVG pattern background (circle, square, grid, grid-check)",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "BackgroundPattern"
       ],
@@ -9427,7 +9427,7 @@
       "description": "Small status label with semantic variants",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Badge"
       ],
@@ -9482,7 +9482,7 @@
       "description": "Badge with pinned leading or trailing addon text",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "BadgeGroup"
       ],
@@ -9539,7 +9539,7 @@
       "description": "Inline notification banner",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Banner"
       ],
@@ -9650,7 +9650,7 @@
       "description": "Semantic quotation with content and attribution",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Blockquote"
       ],
@@ -9705,7 +9705,7 @@
       "description": "Breadcrumb navigation",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Breadcrumbs"
       ],
@@ -9755,7 +9755,7 @@
       "description": "Action button with variant and size props",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Button"
       ],
@@ -9811,7 +9811,7 @@
       "description": "Accessible group for related independent actions",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ButtonGroup"
       ],
@@ -9867,7 +9867,7 @@
       "description": "Interactive date calendar with single or multiple selection",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Calendar"
       ],
@@ -9923,7 +9923,7 @@
       "description": "Presentational and interactive card surfaces",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Card"
       ],
@@ -9976,7 +9976,7 @@
       "description": "Slide carousel with navigation",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Carousel"
       ],
@@ -10028,7 +10028,7 @@
       "description": "Experimental protocol-neutral conversation layout and semantics",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Chat"
       ],
@@ -10083,7 +10083,7 @@
       "description": "Checkbox with visual indicator (deprecated — use CheckboxField)",
       "lifecycle": "deprecated",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Checkbox"
       ],
@@ -10142,7 +10142,7 @@
       "description": "Checkbox with built-in description and error message",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "CheckboxField"
       ],
@@ -10200,7 +10200,7 @@
       "description": "Groups multiple checkboxes with validation",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "CheckboxGroup"
       ],
@@ -10255,7 +10255,7 @@
       "description": "Normalized document sources with shared reference ordinals",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Citation"
       ],
@@ -10311,7 +10311,7 @@
       "description": "Inline plain-text code without parsing, highlighting, or execution",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Code"
       ],
@@ -10368,7 +10368,7 @@
       "description": "Plain-text code surface without parsing, highlighting, or execution",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "CodeBlock"
       ],
@@ -10426,7 +10426,7 @@
       "description": "Interactive saturation/brightness canvas for picking a color value",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ColorArea"
       ],
@@ -10482,7 +10482,7 @@
       "description": "Text input for color values",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ColorField"
       ],
@@ -10535,7 +10535,7 @@
       "description": "Light/dark mode toggle with persistence",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ColorModeToggle"
       ],
@@ -10590,7 +10590,7 @@
       "description": "Composable color picker that provides shared color state to ColorArea, ColorSlider, and ColorWheel",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ColorPicker"
       ],
@@ -10650,7 +10650,7 @@
       "description": "Single-channel color slider",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ColorSlider"
       ],
@@ -10702,7 +10702,7 @@
       "description": "Small colored circle or square showing a color value",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ColorSwatch"
       ],
@@ -10758,7 +10758,7 @@
       "description": "Selectable swatch grid",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ColorSwatchPicker"
       ],
@@ -10810,7 +10810,7 @@
       "description": "Circular hue selector",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ColorWheel"
       ],
@@ -10862,7 +10862,7 @@
       "description": "Vertical flex-column layout with gap, align, and justify props",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Column"
       ],
@@ -10919,7 +10919,7 @@
       "description": "Filterable select with multi-select support",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Combobox"
       ],
@@ -10974,7 +10974,7 @@
       "description": "Searchable command surface for app actions, navigation, and grouped workflows",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "CommandPalette"
       ],
@@ -11032,7 +11032,7 @@
       "description": "Wraps children in a different color theme (e.g. dark section inside a light page, or brand-colored panel)",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Container"
       ],
@@ -11096,7 +11096,7 @@
       "description": "Right-click context menu",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ContextMenu"
       ],
@@ -11149,7 +11149,7 @@
       "description": "Visual credit-card display with 13 style variants",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "CreditCard"
       ],
@@ -11206,7 +11206,7 @@
       "description": "Content Security Policy nonce provider",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "CSPProvider"
       ],
@@ -11260,7 +11260,7 @@
       "description": "Segmented date input",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "DateField"
       ],
@@ -11312,7 +11312,7 @@
       "description": "Date field with calendar popover",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "DatePicker"
       ],
@@ -11366,7 +11366,7 @@
       "description": "Start/end date picker",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "DateRangePicker"
       ],
@@ -11419,7 +11419,7 @@
       "description": "Modal dialog with backdrop",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Dialog"
       ],
@@ -11471,7 +11471,7 @@
       "description": "Single collapsible section",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Disclosure"
       ],
@@ -11523,7 +11523,7 @@
       "description": "Small colored circle status indicator",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "DotIcon"
       ],
@@ -11577,7 +11577,7 @@
       "description": "Panel that slides in from the screen edge, for navigation drawers and detail views",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Drawer"
       ],
@@ -11640,7 +11640,7 @@
       "description": "Drag-and-drop target",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "DropZone"
       ],
@@ -11693,7 +11693,7 @@
       "description": "Placeholder for empty content areas",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "EmptyState"
       ],
@@ -11747,7 +11747,7 @@
       "description": "Icon with a colored background shape (circle or square); used for feature highlights and empty states",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "FeaturedIcon"
       ],
@@ -11811,7 +11811,7 @@
       "description": "Form field wrapper with label and validation",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Field"
       ],
@@ -11866,7 +11866,7 @@
       "description": "Grouped fields with legend",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Fieldset"
       ],
@@ -11920,7 +11920,7 @@
       "description": "Native file picker trigger",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "FileTrigger"
       ],
@@ -11973,7 +11973,7 @@
       "description": "Drop zone + animated upload list with progress bars",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "FileUpload"
       ],
@@ -12030,7 +12030,7 @@
       "description": "Form element with validation",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Form"
       ],
@@ -12082,7 +12082,7 @@
       "description": "Selectable grid of items",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "GridList"
       ],
@@ -12135,7 +12135,7 @@
       "description": "Horizontal header navigation primitives",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "HeaderNav"
       ],
@@ -12187,7 +12187,7 @@
       "description": "Locale and text direction provider",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "I18nProvider"
       ],
@@ -12241,7 +12241,7 @@
       "description": "Lucide-react icon wrapper with BEM sizing",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Icon"
       ],
@@ -12296,7 +12296,7 @@
       "description": "Square button for icon-only use",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "IconButton"
       ],
@@ -12351,7 +12351,7 @@
       "description": "Decorative marketing illustration SVG with optional children overlay",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Illustration"
       ],
@@ -12406,7 +12406,7 @@
       "description": "Styled image wrapper with radius and fit props",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Image"
       ],
@@ -12462,7 +12462,7 @@
       "description": "Interactive image crop region with aspect ratio and circular crop support",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ImageCropper"
       ],
@@ -12521,7 +12521,7 @@
       "description": "Text input with label, description, and validation",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Input"
       ],
@@ -12577,7 +12577,7 @@
       "description": "Horizontal group container attaching addons to an input field",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "InputGroup"
       ],
@@ -12636,7 +12636,7 @@
       "description": "Tag chip input — type to add tags, press Enter to commit, Backspace to remove",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "InputTags"
       ],
@@ -12698,7 +12698,7 @@
       "description": "",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "IphoneMockup"
       ],
@@ -12746,7 +12746,7 @@
       "description": "Semantic keyboard input or shortcut hint",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Kbd"
       ],
@@ -12801,7 +12801,7 @@
       "description": "Semantic description-list display for labels and corresponding values",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "KeyValuePairs"
       ],
@@ -12858,7 +12858,7 @@
       "description": "Collection-driven modal media viewer with owned navigation and focus restoration",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Lightbox"
       ],
@@ -12978,7 +12978,7 @@
       "description": "Styled anchor link",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Link"
       ],
@@ -13029,7 +13029,7 @@
       "description": "Simple non-interactive list with optional dividers",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "List"
       ],
@@ -13084,7 +13084,7 @@
       "description": "Standalone selectable listbox",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ListBox"
       ],
@@ -13135,7 +13135,7 @@
       "description": "Bounded Markdown rendered through Tale semantic primitives",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Markdown"
       ],
@@ -13190,7 +13190,7 @@
       "description": "Dropdown menu with items and groups",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Menu"
       ],
@@ -13244,7 +13244,7 @@
       "description": "Horizontal menu bar",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Menubar"
       ],
@@ -13296,7 +13296,7 @@
       "description": "Smart React props merging utility",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "mergeProps"
       ],
@@ -13349,7 +13349,7 @@
       "description": "Gauge showing a known-range value such as storage used, battery level, or capacity",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Meter"
       ],
@@ -13411,7 +13411,7 @@
       "description": "Multi-value dropdown with inline search and optional footer actions",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "MultiSelect"
       ],
@@ -13471,7 +13471,7 @@
       "description": "Top-level navigation bar",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "NavigationMenu"
       ],
@@ -13523,7 +13523,7 @@
       "description": "Numeric input with increment/decrement",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "NumberField"
       ],
@@ -13578,7 +13578,7 @@
       "description": "Document outline navigation with active-heading observation",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Outline"
       ],
@@ -13632,7 +13632,7 @@
       "description": "Measured list that collapses items into one deterministic overflow control",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "OverflowList"
       ],
@@ -13691,7 +13691,7 @@
       "description": "Page navigation controls",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Pagination"
       ],
@@ -13742,7 +13742,7 @@
       "description": "Auto-rendering dot indicators for carousel/slide pagination",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "PaginationDot"
       ],
@@ -13799,7 +13799,7 @@
       "description": "Auto-rendering line indicators for carousel/slide pagination",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "PaginationLine"
       ],
@@ -13856,7 +13856,7 @@
       "description": "Credit card number input with auto-formatting and card type detection",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "PaymentInput"
       ],
@@ -13974,7 +13974,7 @@
       "description": "OTP/verification code input",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "PinInput"
       ],
@@ -14028,7 +14028,7 @@
       "description": "Floating panel anchored to a trigger element, for pickers, tooltips, and contextual content",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Popover"
       ],
@@ -14089,7 +14089,7 @@
       "description": "Floating preview panel that appears when hovering a link or trigger element",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "PreviewCard"
       ],
@@ -14149,7 +14149,7 @@
       "description": "Determinate/indeterminate linear progress",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ProgressBar"
       ],
@@ -14202,7 +14202,7 @@
       "description": "Determinate/indeterminate circular progress",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ProgressCircle"
       ],
@@ -14255,7 +14255,7 @@
       "description": "QR code generator with size variants and decorative scan overlay",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "QRCode"
       ],
@@ -14432,7 +14432,7 @@
       "description": "Radio button with group support (deprecated — use RadioField)",
       "lifecycle": "deprecated",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Radio"
       ],
@@ -14492,7 +14492,7 @@
       "description": "Radio button with built-in description and error message",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "RadioField"
       ],
@@ -14551,7 +14551,7 @@
       "description": "Group of mutually exclusive radio buttons with label and validation",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "RadioGroup"
       ],
@@ -14611,7 +14611,7 @@
       "description": "Date range selection calendar",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "RangeCalendar"
       ],
@@ -14664,7 +14664,7 @@
       "description": "Pill badge with star icon and numeric rating",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "RatingBadge"
       ],
@@ -14721,7 +14721,7 @@
       "description": "Read-only star rating display",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "RatingStars"
       ],
@@ -14774,7 +14774,7 @@
       "description": "Adjacent flex panels with owned sizing, bounds, and accessible handles",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Resizable"
       ],
@@ -14833,7 +14833,7 @@
       "description": "Horizontal flex-row layout with gap, align, and justify props",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Row"
       ],
@@ -14890,7 +14890,7 @@
       "description": "Custom scrollbar container",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ScrollArea"
       ],
@@ -14942,7 +14942,7 @@
       "description": "Search input with clear button",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "SearchField"
       ],
@@ -14997,7 +14997,7 @@
       "description": "Decorative full-width horizontal rule with section spacing",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "SectionDivider"
       ],
@@ -15054,7 +15054,7 @@
       "description": "Dropdown select with popover listbox",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Select"
       ],
@@ -15108,7 +15108,7 @@
       "description": "Styled native `<select>` element",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "SelectNative"
       ],
@@ -15162,7 +15162,7 @@
       "description": "Horizontal or vertical divider",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Separator"
       ],
@@ -15215,7 +15215,7 @@
       "description": "Sidebar navigation primitives for composing simple, dual-tier, slim, and section-divided sidebars",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Sidebar"
       ],
@@ -15275,7 +15275,7 @@
       "description": "Decorative placeholder for content that is still loading",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Skeleton"
       ],
@@ -15332,7 +15332,7 @@
       "description": "Range input with single or dual thumbs",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Slider"
       ],
@@ -15389,7 +15389,7 @@
       "description": "Social login button with provider icon",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "SocialButton"
       ],
@@ -15444,7 +15444,7 @@
       "description": "Equal-width vertical group for social login buttons",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "SocialButtonGroup"
       ],
@@ -15501,7 +15501,7 @@
       "description": "Indeterminate loading indicator",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Spinner"
       ],
@@ -15553,7 +15553,7 @@
       "description": "Toggle switch with sliding thumb (deprecated — use SwitchField)",
       "lifecycle": "deprecated",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Switch"
       ],
@@ -15613,7 +15613,7 @@
       "description": "Toggle switch with built-in description and error message",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "SwitchField"
       ],
@@ -15672,7 +15672,7 @@
       "description": "Data table with sorting, expandable rows, and footer",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Table"
       ],
@@ -15728,7 +15728,7 @@
       "description": "Tabbed content with indicator",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Tabs"
       ],
@@ -15781,7 +15781,7 @@
       "description": "Tag list with optional removal",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "TagGroup"
       ],
@@ -15835,7 +15835,7 @@
       "description": "Combobox that renders selected items as inline tag chips in the field",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "TagSelect"
       ],
@@ -15897,7 +15897,7 @@
       "description": "Polymorphic typography wrapper with variant, size, and colour props",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Text"
       ],
@@ -15954,7 +15954,7 @@
       "description": "Multi-line text input with validation",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "TextArea"
       ],
@@ -16010,7 +16010,7 @@
       "description": "Rich-text editor built on Tiptap v3 with simple and advanced toolbars",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "TextEditor"
       ],
@@ -16071,7 +16071,7 @@
       "description": "Single-line text input with validation",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "TextField"
       ],
@@ -16127,7 +16127,7 @@
       "description": "Segmented time input",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "TimeField"
       ],
@@ -16179,7 +16179,7 @@
       "description": "Locale- and timezone-explicit absolute or relative time",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Timestamp"
       ],
@@ -16236,7 +16236,7 @@
       "description": "Queued viewport feedback with Tale-owned timers, announcements, and recovery",
       "lifecycle": "experimental",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Toast"
       ],
@@ -16294,7 +16294,7 @@
       "description": "Pressable toggle with selected/unselected state",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ToggleButton"
       ],
@@ -16350,7 +16350,7 @@
       "description": "Group of toggle buttons",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "ToggleButtonGroup"
       ],
@@ -16404,7 +16404,7 @@
       "description": "Horizontal bar of buttons, toggles, or controls for a related set of actions",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Toolbar"
       ],
@@ -16464,7 +16464,7 @@
       "description": "Hover tooltip",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Tooltip"
       ],
@@ -16514,7 +16514,7 @@
       "description": "Hierarchical tree view",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Tree"
       ],
@@ -16565,7 +16565,7 @@
       "description": "Native video player with custom controls, keyboard shortcuts, and trickplay",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "VideoPlayer"
       ],
@@ -16624,7 +16624,7 @@
       "description": "Virtualized collection utilities",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "Virtualizer"
       ],
@@ -23345,7 +23345,7 @@
       "description": "Public React utility hook useAnimationFrame.",
       "lifecycle": "stable",
       "package": "@tale-ui/utils",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "useAnimationFrame"
       ],
@@ -23390,7 +23390,7 @@
       "description": "Public React utility hook useEnhancedClickHandler.",
       "lifecycle": "stable",
       "package": "@tale-ui/utils",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "useEnhancedClickHandler"
       ],
@@ -23435,7 +23435,7 @@
       "description": "Public React utility hook useId.",
       "lifecycle": "stable",
       "package": "@tale-ui/utils",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "useId"
       ],
@@ -23480,7 +23480,7 @@
       "description": "Public React utility hook useInterval.",
       "lifecycle": "stable",
       "package": "@tale-ui/utils",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "useInterval"
       ],
@@ -23525,7 +23525,7 @@
       "description": "Public React utility hook useIsoLayoutEffect.",
       "lifecycle": "stable",
       "package": "@tale-ui/utils",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "useIsoLayoutEffect"
       ],
@@ -23570,7 +23570,7 @@
       "description": "Public React utility hook useMergedRefs.",
       "lifecycle": "stable",
       "package": "@tale-ui/utils",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "useMergedRefs"
       ],
@@ -23615,7 +23615,7 @@
       "description": "Public React utility hook useOnMount.",
       "lifecycle": "stable",
       "package": "@tale-ui/utils",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "useOnMount"
       ],
@@ -23660,7 +23660,7 @@
       "description": "Public React utility hook useRefWithInit.",
       "lifecycle": "stable",
       "package": "@tale-ui/utils",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "useRefWithInit"
       ],
@@ -23705,7 +23705,7 @@
       "description": "Public React utility hook useStableCallback.",
       "lifecycle": "stable",
       "package": "@tale-ui/utils",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "useStableCallback"
       ],
@@ -23750,7 +23750,7 @@
       "description": "Public Table controller hook for stable client sorting and correlated server sorting.",
       "lifecycle": "stable",
       "package": "@tale-ui/react",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "useTableController"
       ],
@@ -23795,7 +23795,7 @@
       "description": "Public React utility hook useTimeout.",
       "lifecycle": "stable",
       "package": "@tale-ui/utils",
-      "version": "3.0.0",
+      "version": "2.2.0",
       "aliases": [
         "useTimeout"
       ],
@@ -53826,5 +53826,5 @@
       }
     }
   ],
-  "digest": "sha256:39a505d5414dcb2ae04070e11e002a4d6507b5b623536011a0e66b010d394819"
+  "digest": "sha256:2cea3f951d88ce3f0c45812fb0840131b6811fd323fd742ee94e66bb6bec6731"
 }

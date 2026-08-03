@@ -1,6 +1,6 @@
 {
   "name": "@tale-ui/utils",
-  "version": "3.0.0",
+  "version": "2.2.0",
   "description": "A collection of React utility functions for Tale UI.",
   "repository": {
     "type": "git",
